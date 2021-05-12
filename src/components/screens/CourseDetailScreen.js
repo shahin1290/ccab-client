@@ -1,5 +1,6 @@
 import React, { useEffect  , useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios';
 import {
   getCourseDetails,
   deleteCourse,
@@ -22,10 +23,83 @@ export default function CourseDetailScreen({ match }) {
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
+    getGeoInfo()
+    if (validateCounrty())
+      setShowKlarmaImg(true)
+      
     console.log(course);
   }, [dispatch, ID])
 
-  
+  const [countryName,setcountryName]=useState('');
+  const [countryCode,setcountryCode]=useState('');
+  const [countryLang,setcountryLang]=useState('');
+  const [ showKlarnaImg , setShowKlarmaImg]=useState('');
+
+  // get the user ip info 
+  const getGeoInfo = () => {
+    axios.get('https://ipapi.co/json/').then((response) => {
+        let data = response.data;
+      //  console.log(data);
+          setcountryName(data.country_name) 
+          
+          setcountryLang(data.languages)
+        
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+//console.log(countryName);
+// validate the user country
+  const validateCounrty = ()=>{
+      let KlaranCountry = [
+        {name:'Austria',code:'de_at',lang:'de'},
+        {name:'Belgium',code:'fr_be',lang:'fr'},
+        {name:'Belgium',code:'nl_be',lang:'nl'},
+        {name:'Denmark',code:'da_dk',lang:'da'},
+        {name:'Finland',code:'fi_fi',lang:'fi'},
+        {name:'France',code:'fr_fr',lang:'fr'},
+        {name:'Germany',code:'de_de',lang:'de'},
+        {name:'Italy',code:'it_it',lang:'it'},
+        {name:'Netherlands',code:'nl_nl',lang:'nl'},
+        {name:'Norway',code:'nb_no',lang:'nb'},
+        {name:'Poland',code:'pl_pl',lang:'pl'},
+        {name:'Spain',code:'es_es',lang:'es'},
+        {name:'Sweden',code:'sv_se',lang:'sv'},
+        {name:'Switzerland',code:'fr_ch',lang:'fr'},
+        {name:'Switzerland ',code:'de_ch',lang:'de'},
+        {name:'Switzerland ',code:'it_ch',lang:'it'},
+        {name:'United Kingdom	',code:'en_gb',lang:'en'},
+        {name:'United States',code:'en_us',lang:'en'},
+        {name:'Lithuania',code:'lt_ru',lang:'ru'},
+      ]
+      let i ; 
+      for (i of KlaranCountry ){
+        if ( (i.name == countryName && countryLang.indexOf(i.lang) !== -1 )  ){
+          setcountryCode(i.code) 
+          return true;
+        }
+      }
+  }
+ // console.log(validateCounrty());
+/*
+Austria	de_at
+Belgium (french)	fr_be
+Belgium (dutch)	nl_be
+Denmark	da_dk
+Finland	fi_fi
+France	fr_fr
+Germany	de_de
+Italy	it_it
+Netherlands	nl_nl
+Norway	nb_no
+Poland	pl_pl
+Spain	es_es
+Sweden	sv_se
+Switzerland (french)	fr_ch
+Switzerland (german)	de_ch
+Switzerland (italian)	it_ch
+United Kingdom	en_gb
+United States	en_us*/
   const getVideoID = (VideoPath)=>{
         return VideoPath.slice(32)
   }
@@ -153,6 +227,8 @@ console.log(course)
                         <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={ getVideoID(course.video_path)} onClose={() => setOpen(false)} />
                         <h4>Preview this course</h4>
                       </div>
+
+                     
                       {/* End Video Box */}
                       <div className="price"> {course.price >0? '$'+(course.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):'Free Course '}</div>
                       {/* <div className="time-left">
@@ -164,7 +240,13 @@ console.log(course)
                           Inroll now <i className="fa fa-angle-right"></i>
                         </span>
                       </a>
-                
+                      <div className="my-2 mt-4">
+                        {showKlarnaImg?
+                        <img src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}/>
+                        :null
+                        }
+                      
+                      </div>
                     </div>
                   </div>
                 </div>

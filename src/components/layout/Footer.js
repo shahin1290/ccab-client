@@ -24,7 +24,9 @@ export default function Footer() {
                               <div className="logo">
                                 <a href="index.html"><img src={logo} width="30%" /></a>
                               </div>
-                              <div className="text">CODIFY COLLEGE Coding For Better Life </div>
+                              <div className="text">
+                                <img width="25%" src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'/>
+                                 </div>
                               <div className="social-box">
                                 <a href="#" className="fa fa-facebook" />
                                 <a href="#" className="fa fa-instagram" />
