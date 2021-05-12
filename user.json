@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "6034ff5fc1d289612c50bdb5"
+  },
+  "name": "Admin",
+  "email": "rahmonblog@gmail.com",
+  "password": "$2a$10$i.9yf0JTPDsMcHOd9UkonOfkp5eBxeYhxmGUi3k5OPKO6EqXeQjW.",
+  "__v": 1,
+  "deactivated": false,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzRmZjVmYzFkMjg5NjEyYzUwYmRiNSIsImlhdCI6MTYxOTcwNzkyOX0.sJpvKlZGdA_9OiEz7N2RurUlXrTPk7OKUx-qwU-PY5Q",
+  "user_type": "AdminUser",
+  "AccessUsers": []
+},{
+  "_id": {
+    "$oid": "607efe9f3e0bf52da41fbc53"
+  },
+  "AccessUsers": [],
+  "user_type": "StudentUser",
+  "name": "user1 user1",
+  "email": "user1@gmail.com",
+  "phoneNumber": "46-072123456789",
+  "password": "$2a$10$IMf1iEBJ9x1bPEttWva27ewm5stQX9b7am9JJJCFYkeaTk5FPVzA.",
+  "__v": 0,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2VmZTlmM2UwYmY1MmRhNDFmYmM1MyIsImlhdCI6MTYxOTcwNzY1Nn0.AF7AQtCqjF4wfvWURsZxjSSAxU0BiRCPNE6PT4oPKio"
+},{
+  "_id": {
+    "$oid": "6080a5edeb85d2356cd06756"
+  },
+  "AccessUsers": [],
+  "user_type": "MentorUser",
+  "name": "user3 user3",
+  "email": "user3@gmail.com",
+  "phoneNumber": "0046-123456789",
+  "password": "$2a$10$aEaWMMg5BiVSC6Doc6zYuuiItVqkdZnyn0i36dPTSYN0cmCZtR.cy",
+  "__v": 0,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwODBhNWVkZWI4NWQyMzU2Y2QwNjc1NiIsImlhdCI6MTYxOTY0NzU3OH0._VUZsxfQXFTI48hzTCSwScnMO3_e3WQrUUscevlWcGU"
+}]
