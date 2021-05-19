@@ -2,11 +2,10 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getWeekList } from '../../redux/actions/weekAction'
 import DayContent from '../layout/DayContent'
-import ReactPlayer from 'react-player'
 import { Card, Tabs, Tab, Accordion } from 'react-bootstrap'
 import { getDayList } from '../../redux/actions/dayAction'
-import { AiOutlineBars } from 'react-icons/ai'
-import styled from 'styled-components'
+import Plyr from 'plyr-react'
+import 'plyr-react/dist/plyr.css'
 
 export default function CourseContentScreen({ match }) {
   const dispatch = useDispatch()
@@ -66,41 +65,22 @@ export default function CourseContentScreen({ match }) {
                 {day.name ? (
                   <div className="inner-column">
                     <div className="course-video-box" >
-                      <div
-                      onContextMenu={(e)=>{e.preventDefault()}}
-                        style={{
-                          padding: '56.25% 0 0 0',
-                          position: 'relative'
+                    <Plyr
+                        source={{
+                          type: 'video',
+                          sources: [
+                            {
+                              src: day.video_path,
+                              provider: 'youtube'
+                            }
+                          ]
                         }}
-                      >
-                     
-
-                       
-                            <div className="player-overlay"></div>
-                        <ReactPlayer
-                       
-                          url={day.video_path}
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            zIndex:'3'
-                          }}
-                          width="100%"
-                          height="100%"
-                          controls
-                         
-                          
-                          
-                          fs='0'
-                          origin='http://localhost:3000'
-                          config={{
-                            youtube: {
-                              playerVars: { showinfo: 0,fs:0,rel:0,autoplay:1, modestbranding:1 }
-                            }}}
-                        ></ReactPlayer>
-                      
-                      </div>
+                        options={
+                          {
+                            /* ... */
+                          }
+                        }
+                      />
                     </div>
 
                     {/* Intro Info Tabs*/}
