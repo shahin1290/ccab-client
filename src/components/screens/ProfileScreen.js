@@ -34,8 +34,12 @@ export default function ProfileScreen() {
 
   const filterCourseList = () => {
     if (userDetail.user_type === 'StudentUser') {
-      return courseList.filter((course) =>(course.price == 0)||
-        course.students.some((student) =>  (student._id === userDetail._id)||(course.price == 0))
+      return courseList.filter(
+        (course) =>
+          course.price == 0 ||
+          course.students.some(
+            (student) => student._id === userDetail._id || course.price == 0
+          )
       )
     }
 
@@ -56,9 +60,11 @@ export default function ProfileScreen() {
   const { myTasks, loading: detailLoading, error: loadingError } = taskListMy
 
   //get quiz list list
-  const { myQuizList, loading: quizLoading, error: quizError } = useSelector(
-    (state) => state.myQuizList
-  )
+  const {
+    myQuizList,
+    loading: quizLoading,
+    error: quizError
+  } = useSelector((state) => state.myQuizList)
 
   // getting myAnswerList
 
@@ -118,7 +124,16 @@ export default function ProfileScreen() {
                 {/* Content */}
                 <div className="content">
                   {/* Author Image */}
-
+                  <div className="author-image">
+                    <img
+                      src={
+                        user.avatar
+                          ? `/uploads/Avatar/${user.avatar}`
+                          : '/images/resource/author-13.jpg'
+                      }
+                      alt="avatar"
+                    />
+                  </div>
                   <h4>{userDetail.name}</h4>
                   <div className="designation">{userDetail.user_type}</div>
                   <ul className="social-box">
@@ -240,11 +255,16 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <Link to={`/course-content/${course._id}`}>
                                     <img
-                                      src={'https://server.ccab.tech/uploads/Bootcamp/'+course.img_path}
+                                      src={
+                                        'https://server.ccab.tech/uploads/Bootcamp/' +
+                                        course.img_path
+                                      }
                                       alt="bootcamp"
                                     />
                                   </Link>
-                                  <div className="time text-light pl-1 py-1">{course.weeks*5*2} hours</div>
+                                  <div className="time text-light pl-1 py-1">
+                                    {course.weeks * 5 * 2} hours
+                                  </div>
                                 </div>
                                 <div className="lower-content">
                                   <h6 className="my-2">
@@ -253,10 +273,13 @@ export default function ProfileScreen() {
                                     </Link>
                                   </h6>
                                   <div className="text">
-                            <span className="d-inline-block text-truncate" style={{maxWidth: "240px"}}>
-                              {course.description}
-                              </span>
-                             </div>
+                                    <span
+                                      className="d-inline-block text-truncate"
+                                      style={{ maxWidth: '240px' }}
+                                    >
+                                      {course.description}
+                                    </span>
+                                  </div>
                                   <div className="clearfix">
                                     <div className="pull-left">
                                       <div className="author">
