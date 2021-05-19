@@ -41,6 +41,7 @@ export default function UpdateCourese({match}) {
         const [ price , setPrice ] = useState(course.price);    
         const [ name , setName ] = useState(course.name);
         const [ description , setDescription ] = useState(course.description)
+        const [category, setCategory] = useState(course.category)
         const [ startDate , setStartDate ] = useState(new Date());
         const [ seats , setSeats ] = useState(course.seats);
         const [ published , SetPublished ] = useState(course.published);
@@ -76,6 +77,7 @@ export default function UpdateCourese({match}) {
             setMentor({name:course.mentor.name,_id:course.mentor._id})
             setName(course.name)
             setDescription(course.description)
+            setCategory(course.category)
             setPrice(course.price)
             setSeats(course.seats)
             setStudents(course.students)
@@ -235,6 +237,7 @@ export default function UpdateCourese({match}) {
             form_data.append('_id',course._id)
             form_data.append('name',name)
             form_data.append('description',description)
+            form_data.append('category', category)
             form_data.append('video_path',VideoUrl)
             form_data.append('seats',seats)
             form_data.append('weeks',weeks)
@@ -294,6 +297,37 @@ export default function UpdateCourese({match}) {
                             defaultValue={description} onChange={(e)=>{setDescription(e.target.value)}} />
                             
                             </div>
+
+                        {/* Category */}      
+                            <div className="form-group mb-2">
+                        <label> Categogy</label>
+
+                        
+                        <select
+                          className="custom-select-box px-2 ml-2"
+                          onChange={(e) => setCategory(e.target.value)}
+                        >
+                          <option value="" disabled selected>
+                            select an option
+                          </option>
+
+                          <option>React </option>
+
+                          <option>Node </option>
+
+                          <option>Front End Development </option>
+
+                          <option>Web Development </option>
+                        </select>
+                      </div>
+
+                      <div className="my-3">
+                        <span className="rounded-pill  px-2 py-1 m-2 bg-light">
+                          <i class="fas fa-plus-circle text-success"></i>{' '}
+                          {category}
+                        </span>
+                      </div>
+
                             {/* Form Group */}
                             <div className="inner-container">
                                 <div className="row clearfix">
