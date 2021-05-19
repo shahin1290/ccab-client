@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.7.1",
     "axios": "^0.21.1",
     "downloadjs": "^1.4.7",
+    "html-react-parser": "^1.2.6",
     "jquery": "^3.6.0",
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "react": "^17.0.1",
@@ -55,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^9.0.2"
   }
 }

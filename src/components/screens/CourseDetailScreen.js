@@ -21,36 +21,39 @@ export default function CourseDetailScreen({ match }) {
   const { course, loading, error } = useSelector((state) => state.courseDetails)
   const [isOpen, setOpen] = useState(false)
 
+  const [countryName,setcountryName]=useState('');
+  const [countryCode,setcountryCode]=useState('');
+  const [countryLang,setcountryLang]=useState('');
+  const [ showKlarnaImg , setShowKlarmaImg]=useState(false);
+
+
   useEffect(() => {
     dispatch(getCourseDetails(ID))
     getGeoInfo()
-    if (validateCounrty())
-      setShowKlarmaImg(true)
+    
       
     console.log(course);
   }, [dispatch, ID])
 
-  const [countryName,setcountryName]=useState('');
-  const [countryCode,setcountryCode]=useState('');
-  const [countryLang,setcountryLang]=useState('');
-  const [ showKlarnaImg , setShowKlarmaImg]=useState('');
+
+
 
   // get the user ip info 
   const getGeoInfo = () => {
-    axios.get('https://ipapi.co/json/').then((response) => {
+     axios.get('https://ipapi.co/json/').then((response) => {
         let data = response.data;
-      //  console.log(data);
-          setcountryName(data.country_name) 
-          
-          setcountryLang(data.languages)
-        
+       console.log(data);
+    
+          validateCounrty(data.country_name,data.languages)
     }).catch((error) => {
         console.log(error);
     });
 };
+
 //console.log(countryName);
 // validate the user country
-  const validateCounrty = ()=>{
+  const validateCounrty = (countryName,countryLang)=>{
+    console.log('Validate Country ');
       let KlaranCountry = [
         {name:'Austria',code:'de_at',lang:'de'},
         {name:'Belgium',code:'fr_be',lang:'fr'},
@@ -72,34 +75,16 @@ export default function CourseDetailScreen({ match }) {
         {name:'United States',code:'en_us',lang:'en'},
         {name:'Lithuania',code:'lt_ru',lang:'ru'},
       ]
-      let i ; 
-      for (i of KlaranCountry ){
-        if ( (i.name == countryName && countryLang.indexOf(i.lang) !== -1 )  ){
+      
+      for (let i of KlaranCountry ){
+        if ( (i.name == countryName)  && countryLang.indexOf(i.lang) !== -1  ){
           setcountryCode(i.code) 
-          return true;
+          console.log(i.code);
+         setShowKlarmaImg(true)
         }
       }
   }
- // console.log(validateCounrty());
-/*
-Austria	de_at
-Belgium (french)	fr_be
-Belgium (dutch)	nl_be
-Denmark	da_dk
-Finland	fi_fi
-France	fr_fr
-Germany	de_de
-Italy	it_it
-Netherlands	nl_nl
-Norway	nb_no
-Poland	pl_pl
-Spain	es_es
-Sweden	sv_se
-Switzerland (french)	fr_ch
-Switzerland (german)	de_ch
-Switzerland (italian)	it_ch
-United Kingdom	en_gb
-United States	en_us*/
+
   const getVideoID = (VideoPath)=>{
         return VideoPath.slice(32)
   }
@@ -132,7 +117,7 @@ console.log(course)
           ) : error ? (
             <Message>{error}</Message>
           ) : course.name ? (
-            <div>
+            <div >
               <div className="sec-title">
                 <h2>{course.name}</h2>
               </div>
@@ -176,16 +161,16 @@ console.log(course)
                                     {course.info_list.length?
                                     course.info_list.map((item)=>{
                                       return(
-                                        <>
+                                        <div key={item.title}>
                                         <h3>{item.title}</h3>
                                         <ul className="review-list">
                                          { item.items.map((itemList)=>{
                                             return(
-                                              <li>{itemList.content}</li>
+                                              <li key={itemList.content}>{itemList.content}</li>
                                             )
                                           })}
                                         </ul>
-                                        </>
+                                        </div>
                                       )
                                     }):<p className="p-2 text-warning">There is no Requirements</p>}
                  
@@ -235,14 +220,16 @@ console.log(course)
                         23 hours left at this price!
                       </div> */}
 
-                      <a href={!userDetail.token?'/login' :course.price >0?"https://meetings.hubspot.com/sl-melad":'/course-content/'+course._id} className="theme-btn btn-style-three">
+                      <a href={!userDetail.token?'/login' :course.price >0?
+                      (showKlarnaImg?'/checkout-klarna/'+course._id:'/checkout/'+course._id)
+                      :'/course-content/'+course._id} className="theme-btn btn-style-three">
                         <span className="txt">
                           Inroll now <i className="fa fa-angle-right"></i>
                         </span>
                       </a>
                       <div className="my-2 mt-4">
                         {showKlarnaImg?
-                        <img src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}/>
+                        <img width="30%" src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}/>
                         :null
                         }
                       

@@ -15,7 +15,7 @@ import Loader from '../layout/Loader'
 import { Tabs, Tab, Card, Form, Col } from 'react-bootstrap'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
-
+//console.log(process.env.REACT_APP_STRIPE_KEY);
 const CheckoutForm = (props) => {
   const stripe = useStripe()
   const elements = useElements()
