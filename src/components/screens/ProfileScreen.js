@@ -17,6 +17,8 @@ import { getMyQuizAnswerList } from './../../redux/actions/quizAnswerAction'
 import { getCourseList } from '../../redux/actions/courseAction'
 import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
+import Purchases from '../layout/Purchases'
+
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -343,6 +345,11 @@ export default function ProfileScreen() {
                   </div>
                 </div>
               </Tab>
+              {userDetail && userDetail.user_type === 'StudentUser' ? (
+                <Tab eventKey="Purchases" title="Purchases">
+                  <Purchases />
+                </Tab>
+              ) : null}
             </Tabs>
           </div>
         </div>

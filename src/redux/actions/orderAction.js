@@ -3,6 +3,9 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_FAIL,
+  ORDER_LIST_SUCCESS,
   ORDER_KLARNA_CREATE_REQUEST,
   ORDER_KLARNA_CREATE_SUCCESS,
   ORDER_KLARNA_CREATE_FAIL,
@@ -26,7 +29,7 @@ export const createOrder = (bootcampId, order) => async (
     } = getState()
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
-    const response = await axios.post(`/api/order/${bootcampId}`, order, config)
+    const response = await axios.post(`https://server.ccab.tech/api/order/${bootcampId}`, order, config)
 
     // console.log("response:", response)
 
@@ -45,6 +48,40 @@ export const createOrder = (bootcampId, order) => async (
   }
 }
 
+export const getOrderList = () => async (dispatch, getState) => {
+  try {
+    const {
+      userLogin: { userDetail }
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    const response = await axios.get(`https://server.ccab.tech/api/order/myorders`, config)
+
+
+    dispatch({
+      type: ORDER_LIST_REQUEST
+    })
+
+    dispatch({
+      type: ORDER_LIST_SUCCESS,
+      payload: response.data.data
+      // payload: console.log("payload: ",response.data)
+    })
+  } catch (error) {
+    dispatch({
+      type: ORDER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
 
 
 

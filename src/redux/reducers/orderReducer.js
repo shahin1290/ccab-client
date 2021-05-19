@@ -2,6 +2,9 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
   ORDER_KLARNA_CREATE_REQUEST,
   ORDER_KLARNA_CREATE_SUCCESS,
   ORDER_KLARNA_CREATE_FAIL,
@@ -38,7 +41,29 @@ export const orderCreateReducer = (
   }
 }
 
+export const orderListReducer = (state = { orderList: [] }, action) => {
+  switch (action.type) {
+    case ORDER_LIST_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case ORDER_LIST_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        orderList: action.payload
+      }
+    case ORDER_LIST_FAIL:
+      return {
+        ...state,
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
 
+    default:
+      return state
+  }
+}
 
 
 export const orderKlarnaCreateReducer = (

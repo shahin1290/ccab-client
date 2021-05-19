@@ -68,7 +68,7 @@ import {
   quizAnswerListReducer
 } from './redux/reducers/quizAnswerReducer'
 
-import { orderCreateReducer,
+import { orderCreateReducer, orderListReducer,
         orderKlarnaCreateReducer,
         orderKlarnaReadReducer  } from './redux/reducers/orderReducer'
 
@@ -120,6 +120,7 @@ const reducer = combineReducers({
   quizAnswerList: quizAnswerListReducer,
   quizUpdate: quizUpdateReducer,
   orderCreate: orderCreateReducer,
+  orderList: orderListReducer,
   KlarnaOrderCreate:orderKlarnaCreateReducer,
   KlarnaOrderRead:orderKlarnaReadReducer
 })
