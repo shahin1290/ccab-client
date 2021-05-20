@@ -22,6 +22,7 @@ import image2 from './../../assets/images/header/image-3.jpg'
 import image3 from './../../assets/images/image-3.png'
 import image4 from './../../assets/images/image-4.png'
 import VideoImage from './../../assets/images/videosImage.gif';
+import OnlineEducationProspect from '../layout/OnlineEducationProspect';
 export default function HomeScreen({ match }) {
 
   const dispatch = useDispatch()
@@ -152,6 +153,8 @@ export default function HomeScreen({ match }) {
 
         {/* End Education Section Two */}
         <TopCourses></TopCourses>
+
+        <OnlineEducationProspect></OnlineEducationProspect>
         {/* Program Section */}
         <section className="program-section">
           <div className="auto-container">

@@ -2,3 +2,17 @@
   height: 10vh;
 } /* LOGIN PAGE */
 
+.fa-online-education {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #888;
+  padding: 0.8em;
+  font-size: 30px;
+}
+
+.block-seperator {
+  width: 10%;
+  height: 2px;
+  background-color: #e84d1b;
+  margin: 30px auto;
+}
