@@ -155,7 +155,7 @@ export default function CourseContentScreen({ match }) {
                 <div className="inner-column sticky-top">
                   <h4>Table of contents</h4>
                   {/* Accordion Box */}
-                  <Accordion className="accordion-box style-two">
+                  <Accordion style={{ height: '500px', overflowY: 'scroll' }} className="accordion-box style-two">
                     {weekList.map((week, index) => (
                       <Card className="accordion block">
                         <Accordion.Toggle

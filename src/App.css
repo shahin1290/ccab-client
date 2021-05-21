@@ -2,3 +2,58 @@
   height: 10vh;
 } /* LOGIN PAGE */
 
+.title {
+  font-size: 34px;
+  font-weight: 400;
+}
+.sub-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.sub-text {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 20px 0;
+}
+.contact-text {
+  color: #ffffff;
+  transition: transform 1s;
+}
+.contact-text:hover {
+  transform: scale(1.1);
+}
+
+.fa-online-education {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #888;
+  padding: 0.8em;
+  font-size: 30px;
+}
+
+.block-seperator {
+  width: 10%;
+  height: 2px;
+  background-color: #e84d1b;
+  margin: 10px auto;
+}
+
+.star-ratings-sprite {
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
+    repeat-x;
+  font-size: 0;
+  height: 21px;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 110px;
+  margin: 0 auto;
+}
+.star-ratings-sprite-rating {
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
+    repeat-x;
+  background-position: 0 100%;
+  float: left;
+  height: 21px;
+  display: block;
+}
