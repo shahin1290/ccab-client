@@ -332,7 +332,7 @@ export default function UpdateCourese({match}) {
                             <div className="inner-container">
                                 <div className="row clearfix">
                                 {/* Left Column */}
-                                <div className="left-column col-lg-7 col-md-12 col-sm-12">
+                                <div className="left-column col-lg-12 col-md-12 col-sm-12">
                                     <div className="inner-column">
                               
                                     {/* Edit Course Form */}
@@ -410,7 +410,7 @@ export default function UpdateCourese({match}) {
                                     </div>
                                 </div>
                                 {/* Right Column */}
-                                <div className="right-column col-lg-4 col-md-12 col-sm-12">
+                                <div className="right-column col-lg-12 col-md-12 col-sm-12">
                                     <div className="inner-column">
                                     <div className="edit-course-form">
                                         {/* Form Group */}
@@ -435,8 +435,8 @@ export default function UpdateCourese({match}) {
                                                 <Accordion.Collapse eventKey={`${index}`}>
                                                     <Card.Body>
                                                     {x.items.map((answer) => (
-                                                        <div>
-                                                         {answer.content} 
+                                                        <div className="mb-3">
+                                                         {'- '+answer.content} 
                                                         </div>
                                                     ))}
                                                     </Card.Body>

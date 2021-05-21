@@ -87,17 +87,17 @@ const _handelcreateKlarnaOrder = async()=>{
       'Access-Control-Allow-Credentials': true,
                   }
   }
-  const resp = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_'+currency+'&compact=ultra&apiKey=077ab08d433eb54aab69',{},config)
+  const resp = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_SEK&compact=ultra&apiKey=077ab08d433eb54aab69',{},config)
 
   console.log(Math.round(resp.data['USD_'+currency]* course.price) );
-  let price= Math.round(resp.data['USD_'+currency]* course.price)
+  let price= Math.round(resp.data['USD_SEK']* course.price)
   let amount = price*100;
   let taxrate = 1000;
   let totalTaxRate = amount - (amount*10000)/(10000+taxrate)
   console.log(Math.round(totalTaxRate));
     const data = {
         "purchase_country": "SE",
-        "purchase_currency": currency,
+        "purchase_currency": "SEK",
         "locale": "sv-SE",
         "order_amount": amount ,
         "order_tax_amount": totalTaxRate,

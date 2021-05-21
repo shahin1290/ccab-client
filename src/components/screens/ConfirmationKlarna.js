@@ -32,7 +32,8 @@ const ConfirmationKlarna = ({match}) => {
           setHTML(order.html_snippet)
           setOrderId(order.order_id)
           getSnippet()
-          dispatch(captureOrder(ID))
+        
+         //status: "checkout_complete"
 		}
       },[order,html])
 
@@ -66,7 +67,10 @@ const getSnippet = ()=>{
           <div ref={paymentContainerRef}></div>
 
            <div />
-         
+         {order&&order.status=== "checkout_complete"?
+         <div className="row">
+            <div className="col offset-5"><a href={"/course-content/"+course._id} className="btn btn-danger rounded-pill">Start Learning !</a></div>
+         </div>:null}
         </div>
     );
 }

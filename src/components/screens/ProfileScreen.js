@@ -111,7 +111,7 @@ export default function ProfileScreen() {
 
   // Getting user Details
   const { loading, user, error } = useSelector((state) => state.userProfile)
-
+console.log(user);
   return (
     <>
       <div
@@ -130,7 +130,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `/uploads/Avatar/${user.avatar}`
+                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                           : '/images/resource/author-13.jpg'
                       }
                       alt="avatar"

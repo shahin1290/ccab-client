@@ -6,6 +6,8 @@ import {
   deleteCourse,
   createCourse
 } from '../../redux/actions/courseAction'
+import {getOrder} from '../../redux/actions/orderAction';
+
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
 import ModalVideo from 'react-modal-video'
@@ -17,6 +19,8 @@ export default function CourseDetailScreen({ match }) {
   // user must be logged in before!!!
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
+
+ const { order, loading:getOrderLoading, error:getOrderError  } = useSelector((state) => state.getOrderView)
 
   const { course, loading, error } = useSelector((state) => state.courseDetails)
   const [isOpen, setOpen] = useState(false)
@@ -30,19 +34,20 @@ export default function CourseDetailScreen({ match }) {
   useEffect(() => {
     dispatch(getCourseDetails(ID))
     getGeoInfo()
-    
+    // get order for this course 
+    dispatch(getOrder(ID))
       
     console.log(course);
   }, [dispatch, ID])
 
-
+console.log(order);
 
 
   // get the user ip info 
   const getGeoInfo = () => {
      axios.get('https://ipapi.co/json/').then((response) => {
         let data = response.data;
-       console.log(data);
+      // console.log(data);
     
           validateCounrty(data.country_name,data.languages)
     }).catch((error) => {
@@ -88,7 +93,7 @@ export default function CourseDetailScreen({ match }) {
   const getVideoID = (VideoPath)=>{
         return VideoPath.slice(32)
   }
-console.log(course)
+//console.log(course)
   return (
     <>
       {/* Intro Courses */}
@@ -215,21 +220,33 @@ console.log(course)
 
                      
                       {/* End Video Box */}
-                      <div className="price"> {course.price >0? '$'+(course.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):'Free Course '}</div>
+                     
                       {/* <div className="time-left">
                         23 hours left at this price!
                       </div> */}
-
-                      <a href={!userDetail.token?'/login' :course.price >0?
+                      {order&&order.course?(
+        <a href={'/course-content/'+course._id} className="mt-4 theme-btn btn-style-three">
+                        <span className="txt">
+                          GO TO Course<i className="fa fa-angle-right"></i>
+                        </span>
+                      </a>
+                        
+                      ):(
+                        <>
+          <div className="price"> {course.price >0? '$'+(course.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):'Free Course '}</div>
+        <a href={!userDetail.token?'/login' :course.price >0?
                       (showKlarnaImg?'/checkout-klarna/'+course._id:'/checkout/'+course._id)
                       :'/course-content/'+course._id} className="theme-btn btn-style-three">
                         <span className="txt">
                           Inroll now <i className="fa fa-angle-right"></i>
                         </span>
                       </a>
-                      <div className="my-2 mt-4">
+                        </>
+                      )}
+              
+                      <div className=" mt-4">
                         {showKlarnaImg?
-                        <img width="30%" src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}/>
+                        <img width="50%" src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}/>
                         :null
                         }
                       

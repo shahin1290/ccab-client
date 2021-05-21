@@ -20,6 +20,7 @@ import Privacy from './components/screens/privacy'
 import EditProfileStudent from './components/screens/EditProfileStudent'
 /* Admin Screen*/
 import MangeCoures from './components/screens/AdminScreen/MangeCoures'
+import MangeOrder from './components/screens/AdminScreen/MangeOrder'
 import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -68,11 +69,20 @@ function App() {
         {/* Private Route for Admin  */}
         <AdminRoute exact path="/admin-users-list" component={UserListScreen} />
         <AdminRoute exact path="/admin-courses-list" component={MangeCoures} />
+
         <AdminRoute
           exact
           path="/admin-page/:pageNumber"
           component={MangeCoures}
         ></AdminRoute>
+
+        <AdminRoute exact path="/admin-order-list" component={MangeOrder} />
+        <AdminRoute
+          exact
+          path="/admin-order/:pageNumber"
+          component={MangeOrder}
+        ></AdminRoute>
+
         <AdminRoute
           exact
           path="/admin-coure-update/:id"

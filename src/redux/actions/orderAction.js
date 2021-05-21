@@ -6,6 +6,12 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_FAIL,
   ORDER_LIST_SUCCESS,
+  ORDER_LIST_ALL_REQUEST,
+  ORDER_LIST_ALL_FAIL,
+  ORDER_LIST_ALL_SUCCESS,
+  ORDER_VIEW_REQUEST,
+  ORDER_VIEW_FAIL,
+  ORDER_VIEW_SUCCESS,
   ORDER_KLARNA_CREATE_REQUEST,
   ORDER_KLARNA_CREATE_SUCCESS,
   ORDER_KLARNA_CREATE_FAIL,
@@ -48,6 +54,8 @@ export const createOrder = (bootcampId, order) => async (
   }
 }
 
+
+// get orders list for student 
 export const getOrderList = () => async (dispatch, getState) => {
   try {
     const {
@@ -83,7 +91,76 @@ export const getOrderList = () => async (dispatch, getState) => {
   }
 }
 
+// get all orders for Admin 
+export const getAllOrders = () => async (dispatch, getState) => {
+  try {
+    const {
+      userLogin: { userDetail }
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
 
+    const response = await axios.get(`https://server.ccab.tech/api/order/`, config)
+
+
+    dispatch({
+      type: ORDER_LIST_ALL_REQUEST
+    })
+ //console.log("payload: ",response.data.data)
+    dispatch({
+      type: ORDER_LIST_ALL_SUCCESS,
+      payload: response.data.data
+      
+    })
+  } catch (error) {
+    dispatch({
+      type: ORDER_LIST_ALL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const getOrder = (id) => async (dispatch, getState) => {
+  try {
+    const {
+      userLogin: { userDetail }
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    const response = await axios.get(`https://server.ccab.tech/api/order/`+id, config)
+
+
+    dispatch({
+      type: ORDER_VIEW_REQUEST
+    })
+ //console.log("payload: ",response.data.data)
+    dispatch({
+      type: ORDER_VIEW_SUCCESS,
+      payload: response.data.data
+      
+    })
+  } catch (error) {
+    dispatch({
+      type: ORDER_VIEW_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
 
 export const createKlarnaOrder = (order,id) => async (
   dispatch,

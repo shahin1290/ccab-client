@@ -123,7 +123,7 @@ export default function EditProfile() {
                       preview
                         ? preview
                         : user.avatar
-                        ? `/uploads/Avatar/${user.avatar}`
+                        ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                         : 'https://via.placeholder.com/200x112'
                     }
                     alt="avatar"
