@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Message from '../layout/Message'
 import axios from 'axios'
-import logo from './../../assets/images/logoBody.png'
+import logo from './../../assets/images/whiteLogo.jpg'
 
 const ContactForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -63,12 +63,11 @@ const ContactForm = () => {
             <img
               src={logo}
               width="50px"
-              style={{ backgroundColor: '#252841' }}
             />
             <div
               style={{
                 'text-shadow': '0 0 1.2px #000',
-                padding: '10px 5px',
+                padding: '20px 5px',
                 'font-style': 'italic'
               }}
             >
@@ -1150,8 +1149,6 @@ const ContactForm = () => {
                     placeholder="Your Message here"
                     onChange={(e) => setMessage(e.target.value)}
                     required
-                    rows="4"
-                    cols="50"
                   />
                 </div>
                 <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">

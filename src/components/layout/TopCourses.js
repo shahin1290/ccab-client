@@ -20,7 +20,9 @@ export default function TopCourses({ match }) {
   return (
     <>
       {/* Institution Section */}
-      <section className="institution-section">
+      <section className="institution-section"   style={{
+        backgroundColor: '#F8F9FD',
+      }}>
         <div className="auto-container">
           {/* Sec Title */}
           <div className="title text-center p-4 ">Our Top Courses</div>
@@ -48,7 +50,7 @@ export default function TopCourses({ match }) {
                           }
                           alt=""
                           style={{
-                            'max-height': '170px',
+                            'max-height': '150px',
                             }}
                         />
                       </Link>

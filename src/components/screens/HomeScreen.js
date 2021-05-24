@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import $ from 'jquery'
+import React, { useEffect } from 'react'
 import 'malihu-custom-scrollbar-plugin'
-
-// import '../../assets/js/owl'
-// import '../../assets/js/wow'
-// import '../../assets/js/parallax'
-import WOW from 'wowjs'
-import { script } from '../../assets/js/script'
 import TopCourses from './../layout/TopCourses'
 import { Carousel } from 'react-bootstrap'
 import CountUp from 'react-countup'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUesrsNumbers } from './../../redux/actions/userAction'
-import ModalVideo from 'react-modal-video'
-import * as Scroll from 'react-scroll'
+
 import {
   Link,
   Element,
@@ -28,8 +20,10 @@ import image1 from './../../assets/images/header/image-2.jpg'
 import image2 from './../../assets/images/header/image-3.jpg'
 import image3 from './../../assets/images/image-3.png'
 import image4 from './../../assets/images/image-4.png'
-import VideoImage from './../../assets/images/videosImage.gif'
 import OnlineEducationProspect from '../layout/OnlineEducationProspect'
+import RatingSection from '../layout/RatingSection'
+import ContactSection from '../layout/ContactSection'
+import HomeVideoSection from '../layout/HomeVideoSection'
 export default function HomeScreen({ match }) {
   const dispatch = useDispatch()
   const { courseList, loading, error } = useSelector(
@@ -43,16 +37,20 @@ export default function HomeScreen({ match }) {
   }, [dispatch])
   console.log(usersCount)
 
-  const [isOpen, setOpen] = useState(false)
   return (
     <>
       <div className="home">
         {/* Education Section Two */}
-        <section className="education-section-two  homeContainer">
+        <section
+          className="education-section-two"
+          style={{
+            backgroundColor: '#fff'
+          }}
+        >
           <div className="auto-container">
             <div className="row clearfix">
               {/* Image Column */}
-              <div className="image-column mt-5 col-lg-7 col-md-12 col-sm-12">
+              <div className="image-column mt-5 pt-3 col-lg-7 col-md-12 col-sm-12">
                 <div className="inner-column ">
                   <div className="image titlt " data-tilt data-tilt-max={4}>
                     {/* Slider Section */}
@@ -121,78 +119,83 @@ export default function HomeScreen({ match }) {
         </section>
 
         {/* End Banner Section */}
+        {/* End Education Section Two */}
+        <TopCourses></TopCourses>
 
         {/* How IT Works Section */}
-        <section className=" container my-5" id="HOW-IT-WORKS">
-          <div className="title text-center p-4 ">How It Works</div>
-          <hr className="block-seperator mb-5" />
-          <div className="row  center">
-            <div className=" F-box col-sm s12 l3 offset-l1 ">
-              <i className="fas fa-calendar-alt big_icon purple"></i>
+        <section
+          style={{
+            backgroundColor: '#fff'
+          }}
+        >
+          <div className="auto-container">
+            <div className="title text-center p-4 ">How It Works</div>
+            <hr className="block-seperator mb-5" />
+            <div className="row  center">
+              <div className=" F-box col-sm s12 l3 offset-l1 ">
+                <i className="fas fa-calendar-alt big_icon purple"></i>
 
-              <h3 className="box__h3">Bootcamp schedule</h3>
-              <p className="box_text">
-                Bootcamp starting date: February 2021. Be it Full time or Part
-                time, we offer teaching using modern technologies. Main teaching
-                language is English, however we offer support in Swedish,
-                Arabic, Hindi & German
-              </p>
-              <a
-                href="https://meetings.hubspot.com/sl-melad"
-                target="_blank"
-                className="btn rounded bg-success p-2 text-light"
-              >
-                Book a Free Phone Call{' '}
-              </a>
-            </div>
+                <h4>Bootcamp schedule</h4>
+                <div className="sub-text">
+                  Bootcamp starting date: February 2021. Be it Full time or Part
+                  time, we offer teaching using modern technologies. Main
+                  teaching language is English, however we offer support in
+                  Swedish, Arabic, Hindi & German
+                </div>
+                <a
+                  href="https://meetings.hubspot.com/sl-melad"
+                  target="_blank"
+                  className="btn rounded bg-success p-2 text-light"
+                >
+                  Book a Free Phone Call{' '}
+                </a>
+              </div>
 
-            <div className=" F-box col-sm s12 l3">
-              <i className="fas fa-gem big_icon purple"></i>
-              <h3 className="box__h3">Payment Plan</h3>
-              <p className="box_text">
-                Flexible Payment plans with our partners, also you can benefit
-                from.
-              </p>
-              <a
-                href="https://meetings.hubspot.com/sl-melad"
-                target="_blank"
-                className="btn rounded bg-info  p-2 text-light"
-              >
-                Book an Interview!{' '}
-              </a>
-            </div>
+              <div className=" F-box col-sm s12 l3">
+                <i className="fas fa-gem big_icon purple"></i>
+                <h4>Payment Plan</h4>
+                <div className="sub-text">
+                  Flexible Payment plans with our partners, also you can benefit
+                  from.
+                </div>
+                <a
+                  href="https://meetings.hubspot.com/sl-melad"
+                  target="_blank"
+                  className="btn rounded bg-info  p-2 text-light"
+                >
+                  Book an Interview!{' '}
+                </a>
+              </div>
 
-            <div className=" F-box col-sm s12 l3">
-              <i className="fab fa-free-code-camp big_icon purple"></i>
-              <h3 className="box__h3">Start with our free course</h3>
-              <p className="box_text">
-                Start with Codify Foundation course, which is currently free.
-                Codify's foundation course is a great opportunity to learn the
-                basics and to enjoy building your first website.
-              </p>
-              <a href="#" className="btn rounded bg-warning p-2 text-dark">
-                Start Now!
-              </a>
+              <div className=" F-box col-sm s12 l3">
+                <i className="fab fa-free-code-camp big_icon purple"></i>
+                <h4>Start with our free course</h4>
+                <div className="sub-text">
+                  Start with Codify Foundation course, which is currently free.
+                  Codify's foundation course is a great opportunity to learn the
+                  basics and to enjoy building your first website.
+                </div>
+                <a href="#" className="btn rounded bg-warning p-2 text-dark">
+                  Start Now!
+                </a>
+              </div>
             </div>
           </div>
         </section>
         {/*End How IT Works Section */}
 
-        {/* End Education Section Two */}
-        <TopCourses></TopCourses>
+        <OnlineEducationProspect />
 
-        <OnlineEducationProspect></OnlineEducationProspect>
+        <HomeVideoSection />
         {/* Program Section */}
         <section className="program-section">
           <div className="auto-container">
             <div className="row clearfix">
               {/* Content Column */}
               <div className="content-column col-lg-6 col-md-12 col-sm-12">
-                <div className="inner-column text-center" >
-                  <div className="title">
-                    Who is this program for ?
-                  </div>
-                  <hr className="block-seperator" />
+                <div className="inner-column text-center">
+                  <div className="title">Who is this program for ?</div>
+                  <hr className="block-seperator mt-4" />
                   <div className="text">
                     <div className="sub-text">
                       People who wish to transition to a career as a Developer
@@ -221,7 +224,7 @@ export default function HomeScreen({ match }) {
               {/* Image Column */}
               <div className="image-column col-lg-6 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <div className="image titlt mt-5" data-tilt data-tilt-max={4}>
+                  <div className="image titlt" data-tilt data-tilt-max={4}>
                     <img src={image4} />
                   </div>
                 </div>
@@ -326,40 +329,10 @@ export default function HomeScreen({ match }) {
           </div>
         </section>
         {/* End Achievement Section */}
-        {/* Video Section Two */}
-        <section className="video-section-two mb-5">
-          <div className="auto-container">
-            {/*Video Box*/}
-            <div
-              className="video-boxed"
-              style={{
-                backgroundImage: 'url(' + VideoImage + ')'
-              }}
-            >
-              <a
-                className="lightbox-image overlay-box"
-                onClick={() => setOpen(true)}
-              >
-                <span className="fa fa-play">
-                  <i className="ripple" />
-                </span>
-              </a>
-              <h4>
-                Watch Intro <br /> Video
-              </h4>
-              <div onContextMenu="return false">
-                <ModalVideo
-                  channel="youtube"
-                  youtube={{ controls: 1, modestbranding: 1, showinfo: 0 }}
-                  isOpen={isOpen}
-                  videoId="Uqn5LJd_6gU"
-                  onClose={() => setOpen(false)}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* End Video Section Two */}
+
+        {/* Rating section */}
+        <RatingSection />
+        <ContactSection />
       </div>
     </>
   )

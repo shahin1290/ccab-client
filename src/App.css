@@ -5,32 +5,32 @@
 .title {
   font-size: 34px;
   font-weight: 600;
-  font-family: Montserrat;
+  font-family: Inter;
 }
 
 .title2 {
   font-size: 32px;
   font-weight: 200;
-  font-family: Montserrat;
+  font-family: Inter;
   margin-top: 20px;
 }
 .sub-title {
   font-size: 20px;
   font-weight: 700;
-  font-family: Montserrat;
+  font-family: Inter;
 }
 .sub-text {
   font-size: 16px;
   font-weight: 300;
-  padding: 20px 0;
-  font-family: Montserrat;
+  padding: 10px 0;
+  font-family: Inter;
 }
 
 .sub-text-bold {
   font-size: 15px;
   font-weight: 700;
   margin-top: 20px;
-  font-family: Montserrat;
+  font-family: Inter;
 }
 
 .phone-text {
@@ -38,7 +38,7 @@
   font-size: 16px;
   font-weight: 500;
   margin-top: 20px;
-  font-family: Montserrat;
+  font-family: Inter;
 }
 .contact-text {
   color: #ffffff;
@@ -60,7 +60,7 @@
   width: 10%;
   height: 2px;
   background-color: #e84d1b;
-  margin: 10px auto;
+  margin: 0 auto;
 }
 
 .star-ratings-sprite {

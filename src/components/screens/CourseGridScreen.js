@@ -10,9 +10,7 @@ export default function CourseGridScreen({ match }) {
   const [currentPage, setCurrentPage] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
-  const coursesPerPage = 50
-
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const coursesPerPage = 100
 
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
@@ -60,7 +58,7 @@ export default function CourseGridScreen({ match }) {
     return currentCourses
   }
 
-  const pagination = (category) => {
+  /*  const pagination = (category) => {
     const filteredCourses = courseList.filter((course) => {
       if (searchTerm === '') {
         return course.category === category
@@ -98,7 +96,7 @@ export default function CourseGridScreen({ match }) {
       currentPage.length &&
       currentPage.find((page) => page.category === category).pageNumber
     )
-  }
+  } */
 
   useEffect(() => {
     dispatch(getCourseList())
@@ -117,16 +115,13 @@ export default function CourseGridScreen({ match }) {
     <>
       <section class="page-title">
         <div class="auto-container">
-          <div style={{ marginTop: '50px' }}>
-            <h1>All Online Courses</h1>
-          </div>
           <div class="search-boxed">
             <div class="search-box">
               <div class="form-group">
                 <input
                   type="search"
                   name="search-field"
-                  placeholder="What do you want to learn?"
+                  placeholder="Search with course name"
                   required
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -199,8 +194,8 @@ export default function CourseGridScreen({ match }) {
                                           }
                                           alt=""
                                           style={{
-                                            'max-height': '150px',
-                                            }}
+                                            'max-height': '150px'
+                                          }}
                                         />
                                       </Link>
                                     </div>
@@ -316,9 +311,7 @@ export default function CourseGridScreen({ match }) {
           style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
         ></div>
         <div className="auto-container">
-          <div className="sec-title">
-            <h2>Most Popular Courses</h2>
-          </div>
+          <div className="title pb-3">Most Popular Courses</div>
           <div className="row clearfix">
             <div className="col-lg-9 col-md-12 col-sm-12">
               <div className="row clearfix">
