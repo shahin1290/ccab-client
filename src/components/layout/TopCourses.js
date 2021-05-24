@@ -13,8 +13,6 @@ export default function TopCourses({ match }) {
     (state) => state.courseList
   )
 
-  
-
   useEffect(() => {
     dispatch(getCourseList())
   }, [dispatch])
@@ -25,10 +23,8 @@ export default function TopCourses({ match }) {
       <section className="institution-section">
         <div className="auto-container">
           {/* Sec Title */}
-          <div className="sec-title style-two">
-            <h2>Our top courses</h2>
-            <div className="text"></div>
-          </div>
+          <div className="title text-center p-4 ">Our Top Courses</div>
+          <hr className="block-seperator mb-5" />
           <div className="row clearfix">
             {/* Institution Block */}
 
@@ -37,43 +33,54 @@ export default function TopCourses({ match }) {
             ) : error ? (
               <Message>{error}</Message>
             ) : courseList.length ? (
-              courseList.map((course) =>  (
-                <div className="cource-block-two col-lg-4 col-md-6 col-sm-12" key={course._id}>
-                <div className="inner-box">
-                  <div className="image">
-                    <Link to={`/courses/${course._id}`}>
-                      <img
-                        src={'https://server.ccab.tech/uploads/Bootcamp/'+course.img_path}
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                  <div className="lower-content">
-                    <h5>
+              courseList.map((course) => (
+                <div
+                  className="cource-block-two col-lg-3 col-md-6 col-sm-12"
+                  key={course._id}
+                >
+                  <div className="inner-box">
+                    <div className="image" >
                       <Link to={`/courses/${course._id}`}>
-                        {course.name}
+                        <img
+                          src={
+                            'http://localhost:5001/uploads/Bootcamp/' +
+                            course.img_path
+                          }
+                          alt=""
+                          style={{
+                            'max-height': '170px',
+                            }}
+                        />
                       </Link>
-                    </h5>
-                    <div className="text">
-                    <span className="d-inline-block text-truncate" style={{maxWidth: "240px"}}>
-                      {course.description}
-                      </span>
-                     </div>
-                    <div className="clearfix">
-                      <div className="pull-left">
-                        <div className="students">
-                          {course.weeks * 5} Lectures
-                        </div>
+                    </div>
+                    <div className="lower-content">
+                      <h5>
+                        <Link to={`/courses/${course._id}`}>{course.name}</Link>
+                      </h5>
+                      <div className="text">
+                        <span
+                          className="d-inline-block text-truncate"
+                          style={{ maxWidth: '240px' }}
+                        >
+                          {course.description}
+                        </span>
                       </div>
-                      <div className="pull-right">
-                        <div className="hours">{course.weeks * 5*2} Hours</div>
+                      <div className="clearfix">
+                        <div className="pull-left">
+                          <div className="students">
+                            {course.weeks * 5} Lectures
+                          </div>
+                        </div>
+                        <div className="pull-right">
+                          <div className="hours">
+                            {course.weeks * 5 * 2} Hours
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-                )
-              )
+              ))
             ) : (
               ''
             )}
@@ -84,7 +91,7 @@ export default function TopCourses({ match }) {
                 data-wow-delay="0ms"
                 data-wow-duration="1500ms"
               >
-                <a href="/course-grid" className="theme-btn btn-style-six">
+                <a href="/course-grid" className="theme-btn btn-style-three">
                   <span className="txt">Browse All</span>
                 </a>
               </div>

@@ -91,14 +91,20 @@ export default function Assignments() {
 
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
-    const res = await fetch('https://server.ccab.tech/api/tasks/' + task._id + '/download', config)
+    const res = await fetch(
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
+      config
+    )
     const blob = await res.blob()
     download(blob, task.projectName + '-Assignment')
   }
 
   const DownloadAnswerHandler = async (answer) => {
     // dispatch(DownloadAssignemnt(task.task._id))
-    const res = await fetch('https://server.ccab.tech/api/answers/' + answer._id + '/download', config)
+    const res = await fetch(
+      'http://localhost:5001/api/answers/' + answer._id + '/download',
+      config
+    )
     const blob = await res.blob()
     download(blob, answer.task.projectName + '-' + userDetail.name + '-Answer')
   }
@@ -190,7 +196,6 @@ export default function Assignments() {
                                       <td
                                         style={{
                                           color: '#ffc40c'
-                                          
                                         }}
                                       >
                                         {taskStatus(task._id).status}

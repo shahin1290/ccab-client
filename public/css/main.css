@@ -86,7 +86,7 @@
 
 body {
 	font-family: 'Poppins', sans-serif;
-	font-size:14px;
+	font-size:4px;
 	color:#777777;
 	line-height:1.7em;
 	font-weight:400;
@@ -2311,6 +2311,7 @@ img{
 	border-radius:3px;
 	background-color:#ffffff;
 	box-shadow:0px 0px 15px rgba(0,0,0,0.08);
+	
 }
 
 .cource-block .inner-box .image{
@@ -2321,6 +2322,7 @@ img{
 .cource-block .inner-box .image img{
 	position:relative;
 	width:100%;
+
 	display:block;
 	-webkit-transition:all 500ms ease;
 	-moz-transition:all 500ms ease;

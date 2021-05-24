@@ -19,7 +19,6 @@ import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 
-
 export default function ProfileScreen() {
   const dispatch = useDispatch()
 
@@ -111,7 +110,7 @@ export default function ProfileScreen() {
 
   // Getting user Details
   const { loading, user, error } = useSelector((state) => state.userProfile)
-console.log(user);
+  console.log(user)
   return (
     <>
       <div
@@ -130,7 +129,7 @@ console.log(user);
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/author-13.jpg'
                       }
                       alt="avatar"
@@ -258,7 +257,7 @@ console.log(user);
                                   <Link to={`/course-content/${course._id}`}>
                                     <img
                                       src={
-                                        'https://server.ccab.tech/uploads/Bootcamp/' +
+                                        'http://localhost:5001/uploads/Bootcamp/' +
                                         course.img_path
                                       }
                                       alt="bootcamp"

@@ -22,8 +22,7 @@ const OnlineEducationProspect = () => {
       <section
         style={{
           backgroundColor: 'white',
-          padding: '80px 0',
-          fontFamily: 'Montserrat'
+          padding: '80px 0'
         }}
       >
         <div className="auto-container">
@@ -147,14 +146,19 @@ const OnlineEducationProspect = () => {
                 <Col xs={6}>
                   {' '}
                   {/* Video Section Two */}
-                  <div className="video-section-two">
+                  <div
+                  
+                    className="video-section-two"
+                    
+                  >
                     {/*Video Box*/}
                     <div
                       className="video-boxed"
                       style={{
                         width: '500px',
                         height: '250px',
-                        backgroundImage: 'url(' + VideoImage + ')'
+                        backgroundImage: 'url(' + VideoImage + ')',
+                        'border-radius': '50px 0', overflow: 'hidden'
                       }}
                     >
                       <a
@@ -207,7 +211,7 @@ const OnlineEducationProspect = () => {
                   </div>
                   <Link
                     activeClass="active"
-                    className="theme-btn btn-style-six"
+                    className="theme-btn btn-style-three"
                     to="HOW-IT-WORKS"
                     spy={true}
                     smooth={true}

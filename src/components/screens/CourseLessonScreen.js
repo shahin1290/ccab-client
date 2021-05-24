@@ -15,7 +15,7 @@ export default function CourseContentScreen({ match }) {
 
   const dayDetails = useSelector((state) => state.dayDetails)
   const { day } = dayDetails
-  console.log(day);
+  console.log(day)
   useEffect(() => {
     dispatch(getWeekList(id))
   }, [dispatch, id])
@@ -64,8 +64,8 @@ export default function CourseContentScreen({ match }) {
               <div className="content-column col-lg-8 col-md-12 col-sm-12">
                 {day.name ? (
                   <div className="inner-column">
-                    <div className="course-video-box" >
-                    <Plyr
+                    <div className="course-video-box">
+                      <Plyr
                         source={{
                           type: 'video',
                           sources: [
@@ -89,7 +89,11 @@ export default function CourseContentScreen({ match }) {
                       <div className="intro-tabs tabs-box">
                         {/*Tab Btns*/}
                         <Tabs defaultActiveKey="content">
-                          <Tab eventKey="content" title="Content" style={{fontSize: "30px"}}>
+                          <Tab
+                            eventKey="content"
+                            title="Content"
+                            style={{ fontSize: '30px' }}
+                          >
                             <div
                               className="tabs-content"
                               style={{ padding: '0 15px' }}
@@ -113,7 +117,7 @@ export default function CourseContentScreen({ match }) {
 
                                 {findElementText('image') && (
                                   <img
-                                    src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
+                                    src={`http://localhost:5001/uploads/Source_Code/${findElementText(
                                       'image'
                                     )}`}
                                     alt="img"
@@ -155,7 +159,10 @@ export default function CourseContentScreen({ match }) {
                 <div className="inner-column sticky-top">
                   <h4>Table of contents</h4>
                   {/* Accordion Box */}
-                  <Accordion style={{ height: '500px', overflowY: 'scroll' }} className="accordion-box style-two">
+                  <Accordion
+                    style={{ height: '500px', overflowY: 'scroll' }}
+                    className="accordion-box style-two"
+                  >
                     {weekList.map((week, index) => (
                       <Card className="accordion block">
                         <Accordion.Toggle
@@ -165,7 +172,6 @@ export default function CourseContentScreen({ match }) {
                           onClick={() => dispatch(getDayList(week._id))}
                         >
                           {week.name}
-                          
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey={`${index}`}>
                           <DayContent

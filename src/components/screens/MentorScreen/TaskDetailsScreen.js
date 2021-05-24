@@ -75,19 +75,25 @@ export default function TaskDetailsScreen({ match }) {
       Authorization: 'Bearer ' + userDetail.token
     }
   }
-console.log(answers);
+  console.log(answers)
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
-    const res = await fetch('https://server.ccab.tech/api/tasks/' + task.task._id + '/download', config)
+    const res = await fetch(
+      'http://localhost:5001/api/tasks/' + task.task._id + '/download',
+      config
+    )
     const blob = await res.blob()
     download(blob, task.task.projectName + '-Assignment')
   }
 
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
-    const res = await fetch('https://server.ccab.tech/api/answers/' + answer._id + '/download', config)
+    const res = await fetch(
+      'http://localhost:5001/api/answers/' + answer._id + '/download',
+      config
+    )
     const blob = await res.blob()
-    console.log(answer.task);
+    console.log(answer.task)
     download(blob, answer.task.projectName + '-' + answer.user.name + '-Answer')
     dispatch(getTaskAnswerList(bootcampId, id))
   }
@@ -343,17 +349,18 @@ Failed
                     ></i>
                   </td> */}
 
-                  <td>{answer.status !== 'Not Sent'?
-                           <button
-                      onClick={() => {
-                        DownloadAnswerHandler(answer)
-                      }}
-                    >
-                      Download
-                    </button>
-                :'Not Available'
-                }
-           
+                  <td>
+                    {answer.status !== 'Not Sent' ? (
+                      <button
+                        onClick={() => {
+                          DownloadAnswerHandler(answer)
+                        }}
+                      >
+                        Download
+                      </button>
+                    ) : (
+                      'Not Available'
+                    )}
                   </td>
                 </tr>
               ))

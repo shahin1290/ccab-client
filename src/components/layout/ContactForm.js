@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Message from '../layout/Message'
 import axios from 'axios'
+import logo from './../../assets/images/logoBody.png'
 
 const ContactForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -34,7 +35,7 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('https://server.ccab.tech/contact', {
+      const res = await axios.post('http://localhost:5001/contact', {
         name,
         email,
         phoneNumber,
@@ -51,11 +52,29 @@ const ContactForm = () => {
     <div className="p-4">
       <div className="row clearfix">
         {/* Title Box */}
-        <div className="title-box col-lg-4 col-md-12 col-sm-12">
-          <div>Want to find out more?</div>
-          <div>SPEAK WITH AN EDUCATION ADVISOR</div>
-          <h6>Fill in the form or call us directly on:</h6>
-          <p>+353 1539 7973</p>
+        <div className=" col-lg-4 col-md-12 col-sm-12">
+          <div className="sub-title">Want to find out more?</div>
+          <div className="title2">SPEAK WITH AN EDUCATION ADVISOR</div>
+          <div className="sub-text-bold">
+            Fill in the form or call us directly on:
+          </div>
+          <div className="phone-text">+353 1539 7973</div>
+          <div style={{ display: 'flex', padding: '55px 0' }}>
+            <img
+              src={logo}
+              width="50px"
+              style={{ backgroundColor: '#252841' }}
+            />
+            <div
+              style={{
+                'text-shadow': '0 0 1.2px #000',
+                padding: '10px 5px',
+                'font-style': 'italic'
+              }}
+            >
+              Coding for Bettter Life
+            </div>
+          </div>
         </div>
         {/* Login Form */}
         <div className="styled-form col-lg-8 col-md-12 col-sm-12">
