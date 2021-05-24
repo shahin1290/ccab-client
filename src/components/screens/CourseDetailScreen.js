@@ -78,7 +78,7 @@ console.log(order);
         {name:'Switzerland ',code:'it_ch',lang:'it'},
         {name:'United Kingdom	',code:'en_gb',lang:'en'},
         {name:'United States',code:'en_us',lang:'en'},
-        {name:'Lithuania',code:'lt_ru',lang:'ru'},
+        //{name:'Lithuania',code:'lt_ru',lang:'ru'},
       ]
       
       for (let i of KlaranCountry ){
@@ -235,7 +235,7 @@ console.log(order);
                         <>
           <div className="price"> {course.price >0? '$'+(course.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):'Free Course '}</div>
         <a href={!userDetail.token?'/login' :course.price >0?
-                      (showKlarnaImg?'/checkout-klarna/'+course._id:'/checkout/'+course._id)
+                    '/checkout/'+course._id
                       :'/course-content/'+course._id} className="theme-btn btn-style-three">
                         <span className="txt">
                           Inroll now <i className="fa fa-angle-right"></i>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   useStripe,
@@ -9,10 +9,11 @@ import {
   CardCvcElement
 } from '@stripe/react-stripe-js'
 import { useSelector, useDispatch } from 'react-redux'
-import { createOrder } from '../../redux/actions/orderAction'
+import { createOrder,createKlarnaOrder } from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
 import Loader from '../layout/Loader'
 import { Tabs, Tab, Card, Form, Col } from 'react-bootstrap'
+import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 //console.log(process.env.REACT_APP_STRIPE_KEY);
@@ -22,7 +23,18 @@ const CheckoutForm = (props) => {
   const dispatch = useDispatch()
   const ID = props.match.params.bootcampId
 
+  const  paymentContainerRef = useRef();
   const { course } = useSelector((state) => state.courseDetails)
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userDetail } = userLogin
+
+  const {order, loading:CreateOrderLoading, error:CreateOrderError } = useSelector((state) => state.KlarnaOrderCreate)
+ 
+
+  const [html , setHTML] = useState( '')
+  const [ currency, setCurrency] = useState('')
+  const [ lang  , setLang ] = useState('')
 
   //address details
   const [name, setName] = useState('')
@@ -34,6 +46,19 @@ const CheckoutForm = (props) => {
   useEffect(() => {
     dispatch(getCourseDetails(ID))
   }, [dispatch, ID])
+
+
+
+
+  
+  useEffect(()=>{
+    if ( order && order.html_snippet ){
+      setHTML(order.html_snippet)
+      
+      getSnippet()
+}
+  },[order,html])
+
 
   const ELEMENT_OPTIONS = {
     style: {
@@ -75,11 +100,84 @@ const CheckoutForm = (props) => {
       dispatch(
         createOrder(ID, {
           token: paymentMethod.id,
-          amount: course && course.price * 1.25
+          amount: course && course.price 
         })
       )
     }
   }
+
+
+
+
+  const getSnippet = ()=>{
+    var checkoutContainer = paymentContainerRef.current;
+                
+    checkoutContainer.innerHTML = html;
+    //console.log(checkoutContainer.innerHTML);
+    var scriptsTags = checkoutContainer.getElementsByTagName('script')
+    console.log(scriptsTags);
+    for (var i = 0; i < scriptsTags.length; i++) {
+      var parentNode = scriptsTags[i].parentNode
+      var newScriptTag = document.createElement('script')
+      newScriptTag.type = 'text/javascript'
+      newScriptTag.text = scriptsTags[i].text
+      console.log(newScriptTag.text);
+      parentNode.removeChild(scriptsTags[i])
+      parentNode.appendChild(newScriptTag)
+        }
+  }
+
+
+
+  const _handelcreateKlarnaOrder = async()=>{
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': true,
+                    }
+    }
+    const resp = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_SEK&compact=ultra&apiKey=077ab08d433eb54aab69',{},config)
+  
+    console.log(Math.round(resp.data['USD_'+currency]* course.price) );
+    let price= Math.round(resp.data['USD_SEK']* course.price)
+    let amount = price*100;
+    let taxrate = 1000;
+    let totalTaxRate = amount - (amount*10000)/(10000+taxrate)
+    console.log(Math.round(totalTaxRate));
+      const data = {
+          "purchase_country": "SE",
+          "purchase_currency": "SEK",
+          "locale": "sv-SE",
+          "order_amount": amount ,
+          "order_tax_amount": totalTaxRate,
+          "order_lines": [
+              {
+                  "type": "Digital",
+                  "reference": "19-402-USA",
+                  "name": course.name,
+                  "quantity": 1,
+                  "quantity_unit": "pcs",
+                  "unit_price": amount,
+                  "tax_rate": taxrate,
+                  "total_amount": amount,
+                  "total_discount_amount": 0,
+                  "total_tax_amount": totalTaxRate
+              }
+              ],
+              "merchant_urls": {
+                "terms":process.env.REACT_APP_HOST + "/privacy",
+                "checkout": process.env.REACT_APP_HOST +"/checkout-klarna/"+ID,
+                "confirmation": process.env.REACT_APP_HOST +"/confirmation-klarna/"+ID,
+                "push":  "https://server.ccab.tech/api/order/push/"+ID+"/"+userDetail._id
+              },
+      }
+     dispatch(createKlarnaOrder({data:data},ID)) 
+  
+  
+    console.log(process.env.REACT_APP_HOST );
+  
+  }
+
 
   return (
     <div className="sidebar-page-container">
@@ -109,7 +207,7 @@ const CheckoutForm = (props) => {
 
               {/* Signup Info Tabs*/}
               <div className="checkout-info-tabs col-lg-9 col-md-12 col-sm-12">
-                <Tabs defaultActiveKey="card" transition={false}>
+                <Tabs defaultActiveKey="card" transition={false} onSelect={(e)=>{if (e==='klarna') _handelcreateKlarnaOrder()}}>
                   <Tab eventKey="card" title="Credit/ Debit card">
                     <form onSubmit={submitHandler}>
                       <h4 style={{ padding: '30px 0 5px 0' }}>
@@ -284,8 +382,21 @@ const CheckoutForm = (props) => {
                       </div>
                     </form>
                   </Tab>
-                  <Tab eventKey="bank" title="Klaran"></Tab>
-                  <Tab eventKey="paypal" title="Paypal / Payoneer"></Tab>
+                  <Tab eventKey="klarna" title="Klaran" >
+                  <div className="container " 
+                    style={{'padding':'60px 0px'}}>
+                      { CreateOrderLoading && <Loader/>}
+                      
+                      <div ref={paymentContainerRef}></div>
+
+                      <div />
+                    
+                    </div>
+
+
+
+                  </Tab>
+                 
                 </Tabs>
               </div>
             </div>
@@ -316,7 +427,7 @@ const CheckoutForm = (props) => {
                       <li className="clearfix">
                         <strong>Total</strong>{' '}
                         <span className="pull-right">
-                          ${course.price * 1.25}
+                          ${course.price }
                         </span>
                       </li>
                     </ul>

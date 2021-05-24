@@ -35,6 +35,7 @@ const CheckoutKlarna = ({match}) => {
         if (course._id )
         _handelcreateKlarnaOrder()
       },[course])
+      
       useEffect(()=>{
         if ( order && order.html_snippet ){
           setHTML(order.html_snippet)
