@@ -82,8 +82,8 @@ export default function CourseDetailScreen({ match }) {
       { name: 'Switzerland ', code: 'de_ch', lang: 'de' },
       { name: 'Switzerland ', code: 'it_ch', lang: 'it' },
       { name: 'United Kingdom	', code: 'en_gb', lang: 'en' },
-      { name: 'United States', code: 'en_us', lang: 'en' },
-      { name: 'Lithuania', code: 'lt_ru', lang: 'ru' }
+      { name: 'United States', code: 'en_us', lang: 'en' }
+      //{name:'Lithuania',code:'lt_ru',lang:'ru'},
     ]
 
     for (let i of KlaranCountry) {
@@ -268,9 +268,7 @@ export default function CourseDetailScreen({ match }) {
                               !userDetail.token
                                 ? '/login'
                                 : course.price > 0
-                                ? showKlarnaImg
-                                  ? '/checkout-klarna/' + course._id
-                                  : '/checkout/' + course._id
+                                ? '/checkout/' + course._id
                                 : '/course-content/' + course._id
                             }
                             className="theme-btn btn-style-three"

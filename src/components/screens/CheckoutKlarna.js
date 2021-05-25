@@ -16,37 +16,35 @@ const CheckoutKlarna = ({ match }) => {
 
   const { course, loading, error } = useSelector((state) => state.courseDetails)
 
-  const {
-    order,
-    loading: CreateOrderLoading,
-    success,
-    error: CreateOrderError
-  } = useSelector((state) => state.KlarnaOrderCreate)
-  const [html, setHTML] = useState('')
-  const [orderId, setOrderId] = useState('')
+  const {order, loading:CreateOrderLoading, success, error:CreateOrderError } = useSelector((state) => state.KlarnaOrderCreate)
+  const [html , setHTML] = useState( '')
+  const [ orderId , setOrderId ]= useState('')
 
-  useEffect(() => {
-    getGeoInfo()
-    dispatch(getCourseDetails(ID))
+    useEffect(() => {
+      getGeoInfo()
+        dispatch(getCourseDetails(ID))
+        
+        
+        console.log(course);
+      }, [dispatch, ID])
 
-    console.log(course)
-  }, [dispatch, ID])
+      useEffect(()=>{
+        if (course._id )
+        _handelcreateKlarnaOrder()
+      },[course])
+      
+      useEffect(()=>{
+        if ( order && order.html_snippet ){
+          setHTML(order.html_snippet)
+          setOrderId(order.order_id)
+          getSnippet()
+		}
+      },[order,html])
 
-  useEffect(() => {
-    if (course._id) _handelcreateKlarnaOrder()
-  }, [course])
-  useEffect(() => {
-    if (order && order.html_snippet) {
-      setHTML(order.html_snippet)
-      setOrderId(order.order_id)
-      getSnippet()
-    }
-  }, [order, html])
-
-  const [country, setCountry] = useState('')
-  const [currency, setCurrency] = useState('')
-  const [lang, setLang] = useState('')
-  // get the user ip info
+      const [country , setCountry ] = useState('')
+      const [ currency, setCurrency] = useState('')
+      const [ lang  , setLang ] = useState('')
+        // get the user ip info 
   const getGeoInfo = () => {
     axios
       .get('https://ipapi.co/json/')
