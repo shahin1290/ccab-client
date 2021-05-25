@@ -98,7 +98,7 @@ export default function TaskListScreen({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     try {
       const res = await fetch(
-        'http://localhost:5001/api/tasks/' + task._id + '/download',
+        'https://server.ccab.tech/api/tasks/' + task._id + '/download',
         config
       )
       const blob = await res.blob()

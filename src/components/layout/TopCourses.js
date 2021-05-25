@@ -20,9 +20,12 @@ export default function TopCourses({ match }) {
   return (
     <>
       {/* Institution Section */}
-      <section className="institution-section"   style={{
-        backgroundColor: '#F8F9FD',
-      }}>
+      <section
+        className="institution-section"
+        style={{
+          backgroundColor: '#F8F9FD'
+        }}
+      >
         <div className="auto-container">
           {/* Sec Title */}
           <div className="title text-center p-4 ">Our Top Courses</div>
@@ -41,17 +44,17 @@ export default function TopCourses({ match }) {
                   key={course._id}
                 >
                   <div className="inner-box">
-                    <div className="image" >
+                    <div className="image">
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'http://localhost:5001/uploads/Bootcamp/' +
+                            'https://server.ccab.tech/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""
                           style={{
-                            'max-height': '150px',
-                            }}
+                            'max-height': '150px'
+                          }}
                         />
                       </Link>
                     </div>

@@ -35,7 +35,7 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5001/contact', {
+      const res = await axios.post('https://server.ccab.tech/contact', {
         name,
         email,
         phoneNumber,
@@ -60,10 +60,7 @@ const ContactForm = () => {
           </div>
           <div className="phone-text">+353 1539 7973</div>
           <div style={{ display: 'flex', padding: '55px 0' }}>
-            <img
-              src={logo}
-              width="50px"
-            />
+            <img src={logo} width="50px" />
             <div
               style={{
                 'text-shadow': '0 0 1.2px #000',
