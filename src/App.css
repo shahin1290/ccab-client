@@ -4,16 +4,41 @@
 
 .title {
   font-size: 34px;
-  font-weight: 400;
+  font-weight: 600;
+  font-family: Inter;
+}
+
+.title2 {
+  font-size: 32px;
+  font-weight: 200;
+  font-family: Inter;
+  margin-top: 20px;
 }
 .sub-title {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 700;
+  font-family: Inter;
 }
 .sub-text {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
-  padding: 20px 0;
+  padding: 10px 0;
+  font-family: Inter;
+}
+
+.sub-text-bold {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 20px;
+  font-family: Inter;
+}
+
+.phone-text {
+  color: #23bbbb;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 20px;
+  font-family: Inter;
 }
 .contact-text {
   color: #ffffff;
@@ -35,7 +60,7 @@
   width: 10%;
   height: 2px;
   background-color: #e84d1b;
-  margin: 10px auto;
+  margin: 0 auto;
 }
 
 .star-ratings-sprite {

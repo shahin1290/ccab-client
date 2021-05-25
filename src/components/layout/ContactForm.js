@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Message from '../layout/Message'
 import axios from 'axios'
+import logo from './../../assets/images/whiteLogo.jpg'
 
 const ContactForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -51,11 +52,25 @@ const ContactForm = () => {
     <div className="p-4">
       <div className="row clearfix">
         {/* Title Box */}
-        <div className="title-box col-lg-4 col-md-12 col-sm-12">
-          <div>Want to find out more?</div>
-          <div>SPEAK WITH AN EDUCATION ADVISOR</div>
-          <h6>Fill in the form or call us directly on:</h6>
-          <p>+353 1539 7973</p>
+        <div className=" col-lg-4 col-md-12 col-sm-12">
+          <div className="sub-title">Want to find out more?</div>
+          <div className="title2">SPEAK WITH AN EDUCATION ADVISOR</div>
+          <div className="sub-text-bold">
+            Fill in the form or call us directly on:
+          </div>
+          <div className="phone-text">+353 1539 7973</div>
+          <div style={{ display: 'flex', padding: '55px 0' }}>
+            <img src={logo} width="50px" />
+            <div
+              style={{
+                'text-shadow': '0 0 1.2px #000',
+                padding: '20px 5px',
+                'font-style': 'italic'
+              }}
+            >
+              Coding for Bettter Life
+            </div>
+          </div>
         </div>
         {/* Login Form */}
         <div className="styled-form col-lg-8 col-md-12 col-sm-12">
@@ -1131,8 +1146,6 @@ const ContactForm = () => {
                     placeholder="Your Message here"
                     onChange={(e) => setMessage(e.target.value)}
                     required
-                    rows="4"
-                    cols="50"
                   />
                 </div>
                 <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">

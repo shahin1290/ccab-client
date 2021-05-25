@@ -23,7 +23,10 @@ export const getDayList = (id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get(`https://server.ccab.tech/api/content/` + id, config)
+    const response = await axios.get(
+      `https://server.ccab.tech/api/content/` + id,
+      config
+    )
 
     dispatch({
       type: DAY_LIST_REQUEST
@@ -60,7 +63,10 @@ export const getDayDetails = (weekId, id) => async (dispatch, getState) => {
       }
     }
 
-    const response = await axios.get(`https://server.ccab.tech/api/content/${weekId}/${id}`, config)
+    const response = await axios.get(
+      `https://server.ccab.tech/api/content/${weekId}/${id}`,
+      config
+    )
 
     dispatch({
       type: DAY_DETAILS_SUCCESS,
@@ -79,7 +85,6 @@ export const getDayDetails = (weekId, id) => async (dispatch, getState) => {
 // update course
 export const updateDay = (weekId, id, day) => async (dispatch, getState) => {
   try {
-
     const {
       userLogin: { userDetail }
     } = getState()
@@ -93,8 +98,11 @@ export const updateDay = (weekId, id, day) => async (dispatch, getState) => {
       type: DAY_UPDATE_REQUEST
     })
 
-    await axios.put(`https://server.ccab.tech/api/content/${weekId}/${id}`, day, config)
-
+    await axios.put(
+      `https://server.ccab.tech/api/content/${weekId}/${id}`,
+      day,
+      config
+    )
 
     dispatch({
       type: DAY_UPDATE_SUCCESS

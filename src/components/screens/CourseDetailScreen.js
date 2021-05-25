@@ -1,12 +1,12 @@
-import React, { useEffect  , useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios';
+import axios from 'axios'
 import {
   getCourseDetails,
   deleteCourse,
   createCourse
 } from '../../redux/actions/courseAction'
-import {getOrder} from '../../redux/actions/orderAction';
+import { getOrder } from '../../redux/actions/orderAction'
 
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
@@ -20,80 +20,85 @@ export default function CourseDetailScreen({ match }) {
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
 
- const { order, loading:getOrderLoading, error:getOrderError  } = useSelector((state) => state.getOrderView)
+  const {
+    order,
+    loading: getOrderLoading,
+    error: getOrderError
+  } = useSelector((state) => state.getOrderView)
 
   const { course, loading, error } = useSelector((state) => state.courseDetails)
   const [isOpen, setOpen] = useState(false)
 
-  const [countryName,setcountryName]=useState('');
-  const [countryCode,setcountryCode]=useState('');
-  const [countryLang,setcountryLang]=useState('');
-  const [ showKlarnaImg , setShowKlarmaImg]=useState(false);
-
+  const [countryName, setcountryName] = useState('')
+  const [countryCode, setcountryCode] = useState('')
+  const [countryLang, setcountryLang] = useState('')
+  const [showKlarnaImg, setShowKlarmaImg] = useState(false)
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
     getGeoInfo()
-    // get order for this course 
+    // get order for this course
     dispatch(getOrder(ID))
-      
-    console.log(course);
+
+    console.log(course)
   }, [dispatch, ID])
 
-console.log(order);
+  console.log(order)
 
-
-  // get the user ip info 
+  // get the user ip info
   const getGeoInfo = () => {
-     axios.get('https://ipapi.co/json/').then((response) => {
-        let data = response.data;
-      // console.log(data);
-    
-          validateCounrty(data.country_name,data.languages)
-    }).catch((error) => {
-        console.log(error);
-    });
-};
+    axios
+      .get('https://ipapi.co/json/')
+      .then((response) => {
+        let data = response.data
+        // console.log(data);
 
-//console.log(countryName);
-// validate the user country
-  const validateCounrty = (countryName,countryLang)=>{
-    console.log('Validate Country ');
-      let KlaranCountry = [
-        {name:'Austria',code:'de_at',lang:'de'},
-        {name:'Belgium',code:'fr_be',lang:'fr'},
-        {name:'Belgium',code:'nl_be',lang:'nl'},
-        {name:'Denmark',code:'da_dk',lang:'da'},
-        {name:'Finland',code:'fi_fi',lang:'fi'},
-        {name:'France',code:'fr_fr',lang:'fr'},
-        {name:'Germany',code:'de_de',lang:'de'},
-        {name:'Italy',code:'it_it',lang:'it'},
-        {name:'Netherlands',code:'nl_nl',lang:'nl'},
-        {name:'Norway',code:'nb_no',lang:'nb'},
-        {name:'Poland',code:'pl_pl',lang:'pl'},
-        {name:'Spain',code:'es_es',lang:'es'},
-        {name:'Sweden',code:'sv_se',lang:'sv'},
-        {name:'Switzerland',code:'fr_ch',lang:'fr'},
-        {name:'Switzerland ',code:'de_ch',lang:'de'},
-        {name:'Switzerland ',code:'it_ch',lang:'it'},
-        {name:'United Kingdom	',code:'en_gb',lang:'en'},
-        {name:'United States',code:'en_us',lang:'en'},
-        //{name:'Lithuania',code:'lt_ru',lang:'ru'},
-      ]
-      
-      for (let i of KlaranCountry ){
-        if ( (i.name == countryName)  && countryLang.indexOf(i.lang) !== -1  ){
-          setcountryCode(i.code) 
-          console.log(i.code);
-         setShowKlarmaImg(true)
-        }
+        validateCounrty(data.country_name, data.languages)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  //console.log(countryName);
+  // validate the user country
+  const validateCounrty = (countryName, countryLang) => {
+    console.log('Validate Country ')
+    let KlaranCountry = [
+      { name: 'Austria', code: 'de_at', lang: 'de' },
+      { name: 'Belgium', code: 'fr_be', lang: 'fr' },
+      { name: 'Belgium', code: 'nl_be', lang: 'nl' },
+      { name: 'Denmark', code: 'da_dk', lang: 'da' },
+      { name: 'Finland', code: 'fi_fi', lang: 'fi' },
+      { name: 'France', code: 'fr_fr', lang: 'fr' },
+      { name: 'Germany', code: 'de_de', lang: 'de' },
+      { name: 'Italy', code: 'it_it', lang: 'it' },
+      { name: 'Netherlands', code: 'nl_nl', lang: 'nl' },
+      { name: 'Norway', code: 'nb_no', lang: 'nb' },
+      { name: 'Poland', code: 'pl_pl', lang: 'pl' },
+      { name: 'Spain', code: 'es_es', lang: 'es' },
+      { name: 'Sweden', code: 'sv_se', lang: 'sv' },
+      { name: 'Switzerland', code: 'fr_ch', lang: 'fr' },
+      { name: 'Switzerland ', code: 'de_ch', lang: 'de' },
+      { name: 'Switzerland ', code: 'it_ch', lang: 'it' },
+      { name: 'United Kingdom	', code: 'en_gb', lang: 'en' },
+      { name: 'United States', code: 'en_us', lang: 'en' }
+      //{name:'Lithuania',code:'lt_ru',lang:'ru'},
+    ]
+
+    for (let i of KlaranCountry) {
+      if (i.name == countryName && countryLang.indexOf(i.lang) !== -1) {
+        setcountryCode(i.code)
+        console.log(i.code)
+        setShowKlarmaImg(true)
       }
+    }
   }
 
-  const getVideoID = (VideoPath)=>{
-        return VideoPath.slice(32)
+  const getVideoID = (VideoPath) => {
+    return VideoPath.slice(32)
   }
-//console.log(course)
+  //console.log(course)
   return (
     <>
       {/* Intro Courses */}
@@ -122,7 +127,7 @@ console.log(order);
           ) : error ? (
             <Message>{error}</Message>
           ) : course.name ? (
-            <div >
+            <div>
               <div className="sec-title">
                 <h2>{course.name}</h2>
               </div>
@@ -144,7 +149,6 @@ console.log(order);
                             >
                               Overview
                             </li>
-                           
                           </ul>
 
                           {/*Tabs Container*/}
@@ -154,39 +158,48 @@ console.log(order);
                               <div className="content">
                                 {/* Cource Overview */}
                                 <div className="course-overview">
-                                  <div className="inner-box">   
-                                  <h4>About the Course</h4>
+                                  <div className="inner-box">
+                                    <h4>About the Course</h4>
                                     <p>{course.description}</p>
-                                 
-                                    
+
                                     <ul className="student-list">
-                                      <li className="text-dark bg-warning p-2 rounded ">{course.seats < 99 ?course.seats - course.students.length : 'unlimited'} Seats available</li>
-                                      <li className="text-dark bg-success p-2 rounded ">{course.weeks*5} lectures </li>
+                                      <li className="text-dark bg-warning p-2 rounded ">
+                                        {course.seats < 99
+                                          ? course.seats -
+                                            course.students.length
+                                          : 'unlimited'}{' '}
+                                        Seats available
+                                      </li>
+                                      <li className="text-dark bg-success p-2 rounded ">
+                                        {course.weeks * 5} lectures{' '}
+                                      </li>
                                     </ul>
-                                    {course.info_list.length?
-                                    course.info_list.map((item)=>{
-                                      return(
-                                        <div key={item.title}>
-                                        <h3>{item.title}</h3>
-                                        <ul className="review-list">
-                                         { item.items.map((itemList)=>{
-                                            return(
-                                              <li key={itemList.content}>{itemList.content}</li>
-                                            )
-                                          })}
-                                        </ul>
-                                        </div>
-                                      )
-                                    }):<p className="p-2 text-warning">There is no Requirements</p>}
-                 
-                        
+                                    {course.info_list.length ? (
+                                      course.info_list.map((item) => {
+                                        return (
+                                          <div key={item.title}>
+                                            <h3>{item.title}</h3>
+                                            <ul className="review-list">
+                                              {item.items.map((itemList) => {
+                                                return (
+                                                  <li key={itemList.content}>
+                                                    {itemList.content}
+                                                  </li>
+                                                )
+                                              })}
+                                            </ul>
+                                          </div>
+                                        )
+                                      })
+                                    ) : (
+                                      <p className="p-2 text-warning">
+                                        There is no Requirements
+                                      </p>
+                                    )}
                                   </div>
                                 </div>
                               </div>
                             </div>
-
-                         
-
                           </div>
                         </div>
                       </div>
@@ -201,55 +214,79 @@ console.log(order);
                         className="intro-video"
                         style={{
                           backgroundImage:
-                            'url(https://server.ccab.tech/uploads/Bootcamp/'+course.img_path+')'
+                            'url(https://server.ccab.tech/uploads/Bootcamp/' +
+                            course.img_path +
+                            ')'
                         }}
                       >
                         <a
-                         
                           className="lightbox-image intro-video-box"
-                          onClick={()=> setOpen(true)}
+                          onClick={() => setOpen(true)}
                         >
                           <span className="fa fa-play">
                             <i className="ripple"></i>
                           </span>
                         </a>
 
-                        <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={ getVideoID(course.video_path)} onClose={() => setOpen(false)} />
+                        <ModalVideo
+                          channel="youtube"
+                          autoplay
+                          isOpen={isOpen}
+                          videoId={getVideoID(course.video_path)}
+                          onClose={() => setOpen(false)}
+                        />
                         <h4>Preview this course</h4>
                       </div>
 
-                     
                       {/* End Video Box */}
-                     
+
                       {/* <div className="time-left">
                         23 hours left at this price!
                       </div> */}
-                      {order&&order.course?(
-        <a href={'/course-content/'+course._id} className="mt-4 theme-btn btn-style-three">
-                        <span className="txt">
-                          GO TO Course<i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                        
-                      ):(
+                      {order && order.course ? (
+                        <a
+                          href={'/course-content/' + course._id}
+                          className="mt-4 theme-btn btn-style-three"
+                        >
+                          <span className="txt">
+                            GO TO Course<i className="fa fa-angle-right"></i>
+                          </span>
+                        </a>
+                      ) : (
                         <>
-          <div className="price"> {course.price >0? '$'+(course.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):'Free Course '}</div>
-        <a href={!userDetail.token?'/login' :course.price >0?
-                    '/checkout/'+course._id
-                      :'/course-content/'+course._id} className="theme-btn btn-style-three">
-                        <span className="txt">
-                          Inroll now <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
+                          <div className="price">
+                            {' '}
+                            {course.price > 0
+                              ? '$' +
+                                course.price
+                                  .toFixed(2)
+                                  .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                              : 'Free Course '}
+                          </div>
+                          <a
+                            href={
+                              !userDetail.token
+                                ? '/login'
+                                : course.price > 0
+                                ? '/checkout/' + course._id
+                                : '/course-content/' + course._id
+                            }
+                            className="theme-btn btn-style-three"
+                          >
+                            <span className="txt">
+                              Inroll now <i className="fa fa-angle-right"></i>
+                            </span>
+                          </a>
                         </>
                       )}
-              
+
                       <div className=" mt-4">
-                        {showKlarnaImg?
-                        <img width="50%" src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}/>
-                        :null
-                        }
-                      
+                        {showKlarnaImg ? (
+                          <img
+                            width="50%"
+                            src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}
+                          />
+                        ) : null}
                       </div>
                     </div>
                   </div>

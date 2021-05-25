@@ -19,7 +19,6 @@ import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 
-
 export default function ProfileScreen() {
   const dispatch = useDispatch()
 
@@ -111,7 +110,7 @@ export default function ProfileScreen() {
 
   // Getting user Details
   const { loading, user, error } = useSelector((state) => state.userProfile)
-console.log(user);
+  console.log(user)
   return (
     <>
       <div

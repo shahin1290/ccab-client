@@ -8,22 +8,39 @@ import Loader from '../layout/Loader'
 export default function CourseGridScreen({ match }) {
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const coursesPerPage = 3
-
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const coursesPerPage = 100
 
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
   )
 
   /*******************Functions *************/
-  const categoryArray = [...new Set(courseList.map((item) => item.category))]
+  const categoryArray = [
+    ...new Set(
+      courseList
+        .filter((val) => {
+          if (searchTerm === '') {
+            return val
+          }
+          if (val.name.toLowerCase().includes(searchTerm)) {
+            return val
+          }
+        })
+        .map((item) => item.category)
+    )
+  ]
 
   const categoryCourses = (category) => {
-    const filteredCourses = courseList.filter(
-      (couser) => couser.category === category
-    )
+    const filteredCourses = courseList.filter((course) => {
+      if (searchTerm === '') {
+        return course.category === category
+      }
+      if (course.name.toLowerCase().includes(searchTerm)) {
+        return course.category === category
+      }
+    })
 
     const found = currentPage.find((el) => el.category === category)
 
@@ -41,10 +58,15 @@ export default function CourseGridScreen({ match }) {
     return currentCourses
   }
 
-  const pagination = (category) => {
-    const filteredCourses = courseList.filter(
-      (couser) => couser.category === category
-    )
+  /*  const pagination = (category) => {
+    const filteredCourses = courseList.filter((course) => {
+      if (searchTerm === '') {
+        return course.category === category
+      }
+      if (course.name.toLowerCase().includes(searchTerm)) {
+        return course.category === category
+      }
+    })
 
     let pageNumbers = []
 
@@ -64,21 +86,26 @@ export default function CourseGridScreen({ match }) {
       el.category !== category ? el : { ...el, pageNumber }
     )
 
-    setCurrentPage(found)
+    if (found) {
+      setCurrentPage(found)
+    }
   }
 
-  const findPageNumber = (category) =>
-    currentPage.length &&
-    currentPage.find((page) => page.category === category).pageNumber
+  const findPageNumber = (category) => {
+    return (
+      currentPage.length &&
+      currentPage.find((page) => page.category === category).pageNumber
+    )
+  } */
 
   useEffect(() => {
     dispatch(getCourseList())
-  }, [dispatch])
+  }, [dispatch, searchTerm])
 
   useEffect(() => {
     const currentCoursesArray = []
-    categoryArray.map((course) => {
-      currentCoursesArray.push({ category: course, pageNumber: 1 })
+    categoryArray.map((category) => {
+      currentCoursesArray.push({ category: category, pageNumber: 1 })
     })
 
     setCurrentPage(currentCoursesArray)
@@ -86,7 +113,26 @@ export default function CourseGridScreen({ match }) {
 
   return (
     <>
-      {/*End Page Title*/}
+      <section class="page-title">
+        <div class="auto-container">
+          <div class="search-boxed">
+            <div class="search-box">
+              <div class="form-group">
+                <input
+                  type="search"
+                  name="search-field"
+                  placeholder="Search with course name"
+                  required
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button type="submit">
+                  <span class="icon fa fa-search"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/*Sidebar Page Container */}
       <div className="sidebar-page-container">
         <div
@@ -124,7 +170,9 @@ export default function CourseGridScreen({ match }) {
                         <div className="options-view">
                           <div className="clearfix">
                             <div className="pull-left">
-                              <h3>{category}</h3>
+                              <div className="title pt-5">
+                                {category} Courses
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -133,7 +181,7 @@ export default function CourseGridScreen({ match }) {
                             categoryCourses(category).map((course) => {
                               return (
                                 <div
-                                  className="cource-block-two col-lg-4 col-md-6 col-sm-12"
+                                  className="cource-block-two col-lg-3 col-md-6 col-sm-12"
                                   key={course._id}
                                 >
                                   <div className="inner-box">
@@ -145,6 +193,9 @@ export default function CourseGridScreen({ match }) {
                                             course.img_path
                                           }
                                           alt=""
+                                          style={{
+                                            'max-height': '150px'
+                                          }}
                                         />
                                       </Link>
                                     </div>
@@ -182,12 +233,13 @@ export default function CourseGridScreen({ match }) {
                         </div>
 
                         {/* Pagination  */}
-                        <div className="styled-pagination">
+                        {/*    <div className="styled-pagination">
                           <ul className="clearfix">
                             <li className="prev">
                               <a
                                 onClick={() => {
-                                  const pageNumber = findPageNumber(category)
+                                  const pageNumber =
+                                    category && findPageNumber(category)
                                   pageNumber !== 1 &&
                                     paginate(category, pageNumber - 1)
                                 }}
@@ -227,12 +279,12 @@ export default function CourseGridScreen({ match }) {
                               </a>
                             </li>
                           </ul>
-                        </div>
+                        </div> */}
                       </div>
                     )
                   })
                 ) : (
-                  ''
+                  <Message className="mb-5">No Courses Found</Message>
                 )}
               </div>
             </div>
@@ -259,9 +311,7 @@ export default function CourseGridScreen({ match }) {
           style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
         ></div>
         <div className="auto-container">
-          <div className="sec-title">
-            <h2>Most Popular Courses</h2>
-          </div>
+          <div className="title pb-3">Most Popular Courses</div>
           <div className="row clearfix">
             <div className="col-lg-9 col-md-12 col-sm-12">
               <div className="row clearfix">

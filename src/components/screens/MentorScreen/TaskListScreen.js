@@ -25,7 +25,6 @@ export default function TaskListScreen({ match }) {
   const { userDetail } = useSelector((state) => state.userLogin)
   const { tasks, loading, error } = useSelector((state) => state.taskList)
 
-
   // Update Check mark
   const taskCheck = useSelector((state) => state.taskCheck)
   const {
@@ -97,13 +96,14 @@ export default function TaskListScreen({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id)
     try {
-        const res = await fetch('https://server.ccab.tech/api/tasks/' + task._id + '/download')
-    const blob = await res.blob()
-    download(blob, task.projectName + '-Assignment')
+      const res = await fetch(
+        'https://server.ccab.tech/api/tasks/' + task._id + '/download'
+      )
+      const blob = await res.blob()
+      download(blob, task.projectName + '-Assignment')
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  
   }
 
   // Splite the Date

@@ -20,7 +20,10 @@ export const getWeekList = (id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get(`https://server.ccab.tech/api/weeks/` + id, config)
+    const response = await axios.get(
+      `https://server.ccab.tech/api/weeks/` + id,
+      config
+    )
 
     dispatch({
       type: WEEK_LIST_REQUEST

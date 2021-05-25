@@ -96,16 +96,17 @@ export default function TaskListScreen({ match }) {
   }
 
   const DownloadAssignmentHandler = async (task) => {
-    try {   
-       const res = await fetch('https://server.ccab.tech/api/tasks/' + task._id + '/download', config)
-    const blob = await res.blob()
-    download(blob, task.projectName + '-Assignment')
-      
+    try {
+      const res = await fetch(
+        'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+        config
+      )
+      const blob = await res.blob()
+      download(blob, task.projectName + '-Assignment')
     } catch (error) {
-        console.log(error);
+      console.log(error)
     }
     // dispatch(DownloadAssignemnt(task.task._id))
-
   }
 
   // Splite the Date
@@ -167,7 +168,10 @@ export default function TaskListScreen({ match }) {
                 <tr key={task._id}>
                   <td>{tasks.indexOf(task) + 1}</td>
                   <td>
-                    <Link  className="text-info" to={`/task-details/${task.bootcamp}/${task._id}`}>
+                    <Link
+                      className="text-info"
+                      to={`/task-details/${task.bootcamp}/${task._id}`}
+                    >
                       {task.projectName}
                     </Link>
                   </td>

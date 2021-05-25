@@ -13,18 +13,24 @@ import { createOrder,createKlarnaOrder } from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
 import Loader from '../layout/Loader'
 import { Tabs, Tab, Card, Form, Col } from 'react-bootstrap'
-import axios from 'axios';
+import axios from 'axios'
+import Message from '../layout/Message'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 //console.log(process.env.REACT_APP_STRIPE_KEY);
-const CheckoutForm = (props) => {
+
+const CheckoutForm = ({ match, history }) => {
   const stripe = useStripe()
   const elements = useElements()
+  const [isProcessing, setProcessingTo] = useState(false)
+  const [checkoutError, setCheckoutError] = useState()
+
   const dispatch = useDispatch()
-  const ID = props.match.params.bootcampId
+  const ID = match.params.bootcampId
 
   const  paymentContainerRef = useRef();
   const { course } = useSelector((state) => state.courseDetails)
+  const { loading, success, error } = useSelector((state) => state.orderCreate)
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
@@ -47,6 +53,11 @@ const CheckoutForm = (props) => {
     dispatch(getCourseDetails(ID))
   }, [dispatch, ID])
 
+  useEffect(() => {
+    if (success) {
+      history.push(`/courses/${ID}`)
+    }
+  }, [success])
 
 
 
@@ -67,42 +78,100 @@ const CheckoutForm = (props) => {
         color: '#424770',
         letterSpacing: '0.025em',
         '::placeholder': {
-          color: '#aab7c4',
-        },
+          color: '#aab7c4'
+        }
       },
       invalid: {
-        color: '#9e2146',
-      },
-    },
-  };
-  
-  const { loading, success, error } = useSelector((state) => state.orderCreate)
+        color: '#9e2146'
+      }
+    }
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault()
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: elements.getElement(CardNumberElement),
-      billing_details: {
-        name,
-        address: {
-          line1: street,
-          state: country,
-          city,
-          postal_code: zip
-        }
-      }
-    })
 
-    if (error) {
+    if (!stripe || !elements) {
       return
-    } else {
-      dispatch(
-        createOrder(ID, {
-          token: paymentMethod.id,
-          amount: course && course.price 
-        })
+    }
+
+    setProcessingTo(true)
+
+    const cardElement = elements.getElement(CardNumberElement)
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    try {
+      const { data: clientSecret } = await axios.post(
+        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
+        {
+          paymentMethodType: 'card',
+          currency: 'usd',
+          amount: course.price * 125
+        },
+        config
       )
+
+      const paymentMethodReq = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        billing_details: {
+          name,
+          address: {
+            line1: street,
+            state: country,
+            city,
+            postal_code: zip
+          }
+        }
+      })
+
+      if (paymentMethodReq.error) {
+        setCheckoutError(paymentMethodReq.error.message)
+        setProcessingTo(false)
+        return
+      }
+
+      const { error, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: cardElement,
+            billing_details: {
+              name,
+              address: {
+                line1: street,
+                state: country,
+                city,
+                postal_code: zip
+              }
+            }
+          }
+        }
+      )
+
+      if (error) {
+        setCheckoutError(error.message)
+        setProcessingTo(false)
+        return
+      }
+
+      if (paymentIntent.status === 'succeeded') {
+        setProcessingTo(false)
+
+        dispatch(
+          createOrder(ID, {
+            token: paymentIntent.id,
+            amount: paymentIntent.amount / 100
+          })
+        )
+      }
+    } catch (err) {
+      setCheckoutError(err.message)
     }
   }
 
@@ -188,6 +257,7 @@ const CheckoutForm = (props) => {
             {/* Sec Title */}
             <div className="sec-title">
               <h4>Checkout</h4>
+              {checkoutError && <Message>{checkoutError}</Message>}{' '}
             </div>
             <div className="checkout-section">
               {/* Checkout Form */}
@@ -213,6 +283,8 @@ const CheckoutForm = (props) => {
                       <h4 style={{ padding: '30px 0 5px 0' }}>
                         Payment Information
                       </h4>
+                      {isProcessing && <Loader />}
+
                       <div
                         className="row clearfix p-3"
                         style={{
@@ -249,11 +321,11 @@ const CheckoutForm = (props) => {
                               backgroundColor: 'white'
                             }}
                           >
-                           <CardNumberElement 
-                                  id="cardNumber"
-                                  options={ELEMENT_OPTIONS}
-                                />
-                          </div> 
+                            <CardNumberElement
+                              id="cardNumber"
+                              options={ELEMENT_OPTIONS}
+                            />
+                          </div>
                         </div>
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
