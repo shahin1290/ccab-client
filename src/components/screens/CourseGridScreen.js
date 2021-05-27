@@ -7,17 +7,17 @@ import Loader from '../layout/Loader'
 
 export default function CourseGridScreen({ match }) {
   const dispatch = useDispatch()
-  const [currentPage, setCurrentPage] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
-  const coursesPerPage = 100
 
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
   )
 
+  console.log(match.params.category);
+
   /*******************Functions *************/
-  const categoryArray = [
+  const categoryArray = match.params.category ? [match.params.category] : [
     ...new Set(
       courseList
         .filter((val) => {
@@ -32,8 +32,10 @@ export default function CourseGridScreen({ match }) {
     )
   ]
 
-  const categoryCourses = (category) => {
-    const filteredCourses = courseList.filter((course) => {
+  console.log(categoryArray);
+
+  const categoryCourses = (category) =>
+    courseList.filter((course) => {
       if (searchTerm === '') {
         return course.category === category
       }
@@ -41,22 +43,6 @@ export default function CourseGridScreen({ match }) {
         return course.category === category
       }
     })
-
-    const found = currentPage.find((el) => el.category === category)
-
-    let indexOfLastCourse
-
-    found
-      ? (indexOfLastCourse = found.pageNumber * coursesPerPage)
-      : (indexOfLastCourse = 1 * coursesPerPage)
-
-    const currentCourses = filteredCourses.slice(
-      indexOfLastCourse - coursesPerPage,
-      indexOfLastCourse
-    )
-
-    return currentCourses
-  }
 
   /*  const pagination = (category) => {
     const filteredCourses = courseList.filter((course) => {
@@ -102,14 +88,14 @@ export default function CourseGridScreen({ match }) {
     dispatch(getCourseList())
   }, [dispatch, searchTerm])
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const currentCoursesArray = []
     categoryArray.map((category) => {
       currentCoursesArray.push({ category: category, pageNumber: 1 })
     })
 
     setCurrentPage(currentCoursesArray)
-  }, [courseList])
+  }, [courseList]) */
 
   return (
     <>

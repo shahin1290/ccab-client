@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, isValid } from '../../../redux/actions/userAction'
 import AdminHeaderContnet from './AdminHeaderContnet'
 import { getProfile } from '../../../redux/actions/userAction'
+import { getCourseList } from '../../../redux/actions/courseAction'
 
 export default function AdminHeader() {
   const userLogin = useSelector((state) => state.userLogin)
@@ -20,8 +21,13 @@ export default function AdminHeader() {
   const dispatch = useDispatch()
   const history = useHistory()
 
+   const { courseList } = useSelector((state) => state.courseList)
+
+  const categoryArray = [...new Set(courseList.map((item) => item.category))]
+
   useEffect(() => {
     dispatch(getProfile())
+    dispatch(getCourseList())
   }, [dispatch])
 
   const logoutHandler = () => {
@@ -41,21 +47,21 @@ export default function AdminHeader() {
                 Home
               </Nav.Link>
               {/* Items  hide-on-big-screen */}
-              <div className="text-dark hide-on-big-screen ">
+              <div className="text-dark hide-on-big-screen pt-4 ">
                 Courses
                 <Dropdown.Menu show className="border-0">
                   <NavDropdown.Item href="/course-grid" show>
                     All Courses
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/Webdevelopment" show>
-                    Web Development
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/react" show>
-                    React
-                  </NavDropdown.Item>
+                  {categoryArray.length &&
+                    categoryArray.map((category) => (
+                      <NavDropdown.Item href={`/course-grid/${category}`} show>
+                        {category}
+                      </NavDropdown.Item>
+                    ))}
                 </Dropdown.Menu>
               </div>
-              <div className="collapse navbar-collapse">
+              <div className="collapse navbar-collapse mr-3">
                 <ul className="navbar-nav ">
                   <li className="nav-item dropdown dropdown-slide dropdown-hover ">
                     <a href="#" className="text-dark">
@@ -69,19 +75,18 @@ export default function AdminHeader() {
                         All Courses
                       </a>
                       <div class="dropdown-divider"></div>
-
-                      <a className="dropdown-item" href="#">
-                        Web Development
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a className="dropdown-item" href="#">
-                        Web Development
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a className="dropdown-item" href="#">
-                        Web Development
-                      </a>
-                      <div class="dropdown-divider"></div>
+                      {categoryArray.length &&
+                        categoryArray.map((category) => (
+                          <>
+                            <a
+                              className="dropdown-item"
+                              href={`/course-grid/${category}`}
+                            >
+                              {category}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                          </>
+                        ))}
                     </div>
                   </li>
                 </ul>
@@ -94,7 +99,10 @@ export default function AdminHeader() {
                   <Nav.Link href="/get-start">Register</Nav.Link>
                 </>
               ) : (
-                <div className="collapse navbar-collapse" style={{marginLeft: '350px'}}>
+                <div
+                  className="collapse navbar-collapse"
+                  style={{ marginLeft: '350px' }}
+                >
                   <ul className="navbar-nav ">
                     <li className="nav-item dropdown dropdown-slide dropdown-hover ">
                       <a href="/">

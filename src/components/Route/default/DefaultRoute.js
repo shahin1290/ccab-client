@@ -38,7 +38,7 @@ export default function DefaultRoute() {
           <Route exact path="/login" component={LoginScreen}></Route>
           <Route exact path="/get-start" component={RegisterScreen}></Route>
           <Route exact path="/course-list" component={CoueseListScreen}></Route>
-          <Route exact path="/course-grid" component={CourseGridScreen}></Route>
+          <Route exact path="/course-grid/:category?" component={CourseGridScreen}></Route>
           <Route exact path="/page/:pageNumber" component={CourseGridScreen}></Route>
           <Route
             exact

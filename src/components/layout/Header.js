@@ -20,15 +20,17 @@ export default function Header() {
   // Getting user Details
   const { loading, user, error } = useSelector((state) => state.userProfile)
 
-  // state from isValid reducer
-  const isTokenValid = useSelector((state) => state.isTokenValid)
-  const { error: ValidError, loading: ValidLoading, success } = isTokenValid
+  const { courseList } = useSelector((state) => state.courseList)
+
+  /*******************Functions *************/
+  const categoryArray = [...new Set(courseList.map((item) => item.category))]
 
   const dispatch = useDispatch()
   const history = useHistory()
 
   useEffect(() => {
     dispatch(getProfile())
+    
   }, [dispatch])
 
   const logoutHandler = () => {
@@ -67,12 +69,12 @@ export default function Header() {
                 <NavDropdown.Item href="/course-grid" show>
                   All Courses
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/Webdevelopment" show>
-                  Web Development
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/react" show>
-                  React
-                </NavDropdown.Item>
+                {categoryArray.length &&
+                  categoryArray.map((category) => (
+                    <NavDropdown.Item href={`/course-grid/${category}`} show>
+                      {category}
+                    </NavDropdown.Item>
+                  ))}
               </Dropdown.Menu>
             </div>
             <div className="collapse navbar-collapse mr-3">
@@ -89,19 +91,16 @@ export default function Header() {
                       All Courses
                     </a>
                     <div class="dropdown-divider"></div>
-
-                    <a className="dropdown-item" href="#">
-                      Web Development
+                    {categoryArray.length &&
+                  categoryArray.map((category) => (
+                    <>
+                    <a className="dropdown-item" href={`/course-grid/${category}`} >
+                      {category}
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#">
-                      Web Development
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#">
-                      Web Development
-                    </a>
-                    <div class="dropdown-divider"></div>
+                     <div class="dropdown-divider"></div>
+                     </>
+                  ))}
+                    
                   </div>
                 </li>
               </ul>
@@ -135,13 +134,12 @@ export default function Header() {
               <Nav className="text-dark hide-on-big-screen pt-4 ">
                 Manage
                 <Dropdown.Menu show className="border-0">
-                  <NavDropdown.Item href="/mentor-courses-list" >
-                  Mange Courses
+                  <NavDropdown.Item href="/mentor-courses-list">
+                    Mange Courses
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/mentor-users-list">
-                  Users
+                    Users
                   </NavDropdown.Item>
-                
                 </Dropdown.Menu>
                 <Nav.Link
                   href="/profile"
