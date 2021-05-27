@@ -10,12 +10,12 @@ const HomeVideoSection = () => {
   return (
     <section
       style={{
-        backgroundColor: 'white', padding : '50px 0'
+        backgroundColor: '#F8F9FD', padding : '20px 0'
       }}
     >
       <div className="auto-container">
         <Row className="mt-5 p-5">
-          <Col xs={6}>
+          <Col>
             {' '}
             {/* Video Section Two */}
             <div className="video-section-two">
@@ -58,7 +58,7 @@ const HomeVideoSection = () => {
             </div>
             {/* End Video Section Two */}
           </Col>
-          <Col xs={6}>
+          <Col>
             <div className="title">90%</div>
             <hr
               style={{

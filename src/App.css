@@ -8,6 +8,52 @@
   font-family: Inter;
 }
 
+.navbar {
+  text-transform: capitalize !important;
+  font-size: 16px !important;
+}
+
+@media (min-width: 992px) {
+  .hide-on-big-screen {
+    display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .hide-on-small-screen {
+    display: none !important;
+  }
+}
+
+#dropdown-button-drop-right {
+  color: #343a40 !important
+}
+
+.nav-link.dropdown-toggle:after {
+  display: none;
+}
+
+.dropdown .dropdown-menu {
+  transition: all 0.2s;
+  overflow: hidden;
+  transform-origin: top center;
+  transform: scale(1, 0);
+  display: block;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  left: -100px;
+}
+.dropdown:hover .dropdown-menu {
+  transform: scale(1);
+}
+ 
+.logo-image {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: -6px;
+}
+
 .title2 {
   font-size: 32px;
   font-weight: 200;
@@ -20,7 +66,7 @@
   font-family: Inter;
 }
 .sub-text {
-  font-size: 16px;
+  font-size: 1em;
   font-weight: 300;
   padding: 10px 0;
   font-family: Inter;
@@ -66,7 +112,6 @@
 .star-ratings-sprite {
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
     repeat-x;
-  font-size: 0;
   height: 21px;
   line-height: 0;
   overflow: hidden;
@@ -82,3 +127,8 @@
   height: 21px;
   display: block;
 }
+
+
+
+
+

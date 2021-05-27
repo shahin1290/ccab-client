@@ -50,7 +50,7 @@ export default function HomeScreen({ match }) {
           <div className="auto-container">
             <div className="row clearfix">
               {/* Image Column */}
-              <div className="image-column mt-5 pt-3 col-lg-7 col-md-12 col-sm-12">
+              <div className="image-column  col-lg-7 col-md-12 col-sm-12">
                 <div className="inner-column ">
                   <div className="image titlt " data-tilt data-tilt-max={4}>
                     {/* Slider Section */}
@@ -95,10 +95,7 @@ export default function HomeScreen({ match }) {
                   <div className="text header-text">
                     Codify College’s Full Stack Web Development Bootcamp is a
                     remote bootcamp for anyone who wants to build apps to solve
-                    real-world problems on the web. As a graduate, you’ll have a
-                    solid base of fundamental programming and computer science
-                    knowledge, as well as experience with languages, frameworks,
-                    and libraries that employers demand.{' '}
+                    real-world problems on the web.
                   </div>
 
                   <Link
@@ -122,117 +119,9 @@ export default function HomeScreen({ match }) {
         {/* End Education Section Two */}
         <TopCourses></TopCourses>
 
-        {/* How IT Works Section */}
-        <section
-          style={{
-            backgroundColor: '#fff'
-          }}
-        >
-          <div className="auto-container">
-            <div className="title text-center p-4 ">How It Works</div>
-            <hr className="block-seperator mb-5" />
-            <div className="row  center">
-              <div className=" F-box col-sm s12 l3 offset-l1 ">
-                <i className="fas fa-calendar-alt big_icon purple"></i>
-
-                <h4>Bootcamp schedule</h4>
-                <div className="sub-text">
-                  Bootcamp starting date: February 2021. Be it Full time or Part
-                  time, we offer teaching using modern technologies. Main
-                  teaching language is English, however we offer support in
-                  Swedish, Arabic, Hindi & German
-                </div>
-                <a
-                  href="https://meetings.hubspot.com/sl-melad"
-                  target="_blank"
-                  className="btn rounded bg-success p-2 text-light"
-                >
-                  Book a Free Phone Call{' '}
-                </a>
-              </div>
-
-              <div className=" F-box col-sm s12 l3">
-                <i className="fas fa-gem big_icon purple"></i>
-                <h4>Payment Plan</h4>
-                <div className="sub-text">
-                  Flexible Payment plans with our partners, also you can benefit
-                  from.
-                </div>
-                <a
-                  href="https://meetings.hubspot.com/sl-melad"
-                  target="_blank"
-                  className="btn rounded bg-info  p-2 text-light"
-                >
-                  Book an Interview!{' '}
-                </a>
-              </div>
-
-              <div className=" F-box col-sm s12 l3">
-                <i className="fab fa-free-code-camp big_icon purple"></i>
-                <h4>Start with our free course</h4>
-                <div className="sub-text">
-                  Start with Codify Foundation course, which is currently free.
-                  Codify's foundation course is a great opportunity to learn the
-                  basics and to enjoy building your first website.
-                </div>
-                <a href="#" className="btn rounded bg-warning p-2 text-dark">
-                  Start Now!
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/*End How IT Works Section */}
-
         <OnlineEducationProspect />
 
         <HomeVideoSection />
-        {/* Program Section */}
-        <section className="program-section">
-          <div className="auto-container">
-            <div className="row clearfix">
-              {/* Content Column */}
-              <div className="content-column col-lg-6 col-md-12 col-sm-12">
-                <div className="inner-column text-center">
-                  <div className="title">Who is this program for ?</div>
-                  <hr className="block-seperator mt-4" />
-                  <div className="text">
-                    <div className="sub-text">
-                      People who wish to transition to a career as a Developer
-                      or looking to add the latest tech stack to their current
-                      skills.
-                    </div>
-                    <div className="sub-text">
-                      Do you want to accelerate your learning process in a
-                      intense and efficient way?
-                    </div>
-                  </div>
-
-                  <Link
-                    activeClass="active"
-                    className="theme-btn btn-style-three"
-                    to="HOW-IT-WORKS"
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={500}
-                  >
-                    <span className="txt">Learn More</span>
-                  </Link>
-                </div>
-              </div>
-              {/* Image Column */}
-              <div className="image-column col-lg-6 col-md-12 col-sm-12">
-                <div className="inner-column">
-                  <div className="image titlt" data-tilt data-tilt-max={4}>
-                    <img src={image4} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* End Education Section Two */}
 
         {/* Achievement Section Two */}
         <section className="achievements-section-two">
@@ -330,9 +219,120 @@ export default function HomeScreen({ match }) {
         </section>
         {/* End Achievement Section */}
 
+        {/* Program Section */}
+        <section className="program-section mt-5 pt-5">
+          <div className="auto-container">
+            <div className="row clearfix">
+              {/* Content Column */}
+              <div className="content-column col-lg-6 col-md-12 col-sm-12">
+                <div className="inner-column text-center">
+                  <div className="title">Who is this program for ?</div>
+                  <hr className="block-seperator mt-4" />
+                  <div className="text">
+                    <div className="sub-text">
+                      People who wish to transition to a career as a Developer
+                      or looking to add the latest tech stack to their current
+                      skills.
+                    </div>
+                    <div className="sub-text">
+                      Do you want to accelerate your learning process in a
+                      intense and efficient way?
+                    </div>
+                  </div>
+
+                  <Link
+                    activeClass="active"
+                    className="theme-btn btn-style-three"
+                    to="HOW-IT-WORKS"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
+                    <span className="txt">Learn More</span>
+                  </Link>
+                </div>
+              </div>
+              {/* Image Column */}
+              <div className="image-column col-lg-6 col-md-12 col-sm-12">
+                <div className="inner-column">
+                  <div className="image titlt" data-tilt data-tilt-max={4}>
+                    <img src={image4} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* End Education Section Two */}
+
+        {/* How IT Works Section */}
+        <section
+          style={{
+            backgroundColor: '#fff',
+            padding: '40px 0'
+          }}
+          
+        >
+          <div className="auto-container">
+            <div className="title text-center p-4 ">How It Works</div>
+            <hr className="block-seperator mb-5" />
+            <div className="row  center">
+              <div className=" F-box col-sm s12 l3 offset-l1 ">
+                <i className="fas fa-calendar-alt big_icon purple"></i>
+
+                <h4>Bootcamp schedule</h4>
+                <div className="sub-text">
+                  Bootcamp starting date: February 2021. Be it Full time or Part
+                  time, we offer teaching using modern technologies. Main
+                  teaching language is English, however we offer support in
+                  Swedish, Arabic, Hindi & German
+                </div>
+                <a
+                  href="https://meetings.hubspot.com/sl-melad"
+                  target="_blank"
+                  className="btn rounded bg-success p-2 text-light"
+                >
+                  Book a Free Phone Call{' '}
+                </a>
+              </div>
+
+              <div className=" F-box col-sm s12 l3">
+                <i className="fas fa-gem big_icon purple"></i>
+                <h4>Payment Plan</h4>
+                <div className="sub-text">
+                  Flexible Payment plans with our partners, also you can benefit
+                  from.
+                </div>
+                <a
+                  href="https://meetings.hubspot.com/sl-melad"
+                  target="_blank"
+                  className="btn rounded bg-info  p-2 text-light"
+                >
+                  Book an Interview!{' '}
+                </a>
+              </div>
+
+              <div className=" F-box col-sm s12 l3">
+                <i className="fab fa-free-code-camp big_icon purple"></i>
+                <h4>Start with our free course</h4>
+                <div className="sub-text">
+                  Start with Codify Foundation course, which is currently free.
+                  Codify's foundation course is a great opportunity to learn the
+                  basics and to enjoy building your first website.
+                </div>
+                <a href="#" className="btn rounded bg-warning p-2 text-dark">
+                  Start Now!
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/*End How IT Works Section */}
+        <ContactSection />
+
         {/* Rating section */}
         <RatingSection />
-        <ContactSection />
       </div>
     </>
   )

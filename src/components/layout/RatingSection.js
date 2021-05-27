@@ -12,13 +12,13 @@ const RatingSection = () => {
       style={{
         backgroundColor: '#fff',
         position: 'relative',
-        padding: '70px 0'
+        padding: '20px 0'
       }}
     >
       <div className="auto-container text-center">
         <Row>
-          <Col md={{ span: 1, offset: 1 }}>
-            <img src="images/switchup.png" />
+          <Col>
+            <img src="images/switchup.png"  className="w-25"/>
             <div className="sub-text">{switchUpRatting}/5 Rating</div>
 
             <div class="star-ratings-sprite">
@@ -30,8 +30,8 @@ const RatingSection = () => {
               ></span>
             </div>
           </Col>
-          <Col md={{ span: 1, offset: 2 }}>
-            <img src="images/facebook.png" />
+          <Col >
+            <img src="images/facebook.png"  className="w-25"/>
             <div className="sub-text">{facebookRating}/5 Rating</div>
             <div class="star-ratings-sprite">
               <span
@@ -42,8 +42,8 @@ const RatingSection = () => {
               ></span>
             </div>
           </Col>
-          <Col md={{ span: 1, offset: 2 }}>
-            <img src="images/google.png" />
+          <Col >
+            <img src="images/google.png"  className="w-25"/>
             <div className="sub-text">{googleRating}/5 Rating</div>
             <div class="star-ratings-sprite">
               <span
@@ -54,8 +54,8 @@ const RatingSection = () => {
               ></span>
             </div>
           </Col>
-          <Col md={{ span: 1, offset: 2 }}>
-            <img src="images/coursereport.png" />
+          <Col >
+            <img src="images/coursereport.png"  className="w-25"/>
             <div className="sub-text">{courseReportRating}/5 Rating</div>
             <div class="star-ratings-sprite">
               <span

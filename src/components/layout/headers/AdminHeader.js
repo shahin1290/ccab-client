@@ -1,23 +1,17 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import {
-  Nav,
-  Navbar,
-  NavDropdown,
-  Container,
-  Badge,
-  Image
-} from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Nav, Navbar, Dropdown, NavDropdown } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, isValid } from '../../../redux/actions/userAction'
-import { VALID_REST } from './../../../redux/constences/userConst'
-import { toast } from 'react-toastify'
-import Loader from '../../layout/Loader'
 import AdminHeaderContnet from './AdminHeaderContnet'
+import { getProfile } from '../../../redux/actions/userAction'
+
 export default function AdminHeader() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
+
+  // Getting user Details
+  const { loading, user, error } = useSelector((state) => state.userProfile)
 
   // state from isValid reducer
   const isTokenValid = useSelector((state) => state.isTokenValid)
@@ -26,24 +20,9 @@ export default function AdminHeader() {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  // useEffect(() => {
-  //   dispatch(isValid())
-  // }, [dispatch])
-
-  // useEffect(() => {
-  //   console.log(userDetail)
-  //   if (userDetail && !userDetail._id && !ValidLoading && !success) {
-  //     history.push('/login')
-  //   }
-  // }, [history, userDetail, success])
-
-  // useEffect(() => {
-  //   if (ValidError) {
-  //     dispatch(logout())
-  //     history.push('/login')
-  //     dispatch({ type: VALID_REST })
-  //   }
-  // }, [dispatch, ValidError])
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [dispatch])
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -52,32 +31,105 @@ export default function AdminHeader() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
         <div className="container">
-          <Navbar.Brand >Admin DashBoard</Navbar.Brand>
+          <Navbar.Brand>Admin DashBoard</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse id="responsive-navbar-nav" className="text-danger">
+            <Nav>
+              <Nav.Link className="text-dark  mr-3" href="/">
+                Home
+              </Nav.Link>
+              {/* Items  hide-on-big-screen */}
+              <div className="text-dark hide-on-big-screen ">
+                Courses
+                <Dropdown.Menu show className="border-0">
+                  <NavDropdown.Item href="/course-grid" show>
+                    All Courses
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/Webdevelopment" show>
+                    Web Development
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/react" show>
+                    React
+                  </NavDropdown.Item>
+                </Dropdown.Menu>
+              </div>
+              <div className="collapse navbar-collapse">
+                <ul className="navbar-nav ">
+                  <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                    <a href="#" className="text-dark">
+                      Courses
+                    </a>
+                    <div
+                      className="dropdown-menu  mt-4 ml-5"
+                      aria-labelledby="navbarDropdownMenuLink"
+                    >
+                      <a className="dropdown-item" href="/course-grid">
+                        All Courses
+                      </a>
+                      <div class="dropdown-divider"></div>
 
+                      <a className="dropdown-item" href="#">
+                        Web Development
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a className="dropdown-item" href="#">
+                        Web Development
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a className="dropdown-item" href="#">
+                        Web Development
+                      </a>
+                      <div class="dropdown-divider"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <AdminHeaderContnet></AdminHeaderContnet>
 
-          <AdminHeaderContnet></AdminHeaderContnet>
+              {!userDetail.token ? (
+                <>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link href="/get-start">Register</Nav.Link>
+                </>
+              ) : (
+                <div className="collapse navbar-collapse" style={{marginLeft: '350px'}}>
+                  <ul className="navbar-nav ">
+                    <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                      <a href="/">
+                        <div class="logo-image">
+                          <img
+                            src={
+                              user.avatar
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                : '/images/resource/author-13.jpg'
+                            }
+                            alt="avatar"
+                          />
+                        </div>
+                      </a>
+                      <div
+                        className="dropdown-menu  mt-3"
+                        aria-labelledby="navbarDropdownMenuLink"
+                      >
+                        <a className="dropdown-item" href="/profile">
+                          My Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
 
-          <Nav>
-            {!userDetail.token ? (
-              <>
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/get-start">Register</Nav.Link>
-              </>):
-              <NavDropdown title={'Hi ' + userDetail.name} id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="/profile ">my profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-            </NavDropdown>
-            }
-
+                        <a className="dropdown-item" onClick={logoutHandler}>
+                          Logout
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </Nav>
           </Navbar.Collapse>
-          </div>
-        </Navbar>
+        </div>
+      </Navbar>
     </>
   )
 }

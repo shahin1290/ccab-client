@@ -40,7 +40,7 @@ export default function TopCourses({ match }) {
             ) : courseList.length ? (
               courseList.map((course) => (
                 <div
-                  className="cource-block-two col-lg-3 col-md-6 col-sm-12"
+                  className="cource-block-two col-lg-3 col-md-6 col-sm-6"
                   key={course._id}
                 >
                   <div className="inner-box">
@@ -48,7 +48,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                            'http://localhost:5001/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""

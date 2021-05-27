@@ -1,30 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import {
-  Nav,
-  Navbar,
-  NavDropdown,
-  Container,
-  Badge,
-  Image,
-  Button
-} from 'react-bootstrap'
-// imgaes 
-import Logo from './../../assets/images/logoBody.png'
 
-import { LinkContainer } from 'react-router-bootstrap'
+// include styles
+import 'rodal/lib/rodal.css'
+import { Nav, Dropdown, NavDropdown, Navbar } from 'react-bootstrap'
+// imgaes
+import Logo from './../../assets/images/whiteLogo.jpg'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, isValid } from '../../redux/actions/userAction'
-import { VALID_REST } from './../../redux/constences/userConst'
-import { toast } from 'react-toastify'
-import Loader from '../layout/Loader'
 
 import AdminHeader from './../layout/headers/AdminHeaderContnet'
 import StudentHeaderContent from './../layout/headers/StudentHeaderContent'
+import { getProfile } from '../../redux/actions/userAction'
 
 export default function Header() {
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userDetail } = userLogin
+  const { userDetail } = useSelector((state) => state.userLogin)
+
+  // Getting user Details
+  const { loading, user, error } = useSelector((state) => state.userProfile)
 
   // state from isValid reducer
   const isTokenValid = useSelector((state) => state.isTokenValid)
@@ -33,21 +27,9 @@ export default function Header() {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  /* useEffect(() => {
-    dispatch(isValid())
+  useEffect(() => {
+    dispatch(getProfile())
   }, [dispatch])
-  useEffect(() => {
-    if (userDetail && !userDetail._id && !ValidLoading && !success) {
-      history.push('/login')
-    }
-  }, [history, userDetail, success])
-  useEffect(() => {
-    if (ValidError) {
-      dispatch(logout())
-      history.push('/login')
-      dispatch({ type: VALID_REST })
-    }
-  }, [dispatch, ValidError]) */
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -56,68 +38,179 @@ export default function Header() {
 
   return (
     <>
-  
-        <Navbar collapseOnSelect expand="lg"   className="pb-2 " sticky="top" 
-        style={{zIndex:'1030', backgroundColor:'#0466c8'}} >
-          <div className="container">
-          <Navbar.Brand href="/">
-            <img src={Logo} title="Bootcamp" width="50px" />
-            <span className="ml-2 text-light " >Codify College </span>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        className="p-2 "
+        sticky="top"
+        style={{
+          zIndex: '1030',
+          backgroundColor: '#fff',
+          'box-shadow': '0px 0px 5px rgba(0,0,0,.6)'
+        }}
+      >
+        <Navbar.Brand href="/">
+          <img className="ml-5" src={Logo} title="Bootcamp" width="40px" />
+          <span className="ml-2 text-dark ">Codify College </span>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-          <Navbar.Collapse id="responsive-navbar-nav">
-      
-          {userDetail.user_type === 'MentorUser'? (
-                      <Nav className="mr-auto">
-                        <Nav.Link className="text-light" href="/">Home</Nav.Link>
-                        <Nav.Link href="/course-grid">Courses</Nav.Link>
-                        <Nav.Link href="/mentor-courses-list">Manage Courses</Nav.Link>
-                        <Nav.Link href="/mentor-users-list">Users</Nav.Link>
-                      </Nav>
-                  ) :
-                  userDetail.user_type === 'StudentUser' ? (
-                    <StudentHeaderContent/>
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link className="text-dark hide-on-small-screen" href="/">
+              Home
+            </Nav.Link>
+            {/* Items  hide-on-big-screen */}
+            <div className="text-dark hide-on-big-screen pt-4 ">
+              Courses
+              <Dropdown.Menu show className="border-0">
+                <NavDropdown.Item href="/course-grid" show>
+                  All Courses
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/Webdevelopment" show>
+                  Web Development
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/react" show>
+                  React
+                </NavDropdown.Item>
+              </Dropdown.Menu>
+            </div>
+            <div className="collapse navbar-collapse mr-3">
+              <ul className="navbar-nav ">
+                <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                  <a href="#" className="text-dark">
+                    Courses
+                  </a>
+                  <div
+                    className="dropdown-menu  mt-4 ml-5"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                    <a className="dropdown-item" href="/course-grid">
+                      All Courses
+                    </a>
+                    <div class="dropdown-divider"></div>
 
-                  ): userDetail.user_type === 'AdminUser' ?(<AdminHeader/>) :  
-                  <Nav className="mr-auto">
-                    <Nav.Link className="text-light" href="/">Home</Nav.Link>
-                    <Nav.Link className="text-light" href="/course-grid">Courses</Nav.Link>
-                  
-                </Nav>
-                }
+                    <a className="dropdown-item" href="#">
+                      Web Development
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">
+                      Web Development
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">
+                      Web Development
+                    </a>
+                    <div class="dropdown-divider"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </Nav>
+          {userDetail.user_type === 'MentorUser' ? (
+            <>
+              <div className="collapse navbar-collapse mr-3">
+                <ul className="navbar-nav ">
+                  <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                    <a href="#" className="text-dark">
+                      Manage
+                    </a>
+                    <div
+                      className="dropdown-menu  mt-4 ml-5"
+                      aria-labelledby="navbarDropdownMenuLink"
+                    >
+                      <a className="dropdown-item" href="/mentor-courses-list">
+                        Mange Courses
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a className="dropdown-item" href="/mentor-users-list">
+                        Users
+                      </a>
+                      <div class="dropdown-divider"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
+              <Nav className="text-dark hide-on-big-screen pt-4 ">
+                Manage
+                <Dropdown.Menu show className="border-0">
+                  <NavDropdown.Item href="/mentor-courses-list" >
+                  Mange Courses
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/mentor-users-list">
+                  Users
+                  </NavDropdown.Item>
+                
+                </Dropdown.Menu>
+                <Nav.Link
+                  href="/profile"
+                  className="text-dark hide-on-big-screen"
+                >
+                  My Profile
+                </Nav.Link>
+                <Nav.Link
+                  onClick={logoutHandler}
+                  className="text-dark hide-on-big-screen"
+                >
+                  Logout
+                </Nav.Link>
+              </Nav>
+            </>
+          ) : userDetail.user_type === 'StudentUser' ? (
+            <StudentHeaderContent logoutHandler={logoutHandler} />
+          ) : (
+            userDetail.user_type === 'AdminUser' && (
+              <AdminHeader logoutHandler={logoutHandler} />
+            )
+          )}
 
- 
-            <Nav>
-
-              {!userDetail.token? 
+          <Nav>
+            {!userDetail.token ? (
               <>
-                 <Nav.Link className="text-light" href="/login">Login</Nav.Link>
-                 <Nav.Link className="text-light" href="/get-start">Register</Nav.Link>
-                 </>
-                 :
-                <NavDropdown className="navLinks" title={'Hi ' + userDetail.name} id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="/profile ">my profile</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-              </NavDropdown>
-            }
-          
-            </Nav>
-          </Navbar.Collapse>
-</div>
+                <Nav.Link className="text-dark" href="/login">
+                  Login
+                </Nav.Link>
+                <Nav.Link className="text-dark" href="/get-start">
+                  Register
+                </Nav.Link>
+              </>
+            ) : (
+              <div className="collapse navbar-collapse mr-3">
+                <ul className="navbar-nav ">
+                  <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                    <a href="/">
+                      <div class="logo-image mt-1">
+                        <img
+                          src={
+                            user.avatar
+                              ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                              : '/images/resource/author-13.jpg'
+                          }
+                          alt="avatar"
+                        />
+                      </div>
+                    </a>
+                    <div
+                      className="dropdown-menu  mt-3"
+                      aria-labelledby="navbarDropdownMenuLink"
+                    >
+                      <a className="dropdown-item" href="/profile">
+                        My Profile
+                      </a>
+                      <div class="dropdown-divider"></div>
 
-        </Navbar>
-
-
-
-               
-                 
-
-            
-              
+                      <a className="dropdown-item" onClick={logoutHandler}>
+                        Logout
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     </>
   )
 }

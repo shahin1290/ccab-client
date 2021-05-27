@@ -129,7 +129,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/author-13.jpg'
                       }
                       alt="avatar"
@@ -257,7 +257,7 @@ export default function ProfileScreen() {
                                   <Link to={`/course-content/${course._id}`}>
                                     <img
                                       src={
-                                        'https://server.ccab.tech/uploads/Bootcamp/' +
+                                        'http://localhost:5001/uploads/Bootcamp/' +
                                         course.img_path
                                       }
                                       alt="bootcamp"

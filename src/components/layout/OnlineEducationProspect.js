@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 
-
-
-
 const OnlineEducationProspect = () => {
-  
   return (
     <>
       <section
         style={{
-          backgroundColor: '#F8F9FD',
+          backgroundColor: '#fff',
           padding: '50px 0'
         }}
       >
@@ -83,9 +79,7 @@ const OnlineEducationProspect = () => {
               <i className="fa-online-education fas fa-history"></i>
             </Col>
             <Col md={5} className="pl-4">
-              <h4>
-                Industry-Validated Every Six Months
-              </h4>
+              <h4>Industry-Validated Every Six Months</h4>
               <div className="sub-text">
                 The Industry Advisory Council (IAC) comprises industry
                 employers, recruiters, academics, enterprise organisations, and
@@ -106,28 +100,24 @@ const OnlineEducationProspect = () => {
             education partners include:
           </div>
           <Row className="mt-5 pt-3">
-            <Col md={{ span: 1, offset: 1 }}>
-              <img src="images/eu.jpg" />
+            <Col>
+              <img src="images/eu.jpg" className="w-50" />
             </Col>
-            <Col md={{ span: 1, offset: 1 }}>
-              <img src="images/eu.png" />
+            <Col>
+              <img src="images/eu.png" className="w-50" />
             </Col>
-            <Col md={{ span: 1, offset: 1 }}>
-              <img src="images/scqf.png" />
+            <Col>
+              <img src="images/scqf.png" className="w-50" />
             </Col>
-            <Col md={{ span: 1, offset: 1 }}>
-              <img src="images/gateway.jpg" />
+            <Col>
+              <img src="images/gateway.jpg" className="w-50" />
             </Col>
-            <Col md={{ span: 1, offset: 1 }}>
-              <img src="images/csn.jpg" />
+            <Col>
+              <img src="images/csn.jpg" className="w-50" />
             </Col>
           </Row>
-
-         
         </div>
       </section>
-      
-      
     </>
   )
 }
