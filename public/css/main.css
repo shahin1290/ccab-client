@@ -864,7 +864,7 @@ img {
 
 .sec-title h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.2em;
   font-weight: 700;
 }
@@ -959,7 +959,7 @@ img {
 .main-header .header-top .info-list li span {
   position: relative;
   font-weight: 600;
-  color: #03382e;
+  color: #4a4a4a;
 }
 
 .main-header .header-top .info-list li:last-child {
@@ -999,7 +999,7 @@ img {
 
 .main-header .header-top .login-nav li a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 14px;
   font-weight: 600;
   display: inline-block;
@@ -2303,7 +2303,7 @@ img {
 
 .education-section .content-column h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.2em;
   font-weight: 700;
 }
@@ -2420,7 +2420,7 @@ img {
 
 .cource-block .inner-box .lower-content h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
   letter-spacing: 1px;
@@ -2428,7 +2428,7 @@ img {
 
 .cource-block .inner-box .lower-content h5 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   -webkit-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -2777,7 +2777,7 @@ img {
   position: relative;
   width: 100px;
   height: 100px;
-  color: #03382e;
+  color: #4a4a4a;
   text-align: center;
   line-height: 100px;
   font-weight: 400;
@@ -2804,7 +2804,7 @@ img {
 .fact-counter .count-outer .percentage {
   display: inline-block;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 60px;
   line-height: 1em;
 }
@@ -2812,7 +2812,7 @@ img {
 .fact-counter .column .inner .count-outer {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 60px;
   line-height: 1em;
 }
@@ -2822,7 +2822,7 @@ img {
   font-size: 26px;
   font-weight: 700;
   margin-top: 20px;
-  color: #03382e;
+  color: #4a4a4a;
   margin-bottom: 12px;
 }
 
@@ -2910,7 +2910,7 @@ img {
 .fluid-section-one .content-column h2 {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
 }
 
 .fluid-section-one .content-column .events {
@@ -2930,7 +2930,7 @@ img {
 }
 
 .fluid-section-one .content-column .events:hover {
-  color: #03382e;
+  color: #4a4a4a;
 }
 
 .fluid-section-one .content-column .blocks-outer {
@@ -2996,7 +2996,7 @@ img {
   top: 0px;
   width: 54px;
   height: 54px;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 32px;
   font-weight: 500;
   border-radius: 50px;
@@ -3063,7 +3063,7 @@ img {
 
 .event-block .inner-box h3 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.3em;
   transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -3159,7 +3159,7 @@ img {
 
 .news-block .inner-box .lower-content h3 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -3623,7 +3623,7 @@ img {
 .main-footer .footer-widget h4 {
   position: relative;
   font-weight: 600;
-  color: #03382e;
+  color: #4a4a4a;
   padding-bottom: 10px;
   margin-bottom: 30px;
   text-transform: capitalize;
@@ -3636,7 +3636,7 @@ img {
   bottom: 0px;
   height: 2px;
   width: 30px;
-  background-color: #03382e;
+  background-color: #4a4a4a;
 }
 
 .main-footer .logo-widget {
@@ -3703,7 +3703,7 @@ img {
 
 .main-footer .links-widget .copyright {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 14px;
   font-weight: 300;
 }
@@ -4342,7 +4342,7 @@ img {
   position: relative;
   width: 100px;
   height: 100px;
-  color: #03382e;
+  color: #4a4a4a;
   text-align: center;
   line-height: 100px;
   font-weight: 400;
@@ -4632,7 +4632,7 @@ img {
 
 .event-block-two .inner-box h4 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -5104,7 +5104,7 @@ img {
 
 .education-section-three .content-column h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.2em;
   font-weight: 700;
 }
@@ -5409,7 +5409,7 @@ img {
 
 .institute-block-two .inner-box .lower-content h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
   font-family: 'Roboto Condensed', sans-serif;
@@ -5417,7 +5417,7 @@ img {
 
 .institute-block-two .inner-box .lower-content h4 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   -webkit-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -5520,7 +5520,7 @@ img {
 
 .education-section-four .content-column h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.2em;
   font-weight: 700;
   font-family: 'Roboto Condensed', sans-serif;
@@ -6199,14 +6199,14 @@ img {
 
 .login-section .login-box .title-box h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
   line-height: 1.3em;
 }
 
 .login-section .login-box .title-box .text {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.8em;
@@ -6545,14 +6545,14 @@ img {
 
 .register-section .register-box .title-box h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
   line-height: 1.3em;
 }
 
 .register-section .register-box .title-box .text {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.8em;
@@ -6588,7 +6588,7 @@ img {
 
 .privacy-section h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.2em;
   margin-bottom: 22px;
   font-weight: 700;
@@ -6613,7 +6613,7 @@ img {
 
 .privacy-section h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.5em;
   margin-bottom: 22px;
   font-weight: 700;
@@ -6643,7 +6643,7 @@ img {
   width: 7px;
   height: 7px;
   border-radius: 50px;
-  background-color: #03382e;
+  background-color: #4a4a4a;
 }
 
 /*Comming Soon*/
@@ -6691,7 +6691,7 @@ img {
 
 .comming-soon .content .content-inner h1 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 90px;
   font-weight: 600;
   line-height: 1.2em;
@@ -6933,7 +6933,7 @@ img {
 .options-view h3 {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.3em;
 }
 
@@ -7110,14 +7110,14 @@ img {
 
 .cource-block-two .inner-box .lower-content h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
 }
 
 .cource-block-two .inner-box .lower-content h5 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   -webkit-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -7179,7 +7179,7 @@ img {
   position: relative;
   width: 40px;
   height: 40px;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 14px;
   font-weight: 500;
   line-height: 40px;
@@ -7215,7 +7215,7 @@ img {
   position: relative;
   padding: 12px 25px;
   font-weight: 600;
-  color: #03382e;
+  color: #4a4a4a;
   display: block;
   border-bottom: 1px solid #f0f5fb;
 }
@@ -7611,14 +7611,14 @@ img {
 
 .cource-block-three .inner-box h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
 }
 
 .cource-block-three .inner-box h5 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   -webkit-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -7709,14 +7709,14 @@ img {
 
 .cource-block-four .inner-box h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
 }
 
 .cource-block-four .inner-box h5 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   -webkit-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -7837,7 +7837,7 @@ img {
   position: relative;
   width: 80px;
   height: 80px;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 36px;
   margin: 0 auto;
   border-radius: 5px;
@@ -7863,7 +7863,7 @@ img {
 
 .topic-block .inner-box h5 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   -webkit-transition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -8075,7 +8075,7 @@ img {
   cursor: pointer;
   line-height: 24px;
   font-weight: 600;
-  color: #03382e;
+  color: #4a4a4a;
   padding: 20px 60px 20px 40px;
   text-transform: capitalize;
   transition: all 500ms ease;
@@ -8380,7 +8380,7 @@ img {
   display: block;
   margin-top: 50px;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 36px;
   text-align: center;
 }
@@ -8422,7 +8422,7 @@ img {
 
 .course-overview .inner-box h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
   margin-bottom: 15px;
@@ -8465,7 +8465,7 @@ img {
 
 .course-overview .inner-box h3 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 20px;
   font-weight: 600;
   line-height: 1.3em;
@@ -8548,7 +8548,7 @@ img {
 
 .student-block .block-inner h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 24px;
   font-weight: 700;
   line-height: 1.3em;
@@ -8606,7 +8606,7 @@ img {
 
 .cource-review-box h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
   line-height: 1.3em;
   margin-bottom: 15px;
@@ -8830,7 +8830,7 @@ img {
 
 .intro-section-two .accordian-column h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
   padding: 15px 20px;
   border-bottom: 1px solid #f0f5fb;
@@ -9065,7 +9065,7 @@ img {
 
 .book-block .inner-box .lower-box h6 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   transition: all 300ms ease;
   -webkit-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
@@ -9089,7 +9089,7 @@ img {
 
 .books-page-section .widgets-column h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   padding: 20px 30px;
   border-bottom: 1px solid #f0f5fb;
@@ -9140,7 +9140,7 @@ img {
 
 .book-widget .widget-inner h6 a {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
 }
 
 .book-widget .widget-inner .author {
@@ -9229,7 +9229,7 @@ img {
 
 .books-detail-section .info-column .book-info li {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -9265,7 +9265,7 @@ img {
 .books-detail-section .content-column h2 {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.3em;
 }
 
@@ -9281,7 +9281,7 @@ img {
 
 .books-detail-section .content-column h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 15px;
@@ -9297,7 +9297,7 @@ img {
 
 .books-detail-section .content-column h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 18px;
@@ -9309,7 +9309,7 @@ img {
 
 .books-detail-section .content-column .book-info li {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 8px;
@@ -9382,14 +9382,14 @@ img {
 
 .profile-section .content-column h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
   line-height: 1.3em;
 }
 
 .profile-section .content-column h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
   margin-top: 15px;
@@ -9425,7 +9425,7 @@ img {
 
 .profile-section .content-column h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
   margin-top: 15px;
@@ -9470,7 +9470,7 @@ img {
 .profile-section .image-column h3 {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   margin-top: 22px;
 }
 
@@ -9603,7 +9603,7 @@ img {
 .student-profile-section .image-column h4 {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
 }
 
 .student-profile-section .image-column .text {
@@ -9865,7 +9865,7 @@ img {
 
 .edit-profile-section .edit-profile-tabs .tabs-content .title-box h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
 }
 
@@ -10065,7 +10065,7 @@ img {
 
 .sidebar-title h5 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 500;
   line-height: 1.2em;
   padding: 25px 25px;
@@ -10126,14 +10126,14 @@ img {
   font-size: 16px;
   margin: 0px 0px 0px;
   font-weight: 600;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.4em;
   text-transform: capitalize;
   font-family: 'Poppins', sans-serif;
 }
 
 .sidebar .popular-posts .post .text a {
-  color: #03382e;
+  color: #4a4a4a;
   transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -10163,7 +10163,7 @@ img {
   line-height: 24px;
   padding: 8px 10px 8px;
   margin: 0px 5px 15px 0px;
-  color: #03382e;
+  color: #4a4a4a;
   text-align: center;
   font-size: 13px;
   background: none;
@@ -10205,7 +10205,7 @@ img {
 .blog-detail .inner-box h2 {
   position: relative;
   font-weight: 700;
-  color: #03382e;
+  color: #4a4a4a;
   line-height: 1.2em;
 }
 
@@ -10243,7 +10243,7 @@ img {
 
 .blog-detail .inner-box h4 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   line-height: 1.3em;
   margin-bottom: 15px;
@@ -10263,7 +10263,7 @@ img {
 
 .blog-detail .inner-box .social-box span {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-size: 20px;
   font-weight: 600;
   margin-right: 15px;
@@ -10301,7 +10301,7 @@ img {
 .comment-form .group-title h4 {
   position: relative;
   margin-bottom: 20px;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
 }
 
@@ -10637,7 +10637,7 @@ img {
 
 .contact-info-section .title-box h2 {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 700;
   line-height: 1.3em;
 }
@@ -10671,7 +10671,7 @@ img {
 
 .contact-info-section .info-column strong {
   position: relative;
-  color: #03382e;
+  color: #4a4a4a;
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 10px;

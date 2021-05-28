@@ -9,30 +9,31 @@ export default function CourseGridScreen({ match }) {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
 
-
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
   )
 
-  console.log(match.params.category);
+  console.log(match.params.category)
 
   /*******************Functions *************/
-  const categoryArray = match.params.category ? [match.params.category] : [
-    ...new Set(
-      courseList
-        .filter((val) => {
-          if (searchTerm === '') {
-            return val
-          }
-          if (val.name.toLowerCase().includes(searchTerm)) {
-            return val
-          }
-        })
-        .map((item) => item.category)
-    )
-  ]
+  const categoryArray = match.params.category
+    ? [match.params.category]
+    : [
+        ...new Set(
+          courseList
+            .filter((val) => {
+              if (searchTerm === '') {
+                return val
+              }
+              if (val.name.toLowerCase().includes(searchTerm)) {
+                return val
+              }
+            })
+            .map((item) => item.category)
+        )
+      ]
 
-  console.log(categoryArray);
+  console.log(categoryArray)
 
   const categoryCourses = (category) =>
     courseList.filter((course) => {
@@ -186,14 +187,17 @@ export default function CourseGridScreen({ match }) {
                                       </Link>
                                     </div>
                                     <div className="lower-content">
-                                      <h5>
-                                        <Link to={`/courses/${course._id}`}>
+                                      <div>
+                                        <Link
+                                          className="sub-title"
+                                          to={`/courses/${course._id}`}
+                                        >
                                           {course.name}
                                         </Link>
-                                      </h5>
+                                      </div>
                                       <div className="text">
                                         <span
-                                          className="d-inline-block text-truncate"
+                                          className="sub-text d-inline-block text-truncate"
                                           style={{ maxWidth: '240px' }}
                                         >
                                           {course.description}
@@ -324,14 +328,14 @@ export default function CourseGridScreen({ match }) {
                         </Link>
                       </div>
                       <div className="lower-content">
-                        <h5>
-                          <Link to="/course/1/details">
+                        <div>
+                          <Link className="sub-title" to="/course/1/details">
                             {courseList[0].name}
                           </Link>
-                        </h5>
+                        </div>
                         <div className="text">
                           <span
-                            className="d-inline-block text-truncate"
+                            className="sub-text d-inline-block text-truncate"
                             style={{ maxWidth: '240px' }}
                           >
                             {courseList[0].description}

@@ -245,21 +245,21 @@ const CheckoutForm = ({ match, history }) => {
   }
 
   return (
-    <div className="sidebar-page-container">
-      <div className="auto-container">
+    <div className="sidebar-page-container" >
+      <div className="auto-container" >
         <div className="row clearfix">
           {/* Content Side */}
           <div className="content-side col-lg-9 col-md-12 col-sm-12">
             {/* Sec Title */}
             <div className="sec-title">
-              <h4>Checkout</h4>
+              <div className="title">Checkout</div>
               {checkoutError && <Message>{checkoutError}</Message>}{' '}
             </div>
             <div className="checkout-section">
               {/* Checkout Form */}
 
               <div className="col-lg-12 col-md-12 col-sm-12 form-group">
-                <h3>Select Payment Method</h3>
+                <div className="title2">Select Payment Method</div>
 
                 {loading && <Loader />}
                 {error ? (
@@ -282,9 +282,9 @@ const CheckoutForm = ({ match, history }) => {
                 >
                   <Tab eventKey="card" title="Credit/ Debit card">
                     <form onSubmit={submitHandler}>
-                      <h4 style={{ padding: '30px 0 5px 0' }}>
+                      <div className="sub-title p-3">
                         Payment Information
-                      </h4>
+                      </div>
                       {isProcessing && <Loader />}
 
                       <div
@@ -356,9 +356,9 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
                       </div>
-                      <h4 style={{ padding: '30px 0 5px 0' }}>
+                      <div className="sub-title p-3">
                         Billing Address
-                      </h4>
+                      </div>
                       <div
                         className="row clearfix"
                         style={{
@@ -471,16 +471,16 @@ const CheckoutForm = ({ match, history }) => {
           </div>
 
           {/* Sidebar Side */}
-          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12">
-            <aside className="sidebar sticky-top">
+          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-3" >
+            <aside className="sidebar sticky-top  mt-5" >
               {/* Order Widget */}
-              <div className="sidebar-widget order-widget">
-                <div className="widget-content">
+              <div className="sidebar-widget order-widget" >
+                <div className="widget-content " >
                   <div className="sidebar-title">
-                    <h6>Order Summary</h6>
+                    <div className="sub-title">Order Summary</div>
                   </div>
                   {/* Order Box */}
-                  <div className="order-box">
+                  <div className="order-box bg-white p-2" >
                     <ul>
                       <li className="clearfix">
                         Basic Plan{' '}

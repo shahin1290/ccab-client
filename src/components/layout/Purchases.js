@@ -35,7 +35,7 @@ export default function Quizzes() {
             </div>
           </div>
           <div className="inner-container">
-            <div className="container-content">
+            <div className="table-responsive">
               {orderLoading ? (
                 <Loader />
               ) : orderError ? (

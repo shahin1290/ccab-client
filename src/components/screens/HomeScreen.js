@@ -321,7 +321,7 @@ export default function HomeScreen({ match }) {
                   Codify's foundation course is a great opportunity to learn the
                   basics and to enjoy building your first website.
                 </div>
-                <a href="#" className="btn rounded bg-warning p-2 text-dark">
+                <a href="/get-start" className="btn rounded bg-warning p-2 text-dark">
                   Start Now!
                 </a>
               </div>

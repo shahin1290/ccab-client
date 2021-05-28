@@ -43,7 +43,7 @@ export default function MentorCoursesList() {
             </div>
           </div>
           <div className="inner-container">
-            <div className="container-content">
+            <div className="table-responsive">
               <Table responsive="sm">
                 <thead>
                   <tr>

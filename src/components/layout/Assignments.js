@@ -131,7 +131,7 @@ export default function Assignments() {
             </div>
           </div>
           <div className="inner-container">
-            <div className="container-content">
+            <div className="table-responsive">
               {myTasksLoading ? (
                 <Loader />
               ) : myTasksError ? (

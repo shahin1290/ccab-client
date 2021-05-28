@@ -796,7 +796,6 @@ export default function RegisterScreen({ location, setAlert }) {
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Password</label>
-                    <span className="eye-icon flaticon-eye" />
                     <input
                       type="password"
                       name="password"
@@ -809,12 +808,11 @@ export default function RegisterScreen({ location, setAlert }) {
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Confirm Password</label>
-                    <span className="eye-icon flaticon-eye" />
                     <input
                       type="password"
                       name="confirmPassword"
                       value={confirmPassword}
-                      placeholder="Password"
+                      placeholder="Confirm Password"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required
                     />

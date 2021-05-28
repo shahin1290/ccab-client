@@ -48,7 +48,7 @@ export default function AdminHeaderContnet({ logoutHandler }) {
           <NavDropdown.Item href="/admin-courses-list">
             Mange Courses
           </NavDropdown.Item>
-          <NavDropdown.Item href="/course-grid">Users</NavDropdown.Item>
+          <NavDropdown.Item href="/admin-users-list">Users</NavDropdown.Item>
         </Dropdown.Menu>
         <Nav.Link href="/profile" className="text-dark hide-on-big-screen">
           My Profile

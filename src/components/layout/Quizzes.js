@@ -47,9 +47,11 @@ export default function Quizzes() {
   const { updateSuccess, error: UpdateError } = userUpdate
 
   //get quiz list list
-  const { myQuizList, loading: quizLoading, error: quizError } = useSelector(
-    (state) => state.myQuizList
-  )
+  const {
+    myQuizList,
+    loading: quizLoading,
+    error: quizError
+  } = useSelector((state) => state.myQuizList)
 
   // getting myAnswerList
 
@@ -96,7 +98,7 @@ export default function Quizzes() {
             </div>
           </div>
           <div className="inner-container">
-            <div className="container-content">
+            <div className="table-responsive">
               {quizLoading ? (
                 <Loader />
               ) : quizError ? (

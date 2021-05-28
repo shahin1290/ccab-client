@@ -1,3 +1,10 @@
+body {
+  font-size: 16px !important;
+  font-weight: 200 !important;
+  font-family: Inter !important;
+  color: #4a4a4a !important;
+}
+
 .login-nav-section {
   height: 10vh;
 } /* LOGIN PAGE */
@@ -26,7 +33,7 @@
 }
 
 #dropdown-button-drop-right {
-  color: #343a40 !important
+  color: #4a4a4a !important;
 }
 
 .nav-link.dropdown-toggle:after {
@@ -45,7 +52,7 @@
 .dropdown:hover .dropdown-menu {
   transform: scale(1);
 }
- 
+
 .logo-image {
   width: 46px;
   height: 46px;
@@ -59,18 +66,20 @@
   font-weight: 200;
   font-family: Inter;
   margin-top: 20px;
+  color: #4a4a4a !important;
 }
 .sub-title {
   font-size: 20px;
   font-weight: 600;
   font-family: Inter;
-  color: #55595c !important
+  color: #4a4a4a !important;
 }
 .sub-text {
   font-size: 16px;
   font-weight: 300;
   padding: 10px 0;
   font-family: Inter;
+  
 }
 
 .sub-text-bold {

@@ -274,20 +274,11 @@ export default function CourseDetailScreen({ match }) {
                             className="theme-btn btn-style-three"
                           >
                             <span className="txt">
-                              Inroll now <i className="fa fa-angle-right"></i>
+                              Enroll now <i className="fa fa-angle-right"></i>
                             </span>
                           </a>
                         </>
                       )}
-
-                      <div className=" mt-4">
-                        {showKlarnaImg ? (
-                          <img
-                            width="50%"
-                            src={`https://cdn.klarna.com/1.0/shared/image/generic/badge/${countryCode}/checkout/long-blue.png?width=440`}
-                          />
-                        ) : null}
-                      </div>
                     </div>
                   </div>
                 </div>
