@@ -58,8 +58,10 @@ export default function MangeOrder({match}) {
         })
 
   const getPriceFormat = (price)=>{
-          let priceFormat = Math.ceil(price /1000 )
+    
+          let priceFormat = Math.floor(price /1000 )
           priceFormat += ' '+(price%1000)
+
           return priceFormat
   }
 

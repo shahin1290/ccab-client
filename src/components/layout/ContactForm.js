@@ -49,10 +49,10 @@ const ContactForm = () => {
     }
   }
   return (
-    <div className="p-4">
+    <div className="p-4" style={{'max-height': '800px', overflow: 'auto'}}>
       <div className="row clearfix">
         {/* Title Box */}
-        <div className=" col-lg-4 col-md-12 col-sm-12">
+        <div className="styled-form col-lg-4 col-md-12 col-sm-12">
           <div className="sub-title">Want to find out more?</div>
           <div className="title2">SPEAK WITH AN EDUCATION ADVISOR</div>
           <div className="sub-text-bold">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { getCourseList } from '../../redux/actions/courseAction'
 
 // include styles
 import 'rodal/lib/rodal.css'
@@ -30,7 +31,7 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(getProfile())
-    
+    dispatch(getCourseList())
   }, [dispatch])
 
   const logoutHandler = () => {

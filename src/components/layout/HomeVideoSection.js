@@ -10,18 +10,18 @@ const HomeVideoSection = () => {
   return (
     <section
       style={{
-        backgroundColor: '#F8F9FD', padding : '20px 0'
+        backgroundColor: '#F8F9FD', padding : '100px 0'
       }}
     >
       <div className="auto-container">
-        <Row className="mt-5 p-5">
-          <Col>
+        <div className="row clearfix ">
+          <div className="text-center col-lg-6 col-md-6 col-sm-12" >
             {' '}
             {/* Video Section Two */}
-            <div className="video-section-two">
+            <div className="video-section-two mb-5" >
               {/*Video Box*/}
               <div
-                className="video-boxed"
+                className="video-boxed "
                 style={{
                   width: '500px',
                   height: '250px',
@@ -31,10 +31,10 @@ const HomeVideoSection = () => {
                 }}
               >
                 <a
-                  className="lightbox-image overlay-box"
+                  className="lightbox-image overlay-box "
                   onClick={() => setOpen(true)}
                 >
-                  <span className="fa fa-play">
+                  <span className="fa fa-play" >
                     <i className="ripple" />
                   </span>
                 </a>
@@ -57,8 +57,8 @@ const HomeVideoSection = () => {
               </div>
             </div>
             {/* End Video Section Two */}
-          </Col>
-          <Col>
+          </div>
+          <div className="col-lg-6 col-md-6 col-sm-12" >
             <div className="title">90%</div>
             <hr
               style={{
@@ -67,10 +67,10 @@ const HomeVideoSection = () => {
                 backgroundColor: '#e84d1b'
               }}
             />
-            <h4>
+            <div className="sub-title pb-3">
               Of Our Grads Are Employed Within Six Months
-            </h4>
-            <div className="sub-text">
+            </div>
+            <div className="sub-text pb-5">
               Your career is our mission. Code Institute has redefined education
               – offering online, on-demand, supported learning that helps you
               change career to software development. With 1000+ global hiring
@@ -88,8 +88,8 @@ const HomeVideoSection = () => {
             >
               <span className="txt">Find Out More</span>
             </Link>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     </section>
   )

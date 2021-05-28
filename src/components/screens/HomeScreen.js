@@ -281,7 +281,7 @@ export default function HomeScreen({ match }) {
               <div className=" F-box col-sm s12 l3 offset-l1 ">
                 <i className="fas fa-calendar-alt big_icon purple"></i>
 
-                <h4>Bootcamp schedule</h4>
+                <div className="sub-title pb-1">Bootcamp schedule</div>
                 <div className="sub-text">
                   Bootcamp starting date: February 2021. Be it Full time or Part
                   time, we offer teaching using modern technologies. Main
@@ -299,7 +299,7 @@ export default function HomeScreen({ match }) {
 
               <div className=" F-box col-sm s12 l3">
                 <i className="fas fa-gem big_icon purple"></i>
-                <h4>Payment Plan</h4>
+                <div className="sub-title pb-1">Payment Plan</div>
                 <div className="sub-text">
                   Flexible Payment plans with our partners, also you can benefit
                   from.
@@ -315,7 +315,7 @@ export default function HomeScreen({ match }) {
 
               <div className=" F-box col-sm s12 l3">
                 <i className="fab fa-free-code-camp big_icon purple"></i>
-                <h4>Start with our free course</h4>
+                <div className="sub-title pb-1">Start with our free course</div>
                 <div className="sub-text">
                   Start with Codify Foundation course, which is currently free.
                   Codify's foundation course is a great opportunity to learn the

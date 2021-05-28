@@ -15,10 +15,11 @@ const RatingSection = () => {
         padding: '20px 0'
       }}
     >
-      <div className="auto-container text-center">
-        <Row>
-          <Col>
-            <img src="images/switchup.png"  className="w-25"/>
+      <div className="auto-container">
+     
+        <div className="row clearfix ">
+          <div className="text-center col-lg-3 col-md-6 col-sm-12 ">
+            <img src="images/switchup.png" className="w-25 pt-4 " />
             <div className="sub-text">{switchUpRatting}/5 Rating</div>
 
             <div class="star-ratings-sprite">
@@ -29,9 +30,10 @@ const RatingSection = () => {
                 class="star-ratings-sprite-rating"
               ></span>
             </div>
-          </Col>
-          <Col >
-            <img src="images/facebook.png"  className="w-25"/>
+          </div>
+
+          <div className=" text-center col-lg-3 col-md-6 col-sm-12">
+            <img src="images/facebook.png" className="w-25 pt-4" />
             <div className="sub-text">{facebookRating}/5 Rating</div>
             <div class="star-ratings-sprite">
               <span
@@ -41,9 +43,10 @@ const RatingSection = () => {
                 class="star-ratings-sprite-rating"
               ></span>
             </div>
-          </Col>
-          <Col >
-            <img src="images/google.png"  className="w-25"/>
+          </div>
+
+          <div className=" text-center col-lg-3 col-md-6 col-sm-12">
+          <img src="images/google.png"  className="w-25 pt-4"/>
             <div className="sub-text">{googleRating}/5 Rating</div>
             <div class="star-ratings-sprite">
               <span
@@ -53,9 +56,10 @@ const RatingSection = () => {
                 class="star-ratings-sprite-rating"
               ></span>
             </div>
-          </Col>
-          <Col >
-            <img src="images/coursereport.png"  className="w-25"/>
+          </div>
+
+          <div className=" text-center col-lg-3 col-md-6 col-sm-12">
+            <img src="images/coursereport.png" className="w-25 pt-4" />
             <div className="sub-text">{courseReportRating}/5 Rating</div>
             <div class="star-ratings-sprite">
               <span
@@ -65,9 +69,10 @@ const RatingSection = () => {
                 class="star-ratings-sprite-rating"
               ></span>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
+     
     </section>
   )
 }
