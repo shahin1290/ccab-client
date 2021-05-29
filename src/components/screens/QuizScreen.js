@@ -74,7 +74,7 @@ export default function QuizScreen({ match, location }) {
     dispatch(getMyQuizAnswerList())
     dispatch(getQuizDetails(bootcampId, weekId, id))
     if (answer && answer.success) {
-      history.push('/quizzes')
+      history.push('/profile')
     }
   }, [dispatch, bootcampId, weekId, id, answer, history, updateSuccess])
 
@@ -101,9 +101,9 @@ export default function QuizScreen({ match, location }) {
   }
 
   return (
-    <>
+    <div className="auto-container">
       {/* Test View Section */}
-      <div className="auto-container p-5 m-3">
+      <div className="p-5 m-3">
         {/* Sec Title */}
         <div className="sec-title">
           <div className="title pb-2">Quiz Name: {quiz.name}</div>
@@ -271,6 +271,6 @@ export default function QuizScreen({ match, location }) {
         </div>
       </div>
       {/* End Test View Section */}
-    </>
+    </div>
   )
 }

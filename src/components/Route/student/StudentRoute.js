@@ -20,9 +20,7 @@ const StudentRoute = ({ component: Component, ...rest }) => {
           !Token ? (
             <Redirect to="/login" />
           ) : (
-            <div className=" auto-container">
               <Component {...props} />
-            </div>
           )
         }
       />

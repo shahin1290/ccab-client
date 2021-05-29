@@ -49,9 +49,9 @@ export default function QuizAnswerScreen({ match, location }) {
   }
 
   return (
-    <>
+    <div className="auto-container">
       {/* Test View Section */}
-      <div className="auto-container p-5 m-3">
+      <div className=" p-5 m-3">
         {quizLoading ? (
           <Loader />
         ) : quizError ? (
@@ -168,6 +168,6 @@ export default function QuizAnswerScreen({ match, location }) {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }

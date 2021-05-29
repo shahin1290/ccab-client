@@ -120,13 +120,13 @@ export default function Assignments() {
 
   return (
     <>
-      <div style={{ paddingTop: '20px' }} className="manage-cource-section">
+      <div className="pb-5 mt-5 mb-5" >
         <div className="auto-container">
           {/* Sec Title */}
-          <div className="sec-title">
+          <div className="title mb-4">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>My Assignments</h4>
+                <div>My Assignments</div>
               </div>
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function Assignments() {
               ) : myTasksError ? (
                 <Message variant="danger">{myTasksError}</Message>
               ) : (
-                <table className="table">
+                <table className="table text-center">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -233,7 +233,7 @@ export default function Assignments() {
                                   ) : (
                                     <Link
                                       to={`/assignment-details/${task.bootcamp._id}/${task._id}`}
-                                      style={{ color: '#3366BB' }}
+                                      className=" text-info"
                                     >
                                       Submit Assignment
                                     </Link>

@@ -22,7 +22,7 @@ const CountDown = () => {
         clearInterval(interval.current)
         document.getElementById('quiz').click()
         localStorage.removeItem('timestamp')
-        history.push('/quizzes')
+        history.push('/profile')
       } else {
         setTimerMinutes(minutes)
         setTimerSeconds(seconds)

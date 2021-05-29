@@ -87,13 +87,13 @@ export default function Quizzes() {
 
   return (
     <>
-      <div style={{ paddingTop: '20px' }} className="manage-cource-section">
+      <div className="pb-5 mt-5 mb-5">
         <div className="auto-container">
           {/* Sec Title */}
-          <div className="sec-title">
+          <div className="title mb-4">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>My Quizzes</h4>
+                <div>My Quizzes</div>
               </div>
             </div>
           </div>
@@ -191,9 +191,7 @@ export default function Quizzes() {
                                   quizStatus(quiz._id).status !== 'Not Sent' ? (
                                     <Link
                                       to={`/quiz-answer/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
-                                      style={{
-                                        color: '#3366BB'
-                                      }}
+                                      className=" text-info"
                                     >
                                       Show answer
                                     </Link>

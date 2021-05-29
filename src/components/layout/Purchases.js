@@ -24,13 +24,13 @@ export default function Quizzes() {
 
   return (
     <>
-      <div style={{ paddingTop: '20px' }} className="manage-cource-section">
+      <div className="pb-5 pt-5 mb-5">
         <div className="auto-container">
           {/* Sec Title */}
-          <div className="sec-title">
+          <div className="title mb-4">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>My Purchases</h4>
+                <div>My Purchases</div>
               </div>
             </div>
           </div>
