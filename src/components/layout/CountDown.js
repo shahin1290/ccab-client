@@ -34,8 +34,12 @@ const CountDown = () => {
   })
 
   return (
-    <div style={{color: 'red'}}>
-      {timerMinutes < 10 && '0'}{timerMinutes}: {timerSeconds < 10 && '0'}{timerSeconds}
+    <div className="text-danger pb-2 font-weight-bold">
+      <i className="fas fa-stopwatch">
+        {timerMinutes < 10 && '0'}
+        {timerMinutes}: {timerSeconds < 10 && '0'}
+        {timerSeconds}
+      </i>
     </div>
   )
 }
