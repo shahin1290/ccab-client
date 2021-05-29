@@ -64,7 +64,7 @@ export default function Header() {
               Home
             </Nav.Link>
             {/* Items  hide-on-big-screen */}
-            <div className="text-dark hide-on-big-screen pt-4 ">
+            <div className="text-dark hide-on-big-screen pt-4">
               Courses
               <Dropdown.Menu show className="border-0">
                 <NavDropdown.Item href="/course-grid" show>
@@ -81,7 +81,7 @@ export default function Header() {
             <div className="collapse navbar-collapse mr-3">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                  <a href="#" className="text-dark">
+                  <a href="#" className="text-dark pb-5 pt-5">
                     Courses
                   </a>
                   <div
@@ -112,7 +112,7 @@ export default function Header() {
               <div className="collapse navbar-collapse mr-3">
                 <ul className="navbar-nav ">
                   <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                    <a href="#" className="text-dark">
+                    <a href="#" className="text-dark pb-5 pt-5">
                       Manage
                     </a>
                     <div
@@ -176,10 +176,10 @@ export default function Header() {
               </>
             ) : (
               <div className="collapse navbar-collapse mr-3">
-                <ul className="navbar-nav ">
-                  <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                <ul className="navbar-nav">
+                  <li className="nav-item dropdown dropdown-slide dropdown-hover">
                     <a href="/">
-                      <div class="logo-image mt-1">
+                      <div className="logo-image pb-1">
                         <img
                           src={
                             user.avatar

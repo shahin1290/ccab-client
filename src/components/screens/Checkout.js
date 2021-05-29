@@ -471,7 +471,7 @@ const CheckoutForm = ({ match, history }) => {
           </div>
 
           {/* Sidebar Side */}
-          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-3" >
+          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5" >
             <aside className="sidebar sticky-top  mt-5" >
               {/* Order Widget */}
               <div className="sidebar-widget order-widget" >

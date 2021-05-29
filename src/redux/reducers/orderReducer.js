@@ -41,7 +41,7 @@ export const orderCreateReducer = (
         loading: false, // loading is done laoding!
         error: action.payload
       }
-    
+
     default:
       return state
   }
@@ -96,7 +96,10 @@ export const orderListAllReducer = (state = { orderList: [] }, action) => {
   }
 }
 
-export const orderVeiwReducer = (state = { order: {} }, action) => {
+export const orderVeiwReducer = (
+  state = { order: {}, loading: false },
+  action
+) => {
   switch (action.type) {
     case ORDER_VIEW_REQUEST:
       return {
@@ -110,9 +113,9 @@ export const orderVeiwReducer = (state = { order: {} }, action) => {
       }
     case ORDER_VIEW_FAIL:
       return {
-        ...state,
         loading: false, // loading is done laoding!
-        error: action.payload
+        error: action.payload,
+        order: {}
       }
 
     default:
@@ -127,7 +130,7 @@ export const orderKlarnaCreateReducer = (
   switch (action.type) {
     case ORDER_KLARNA_CREATE_REQUEST:
       return {
-        loading: true 
+        loading: true
       }
 
     case ORDER_KLARNA_CREATE_SUCCESS:
@@ -142,13 +145,11 @@ export const orderKlarnaCreateReducer = (
         loading: false, // loading is done laoding!
         error: action.payload
       }
-    
+
     default:
       return state
   }
 }
-
-
 
 export const orderKlarnaReadReducer = (
   state = { order: {}, success: false },
@@ -157,7 +158,7 @@ export const orderKlarnaReadReducer = (
   switch (action.type) {
     case ORDER_KLARNA_READ_REQUEST:
       return {
-        loading: true 
+        loading: true
       }
 
     case ORDER_KLARNA_READ_SUCCESS:
@@ -172,7 +173,7 @@ export const orderKlarnaReadReducer = (
         loading: false, // loading is done laoding!
         error: action.payload
       }
-    
+
     default:
       return state
   }

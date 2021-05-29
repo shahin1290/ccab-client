@@ -14,10 +14,10 @@ export default function StudentHeaderContnet({ logoutHandler }) {
     <>
       {/* Item  hide-on-small-screen */}
 
-      <div className="collapse navbar-collapse mr-3">
+      <div className="collapse navbar-collapse pr-3">
         <ul className="navbar-nav ">
           <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-            <a href="#" className="text-dark">
+            <a href="#" className="text-dark pb-5 pt-5">
               Tests
             </a>
             <div
