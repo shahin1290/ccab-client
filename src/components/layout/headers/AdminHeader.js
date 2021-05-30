@@ -21,7 +21,7 @@ export default function AdminHeader() {
   const dispatch = useDispatch()
   const history = useHistory()
 
-   const { courseList } = useSelector((state) => state.courseList)
+  const { courseList } = useSelector((state) => state.courseList)
 
   const categoryArray = [...new Set(courseList.map((item) => item.category))]
 
@@ -110,7 +110,7 @@ export default function AdminHeader() {
                           <img
                             src={
                               user.avatar
-                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : '/images/resource/author-13.jpg'
                             }
                             alt="avatar"

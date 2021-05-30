@@ -93,15 +93,17 @@ export default function Header() {
                     </a>
                     <div class="dropdown-divider"></div>
                     {categoryArray.length &&
-                  categoryArray.map((category) => (
-                    <>
-                    <a className="dropdown-item" href={`/course-grid/${category}`} >
-                      {category}
-                    </a>
-                     <div class="dropdown-divider"></div>
-                     </>
-                  ))}
-                    
+                      categoryArray.map((category) => (
+                        <>
+                          <a
+                            className="dropdown-item"
+                            href={`/course-grid/${category}`}
+                          >
+                            {category}
+                          </a>
+                          <div class="dropdown-divider"></div>
+                        </>
+                      ))}
                   </div>
                 </li>
               </ul>
@@ -183,7 +185,7 @@ export default function Header() {
                         <img
                           src={
                             user.avatar
-                              ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                              ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                               : '/images/resource/author-13.jpg'
                           }
                           alt="avatar"

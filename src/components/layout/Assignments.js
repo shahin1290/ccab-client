@@ -92,7 +92,7 @@ export default function Assignments() {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'http://localhost:5001/api/tasks/' + task._id + '/download',
+      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -102,7 +102,7 @@ export default function Assignments() {
   const DownloadAnswerHandler = async (answer) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'http://localhost:5001/api/answers/' + answer._id + '/download',
+      'https://server.ccab.tech/api/answers/' + answer._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -120,7 +120,7 @@ export default function Assignments() {
 
   return (
     <>
-      <div className="pb-5 mt-5 mb-5" >
+      <div className="pb-5 mt-5 mb-5">
         <div className="auto-container">
           {/* Sec Title */}
           <div className="title mb-4">
@@ -131,6 +131,7 @@ export default function Assignments() {
             </div>
           </div>
           <div className="inner-container">
+            {console.log(myTasksError)}
             <div className="table-responsive">
               {myTasksLoading ? (
                 <Loader />
@@ -155,7 +156,7 @@ export default function Assignments() {
                     </tr>
                   </thead>
                   <tbody>
-                    {myTasks.length ? (
+                    {myTasks.length &&
                       myTasks.map((task, index) => (
                         <tr key={task._id}>
                           <td>{index + 1}</td>
@@ -242,12 +243,7 @@ export default function Assignments() {
                               </>
                             )}
                         </tr>
-                      ))
-                    ) : (
-                      <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                        You Don't have Any Assignments yet !
-                      </p>
-                    )}
+                      ))}
                   </tbody>
                 </table>
               )}

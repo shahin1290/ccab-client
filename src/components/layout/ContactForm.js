@@ -35,7 +35,7 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5001/contact', {
+      const res = await axios.post('https://server.ccab.tech/contact', {
         name,
         email,
         phoneNumber,
@@ -49,7 +49,7 @@ const ContactForm = () => {
     }
   }
   return (
-    <div className="p-4" style={{'max-height': '800px', overflow: 'auto'}}>
+    <div className="p-4" style={{ 'max-height': '800px', overflow: 'auto' }}>
       <div className="row clearfix">
         {/* Title Box */}
         <div className="styled-form col-lg-4 col-md-12 col-sm-12">

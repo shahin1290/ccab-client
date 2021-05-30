@@ -42,24 +42,27 @@ export default function TopCourses({ match }) {
                 <div
                   className=" cource-block-two col-lg-3 col-md-6 col-sm-12"
                   key={course._id}
-                  
                 >
                   <div className="inner-box ">
                     <div className="image ">
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'http://localhost:5001/uploads/Bootcamp/' +
+                            'https://server.ccab.tech/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""
-                         
                         />
                       </Link>
                     </div>
                     <div className="lower-content">
-                      <div >
-                        <Link className="sub-title" to={`/courses/${course._id}`}>{course.name}</Link>
+                      <div>
+                        <Link
+                          className="sub-title"
+                          to={`/courses/${course._id}`}
+                        >
+                          {course.name}
+                        </Link>
                       </div>
                       <div className="text">
                         <span

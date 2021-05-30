@@ -176,7 +176,7 @@ export default function CourseGridScreen({ match }) {
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            'http://localhost:5001/uploads/Bootcamp/' +
+                                            'https://server.ccab.tech/uploads/Bootcamp/' +
                                             course.img_path
                                           }
                                           alt=""
@@ -274,7 +274,7 @@ export default function CourseGridScreen({ match }) {
                     )
                   })
                 ) : (
-                  <Message className="mb-5">No Courses Found</Message>
+                  <Loader />
                 )}
               </div>
             </div>
@@ -320,7 +320,7 @@ export default function CourseGridScreen({ match }) {
                         <Link to="/course/1/details">
                           <img
                             src={
-                              'http://localhost:5001/uploads/Bootcamp/' +
+                              'https://server.ccab.tech/uploads/Bootcamp/' +
                               courseList[0].img_path
                             }
                             alt=""

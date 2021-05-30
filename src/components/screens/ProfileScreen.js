@@ -110,7 +110,6 @@ export default function ProfileScreen() {
 
   // Getting user Details
   const { loading, user, error } = useSelector((state) => state.userProfile)
-  console.log(user)
   return (
     <>
       <div
@@ -129,7 +128,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                           : '/images/resource/author-13.jpg'
                       }
                       alt="avatar"
@@ -238,6 +237,8 @@ export default function ProfileScreen() {
                       {/* Course Block */}
                       {bootcampLoading ? (
                         <Loader />
+                      ) : bootcampError ? (
+                        <Message>{bootcampError}</Message>
                       ) : filterCourseList().length ? (
                         filterCourseList().map((course) => {
                           return (
@@ -249,7 +250,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'http://localhost:5001/uploads/Bootcamp/' +
+                                      'https://server.ccab.tech/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
@@ -287,11 +288,7 @@ export default function ProfileScreen() {
                             </div>
                           )
                         })
-                      ) : (
-                        <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                          You Don't have Any Courses yet !
-                        </p>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </div>

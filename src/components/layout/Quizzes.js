@@ -47,11 +47,8 @@ export default function Quizzes() {
   const { updateSuccess, error: UpdateError } = userUpdate
 
   //get quiz list list
-  const {
-    myQuizList,
-    loading: quizLoading,
-    error: quizError
-  } = useSelector((state) => state.myQuizList)
+  const quizzes = useSelector((state) => state.myQuizList)
+  const { myQuizList, loading: quizLoading, error: quizError } = quizzes
 
   // getting myAnswerList
 
@@ -64,7 +61,7 @@ export default function Quizzes() {
   } = quizAnswerMyList
 
   const quizStatus = (quizId) => {
-    if (answerListSuccess && myQuizAnswers.length) {
+    if (myQuizAnswers && myQuizAnswers.length > 0) {
       const foundAnswer = myQuizAnswers.find((ans) => ans.quiz === quizId)
       return foundAnswer
     }
@@ -122,92 +119,92 @@ export default function Quizzes() {
                     </tr>
                   </thead>
                   <tbody>
-                    {myQuizList.length ? (
-                      myQuizList.map((quiz, index) => (
-                        <tr key={quiz._id}>
-                          <td>{index + 1}</td>
-                          <td>{quiz.name}</td>
-                          <td>{quiz.bootcamp.name}</td>
-                          <td>{getDate(quiz.createdAt)}</td>
+                    {myQuizList.length
+                      ? myQuizList.map((quiz, index) => (
+                          <tr key={quiz._id}>
+                            <td>{index + 1}</td>
+                            <td>{quiz.name}</td>
+                            <td>{quiz.bootcamp.name}</td>
+                            <td>{getDate(quiz.createdAt)}</td>
 
-                          {userDetail.user_type !== 'MentorUser' &&
-                            userDetail.user_type !== 'AdminUser' && (
-                              <>
-                                <td>
-                                  {quizStatus(quiz._id) &&
-                                  quizStatus(quiz._id).status === 'Not Sent' ? (
-                                    <Link
-                                      to={`/quiz/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
-                                      style={{
-                                        color: '#3366BB'
-                                      }}
-                                    >
-                                      Take the quiz
-                                    </Link>
-                                  ) : (
-                                    <div>Submitted</div>
-                                  )}
-                                </td>
+                            {userDetail.user_type !== 'MentorUser' &&
+                              userDetail.user_type !== 'AdminUser' && (
+                                <>
+                                  <td>
+                                    {quizStatus(quiz._id) &&
+                                    quizStatus(quiz._id).status ===
+                                      'Not Sent' ? (
+                                      <Link
+                                        to={`/quiz/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
+                                        style={{
+                                          color: '#3366BB'
+                                        }}
+                                      >
+                                        Take the quiz
+                                      </Link>
+                                    ) : (
+                                      <div>Submitted</div>
+                                    )}
+                                  </td>
 
-                                {quizStatus(quiz._id) ? (
-                                  quizStatus(quiz._id).status === 'Not Sent' ? (
-                                    <td style={{ color: 'red' }}>
-                                      {quizStatus(quiz._id).status}
-                                    </td>
-                                  ) : quizStatus(quiz._id).status ===
-                                    'Pending' ? (
-                                    <td
-                                      style={{
-                                        color: 'yellow'
-                                      }}
-                                    >
-                                      {quizStatus(quiz._id).status}
-                                    </td>
-                                  ) : quizStatus(quiz._id).status ===
-                                    'Failed' ? (
-                                    <td
-                                      style={{
-                                        color: 'red'
-                                      }}
-                                    >
-                                      {quizStatus(quiz._id).status}
-                                    </td>
-                                  ) : quizStatus(quiz._id).status === 'Sent' ? (
-                                    <td style={{ color: '#171717' }}>
-                                      {quizStatus(quiz._id).status}
-                                    </td>
-                                  ) : (
-                                    <td
-                                      style={{
-                                        color: '#1aff1a'
-                                      }}
-                                    >
-                                      {quizStatus(quiz._id).status}
-                                    </td>
-                                  )
-                                ) : null}
-                                <td>
-                                  {quizStatus(quiz._id) &&
-                                  quizStatus(quiz._id).status !== 'Not Sent' ? (
-                                    <Link
-                                      to={`/quiz-answer/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
-                                      className=" text-info"
-                                    >
-                                      Show answer
-                                    </Link>
-                                  ) : (
-                                    'Not Available'
-                                  )}
-                                </td>
-                              </>
-                            )}
-                        </tr>
-                      ))
-                    ) : (
-                      <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                        You Don't have Any Quizzes yet !
-                      </p>
-                    )}
+                                  {quizStatus(quiz._id) ? (
+                                    quizStatus(quiz._id).status ===
+                                    'Not Sent' ? (
+                                      <td style={{ color: 'red' }}>
+                                        {quizStatus(quiz._id).status}
+                                      </td>
+                                    ) : quizStatus(quiz._id).status ===
+                                      'Pending' ? (
+                                      <td
+                                        style={{
+                                          color: 'yellow'
+                                        }}
+                                      >
+                                        {quizStatus(quiz._id).status}
+                                      </td>
+                                    ) : quizStatus(quiz._id).status ===
+                                      'Failed' ? (
+                                      <td
+                                        style={{
+                                          color: 'red'
+                                        }}
+                                      >
+                                        {quizStatus(quiz._id).status}
+                                      </td>
+                                    ) : quizStatus(quiz._id).status ===
+                                      'Sent' ? (
+                                      <td style={{ color: '#171717' }}>
+                                        {quizStatus(quiz._id).status}
+                                      </td>
+                                    ) : (
+                                      <td
+                                        style={{
+                                          color: '#1aff1a'
+                                        }}
+                                      >
+                                        {quizStatus(quiz._id).status}
+                                      </td>
+                                    )
+                                  ) : null}
+                                  <td>
+                                    {quizStatus(quiz._id) &&
+                                    quizStatus(quiz._id).status !==
+                                      'Not Sent' ? (
+                                      <Link
+                                        to={`/quiz-answer/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
+                                        className=" text-info"
+                                      >
+                                        Show Answer
+                                      </Link>
+                                    ) : (
+                                      'Not Available'
+                                    )}
+                                  </td>
+                                </>
+                              )}
+                          </tr>
+                        ))
+                      : null}
                   </tbody>
                 </table>
               )}

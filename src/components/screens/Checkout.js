@@ -106,7 +106,7 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       const { data: clientSecret } = await axios.post(
-        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
+        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: 'usd',
@@ -236,7 +236,7 @@ const CheckoutForm = ({ match, history }) => {
         checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
         confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
         push:
-          'http://localhost:5001/api/order/push/' + ID + '/' + userDetail._id
+          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
       }
     }
     dispatch(createKlarnaOrder({ data: data }, ID))
@@ -245,8 +245,8 @@ const CheckoutForm = ({ match, history }) => {
   }
 
   return (
-    <div className="sidebar-page-container" >
-      <div className="auto-container" >
+    <div className="sidebar-page-container">
+      <div className="auto-container">
         <div className="row clearfix">
           {/* Content Side */}
           <div className="content-side col-lg-9 col-md-12 col-sm-12">
@@ -282,9 +282,7 @@ const CheckoutForm = ({ match, history }) => {
                 >
                   <Tab eventKey="card" title="Credit/ Debit card">
                     <form onSubmit={submitHandler}>
-                      <div className="sub-title p-3">
-                        Payment Information
-                      </div>
+                      <div className="sub-title p-3">Payment Information</div>
                       {isProcessing && <Loader />}
 
                       <div
@@ -356,9 +354,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
                       </div>
-                      <div className="sub-title p-3">
-                        Billing Address
-                      </div>
+                      <div className="sub-title p-3">Billing Address</div>
                       <div
                         className="row clearfix"
                         style={{
@@ -471,16 +467,16 @@ const CheckoutForm = ({ match, history }) => {
           </div>
 
           {/* Sidebar Side */}
-          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5" >
-            <aside className="sidebar sticky-top  mt-5" >
+          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5">
+            <aside className="sidebar sticky-top  mt-5">
               {/* Order Widget */}
-              <div className="sidebar-widget order-widget" >
-                <div className="widget-content " >
+              <div className="sidebar-widget order-widget">
+                <div className="widget-content ">
                   <div className="sidebar-title">
                     <div className="sub-title">Order Summary</div>
                   </div>
                   {/* Order Box */}
-                  <div className="order-box bg-white p-2" >
+                  <div className="order-box bg-white p-2">
                     <ul>
                       <li className="clearfix">
                         Basic Plan{' '}
