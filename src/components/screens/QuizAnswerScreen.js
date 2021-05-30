@@ -13,7 +13,6 @@ export default function QuizAnswerScreen({ match, location }) {
   const dispatch = useDispatch()
   const redirect = location.search ? location.search.split('=')[1] : '/profile'
 
-
   const {
     quiz,
     loading: quizLoading,
@@ -50,22 +49,18 @@ export default function QuizAnswerScreen({ match, location }) {
   }
 
   return (
-    <>
-      <section className="login-nav-section">
-        <div className="auto-container"></div>
-      </section>
-
+    <div className="auto-container">
       {/* Test View Section */}
-      <div className="testview-section" style={{ marginBottom: '200px' }}>
+      <div className=" p-5 m-3">
         {quizLoading ? (
           <Loader />
         ) : quizError ? (
           <Message variant="danger">{quizError}</Message>
         ) : (
-          <div className="auto-container">
+          <div>
             {/* Sec Title */}
-            <div className="sec-title">
-              <h4 style={{ marginTop: '30px' }}>Quiz Name: {quiz.name}</h4>
+            <div className="title pb-5">
+              <div>Quiz Name: {quiz.name}</div>
             </div>
 
             <div className="inner-container">
@@ -73,26 +68,20 @@ export default function QuizAnswerScreen({ match, location }) {
               <div className="upper-box">
                 {/* Question Box */}
                 <div className="question-box">
-                  <div className="row clearfix">
+                  <div className="row clearfix ">
                     {/* Column */}
                     <div className="column col-lg-6 col-md-6 col-sm-12">
-                      <h6>Questions</h6>
-                      <div className="question">
+                      <div className="sub-title">Questions</div>
+                      <div className="sub-text">
                         {quiz.question && quiz.question.length}{' '}
                         <span>Questions</span>
                       </div>
                     </div>
 
                     {/* Column */}
-                    <div className="column col-lg-2 col-md-6 col-sm-12">
-                      <h6>Time</h6>
-                      <div className="time-counter-two">
-                        <div
-                          className="time-countdown-two clearfix"
-                          data-countdown="2020/8/30"
-                        ></div>
-                        <span className="minutes py-1 d-block rounded-pill">{quiz.time} Minutes </span>
-                      </div>
+                    <div className="column col-lg-6 col-md-6 col-sm-12">
+                      <div className="sub-title">Time</div>
+                      <div className="sub-text">{quiz.time} Minutes </div>
                     </div>
                   </div>
                 </div>
@@ -179,7 +168,6 @@ export default function QuizAnswerScreen({ match, location }) {
           </div>
         )}
       </div>
-      {/* End Test View Section */}
-    </>
+    </div>
   )
 }

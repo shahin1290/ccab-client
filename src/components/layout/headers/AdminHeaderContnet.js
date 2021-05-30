@@ -1,6 +1,6 @@
 import {
   Nav,
-  Navbar,
+  Dropdown,
   NavDropdown,
   Container,
   Badge,
@@ -9,18 +9,57 @@ import {
 } from 'react-bootstrap'
 import React from 'react'
 
-export default function AdminHeaderContnet() {
-    return (
-      <Nav className="mr-auto">
-        <Nav.Link className="text-light navLinks" href="/">Home</Nav.Link>
-        <Nav.Link className="text-light navLinks" href="/course-grid"> Courses</Nav.Link>
-        <Nav.Link className="text-light navLinks" href="/admin-order-list"> Orders</Nav.Link>
-        <Nav.Link className="text-light navLinks" href="/admin-courses-list">Mange Courses</Nav.Link>
-        <Nav.Link href="/admin-users-list">Users</Nav.Link>
+export default function AdminHeaderContnet({ logoutHandler }) {
+  return (
+    <>
+      <div className="collapse navbar-collapse mr-3">
+        <ul className="navbar-nav ">
+          <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+            <a href="#" className="text-dark">
+              Manage
+            </a>
+            <div
+              className="dropdown-menu  mt-4 ml-5"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <a className="dropdown-item" href="/admin-order-list">
+                Orders
+              </a>
+              <div class="dropdown-divider"></div>
 
-    </Nav>
+              <a className="dropdown-item" href="/admin-courses-list">
+                Mange Courses
+              </a>
+              <div class="dropdown-divider"></div>
+              <a className="dropdown-item" href="/admin-users-list">
+                Users
+              </a>
+              <div class="dropdown-divider"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-
-
-    )
+      {/* Items  hide-on-big-screen */}
+      <Nav className="text-dark hide-on-big-screen pt-4 ">
+        Manage
+        <Dropdown.Menu show className="border-0">
+          <NavDropdown.Item href="/admin-order-list">Orders</NavDropdown.Item>
+          <NavDropdown.Item href="/admin-courses-list">
+            Mange Courses
+          </NavDropdown.Item>
+          <NavDropdown.Item href="/admin-users-list">Users</NavDropdown.Item>
+        </Dropdown.Menu>
+        <Nav.Link href="/profile" className="text-dark hide-on-big-screen">
+          My Profile
+        </Nav.Link>
+        <Nav.Link
+          onClick={logoutHandler}
+          className="text-dark hide-on-big-screen"
+        >
+          Logout
+        </Nav.Link>
+      </Nav>
+    </>
+  )
 }

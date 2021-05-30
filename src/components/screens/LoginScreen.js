@@ -66,7 +66,6 @@ export default function LoginScreen({ location }) {
                 </div>
                 <div className="form-group">
                   <label>Password</label>
-                  <span className="eye-icon flaticon-eye" />
                   <input
                     type="password"
                     name="password"

@@ -120,24 +120,25 @@ export default function Assignments() {
 
   return (
     <>
-      <div style={{ paddingTop: '20px' }} className="manage-cource-section">
+      <div className="pb-5 mt-5 mb-5">
         <div className="auto-container">
           {/* Sec Title */}
-          <div className="sec-title">
+          <div className="title mb-4">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>My Assignments</h4>
+                <div>My Assignments</div>
               </div>
             </div>
           </div>
           <div className="inner-container">
-            <div className="container-content">
+            {console.log(myTasksError)}
+            <div className="table-responsive">
               {myTasksLoading ? (
                 <Loader />
               ) : myTasksError ? (
                 <Message variant="danger">{myTasksError}</Message>
               ) : (
-                <table className="table">
+                <table className="table text-center">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -155,7 +156,7 @@ export default function Assignments() {
                     </tr>
                   </thead>
                   <tbody>
-                    {myTasks.length ? (
+                    {myTasks.length &&
                       myTasks.map((task, index) => (
                         <tr key={task._id}>
                           <td>{index + 1}</td>
@@ -233,7 +234,7 @@ export default function Assignments() {
                                   ) : (
                                     <Link
                                       to={`/assignment-details/${task.bootcamp._id}/${task._id}`}
-                                      style={{ color: '#3366BB' }}
+                                      className=" text-info"
                                     >
                                       Submit Assignment
                                     </Link>
@@ -242,12 +243,7 @@ export default function Assignments() {
                               </>
                             )}
                         </tr>
-                      ))
-                    ) : (
-                      <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                        You Don't have Any Assignments yet !
-                      </p>
-                    )}
+                      ))}
                   </tbody>
                 </table>
               )}

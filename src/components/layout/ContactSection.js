@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Rodal from 'rodal'
 // include styles
 import 'rodal/lib/rodal.css'
-import ContactForm from './ContactForm';
+import ContactForm from './ContactForm'
 
 const ContactSection = () => {
   const [showModal, setShowModal] = useState({ visible: false })
@@ -34,8 +34,7 @@ const ContactSection = () => {
         animation="rotate"
         visible={showModal.visible}
         onClose={() => setShowModal({ visible: false })}
-        width="1000"
-        height="700"
+        width="900"
       >
         <ContactForm />
       </Rodal>

@@ -22,7 +22,7 @@ const CountDown = () => {
         clearInterval(interval.current)
         document.getElementById('quiz').click()
         localStorage.removeItem('timestamp')
-        history.push('/quizzes')
+        history.push('/profile')
       } else {
         setTimerMinutes(minutes)
         setTimerSeconds(seconds)
@@ -34,8 +34,12 @@ const CountDown = () => {
   })
 
   return (
-    <div style={{color: 'red'}}>
-      {timerMinutes < 10 && '0'}{timerMinutes}: {timerSeconds < 10 && '0'}{timerSeconds}
+    <div className="text-danger pb-2 font-weight-bold">
+      <i className="fas fa-stopwatch">
+        {timerMinutes < 10 && '0'}
+        {timerMinutes}: {timerSeconds < 10 && '0'}
+        {timerSeconds}
+      </i>
     </div>
   )
 }

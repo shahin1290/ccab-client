@@ -110,11 +110,10 @@ export default function ProfileScreen() {
 
   // Getting user Details
   const { loading, user, error } = useSelector((state) => state.userProfile)
-  console.log(user)
   return (
     <>
       <div
-        className="instructor-page-section  "
+        className="instructor-page-section"
         style={{ backgroundColor: '#fff' }}
       >
         <div className="auto-container">
@@ -135,27 +134,17 @@ export default function ProfileScreen() {
                       alt="avatar"
                     />
                   </div>
-                  <h4>{userDetail.name}</h4>
+                  <div className="sub-title">{userDetail.name}</div>
                   <div className="designation">{userDetail.user_type}</div>
-                  <ul className="social-box">
-                    <li className="facebook">
-                      <a href="#" className="fa fa-facebook" />
-                    </li>
-                    <li className="google">
-                      <a href="#" className="fa fa-google" />
-                    </li>
-                    <li className="twitter">
-                      <a href="#" className="fa fa-twitter" />
-                    </li>
-                  </ul>
+
                   {/* Fact Counter */}
                   <div className="fact-counter2">
                     <div className="row clearfix">
                       {/* Column */}
                       <div className="column counter-column col-lg-3 col-md-6 col-sm-12 ">
                         <div className="inner">
-                          <h5 className="counter-title">Courses</h5>
-                          <div className="count-outer count-box">
+                          <div className="sub-title">Courses</div>
+                          <div className="sub-title">
                             <CountUp
                               start={-2}
                               end={filterCourseList().length}
@@ -170,8 +159,8 @@ export default function ProfileScreen() {
                       {/* Column */}
                       <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
                         <div className="inner">
-                          <h5 className="counter-title">Assignments</h5>
-                          <div className="count-outer count-box">
+                          <div className="sub-title">Assignments</div>
+                          <div className="sub-title">
                             <CountUp
                               start={-2}
                               end={myTasks.length}
@@ -186,8 +175,8 @@ export default function ProfileScreen() {
                       {/* Column */}
                       <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
                         <div className="inner">
-                          <h5 className="counter-title">Quizzes</h5>
-                          <div className="count-outer count-box">
+                          <div className="sub-title">Quizzes</div>
+                          <div className="sub-title">
                             <CountUp
                               start={-2}
                               end={myQuizList.length}
@@ -202,8 +191,8 @@ export default function ProfileScreen() {
                       {/* Column */}
                       <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
                         <div className="inner">
-                          <h5 className="counter-title">Answers</h5>
-                          <div className="count-outer count-box">
+                          <div className="sub-title">Answers</div>
+                          <div className="sub-title">
                             <CountUp
                               start={-2}
                               end={myanswers.length + myQuizAnswers.length}
@@ -240,7 +229,7 @@ export default function ProfileScreen() {
             {/* Instructor Info Tabs*/}
             <Tabs defaultActiveKey="Courses" id="uncontrolled-tab-example">
               <Tab eventKey="Courses" title="Courses">
-                <h4 style={{ padding: '20px' }}>My Courses</h4>
+                <div className="title pt-5 pb-3">My Courses</div>
 
                 <div className="single-item-carousel owl-carousel owl-theme">
                   <div className="slide">
@@ -248,32 +237,33 @@ export default function ProfileScreen() {
                       {/* Course Block */}
                       {bootcampLoading ? (
                         <Loader />
+                      ) : bootcampError ? (
+                        <Message>{bootcampError}</Message>
                       ) : filterCourseList().length ? (
                         filterCourseList().map((course) => {
                           return (
-                            <div className="course-block col-lg-3 col-md-4 col-sm-12">
-                              <div className="inner-box">
+                            <div className="shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4">
+                              <Link
+                                className="inner-box"
+                                to={`/course-content/${course._id}`}
+                              >
                                 <div className="image">
-                                  <Link to={`/course-content/${course._id}`}>
-                                    <img
-                                      src={
-                                        'https://server.ccab.tech/uploads/Bootcamp/' +
-                                        course.img_path
-                                      }
-                                      alt="bootcamp"
-                                    />
-                                  </Link>
+                                  <img
+                                    src={
+                                      'https://server.ccab.tech/uploads/Bootcamp/' +
+                                      course.img_path
+                                    }
+                                    alt="bootcamp"
+                                  />
                                   <div className="time text-light pl-1 py-1">
                                     {course.weeks * 5 * 2} hours
                                   </div>
                                 </div>
                                 <div className="lower-content">
-                                  <h6 className="my-2">
-                                    <Link to={`/course-content/${course._id}`}>
-                                      {course.name}
-                                    </Link>
-                                  </h6>
-                                  <div className="text">
+                                  <div className="my-2 sub-title">
+                                    {course.name}
+                                  </div>
+                                  <div className="sub-text">
                                     <span
                                       className="d-inline-block text-truncate"
                                       style={{ maxWidth: '240px' }}
@@ -294,15 +284,11 @@ export default function ProfileScreen() {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </Link>
                             </div>
                           )
                         })
-                      ) : (
-                        <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                          You Don't have Any Courses yet !
-                        </p>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -322,25 +308,19 @@ export default function ProfileScreen() {
               <Tab eventKey="Personal Info" title="Personal Info">
                 <div className="content mt-4">
                   <div className="card p-5 ">
-                    <h6 className="mb-3">
+                    <div className="sub-title mb-3">
                       {' '}
                       <i className="fas fa-user-tie text-danger personalinfoIcon"></i>{' '}
-                      <span className="bg-dark text-light rounded px-2 py-1 ml-2">
-                        {user.name}
-                      </span>{' '}
-                    </h6>
-                    <h6 className="mb-3">
+                      <span className="  px-2 py-1 ml-2">{user.name}</span>{' '}
+                    </div>
+                    <div className="sub-title mb-3">
                       <i className="fas fa-at text-danger personalinfoIcon"></i>{' '}
-                      <span className="bg-dark text-light rounded px-2 py-1 ml-2">
-                        {user.email}
-                      </span>
-                    </h6>
-                    <h6 className="mb-3">
+                      <span className="   px-2 py-1 ml-2">{user.email}</span>
+                    </div>
+                    <div className="sub-title mb-3">
                       <i className="fas fa-mobile-alt text-danger personalinfoIcon"></i>{' '}
-                      <span className="bg-dark text-light rounded px-2 py-1 ml-2">
-                        {user.phone}
-                      </span>
-                    </h6>
+                      <span className="   px-2 py-1 ml-2">{user.phone}</span>
+                    </div>
                   </div>
                 </div>
               </Tab>

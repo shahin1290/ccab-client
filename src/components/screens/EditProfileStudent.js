@@ -93,7 +93,7 @@ export default function EditProfile() {
       {/* Edit Profile Section */}
       <section
         className="edit-profile-section "
-        style={{ paddingTop: 140 + 'px' }}
+        style={{ paddingTop: 100 + 'px' }}
       >
         <div
           className="patern-layer-one paroller"
@@ -144,9 +144,9 @@ export default function EditProfile() {
                     }}
                   >
                     <input {...getInputProps()} />
-                    <p>
+                    <div className="sub-text">
                       Drag 'n' drop image file here, or click to select file
-                    </p>
+                    </div>
                   </div>
                 </div>
                 {/*  <a href="#" className="theme-btn btn-style-three">
@@ -183,8 +183,8 @@ export default function EditProfile() {
                       <div className="tab active-tab" id="prod-overview">
                         <div className="content">
                           {/* Title Box */}
-                          <div className="title-box">
-                            <h5>Edit Profile</h5>
+                          <div className="sub-title mb-2">
+                            <div>Edit Profile</div>
                           </div>
 
                           {/* Profile Form */}

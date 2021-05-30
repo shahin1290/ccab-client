@@ -40,11 +40,11 @@ export default function TopCourses({ match }) {
             ) : courseList.length ? (
               courseList.map((course) => (
                 <div
-                  className="cource-block-two col-lg-3 col-md-6 col-sm-12"
+                  className=" cource-block-two col-lg-3 col-md-6 col-sm-12"
                   key={course._id}
                 >
-                  <div className="inner-box">
-                    <div className="image">
+                  <div className="inner-box ">
+                    <div className="image ">
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
@@ -52,19 +52,21 @@ export default function TopCourses({ match }) {
                             course.img_path
                           }
                           alt=""
-                          style={{
-                            'max-height': '150px'
-                          }}
                         />
                       </Link>
                     </div>
                     <div className="lower-content">
-                      <h5>
-                        <Link to={`/courses/${course._id}`}>{course.name}</Link>
-                      </h5>
+                      <div>
+                        <Link
+                          className="sub-title"
+                          to={`/courses/${course._id}`}
+                        >
+                          {course.name}
+                        </Link>
+                      </div>
                       <div className="text">
                         <span
-                          className="d-inline-block text-truncate"
+                          className="sub-text d-inline-block text-truncate"
                           style={{ maxWidth: '240px' }}
                         >
                           {course.description}

@@ -7,33 +7,36 @@ import Loader from '../layout/Loader'
 
 export default function CourseGridScreen({ match }) {
   const dispatch = useDispatch()
-  const [currentPage, setCurrentPage] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
-
-  const coursesPerPage = 100
 
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
   )
 
-  /*******************Functions *************/
-  const categoryArray = [
-    ...new Set(
-      courseList
-        .filter((val) => {
-          if (searchTerm === '') {
-            return val
-          }
-          if (val.name.toLowerCase().includes(searchTerm)) {
-            return val
-          }
-        })
-        .map((item) => item.category)
-    )
-  ]
+  console.log(match.params.category)
 
-  const categoryCourses = (category) => {
-    const filteredCourses = courseList.filter((course) => {
+  /*******************Functions *************/
+  const categoryArray = match.params.category
+    ? [match.params.category]
+    : [
+        ...new Set(
+          courseList
+            .filter((val) => {
+              if (searchTerm === '') {
+                return val
+              }
+              if (val.name.toLowerCase().includes(searchTerm)) {
+                return val
+              }
+            })
+            .map((item) => item.category)
+        )
+      ]
+
+  console.log(categoryArray)
+
+  const categoryCourses = (category) =>
+    courseList.filter((course) => {
       if (searchTerm === '') {
         return course.category === category
       }
@@ -41,22 +44,6 @@ export default function CourseGridScreen({ match }) {
         return course.category === category
       }
     })
-
-    const found = currentPage.find((el) => el.category === category)
-
-    let indexOfLastCourse
-
-    found
-      ? (indexOfLastCourse = found.pageNumber * coursesPerPage)
-      : (indexOfLastCourse = 1 * coursesPerPage)
-
-    const currentCourses = filteredCourses.slice(
-      indexOfLastCourse - coursesPerPage,
-      indexOfLastCourse
-    )
-
-    return currentCourses
-  }
 
   /*  const pagination = (category) => {
     const filteredCourses = courseList.filter((course) => {
@@ -102,14 +89,14 @@ export default function CourseGridScreen({ match }) {
     dispatch(getCourseList())
   }, [dispatch, searchTerm])
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const currentCoursesArray = []
     categoryArray.map((category) => {
       currentCoursesArray.push({ category: category, pageNumber: 1 })
     })
 
     setCurrentPage(currentCoursesArray)
-  }, [courseList])
+  }, [courseList]) */
 
   return (
     <>
@@ -200,14 +187,17 @@ export default function CourseGridScreen({ match }) {
                                       </Link>
                                     </div>
                                     <div className="lower-content">
-                                      <h5>
-                                        <Link to={`/courses/${course._id}`}>
+                                      <div>
+                                        <Link
+                                          className="sub-title"
+                                          to={`/courses/${course._id}`}
+                                        >
                                           {course.name}
                                         </Link>
-                                      </h5>
+                                      </div>
                                       <div className="text">
                                         <span
-                                          className="d-inline-block text-truncate"
+                                          className="sub-text d-inline-block text-truncate"
                                           style={{ maxWidth: '240px' }}
                                         >
                                           {course.description}
@@ -284,7 +274,7 @@ export default function CourseGridScreen({ match }) {
                     )
                   })
                 ) : (
-                  <Message className="mb-5">No Courses Found</Message>
+                  <Loader />
                 )}
               </div>
             </div>
@@ -338,14 +328,14 @@ export default function CourseGridScreen({ match }) {
                         </Link>
                       </div>
                       <div className="lower-content">
-                        <h5>
-                          <Link to="/course/1/details">
+                        <div>
+                          <Link className="sub-title" to="/course/1/details">
                             {courseList[0].name}
                           </Link>
-                        </h5>
+                        </div>
                         <div className="text">
                           <span
-                            className="d-inline-block text-truncate"
+                            className="sub-text d-inline-block text-truncate"
                             style={{ maxWidth: '240px' }}
                           >
                             {courseList[0].description}
