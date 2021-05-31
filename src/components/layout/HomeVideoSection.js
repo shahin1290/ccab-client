@@ -78,17 +78,17 @@ const HomeVideoSection = () => {
               partners, our focus is to find you the right job and prepare you
               for interviews with our 1:1 Career Support and Mentor sessions.
             </div>
-            <Link
-              activeclassName="active"
+            {/* <Link
+              activeClass="active"
               className="theme-btn btn-style-three"
-              to="HOW-IT-WORKS"
+              to="/course-grid"
               spy={true}
               smooth={true}
               offset={-100}
               duration={500}
             >
               <span className="txt">Find Out More</span>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
