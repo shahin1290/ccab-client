@@ -33,7 +33,6 @@ export default function CourseGridScreen({ match }) {
         )
       ]
 
-
   const categoryCourses = (category) =>
     courseList.filter((course) => {
       if (searchTerm === '') {
@@ -163,7 +162,7 @@ export default function CourseGridScreen({ match }) {
                           </div>
                         </div>
                         <div className="row clearfix">
-                          {categoryCourses(category).length ?
+                          {categoryCourses(category).length ? (
                             categoryCourses(category).map((course) => {
                               return (
                                 <div
@@ -175,7 +174,7 @@ export default function CourseGridScreen({ match }) {
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            'http://localhost:5001/uploads/Bootcamp/' +
+                                            'https://server.ccab.tech/uploads/Bootcamp/' +
                                             course.img_path
                                           }
                                           alt=""
@@ -218,7 +217,10 @@ export default function CourseGridScreen({ match }) {
                                   </div>
                                 </div>
                               )
-                            }): <Loader />}
+                            })
+                          ) : (
+                            <Loader />
+                          )}
                         </div>
 
                         {/* Pagination  */}
@@ -319,7 +321,7 @@ export default function CourseGridScreen({ match }) {
                         <Link to="/course/1/details">
                           <img
                             src={
-                              'http://localhost:5001/uploads/Bootcamp/' +
+                              'https://server.ccab.tech/uploads/Bootcamp/' +
                               courseList[0].img_path
                             }
                             alt=""

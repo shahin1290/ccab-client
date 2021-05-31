@@ -14,7 +14,7 @@ export const getWeekList = (id) => async (dispatch, getState) => {
     dispatch({
       type: WEEK_LIST_REQUEST
     })
-    
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -25,11 +25,9 @@ export const getWeekList = (id) => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      `http://localhost:5001/api/weeks/` + id,
+      `https://server.ccab.tech/api/weeks/` + id,
       config
     )
-
-    
 
     dispatch({
       type: WEEK_LIST_SUCCESS,
@@ -63,7 +61,7 @@ export const updateWeek = (bootcampId) => async (dispatch, getState) => {
       type: WEEK_UPDATE_REQUEST
     })
 
-    await axios.put('http://localhost:5001/api/weeks/' + bootcampId, config)
+    await axios.put('https://server.ccab.tech/api/weeks/' + bootcampId, config)
 
     dispatch({
       type: WEEK_UPDATE_SUCCESS

@@ -128,7 +128,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                           : '/images/resource/author-13.jpg'
                       }
                       alt="avatar"
@@ -251,7 +251,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'http://localhost:5001/uploads/Bootcamp/' +
+                                      'https://server.ccab.tech/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
@@ -292,7 +292,8 @@ export default function ProfileScreen() {
                       ) : (
                         <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                           You Don't have Any Courses yet !
-                        </p>)}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

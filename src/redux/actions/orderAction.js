@@ -36,7 +36,7 @@ export const createOrder =
       }
 
       const response = await axios.post(
-        `http://localhost:5001/api/order/${bootcampId}`,
+        `https://server.ccab.tech/api/order/${bootcampId}`,
         order,
         config
       )
@@ -76,11 +76,9 @@ export const getOrderList = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/myorders`,
+      `https://server.ccab.tech/api/order/myorders`,
       config
     )
-
-   
 
     dispatch({
       type: ORDER_LIST_SUCCESS,
@@ -115,9 +113,11 @@ export const getAllOrders = () => async (dispatch, getState) => {
       }
     }
 
-    const response = await axios.get(`http://localhost:5001/api/order/`, config)
+    const response = await axios.get(
+      `https://server.ccab.tech/api/order/`,
+      config
+    )
 
-   
     //console.log("payload: ",response.data.data)
     dispatch({
       type: ORDER_LIST_ALL_SUCCESS,
@@ -139,7 +139,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_VIEW_REQUEST
     })
-    
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -151,11 +151,10 @@ export const getOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/` + id,
+      `https://server.ccab.tech/api/order/` + id,
       config
     )
 
-   
     //console.log("payload: ",response.data.data)
     dispatch({
       type: ORDER_VIEW_SUCCESS,
@@ -184,7 +183,7 @@ export const createKlarnaOrder = (order, id) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.post(
-      `http://localhost:5001/api/order/${id}/klarna/order`,
+      `https://server.ccab.tech/api/order/${id}/klarna/order`,
       order,
       config
     )
@@ -218,7 +217,7 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/${id}/klarna/order`,
+      `https://server.ccab.tech/api/order/${id}/klarna/order`,
       config
     )
 
@@ -247,7 +246,7 @@ export const captureOrder = (id) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/capture/${id}`,
+      `https://server.ccab.tech/api/order/capture/${id}`,
       config
     )
   } catch (error) {}

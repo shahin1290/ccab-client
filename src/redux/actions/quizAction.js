@@ -39,10 +39,9 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'http://localhost:5001/api/quizzes/' + bootcampId,
+      'https://server.ccab.tech/api/quizzes/' + bootcampId,
       config
     )
-  
 
     dispatch({
       type: QUIZ_LIST_SUCCESS,
@@ -76,11 +75,10 @@ export const getMyQuizList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      `http://localhost:5001/api/quizzes/myquizlist`,
+      `https://server.ccab.tech/api/quizzes/myquizlist`,
       config
     )
 
-  
     dispatch({
       type: MY_QUIZ_LIST_SUCCESS,
       payload: response.data
@@ -111,7 +109,7 @@ export const getQuizDetails =
       }
 
       const response = await axios.get(
-        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}/${id}`,
+        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
         config
       )
 
@@ -146,7 +144,7 @@ export const createQuiz =
         }
       }
       const response = await axios.post(
-        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}`,
+        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}`,
         quizData,
         config
       )
@@ -178,7 +176,6 @@ export const quizDelete =
         type: QUIZ_DELETE_REQUEST
       })
 
-
       const {
         userLogin: { userDetail }
       } = getState()
@@ -188,9 +185,9 @@ export const quizDelete =
           Authorization: 'Bearer ' + userDetail.token
         }
       }
-     
+
       await axios.delete(
-        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}/${id}`,
+        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
         config
       )
 
@@ -214,7 +211,7 @@ export const updateQuiz =
       dispatch({
         type: QUIZ_UPDATE_REQUEST
       })
-      
+
       const {
         userLogin: { userDetail }
       } = getState()
@@ -224,10 +221,9 @@ export const updateQuiz =
           Authorization: 'Bearer ' + userDetail.token
         }
       }
-     
 
       await axios.put(
-        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}/${id}`,
+        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
         quiz,
         config
       )

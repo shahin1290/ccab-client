@@ -28,11 +28,9 @@ export const getDayList = (id) => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      `http://localhost:5001/api/content/` + id,
+      `https://server.ccab.tech/api/content/` + id,
       config
     )
-
-    
 
     dispatch({
       type: DAY_LIST_SUCCESS,
@@ -66,7 +64,7 @@ export const getDayDetails = (weekId, id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/content/${weekId}/${id}`,
+      `https://server.ccab.tech/api/content/${weekId}/${id}`,
       config
     )
 
@@ -90,7 +88,7 @@ export const updateDay = (weekId, id, day) => async (dispatch, getState) => {
     dispatch({
       type: DAY_UPDATE_REQUEST
     })
-    
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -100,10 +98,9 @@ export const updateDay = (weekId, id, day) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-   
 
     await axios.put(
-      `http://localhost:5001/api/content/${weekId}/${id}`,
+      `https://server.ccab.tech/api/content/${weekId}/${id}`,
       day,
       config
     )

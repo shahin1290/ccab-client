@@ -214,7 +214,7 @@ export default function CourseDetailScreen({ match }) {
                         className="intro-video"
                         style={{
                           backgroundImage:
-                            'url(http://localhost:5001/uploads/Bootcamp/' +
+                            'url(https://server.ccab.tech/uploads/Bootcamp/' +
                             course.img_path +
                             ')'
                         }}
@@ -277,7 +277,9 @@ export default function CourseDetailScreen({ match }) {
                               Enroll now <i className="fa fa-angle-right"></i>
                             </span>
                           </a>
-                          <div style={{margin: '10px auto 0 auto', width: '60%'}}>
+                          <div
+                            style={{ margin: '10px auto 0 auto', width: '60%' }}
+                          >
                             <img
                               width="23%"
                               className="pr-2"
