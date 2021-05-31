@@ -30,6 +30,10 @@ export default function HomeScreen({ match }) {
     (state) => state.courseList
   )
 
+ 
+    const { userDetail } = useSelector((state) => state.userLogin)
+
+
   const { usersCount } = useSelector((state) => state.userNumbers)
 
   useEffect(() => {
@@ -267,7 +271,7 @@ export default function HomeScreen({ match }) {
         {/* End Education Section Two */}
 
         {/* How IT Works Section */}
-        <section
+        <section id='HOW-IT-WORKS'
           style={{
             backgroundColor: '#fff',
             padding: '40px 0'
@@ -321,7 +325,7 @@ export default function HomeScreen({ match }) {
                   Codify's foundation course is a great opportunity to learn the
                   basics and to enjoy building your first website.
                 </div>
-                <a href="/get-start" className="btn rounded bg-warning p-2 text-dark">
+                <a href={userDetail.token?'/profile':"/get-start"} className="btn rounded bg-warning p-2 text-dark">
                   Start Now!
                 </a>
               </div>
