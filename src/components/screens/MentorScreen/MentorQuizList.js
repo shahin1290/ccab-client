@@ -52,10 +52,9 @@ export default function QuizListScreen({ match }) {
   }
 
   return (
-    <div style={{ margin: '100px 0' }}>
-      <h1>Quizzes</h1>
-      {loading && <Loader />}
-      {error && <Message>{error}</Message>}
+    <div style={{ margin: '50px 0' }}>
+      <div className="title mb-5">Quizzes</div>
+
       <Table striped bordered hover responsive="sm">
         <thead>
           <tr>

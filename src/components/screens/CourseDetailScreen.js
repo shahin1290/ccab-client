@@ -277,6 +277,17 @@ export default function CourseDetailScreen({ match }) {
                               Enroll now <i className="fa fa-angle-right"></i>
                             </span>
                           </a>
+                          <div style={{margin: '10px auto 0 auto', width: '60%'}}>
+                            <img
+                              width="23%"
+                              className="pr-2"
+                              src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+                            />
+                            <img
+                              width="75%"
+                              src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+                            />
+                          </div>
                         </>
                       )}
                     </div>

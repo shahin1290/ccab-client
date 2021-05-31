@@ -85,8 +85,8 @@ const _handleUpdateUserROle =()=>{
 
   return (
     <>
-    <div className="container " style={{paddingTop:'120px'}}>
-      <h1 className="py-1">Users</h1>
+    <div className="container " style={{padding:'60px 0'}}>
+      <div className="title pb-3">Users</div>
       <div className="py-2">
         <Link to="/register">
           {" "}

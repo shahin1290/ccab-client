@@ -38,7 +38,7 @@ export default function MentorCoursesList() {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>Manage Courses</h4>
+                <div  className="title ">Manage Courses</div>
               </div>
             </div>
           </div>

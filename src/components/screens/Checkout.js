@@ -490,7 +490,9 @@ const CheckoutForm = ({ match, history }) => {
                       </li>
                       <li className="clearfix">
                         <strong>Total</strong>{' '}
-                        <span className="pull-right">${course.price}</span>
+                        <span className="pull-right">
+                          ${course.price * 1.25}
+                        </span>
                       </li>
                     </ul>
                   </div>

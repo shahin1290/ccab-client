@@ -102,19 +102,19 @@ const OnlineEducationProspect = () => {
               education partners include:
             </div>
             <div className="row clearfix mt-5">
-              <div className="text-center col-lg-3 col-md-6 col-sm-12 ">
+              <div className="text-center col-lg-3 col-md-6 col-sm-12 pb-5">
                 <img src="images/eu.jpg" className=" w-50 h-75" />
               </div>
 
-              <div className=" text-center col-lg-3 col-md-6 col-sm-12">
+              <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-5">
                 <img src="images/scqf.png" className="w-50 h-75" />
               </div>
 
-              <div className=" text-center col-lg-3 col-md-6 col-sm-12">
+              <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-5">
                 <img src="images/gateway.jpg" className="w-50 h-75" />
               </div>
 
-              <div className=" text-center col-lg-3 col-md-6 col-sm-12">
+              <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-5">
                 <img src="images/csn.jpg" className="w-50 h-75" />
               </div>
             </div>

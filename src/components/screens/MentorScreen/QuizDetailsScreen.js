@@ -45,7 +45,7 @@ export default function TaskDetailsScreen({ match }) {
 
   return (
     <div className="py-5">
-      <h1>Quiz Details</h1>
+      <div className="title mb-4">Quiz Detail Page</div>
       {quizLoading ? (
         <Loader />
       ) : QuizError ? (
@@ -54,9 +54,19 @@ export default function TaskDetailsScreen({ match }) {
         <div className="p-3 container-fluid ">
           <div className="row">
             <div className="col-sm ">
-              <h3 className="mb-2">{quiz.name}</h3>
-              <p>{quiz.description}</p>
-              <span className="mb-1 d-block">{getDates(quiz.createdAt)}</span>
+              <div className="pb-2">
+                <span className="sub-title pb-5">Name: </span> {quiz.name}
+              </div>
+              <div className=" pb-2">
+                {' '}
+                <span className="sub-title mb-2">Description: </span>{' '}
+                {quiz.description}
+              </div>
+              <div className=" pb-2">
+                {' '}
+                <span className="sub-title mb-2">Date: </span>
+                {getDates(quiz.createdAt)}
+              </div>
             </div>
           </div>
         </div>

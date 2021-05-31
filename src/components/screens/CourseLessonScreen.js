@@ -58,7 +58,7 @@ export default function CourseContentScreen({ match }) {
         <div className="circle-one"></div>
         <div className="auto-container">
           <div className="inner-container">
-            <h2>{day.name}</h2>
+            <div className="title mb-3">{day.name}</div>
             <div className="row clearfix">
               {/* Content Column */}
               <div className="content-column col-lg-8 col-md-12 col-sm-12">
@@ -100,19 +100,16 @@ export default function CourseContentScreen({ match }) {
                             >
                               <div className="content">
                                 {findElementText('title') && (
-                                  <h4 style={{ paddingTop: '25px' }}>
+                                  <div className="sub-title pt-4 pb-4">
                                     {findElementText('title')}
-                                  </h4>
+                                  </div>
                                 )}
 
                                 {findElementText('description') && (
-                                  <p
-                                    style={{
-                                      fontSize: '16px'
-                                    }}
+                                  <div className="sub-text mb-5"
                                   >
                                     {findElementText('description')}
-                                  </p>
+                                  </div>
                                 )}
 
                                 {findElementText('image') && (
@@ -125,7 +122,8 @@ export default function CourseContentScreen({ match }) {
                                 )}
 
                                 {findElementText('code') && (
-                                  <p
+                                  <div
+                                  className="sub-text mb-5"
                                     style={{
                                       width: '50%',
                                       margin: '20px auto',
@@ -135,7 +133,7 @@ export default function CourseContentScreen({ match }) {
                                     }}
                                   >
                                     {findElementText('code')}
-                                  </p>
+                                  </div>
                                 )}
                               </div>
                             </div>
@@ -146,8 +144,8 @@ export default function CourseContentScreen({ match }) {
                   </div>
                 ) : (
                   <div className="sec-title style-two">
-                    <h2>Welcome to Course Content</h2>
-                    <div className="text">
+                    <div className="title">Welcome to Course Content</div>
+                    <div className="sub-text">
                       Please navigate to the side menu to see the daily content
                     </div>
                   </div>
@@ -157,7 +155,7 @@ export default function CourseContentScreen({ match }) {
               {/* Accordian Column */}
               <div className="accordian-column col-lg-4 col-md-12 col-sm-12">
                 <div className="inner-column sticky-top">
-                  <h4>Table of contents</h4>
+                  <div className="title">Table of contents</div>
                   {/* Accordion Box */}
                   <Accordion
                     style={{ height: '500px', overflowY: 'scroll' }}

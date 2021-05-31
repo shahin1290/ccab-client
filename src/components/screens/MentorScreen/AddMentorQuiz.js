@@ -24,16 +24,22 @@ export default function UpdateMentorCourse({ location, match }) {
     (state) => state.quizUpdate
   )
 
-  const { quiz, loading, error } = useSelector((state) => state.quizCreate)
+  const {
+    quiz,
+    error: addQuizError,
+    success: addSuccess
+  } = useSelector((state) => state.quizCreate)
 
   const { bootcampId, weekId, id } = match.params
 
   useEffect(() => {
-    dispatch(getQuizDetails(bootcampId, weekId, id))
+    if (id) {
+      dispatch(getQuizDetails(bootcampId, weekId, id))
+    }
     if (quiz && quiz.success) {
       history.push(redirect)
     }
-  }, [quiz, bootcampId, weekId, dispatch])
+  }, [quiz, bootcampId, weekId, id, dispatch])
 
   const [name, setName] = useState()
   const [time, setTime] = useState()
@@ -107,12 +113,20 @@ export default function UpdateMentorCourse({ location, match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>Add Quiz</h4>
+                <div className="title">Add Quiz</div>
                 {updateError ? (
                   <p className="text-danger bg-light p-2 ">{updateError}</p>
                 ) : updateSuccess ? (
                   <p className="text-success bg-light p-2 ">
                     Quiz Updated successfully
+                  </p>
+                ) : null}
+
+                {addQuizError ? (
+                  <p className="text-danger bg-light p-2 ">{updateError}</p>
+                ) : addSuccess ? (
+                  <p className="text-success bg-light p-2 ">
+                    Quiz Added successfully
                   </p>
                 ) : null}
               </div>
@@ -124,10 +138,9 @@ export default function UpdateMentorCourse({ location, match }) {
               {/* Left Column */}
               <div className="left-column col-lg-7 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <h6>Basic Information</h6>
+                  <div className="sub-title">Basic Information</div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">
-                    {error && <Message>{error}</Message>}
                     <form>
                       {/* Form Group */}
                       <div className="form-group">
@@ -165,7 +178,9 @@ export default function UpdateMentorCourse({ location, match }) {
                           onChange={(e) => setTime(e.target.value)}
                         />
                       </div>
-                      <h6>Add Question and Possible Answers</h6>
+                      <div div className="sub-title">
+                        Add Question and Possible Answers
+                      </div>
                       <div className="form-group">
                         <label>Question</label>
                         <input
@@ -251,12 +266,12 @@ export default function UpdateMentorCourse({ location, match }) {
                 </div>
               </div>
               {/* Right Column */}
-              <div className="right-column col-lg-4 col-md-12 col-sm-12">
+              <div className="right-column col-lg-4 col-md-12 col-sm-12 text-center">
                 <div className="inner-column">
                   <div className="edit-course-form">
                     {/* Form Group */}
                     <div className="form-group">
-                      <h6>Quiz Questions</h6>
+                      <div className="sub-title mb-4">Quiz Questions</div>
 
                       <Accordion
                         className="accordion-box style-two"
@@ -287,7 +302,7 @@ export default function UpdateMentorCourse({ location, match }) {
                       </Accordion>
                     </div>
 
-                    <div className="button-box text-center">
+                    <div className="button-box">
                       {id ? (
                         <button
                           type="button"
