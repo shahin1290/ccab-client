@@ -10,7 +10,7 @@ const ContactSection = () => {
   return (
     <section
       style={{
-        backgroundColor: '#445261',
+        backgroundColor: '#252841',
         padding: '80px 0'
       }}
     >
