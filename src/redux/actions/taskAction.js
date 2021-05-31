@@ -30,6 +30,10 @@ import axios from 'axios'
 
 export const getTaskList = (bootcampId) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: TASK_LIST_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -44,9 +48,6 @@ export const getTaskList = (bootcampId) => async (dispatch, getState) => {
       'https://server.ccab.tech/api/tasks/' + bootcampId,
       config
     )
-    dispatch({
-      type: TASK_LIST_REQUEST
-    })
 
     dispatch({
       type: TASK_LIST_SUCCESS,
@@ -142,6 +143,10 @@ export const createTask =
 
 export const taskDelete = (bootcampId, id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: TASK_DELETE_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -151,9 +156,6 @@ export const taskDelete = (bootcampId, id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    dispatch({
-      type: TASK_DELETE_REQUEST
-    })
 
     await axios.delete(
       `https://server.ccab.tech/api/tasks/${bootcampId}/${id}`,

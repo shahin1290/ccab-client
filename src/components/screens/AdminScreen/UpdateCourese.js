@@ -271,7 +271,7 @@ export default function UpdateCourese({ match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>Edit Courses</h4>
+                <div className="title">Edit Courses</div>
               </div>
               <div className="pull-right">
                 <a href="/mentor-courses-list" className="see-all">
@@ -294,7 +294,7 @@ export default function UpdateCourese({ match }) {
               {/* Left Column */}
               <div className="left-column col-lg-8 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <h6>Basic Information</h6>
+                  <div className="sub-title pb-3">Basic Information</div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">
                     <form method="post" action="index.html">
@@ -352,7 +352,7 @@ export default function UpdateCourese({ match }) {
 
                       <div className="my-3">
                         <span className="rounded-pill  px-2 py-1 m-2 bg-light">
-                          <i class="fas fa-plus-circle text-success"></i>{' '}
+                          <i className="fas fa-plus-circle text-success"></i>{' '}
                           {category}
                         </span>
                       </div>
@@ -366,7 +366,9 @@ export default function UpdateCourese({ match }) {
                               {/* Edit Course Form */}
                               <div className="edit-course-form">
                                 <form>
-                                  <h6>Add Describtion Info List</h6>
+                                  <div className="sub-title pb-3">
+                                    Add Describtion Info List
+                                  </div>
                                   <div className="form-group">
                                     <label>List Title</label>
                                     <input
@@ -409,7 +411,7 @@ export default function UpdateCourese({ match }) {
                                           type="button"
                                           onClick={handleAddFields}
                                         >
-                                          <i class="fas fa-plus-square"></i>
+                                          <i className="fas fa-plus-square"></i>
                                         </button>
                                         <button
                                           type="button"
@@ -418,7 +420,7 @@ export default function UpdateCourese({ match }) {
                                             handleRemoveFields(inputField.id)
                                           }
                                         >
-                                          <i class="fas fa-minus-square"></i>
+                                          <i className="fas fa-minus-square"></i>
                                         </button>
                                       </div>
                                     </Card>
@@ -445,7 +447,9 @@ export default function UpdateCourese({ match }) {
                               <div className="edit-course-form">
                                 {/* Form Group */}
                                 <div className="form-group">
-                                  <h6>INFO LIST</h6>
+                                  <div className="sub-title pb-3">
+                                    INFO LIST
+                                  </div>
 
                                   <Accordion
                                     className="accordion-box style-two"
@@ -500,7 +504,7 @@ export default function UpdateCourese({ match }) {
               {/* Right Column */}
               <div className="right-column col-lg-4 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <h6>Video & Image</h6>
+                  <div className="sub-title pb-3">Video & Image</div>
                   {/* Video Box */}
                   <div
                     className="video-boxed"
@@ -588,7 +592,7 @@ export default function UpdateCourese({ match }) {
                   <div className=""></div>
                   {/* End Url Box */}
 
-                  <h6>Options</h6>
+                  <div className="sub-title pb-3">Options</div>
                   <div className="option-cource-box">
                     <div className="box-inner">
                       <div className="form-group mb-2">
@@ -623,7 +627,7 @@ export default function UpdateCourese({ match }) {
                         <div className="my-3">
                           {Mentor.name ? (
                             <span className="rounded-pill  px-2 py-1 m-2 bg-light">
-                              <i class="fas fa-plus-circle text-success"></i>{' '}
+                              <i className="fas fa-plus-circle text-success"></i>{' '}
                               {Mentor.name}
                             </span>
                           ) : (
@@ -696,7 +700,7 @@ export default function UpdateCourese({ match }) {
                                     _handleUnselectStudent(student._id)
                                   }}
                                 >
-                                  <i class="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
                                 </a>{' '}
                                 {student.name}
                               </span>

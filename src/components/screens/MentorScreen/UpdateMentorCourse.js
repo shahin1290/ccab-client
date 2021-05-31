@@ -10,9 +10,11 @@ import { Modal } from 'react-bootstrap'
 export default function UpdateMentorCourse({ match }) {
   const dispatch = useDispatch()
 
-  const { day, loading: dayLoading, error: dayError } = useSelector(
-    (state) => state.dayDetails
-  )
+  const {
+    day,
+    loading: dayLoading,
+    error: dayError
+  } = useSelector((state) => state.dayDetails)
 
   const {
     loading: updateLoading,
@@ -38,11 +40,10 @@ export default function UpdateMentorCourse({ match }) {
           return null
         }
       }
-    } return ''
+    }
+    return ''
   }
   useEffect(() => {
-    
-
     setName(day.name)
     setDescription(findElementText('description'))
     setTitle(findElementText('title'))
@@ -59,7 +60,6 @@ export default function UpdateMentorCourse({ match }) {
   const handleOpenVideo = () => {
     setShowVideo(true)
   }
-
 
   //form submission
   const [name, setName] = useState('')
@@ -91,7 +91,7 @@ export default function UpdateMentorCourse({ match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>Edit Content</h4>
+                <div className="title ">Edit Content</div>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function UpdateMentorCourse({ match }) {
                         />
                       </div>
 
-                      <h5>Add Section </h5>
+                      <div className="sub-title pb-2">Add Section </div>
 
                       <div className="form-group">
                         <label>Title</label>
@@ -172,7 +172,7 @@ export default function UpdateMentorCourse({ match }) {
                 {/* Right Column */}
                 <div className="right-column col-lg-4 col-md-12 col-sm-12">
                   <div className="inner-column">
-                    <h6>Video</h6>
+                    <div className="sub-title pb-2">Video</div>
                     {/* Video Box */}
                     <div
                       className="video-boxed"

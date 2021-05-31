@@ -61,6 +61,10 @@ export const createOrder =
 // get orders list for student
 export const getOrderList = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: ORDER_LIST_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -75,10 +79,6 @@ export const getOrderList = () => async (dispatch, getState) => {
       `https://server.ccab.tech/api/order/myorders`,
       config
     )
-
-    dispatch({
-      type: ORDER_LIST_REQUEST
-    })
 
     dispatch({
       type: ORDER_LIST_SUCCESS,
@@ -99,6 +99,10 @@ export const getOrderList = () => async (dispatch, getState) => {
 // get all orders for Admin
 export const getAllOrders = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: ORDER_LIST_ALL_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -114,9 +118,6 @@ export const getAllOrders = () => async (dispatch, getState) => {
       config
     )
 
-    dispatch({
-      type: ORDER_LIST_ALL_REQUEST
-    })
     //console.log("payload: ",response.data.data)
     dispatch({
       type: ORDER_LIST_ALL_SUCCESS,
@@ -135,6 +136,10 @@ export const getAllOrders = () => async (dispatch, getState) => {
 
 export const getOrder = (id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: ORDER_VIEW_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -150,9 +155,6 @@ export const getOrder = (id) => async (dispatch, getState) => {
       config
     )
 
-    dispatch({
-      type: ORDER_VIEW_REQUEST
-    })
     //console.log("payload: ",response.data.data)
     dispatch({
       type: ORDER_VIEW_SUCCESS,

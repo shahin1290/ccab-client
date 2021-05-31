@@ -99,7 +99,7 @@ export default function HomeScreen({ match }) {
                   </div>
 
                   <Link
-                    activeClass="active"
+                    activeclassName="active"
                     className="theme-btn btn-style-three"
                     to="HOW-IT-WORKS"
                     spy={true}
@@ -241,7 +241,7 @@ export default function HomeScreen({ match }) {
                   </div>
 
                   <Link
-                    activeClass="active"
+                    activeclassName="active"
                     className="theme-btn btn-style-three"
                     to="HOW-IT-WORKS"
                     spy={true}
@@ -272,7 +272,6 @@ export default function HomeScreen({ match }) {
             backgroundColor: '#fff',
             padding: '40px 0'
           }}
-          
         >
           <div className="auto-container">
             <div className="title text-center p-4 ">How It Works</div>
@@ -321,7 +320,10 @@ export default function HomeScreen({ match }) {
                   Codify's foundation course is a great opportunity to learn the
                   basics and to enjoy building your first website.
                 </div>
-                <a href="/get-start" className="btn rounded bg-warning p-2 text-dark">
+                <a
+                  href="/get-start"
+                  className="btn rounded bg-warning p-2 text-dark"
+                >
                   Start Now!
                 </a>
               </div>

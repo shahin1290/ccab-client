@@ -292,7 +292,7 @@ const CheckoutForm = ({ match, history }) => {
                           backgroundColor: 'white'
                         }}
                       >
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Holder Name</label>
 
                           <div
@@ -312,7 +312,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label htmlFor="cardNumber">Card Number</label>
                           <div
                             style={{
@@ -328,7 +328,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-6 col-sm-12">
                           <label>Expiration Date</label>
                           <div
                             style={{
@@ -341,7 +341,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-6 col-sm-12">
                           <label>CVC Code</label>
                           <div
                             style={{
@@ -362,7 +362,7 @@ const CheckoutForm = ({ match, history }) => {
                           backgroundColor: 'white'
                         }}
                       >
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Street</label>
 
                           <div
@@ -382,7 +382,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>City</label>
 
                           <div
@@ -402,7 +402,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Country</label>
 
                           <div
@@ -421,7 +421,7 @@ const CheckoutForm = ({ match, history }) => {
                             />
                           </div>
                         </div>
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Zip</label>
 
                           <div
@@ -490,7 +490,9 @@ const CheckoutForm = ({ match, history }) => {
                       </li>
                       <li className="clearfix">
                         <strong>Total</strong>{' '}
-                        <span className="pull-right">${course.price}</span>
+                        <span className="pull-right">
+                          ${course.price * 1.25}
+                        </span>
                       </li>
                     </ul>
                   </div>

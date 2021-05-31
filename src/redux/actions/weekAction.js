@@ -11,6 +11,10 @@ import axios from 'axios'
 
 export const getWeekList = (id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: WEEK_LIST_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -24,10 +28,6 @@ export const getWeekList = (id) => async (dispatch, getState) => {
       `https://server.ccab.tech/api/weeks/` + id,
       config
     )
-
-    dispatch({
-      type: WEEK_LIST_REQUEST
-    })
 
     dispatch({
       type: WEEK_LIST_SUCCESS,

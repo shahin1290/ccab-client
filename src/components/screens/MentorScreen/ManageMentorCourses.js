@@ -15,7 +15,6 @@ export default function ManageMentorScreen({ match }) {
   useEffect(() => {
     dispatch(getWeekList(id))
   }, [dispatch, id])
-  console.log(weekList);
   return (
     <>
       <section className="login-nav-section">
@@ -25,7 +24,7 @@ export default function ManageMentorScreen({ match }) {
       {/* Intro Section */}
       <Container style={{ marginBottom: '200px' }}>
         {/* Accordian Column */}
-        <h4>Table of contents</h4>
+        <div className="title mb-4">Table of contents</div>
         {/* Accordion Box */}
         <Accordion className="accordion-box style-two">
           {weekList.map((week, index) => (
@@ -37,9 +36,9 @@ export default function ManageMentorScreen({ match }) {
                 style={{ display: 'flex', justifyContent: 'space-between' }}
                 onClick={() => dispatch(getDayList(week._id))}
               >
-                <div>{week.name}</div>
+                <div className="pr-5">{week.name}</div>
 
-                <div style={{ display: 'flex' }}>
+                <div >
                   <Link
                     to={`/mentor-add-quiz/${week.bootcamp}/${week._id}`}
                     className="btn btn-info bordered"

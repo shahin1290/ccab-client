@@ -101,7 +101,7 @@ export default function MangeOrder({ match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>Purchases List</h4>
+                <div className="title">Purchases List</div>
               </div>
             </div>
           </div>
@@ -278,7 +278,7 @@ export default function MangeOrder({ match }) {
                                 </td>
                                 <td>
                                   {order.orderStatus}
-                                  <i class="ml-2 fas fa-check-circle text-success"></i>
+                                  <i className="ml-2 fas fa-check-circle text-success"></i>
                                 </td>
                               </tr>
                             ))

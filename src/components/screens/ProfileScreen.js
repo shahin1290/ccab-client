@@ -234,6 +234,7 @@ export default function ProfileScreen() {
                 <div className="single-item-carousel owl-carousel owl-theme">
                   <div className="slide">
                     <div className="row clearfix">
+                      {console.log(bootcampLoading)}
                       {/* Course Block */}
                       {bootcampLoading ? (
                         <Loader />
@@ -288,7 +289,11 @@ export default function ProfileScreen() {
                             </div>
                           )
                         })
-                      ) : null}
+                      ) : (
+                        <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                          You Don't have Any Courses yet !
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

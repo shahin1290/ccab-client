@@ -147,11 +147,11 @@ export default function QuizScreen({ match, location }) {
 
           <div className={show ? 'd-none' : 'd-block'}>
             <div className="sub-title pt-5 pb-3"> Instructions</div>
-            <ul class="list-group ">
-              <li class="list-group-item">
+            <ul className="list-group ">
+              <li className="list-group-item">
                 Complete the quiz in one sitting with allotted times
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 Only one choice for each question{' '}
               </li>
             </ul>
@@ -212,7 +212,7 @@ export default function QuizScreen({ match, location }) {
                                   }
                                   style={{ padding: '0 20px' }}
                                 >
-                                  <i class="fas fa-edit">edit</i>
+                                  <i className="fas fa-edit">edit</i>
                                 </Link>
                                 <Link
                                   onClick={() => {
@@ -224,7 +224,7 @@ export default function QuizScreen({ match, location }) {
                                       deleteQuizQuestion(q)
                                   }}
                                 >
-                                  <i class="fas fa-trash">Delete</i>
+                                  <i className="fas fa-trash">Delete</i>
                                 </Link>
                               </span>
                             )}

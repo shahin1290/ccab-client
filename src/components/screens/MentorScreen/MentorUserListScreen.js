@@ -27,8 +27,8 @@ export default function UserlistScreen() {
 
   return (
     <>
-      <div className="container " style={{ padding: '120px 0' }}>
-        <h1 className="py-1">Bootcamp Students</h1>
+      <div className="container " style={{ padding: '50px 0' }}>
+        <div className="title mb-5">Bootcamp Students</div>
 
         {loading ? (
           <Loader />
