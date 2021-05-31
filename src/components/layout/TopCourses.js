@@ -34,7 +34,7 @@ export default function TopCourses({ match }) {
             {/* Institution Block */}
 
             {loading ? (
-              <Loader />
+              <Loader className="m-5" />
             ) : error ? (
               <Message>{error}</Message>
             ) : courseList.length ? (

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -145,7 +144,7 @@ export default function DayContent({ weekId, bootcampId }) {
                       style={{ marginLeft: '100px' }}
                     >
                       {' '}
-                      <i class="fas fa-edit">edit content</i>
+                      <i className="fas fa-edit">edit content</i>
                     </Link>
                   )}
                 </div>

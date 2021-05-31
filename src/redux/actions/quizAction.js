@@ -24,6 +24,10 @@ import axios from 'axios'
 
 export const getQuizList = (bootcampId) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: QUIZ_LIST_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -38,9 +42,6 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
       'https://server.ccab.tech/api/quizzes/' + bootcampId,
       config
     )
-    dispatch({
-      type: QUIZ_LIST_REQUEST
-    })
 
     dispatch({
       type: QUIZ_LIST_SUCCESS,
@@ -60,6 +61,10 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
 
 export const getMyQuizList = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: MY_QUIZ_LIST_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -73,10 +78,6 @@ export const getMyQuizList = () => async (dispatch, getState) => {
       `https://server.ccab.tech/api/quizzes/myquizlist`,
       config
     )
-
-    dispatch({
-      type: MY_QUIZ_LIST_REQUEST
-    })
 
     dispatch({
       type: MY_QUIZ_LIST_SUCCESS,
@@ -171,6 +172,10 @@ export const createQuiz =
 export const quizDelete =
   (bootcampId, weekId, id) => async (dispatch, getState) => {
     try {
+      dispatch({
+        type: QUIZ_DELETE_REQUEST
+      })
+
       const {
         userLogin: { userDetail }
       } = getState()
@@ -180,9 +185,6 @@ export const quizDelete =
           Authorization: 'Bearer ' + userDetail.token
         }
       }
-      dispatch({
-        type: QUIZ_DELETE_REQUEST
-      })
 
       await axios.delete(
         `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
@@ -206,6 +208,10 @@ export const quizDelete =
 export const updateQuiz =
   (bootcampId, weekId, id, quiz) => async (dispatch, getState) => {
     try {
+      dispatch({
+        type: QUIZ_UPDATE_REQUEST
+      })
+
       const {
         userLogin: { userDetail }
       } = getState()
@@ -215,9 +221,6 @@ export const updateQuiz =
           Authorization: 'Bearer ' + userDetail.token
         }
       }
-      dispatch({
-        type: QUIZ_UPDATE_REQUEST
-      })
 
       await axios.put(
         `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,

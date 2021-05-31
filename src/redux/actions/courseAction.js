@@ -24,6 +24,10 @@ import axios from 'axios'
 export const getCourseList =
   (pageNumber = '') =>
   async (dispatch, getState) => {
+    dispatch({
+      type: COURSE_LIST_REQUEST
+    })
+
     try {
       const {
         userLogin: { userDetail }
@@ -38,10 +42,6 @@ export const getCourseList =
         `https://server.ccab.tech/api/bootcamp?pageNumber=${pageNumber}`,
         config
       )
-
-      dispatch({
-        type: COURSE_LIST_REQUEST
-      })
 
       dispatch({
         type: COURSE_LIST_SUCCESS,
@@ -63,6 +63,10 @@ export const getCourseListForAdmin =
   (pageNumber = '') =>
   async (dispatch, getState) => {
     try {
+      dispatch({
+        type: ADMIN_COURSE_LIST_REQUEST
+      })
+
       const {
         userLogin: { userDetail }
       } = getState()
@@ -76,10 +80,6 @@ export const getCourseListForAdmin =
         `https://server.ccab.tech/api/bootcamp/mange?pageNumber=${pageNumber}`,
         config
       )
-
-      dispatch({
-        type: ADMIN_COURSE_LIST_REQUEST
-      })
 
       dispatch({
         type: ADMIN_COURSE_LIST_SUCCESS,
@@ -167,6 +167,10 @@ export const createCourse = (course) => async (dispatch, getState) => {
 
 export const deleteCourse = (id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: COURSE_DELETE_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -176,9 +180,6 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    dispatch({
-      type: COURSE_DELETE_REQUEST
-    })
 
     await axios.delete('https://server.ccab.tech/api/bootcamp/' + id, config)
 
@@ -199,6 +200,10 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
 // update course
 export const updateCourse = (course, id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: COURSE_UPDATE_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -208,9 +213,7 @@ export const updateCourse = (course, id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    dispatch({
-      type: COURSE_UPDATE_REQUEST
-    })
+
     //console.log(course);
     await axios.put(
       'https://server.ccab.tech/api/bootcamp/' + id,

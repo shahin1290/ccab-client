@@ -49,7 +49,7 @@ export default function Header() {
         style={{
           zIndex: '1030',
           backgroundColor: '#fff',
-          'box-shadow': '0px 0px 5px rgba(0,0,0,.6)'
+          boxshadow: '0px 0px 5px rgba(0,0,0,.6)'
         }}
       >
         <Navbar.Brand href="/">
@@ -67,12 +67,15 @@ export default function Header() {
             <div className="text-dark hide-on-big-screen pt-4">
               Courses
               <Dropdown.Menu show className="border-0">
-                <NavDropdown.Item href="/course-grid" show>
+                <NavDropdown.Item href="/course-grid">
                   All Courses
                 </NavDropdown.Item>
                 {categoryArray.length &&
                   categoryArray.map((category) => (
-                    <NavDropdown.Item href={`/course-grid/${category}`} show>
+                    <NavDropdown.Item
+                      key={category}
+                      href={`/course-grid/${category}`}
+                    >
                       {category}
                     </NavDropdown.Item>
                   ))}
@@ -91,18 +94,18 @@ export default function Header() {
                     <a className="dropdown-item" href="/course-grid">
                       All Courses
                     </a>
-                    <div class="dropdown-divider"></div>
+                    <div className="dropdown-divider"></div>
                     {categoryArray.length &&
                       categoryArray.map((category) => (
-                        <>
+                        <div key={category}>
                           <a
                             className="dropdown-item"
                             href={`/course-grid/${category}`}
                           >
                             {category}
                           </a>
-                          <div class="dropdown-divider"></div>
-                        </>
+                          <div className="dropdown-divider"></div>
+                        </div>
                       ))}
                   </div>
                 </li>
@@ -124,11 +127,11 @@ export default function Header() {
                       <a className="dropdown-item" href="/mentor-courses-list">
                         Mange Courses
                       </a>
-                      <div class="dropdown-divider"></div>
+                      <div className="dropdown-divider"></div>
                       <a className="dropdown-item" href="/mentor-users-list">
                         Users
                       </a>
-                      <div class="dropdown-divider"></div>
+                      <div className="dropdown-divider"></div>
                     </div>
                   </li>
                 </ul>
@@ -199,7 +202,7 @@ export default function Header() {
                       <a className="dropdown-item" href="/profile">
                         My Profile
                       </a>
-                      <div class="dropdown-divider"></div>
+                      <div className="dropdown-divider"></div>
 
                       <a className="dropdown-item" onClick={logoutHandler}>
                         Logout

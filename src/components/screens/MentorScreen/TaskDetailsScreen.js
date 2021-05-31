@@ -301,7 +301,7 @@ Failed
                           ></i>
                         )}
                       </Col>
-                      <Col class="statusCol-Admin">
+                      <Col className="statusCol-Admin">
                         {/* answer status */}
                         {answer.status === 'Not Sent' ? (
                           <td style={{ color: 'red' }}>{answer.status}</td>

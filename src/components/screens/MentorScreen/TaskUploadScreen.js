@@ -118,7 +118,7 @@ export default function TaskUploadScreen({ match }) {
   return (
     <div className="py-5">
       {console.log(tasks)}
-      <h1>Task uploading</h1>
+      <div div className="title mb-4">Task uploading</div>
 
       <Row>
         <Col lg={3} md={6} sm={12}>
@@ -165,7 +165,7 @@ export default function TaskUploadScreen({ match }) {
           </Form>
         </Col>
         <Col lg={8} md={6} sm={12}>
-          <h4 className="py-2">Latest Task</h4>
+          <div className="sub-title mb-2" >Latest Task</div>
 
           <Table striped bordered hover responsive="sm">
             <thead>

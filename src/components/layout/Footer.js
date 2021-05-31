@@ -25,28 +25,40 @@ export default function Footer() {
                   <div className="footer-column col-lg-9 col-md-6 col-sm-12">
                     <div className="footer-widget logo-widget">
                       <div className="logo">
-                        <a href="index.html">
+                        <a href="/l">
                           <img src={logo} width="30%" />
                         </a>
                       </div>
                       <div className="text">
                         <img
-                          width="25%"
+                          width="20%"
+                          className="pr-2"
                           src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
                         />
-                      </div>
-                  
-
-                      <div className="text">
-                        <img src="https://cdn.jotfor.ms/images/credit-card-logo.png" />
+                        <img width="75%" src="https://cdn.jotfor.ms/images/credit-card-logo.png" />
                       </div>
 
                       <div className="social-box">
-                        <a href="#" className="fa fa-facebook" />
-                        <a href="#" className="fa fa-instagram" />
-                        <a href="#" className="fa fa-twitter" />
-                        <a href="#" className="fa fa-google" />
-                        <a href="#" className="fa fa-pinterest-p" />
+                        <a
+                          href="https://www.facebook.com/CodifyCollege"
+                          className="fa fa-facebook"
+                        />
+                        <a
+                          href="https://www.instagram.com/codify.college/"
+                          className="fa fa-instagram"
+                        />
+                        <a
+                          href="https://www.twitter.com/CodifyCollege"
+                          className="fa fa-twitter"
+                        />
+                        <a
+                          href="https://www.codifycollege.se/"
+                          className="fa fa-google"
+                        />
+                        <a
+                          href="https://www.linkedin.com/company/codify-college/"
+                          className="fa fa-linkedin"
+                        />
                       </div>
                     </div>
                   </div>

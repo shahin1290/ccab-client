@@ -34,7 +34,7 @@ export default function RegisterScreen({ location, setAlert }) {
   const [gender, setGender] = useState('')
   const [message, setMessage] = useState(null)
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split('=')[1] : '/login'
 
   useEffect(() => {
     if (registerSuccess) {

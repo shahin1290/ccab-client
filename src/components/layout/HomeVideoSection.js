@@ -10,15 +10,16 @@ const HomeVideoSection = () => {
   return (
     <section
       style={{
-        backgroundColor: '#F8F9FD', padding : '100px 0'
+        backgroundColor: '#F8F9FD',
+        padding: '100px 0'
       }}
     >
       <div className="auto-container">
         <div className="row clearfix ">
-          <div className="text-center col-lg-6 col-md-6 col-sm-12" >
+          <div className="text-center col-lg-6 col-md-6 col-sm-12">
             {' '}
             {/* Video Section Two */}
-            <div className="video-section-two mb-5" >
+            <div className="video-section-two mb-5">
               {/*Video Box*/}
               <div
                 className="video-boxed "
@@ -34,7 +35,7 @@ const HomeVideoSection = () => {
                   className="lightbox-image overlay-box "
                   onClick={() => setOpen(true)}
                 >
-                  <span className="fa fa-play" >
+                  <span className="fa fa-play">
                     <i className="ripple" />
                   </span>
                 </a>
@@ -58,7 +59,7 @@ const HomeVideoSection = () => {
             </div>
             {/* End Video Section Two */}
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12" >
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <div className="title">90%</div>
             <hr
               style={{

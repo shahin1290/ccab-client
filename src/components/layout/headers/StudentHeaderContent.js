@@ -27,7 +27,7 @@ export default function StudentHeaderContnet({ logoutHandler }) {
               <a className="dropdown-item" href="/quizzes">
                 Quiz
               </a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
 
               <a className="dropdown-item" href="/assignments">
                 Assignment
@@ -41,9 +41,7 @@ export default function StudentHeaderContnet({ logoutHandler }) {
       <Nav className="text-dark hide-on-big-screen pr-5">
         Tests
         <Dropdown.Menu show className="border-0">
-          <NavDropdown.Item href="/quizzes" show>
-            Quiz
-          </NavDropdown.Item>
+          <NavDropdown.Item href="/quizzes">Quiz</NavDropdown.Item>
           <NavDropdown.Item href="/assignments">Assignment</NavDropdown.Item>
         </Dropdown.Menu>
         <Nav.Link href="/profile" className="text-dark hide-on-big-screen">

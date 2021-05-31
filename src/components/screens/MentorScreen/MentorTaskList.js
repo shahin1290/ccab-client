@@ -141,10 +141,9 @@ export default function TaskListScreen({ match }) {
   }
 
   return (
-    <div style={{ margin: '100px 0' }}>
-      <h1>Tasks</h1>
-      {loading && <Loader />}
-      {error && <Message>{error}</Message>}
+    <div style={{ margin: '50px 0' }}>
+      <div className="title mb-4">Tasks</div>
+
       <Table striped bordered hover responsive="sm">
         <thead>
           <tr>

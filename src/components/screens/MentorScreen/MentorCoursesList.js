@@ -38,7 +38,7 @@ export default function MentorCoursesList() {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <h4>Manage Courses</h4>
+                <div  className="title ">Manage Courses</div>
               </div>
             </div>
           </div>
@@ -105,17 +105,17 @@ export default function MentorCoursesList() {
                               <Nav.Link
                                 href={`/manage-mentor-course/${item._id}`}
                               >
-                                <i class="fas fa-edit">Edit content</i>
+                                <i className="fas fa-edit">Edit content</i>
                               </Nav.Link>
                             </th>
                             <th>
                               <Nav.Link href={`/mentor-task-list/${item._id}`}>
-                                <i class="fas fa-list-ul">Task List</i>
+                                <i className="fas fa-list-ul">Task List</i>
                               </Nav.Link>
                             </th>
                             <th>
                               <Nav.Link href={`/mentor-quiz-list/${item._id}`}>
-                                <i class="fas fa-list-ul">Quiz List</i>
+                                <i className="fas fa-list-ul">Quiz List</i>
                               </Nav.Link>
                             </th>
                           </tr>
