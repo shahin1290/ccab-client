@@ -101,7 +101,7 @@ export default function QuizListScreen({ match }) {
                       style={{ paddingRight: '15px' }}
                       to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.week}/${quiz._id}`}
                     >
-                      <i class="fas fa-edit"></i>
+                      <i className="fas fa-edit"></i>
                     </Link>
 
                     <i

@@ -74,7 +74,7 @@ export default function AdminHeader() {
                       <a className="dropdown-item" href="/course-grid">
                         All Courses
                       </a>
-                      <div class="dropdown-divider"></div>
+                      <div className="dropdown-divider"></div>
                       {categoryArray.length &&
                         categoryArray.map((category) => (
                           <>
@@ -84,7 +84,7 @@ export default function AdminHeader() {
                             >
                               {category}
                             </a>
-                            <div class="dropdown-divider"></div>
+                            <div className="dropdown-divider"></div>
                           </>
                         ))}
                     </div>
@@ -106,11 +106,11 @@ export default function AdminHeader() {
                   <ul className="navbar-nav ">
                     <li className="nav-item dropdown dropdown-slide dropdown-hover ">
                       <a href="/">
-                        <div class="logo-image">
+                        <div className="logo-image">
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : '/images/resource/author-13.jpg'
                             }
                             alt="avatar"
@@ -124,7 +124,7 @@ export default function AdminHeader() {
                         <a className="dropdown-item" href="/profile">
                           My Profile
                         </a>
-                        <div class="dropdown-divider"></div>
+                        <div className="dropdown-divider"></div>
 
                         <a className="dropdown-item" onClick={logoutHandler}>
                           Logout

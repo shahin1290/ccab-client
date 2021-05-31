@@ -352,7 +352,7 @@ export default function UpdateCourese({ match }) {
 
                       <div className="my-3">
                         <span className="rounded-pill  px-2 py-1 m-2 bg-light">
-                          <i class="fas fa-plus-circle text-success"></i>{' '}
+                          <i className="fas fa-plus-circle text-success"></i>{' '}
                           {category}
                         </span>
                       </div>
@@ -409,7 +409,7 @@ export default function UpdateCourese({ match }) {
                                           type="button"
                                           onClick={handleAddFields}
                                         >
-                                          <i class="fas fa-plus-square"></i>
+                                          <i className="fas fa-plus-square"></i>
                                         </button>
                                         <button
                                           type="button"
@@ -418,7 +418,7 @@ export default function UpdateCourese({ match }) {
                                             handleRemoveFields(inputField.id)
                                           }
                                         >
-                                          <i class="fas fa-minus-square"></i>
+                                          <i className="fas fa-minus-square"></i>
                                         </button>
                                       </div>
                                     </Card>
@@ -559,8 +559,7 @@ export default function UpdateCourese({ match }) {
                     {ImageLable ? (
                       <img
                         src={
-                          'https://server.ccab.tech/uploads/Bootcamp/' +
-                          ImageLable
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (
@@ -623,7 +622,7 @@ export default function UpdateCourese({ match }) {
                         <div className="my-3">
                           {Mentor.name ? (
                             <span className="rounded-pill  px-2 py-1 m-2 bg-light">
-                              <i class="fas fa-plus-circle text-success"></i>{' '}
+                              <i className="fas fa-plus-circle text-success"></i>{' '}
                               {Mentor.name}
                             </span>
                           ) : (
@@ -696,7 +695,7 @@ export default function UpdateCourese({ match }) {
                                     _handleUnselectStudent(student._id)
                                   }}
                                 >
-                                  <i class="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
                                 </a>{' '}
                                 {student.name}
                               </span>

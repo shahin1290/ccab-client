@@ -36,7 +36,7 @@ export const createOrder =
       }
 
       const response = await axios.post(
-        `https://server.ccab.tech/api/order/${bootcampId}`,
+        `http://localhost:5001/api/order/${bootcampId}`,
         order,
         config
       )
@@ -61,6 +61,10 @@ export const createOrder =
 // get orders list for student
 export const getOrderList = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: ORDER_LIST_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -72,13 +76,11 @@ export const getOrderList = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/myorders`,
+      `http://localhost:5001/api/order/myorders`,
       config
     )
 
-    dispatch({
-      type: ORDER_LIST_REQUEST
-    })
+   
 
     dispatch({
       type: ORDER_LIST_SUCCESS,
@@ -99,6 +101,10 @@ export const getOrderList = () => async (dispatch, getState) => {
 // get all orders for Admin
 export const getAllOrders = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: ORDER_LIST_ALL_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -109,14 +115,9 @@ export const getAllOrders = () => async (dispatch, getState) => {
       }
     }
 
-    const response = await axios.get(
-      `https://server.ccab.tech/api/order/`,
-      config
-    )
+    const response = await axios.get(`http://localhost:5001/api/order/`, config)
 
-    dispatch({
-      type: ORDER_LIST_ALL_REQUEST
-    })
+   
     //console.log("payload: ",response.data.data)
     dispatch({
       type: ORDER_LIST_ALL_SUCCESS,
@@ -135,6 +136,10 @@ export const getAllOrders = () => async (dispatch, getState) => {
 
 export const getOrder = (id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: ORDER_VIEW_REQUEST
+    })
+    
     const {
       userLogin: { userDetail }
     } = getState()
@@ -146,13 +151,11 @@ export const getOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/` + id,
+      `http://localhost:5001/api/order/` + id,
       config
     )
 
-    dispatch({
-      type: ORDER_VIEW_REQUEST
-    })
+   
     //console.log("payload: ",response.data.data)
     dispatch({
       type: ORDER_VIEW_SUCCESS,
@@ -181,7 +184,7 @@ export const createKlarnaOrder = (order, id) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.post(
-      `https://server.ccab.tech/api/order/${id}/klarna/order`,
+      `http://localhost:5001/api/order/${id}/klarna/order`,
       order,
       config
     )
@@ -215,7 +218,7 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/${id}/klarna/order`,
+      `http://localhost:5001/api/order/${id}/klarna/order`,
       config
     )
 
@@ -244,7 +247,7 @@ export const captureOrder = (id) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/capture/${id}`,
+      `http://localhost:5001/api/order/capture/${id}`,
       config
     )
   } catch (error) {}

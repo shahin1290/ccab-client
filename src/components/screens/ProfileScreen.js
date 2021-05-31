@@ -128,7 +128,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/author-13.jpg'
                       }
                       alt="avatar"
@@ -234,6 +234,7 @@ export default function ProfileScreen() {
                 <div className="single-item-carousel owl-carousel owl-theme">
                   <div className="slide">
                     <div className="row clearfix">
+                      {console.log(bootcampLoading)}
                       {/* Course Block */}
                       {bootcampLoading ? (
                         <Loader />
@@ -250,7 +251,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'https://server.ccab.tech/uploads/Bootcamp/' +
+                                      'http://localhost:5001/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
@@ -288,7 +289,10 @@ export default function ProfileScreen() {
                             </div>
                           )
                         })
-                      ) : null}
+                      ) : (
+                        <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                          You Don't have Any Courses yet !
+                        </p>)}
                     </div>
                   </div>
                 </div>

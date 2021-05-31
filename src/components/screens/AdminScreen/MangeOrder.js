@@ -278,7 +278,7 @@ export default function MangeOrder({ match }) {
                                 </td>
                                 <td>
                                   {order.orderStatus}
-                                  <i class="ml-2 fas fa-check-circle text-success"></i>
+                                  <i className="ml-2 fas fa-check-circle text-success"></i>
                                 </td>
                               </tr>
                             ))

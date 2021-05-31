@@ -222,14 +222,14 @@ export default function UpdateMentorCourse({ location, match }) {
                             }}
                           >
                             <button type="button" onClick={handleAddFields}>
-                              <i class="fas fa-plus-square"></i>
+                              <i className="fas fa-plus-square"></i>
                             </button>
                             <button
                               type="button"
                               disabled={inputFields.length === 1}
                               onClick={() => handleRemoveFields(inputField.id)}
                             >
-                              <i class="fas fa-minus-square"></i>
+                              <i className="fas fa-minus-square"></i>
                             </button>
                           </div>
                         </Card>

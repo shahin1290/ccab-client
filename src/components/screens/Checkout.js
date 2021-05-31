@@ -106,7 +106,7 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
+        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: 'usd',
@@ -236,7 +236,7 @@ const CheckoutForm = ({ match, history }) => {
         checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
         confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
         push:
-          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
+          'http://localhost:5001/api/order/push/' + ID + '/' + userDetail._id
       }
     }
     dispatch(createKlarnaOrder({ data: data }, ID))
@@ -292,7 +292,7 @@ const CheckoutForm = ({ match, history }) => {
                           backgroundColor: 'white'
                         }}
                       >
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Holder Name</label>
 
                           <div
@@ -312,7 +312,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label htmlFor="cardNumber">Card Number</label>
                           <div
                             style={{
@@ -328,7 +328,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-6 col-sm-12">
                           <label>Expiration Date</label>
                           <div
                             style={{
@@ -341,7 +341,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-6 col-sm-12">
                           <label>CVC Code</label>
                           <div
                             style={{
@@ -362,7 +362,7 @@ const CheckoutForm = ({ match, history }) => {
                           backgroundColor: 'white'
                         }}
                       >
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Street</label>
 
                           <div
@@ -382,7 +382,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>City</label>
 
                           <div
@@ -402,7 +402,7 @@ const CheckoutForm = ({ match, history }) => {
                           </div>
                         </div>
 
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Country</label>
 
                           <div
@@ -421,7 +421,7 @@ const CheckoutForm = ({ match, history }) => {
                             />
                           </div>
                         </div>
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
                           <label>Zip</label>
 
                           <div

@@ -25,16 +25,16 @@ export default function AdminHeaderContnet({ logoutHandler }) {
               <a className="dropdown-item" href="/admin-order-list">
                 Orders
               </a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
 
               <a className="dropdown-item" href="/admin-courses-list">
                 Mange Courses
               </a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/admin-users-list">
                 Users
               </a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
             </div>
           </li>
         </ul>

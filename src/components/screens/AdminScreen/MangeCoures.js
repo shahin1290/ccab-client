@@ -272,13 +272,13 @@ export default function MangeCourse({ match }) {
                             </th>
                             <th className="actions" scope="col">
                               <Link to={'/admin-coure-update/' + item._id}>
-                                <i class="fas fa-edit"></i>
+                                <i className="fas fa-edit"></i>
                               </Link>
 
                               {/* delete course button */}
                               <a>
                                 <i
-                                  class="fas fa-trash-alt"
+                                  className="fas fa-trash-alt"
                                   onClick={() => {
                                     setDeletedCourse(item)
                                     handleShowDelete()
@@ -336,7 +336,7 @@ export default function MangeCourse({ match }) {
                                       WithholdHnadler(item)
                                     }}
                                   >
-                                    <i class="fas fa-minus-circle"></i>
+                                    <i className="fas fa-minus-circle"></i>
                                   </a>
                                 </OverlayTrigger>
                               ) : (

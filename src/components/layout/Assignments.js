@@ -92,30 +92,16 @@ export default function Assignments() {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
       config
     )
     const blob = await res.blob()
     download(blob, task.projectName + '-Assignment')
   }
 
-  const DownloadAnswerHandler = async (answer) => {
-    // dispatch(DownloadAssignemnt(task.task._id))
-    const res = await fetch(
-      'https://server.ccab.tech/api/answers/' + answer._id + '/download',
-      config
-    )
-    const blob = await res.blob()
-    download(blob, answer.task.projectName + '-' + userDetail.name + '-Answer')
-  }
-
   const getDate = (date) => {
     let d = new Date(date)
     return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
-  }
-
-  if (!myTasks > 0) {
-    return null
   }
 
   return (
@@ -131,122 +117,116 @@ export default function Assignments() {
             </div>
           </div>
           <div className="inner-container">
-            {console.log(myTasksError)}
             <div className="table-responsive">
-              {myTasksLoading ? (
-                <Loader />
-              ) : myTasksError ? (
-                <Message variant="danger">{myTasksError}</Message>
-              ) : (
-                <table className="table text-center">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Assignment Name</th>
-                      <th>Bootcamp</th>
-                      <th>Assignment</th>
-                      <th>Created At</th>
-                      {userDetail.user_type !== 'MentorUser' &&
-                        userDetail.user_type !== 'AdminUser' && (
-                          <>
-                            <th>Status</th>
-                            <th>Submit</th>
-                          </>
-                        )}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {myTasks.length &&
-                      myTasks.map((task, index) => (
-                        <tr key={task._id}>
-                          <td>{index + 1}</td>
-                          <td>{task.projectName}</td>
-                          {/* status */}
-                          {/* date */}
-                          {/* <td>{task.description}</td> */}
-                          <td>{task.bootcamp.name}</td>
-                          <td>
-                            <Link
-                              onClick={() => DownloadAssignmentHandler(task)}
-                            >
-                              <i class="fas fa-file-download"></i> DOWNLOAD
-                            </Link>
-                          </td>
+              <table className="table text-center">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Assignment Name</th>
+                    <th>Bootcamp</th>
+                    <th>Assignment</th>
+                    <th>Created At</th>
+                    {userDetail.user_type !== 'MentorUser' &&
+                      userDetail.user_type !== 'AdminUser' && (
+                        <>
+                          <th>Status</th>
+                          <th>Submit</th>
+                        </>
+                      )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {myTasksLoading ? (
+                    <Loader />
+                  ) : myTasksError ? (
+                    <Message variant="danger">{myTasksError}</Message>
+                  ) : (
+                    myTasks.map((task, index) => (
+                      <tr key={task._id}>
+                        <td>{index + 1}</td>
+                        <td>{task.projectName}</td>
+                        {/* status */}
+                        {/* date */}
+                        {/* <td>{task.description}</td> */}
+                        <td>{task.bootcamp.name}</td>
+                        <td>
+                          <Link onClick={() => DownloadAssignmentHandler(task)}>
+                            <i class="fas fa-file-download"></i> DOWNLOAD
+                          </Link>
+                        </td>
 
-                          <td>{getDate(task.createdAt)}</td>
+                        <td>{getDate(task.createdAt)}</td>
 
-                          {userDetail.user_type !== 'MentorUser' &&
-                            userDetail.user_type !== 'AdminUser' && (
-                              <>
-                                {answerListLoading ? (
-                                  <Loader />
-                                ) : answerListError ? (
-                                  <Message variant="danger">
-                                    {answerListError}
-                                  </Message>
-                                ) : (
-                                  <>
-                                    {taskStatus(task._id) &&
-                                    taskStatus(task._id).status ===
-                                      'Not Sent' ? (
-                                      <td style={{ color: 'red' }}>
-                                        {taskStatus(task._id).status}
-                                      </td>
-                                    ) : taskStatus(task._id).status ===
-                                      'Pending' ? (
-                                      <td
-                                        style={{
-                                          color: '#ffc40c'
-                                        }}
-                                      >
-                                        {taskStatus(task._id).status}
-                                      </td>
-                                    ) : taskStatus(task._id).status ===
-                                      'Failed' ? (
-                                      <td
-                                        style={{
-                                          color: 'red'
-                                        }}
-                                      >
-                                        {taskStatus(task._id).status}
-                                      </td>
-                                    ) : taskStatus(task._id).status ===
-                                      'Sent' ? (
-                                      <td style={{ color: '#171717' }}>
-                                        {taskStatus(task._id).status}
-                                      </td>
-                                    ) : (
-                                      <td
-                                        style={{
-                                          color: '#1aff1a'
-                                        }}
-                                      >
-                                        {taskStatus(task._id).status}
-                                      </td>
-                                    )}
-                                  </>
-                                )}
-
-                                <td>
+                        {userDetail.user_type !== 'MentorUser' &&
+                          userDetail.user_type !== 'AdminUser' && (
+                            <>
+                              {answerListLoading ? (
+                                <Loader />
+                              ) : answerListError ? (
+                                <Message variant="danger">
+                                  {answerListError}
+                                </Message>
+                              ) : (
+                                <>
                                   {taskStatus(task._id) &&
-                                  taskStatus(task._id).status !== 'Not Sent' ? (
-                                    'Submitted'
-                                  ) : (
-                                    <Link
-                                      to={`/assignment-details/${task.bootcamp._id}/${task._id}`}
-                                      className=" text-info"
+                                  taskStatus(task._id).status === 'Not Sent' ? (
+                                    <td style={{ color: 'red' }}>
+                                      {taskStatus(task._id).status}
+                                    </td>
+                                  ) : taskStatus(task._id).status ===
+                                    'Pending' ? (
+                                    <td
+                                      style={{
+                                        color: '#ffc40c'
+                                      }}
                                     >
-                                      Submit Assignment
-                                    </Link>
+                                      {taskStatus(task._id).status}
+                                    </td>
+                                  ) : taskStatus(task._id).status ===
+                                    'Failed' ? (
+                                    <td
+                                      style={{
+                                        color: 'red'
+                                      }}
+                                    >
+                                      {taskStatus(task._id).status}
+                                    </td>
+                                  ) : taskStatus(task._id).status === 'Sent' ? (
+                                    <td style={{ color: '#171717' }}>
+                                      {taskStatus(task._id).status}
+                                    </td>
+                                  ) : (
+                                    <td
+                                      style={{
+                                        color: '#1aff1a'
+                                      }}
+                                    >
+                                      {taskStatus(task._id).status}
+                                    </td>
                                   )}
-                                </td>
-                              </>
-                            )}
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              )}
+                                </>
+                              )}
+
+                              <td>
+                                {taskStatus(task._id) &&
+                                taskStatus(task._id).status !== 'Not Sent' ? (
+                                  'Submitted'
+                                ) : (
+                                  <Link
+                                    to={`/assignment-details/${task.bootcamp._id}/${task._id}`}
+                                    className=" text-info"
+                                  >
+                                    Submit Assignment
+                                  </Link>
+                                )}
+                              </td>
+                            </>
+                          )}
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

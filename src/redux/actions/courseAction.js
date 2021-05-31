@@ -24,6 +24,10 @@ import axios from 'axios'
 export const getCourseList =
   (pageNumber = '') =>
   async (dispatch, getState) => {
+    dispatch({
+      type: COURSE_LIST_REQUEST
+    })
+
     try {
       const {
         userLogin: { userDetail }
@@ -35,13 +39,11 @@ export const getCourseList =
         }
       }
       const response = await axios.get(
-        `https://server.ccab.tech/api/bootcamp?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/bootcamp?pageNumber=${pageNumber}`,
         config
       )
 
-      dispatch({
-        type: COURSE_LIST_REQUEST
-      })
+      
 
       dispatch({
         type: COURSE_LIST_SUCCESS,
@@ -63,6 +65,10 @@ export const getCourseListForAdmin =
   (pageNumber = '') =>
   async (dispatch, getState) => {
     try {
+      dispatch({
+        type: ADMIN_COURSE_LIST_REQUEST
+      })
+
       const {
         userLogin: { userDetail }
       } = getState()
@@ -73,13 +79,11 @@ export const getCourseListForAdmin =
         }
       }
       const response = await axios.get(
-        `https://server.ccab.tech/api/bootcamp/mange?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/bootcamp/mange?pageNumber=${pageNumber}`,
         config
       )
 
-      dispatch({
-        type: ADMIN_COURSE_LIST_REQUEST
-      })
+     
 
       dispatch({
         type: ADMIN_COURSE_LIST_SUCCESS,
@@ -113,7 +117,7 @@ export const getCourseDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/bootcamp/' + id,
+      'http://localhost:5001/api/bootcamp/' + id,
       config
     )
 
@@ -143,7 +147,7 @@ export const createCourse = (course) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.post(
-      'https://server.ccab.tech/api/bootcamp',
+      'http://localhost:5001/api/bootcamp',
       course,
       config
     )
@@ -167,6 +171,11 @@ export const createCourse = (course) => async (dispatch, getState) => {
 
 export const deleteCourse = (id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: COURSE_DELETE_REQUEST
+    })
+
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -176,11 +185,8 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    dispatch({
-      type: COURSE_DELETE_REQUEST
-    })
-
-    await axios.delete('https://server.ccab.tech/api/bootcamp/' + id, config)
+  
+    await axios.delete('http://localhost:5001/api/bootcamp/' + id, config)
 
     dispatch({
       type: COURSE_DELETE_SUCCESS
@@ -199,6 +205,10 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
 // update course
 export const updateCourse = (course, id) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: COURSE_UPDATE_REQUEST
+    })
+    
     const {
       userLogin: { userDetail }
     } = getState()
@@ -208,15 +218,9 @@ export const updateCourse = (course, id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    dispatch({
-      type: COURSE_UPDATE_REQUEST
-    })
+    
     //console.log(course);
-    await axios.put(
-      'https://server.ccab.tech/api/bootcamp/' + id,
-      course,
-      config
-    )
+    await axios.put('http://localhost:5001/api/bootcamp/' + id, course, config)
 
     dispatch({
       type: COURSE_UPDATE_SUCCESS

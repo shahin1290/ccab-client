@@ -34,7 +34,7 @@ export default function TopCourses({ match }) {
             {/* Institution Block */}
 
             {loading ? (
-              <Loader />
+              <Loader className="m-5"/>
             ) : error ? (
               <Message>{error}</Message>
             ) : courseList.length ? (
@@ -48,7 +48,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                            'http://localhost:5001/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""
@@ -103,6 +103,7 @@ export default function TopCourses({ match }) {
                 </a>
               </div>
             </div>
+            
           </div>
         </div>
       </section>
