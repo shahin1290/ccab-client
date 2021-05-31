@@ -219,7 +219,9 @@ export default function CourseGridScreen({ match }) {
                               )
                             })
                           ) : (
-                            <Loader />
+                            <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                              No Course found !
+                            </p>
                           )}
                         </div>
 
@@ -275,7 +277,9 @@ export default function CourseGridScreen({ match }) {
                     )
                   })
                 ) : (
-                  <Loader />
+                  <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                  No Course found !
+                </p>
                 )}
               </div>
             </div>
