@@ -106,7 +106,7 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
+        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: 'usd',
@@ -236,7 +236,7 @@ const CheckoutForm = ({ match, history }) => {
         checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
         confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
         push:
-          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
+          'http://localhost:5001/api/order/push/' + ID + '/' + userDetail._id
       }
     }
     dispatch(createKlarnaOrder({ data: data }, ID))
