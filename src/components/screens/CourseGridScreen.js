@@ -174,7 +174,7 @@ export default function CourseGridScreen({ match }) {
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                                            'http://localhost:5001/uploads/Bootcamp/' +
                                             course.img_path
                                           }
                                           alt=""
@@ -219,7 +219,9 @@ export default function CourseGridScreen({ match }) {
                               )
                             })
                           ) : (
-                            <Loader />
+                            <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                              No Course found !
+                            </p>
                           )}
                         </div>
 
@@ -275,7 +277,9 @@ export default function CourseGridScreen({ match }) {
                     )
                   })
                 ) : (
-                  <Loader />
+                  <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                    No Course found !
+                  </p>
                 )}
               </div>
             </div>
@@ -321,7 +325,7 @@ export default function CourseGridScreen({ match }) {
                         <Link to="/course/1/details">
                           <img
                             src={
-                              'https://server.ccab.tech/uploads/Bootcamp/' +
+                              'http://localhost:5001/uploads/Bootcamp/' +
                               courseList[0].img_path
                             }
                             alt=""

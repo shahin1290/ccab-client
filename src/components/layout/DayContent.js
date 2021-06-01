@@ -17,6 +17,8 @@ export default function DayContent({ weekId, bootcampId }) {
   const { userDetail } = useSelector((state) => state.userLogin)
   const [show, setShow] = useState('')
 
+  console.log(bootcampId)
+
   /****************redux store***************** */
 
   //daylist
@@ -110,10 +112,7 @@ export default function DayContent({ weekId, bootcampId }) {
 
   return (
     <>
-      <Card.Body
-        style={{ height: '400px', overflowY: 'scroll' }}
-        className="acc-content current"
-      >
+      <Card.Body>
         {dayList.length > 0 ? (
           dayList.map((day, index) => (
             <div style={{ padding: ' 0 0 20px 15px' }}>

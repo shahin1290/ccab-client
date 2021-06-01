@@ -128,7 +128,7 @@ const CheckoutKlarna = ({ match }) => {
         checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
         confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
         push:
-          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
+          'http://localhost:5001/api/order/push/' + ID + '/' + userDetail._id
       }
     }
     dispatch(createKlarnaOrder({ data: data }, ID))

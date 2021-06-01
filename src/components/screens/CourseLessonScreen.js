@@ -113,7 +113,7 @@ export default function CourseContentScreen({ match }) {
 
                                 {findElementText('image') && (
                                   <img
-                                    src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
+                                    src={`http://localhost:5001/uploads/Source_Code/${findElementText(
                                       'image'
                                     )}`}
                                     alt="img"
@@ -124,7 +124,7 @@ export default function CourseContentScreen({ match }) {
                                   <div
                                     className="sub-text mb-5"
                                     style={{
-                                      width: '50%',
+                                      width: '80%',
                                       margin: '20px auto',
                                       fontSize: '16px',
                                       padding: '10px',
@@ -170,10 +170,12 @@ export default function CourseContentScreen({ match }) {
                         >
                           {week.name}
                         </Accordion.Toggle>
+                        {console.log(week.bootcamp._id)}
                         <Accordion.Collapse eventKey={`${index}`}>
+                          
                           <DayContent
                             weekId={week._id}
-                            bootcampId={week.bootcamp._id}
+                            bootcampId={week.bootcamp}
                           />
                         </Accordion.Collapse>
                       </Card>
