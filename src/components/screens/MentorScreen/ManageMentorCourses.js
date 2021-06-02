@@ -38,20 +38,7 @@ export default function ManageMentorScreen({ match }) {
               >
                 <div className="pr-5">{week.name}</div>
 
-                <div >
-                  <Link
-                    to={`/mentor-add-quiz/${week.bootcamp}/${week._id}`}
-                    className="btn btn-info bordered"
-                  >
-                    Add quiz
-                  </Link>
-                  <Link
-                    to={`/mentor-upload-assignment/${week.bootcamp}/${week._id}`}
-                    className="btn btn-danger bordered"
-                  >
-                    Upload Assignment
-                  </Link>
-                </div>
+                
               </Accordion.Toggle>
               <Accordion.Collapse eventKey={`${index}`}>
                 <DayContent weekId={week._id} bootcampId={week.bootcamp} />

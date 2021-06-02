@@ -170,7 +170,6 @@ export default function CourseContentScreen({ match }) {
                         >
                           {week.name}
                         </Accordion.Toggle>
-                        {console.log(week.bootcamp._id)}
                         <Accordion.Collapse eventKey={`${index}`}>
                           
                           <DayContent

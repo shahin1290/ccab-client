@@ -10,7 +10,6 @@ import {
   getQuizDetails,
   updateQuiz
 } from '../../../redux/actions/quizAction'
-import Message from '../../layout/Message'
 
 export default function UpdateMentorCourse({ location, match }) {
   const dispatch = useDispatch()
@@ -30,16 +29,16 @@ export default function UpdateMentorCourse({ location, match }) {
     success: addSuccess
   } = useSelector((state) => state.quizCreate)
 
-  const { bootcampId, weekId, id } = match.params
+  const { bootcampId, dayId, id } = match.params
 
   useEffect(() => {
     if (id) {
-      dispatch(getQuizDetails(bootcampId, weekId, id))
+      dispatch(getQuizDetails(bootcampId, dayId, id))
     }
     if (quiz && quiz.success) {
       history.push(redirect)
     }
-  }, [quiz, bootcampId, weekId, id, dispatch])
+  }, [quiz, bootcampId, dayId, id, dispatch])
 
   const [name, setName] = useState()
   const [time, setTime] = useState()
@@ -97,12 +96,12 @@ export default function UpdateMentorCourse({ location, match }) {
   //handle form submit
   const _handleAddQuiz = () => {
     const quizData = { name, description, time, question: questionWithAnswer }
-    dispatch(createQuiz(quizData, bootcampId, weekId))
+    dispatch(createQuiz(quizData, bootcampId, dayId))
   }
 
   const _handleupdateQuiz = () => {
     const quizData = { name, description, time, question: questionWithAnswer }
-    dispatch(updateQuiz(bootcampId, weekId, id, quizData))
+    dispatch(updateQuiz(bootcampId, dayId, id, quizData))
   }
 
   return (

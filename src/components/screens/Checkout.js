@@ -260,6 +260,17 @@ const CheckoutForm = ({ match, history }) => {
 
               <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                 <div className="title2">Select Payment Method</div>
+                <div className="auto-container mb-5">
+                  <img
+                    width="5%"
+                    className="pr-2"
+                    src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+                  />
+                  <img
+                    width="16%"
+                    src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+                  />
+                </div>
 
                 {loading && <Loader />}
                 {error ? (

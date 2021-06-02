@@ -30,9 +30,7 @@ export default function HomeScreen({ match }) {
     (state) => state.courseList
   )
 
- 
-    const { userDetail } = useSelector((state) => state.userLogin)
-
+  const { userDetail } = useSelector((state) => state.userLogin)
 
   const { usersCount } = useSelector((state) => state.userNumbers)
 
@@ -271,7 +269,8 @@ export default function HomeScreen({ match }) {
         {/* End Education Section Two */}
 
         {/* How IT Works Section */}
-        <section id='HOW-IT-WORKS'
+        <section
+          id="HOW-IT-WORKS"
           style={{
             backgroundColor: '#fff',
             padding: '40px 0'
@@ -324,7 +323,10 @@ export default function HomeScreen({ match }) {
                   Codify's foundation course is a great opportunity to learn the
                   basics and to enjoy building your first website.
                 </div>
-                <a href={userDetail.token?'/profile':"/get-start"} className="btn rounded bg-warning p-2 text-dark">
+                <a
+                  href={userDetail.token ? '/profile' : '/get-start'}
+                  className="btn rounded bg-warning p-2 text-dark"
+                >
                   Start Now!
                 </a>
               </div>
@@ -336,6 +338,18 @@ export default function HomeScreen({ match }) {
 
         {/* Rating section */}
         <RatingSection />
+
+        <div className="auto-container text-center  mb-3 mt-5">
+          <img
+            width="6%"
+            className="pr-2"
+            src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+          />
+          <img
+            width="20%"
+            src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+          />
+        </div>
       </div>
     </>
   )
