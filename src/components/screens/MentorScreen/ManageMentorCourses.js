@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getWeekList } from '../../../redux/actions/weekAction'
-import DayContent from '../../layout/DayContent'
+import MentorDayContent from '../../layout/MentorDayContent'
 import { Card, Container, Accordion } from 'react-bootstrap'
 import { getDayList } from '../../../redux/actions/dayAction'
 
@@ -41,7 +41,7 @@ export default function ManageMentorScreen({ match }) {
                 
               </Accordion.Toggle>
               <Accordion.Collapse eventKey={`${index}`}>
-                <DayContent weekId={week._id} bootcampId={week.bootcamp} />
+                <MentorDayContent weekId={week._id} bootcampId={week.bootcamp} />
               </Accordion.Collapse>
             </Card>
           ))}

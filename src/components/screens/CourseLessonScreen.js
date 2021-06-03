@@ -9,23 +9,30 @@ import 'plyr-react/dist/plyr.css'
 
 export default function CourseContentScreen({ match }) {
   const dispatch = useDispatch()
-
   const id = match.params.id
-  const { weekList, loading, error } = useSelector((state) => state.weekList)
 
-  const dayDetails = useSelector((state) => state.dayDetails)
-  const { day } = dayDetails
-  console.log(day)
+  //redux store
+  const { weekList, loading, error } = useSelector((state) => state.weekList)
+  const { day } = useSelector((state) => state.dayDetails)
+
+  //use effec
   useEffect(() => {
     dispatch(getWeekList(id))
   }, [dispatch, id])
 
-  const findElementText = (el) => {
+  //functions
+  const findElementText = (el, sectionName) => {
     if (day.name) {
-      const sourceCode = day.source_code
+      const sections = day.sections
 
-      if (sourceCode.length > 0) {
-        const elementType = sourceCode.find((a) => a.element_type === el)
+      const filteredSection = sections.filter(
+        (section) => section.name === sectionName
+      )
+
+      if (filteredSection.length > 0) {
+        const elementType = filteredSection[0].source_code.find(
+          (a) => a.element_type === el
+        )
         if (elementType) {
           return elementType.element_text
         } else {
@@ -88,55 +95,66 @@ export default function CourseContentScreen({ match }) {
                       {/* Intro Tabs*/}
                       <div className="intro-tabs tabs-box">
                         {/*Tab Btns*/}
-                        <Tabs defaultActiveKey="content">
-                          <Tab
-                            eventKey="content"
-                            title="Content"
-                            style={{ fontSize: '30px' }}
-                          >
-                            <div
-                              className="tabs-content"
-                              style={{ padding: '0 15px' }}
-                            >
-                              <div className="content">
-                                {findElementText('title') && (
-                                  <div className="sub-title pt-4 pb-4">
-                                    {findElementText('title')}
-                                  </div>
-                                )}
+                        <Tabs defaultActiveKey={day.name &&
+                            day.sections && day.sections[0].name}>
+                          {day.name &&
+                            day.sections.map((section) => (
+                              <Tab
+                                eventKey={section.name}
+                                title={section.name}
+                                style={{ fontSize: '30px' }}
+                              >
+                                <div
+                                  className="tabs-content"
+                                  style={{ padding: '0 15px' }}
+                                >
+                                  <div className="content">
+                                    {findElementText('title', section.name) && (
+                                      <div className="sub-title pt-4 pb-4">
+                                        {findElementText('title', section.name)}
+                                      </div>
+                                    )}
 
-                                {findElementText('description') && (
-                                  <div className="sub-text mb-5">
-                                    {findElementText('description')}
-                                  </div>
-                                )}
+                                    {findElementText(
+                                      'description',
+                                      section.name
+                                    ) && (
+                                      <div className="sub-text mb-5">
+                                        {findElementText(
+                                          'description',
+                                          section.name
+                                        )}
+                                      </div>
+                                    )}
 
-                                {findElementText('image') && (
-                                  <img
-                                    src={`http://localhost:5001/uploads/Source_Code/${findElementText(
-                                      'image'
-                                    )}`}
-                                    alt="img"
-                                  />
-                                )}
+                                    {findElementText('image', section.name) && (
+                                      <img
+                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
+                                          'image',
+                                          section.name
+                                        )}`}
+                                        alt="img"
+                                      />
+                                    )}
 
-                                {findElementText('code') && (
-                                  <div
-                                    className="sub-text mb-5"
-                                    style={{
-                                      width: '80%',
-                                      margin: '20px auto',
-                                      fontSize: '16px',
-                                      padding: '10px',
-                                      backgroundColor: '#F5F5F5'
-                                    }}
-                                  >
-                                    {findElementText('code')}
+                                    {findElementText('code', section.name) && (
+                                      <div
+                                        className="sub-text mb-5"
+                                        style={{
+                                          width: '80%',
+                                          margin: '20px auto',
+                                          fontSize: '16px',
+                                          padding: '10px',
+                                          backgroundColor: '#F5F5F5'
+                                        }}
+                                      >
+                                        {findElementText('code', section.name)}
+                                      </div>
+                                    )}
                                   </div>
-                                )}
-                              </div>
-                            </div>
-                          </Tab>
+                                </div>
+                              </Tab>
+                            ))}
                         </Tabs>
                       </div>
                     </div>
@@ -171,7 +189,6 @@ export default function CourseContentScreen({ match }) {
                           {week.name}
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey={`${index}`}>
-                          
                           <DayContent
                             weekId={week._id}
                             bootcampId={week.bootcamp}
