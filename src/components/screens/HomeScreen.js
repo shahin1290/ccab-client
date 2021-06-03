@@ -92,15 +92,14 @@ export default function HomeScreen({ match }) {
               <div className="content-column mt-0 col-lg-5 col-md-12 col-sm-12">
                 <div className="inner-column">
                   <h2>
-                    Learn Full-Stack <br /> Web Development
+                  Learn new skills with Codify College
                   </h2>
                   <div className="text header-text">
-                    Codify College’s Full Stack Web Development Bootcamp is a
-                    remote bootcamp for anyone who wants to build apps to solve
-                    real-world problems on the web.
+                  With Codify College,  you will learn the most in-demand skills to flourish in your carrer.
+
                   </div>
 
-                  <Link
+                  {/* <Link
                     activeclassName="active"
                     className="theme-btn btn-style-three"
                     to="HOW-IT-WORKS"
@@ -110,7 +109,7 @@ export default function HomeScreen({ match }) {
                     duration={500}
                   >
                     <span className="txt">Learn More</span>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -228,17 +227,14 @@ export default function HomeScreen({ match }) {
               {/* Content Column */}
               <div className="content-column col-lg-6 col-md-12 col-sm-12">
                 <div className="inner-column text-center">
-                  <div className="title">Who is this program for ?</div>
+                  <div className="title">Who is this course for?</div>
                   <hr className="block-seperator mt-4" />
                   <div className="text">
                     <div className="sub-text">
-                      People who wish to transition to a career as a Developer
-                      or looking to add the latest tech stack to their current
-                      skills.
+                    If you're looking to transition to a career as a developer, or add a tech stack to your existing skill, then this course is for you.
                     </div>
                     <div className="sub-text">
-                      Do you want to accelerate your learning process in a
-                      intense and efficient way?
+                    If you're looking for the most efficient way to learn, come this way
                     </div>
                   </div>
 
@@ -283,12 +279,12 @@ export default function HomeScreen({ match }) {
               <div className=" F-box col-sm s12 l3 offset-l1 ">
                 <i className="fas fa-calendar-alt big_icon purple"></i>
 
-                <div className="sub-title pb-1">Bootcamp schedule</div>
+                <div className="sub-title pb-1">When does bootcamp start?
+</div>
                 <div className="sub-text">
-                  Bootcamp starting date: February 2021. Be it Full time or Part
-                  time, we offer teaching using modern technologies. Main
-                  teaching language is English, however we offer support in
-                  Swedish, Arabic, Hindi & German
+                When does bootcamp start?
+
+                We start in February 2021. We're teaching both full-time and part-time, using the best modern teaching methods and technology. The main instruction language is English, but have support in Arabic, German, Hindi and Swedish. 
                 </div>
                 <a
                   href="https://meetings.hubspot.com/sl-melad"
@@ -301,10 +297,9 @@ export default function HomeScreen({ match }) {
 
               <div className=" F-box col-sm s12 l3">
                 <i className="fas fa-gem big_icon purple"></i>
-                <div className="sub-title pb-1">Payment Plan</div>
+                <div className="sub-title pb-1">Flexible and affordable payment</div>
                 <div className="sub-text">
-                  Flexible Payment plans with our partners, also you can benefit
-                  from.
+                We offer flexible payment plans through our partners, so you can spread the cost and pay as you learn
                 </div>
                 <a
                   href="https://meetings.hubspot.com/sl-melad"
@@ -317,11 +312,9 @@ export default function HomeScreen({ match }) {
 
               <div className=" F-box col-sm s12 l3">
                 <i className="fab fa-free-code-camp big_icon purple"></i>
-                <div className="sub-title pb-1">Start with our free course</div>
+                <div className="sub-title pb-1">How do I know it's right for me?</div>
                 <div className="sub-text">
-                  Start with Codify Foundation course, which is currently free.
-                  Codify's foundation course is a great opportunity to learn the
-                  basics and to enjoy building your first website.
+                We run a free Codify Foundation course, so you can dip your toes without commitment. It's also a great way to learn the basics and build your own website.
                 </div>
                 <a
                   href={userDetail.token ? '/profile' : '/get-start'}

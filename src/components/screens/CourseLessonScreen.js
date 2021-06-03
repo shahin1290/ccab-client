@@ -95,8 +95,11 @@ export default function CourseContentScreen({ match }) {
                       {/* Intro Tabs*/}
                       <div className="intro-tabs tabs-box">
                         {/*Tab Btns*/}
-                        <Tabs defaultActiveKey={day.name &&
-                            day.sections && day.sections[0].name}>
+                        <Tabs
+                          defaultActiveKey={
+                            day.name && day.sections && day.sections[0].name
+                          }
+                        >
                           {day.name &&
                             day.sections.map((section) => (
                               <Tab
@@ -110,7 +113,10 @@ export default function CourseContentScreen({ match }) {
                                 >
                                   <div className="content">
                                     {findElementText('title', section.name) && (
-                                      <div className="sub-title pt-4 pb-4">
+                                      <div
+                                        className="sub-title pt-4 pb-4"
+                                        style={{ whiteSpace: 'pre;' }}
+                                      >
                                         {findElementText('title', section.name)}
                                       </div>
                                     )}
@@ -119,7 +125,7 @@ export default function CourseContentScreen({ match }) {
                                       'description',
                                       section.name
                                     ) && (
-                                      <div className="sub-text mb-5">
+                                      <div className="sub-text lessontext mb-5">
                                         {findElementText(
                                           'description',
                                           section.name
@@ -139,7 +145,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('code', section.name) && (
                                       <div
-                                        className="sub-text mb-5"
+                                        className="sub-text lessontext mb-5"
                                         style={{
                                           width: '80%',
                                           margin: '20px auto',

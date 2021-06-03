@@ -80,7 +80,14 @@ body {
   padding: 10px 0;
   font-family: Inter;
   
+ 
 }
+.lessontext{
+
+white-space: pre;
+overflow: auto;
+}
+
 
 .sub-text-bold {
   font-size: 15px;

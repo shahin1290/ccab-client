@@ -15,10 +15,9 @@ const ContactSection = () => {
       }}
     >
       <div className="auto-container text-center contact-text">
-        <div className="title buttons-box">Speak with an Education Advisor</div>
+        <div className="title buttons-box">Our education advisor are ready to help you get started</div>
         <div className="sub-text">
-          Take the first step to change your life and become a Software
-          Developer
+        Fill the contact form, ask your questions and get feedback from an education advisor 
         </div>
 
         <div className="buttons-box">
