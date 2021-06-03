@@ -75,17 +75,17 @@ export default function DayContent({ weekId, bootcampId }) {
   }
 
   //filter weekly tasks
-  const filterWeeklyTask = () => {
+  const filterWeeklyTask = (dayId) => {
     if (
       userDetail.name &&
       (userDetail.user_type === 'AdminUser' ||
         userDetail.user_type === 'MentorUser')
     ) {
-      return tasks.length && tasks.filter((task) => task.week === weekId)
+      return tasks.length && tasks.filter((task) => task.day === dayId)
     }
 
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
-      return myTasks.length && myTasks.filter((task) => task.week === weekId)
+      return myTasks.length && myTasks.filter((task) => task.day === dayId)
     }
   }
 
@@ -173,16 +173,14 @@ export default function DayContent({ weekId, bootcampId }) {
                   </div>
                 ))}
 
-              {filterWeeklyTask().length > 0 &&
-                filterWeeklyTask().map((task) => (
+              {filterWeeklyTask(day._id).length > 0 &&
+                filterWeeklyTask(day._id).map((task) => (
                   <div
-                    className="lightbox-image play-icon"
-                    style={{ padding: ' 0 0 20px 15px' }}
+                  className="pb-3"
                   >
-                    <span
-                      className="fa fa-play "
-                      style={{ paddingTop: '10px' }}
-                    ></span>
+                     <span className="mr-3">
+                      <img width="10%" src="/images/resource/assignment.png" />
+                    </span>
 
                     <Link
                       to={
@@ -191,7 +189,7 @@ export default function DayContent({ weekId, bootcampId }) {
                           : `/task-details/${task.bootcamp}/${task._id}`
                       }
                     >
-                      <span>Task: {task.projectName}</span>
+                      <span className="sub-text">Task: {task.projectName}</span>
                     </Link>
                   </div>
                 ))}

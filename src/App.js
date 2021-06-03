@@ -141,7 +141,7 @@ function App() {
 
         <MentorRoute
           exact
-          path="/mentor-upload-assignment/:bootcampId/:weekId"
+          path="/mentor-upload-assignment/:bootcampId/:dayId"
           component={TaskUploadScreen}
         ></MentorRoute>
 
