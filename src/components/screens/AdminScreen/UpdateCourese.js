@@ -563,7 +563,7 @@ export default function UpdateCourese({ match }) {
                     {ImageLable ? (
                       <img
                         src={
-                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
+                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (

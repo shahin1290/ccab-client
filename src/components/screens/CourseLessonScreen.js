@@ -106,14 +106,14 @@ export default function CourseContentScreen({ match }) {
                                 )}
 
                                 {findElementText('description') && (
-                                  <div className="sub-text mb-5">
+                                  <div className="sub-text lessontext mb-5" style={{ 'whiteSpace': 'pre;'}}>
                                     {findElementText('description')}
                                   </div>
                                 )}
 
                                 {findElementText('image') && (
                                   <img
-                                    src={`http://localhost:5001/uploads/Source_Code/${findElementText(
+                                    src={`http://server.ccab.tech/uploads/Source_Code/${findElementText(
                                       'image'
                                     )}`}
                                     alt="img"
@@ -122,7 +122,7 @@ export default function CourseContentScreen({ match }) {
 
                                 {findElementText('code') && (
                                   <div
-                                    className="sub-text mb-5"
+                                    className="sub-text lessontext mb-5"
                                     style={{
                                       width: '80%',
                                       margin: '20px auto',
