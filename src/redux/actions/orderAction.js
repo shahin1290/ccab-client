@@ -17,7 +17,13 @@ import {
   ORDER_KLARNA_CREATE_FAIL,
   ORDER_KLARNA_READ_REQUEST,
   ORDER_KLARNA_READ_SUCCESS,
-  ORDER_KLARNA_READ_FAIL
+  ORDER_KLARNA_READ_FAIL,
+  KLARNA_SESSION_CREATE_REQUEST,
+  KLARNA_SESSION_CREATE_SUCCESS,
+  KLARNA_SESSION_CREATE_FAIL,
+  KLARNA_SESSION_READ_REQUEST,
+  KLARNA_SESSION_READ_SUCCESS,
+  KLARNA_SESSION_READ_FAIL
 } from '../constences/orderConst'
 
 export const createOrder =
@@ -36,7 +42,7 @@ export const createOrder =
       }
 
       const response = await axios.post(
-        `https://server.ccab.tech/api/order/${bootcampId}`,
+        `http://localhost:5001/api/order/${bootcampId}`,
         order,
         config
       )
@@ -76,7 +82,7 @@ export const getOrderList = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/myorders`,
+      `http://localhost:5001/api/order/myorders`,
       config
     )
 
@@ -113,7 +119,7 @@ export const getAllOrders = () => async (dispatch, getState) => {
       }
     }
 
-    const response = await axios.get(`https://server.ccab.tech/api/order/`, config)
+    const response = await axios.get(`http://localhost:5001/api/order/`, config)
 
     //console.log("payload: ",response.data.data)
     dispatch({
@@ -148,7 +154,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/` + id,
+      `http://localhost:5001/api/order/` + id,
       config
     )
 
@@ -168,7 +174,42 @@ export const getOrder = (id) => async (dispatch, getState) => {
   }
 }
 
-export const createKlarnaOrder = (order, id) => async (dispatch, getState) => {
+export const createKlarnaSession =
+  (order, id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: KLARNA_SESSION_CREATE_REQUEST
+      })
+
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: { Authorization: 'Bearer ' + userDetail.token }
+      }
+
+      const response = await axios.post(
+        `http://localhost:5001/api/order/${id}/klarna/session`,
+        order,
+        config
+      )
+
+      dispatch({
+        type: KLARNA_SESSION_CREATE_SUCCESS,
+        // payload: console.log("payload:",  response.data),
+        payload: JSON.parse(response.data.data)
+      })
+    } catch (error) {
+      console.log('error:', error)
+      dispatch({
+        type: KLARNA_SESSION_CREATE_FAIL,
+        //    payload: error.res
+        payload: error.response.data.message
+      })
+    }
+  }
+
+export const createKlarnaOrder = (id, data) => async (dispatch, getState) => {
   try {
     dispatch({
       type: ORDER_KLARNA_CREATE_REQUEST
@@ -177,11 +218,16 @@ export const createKlarnaOrder = (order, id) => async (dispatch, getState) => {
     const {
       userLogin: { userDetail }
     } = getState()
-    const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
 
     const response = await axios.post(
-      `https://server.ccab.tech/api/order/${id}/klarna/order`,
-      order,
+      `http://localhost:5001/api/order/${id}/klarna/order`,
+      data,
       config
     )
 
@@ -211,10 +257,15 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     const {
       userLogin: { userDetail }
     } = getState()
-    const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/${id}/klarna/order`,
+      `http://localhost:5001/api/order/${id}/klarna/order`,
       config
     )
 
@@ -235,15 +286,60 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
   }
 }
 
-export const captureOrder = (id) => async (dispatch, getState) => {
+export const readKlarnaSession =
+  (id, session) => async (dispatch, getState) => {
+    console.log('id', session)
+    try {
+      dispatch({
+        type: KLARNA_SESSION_READ_REQUEST
+      })
+
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userDetail.token
+        }
+      }
+
+      const response = await axios.post(
+        `http://localhost:5001/api/order/${id}/klarna/authorize`,
+        session,
+        config
+      )
+
+      dispatch({
+        type: KLARNA_SESSION_READ_SUCCESS,
+        // payload: console.log("payload:",  response.data),
+        payload: JSON.parse(response.data.data)
+      })
+    } catch (error) {
+      console.log('error:', error)
+      dispatch({
+        type: KLARNA_SESSION_READ_FAIL,
+        //    payload: error.res
+        payload: error.response.data.message
+      })
+    }
+  }
+
+export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
   try {
     const {
       userLogin: { userDetail }
     } = getState()
-    const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
 
-    const response = await axios.get(
-      `https://server.ccab.tech/api/order/capture/${id}`,
+    const response = await axios.post(
+      `http://localhost:5001/api/order/capture/${id}`,
+      {orderBy},
       config
     )
   } catch (error) {}

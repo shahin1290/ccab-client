@@ -16,7 +16,13 @@ import {
   ORDER_KLARNA_CREATE_FAIL,
   ORDER_KLARNA_READ_REQUEST,
   ORDER_KLARNA_READ_SUCCESS,
-  ORDER_KLARNA_READ_FAIL
+  ORDER_KLARNA_READ_FAIL,
+  KLARNA_SESSION_CREATE_REQUEST,
+  KLARNA_SESSION_CREATE_SUCCESS,
+  KLARNA_SESSION_CREATE_FAIL,
+  KLARNA_SESSION_READ_REQUEST,
+  KLARNA_SESSION_READ_SUCCESS,
+  KLARNA_SESSION_READ_FAIL
 } from '../constences/orderConst'
 
 export const orderCreateReducer = (
@@ -122,6 +128,61 @@ export const orderVeiwReducer = (
       return state
   }
 }
+export const klarnaSessionCreateReducer = (
+  state = { session: {}, success: false },
+  action
+) => {
+  switch (action.type) {
+    case KLARNA_SESSION_CREATE_REQUEST:
+      return {
+        loading: true
+      }
+
+    case KLARNA_SESSION_CREATE_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        session: action.payload,
+        success: true
+      }
+    case KLARNA_SESSION_CREATE_FAIL:
+      return {
+        success: false,
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
+export const klarnaSessionReadReducer = (
+  state = { token: {}, loading: false },
+  action
+) => {
+  switch (action.type) {
+    case KLARNA_SESSION_READ_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case KLARNA_SESSION_READ_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        token: action.payload
+      }
+    case KLARNA_SESSION_READ_FAIL:
+      return {
+        loading: false, // loading is done laoding!
+        error: action.payload,
+        token: {}
+      }
+
+    default:
+      return state
+  }
+}
+
 
 export const orderKlarnaCreateReducer = (
   state = { order: {}, success: false },

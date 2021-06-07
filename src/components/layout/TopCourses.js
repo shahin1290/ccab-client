@@ -32,9 +32,8 @@ export default function TopCourses({ match }) {
           <hr className="block-seperator mb-5" />
 
           <div className="text header-text">
-          Each course consists of video-lectures, assignments and quizzes.
-
-                  </div>
+            Each course consists of video-lectures, assignments and quizzes.
+          </div>
           <div className="row clearfix">
             {/* Institution Block */}
 
@@ -53,7 +52,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                            'http://localhost:5001/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""

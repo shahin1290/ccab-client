@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+/* eslint-disable no-undef */
+import React, { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   useStripe,
@@ -9,13 +10,18 @@ import {
   CardCvcElement
 } from '@stripe/react-stripe-js'
 import { useSelector, useDispatch } from 'react-redux'
-import { createOrder, createKlarnaOrder } from '../../redux/actions/orderAction'
+import {
+  createOrder,
+  createKlarnaSession,
+  readKlarnaSession
+} from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
 import Loader from '../layout/Loader'
-import { Tabs, Tab, Card, Form, Col } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../layout/Message'
-
+import KlarnaPayment from '../layout/KlarnaPayment'
+import {getKarnaOrderLines} from '../../util/karnaOrderLines'
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 //console.log(process.env.REACT_APP_STRIPE_KEY);
 
@@ -28,7 +34,6 @@ const CheckoutForm = ({ match, history }) => {
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
 
-  const paymentContainerRef = useRef()
   const { course } = useSelector((state) => state.courseDetails)
   const { loading, success, error } = useSelector((state) => state.orderCreate)
 
@@ -52,6 +57,30 @@ const CheckoutForm = ({ match, history }) => {
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
 
+  const [widgetLoaded, setWidgetLoaded] = React.useState(false)
+
+  const { session, success: sessionSuccess } = useSelector(
+    (state) => state.KlarnaSessionCreate
+  )
+
+  useEffect(() => {
+    if (sessionSuccess) {
+      Klarna.Payments.init({
+        client_token: session.client_token
+      })
+
+      Klarna.Payments.load(
+        {
+          container: '#klarna-payments-container',
+          payment_method_category: 'pay_later'
+        },
+        (res) => {
+          setWidgetLoaded(true)
+        }
+      )
+    }
+  }, [sessionSuccess])
+
   useEffect(() => {
     dispatch(getCourseDetails(ID))
   }, [dispatch, ID])
@@ -61,14 +90,6 @@ const CheckoutForm = ({ match, history }) => {
       history.push(`/courses/${ID}`)
     }
   }, [success])
-
-  useEffect(() => {
-    if (order && order.html_snippet) {
-      setHTML(order.html_snippet)
-
-      getSnippet()
-    }
-  }, [order, html])
 
   const ELEMENT_OPTIONS = {
     style: {
@@ -106,11 +127,11 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
+        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: 'usd',
-          amount: course.price * 125
+          amount: course.price
         },
         config
       )
@@ -165,30 +186,12 @@ const CheckoutForm = ({ match, history }) => {
         dispatch(
           createOrder(ID, {
             token: paymentIntent.id,
-            amount: paymentIntent.amount / 100
+            amount: paymentIntent.amount
           })
         )
       }
     } catch (err) {
       setCheckoutError(err.message)
-    }
-  }
-
-  const getSnippet = () => {
-    var checkoutContainer = paymentContainerRef.current
-
-    checkoutContainer.innerHTML = html
-    //console.log(checkoutContainer.innerHTML);
-    var scriptsTags = checkoutContainer.getElementsByTagName('script')
-    console.log(scriptsTags)
-    for (var i = 0; i < scriptsTags.length; i++) {
-      var parentNode = scriptsTags[i].parentNode
-      var newScriptTag = document.createElement('script')
-      newScriptTag.type = 'text/javascript'
-      newScriptTag.text = scriptsTags[i].text
-      console.log(newScriptTag.text)
-      parentNode.removeChild(scriptsTags[i])
-      parentNode.appendChild(newScriptTag)
     }
   }
 
@@ -208,40 +211,28 @@ const CheckoutForm = ({ match, history }) => {
     console.log(Math.round(resp.data['USD_' + currency] * course.price))
     let price = Math.round(resp.data['USD_SEK'] * course.price)
     let amount = price * 100
-    let taxrate = 1000
-    let totalTaxRate = amount - (amount * 10000) / (10000 + taxrate)
-    console.log(Math.round(totalTaxRate))
+
     const data = {
       purchase_country: 'SE',
       purchase_currency: 'SEK',
       locale: 'sv-SE',
-      order_amount: amount,
-      order_tax_amount: totalTaxRate,
+      order_amount: 100,
       order_lines: [
         {
-          type: 'Digital',
-          reference: '19-402-USA',
-          name: course.name,
+          name: 'course',
           quantity: 1,
           quantity_unit: 'pcs',
-          unit_price: amount,
-          tax_rate: taxrate,
-          total_amount: amount,
-          total_discount_amount: 0,
-          total_tax_amount: totalTaxRate
+          unit_price: 100,
+          total_amount: 100
         }
       ],
+
       merchant_urls: {
         terms: process.env.REACT_APP_HOST + '/privacy',
-        checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
-        confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
-        push:
-          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
+        confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID
       }
     }
-    dispatch(createKlarnaOrder({ data: data }, ID))
-
-    console.log(process.env.REACT_APP_HOST)
+    dispatch(createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID))
   }
 
   return (
@@ -255,6 +246,7 @@ const CheckoutForm = ({ match, history }) => {
               <div className="title">Checkout</div>
               {checkoutError && <Message>{checkoutError}</Message>}{' '}
             </div>
+
             <div className="checkout-section">
               {/* Checkout Form */}
 
@@ -463,14 +455,8 @@ const CheckoutForm = ({ match, history }) => {
                       </div>
                     </form>
                   </Tab>
-                  <Tab eventKey="klarna" title="Klaran">
-                    <div className="container " style={{ padding: '60px 0px' }}>
-                      {CreateOrderLoading && <Loader />}
-
-                      <div ref={paymentContainerRef}></div>
-
-                      <div />
-                    </div>
+                  <Tab eventKey="klarna" title="Klarna">
+                    <KlarnaPayment ID={ID} widgetLoaded={widgetLoaded} />
                   </Tab>
                 </Tabs>
               </div>
@@ -489,21 +475,14 @@ const CheckoutForm = ({ match, history }) => {
                   {/* Order Box */}
                   <div className="order-box bg-white p-2">
                     <ul>
-                      <li className="clearfix">
+                      <li className="clearfix mb-3">
                         Basic Plan{' '}
                         <span className="pull-right">${course.price}</span>
                       </li>
-                      <li className="clearfix">
-                        Tax(25% Sweden){' '}
-                        <span className="pull-right">
-                          ${course.price * 0.25}
-                        </span>
-                      </li>
+
                       <li className="clearfix">
                         <strong>Total</strong>{' '}
-                        <span className="pull-right">
-                          ${course.price * 1.25}
-                        </span>
+                        <span className="pull-right">${course.price}</span>
                       </li>
                     </ul>
                   </div>

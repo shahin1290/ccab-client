@@ -238,6 +238,8 @@ function App() {
           component={CheckoutKlarna}
         ></StudentRoute>
 
+       
+
         <StudentRoute
           exact
           path="/confirmation-klarna/:bootcampId"

@@ -68,11 +68,16 @@ import {
   quizAnswerListReducer
 } from './redux/reducers/quizAnswerReducer'
 
-import { orderCreateReducer, 
-        orderListReducer,
-        orderKlarnaCreateReducer,
-        orderKlarnaReadReducer,
-        orderVeiwReducer,orderListAllReducer } from './redux/reducers/orderReducer'
+import {
+  orderCreateReducer,
+  orderListReducer,
+  klarnaSessionCreateReducer,
+  klarnaSessionReadReducer,
+  orderKlarnaCreateReducer,
+  orderKlarnaReadReducer,
+  orderVeiwReducer,
+  orderListAllReducer
+} from './redux/reducers/orderReducer'
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -123,10 +128,12 @@ const reducer = combineReducers({
   quizUpdate: quizUpdateReducer,
   orderCreate: orderCreateReducer,
   orderList: orderListReducer,
-  KlarnaOrderCreate:orderKlarnaCreateReducer,
-  KlarnaOrderRead:orderKlarnaReadReducer,
-  getOrderView:orderVeiwReducer,
-  getAllOrders:orderListAllReducer,
+  KlarnaSessionCreate: klarnaSessionCreateReducer,
+  KlarnaOrderCreate: orderKlarnaCreateReducer,
+  KlarnaOrderRead: orderKlarnaReadReducer,
+  klarnaSessionRead: klarnaSessionReadReducer,
+  getOrderView: orderVeiwReducer,
+  getAllOrders: orderListAllReducer
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')
