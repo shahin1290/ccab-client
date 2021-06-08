@@ -24,7 +24,7 @@ const HomeVideoSection = () => {
               <div
                 className="video-boxed "
                 style={{
-                  width: '500px',
+                  maxWidth: '500px',
                   height: '250px',
                   backgroundImage: 'url(' + VideoImage + ')',
                   'border-radius': '50px 0',

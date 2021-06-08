@@ -52,7 +52,7 @@ export default function HomeScreen({ match }) {
           <div className="auto-container">
             <div className="row clearfix">
               {/* Image Column */}
-              <div className="image-column  col-lg-7 col-md-12 col-sm-12">
+              <div className="image-column  col-lg-6 col-md-12 col-sm-12">
                 <div className="inner-column ">
                   <div className="image titlt " data-tilt data-tilt-max={4}>
                     {/* Slider Section */}
@@ -89,7 +89,7 @@ export default function HomeScreen({ match }) {
                 </div>
               </div>
               {/* Content Column */}
-              <div className="content-column mt-0 col-lg-5 col-md-12 col-sm-12">
+              <div className="content-column mt-0 col-lg-6 col-md-12 col-sm-12">
                 <div className="inner-column">
                   <h2>
                   Learn new skills with Codify College
