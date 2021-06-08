@@ -22,6 +22,8 @@ const KlarnaPayment = ({ ID, widgetLoaded }) => {
 
   const { session } = useSelector((state) => state.KlarnaSessionCreate)
 
+  console.log(session);
+
   const { token } = useSelector((state) => state.klarnaSessionRead)
 
   const {

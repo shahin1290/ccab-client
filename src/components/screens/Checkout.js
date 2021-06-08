@@ -21,7 +21,7 @@ import { Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../layout/Message'
 import KlarnaPayment from '../layout/KlarnaPayment'
-import {getKarnaOrderLines} from '../../util/karnaOrderLines'
+import { getKarnaOrderLines } from '../../util/karnaOrderLines'
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 //console.log(process.env.REACT_APP_STRIPE_KEY);
 
@@ -65,6 +65,7 @@ const CheckoutForm = ({ match, history }) => {
 
   useEffect(() => {
     if (sessionSuccess) {
+      const Klarna = window.Klarna;
       Klarna.Payments.init({
         client_token: session.client_token
       })
@@ -232,7 +233,9 @@ const CheckoutForm = ({ match, history }) => {
         confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID
       }
     }
-    dispatch(createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID))
+    dispatch(
+      createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID)
+    )
   }
 
   return (
