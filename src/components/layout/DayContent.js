@@ -115,7 +115,7 @@ export default function DayContent({ weekId, bootcampId }) {
           dayList.map((day, index) => (
             <div>
               <div className="d-flex mt-3 p-2" style={{backgroundColor: '#F0F5FB'}}>
-                <span className="sub-title text-dark">Day {index + 1}</span>
+               {/*  <span className="sub-title text-dark">Day {index + 1}</span> */}
                
               </div>
               <button

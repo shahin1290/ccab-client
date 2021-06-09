@@ -38,7 +38,7 @@ export default function MentorCoursesList() {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div  className="title ">Manage Courses</div>
+                <div className="title ">Manage Courses</div>
               </div>
             </div>
           </div>
@@ -48,25 +48,25 @@ export default function MentorCoursesList() {
                 <thead>
                   <tr>
                     <th>
-                      <h5>Title</h5>
+                      <div className="text">Title</div>
                     </th>
                     <th>
-                      <h5>Start Date</h5>
+                      <div className="text">Start Date</div>
                     </th>
                     <th>
-                      <h5>Weeks</h5>
+                      <div className="text">Weeks</div>
                     </th>
                     <th>
-                      <h5>Status</h5>
+                      <div className="text">Status</div>
                     </th>
                     <th>
-                      <h5>Content</h5>
+                      <div className="text">Content</div>
                     </th>
                     <th>
-                      <h5>Tasks</h5>
+                      <div className="text">Tasks</div>
                     </th>
                     <th>
-                      <h5>Quizzes</h5>
+                      <div className="text">Quizzes</div>
                     </th>
                   </tr>
                 </thead>
@@ -81,7 +81,7 @@ export default function MentorCoursesList() {
                         //console.log(item);
                         return (
                           <tr>
-                            <th className="title" scope="col">
+                            <th className="text" scope="col">
                               {item.name}
                             </th>
                             <th className="post-date" scope="col">

@@ -9,11 +9,11 @@ import { getMyTaskList, getTaskList } from '../../redux/actions/taskAction'
 import { getMyQuizList, getQuizList } from '../../redux/actions/quizAction'
 import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
 
+
 export default function DayContent({ weekId, bootcampId }) {
   const dispatch = useDispatch()
   const { userDetail } = useSelector((state) => state.userLogin)
   const [show, setShow] = useState('')
-
   /****************redux store***************** */
 
   //daylist
@@ -112,21 +112,30 @@ export default function DayContent({ weekId, bootcampId }) {
     }
   }, [dispatch, userDetail, weekId, bootcampId, UpdateSuccess])
 
-    //handle delete  section (for mentor)
-    const deleteSection = (day, sectionName) => {
-      const updateSection =
-        day &&
-        day.sections.filter((sec) => sec.name !== sectionName)
+  //handle delete  section (for mentor)
+  const deleteSection = (day, sectionName) => {
+    const updateSection =
+      day && day.sections.filter((sec) => sec.name !== sectionName)
 
-      const dayData = {
+    const dayData = {
+      name: day.name,
+      video_path: day.video_path,
+      sections: updateSection,
+      action: 'delete'
+    }
+    dispatch(updateDay(weekId, day._id, dayData))
+  }
+
+  const toggleDayShow = (day) => {
+    dispatch(
+      updateDay(weekId, day._id, {
         name: day.name,
         video_path: day.video_path,
-        sections: updateSection,
-        action: 'delete'
-      }
-      dispatch(updateDay(weekId, day._id, dayData))
-    }
-  
+        show: !day.show
+      })
+    )
+  }
+
 
   return (
     <>
@@ -148,6 +157,15 @@ export default function DayContent({ weekId, bootcampId }) {
                         Assignment
                       </i>
                     </Link>
+
+                    <label className="switch ml-5">
+                      <input
+                        type="checkbox"
+                        checked={day.show}
+                        onChange={() => toggleDayShow(day)}
+                      />
+                      <span className="slider round"></span>
+                    </label>
                   </span>
                 )}
               </div>
@@ -172,11 +190,11 @@ export default function DayContent({ weekId, bootcampId }) {
                   >
                     <span className="">{day.name}</span>
                     <Link
-                            to={`/mentor-course-update/${weekId}/${day._id}`}
-                            className="pl-3"
-                          >
-                            <i class="fas fa-edit"></i>
-                          </Link>
+                      to={`/mentor-course-update/${weekId}/${day._id}`}
+                      className="pl-3"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </Link>
                   </Link>
                 </button>
                 <div className="sub-title ml-5">
@@ -204,7 +222,7 @@ export default function DayContent({ weekId, bootcampId }) {
                             <i class="fas fa-edit"></i>
                           </Link>
                           <a
-                             onClick={() => {
+                            onClick={() => {
                               if (
                                 window.confirm(
                                   'Are you sure you wish to delete this item?'
