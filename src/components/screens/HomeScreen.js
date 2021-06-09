@@ -89,14 +89,12 @@ export default function HomeScreen({ match }) {
                 </div>
               </div>
               {/* Content Column */}
-              <div className="content-column mt-0 col-lg-6 col-md-12 col-sm-12">
+              <div className="content-column mt-2 col-lg-6 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <h2>
-                  Learn new skills with Codify College
-                  </h2>
-                  <div className="text header-text">
-                  With Codify College,  you will learn the most in-demand skills to flourish in your carrer.
-
+                  <h2 className="text-center-small-screen">Learn new skills with Codify College</h2>
+                  <div className="text header-text text-center-small-screen">
+                    With Codify College, you will learn the most in-demand
+                    skills to flourish in your carrer.
                   </div>
 
                   {/* <Link
@@ -231,10 +229,13 @@ export default function HomeScreen({ match }) {
                   <hr className="block-seperator mt-4" />
                   <div className="text">
                     <div className="sub-text">
-                    If you're looking to transition to a career as a developer, or add a tech stack to your existing skill, then this course is for you.
+                      If you're looking to transition to a career as a
+                      developer, or add a tech stack to your existing skill,
+                      then this course is for you.
                     </div>
                     <div className="sub-text">
-                    If you're looking for the most efficient way to learn, come this way
+                      If you're looking for the most efficient way to learn,
+                      come this way
                     </div>
                   </div>
 
@@ -276,49 +277,57 @@ export default function HomeScreen({ match }) {
             <div className="title text-center p-4 ">How It Works</div>
             <hr className="block-seperator mb-5" />
             <div className="row  center">
-              <div className=" F-box col-sm s12 l3 offset-l1 ">
-                <i className="fas fa-calendar-alt big_icon purple"></i>
+              <div className=" F-box col-sm s12 l3 offset-l1  ">
+                <i className="fas fa-calendar-alt big_icon purple text-center-small-screen"></i>
 
-                <div className="sub-title pb-1">When does bootcamp start?
-</div>
-                <div className="sub-text">
-                When does bootcamp start?
-
-                We start in February 2021. We're teaching both full-time and part-time, using the best modern teaching methods and technology. The main instruction language is English, but have support in Arabic, German, Hindi and Swedish. 
+                <div className="sub-title pb-1 text-center-small-screen">When does bootcamp start?</div>
+                <div className="sub-text text-center-small-screen">
+                  When does bootcamp start? We start in February 2021. We're
+                  teaching both full-time and part-time, using the best modern
+                  teaching methods and technology. The main instruction language
+                  is English, but have support in Arabic, German, Hindi and
+                  Swedish.
                 </div>
                 <a
                   href="https://meetings.hubspot.com/sl-melad"
                   target="_blank"
-                  className="btn rounded bg-success p-2 text-light"
+                  className="btn rounded bg-success p-2 text-light text-center-small-screen"
                 >
                   Book a Free Phone Call{' '}
                 </a>
               </div>
 
               <div className=" F-box col-sm s12 l3">
-                <i className="fas fa-gem big_icon purple"></i>
-                <div className="sub-title pb-1">Flexible and affordable payment</div>
-                <div className="sub-text">
-                We offer flexible payment plans through our partners, so you can spread the cost and pay as you learn
+                <i className="fas fa-gem big_icon purple text-center-small-screen"></i>
+                <div className="sub-title pb-1 text-center-small-screen">
+                  Flexible and affordable payment
+                </div>
+                <div className="sub-text text-center-small-screen">
+                  We offer flexible payment plans through our partners, so you
+                  can spread the cost and pay as you learn
                 </div>
                 <a
                   href="https://meetings.hubspot.com/sl-melad"
                   target="_blank"
-                  className="btn rounded bg-info  p-2 text-light"
+                  className="btn rounded bg-info  p-2 text-light text-center-small-screen"
                 >
                   Book an Interview!{' '}
                 </a>
               </div>
 
               <div className=" F-box col-sm s12 l3">
-                <i className="fab fa-free-code-camp big_icon purple"></i>
-                <div className="sub-title pb-1">How do I know it's right for me?</div>
+                <i className="fab fa-free-code-camp big_icon purple text-center-small-screen"></i>
+                <div className="sub-title pb-1 text-center-small-screen">
+                  How do I know it's right for me?
+                </div>
                 <div className="sub-text">
-                We run a free Codify Foundation course, so you can dip your toes without commitment. It's also a great way to learn the basics and build your own website.
+                  We run a free Codify Foundation course, so you can dip your
+                  toes without commitment. It's also a great way to learn the
+                  basics and build your own website.
                 </div>
                 <a
                   href={userDetail.token ? '/profile' : '/get-start'}
-                  className="btn rounded bg-warning p-2 text-dark"
+                  className="btn rounded bg-warning p-2 text-dark text-center-small-screen"
                 >
                   Start Now!
                 </a>

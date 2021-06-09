@@ -63,9 +63,8 @@ const ContactForm = () => {
             <img src={logo} width="50px" />
             <div
               style={{
-                'text-shadow': '0 0 1.2px #000',
+                textShadow: '0 0 1.2px #000',
                 padding: '20px 5px',
-                'font-style': 'italic'
               }}
             >
               Coding for Bettter Life

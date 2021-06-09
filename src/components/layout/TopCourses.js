@@ -29,9 +29,9 @@ export default function TopCourses({ match }) {
         <div className="auto-container">
           {/* Sec Title */}
           <div className="title text-center p-4 ">Discover our courses</div>
-          <hr className="block-seperator mb-5" />
+          <hr className="block-seperator mb-3" />
 
-          <div className="text header-text">
+          <div className="sub-text text-center mb-5">
             Each course consists of video-lectures, assignments and quizzes.
           </div>
           <div className="row clearfix">

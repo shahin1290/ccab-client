@@ -63,12 +63,42 @@ export default function CourseContentScreen({ match }) {
           style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
         ></div>
         <div className="circle-one"></div>
-        <div className="auto-container">
+        <div className="p-5">
           <div className="inner-container">
-            <div className="title mb-3">{day.name}</div>
             <div className="row clearfix">
+              {/* Accordian Column */}
+              <div className="accordian-column col-lg-3 col-md-12 col-sm-12">
+                <div className="inner-column sticky-top">
+                  <div className="title p-2">Table of contents</div>
+                  {/* Accordion Box */}
+                  <Accordion
+                    style={{ height: '500px', overflowY: 'scroll' }}
+                    className="accordion-box style-two"
+                  >
+                    {weekList.map((week, index) => (
+                      <Card className="accordion block">
+                        <Accordion.Toggle
+                          as={Card.Header}
+                          eventKey={`${index}`}
+                          className="acc-btn  bg-warning text-dark"
+                          onClick={() => dispatch(getDayList(week._id))}
+                        >
+                          {week.name}
+                        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey={`${index}`}>
+                          <DayContent
+                            weekId={week._id}
+                            bootcampId={week.bootcamp}
+                          />
+                        </Accordion.Collapse>
+                      </Card>
+                    ))}
+                  </Accordion>
+                </div>
+              </div>
               {/* Content Column */}
-              <div className="content-column col-lg-8 col-md-12 col-sm-12">
+              <div className="content-column col-lg-9 col-md-12 col-sm-12">
+                <div className="title mb-3">{day.name}</div>
                 {day.name ? (
                   <div className="inner-column">
                     <div className="course-video-box">
@@ -99,15 +129,11 @@ export default function CourseContentScreen({ match }) {
                           <Tab eventKey="Content" title="Content">
                             {day.name &&
                               day.sections.map((section) => (
-                                <div
-                                  className="tabs-content"
-                                  style={{ padding: '0 15px' }}
-                                >
+                                <div className="tabs-content p-3">
                                   <div className="content">
                                     {findElementText('title', section.name) && (
                                       <div
-                                        className="sub-title pt-4 pb-4"
-                                        style={{ whiteSpace: 'pre;' }}
+                                        className="title pb-2"
                                       >
                                         {findElementText('title', section.name)}
                                       </div>
@@ -117,12 +143,12 @@ export default function CourseContentScreen({ match }) {
                                       'description',
                                       section.name
                                     ) && (
-                                      <div className="sub-text mb-5">
+                                      <p className="sub-text">
                                         {findElementText(
                                           'description',
                                           section.name
                                         )}
-                                      </div>
+                                      </p>
                                     )}
 
                                     {findElementText('image', section.name) && (
@@ -151,6 +177,7 @@ export default function CourseContentScreen({ match }) {
                                     )}
                                   </div>
                                 </div>
+                               
                               ))}
                           </Tab>
                         </Tabs>
@@ -165,37 +192,6 @@ export default function CourseContentScreen({ match }) {
                     </div>
                   </div>
                 )}
-              </div>
-
-              {/* Accordian Column */}
-              <div className="accordian-column col-lg-4 col-md-12 col-sm-12">
-                <div className="inner-column sticky-top">
-                  <div className="title">Table of contents</div>
-                  {/* Accordion Box */}
-                  <Accordion
-                    style={{ height: '500px', overflowY: 'scroll' }}
-                    className="accordion-box style-two"
-                  >
-                    {weekList.map((week, index) => (
-                      <Card className="accordion block">
-                        <Accordion.Toggle
-                          as={Card.Header}
-                          eventKey={`${index}`}
-                          className="acc-btn"
-                          onClick={() => dispatch(getDayList(week._id))}
-                        >
-                          {week.name}
-                        </Accordion.Toggle>
-                        <Accordion.Collapse eventKey={`${index}`}>
-                          <DayContent
-                            weekId={week._id}
-                            bootcampId={week.bootcamp}
-                          />
-                        </Accordion.Collapse>
-                      </Card>
-                    ))}
-                  </Accordion>
-                </div>
               </div>
             </div>
           </div>
