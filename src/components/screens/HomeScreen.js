@@ -343,12 +343,12 @@ export default function HomeScreen({ match }) {
 
         <div className="auto-container text-center  mb-3 mt-5">
           <img
-            width="6%"
-            className="pr-2"
+            width="90"
+            className="pr-3"
             src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
           />
           <img
-            width="20%"
+            width="310"
             src="https://cdn.jotfor.ms/images/credit-card-logo.png"
           />
         </div>

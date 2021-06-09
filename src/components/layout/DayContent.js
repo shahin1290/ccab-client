@@ -92,6 +92,10 @@ export default function DayContent({ weekId, bootcampId }) {
   /****************useEffect***************** */
 
   useEffect(() => {
+    dispatch(getDayList(weekId))
+  }, [weekId])
+
+  useEffect(() => {
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
       dispatch(getMyTaskList())
       dispatch(getMyQuizList())
@@ -113,17 +117,14 @@ export default function DayContent({ weekId, bootcampId }) {
       <Card.Body>
         {dayList.length > 0 ? (
           dayList.map((day, index) => (
-            <div>
-              <div className="d-flex mt-3 p-2" style={{backgroundColor: '#F0F5FB'}}>
-               {/*  <span className="sub-title text-dark">Day {index + 1}</span> */}
-               
-              </div>
+            <div className="course-content">
+              
               <button
                 onClick={() => {
                   setShow(day._id)
                   dispatch(getDayDetails(weekId, day._id))
                 }}
-                className="lightbox-image play-icon m-3"
+                className="lightbox-image play-icon ml-3 mb-4"
               >
                 <span
                   className="fa fa-play"
@@ -133,21 +134,18 @@ export default function DayContent({ weekId, bootcampId }) {
                 <Link
                   to={`/course-content/${bootcampId}`}
                   style={{
-                    backgroundColor: show === day._id ? '#ffbfbe' : ''
+                    backgroundColor: show === day._id ? '#ffbfbe' : '', padding: '2px'
                   }}
                 >
-                  <span className="sub-text">
-                    {day.name}
-                   
-                  </span>
+                  <span className="sub-text pt-5">{day.name}</span>
                 </Link>
               </button>
 
               {filterWeeklyQuiz(day._id).length > 0 &&
                 filterWeeklyQuiz(day._id).map((quiz) => (
                   <div className="pb-3">
-                    <span className="mr-3">
-                      <img width="10%" src="/images/resource/quiz.png" />
+                    <span className="mr-3 ml-1">
+                      <img width="30" src="/images/resource/quiz.png" />
                     </span>
 
                     {userDetail.user_type === 'StudentUser' && (
@@ -175,11 +173,9 @@ export default function DayContent({ weekId, bootcampId }) {
 
               {filterWeeklyTask(day._id).length > 0 &&
                 filterWeeklyTask(day._id).map((task) => (
-                  <div
-                  className="pb-3"
-                  >
-                     <span className="mr-3">
-                      <img width="10%" src="/images/resource/assignment.png" />
+                  <div className="pb-3">
+                    <span className="mr-3 ml-1">
+                      <img width="30" src="/images/resource/assignment.png" />
                     </span>
 
                     <Link

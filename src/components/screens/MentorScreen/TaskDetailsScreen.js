@@ -174,7 +174,7 @@ Failed
 
   return (
     <div className="py-5">
-      <h1>Task Details</h1>
+      <div className="title">Task Details</div>
       {taskLoading ? (
         <Loader />
       ) : TaskError ? (
@@ -183,7 +183,7 @@ Failed
         <div className="p-3 container-fluid ">
           <div className="row">
             <div className="col-sm ">
-              <h3 className="mb-2">{task.task.projectName}</h3>
+              <div className="sub-title mb-2">{task.task.projectName}</div>
               <span className="mb-1 d-block">
                 {getDates(task.task.createdAt)}
               </span>

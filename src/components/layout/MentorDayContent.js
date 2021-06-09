@@ -9,7 +9,6 @@ import { getMyTaskList, getTaskList } from '../../redux/actions/taskAction'
 import { getMyQuizList, getQuizList } from '../../redux/actions/quizAction'
 import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
 
-
 export default function DayContent({ weekId, bootcampId }) {
   const dispatch = useDispatch()
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -96,6 +95,10 @@ export default function DayContent({ weekId, bootcampId }) {
   /****************useEffect***************** */
 
   useEffect(() => {
+    dispatch(getDayList(weekId))
+  }, [weekId, UpdateSuccess])
+
+  useEffect(() => {
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
       dispatch(getMyTaskList())
       dispatch(getMyQuizList())
@@ -136,7 +139,6 @@ export default function DayContent({ weekId, bootcampId }) {
     )
   }
 
-
   return (
     <>
       <Card.Body>
@@ -145,27 +147,30 @@ export default function DayContent({ weekId, bootcampId }) {
             <div>
               <div className="d-flex bg-warning text-white mt-3 p-2">
                 <span className="sub-title text-white">Day {index + 1}</span>
+                <label className="switch ml-5">
+                  <input
+                    type="checkbox"
+                    checked={day.show}
+                    onChange={() => toggleDayShow(day)}
+                  />
+                  <span className="slider round"></span>
+                </label>
                 {userDetail.user_type !== 'StudentUser' && (
                   <span>
-                    <Link to={`/mentor-add-quiz/${bootcampId}/${day._id}`}>
-                      <i class="fas fa-plus-square text-white pl-5">Quiz</i>
+                    <Link
+                      to={`/mentor-add-quiz/${bootcampId}/${day._id}`}
+                      className="sub-title "
+                    >
+                      <i class="fas fa-plus-square text-white pl-5 ">Quiz</i>
                     </Link>
                     <Link
                       to={`/mentor-upload-assignment/${bootcampId}/${day._id}`}
+                      className="sub-title "
                     >
                       <i class="fas fa-file-upload text-white pl-5">
                         Assignment
                       </i>
                     </Link>
-
-                    <label className="switch ml-5">
-                      <input
-                        type="checkbox"
-                        checked={day.show}
-                        onChange={() => toggleDayShow(day)}
-                      />
-                      <span className="slider round"></span>
-                    </label>
                   </span>
                 )}
               </div>

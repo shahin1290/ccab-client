@@ -69,19 +69,19 @@ export default function CourseContentScreen({ match }) {
               {/* Accordian Column */}
               <div className="accordian-column col-lg-3 col-md-12 col-sm-12">
                 <div className="inner-column sticky-top">
-                  <div className="title p-2">Table of contents</div>
+                  <div className="title2 p-2">Course Content</div>
                   {/* Accordion Box */}
                   <Accordion
                     style={{ height: '500px', overflowY: 'scroll' }}
                     className="accordion-box style-two"
+                    defaultActiveKey="0"
                   >
                     {weekList.map((week, index) => (
-                      <Card className="accordion block">
+                      <Card className="accordion block" key={week._id}>
                         <Accordion.Toggle
                           as={Card.Header}
                           eventKey={`${index}`}
                           className="acc-btn  bg-warning text-dark"
-                          onClick={() => dispatch(getDayList(week._id))}
                         >
                           {week.name}
                         </Accordion.Toggle>
@@ -98,7 +98,7 @@ export default function CourseContentScreen({ match }) {
               </div>
               {/* Content Column */}
               <div className="content-column col-lg-9 col-md-12 col-sm-12">
-                <div className="title mb-3">{day.name}</div>
+                <div className="title mb-3 pt-3">{day.name}</div>
                 {day.name ? (
                   <div className="inner-column">
                     <div className="course-video-box">
@@ -132,9 +132,7 @@ export default function CourseContentScreen({ match }) {
                                 <div className="tabs-content p-3">
                                   <div className="content">
                                     {findElementText('title', section.name) && (
-                                      <div
-                                        className="title pb-2"
-                                      >
+                                      <div className="title pb-2">
                                         {findElementText('title', section.name)}
                                       </div>
                                     )}
@@ -143,12 +141,13 @@ export default function CourseContentScreen({ match }) {
                                       'description',
                                       section.name
                                     ) && (
-                                      <p className="sub-text">
+                                      <div className="sub-text  mb-3"  style={{whiteSpace: 'pre-wrap'}}>
                                         {findElementText(
                                           'description',
                                           section.name
                                         )}
-                                      </p>
+                                        
+                                      </div>
                                     )}
 
                                     {findElementText('image', section.name) && (
@@ -158,26 +157,30 @@ export default function CourseContentScreen({ match }) {
                                           section.name
                                         )}`}
                                         alt="img"
+                                        className="img-fluid row"
+                                        style={{
+                                          filter:
+                                            'drop-shadow(0 0 0.75rem #B8B8B8)',
+                                          maxWidth: '90%',
+                                          margin: ' auto'
+                                        }}
                                       />
                                     )}
 
                                     {findElementText('code', section.name) && (
-                                      <div
-                                        className="sub-text lessontext mb-5"
-                                        style={{
-                                          width: '80%',
-                                          margin: '20px auto',
-                                          fontSize: '16px',
-                                          padding: '10px',
-                                          backgroundColor: '#F5F5F5'
-                                        }}
-                                      >
-                                        {findElementText('code', section.name)}
+                                      <div className="mt-5 mb-5">
+                                      <pre>
+                                        <code>
+                                          {findElementText(
+                                            'code',
+                                            section.name
+                                          )}
+                                        </code>
+                                      </pre>
                                       </div>
                                     )}
                                   </div>
                                 </div>
-                               
                               ))}
                           </Tab>
                         </Tabs>
