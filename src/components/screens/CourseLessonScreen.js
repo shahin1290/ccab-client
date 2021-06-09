@@ -95,18 +95,10 @@ export default function CourseContentScreen({ match }) {
                       {/* Intro Tabs*/}
                       <div className="intro-tabs tabs-box">
                         {/*Tab Btns*/}
-                        <Tabs
-                          defaultActiveKey={
-                            day.name && day.sections && day.sections[0].name
-                          }
-                        >
-                          {day.name &&
-                            day.sections.map((section) => (
-                              <Tab
-                                eventKey={section.name}
-                                title={section.name}
-                                style={{ fontSize: '30px' }}
-                              >
+                        <Tabs defaultActiveKey="Content">
+                          <Tab eventKey="Content" title="Content">
+                            {day.name &&
+                              day.sections.map((section) => (
                                 <div
                                   className="tabs-content"
                                   style={{ padding: '0 15px' }}
@@ -125,7 +117,7 @@ export default function CourseContentScreen({ match }) {
                                       'description',
                                       section.name
                                     ) && (
-                                      <div className="sub-text lessontext mb-5">
+                                      <div className="sub-text mb-5">
                                         {findElementText(
                                           'description',
                                           section.name
@@ -159,8 +151,8 @@ export default function CourseContentScreen({ match }) {
                                     )}
                                   </div>
                                 </div>
-                              </Tab>
-                            ))}
+                              ))}
+                          </Tab>
                         </Tabs>
                       </div>
                     </div>

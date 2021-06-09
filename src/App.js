@@ -25,6 +25,7 @@ import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
 import UpdateMentorCourse from './components/screens/MentorScreen/UpdateMentorCourse'
+import EditMentorSection from './components/screens/MentorScreen/EditMentorSection'
 import AddCourseSection from './components/screens/MentorScreen/AddCourseSection'
 import AddMentorQuiz from './components/screens/MentorScreen/AddMentorQuiz'
 import EditMentorQuiz from './components/screens/MentorScreen/EditMentorQuiz'
@@ -113,6 +114,12 @@ function App() {
           exact
           path="/mentor-course-update/:weekId/:id"
           component={UpdateMentorCourse}
+        ></MentorRoute>
+
+        <MentorRoute
+          exact
+          path="/mentor-section-edit/:weekId/:id"
+          component={EditMentorSection}
         ></MentorRoute>
 
         <MentorRoute
@@ -237,8 +244,6 @@ function App() {
           path="/checkout-klarna/:bootcampId"
           component={CheckoutKlarna}
         ></StudentRoute>
-
-       
 
         <StudentRoute
           exact

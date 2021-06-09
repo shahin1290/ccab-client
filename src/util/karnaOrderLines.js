@@ -38,6 +38,9 @@ export const getKarnaOrderLines = async (course) => {
   )
   let amount = price * 100
 
+  console.log(amount);
+  
+
   const data = {
     purchase_country: response.data.country,
     purchase_currency: response.data.currency,

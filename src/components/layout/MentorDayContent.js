@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Message from './Message'
 import { getDayList } from '../../redux/actions/dayAction'
-import { getDayDetails } from '../../redux/actions/dayAction'
+import { getDayDetails, updateDay } from '../../redux/actions/dayAction'
 import { Card, Button } from 'react-bootstrap'
 import { getMyTaskList, getTaskList } from '../../redux/actions/taskAction'
 import { getMyQuizList, getQuizList } from '../../redux/actions/quizAction'
@@ -18,6 +18,13 @@ export default function DayContent({ weekId, bootcampId }) {
 
   //daylist
   const { dayList, loading, error } = useSelector((state) => state.dayList)
+
+  //day update
+  const {
+    loading: updateLoading,
+    error: updateError,
+    success: UpdateSuccess
+  } = useSelector((state) => state.dayUpdate)
 
   //get task list for students
   const taskListMy = useSelector((state) => state.taskListMy)
@@ -103,7 +110,23 @@ export default function DayContent({ weekId, bootcampId }) {
       dispatch(getTaskList(bootcampId))
       dispatch(getQuizList(bootcampId))
     }
-  }, [dispatch, userDetail, weekId, bootcampId])
+  }, [dispatch, userDetail, weekId, bootcampId, UpdateSuccess])
+
+    //handle delete  section (for mentor)
+    const deleteSection = (day, sectionName) => {
+      const updateSection =
+        day &&
+        day.sections.filter((sec) => sec.name !== sectionName)
+
+      const dayData = {
+        name: day.name,
+        video_path: day.video_path,
+        sections: updateSection,
+        action: 'delete'
+      }
+      dispatch(updateDay(weekId, day._id, dayData))
+    }
+  
 
   return (
     <>
@@ -147,15 +170,21 @@ export default function DayContent({ weekId, bootcampId }) {
                       backgroundColor: show === day._id ? '#ffbfbe' : ''
                     }}
                   >
-                    <span className="">
-                      {day.name}
-                      <Link to={`/add-course-section/${weekId}/${day._id}`}>
-                        <i className="fas fa-plus-square pl-5">Add Section</i>
-                      </Link>
-                    </span>
+                    <span className="">{day.name}</span>
+                    <Link
+                            to={`/mentor-course-update/${weekId}/${day._id}`}
+                            className="pl-3"
+                          >
+                            <i class="fas fa-edit"></i>
+                          </Link>
                   </Link>
                 </button>
-                <div className="sub-title ml-5">Sections</div>
+                <div className="sub-title ml-5">
+                  Sections{' '}
+                  <Link to={`/add-course-section/${weekId}/${day._id}`}>
+                    <i className="fas fa-plus-square pl-5">Add Section</i>
+                  </Link>
+                </div>
                 {day.name && day.sections.length ? (
                   day.sections.map((section, index) => (
                     <div className="sub-text ml-5 pl-5">
@@ -163,23 +192,36 @@ export default function DayContent({ weekId, bootcampId }) {
                       {userDetail.user_type !== 'StudentUser' && (
                         <span className="ml-3">
                           <Link
-                            to={`/mentor-course-update/${weekId}/${day._id}`}
+                            to={`/mentor-section-edit/${weekId}/${day._id}`}
+                            onClick={() =>
+                              localStorage.setItem(
+                                'section',
+                                JSON.stringify(section.name)
+                              )
+                            }
                             className="pl-3"
                           >
                             <i class="fas fa-edit"></i>
                           </Link>
-                          <Link
-                            to={`/mentor-upload-assignment/${bootcampId}/${day._id}`}
+                          <a
+                             onClick={() => {
+                              if (
+                                window.confirm(
+                                  'Are you sure you wish to delete this item?'
+                                )
+                              )
+                                deleteSection(day, section.name)
+                            }}
                             className="pl-3"
                           >
                             <i class="fas fa-trash-alt text-danger"></i>
-                          </Link>
+                          </a>
                         </span>
                       )}
                     </div>
                   ))
                 ) : (
-                  <div className="ml-5 pl-5">No Section is added</div>
+                  <div className="ml-5 p-3">No Section is added</div>
                 )}
 
                 {filterWeeklyQuiz(day._id).length > 0 &&

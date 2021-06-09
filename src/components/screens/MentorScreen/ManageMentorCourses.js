@@ -11,6 +11,7 @@ export default function ManageMentorScreen({ match }) {
 
   const id = match.params.id
   const { weekList, loading, error } = useSelector((state) => state.weekList)
+  
 
   useEffect(() => {
     dispatch(getWeekList(id))

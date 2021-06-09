@@ -49,7 +49,7 @@ export default function Header() {
         style={{
           zIndex: '1030',
           backgroundColor: '#fff',
-          boxshadow: '0px 0px 5px rgba(0,0,0,.6)'
+          boxShadow: '0px 0px 5px rgba(0,0,0,.6)'
         }}
       >
         <Navbar.Brand href="/">
