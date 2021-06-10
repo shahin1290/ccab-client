@@ -11,6 +11,7 @@ import { getOrder } from '../../redux/actions/orderAction'
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
 import ModalVideo from 'react-modal-video'
+import { getPriceConversion } from '../../util/getPriceConversion'
 
 export default function CourseDetailScreen({ match }) {
   const ID = match.params.id
@@ -34,16 +35,15 @@ export default function CourseDetailScreen({ match }) {
   const [countryLang, setcountryLang] = useState('')
   const [showKlarnaImg, setShowKlarmaImg] = useState(false)
 
+  const [amount, setAmount] = useState(null)
+  const [currency, setCurrency] = useState('')
+
   useEffect(() => {
     dispatch(getCourseDetails(ID))
     getGeoInfo()
     // get order for this course
     dispatch(getOrder(ID))
-
-    console.log(course)
   }, [dispatch, ID])
-
-  console.log(order)
 
   // get the user ip info
   const getGeoInfo = () => {
@@ -59,6 +59,17 @@ export default function CourseDetailScreen({ match }) {
         console.log(error)
       })
   }
+
+  //price conversion function
+  const priceConversion = async () => {
+    if (course) {
+      const conversion = await getPriceConversion(course)
+      setAmount(conversion.amount)
+      setCurrency(conversion.currency)
+    }
+  }
+
+  priceConversion()
 
   //console.log(countryName);
   // validate the user country
@@ -214,7 +225,7 @@ export default function CourseDetailScreen({ match }) {
                         className="intro-video"
                         style={{
                           backgroundImage:
-                            'url(http://localhost:5001/uploads/Bootcamp/' +
+                            'url(https://server.ccab.tech/uploads/Bootcamp/' +
                             course.img_path +
                             ')'
                         }}
@@ -254,14 +265,16 @@ export default function CourseDetailScreen({ match }) {
                         </a>
                       ) : (
                         <>
-                          <div className="price">
-                            {' '}
-                            {course.price > 0
-                              ? '$' +
-                                course.price
-                                  .toFixed(2)
-                                  .replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                              : 'Free Course '}
+                          <div className="price mb-3">
+                            {amount ? (
+                              currency && amount && course.price > 0 ? (
+                                `${currency}  ${amount}`
+                              ) : (
+                                'Free Course '
+                              )
+                            ) : (
+                              <Loader />
+                            )}
                           </div>
                           <a
                             href={

@@ -20,25 +20,26 @@ export const getKarnaOrderLines = async (course) => {
     IT: 'it-IT'
   }
 
-  const config = {
+
+
+  const options = {
+    method: 'GET',
+    url: 'https://currency-exchange.p.rapidapi.com/exchange',
+    params: { to: response.data.currency, from: 'USD', q: '1' },
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': true
+      'x-rapidapi-key': '37ca921f40msh20f90334228d804p14c436jsn8fdd5a938611',
+      'x-rapidapi-host': 'currency-exchange.p.rapidapi.com'
     }
   }
-  const resp = await axios.get(
-    `https://free.currconv.com/api/v7/convert?q=USD_${response.data.currency}&compact=ultra&apiKey=077ab08d433eb54aab69`,
-    {},
-    config
-  )
 
-  //console.log(Math.round(resp.data['USD_' + currency] * course.price))
-  let price = Math.round(
-    resp.data[`USD_${response.data.currency}`] * course.price
-  )
+  const resp = await axios.request(options)
+
+
+  let price = Math.round(resp.data * course.price)
+
+ 
   let amount = price * 100
 
-  console.log(amount);
   
 
   const data = {

@@ -22,14 +22,17 @@ import axios from 'axios'
 import Message from '../layout/Message'
 import KlarnaPayment from '../layout/KlarnaPayment'
 import { getKarnaOrderLines } from '../../util/karnaOrderLines'
+import { getPriceConversion } from '../../util/getPriceConversion'
+
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
-//console.log(process.env.REACT_APP_STRIPE_KEY);
 
 const CheckoutForm = ({ match, history }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
+  const [amount, setAmount] = useState(null)
+  const [currency, setCurrency] = useState('')
 
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
@@ -40,6 +43,17 @@ const CheckoutForm = ({ match, history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
 
+  //price conversion function
+  const priceConversion = async () => {
+    if (course) {
+      const conversion = await getPriceConversion(course)
+      setAmount(conversion.amount)
+      setCurrency(conversion.currency)
+    }
+  }
+
+  priceConversion()
+
   const {
     order,
     loading: CreateOrderLoading,
@@ -47,7 +61,6 @@ const CheckoutForm = ({ match, history }) => {
   } = useSelector((state) => state.KlarnaOrderCreate)
 
   const [html, setHTML] = useState('')
-  const [currency, setCurrency] = useState('')
   const [lang, setLang] = useState('')
 
   //address details
@@ -65,7 +78,7 @@ const CheckoutForm = ({ match, history }) => {
 
   useEffect(() => {
     if (sessionSuccess) {
-      const Klarna = window.Klarna;
+      const Klarna = window.Klarna
       Klarna.Payments.init({
         client_token: session.client_token
       })
@@ -128,11 +141,11 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       const { data: clientSecret } = await axios.post(
-        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
+        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
-          currency: 'usd',
-          amount: course.price
+          currency,
+          amount: amount * 100
         },
         config
       )
@@ -187,7 +200,8 @@ const CheckoutForm = ({ match, history }) => {
         dispatch(
           createOrder(ID, {
             token: paymentIntent.id,
-            amount: paymentIntent.amount
+            amount: paymentIntent.amount,
+            currency
           })
         )
       }
@@ -197,42 +211,6 @@ const CheckoutForm = ({ match, history }) => {
   }
 
   const _handelcreateKlarnaOrder = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true
-      }
-    }
-    const resp = await axios.get(
-      'https://free.currconv.com/api/v7/convert?q=USD_SEK&compact=ultra&apiKey=077ab08d433eb54aab69',
-      {},
-      config
-    )
-
-    console.log(Math.round(resp.data['USD_' + currency] * course.price))
-    let price = Math.round(resp.data['USD_SEK'] * course.price)
-    let amount = price * 100
-
-    const data = {
-      purchase_country: 'SE',
-      purchase_currency: 'SEK',
-      locale: 'sv-SE',
-      order_amount: 100,
-      order_lines: [
-        {
-          name: 'course',
-          quantity: 1,
-          quantity_unit: 'pcs',
-          unit_price: 100,
-          total_amount: 100
-        }
-      ],
-
-      merchant_urls: {
-        terms: process.env.REACT_APP_HOST + '/privacy',
-        confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID
-      }
-    }
     dispatch(
       createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID)
     )
@@ -480,12 +458,24 @@ const CheckoutForm = ({ match, history }) => {
                     <ul>
                       <li className="clearfix mb-3">
                         Basic Plan{' '}
-                        <span className="pull-right">${course.price}</span>
+                        <span className="pull-right">
+                          {amount ? (
+                            currency && amount && `${currency}  ${amount}`
+                          ) : (
+                            <Loader />
+                          )}
+                        </span>
                       </li>
 
                       <li className="clearfix">
                         <strong>Total</strong>{' '}
-                        <span className="pull-right">${course.price}</span>
+                        <span className="pull-right">
+                          {amount ? (
+                            currency && amount && `${currency}  ${amount}`
+                          ) : (
+                            <Loader />
+                          )}
+                        </span>
                       </li>
                     </ul>
                   </div>

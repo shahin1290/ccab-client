@@ -141,18 +141,17 @@ export default function CourseContentScreen({ match }) {
                                       'description',
                                       section.name
                                     ) && (
-                                      <div className="sub-text  mb-3"  style={{whiteSpace: 'pre-wrap'}}>
+                                      <div className="sub-text  mb-3">
                                         {findElementText(
                                           'description',
                                           section.name
                                         )}
-                                        
                                       </div>
                                     )}
 
                                     {findElementText('image', section.name) && (
                                       <img
-                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
+                                        src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
                                           'image',
                                           section.name
                                         )}`}
@@ -169,14 +168,14 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('code', section.name) && (
                                       <div className="mt-5 mb-5">
-                                      <pre>
-                                        <code>
-                                          {findElementText(
-                                            'code',
-                                            section.name
-                                          )}
-                                        </code>
-                                      </pre>
+                                        <pre>
+                                          <code>
+                                            {findElementText(
+                                              'code',
+                                              section.name
+                                            )}
+                                          </code>
+                                        </pre>
                                       </div>
                                     )}
                                   </div>
