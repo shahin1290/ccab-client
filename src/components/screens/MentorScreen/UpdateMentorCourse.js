@@ -28,27 +28,10 @@ export default function UpdateMentorCourse({ match }) {
     dispatch(getDayDetails(weekId, id))
   }, [dispatch, weekId, id])
 
-  const findElementText = (el) => {
-    if (day.name) {
-      const sourceCode = day.source_code
 
-      if (sourceCode.length > 0) {
-        const elementType = sourceCode.find((a) => a.element_type === el)
-        if (elementType) {
-          return elementType.element_text
-        } else {
-          return null
-        }
-      }
-    }
-    return ''
-  }
   useEffect(() => {
     setName(day.name)
-    setDescription(findElementText('description'))
-    setTitle(findElementText('title'))
-    setCode(findElementText('code'))
-    setImage(findElementText('image'))
+  
     setVideo(day.video_path)
   }, [weekId, id, day])
 
@@ -63,21 +46,15 @@ export default function UpdateMentorCourse({ match }) {
 
   //form submission
   const [name, setName] = useState('')
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [code, setCode] = useState('')
-  const [image, setImage] = useState('')
+
   const [video, setVideo] = useState('')
 
   const submitHandler = async (e) => {
     e.preventDefault()
     const data = new FormData()
     data.append('video_path', video)
-    data.append('element_text', image)
     data.append('name', name)
-    data.append('title', title)
-    data.append('description', description)
-    data.append('code', code)
+  
 
     dispatch(updateDay(weekId, id, data))
   }
@@ -106,7 +83,7 @@ export default function UpdateMentorCourse({ match }) {
             <div className="row clearfix">
               <form onSubmit={submitHandler} style={{ display: 'flex' }}>
                 {/* Left Column */}
-                <div className="left-column col-lg-8 col-md-12 col-sm-12">
+                <div className="left-column col-lg-12 col-md-12 col-sm-12">
                   <div className="inner-column">
                     {/* Edit Course Form */}
                     <div className="edit-course-form">
@@ -122,55 +99,12 @@ export default function UpdateMentorCourse({ match }) {
                         />
                       </div>
 
-                      <div className="sub-title pb-2">Add Section </div>
-
-                      <div className="form-group">
-                        <label>Title</label>
-                        <input
-                          type="text"
-                          name="title"
-                          value={title}
-                          placeholder="Title"
-                          onChange={(e) => setTitle(e.target.value)}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Description</label>
-                        <textarea
-                          type="text"
-                          name="description"
-                          value={description}
-                          placeholder="Description"
-                          onChange={(e) => setDescription(e.target.value)}
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label>Code</label>
-
-                        <textarea
-                          type="text"
-                          name="code"
-                          value={code}
-                          placeholder="Code"
-                          onChange={(e) => setCode(e.target.value)}
-                        />
-                      </div>
-
-                      <div>
-                        <label>Image</label>
-                        <input
-                          type="file"
-                          name="image"
-                          onChange={(e) => setImage(e.target.files[0])}
-                        />
-                        <span className="valid">Upload Image here</span>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="right-column col-lg-4 col-md-12 col-sm-12">
+                <div className="right-column col-lg-8 col-md-12 col-sm-12">
                   <div className="inner-column">
                     <div className="sub-title pb-2">Video</div>
                     {/* Video Box */}

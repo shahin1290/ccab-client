@@ -215,7 +215,11 @@ export const updateCourse = (course, id) => async (dispatch, getState) => {
     }
 
     //console.log(course);
-    await axios.put('https://server.ccab.tech/api/bootcamp/' + id, course, config)
+    await axios.put(
+      'https://server.ccab.tech/api/bootcamp/' + id,
+      course,
+      config
+    )
 
     dispatch({
       type: COURSE_UPDATE_SUCCESS

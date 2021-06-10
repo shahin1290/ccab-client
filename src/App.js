@@ -9,8 +9,8 @@ import QuizScreen from './components/screens/QuizScreen'
 import CourseContentScreen from './components/screens/CourseContentScreen'
 import QuizAnswerScreen from './components/screens/QuizAnswerScreen'
 import Checkout from './components/screens/Checkout'
-import CheckoutKlarna from './components/screens/CheckoutKlarna';
-import ConfirmationKlarna from './components/screens/ConfirmationKlarna';
+import CheckoutKlarna from './components/screens/CheckoutKlarna'
+import ConfirmationKlarna from './components/screens/ConfirmationKlarna'
 
 import ErrorScreen from './components/screens/ErrorScreen'
 
@@ -25,6 +25,8 @@ import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
 import UpdateMentorCourse from './components/screens/MentorScreen/UpdateMentorCourse'
+import EditMentorSection from './components/screens/MentorScreen/EditMentorSection'
+import AddCourseSection from './components/screens/MentorScreen/AddCourseSection'
 import AddMentorQuiz from './components/screens/MentorScreen/AddMentorQuiz'
 import EditMentorQuiz from './components/screens/MentorScreen/EditMentorQuiz'
 import MentorUserListScreen from './components/screens/MentorScreen/MentorUserListScreen'
@@ -116,7 +118,19 @@ function App() {
 
         <MentorRoute
           exact
-          path="/mentor-add-quiz/:bootcampId/:weekId/:id?"
+          path="/mentor-section-edit/:weekId/:id"
+          component={EditMentorSection}
+        ></MentorRoute>
+
+        <MentorRoute
+          exact
+          path="/add-course-section/:weekId/:id"
+          component={AddCourseSection}
+        ></MentorRoute>
+
+        <MentorRoute
+          exact
+          path="/mentor-add-quiz/:bootcampId/:dayId/:id?"
           component={AddMentorQuiz}
         ></MentorRoute>
 
@@ -134,7 +148,7 @@ function App() {
 
         <MentorRoute
           exact
-          path="/mentor-upload-assignment/:bootcampId/:weekId"
+          path="/mentor-upload-assignment/:bootcampId/:dayId"
           component={TaskUploadScreen}
         ></MentorRoute>
 
@@ -225,26 +239,20 @@ function App() {
           component={Checkout}
         ></StudentRoute>
 
-      <StudentRoute
+        <StudentRoute
           exact
           path="/checkout-klarna/:bootcampId"
           component={CheckoutKlarna}
         ></StudentRoute>
-        
+
         <StudentRoute
           exact
           path="/confirmation-klarna/:bootcampId"
           component={ConfirmationKlarna}
         ></StudentRoute>
 
-
-
         {/* default Routes for guests  */}
         <Route component={DefaultRoutes}></Route>
-
-
-
-
       </Switch>
     </div>
   )

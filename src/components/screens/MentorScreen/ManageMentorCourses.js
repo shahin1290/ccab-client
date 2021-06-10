@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getWeekList } from '../../../redux/actions/weekAction'
-import DayContent from '../../layout/DayContent'
+import MentorDayContent from '../../layout/MentorDayContent'
 import { Card, Container, Accordion } from 'react-bootstrap'
 import { getDayList } from '../../../redux/actions/dayAction'
 
@@ -24,9 +24,9 @@ export default function ManageMentorScreen({ match }) {
       {/* Intro Section */}
       <Container style={{ marginBottom: '200px' }}>
         {/* Accordian Column */}
-        <div className="title mb-4">Table of contents</div>
+        <div className="title mb-4">Manage Course Content</div>
         {/* Accordion Box */}
-        <Accordion className="accordion-box style-two">
+        <Accordion className="accordion-box style-two" defaultActiveKey="0">
           {weekList.map((week, index) => (
             <Card className="accordion block">
               <Accordion.Toggle
@@ -34,27 +34,14 @@ export default function ManageMentorScreen({ match }) {
                 eventKey={`${index}`}
                 className="acc-btn"
                 style={{ display: 'flex', justifyContent: 'space-between' }}
-                onClick={() => dispatch(getDayList(week._id))}
               >
                 <div className="pr-5">{week.name}</div>
-
-                <div >
-                  <Link
-                    to={`/mentor-add-quiz/${week.bootcamp}/${week._id}`}
-                    className="btn btn-info bordered"
-                  >
-                    Add quiz
-                  </Link>
-                  <Link
-                    to={`/mentor-upload-assignment/${week.bootcamp}/${week._id}`}
-                    className="btn btn-danger bordered"
-                  >
-                    Upload Assignment
-                  </Link>
-                </div>
               </Accordion.Toggle>
               <Accordion.Collapse eventKey={`${index}`}>
-                <DayContent weekId={week._id} bootcampId={week.bootcamp} />
+                <MentorDayContent
+                  weekId={week._id}
+                  bootcampId={week.bootcamp}
+                />
               </Accordion.Collapse>
             </Card>
           ))}

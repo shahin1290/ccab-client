@@ -29,14 +29,7 @@ export default function Footer() {
                           <img src={logo} width="30%" />
                         </a>
                       </div>
-                      <div className="text">
-                        <img
-                          width="20%"
-                          className="pr-2"
-                          src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
-                        />
-                        <img width="75%" src="https://cdn.jotfor.ms/images/credit-card-logo.png" />
-                      </div>
+                     
 
                       <div className="social-box">
                         <a

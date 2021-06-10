@@ -79,7 +79,7 @@ export default function TaskDetailsScreen({ match }) {
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'http://localhost:5001/api/tasks/' + task.task._id + '/download',
+      'https://server.ccab.tech/api/tasks/' + task.task._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -89,7 +89,7 @@ export default function TaskDetailsScreen({ match }) {
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
     const res = await fetch(
-      'http://localhost:5001/api/answers/' + answer._id + '/download',
+      'https://server.ccab.tech/api/answers/' + answer._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -174,7 +174,7 @@ Failed
 
   return (
     <div className="py-5">
-      <h1>Task Details</h1>
+      <div className="title">Task Details</div>
       {taskLoading ? (
         <Loader />
       ) : TaskError ? (
@@ -183,7 +183,7 @@ Failed
         <div className="p-3 container-fluid ">
           <div className="row">
             <div className="col-sm ">
-              <h3 className="mb-2">{task.task.projectName}</h3>
+              <div className="sub-title mb-2">{task.task.projectName}</div>
               <span className="mb-1 d-block">
                 {getDates(task.task.createdAt)}
               </span>

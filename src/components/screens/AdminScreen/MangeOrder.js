@@ -29,12 +29,7 @@ export default function MangeOrder({ match }) {
   /************************************************************** */
 
   /************* Functions *************/
-  // tooltip function
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Publish
-    </Tooltip>
-  )
+ 
 
   // get date format
   const getDate = (date) => {
@@ -77,18 +72,7 @@ export default function MangeOrder({ match }) {
     console.log('Verified : ', getVerifiedOrder())
   }, [orderList])
 
-  /*******************  State ********************* */
-  /* to show delete course model */
-  const [show, setShow] = useState(false)
 
-  /* to show add course model */
-  const [showAdd, setShowAdd] = useState(false)
-
-  const [weeks, setWeeks] = useState('')
-  const [AddnewCourseErr, setAddnewCourseErr] = useState('')
-  // item id
-  const [DeletedCourse, setDeletedCourse] = useState('')
-  //console.log(DeletedCourse);
 
   /************************************************** */
 
@@ -207,7 +191,7 @@ export default function MangeOrder({ match }) {
                                   {order.orderStatus === 'Verified' ? (
                                     <button
                                       onClick={() => {
-                                        dispatch(captureOrder(order.course._id))
+                                        dispatch(captureOrder(order.course._id, order.orderBy))
                                         dispatch(getAllOrders())
                                       }}
                                       className="btn btn-primary btn-sm bg-success rounded-pill"

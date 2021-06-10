@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { createOrder, createKlarnaOrder } from '../../redux/actions/orderAction'
 import Loader from '../layout/Loader'
 import axios from 'axios'
-import parse from 'html-react-parser'
 
 const CheckoutKlarna = ({ match }) => {
   const ID = match.params.bootcampId
@@ -22,6 +21,7 @@ const CheckoutKlarna = ({ match }) => {
     success,
     error: CreateOrderError
   } = useSelector((state) => state.KlarnaOrderCreate)
+
   const [html, setHTML] = useState('')
   const [orderId, setOrderId] = useState('')
 
@@ -126,14 +126,13 @@ const CheckoutKlarna = ({ match }) => {
       merchant_urls: {
         terms: process.env.REACT_APP_HOST + '/privacy',
         checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
-        confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
-        push:
-          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
+        confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID
       }
     }
-    dispatch(createKlarnaOrder({ data: data }, ID))
 
     console.log(process.env.REACT_APP_HOST)
+
+    dispatch(createKlarnaOrder({ data: data }, ID))
   }
 
   const submitHandler = async (e) => {

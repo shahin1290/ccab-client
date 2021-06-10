@@ -150,7 +150,6 @@ p {
   width: 85px;
   border-radius: 70px;
   padding: 25px;
-  text-align: center;
 }
 
 .box_text {
@@ -9742,7 +9741,6 @@ img {
 
 .intro-section-two {
   position: relative;
-  padding: 60px 0px 60px;
   background-color: #f0f5fb;
 }
 

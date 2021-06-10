@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+/* eslint-disable no-undef */
+import React, { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   useStripe,
@@ -9,31 +10,49 @@ import {
   CardCvcElement
 } from '@stripe/react-stripe-js'
 import { useSelector, useDispatch } from 'react-redux'
-import { createOrder, createKlarnaOrder } from '../../redux/actions/orderAction'
+import {
+  createOrder,
+  createKlarnaSession,
+  readKlarnaSession
+} from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
 import Loader from '../layout/Loader'
-import { Tabs, Tab, Card, Form, Col } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../layout/Message'
+import KlarnaPayment from '../layout/KlarnaPayment'
+import { getKarnaOrderLines } from '../../util/karnaOrderLines'
+import { getPriceConversion } from '../../util/getPriceConversion'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
-//console.log(process.env.REACT_APP_STRIPE_KEY);
 
 const CheckoutForm = ({ match, history }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
+  const [amount, setAmount] = useState(null)
+  const [currency, setCurrency] = useState('')
 
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
 
-  const paymentContainerRef = useRef()
   const { course } = useSelector((state) => state.courseDetails)
   const { loading, success, error } = useSelector((state) => state.orderCreate)
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
+
+  //price conversion function
+  const priceConversion = async () => {
+    if (course) {
+      const conversion = await getPriceConversion(course)
+      setAmount(conversion.amount)
+      setCurrency(conversion.currency)
+    }
+  }
+
+  priceConversion()
 
   const {
     order,
@@ -42,7 +61,6 @@ const CheckoutForm = ({ match, history }) => {
   } = useSelector((state) => state.KlarnaOrderCreate)
 
   const [html, setHTML] = useState('')
-  const [currency, setCurrency] = useState('')
   const [lang, setLang] = useState('')
 
   //address details
@@ -51,6 +69,31 @@ const CheckoutForm = ({ match, history }) => {
   const [city, setCity] = useState('')
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
+
+  const [widgetLoaded, setWidgetLoaded] = React.useState(false)
+
+  const { session, success: sessionSuccess } = useSelector(
+    (state) => state.KlarnaSessionCreate
+  )
+
+  useEffect(() => {
+    if (sessionSuccess) {
+      const Klarna = window.Klarna
+      Klarna.Payments.init({
+        client_token: session.client_token
+      })
+
+      Klarna.Payments.load(
+        {
+          container: '#klarna-payments-container',
+          payment_method_category: 'pay_later'
+        },
+        (res) => {
+          setWidgetLoaded(true)
+        }
+      )
+    }
+  }, [sessionSuccess])
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
@@ -61,14 +104,6 @@ const CheckoutForm = ({ match, history }) => {
       history.push(`/courses/${ID}`)
     }
   }, [success])
-
-  useEffect(() => {
-    if (order && order.html_snippet) {
-      setHTML(order.html_snippet)
-
-      getSnippet()
-    }
-  }, [order, html])
 
   const ELEMENT_OPTIONS = {
     style: {
@@ -109,8 +144,8 @@ const CheckoutForm = ({ match, history }) => {
         `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
-          currency: 'usd',
-          amount: course.price * 125
+          currency,
+          amount: amount * 100
         },
         config
       )
@@ -165,7 +200,8 @@ const CheckoutForm = ({ match, history }) => {
         dispatch(
           createOrder(ID, {
             token: paymentIntent.id,
-            amount: paymentIntent.amount / 100
+            amount: paymentIntent.amount,
+            currency
           })
         )
       }
@@ -174,74 +210,10 @@ const CheckoutForm = ({ match, history }) => {
     }
   }
 
-  const getSnippet = () => {
-    var checkoutContainer = paymentContainerRef.current
-
-    checkoutContainer.innerHTML = html
-    //console.log(checkoutContainer.innerHTML);
-    var scriptsTags = checkoutContainer.getElementsByTagName('script')
-    console.log(scriptsTags)
-    for (var i = 0; i < scriptsTags.length; i++) {
-      var parentNode = scriptsTags[i].parentNode
-      var newScriptTag = document.createElement('script')
-      newScriptTag.type = 'text/javascript'
-      newScriptTag.text = scriptsTags[i].text
-      console.log(newScriptTag.text)
-      parentNode.removeChild(scriptsTags[i])
-      parentNode.appendChild(newScriptTag)
-    }
-  }
-
   const _handelcreateKlarnaOrder = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true
-      }
-    }
-    const resp = await axios.get(
-      'https://free.currconv.com/api/v7/convert?q=USD_SEK&compact=ultra&apiKey=077ab08d433eb54aab69',
-      {},
-      config
+    dispatch(
+      createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID)
     )
-
-    console.log(Math.round(resp.data['USD_' + currency] * course.price))
-    let price = Math.round(resp.data['USD_SEK'] * course.price)
-    let amount = price * 100
-    let taxrate = 1000
-    let totalTaxRate = amount - (amount * 10000) / (10000 + taxrate)
-    console.log(Math.round(totalTaxRate))
-    const data = {
-      purchase_country: 'SE',
-      purchase_currency: 'SEK',
-      locale: 'sv-SE',
-      order_amount: amount,
-      order_tax_amount: totalTaxRate,
-      order_lines: [
-        {
-          type: 'Digital',
-          reference: '19-402-USA',
-          name: course.name,
-          quantity: 1,
-          quantity_unit: 'pcs',
-          unit_price: amount,
-          tax_rate: taxrate,
-          total_amount: amount,
-          total_discount_amount: 0,
-          total_tax_amount: totalTaxRate
-        }
-      ],
-      merchant_urls: {
-        terms: process.env.REACT_APP_HOST + '/privacy',
-        checkout: process.env.REACT_APP_HOST + '/checkout-klarna/' + ID,
-        confirmation: process.env.REACT_APP_HOST + '/confirmation-klarna/' + ID,
-        push:
-          'https://server.ccab.tech/api/order/push/' + ID + '/' + userDetail._id
-      }
-    }
-    dispatch(createKlarnaOrder({ data: data }, ID))
-
-    console.log(process.env.REACT_APP_HOST)
   }
 
   return (
@@ -255,11 +227,23 @@ const CheckoutForm = ({ match, history }) => {
               <div className="title">Checkout</div>
               {checkoutError && <Message>{checkoutError}</Message>}{' '}
             </div>
+
             <div className="checkout-section">
               {/* Checkout Form */}
 
               <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                 <div className="title2">Select Payment Method</div>
+                <div className="auto-container mb-5">
+                  <img
+                    width="5%"
+                    className="pr-2"
+                    src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+                  />
+                  <img
+                    width="16%"
+                    src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+                  />
+                </div>
 
                 {loading && <Loader />}
                 {error ? (
@@ -452,14 +436,8 @@ const CheckoutForm = ({ match, history }) => {
                       </div>
                     </form>
                   </Tab>
-                  <Tab eventKey="klarna" title="Klaran">
-                    <div className="container " style={{ padding: '60px 0px' }}>
-                      {CreateOrderLoading && <Loader />}
-
-                      <div ref={paymentContainerRef}></div>
-
-                      <div />
-                    </div>
+                  <Tab eventKey="klarna" title="Klarna">
+                    <KlarnaPayment ID={ID} widgetLoaded={widgetLoaded} />
                   </Tab>
                 </Tabs>
               </div>
@@ -478,20 +456,25 @@ const CheckoutForm = ({ match, history }) => {
                   {/* Order Box */}
                   <div className="order-box bg-white p-2">
                     <ul>
-                      <li className="clearfix">
+                      <li className="clearfix mb-3">
                         Basic Plan{' '}
-                        <span className="pull-right">${course.price}</span>
-                      </li>
-                      <li className="clearfix">
-                        Tax(25% Sweden){' '}
                         <span className="pull-right">
-                          ${course.price * 0.25}
+                          {amount ? (
+                            currency && amount && `${currency}  ${amount}`
+                          ) : (
+                            <Loader />
+                          )}
                         </span>
                       </li>
+
                       <li className="clearfix">
                         <strong>Total</strong>{' '}
                         <span className="pull-right">
-                          ${course.price * 1.25}
+                          {amount ? (
+                            currency && amount && `${currency}  ${amount}`
+                          ) : (
+                            <Loader />
+                          )}
                         </span>
                       </li>
                     </ul>

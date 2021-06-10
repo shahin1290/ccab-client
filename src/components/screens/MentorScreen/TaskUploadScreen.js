@@ -11,7 +11,7 @@ import Loader from '../../layout/Loader'
 import download from 'downloadjs'
 
 export default function TaskUploadScreen({ match }) {
-  const { bootcampId, weekId } = match.params
+  const { bootcampId, dayId } = match.params
   const taskCreate = useSelector((state) => state.taskCreate)
   const { success: createSuccess, task, error: CreateTaskError } = taskCreate
 
@@ -85,7 +85,7 @@ export default function TaskUploadScreen({ match }) {
       form_data.append('AssignmentName', AssignmentName)
       form_data.append('description', description)
 
-      dispatch(createTask(form_data, bootcampId, weekId))
+      dispatch(createTask(form_data, bootcampId, dayId))
 
       //clear the fields
       setFile({})

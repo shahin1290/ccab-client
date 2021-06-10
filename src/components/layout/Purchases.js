@@ -59,7 +59,7 @@ export default function Quizzes() {
                           <td>{order.course && order.course.name}</td>
 
                           <td>{getDate(order.createdAt)}</td>
-                          <td>{order.amount}</td>
+                          <td>{order.amount} ({order.currency})</td>
                           <td>{order.orderStatus}</td>
                         </tr>
                       ))

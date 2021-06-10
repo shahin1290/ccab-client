@@ -218,7 +218,10 @@ export const getUsers = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get('https://server.ccab.tech/api/users/', config)
+    const response = await axios.get(
+      'https://server.ccab.tech/api/users/',
+      config
+    )
     // console.log("response:", response);
     console.log(response.data)
     dispatch({

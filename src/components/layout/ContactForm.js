@@ -49,7 +49,7 @@ const ContactForm = () => {
     }
   }
   return (
-    <div className="p-4" style={{ 'max-height': '800px', overflow: 'auto' }}>
+    <div className="p-4" style={{ height: '75vh', overflow: 'auto' }}>
       <div className="row clearfix">
         {/* Title Box */}
         <div className="styled-form col-lg-4 col-md-12 col-sm-12">
@@ -63,9 +63,8 @@ const ContactForm = () => {
             <img src={logo} width="50px" />
             <div
               style={{
-                'text-shadow': '0 0 1.2px #000',
-                padding: '20px 5px',
-                'font-style': 'italic'
+                textShadow: '0 0 1.2px #000',
+                padding: '20px 5px'
               }}
             >
               Coding for Bettter Life
