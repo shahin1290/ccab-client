@@ -17,7 +17,7 @@ import {
 } from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
 import Loader from '../layout/Loader'
-import { Tabs, Tab } from 'react-bootstrap'
+import { Tabs, Tab, Accordion, Card, Button } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../layout/Message'
 import KlarnaPayment from '../layout/KlarnaPayment'
@@ -72,9 +72,11 @@ const CheckoutForm = ({ match, history }) => {
 
   const [widgetLoaded, setWidgetLoaded] = React.useState(false)
 
-  const { session, success: sessionSuccess } = useSelector(
-    (state) => state.KlarnaSessionCreate
-  )
+  const {
+    session,
+    success: sessionSuccess,
+    loading: sessionLoading
+  } = useSelector((state) => state.KlarnaSessionCreate)
 
   useEffect(() => {
     if (sessionSuccess) {
@@ -82,16 +84,6 @@ const CheckoutForm = ({ match, history }) => {
       Klarna.Payments.init({
         client_token: session.client_token
       })
-
-      Klarna.Payments.load(
-        {
-          container: '#klarna-payments-container',
-          payment_method_category: 'pay_later'
-        },
-        (res) => {
-          setWidgetLoaded(true)
-        }
-      )
     }
   }, [sessionSuccess])
 
@@ -211,10 +203,14 @@ const CheckoutForm = ({ match, history }) => {
   }
 
   const _handelcreateKlarnaOrder = async () => {
+    setWidgetLoaded(true)
     dispatch(
       createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID)
     )
+    setWidgetLoaded(false)
   }
+
+  const [klarnaMethod, setKlarnaMethod] = useState()
 
   return (
     <div className="sidebar-page-container">
@@ -437,7 +433,48 @@ const CheckoutForm = ({ match, history }) => {
                     </form>
                   </Tab>
                   <Tab eventKey="klarna" title="Klarna">
-                    <KlarnaPayment ID={ID} widgetLoaded={widgetLoaded} />
+                    {widgetLoaded && <Loader />}
+                    <div
+                      onChange={(e) => setKlarnaMethod(e.target.value)}
+                      className="p-4"
+                    >
+                      {sessionLoading ? (
+                        <Loader />
+                      ) : (
+                        sessionSuccess &&
+                        session.payment_method_categories.map((method) => (
+                          <div className="m-2 p-2 border border-secondary bg-white text-dark ">
+                            <input
+                              value={method.identifier}
+                              className="form-check-input ml-3"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id={method.identifier}
+                            />
+                            <div className="d-flex justify-content-between">
+                              <label
+                                className="form-check-label ml-5"
+                                for={method.identifier}
+                              >
+                                {method.name}
+                              </label>
+                              <img
+                                className="pl-5"
+                                src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg"
+                              />
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+
+                    {klarnaMethod && (
+                      <KlarnaPayment
+                        ID={ID}
+                        widgetLoaded={widgetLoaded}
+                        method={klarnaMethod}
+                      />
+                    )}
                   </Tab>
                 </Tabs>
               </div>
