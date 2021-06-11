@@ -26,26 +26,8 @@ export default function ManageMentorScreen({ match }) {
         {/* Accordian Column */}
         <div className="title mb-4">Manage Course Content</div>
         {/* Accordion Box */}
-        <Accordion className="accordion-box style-two" defaultActiveKey="0">
-          {weekList.map((week, index) => (
-            <Card className="accordion block">
-              <Accordion.Toggle
-                as={Card.Header}
-                eventKey={`${index}`}
-                className="acc-btn"
-                style={{ display: 'flex', justifyContent: 'space-between' }}
-              >
-                <div className="pr-5">{week.name}</div>
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey={`${index}`}>
-                <MentorDayContent
-                  weekId={week._id}
-                  bootcampId={week.bootcamp}
-                />
-              </Accordion.Collapse>
-            </Card>
-          ))}
-        </Accordion>
+
+        <MentorDayContent bootcampId={id} />
       </Container>
       {/* End intro Courses */}
     </>

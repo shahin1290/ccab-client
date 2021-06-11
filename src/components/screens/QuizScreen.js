@@ -11,7 +11,7 @@ import { Card } from 'react-bootstrap'
 import CountDown from '../layout/CountDown'
 
 export default function QuizScreen({ match, location }) {
-  const { bootcampId, weekId, id } = match.params
+  const { bootcampId, dayId, id } = match.params
   const history = useHistory()
   const dispatch = useDispatch()
   const [inputFields, setInputFields] = useState([])
@@ -72,11 +72,11 @@ export default function QuizScreen({ match, location }) {
 
   useEffect(() => {
     dispatch(getMyQuizAnswerList())
-    dispatch(getQuizDetails(bootcampId, weekId, id))
+    dispatch(getQuizDetails(bootcampId, dayId, id))
     if (answer && answer.success) {
       history.push('/profile')
     }
-  }, [dispatch, bootcampId, weekId, id, answer, history, updateSuccess])
+  }, [dispatch, bootcampId, dayId, id, answer, history, updateSuccess])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -97,7 +97,7 @@ export default function QuizScreen({ match, location }) {
       time: quiz.time,
       question: updateQuizQuestion
     }
-    dispatch(updateQuiz(bootcampId, weekId, id, quizData))
+    dispatch(updateQuiz(bootcampId, dayId, id, quizData))
   }
 
   return (
@@ -125,7 +125,7 @@ export default function QuizScreen({ match, location }) {
                     <Link
                       className="theme-btn btn-style-eight"
                       to={{
-                        pathname: `/mentor-add-quiz/${bootcampId}/${weekId}/${id}`
+                        pathname: `/mentor-add-quiz/${bootcampId}/${dayId}/${id}`
                       }}
                     >
                       <span className="txt">Add Questions</span>
@@ -205,7 +205,7 @@ export default function QuizScreen({ match, location }) {
                               <span>
                                 <Link
                                   to={{
-                                    pathname: `/edit-quiz/${bootcampId}/${weekId}/${id}`
+                                    pathname: `/edit-quiz/${bootcampId}/${dayId}/${id}`
                                   }}
                                   onClick={() =>
                                     localStorage.setItem(

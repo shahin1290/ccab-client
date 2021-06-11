@@ -29,6 +29,8 @@ export default function UpdateMentorCourse({ location, match }) {
     success: addSuccess
   } = useSelector((state) => state.quizCreate)
 
+  console.log(quiz);
+
   const { bootcampId, dayId, id } = match.params
 
   useEffect(() => {

@@ -39,7 +39,6 @@ const KlarnaPayment = ({ ID, widgetLoaded }) => {
     console.log(order);
     if (orderSuccess) {
       console.log(order.redirect_url);
-
       <Redirect to={`/confirmation-klarna/${ID}`} />
       //dispatch(readKlarnaOrder(ID))
     }

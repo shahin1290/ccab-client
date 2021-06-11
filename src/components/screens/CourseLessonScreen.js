@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getWeekList } from '../../redux/actions/weekAction'
 import DayContent from '../layout/DayContent'
 import { Card, Tabs, Tab, Accordion } from 'react-bootstrap'
-import { getDayList } from '../../redux/actions/dayAction'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
 
@@ -12,13 +11,7 @@ export default function CourseContentScreen({ match }) {
   const id = match.params.id
 
   //redux store
-  const { weekList, loading, error } = useSelector((state) => state.weekList)
   const { day } = useSelector((state) => state.dayDetails)
-
-  //use effec
-  useEffect(() => {
-    dispatch(getWeekList(id))
-  }, [dispatch, id])
 
   //functions
   const findElementText = (el, sectionName) => {
@@ -70,30 +63,7 @@ export default function CourseContentScreen({ match }) {
               <div className="accordian-column col-lg-3 col-md-12 col-sm-12">
                 <div className="inner-column sticky-top">
                   <div className="title2 p-2">Course Content</div>
-                  {/* Accordion Box */}
-                  <Accordion
-                    style={{ height: '500px', overflowY: 'scroll' }}
-                    className="accordion-box style-two"
-                    defaultActiveKey="0"
-                  >
-                    {weekList.map((week, index) => (
-                      <Card className="accordion block" key={week._id}>
-                        <Accordion.Toggle
-                          as={Card.Header}
-                          eventKey={`${index}`}
-                          className="acc-btn  bg-warning text-dark"
-                        >
-                          {week.name}
-                        </Accordion.Toggle>
-                        <Accordion.Collapse eventKey={`${index}`}>
-                          <DayContent
-                            weekId={week._id}
-                            bootcampId={week.bootcamp}
-                          />
-                        </Accordion.Collapse>
-                      </Card>
-                    ))}
-                  </Accordion>
+                  <DayContent bootcampId={id} />
                 </div>
               </div>
               {/* Content Column */}

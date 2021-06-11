@@ -33,8 +33,8 @@ export default function QuizListScreen({ match }) {
     }
   }, [dispatch, userDetail, history, successDelete, match])
 
-  const deleteHandler = (weekId, id) => {
-    dispatch(quizDelete(match.params.bootcampId, weekId, id))
+  const deleteHandler = (dayId, id) => {
+    dispatch(quizDelete(match.params.bootcampId, dayId, id))
     toast.info('Quiz has been deleted', {
       position: toast.POSITION.BOTTOM_RIGHT
     })
@@ -82,7 +82,7 @@ export default function QuizListScreen({ match }) {
                   <td>
                     <Link
                       className="text-info"
-                      to={`/quiz-details/${quiz.bootcamp}/${quiz.week}/${quiz._id}`}
+                      to={`/quiz-details/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
                     >
                       {quiz.name}
                     </Link>
@@ -98,7 +98,7 @@ export default function QuizListScreen({ match }) {
                   <td>
                     <Link
                       style={{ paddingRight: '15px' }}
-                      to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.week}/${quiz._id}`}
+                      to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
                     >
                       <i className="fas fa-edit"></i>
                     </Link>
@@ -126,7 +126,7 @@ export default function QuizListScreen({ match }) {
                           variant="danger"
                           onClick={() => {
                             deleteHandler(
-                              clickTaskDelete.week,
+                              clickTaskDelete.day,
                               clickTaskDelete._id
                             )
 

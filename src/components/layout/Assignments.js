@@ -173,8 +173,9 @@ export default function Assignments() {
                                     <td style={{ color: 'red' }}>
                                       {taskStatus(task._id).status}
                                     </td>
-                                  ) : taskStatus(task._id).status ===
-                                    'Pending' ? (
+                                  ) : taskStatus(task._id) &&
+                                    taskStatus(task._id).status ===
+                                      'Pending' ? (
                                     <td
                                       style={{
                                         color: '#ffc40c'
@@ -182,8 +183,8 @@ export default function Assignments() {
                                     >
                                       {taskStatus(task._id).status}
                                     </td>
-                                  ) : taskStatus(task._id).status ===
-                                    'Failed' ? (
+                                  ) : taskStatus(task._id) &&
+                                    taskStatus(task._id).status === 'Failed' ? (
                                     <td
                                       style={{
                                         color: 'red'
@@ -191,7 +192,8 @@ export default function Assignments() {
                                     >
                                       {taskStatus(task._id).status}
                                     </td>
-                                  ) : taskStatus(task._id).status === 'Sent' ? (
+                                  ) : taskStatus(task._id) &&
+                                    taskStatus(task._id).status === 'Sent' ? (
                                     <td style={{ color: '#171717' }}>
                                       {taskStatus(task._id).status}
                                     </td>
