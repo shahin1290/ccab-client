@@ -11,7 +11,7 @@ export default function UpdateMentorCourse({ match }) {
   const { query } = useLocation()
   const history = useHistory()
 
-  const { bootcampId, weekId, id } = match.params
+  const { bootcampId, dayId, id } = match.params
 
   const { quiz, loading, error } = useSelector((state) => state.quizDetails)
   const { error: updateError, success: updateSuccess } = useSelector(
@@ -19,12 +19,12 @@ export default function UpdateMentorCourse({ match }) {
   )
 
   useEffect(() => {
-    dispatch(getQuizDetails(bootcampId, weekId, id))
+    dispatch(getQuizDetails(bootcampId, dayId, id))
     if (updateSuccess) {
       localStorage.removeItem('quiz')
-      history.push(`/mentor-show-quiz/:bootcampId/:weekId/:id`)
+      history.push(`/mentor-quiz-list/${bootcampId}`)
     }
-  }, [bootcampId, weekId, id, dispatch, updateSuccess])
+  }, [bootcampId, dayId, id, dispatch, updateSuccess])
 
   const [question, setQuestion] = useState(
     JSON.parse(localStorage.getItem('quiz')).content
@@ -75,7 +75,7 @@ export default function UpdateMentorCourse({ match }) {
       time: quiz.time,
       question: updateQuizQuestion
     }
-    dispatch(updateQuiz(bootcampId, weekId, id, quizData))
+    dispatch(updateQuiz(bootcampId, dayId, id, quizData))
   }
 
   return (

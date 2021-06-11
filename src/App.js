@@ -136,13 +136,13 @@ function App() {
 
         <MentorRoute
           exact
-          path="/mentor-show-quiz/:bootcampId/:weekId/:id"
+          path="/mentor-show-quiz/:bootcampId/:dayId/:id"
           component={QuizScreen}
         ></MentorRoute>
 
         <MentorRoute
           exact
-          path="/edit-quiz/:bootcampId/:weekId/:id"
+          path="/edit-quiz/:bootcampId/:dayId/:id"
           component={EditMentorQuiz}
         ></MentorRoute>
 
