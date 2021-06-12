@@ -9,20 +9,55 @@ import { getCourseDetails } from '../../redux/actions/courseAction'
 import { Redirect } from 'react-router-dom'
 
 import axios from 'axios'
-import { getKarnaOrderLines } from '../../util/karnaOrderLines';
+import { getKarnaOrderLines } from '../../util/karnaOrderLines'
 
-const KlarnaPayment = ({ ID, widgetLoaded }) => {
+const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
   const { course } = useSelector((state) => state.courseDetails)
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
 
-  
-
   const dispatch = useDispatch()
+  const { session, success: sessionSuccess } = useSelector(
+    (state) => state.KlarnaSessionCreate
+  )
 
-  const { session } = useSelector((state) => state.KlarnaSessionCreate)
+  useEffect(() => {
+    if (sessionSuccess && method === 'pay_now') {
+      const Klarna = window.Klarna
 
-  console.log(session);
+      Klarna.Payments.load(
+        {
+          container: '#klarna-payments-container1',
+          payment_method_category: method
+        },
+        (res) => {}
+      )
+    }
+
+    if (sessionSuccess && method === 'pay_later') {
+      const Klarna = window.Klarna
+
+      Klarna.Payments.load(
+        {
+          container: '#klarna-payments-container2',
+          payment_method_category: method
+        },
+        (res) => {}
+      )
+    }
+
+    if (sessionSuccess && method === 'pay_over_time') {
+      const Klarna = window.Klarna
+
+      Klarna.Payments.load(
+        {
+          container: '#klarna-payments-container3',
+          payment_method_category: method
+        },
+        (res) => {}
+      )
+    }
+  }, [sessionSuccess, method])
 
   const { token } = useSelector((state) => state.klarnaSessionRead)
 
@@ -33,7 +68,7 @@ const KlarnaPayment = ({ ID, widgetLoaded }) => {
     error: CreateOrderError
   } = useSelector((state) => state.KlarnaOrderCreate)
 
-  console.log(order);
+  console.log(order)
 
   /* useEffect(() => {
     console.log(order);
@@ -49,7 +84,7 @@ const KlarnaPayment = ({ ID, widgetLoaded }) => {
     // eslint-disable-next-line no-undef
     Klarna.Payments.authorize(
       {
-        payment_method_category: 'pay_later',
+        payment_method_category: method
       },
       /*   {
         shipping_address: {
@@ -82,14 +117,23 @@ const KlarnaPayment = ({ ID, widgetLoaded }) => {
         <Redirect to={`/confirmation-klarna/${ID}`} />
       ) : (
         <div className=" bg-white d-flex flex-column justify-content-center">
-          {' '}
-          <div className="p-3 " id="klarna-payments-container">
-            {widgetLoaded && (
-              <button disabled={!widgetLoaded} className="klarna mt-5" onClick={onClickHandler}>
-                Proceed
-              </button>
-            )}
-          </div>
+          {method === 'pay_now' && (
+            <div className="p-3 " id="klarna-payments-container1"></div>
+          )}
+
+          {method === 'pay_later' && (
+            <div className="p-3 " id="klarna-payments-container2"></div>
+          )}
+          {method === 'pay_over_time' && (
+            <div className="p-3 " id="klarna-payments-container3"></div>
+          )}
+          <button
+            className="klarna mt-5"
+            onClick={onClickHandler}
+            id="checkout-button"
+          >
+            Place Order
+          </button>
         </div>
       )}
     </>
