@@ -233,12 +233,12 @@ const CheckoutForm = ({ match, history }) => {
                 <div className="title2">Select Payment Method</div>
                 <div className="auto-container m-4">
                   <img
-                    width="68"
+                    width="75"
                     className="pr-3"
                     src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
                   />
                   <img
-                    width="200"
+                    width="250"
                     src="https://cdn.jotfor.ms/images/credit-card-logo.png"
                   />
                 </div>
@@ -452,7 +452,6 @@ const CheckoutForm = ({ match, history }) => {
                                 {method.name}
                               </label>
                               <img
-                                className="pl-5"
                                 src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg"
                               />
                             </div>

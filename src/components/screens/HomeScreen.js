@@ -320,7 +320,7 @@ export default function HomeScreen({ match }) {
                 <div className="sub-title pb-1 text-center-small-screen">
                   How do I know it's right for me?
                 </div>
-                <div className="sub-text">
+                <div className="sub-text text-center-small-screen">
                   We run a free Codify Foundation course, so you can dip your
                   toes without commitment. It's also a great way to learn the
                   basics and build your own website.
@@ -343,12 +343,12 @@ export default function HomeScreen({ match }) {
 
         <div className="auto-container text-center  mb-3 mt-5">
           <img
-            width="90"
+            width="75"
             className="pr-3"
             src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
           />
           <img
-            width="310"
+            width="250"
             src="https://cdn.jotfor.ms/images/credit-card-logo.png"
           />
         </div>
