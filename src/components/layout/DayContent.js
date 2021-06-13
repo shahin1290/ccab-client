@@ -141,7 +141,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                         onClick={() => {
                           setShow(day._id)
                           dispatch(getDayDetails(week._id, day._id))
-                          setOpen(false)
+                          setOpen && setOpen(false)
                         }}
                         className="lightbox-image play-icon ml-5 mb-4 mt-3"
                       >
