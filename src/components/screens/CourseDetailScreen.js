@@ -11,9 +11,8 @@ import { getOrder } from '../../redux/actions/orderAction'
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
 import ModalVideo from 'react-modal-video'
-import { getPriceConversion } from '../../util/getPriceConversion'
 import { createCurrrency } from '../../redux/actions/currencyAction'
-import { getPriceFormat } from '../../util/priceFormat';
+import { getPriceFormat } from '../../util/priceFormat'
 
 export default function CourseDetailScreen({ match }) {
   const ID = match.params.id
@@ -32,7 +31,7 @@ export default function CourseDetailScreen({ match }) {
   const { course, loading, error } = useSelector((state) => state.courseDetails)
   const {
     loading: currencyLoading,
-    success,
+    success: currencySuccess,
     currency
   } = useSelector((state) => state.currencyCreate)
 
@@ -42,34 +41,29 @@ export default function CourseDetailScreen({ match }) {
   const [countryCode, setcountryCode] = useState('')
   const [countryLang, setcountryLang] = useState('')
   const [showKlarnaImg, setShowKlarmaImg] = useState(false)
+  const [countryCurrency, setCountryCurrency] = useState('')
 
-  const [amount, setAmount] = useState(null)
+  useEffect(() => {
+    async function fetchMyAPI() {
+      let response = await axios.get('https://ipapi.co/json/')
+
+      setCountryCurrency(response.data.currency)
+      validateCounrty(response.data.country_name, response.data.languages)
+    }
+
+    fetchMyAPI()
+  }, [])
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
-    if (course) {
-      dispatch(createCurrrency())
+
+    if (countryCurrency) {
+      dispatch(createCurrrency(countryCurrency))
     }
 
-    getGeoInfo()
     // get order for this course
     dispatch(getOrder(ID))
-  }, [dispatch, ID])
-
-  // get the user ip info
-  const getGeoInfo = () => {
-    axios
-      .get('https://ipapi.co/json/')
-      .then((response) => {
-        let data = response.data
-        // console.log(data);
-
-        validateCounrty(data.country_name, data.languages)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+  }, [dispatch, ID, countryCurrency])
 
   //console.log(countryName);
   // validate the user country
@@ -271,9 +265,11 @@ export default function CourseDetailScreen({ match }) {
                           <>
                             <div className="price mb-3">
                               {console.log(currency)}
-                              {currency &&
+                              {currencySuccess &&
                                 (course.price > 0
-                                  ? `${getPriceFormat(currency.data.amount * course.price)}  ${currency.data.currency}`
+                                  ? `${getPriceFormat(
+                                      currency.data * course.price
+                                    )}  ${countryCurrency}`
                                   : 'Free Course ')}
                             </div>
                             <a
