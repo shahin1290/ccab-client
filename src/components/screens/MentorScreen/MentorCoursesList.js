@@ -110,12 +110,12 @@ export default function MentorCoursesList() {
                             </th>
                             <th>
                               <Nav.Link href={`/mentor-task-list/${item._id}`}>
-                                <i className="fas fa-list-ul">Task List</i>
+                                <i className="fas fa-edit">Edit Task</i>
                               </Nav.Link>
                             </th>
                             <th>
                               <Nav.Link href={`/mentor-quiz-list/${item._id}`}>
-                                <i className="fas fa-list-ul">Quiz List</i>
+                                <i className="fas fa-edit">Edit Quiz</i>
                               </Nav.Link>
                             </th>
                           </tr>

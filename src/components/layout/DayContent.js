@@ -143,7 +143,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                           dispatch(getDayDetails(week._id, day._id))
                           setOpen && setOpen(false)
                         }}
-                        className="lightbox-image play-icon ml-5 mb-4 mt-3"
+                        className="lightbox-image play-icon m-2"
                       >
                         <span
                           className="fa fa-play"
@@ -163,8 +163,8 @@ export default function DayContent({ bootcampId, setOpen }) {
 
                       {filterWeeklyQuiz(day._id).length > 0 &&
                         filterWeeklyQuiz(day._id).map((quiz) => (
-                          <div className="pb-3">
-                            <span className="mr-3 ml-4">
+                          <div className="pb-3 pt-3">
+                            <span className="mr-3 ml-4 pl-1">
                               <img width="30" src="/images/resource/quiz.png" />
                             </span>
 
@@ -198,7 +198,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                       {filterWeeklyTask(day._id).length > 0 &&
                         filterWeeklyTask(day._id).map((task) => (
                           <div className="pb-3">
-                            <span className="mr-3 ml-4">
+                            <span className="mr-3 ml-4 pl-1">
                               <img
                                 width="30"
                                 src="/images/resource/assignment.png"
