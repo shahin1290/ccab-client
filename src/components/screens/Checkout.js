@@ -145,15 +145,14 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       if (!course || !currencySuccess) return
-      const amount = currency.data.amount * course.price * 100
+      const amount = currency.data * course.price * 100
 
-      const getCurrency = currency.data.currency
 
       const { data: clientSecret } = await axios.post(
         `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
-          currency: getCurrency,
+          currency: countryCurrency,
           amount
         },
         config
@@ -210,7 +209,7 @@ const CheckoutForm = ({ match, history }) => {
           createOrder(ID, {
             token: paymentIntent.id,
             amount: paymentIntent.amount,
-            currency: getCurrency
+            currency: countryCurrency
           })
         )
       }
