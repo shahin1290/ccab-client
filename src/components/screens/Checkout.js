@@ -79,14 +79,29 @@ const CheckoutForm = ({ match, history }) => {
       })
     }
   }, [sessionSuccess])
-  
+
+  const [countryCurrency, setCountryCurrency] = useState('')
+  const [currencyCountry, setCurrencyCountry] = useState('')
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      let response = await axios.get('https://ipapi.co/json/')
+
+      setCountryCurrency(response.data.currency)
+      setCurrencyCountry(response.data.country)
+
+    }
+
+    fetchMyAPI()
+  }, [])
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
+
     if (course) {
-      dispatch(createCurrrency())
+      dispatch(createCurrrency(countryCurrency))
     }
-  }, [dispatch, ID])
+  }, [dispatch, ID, countryCurrency])
 
   useEffect(() => {
     if (orderSuccess) {
@@ -130,15 +145,14 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       if (!course || !currencySuccess) return
-      const amount = currency.data.amount * course.price * 100
+      const amount = currency.data * course.price * 100
 
-      const getCurrency = currency.data.currency
 
       const { data: clientSecret } = await axios.post(
         `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
-          currency: getCurrency,
+          currency: countryCurrency,
           amount
         },
         config
@@ -195,7 +209,7 @@ const CheckoutForm = ({ match, history }) => {
           createOrder(ID, {
             token: paymentIntent.id,
             amount: paymentIntent.amount,
-            currency: getCurrency
+            currency: countryCurrency
           })
         )
       }
@@ -207,7 +221,16 @@ const CheckoutForm = ({ match, history }) => {
   const _handelcreateKlarnaOrder = () => {
     setWidgetLoaded(true)
     dispatch(
-      createKlarnaSession({ data: getKlarnaOrderLines(course, currency.data) }, ID)
+      createKlarnaSession(
+        {
+          data: getKlarnaOrderLines(course, {
+            amount: currency.data,
+            country: currencyCountry,
+            currency: countryCurrency
+          })
+        },
+        ID
+      )
     )
     setWidgetLoaded(false)
   }
@@ -451,9 +474,7 @@ const CheckoutForm = ({ match, history }) => {
                               >
                                 {method.name}
                               </label>
-                              <img
-                                src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg"
-                              />
+                              <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" />
                             </div>
                           </div>
                         ))
@@ -493,8 +514,8 @@ const CheckoutForm = ({ match, history }) => {
                           <span className="pull-right">
                             {currencySuccess &&
                               `${getPriceFormat(
-                                currency.data.amount * course.price
-                              )}  ${currency.data.currency}`}
+                                currency.data * course.price
+                              )}  ${countryCurrency}`}
                           </span>
                         </li>
 
@@ -503,8 +524,8 @@ const CheckoutForm = ({ match, history }) => {
                           <span className="pull-right">
                             {currencySuccess &&
                               `${getPriceFormat(
-                                currency.data.amount * course.price
-                              )}  ${currency.data.currency}`}
+                                currency.data * course.price
+                              )}  ${countryCurrency}`}
                           </span>
                         </li>
                       </ul>
