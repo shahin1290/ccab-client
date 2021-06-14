@@ -80,28 +80,13 @@ const CheckoutForm = ({ match, history }) => {
     }
   }, [sessionSuccess])
 
-  const [countryCurrency, setCountryCurrency] = useState('')
-  const [currencyCountry, setCurrencyCountry] = useState('')
-
-  useEffect(() => {
-    async function fetchMyAPI() {
-      let response = await axios.get('https://ipapi.co/json/')
-
-      setCountryCurrency(response.data.currency)
-      setCurrencyCountry(response.data.country)
-
-    }
-
-    fetchMyAPI()
-  }, [])
-
   useEffect(() => {
     dispatch(getCourseDetails(ID))
 
     if (course) {
-      dispatch(createCurrrency(countryCurrency))
+      dispatch(createCurrrency())
     }
-  }, [dispatch, ID, countryCurrency])
+  }, [dispatch, ID])
 
   useEffect(() => {
     if (orderSuccess) {
@@ -145,14 +130,13 @@ const CheckoutForm = ({ match, history }) => {
 
     try {
       if (!course || !currencySuccess) return
-      const amount = currency.data * course.price * 100
-
+      const amount = currency.data.amount * course.price * 100
 
       const { data: clientSecret } = await axios.post(
         `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
-          currency: countryCurrency,
+          currency: currency.data.currency,
           amount
         },
         config
@@ -209,7 +193,7 @@ const CheckoutForm = ({ match, history }) => {
           createOrder(ID, {
             token: paymentIntent.id,
             amount: paymentIntent.amount,
-            currency: countryCurrency
+            currency: currency.data.currency
           })
         )
       }
@@ -224,9 +208,9 @@ const CheckoutForm = ({ match, history }) => {
       createKlarnaSession(
         {
           data: getKlarnaOrderLines(course, {
-            amount: currency.data,
-            country: currencyCountry,
-            currency: countryCurrency
+            amount: currency.data.amount,
+            country: currency.data.country,
+            currency: currency.data.currency
           })
         },
         ID
@@ -254,14 +238,14 @@ const CheckoutForm = ({ match, history }) => {
 
               <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                 <div className="title2">Select Payment Method</div>
-                <div className="auto-container m-4">
+                <div className="auto-container mt-3 mb-5">
                   <img
-                    width="75"
-                    className="pr-3"
+                    width="50"
+                    className="pr-2"
                     src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
                   />
                   <img
-                    width="250"
+                    width="160"
                     src="https://cdn.jotfor.ms/images/credit-card-logo.png"
                   />
                 </div>
@@ -495,18 +479,19 @@ const CheckoutForm = ({ match, history }) => {
           </div>
 
           {/* Sidebar Side */}
-          {currencyLoading ? (
-            <Loader />
-          ) : (
-            <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5">
-              <aside className="sidebar sticky-top  mt-5">
-                {/* Order Widget */}
-                <div className="sidebar-widget order-widget">
-                  <div className="widget-content ">
-                    <div className="sidebar-title">
-                      <div className="sub-title">Order Summary</div>
-                    </div>
-                    {/* Order Box */}
+
+          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5">
+            <aside className="sidebar sticky-top  mt-5">
+              {/* Order Widget */}
+              <div className="sidebar-widget order-widget">
+                <div className="widget-content ">
+                  <div className="sidebar-title">
+                    <div className="sub-title">Order Summary</div>
+                  </div>
+                  {/* Order Box */}
+                  {currencyLoading ? (
+                    <Loader />
+                  ) : (
                     <div className="order-box bg-white p-2">
                       <ul>
                         <li className="clearfix mb-3">
@@ -514,8 +499,8 @@ const CheckoutForm = ({ match, history }) => {
                           <span className="pull-right">
                             {currencySuccess &&
                               `${getPriceFormat(
-                                currency.data * course.price
-                              )}  ${countryCurrency}`}
+                                currency.data.amount * course.price
+                              )}  ${currency.data.currency}`}
                           </span>
                         </li>
 
@@ -524,17 +509,17 @@ const CheckoutForm = ({ match, history }) => {
                           <span className="pull-right">
                             {currencySuccess &&
                               `${getPriceFormat(
-                                currency.data * course.price
-                              )}  ${countryCurrency}`}
+                                currency.data.amount * course.price
+                              )}  ${currency.data.currency}`}
                           </span>
                         </li>
                       </ul>
                     </div>
-                  </div>
+                  )}
                 </div>
-              </aside>
-            </div>
-          )}
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCourseList } from '../../redux/actions/courseAction'
-import { updateWeek } from '../../redux/actions/weekAction'
 
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
@@ -20,6 +19,7 @@ export default function TopCourses({ match }) {
   return (
     <>
       {/* Institution Section */}
+
       <section
         className="institution-section"
         style={{
@@ -34,14 +34,11 @@ export default function TopCourses({ match }) {
           <div className="sub-text text-center mb-5">
             Each course consists of video-lectures, assignments and quizzes.
           </div>
+          {loading ? <Loader /> : error && <Message>{error}</Message>}
+
           <div className="row clearfix">
             {/* Institution Block */}
-
-            {loading ? (
-              <Loader className="m-5" />
-            ) : error ? (
-              <Message>{error}</Message>
-            ) : courseList.length ? (
+            {courseList.length &&
               courseList.map((course) => (
                 <div
                   className=" cource-block-two col-lg-3 col-md-6 col-sm-12"
@@ -91,25 +88,28 @@ export default function TopCourses({ match }) {
                     </div>
                   </div>
                 </div>
-              ))
+              ))}
+
+            {/* Institution Block */}
+            {courseList.length > 0 ? (
+              <div className="institution-block empty-block col-lg-4 col-md-6 col-sm-12">
+                <div
+                  className="inner-box wow fadeInRight"
+                  data-wow-delay="0ms"
+                  data-wow-duration="1500ms"
+                >
+                  <a href="/course-grid" className="theme-btn btn-style-three">
+                    <span className="txt">Browse All</span>
+                  </a>
+                </div>
+              </div>
             ) : (
               ''
             )}
-            {/* Institution Block */}
-            <div className="institution-block empty-block col-lg-4 col-md-6 col-sm-12">
-              <div
-                className="inner-box wow fadeInRight"
-                data-wow-delay="0ms"
-                data-wow-duration="1500ms"
-              >
-                <a href="/course-grid" className="theme-btn btn-style-three">
-                  <span className="txt">Browse All</span>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </section>
+
       {/* End Institution Section */}
     </>
   )
