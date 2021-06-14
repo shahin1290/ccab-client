@@ -11,6 +11,7 @@ import QuizAnswerScreen from './components/screens/QuizAnswerScreen'
 import Checkout from './components/screens/Checkout'
 import CheckoutKlarna from './components/screens/CheckoutKlarna'
 import ConfirmationKlarna from './components/screens/ConfirmationKlarna'
+import ConfirmationCardPurchase from './components/screens/ConfirmationCardPurchase'
 
 import ErrorScreen from './components/screens/ErrorScreen'
 
@@ -166,7 +167,7 @@ function App() {
 
         <MentorRoute
           exact
-          path="/quiz-details/:bootcampId/:weekId/:id"
+          path="/quiz-details/:bootcampId/:dayId/:id"
           component={QuizDetailsScreen}
         ></MentorRoute>
 
@@ -223,13 +224,13 @@ function App() {
 
         <StudentRoute
           exact
-          path="/quiz/:bootcampId/:weekId/:id"
+          path="/quiz/:bootcampId/:dayId/:id"
           component={QuizScreen}
         ></StudentRoute>
 
         <StudentRoute
           exact
-          path="/quiz-answer/:bootcampId/:weekId/:id"
+          path="/quiz-answer/:bootcampId/:dayId/:id"
           component={QuizAnswerScreen}
         ></StudentRoute>
 
@@ -249,6 +250,12 @@ function App() {
           exact
           path="/confirmation-klarna/:bootcampId"
           component={ConfirmationKlarna}
+        ></StudentRoute>
+
+        <StudentRoute
+          exact
+          path="/confirmation-card-purchase/:bootcampId"
+          component={ConfirmationCardPurchase}
         ></StudentRoute>
 
         {/* default Routes for guests  */}

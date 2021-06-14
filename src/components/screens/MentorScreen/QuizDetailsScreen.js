@@ -14,7 +14,7 @@ export default function TaskDetailsScreen({ match }) {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const { id, weekId, bootcampId } = match.params
+  const { id, dayId, bootcampId } = match.params
   // user must be logged in before!!!
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
@@ -31,10 +31,10 @@ export default function TaskDetailsScreen({ match }) {
     if (userDetail && !userDetail.user_type === 'StudentUser') {
       history.push('/')
     } else {
-      dispatch(getQuizDetails(bootcampId, weekId, id))
+      dispatch(getQuizDetails(bootcampId, dayId, id))
       dispatch(getQuizAnswerList(bootcampId, id))
     }
-  }, [dispatch, userDetail, history, bootcampId, weekId, id])
+  }, [dispatch, userDetail, history, bootcampId, dayId, id])
 
   const getDates = (date) => {
     const date1 = new Date(date)

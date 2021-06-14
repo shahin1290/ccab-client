@@ -17,14 +17,9 @@ export default function ManageMentorScreen({ match }) {
   }, [dispatch, id])
   return (
     <>
-      <section className="login-nav-section">
-        <div className="auto-container"></div>
-      </section>
-      {/*End Page Title*/}
-      {/* Intro Section */}
-      <Container style={{ marginBottom: '200px' }}>
+      <Container>
         {/* Accordian Column */}
-        <div className="title mb-4">Manage Course Content</div>
+        <div className="title mt-5 mb-5">Manage Course Content</div>
         {/* Accordion Box */}
 
         <MentorDayContent bootcampId={id} />

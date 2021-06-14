@@ -9,20 +9,27 @@ import { getCourseDetails } from '../../redux/actions/courseAction'
 import { Redirect } from 'react-router-dom'
 
 import axios from 'axios'
-import { getKarnaOrderLines } from '../../util/karnaOrderLines'
+import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
 
-const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
+const KlarnaPayment = ({ ID, method }) => {
   const { course } = useSelector((state) => state.courseDetails)
   const userLogin = useSelector((state) => state.userLogin)
-  const { userDetail } = userLogin
+  const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const dispatch = useDispatch()
   const { session, success: sessionSuccess } = useSelector(
     (state) => state.KlarnaSessionCreate
   )
 
+  const {
+    loading: currencyLoading,
+    success: currencySuccess,
+    currency
+  } = useSelector((state) => state.currencyCreate)
+
   useEffect(() => {
     if (sessionSuccess && method === 'pay_now') {
+      setWidgetLoaded(false)
       const Klarna = window.Klarna
 
       Klarna.Payments.load(
@@ -30,11 +37,14 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
           container: '#klarna-payments-container1',
           payment_method_category: method
         },
-        (res) => {}
+        (res) => {
+          setWidgetLoaded(true)
+        }
       )
     }
 
     if (sessionSuccess && method === 'pay_later') {
+      setWidgetLoaded(false)
       const Klarna = window.Klarna
 
       Klarna.Payments.load(
@@ -42,11 +52,14 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
           container: '#klarna-payments-container2',
           payment_method_category: method
         },
-        (res) => {}
+        (res) => {
+          setWidgetLoaded(true)
+        }
       )
     }
 
     if (sessionSuccess && method === 'pay_over_time') {
+      setWidgetLoaded(false)
       const Klarna = window.Klarna
 
       Klarna.Payments.load(
@@ -54,7 +67,9 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
           container: '#klarna-payments-container3',
           payment_method_category: method
         },
-        (res) => {}
+        (res) => {
+          setWidgetLoaded(true)
+        }
       )
     }
   }, [sessionSuccess, method])
@@ -68,7 +83,6 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
     error: CreateOrderError
   } = useSelector((state) => state.KlarnaOrderCreate)
 
-  console.log(order)
 
   /* useEffect(() => {
     console.log(order);
@@ -79,7 +93,7 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
     }
   }, [orderSuccess]) */
 
-  const onClickHandler = async () => {
+  const onClickHandler =  () => {
     dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
     // eslint-disable-next-line no-undef
     Klarna.Payments.authorize(
@@ -99,12 +113,11 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
         }
       }, */
 
-      async function (res) {
-        console.log('session_id', res)
+       function (res) {
         dispatch(
           createKlarnaOrder(ID, {
             token: res.authorization_token,
-            data: await getKarnaOrderLines(course)
+            data:  getKlarnaOrderLines(course, currency.data)
           })
         )
       }
@@ -127,13 +140,17 @@ const KlarnaPayment = ({ ID, widgetLoaded, method }) => {
           {method === 'pay_over_time' && (
             <div className="p-3 " id="klarna-payments-container3"></div>
           )}
-          <button
-            className="klarna mt-5"
-            onClick={onClickHandler}
-            id="checkout-button"
-          >
-            Place Order
-          </button>
+
+          {widgetLoaded && (
+            <button
+              className="klarna mt-5"
+              onClick={onClickHandler}
+              id="checkout-button"
+              disabled={!widgetLoaded}
+            >
+              Place Order
+            </button>
+          )}
         </div>
       )}
     </>

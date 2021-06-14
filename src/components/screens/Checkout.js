@@ -21,8 +21,9 @@ import { Tabs, Tab, Accordion, Card, Button } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../layout/Message'
 import KlarnaPayment from '../layout/KlarnaPayment'
-import { getKarnaOrderLines } from '../../util/karnaOrderLines'
-import { getPriceConversion } from '../../util/getPriceConversion'
+import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
+import { getPriceFormat } from '../../util/priceFormat'
+import { createCurrrency } from '../../redux/actions/currencyAction'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
@@ -31,37 +32,29 @@ const CheckoutForm = ({ match, history }) => {
   const elements = useElements()
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
-  const [amount, setAmount] = useState(null)
-  const [currency, setCurrency] = useState('')
 
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
 
   const { course } = useSelector((state) => state.courseDetails)
-  const { loading, success, error } = useSelector((state) => state.orderCreate)
-
+  const {
+    loading,
+    success: orderSuccess,
+    error
+  } = useSelector((state) => state.orderCreate)
+  const {
+    loading: currencyLoading,
+    success: currencySuccess,
+    currency
+  } = useSelector((state) => state.currencyCreate)
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
-
-  //price conversion function
-  const priceConversion = async () => {
-    if (course) {
-      const conversion = await getPriceConversion(course)
-      setAmount(conversion.amount)
-      setCurrency(conversion.currency)
-    }
-  }
-
-  priceConversion()
 
   const {
     order,
     loading: CreateOrderLoading,
     error: CreateOrderError
   } = useSelector((state) => state.KlarnaOrderCreate)
-
-  const [html, setHTML] = useState('')
-  const [lang, setLang] = useState('')
 
   //address details
   const [name, setName] = useState('')
@@ -70,7 +63,7 @@ const CheckoutForm = ({ match, history }) => {
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
 
-  const [widgetLoaded, setWidgetLoaded] = React.useState(false)
+  const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const {
     session,
@@ -86,16 +79,20 @@ const CheckoutForm = ({ match, history }) => {
       })
     }
   }, [sessionSuccess])
+  
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
+    if (course) {
+      dispatch(createCurrrency())
+    }
   }, [dispatch, ID])
 
   useEffect(() => {
-    if (success) {
-      history.push(`/courses/${ID}`)
+    if (orderSuccess) {
+      history.push(`/confirmation-card-purchase/${ID}`)
     }
-  }, [success])
+  }, [orderSuccess])
 
   const ELEMENT_OPTIONS = {
     style: {
@@ -132,12 +129,17 @@ const CheckoutForm = ({ match, history }) => {
     }
 
     try {
+      if (!course || !currencySuccess) return
+      const amount = currency.data.amount * course.price * 100
+
+      const getCurrency = currency.data.currency
+
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
+        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
-          currency,
-          amount: amount * 100
+          currency: getCurrency,
+          amount
         },
         config
       )
@@ -193,7 +195,7 @@ const CheckoutForm = ({ match, history }) => {
           createOrder(ID, {
             token: paymentIntent.id,
             amount: paymentIntent.amount,
-            currency
+            currency: getCurrency
           })
         )
       }
@@ -202,10 +204,10 @@ const CheckoutForm = ({ match, history }) => {
     }
   }
 
-  const _handelcreateKlarnaOrder = async () => {
+  const _handelcreateKlarnaOrder = () => {
     setWidgetLoaded(true)
     dispatch(
-      createKlarnaSession({ data: await getKarnaOrderLines(course) }, ID)
+      createKlarnaSession({ data: getKlarnaOrderLines(course, currency.data) }, ID)
     )
     setWidgetLoaded(false)
   }
@@ -229,26 +231,17 @@ const CheckoutForm = ({ match, history }) => {
 
               <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                 <div className="title2">Select Payment Method</div>
-                <div className="auto-container mb-5">
+                <div className="auto-container m-4">
                   <img
-                    width="5%"
-                    className="pr-2"
+                    width="75"
+                    className="pr-3"
                     src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
                   />
                   <img
-                    width="16%"
+                    width="250"
                     src="https://cdn.jotfor.ms/images/credit-card-logo.png"
                   />
                 </div>
-
-                {loading && <Loader />}
-                {error ? (
-                  <p className="text-danger bg-light p-2 ">{error}</p>
-                ) : success ? (
-                  <p className="text-success bg-light p-2 ">
-                    Order created successfully
-                  </p>
-                ) : null}
               </div>
 
               {/* Signup Info Tabs*/}
@@ -459,7 +452,6 @@ const CheckoutForm = ({ match, history }) => {
                                 {method.name}
                               </label>
                               <img
-                                className="pl-5"
                                 src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg"
                               />
                             </div>
@@ -482,44 +474,46 @@ const CheckoutForm = ({ match, history }) => {
           </div>
 
           {/* Sidebar Side */}
-          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5">
-            <aside className="sidebar sticky-top  mt-5">
-              {/* Order Widget */}
-              <div className="sidebar-widget order-widget">
-                <div className="widget-content ">
-                  <div className="sidebar-title">
-                    <div className="sub-title">Order Summary</div>
-                  </div>
-                  {/* Order Box */}
-                  <div className="order-box bg-white p-2">
-                    <ul>
-                      <li className="clearfix mb-3">
-                        Basic Plan{' '}
-                        <span className="pull-right">
-                          {amount ? (
-                            currency && amount && `${currency}  ${amount}`
-                          ) : (
-                            <Loader />
-                          )}
-                        </span>
-                      </li>
+          {currencyLoading ? (
+            <Loader />
+          ) : (
+            <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5">
+              <aside className="sidebar sticky-top  mt-5">
+                {/* Order Widget */}
+                <div className="sidebar-widget order-widget">
+                  <div className="widget-content ">
+                    <div className="sidebar-title">
+                      <div className="sub-title">Order Summary</div>
+                    </div>
+                    {/* Order Box */}
+                    <div className="order-box bg-white p-2">
+                      <ul>
+                        <li className="clearfix mb-3">
+                          Basic Plan{' '}
+                          <span className="pull-right">
+                            {currencySuccess &&
+                              `${getPriceFormat(
+                                currency.data.amount * course.price
+                              )}  ${currency.data.currency}`}
+                          </span>
+                        </li>
 
-                      <li className="clearfix">
-                        <strong>Total</strong>{' '}
-                        <span className="pull-right">
-                          {amount ? (
-                            currency && amount && `${currency}  ${amount}`
-                          ) : (
-                            <Loader />
-                          )}
-                        </span>
-                      </li>
-                    </ul>
+                        <li className="clearfix">
+                          <strong>Total</strong>{' '}
+                          <span className="pull-right">
+                            {currencySuccess &&
+                              `${getPriceFormat(
+                                currency.data.amount * course.price
+                              )}  ${currency.data.currency}`}
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </aside>
-          </div>
+              </aside>
+            </div>
+          )}
         </div>
       </div>
     </div>

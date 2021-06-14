@@ -12,6 +12,8 @@ import Message from '../layout/Message'
 import Loader from '../layout/Loader'
 import ModalVideo from 'react-modal-video'
 import { getPriceConversion } from '../../util/getPriceConversion'
+import { createCurrrency } from '../../redux/actions/currencyAction'
+import { getPriceFormat } from '../../util/priceFormat';
 
 export default function CourseDetailScreen({ match }) {
   const ID = match.params.id
@@ -28,6 +30,12 @@ export default function CourseDetailScreen({ match }) {
   } = useSelector((state) => state.getOrderView)
 
   const { course, loading, error } = useSelector((state) => state.courseDetails)
+  const {
+    loading: currencyLoading,
+    success,
+    currency
+  } = useSelector((state) => state.currencyCreate)
+
   const [isOpen, setOpen] = useState(false)
 
   const [countryName, setcountryName] = useState('')
@@ -36,10 +44,13 @@ export default function CourseDetailScreen({ match }) {
   const [showKlarnaImg, setShowKlarmaImg] = useState(false)
 
   const [amount, setAmount] = useState(null)
-  const [currency, setCurrency] = useState('')
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
+    if (course) {
+      dispatch(createCurrrency())
+    }
+
     getGeoInfo()
     // get order for this course
     dispatch(getOrder(ID))
@@ -59,17 +70,6 @@ export default function CourseDetailScreen({ match }) {
         console.log(error)
       })
   }
-
-  //price conversion function
-  const priceConversion = async () => {
-    if (course) {
-      const conversion = await getPriceConversion(course)
-      setAmount(conversion.amount)
-      setCurrency(conversion.currency)
-    }
-  }
-
-  priceConversion()
 
   //console.log(countryName);
   // validate the user country
@@ -218,95 +218,99 @@ export default function CourseDetailScreen({ match }) {
                   </div>
 
                   {/* Video Column */}
-                  <div className="video-column col-lg-4 col-md-12 col-sm-12">
-                    <div className="inner-column sticky-top">
-                      {/* Video Box */}
-                      <div
-                        className="intro-video"
-                        style={{
-                          backgroundImage:
-                            'url(https://server.ccab.tech/uploads/Bootcamp/' +
-                            course.img_path +
-                            ')'
-                        }}
-                      >
-                        <a
-                          className="lightbox-image intro-video-box"
-                          onClick={() => setOpen(true)}
+
+                  {currencyLoading ? (
+                    <Loader />
+                  ) : (
+                    <div className="video-column col-lg-4 col-md-12 col-sm-12">
+                      <div className="inner-column sticky-top">
+                        {/* Video Box */}
+                        <div
+                          className="intro-video"
+                          style={{
+                            backgroundImage:
+                              'url(http://localhost:5001/uploads/Bootcamp/' +
+                              course.img_path +
+                              ')'
+                          }}
                         >
-                          <span className="fa fa-play">
-                            <i className="ripple"></i>
-                          </span>
-                        </a>
-
-                        <ModalVideo
-                          channel="youtube"
-                          autoplay
-                          isOpen={isOpen}
-                          videoId={getVideoID(course.video_path)}
-                          onClose={() => setOpen(false)}
-                        />
-                        <h4>Preview this course</h4>
-                      </div>
-
-                      {/* End Video Box */}
-
-                      {/* <div className="time-left">
-                        23 hours left at this price!
-                      </div> */}
-                      {order && order.course ? (
-                        <a
-                          href={'/course-content/' + course._id}
-                          className="mt-4 theme-btn btn-style-three"
-                        >
-                          <span className="txt">
-                            GO TO Course<i className="fa fa-angle-right"></i>
-                          </span>
-                        </a>
-                      ) : (
-                        <>
-                          <div className="price mb-3">
-                            {amount ? (
-                              currency && amount && course.price > 0 ? (
-                                `${currency}  ${amount}`
-                              ) : (
-                                'Free Course '
-                              )
-                            ) : (
-                              <Loader />
-                            )}
-                          </div>
                           <a
-                            href={
-                              !userDetail.token
-                                ? '/login'
-                                : course.price > 0
-                                ? '/checkout/' + course._id
-                                : '/course-content/' + course._id
-                            }
-                            className="theme-btn btn-style-three"
+                            className="lightbox-image intro-video-box"
+                            onClick={() => setOpen(true)}
                           >
-                            <span className="txt">
-                              Enroll now <i className="fa fa-angle-right"></i>
+                            <span className="fa fa-play">
+                              <i className="ripple"></i>
                             </span>
                           </a>
-                          <div
-                            style={{ margin: '10px auto 0 auto', width: '60%' }}
+
+                          <ModalVideo
+                            channel="youtube"
+                            autoplay
+                            isOpen={isOpen}
+                            videoId={getVideoID(course.video_path)}
+                            onClose={() => setOpen(false)}
+                          />
+                          <h4>Preview this course</h4>
+                        </div>
+
+                        {/* End Video Box */}
+
+                        {/* <div className="time-left">
+                        23 hours left at this price!
+                      </div> */}
+                        {order && order.course ? (
+                          <a
+                            href={'/course-content/' + course._id}
+                            className="mt-4 theme-btn btn-style-three"
                           >
-                            <img
-                              width="23%"
-                              className="pr-2"
-                              src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
-                            />
-                            <img
-                              width="75%"
-                              src="https://cdn.jotfor.ms/images/credit-card-logo.png"
-                            />
-                          </div>
-                        </>
-                      )}
+                            <span className="txt">
+                              GO TO Course<i className="fa fa-angle-right"></i>
+                            </span>
+                          </a>
+                        ) : (
+                          <>
+                            <div className="price mb-3">
+                              {console.log(currency)}
+                              {currency &&
+                                (course.price > 0
+                                  ? `${getPriceFormat(currency.data.amount * course.price)}  ${currency.data.currency}`
+                                  : 'Free Course ')}
+                            </div>
+                            <a
+                              href={
+                                !userDetail.token
+                                  ? '/login'
+                                  : course.price > 0
+                                  ? '/checkout/' + course._id
+                                  : '/course-content/' + course._id
+                              }
+                              className="theme-btn btn-style-three"
+                            >
+                              <span className="txt">
+                                Enroll now <i className="fa fa-angle-right"></i>
+                              </span>
+                            </a>
+                            <div
+                              style={{
+                                margin: '10px auto 0 auto',
+                                width: '60%'
+                              }}
+                            >
+                              <img
+                                width="23%"
+                                className="pr-2"
+                                src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+                              />
+                              <img
+                                width="75%"
+                                src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

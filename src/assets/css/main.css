@@ -4099,7 +4099,7 @@ img {
 
 .manage-cource-section {
   position: relative;
-  padding: 130px 0px 80px;
+  padding: 40px 0px 80px;
 }
 
 .manage-cource-section .inner-container {
@@ -9210,8 +9210,8 @@ img {
   padding-left: 4px;
   margin-right: 30px;
   display: inline-block;
-  margin-top: -20px;
-  margin-left: -20px;
+  margin-top: 20px;
+  margin-left: 10px;
   background-color: #ffffff;
   transition: all 900ms ease;
   -moz-transition: all 900ms ease;

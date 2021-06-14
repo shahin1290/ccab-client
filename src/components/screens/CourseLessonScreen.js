@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getWeekList } from '../../redux/actions/weekAction'
 import DayContent from '../layout/DayContent'
-import { Card, Tabs, Tab, Accordion } from 'react-bootstrap'
+import { Collapse, Tabs, Tab, Button } from 'react-bootstrap'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
 
 export default function CourseContentScreen({ match }) {
   const dispatch = useDispatch()
   const id = match.params.id
+  const [open, setOpen] = useState(false)
 
   //redux store
   const { day } = useSelector((state) => state.dayDetails)
@@ -56,14 +57,35 @@ export default function CourseContentScreen({ match }) {
           style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
         ></div>
         <div className="circle-one"></div>
-        <div className="p-5">
+        <div className="p-2">
           <div className="inner-container">
             <div className="row clearfix">
               {/* Accordian Column */}
               <div className="accordian-column col-lg-3 col-md-12 col-sm-12">
                 <div className="inner-column sticky-top">
-                  <div className="title2 p-2">Course Content</div>
-                  <DayContent bootcampId={id} />
+                  <div className="title2 p-2 d-flex justify-content-between">
+                    Course Content{' '}
+
+                    
+                    <a
+                      onClick={() => setOpen(!open)}
+                      aria-controls="example-collapse-text"
+                      aria-expanded={open}
+                      className="hide-on-big-screen "
+                    >
+                      <i class="fas fa-bars"></i>
+                    </a>
+                  </div>
+
+                  <div className="hide-on-small-screen">
+                    <DayContent bootcampId={id} />
+                  </div>
+
+                  <Collapse in={open}>
+                    <div id="example-collapse-text">
+                      <DayContent bootcampId={id} setOpen={setOpen} />
+                    </div>
+                  </Collapse>
                 </div>
               </div>
               {/* Content Column */}
@@ -121,7 +143,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('image', section.name) && (
                                       <img
-                                        src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
+                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
                                           'image',
                                           section.name
                                         )}`}

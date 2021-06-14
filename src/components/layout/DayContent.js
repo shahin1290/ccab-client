@@ -13,7 +13,7 @@ import { getMyQuizList, getQuizList } from '../../redux/actions/quizAction'
 import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
 import { getWeekList } from '../../redux/actions/weekAction'
 
-export default function DayContent({ bootcampId }) {
+export default function DayContent({ bootcampId, setOpen }) {
   const dispatch = useDispatch()
   const { userDetail } = useSelector((state) => state.userLogin)
   const [show, setShow] = useState('')
@@ -22,7 +22,6 @@ export default function DayContent({ bootcampId }) {
 
   //weekList
   const { weekList, loading, error } = useSelector((state) => state.weekList)
-
 
   //use effect
   useEffect(() => {
@@ -125,7 +124,7 @@ export default function DayContent({ bootcampId }) {
       ) : (
         weekList.length &&
         weekList.map((week, index) => (
-          <div className="accordion block" >
+          <div className="accordion block">
             <div
               as={Card.Header}
               eventKey={`${index}`}
@@ -134,87 +133,94 @@ export default function DayContent({ bootcampId }) {
               {week.name}
             </div>
             <div eventKey={`${index}`}>
-              {week.days.map((day, index) => (
-                day.show &&   <div className="course-content">
-                <button
-                  onClick={() => {
-                    setShow(day._id)
-                    dispatch(getDayDetails(week._id, day._id))
-                  }}
-                  className="lightbox-image play-icon ml-5 mb-4 mt-3"
-                >
-                  <span
-                    className="fa fa-play"
-                    style={{ paddingTop: '10px' }}
-                  ></span>
-
-                  <Link
-                    to={`/course-content/${bootcampId}`}
-                    style={{
-                      backgroundColor: show === day._id ? '#ffbfbe' : '',
-                      padding: '2px'
-                    }}
-                  >
-                    <span className="sub-text pt-5">{ day.name}</span>
-                  </Link>
-                </button>
-
-                {filterWeeklyQuiz(day._id).length > 0 &&
-                  filterWeeklyQuiz(day._id).map((quiz) => (
-                    <div className="pb-3">
-                      <span className="mr-3 ml-4">
-                        <img width="30" src="/images/resource/quiz.png" />
-                      </span>
-
-                      {userDetail.user_type === 'StudentUser' && (
-                        <Link
-                          to={
-                            quizStatus(quiz._id) &&
-                            quizStatus(quiz._id).status === 'Not Sent'
-                              ? `/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
-                              : `/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
-                          }
-                        >
-                          <span className="sub-text">Quiz: {quiz.name}</span>
-                        </Link>
-                      )}
-
-                      {userDetail.user_type !== 'StudentUser' && (
-                        <Link
-                          to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
-                        >
-                          <span className="sub-text">Quiz: {quiz.name}</span>
-                        </Link>
-                      )}
-                    </div>
-                  ))}
-
-                {filterWeeklyTask(day._id).length > 0 &&
-                  filterWeeklyTask(day._id).map((task) => (
-                    <div className="pb-3">
-                      <span className="mr-3 ml-4">
-                        <img
-                          width="30"
-                          src="/images/resource/assignment.png"
-                        />
-                      </span>
-
-                      <Link
-                        to={
-                          userDetail.user_type === 'StudentUser'
-                            ? `/assignment-details/${task.bootcamp._id}/${task._id}`
-                            : `/task-details/${task.bootcamp}/${task._id}`
-                        }
+              {week.days.map(
+                (day, index) =>
+                  day.show && (
+                    <div className="course-content">
+                      <button
+                        onClick={() => {
+                          setShow(day._id)
+                          dispatch(getDayDetails(week._id, day._id))
+                          setOpen && setOpen(false)
+                        }}
+                        className="lightbox-image play-icon m-2"
                       >
-                        <span className="sub-text">
-                          Task: {task.projectName}
-                        </span>
-                      </Link>
+                        <span
+                          className="fa fa-play"
+                          style={{ paddingTop: '10px' }}
+                        ></span>
+
+                        <Link
+                          to={`/course-content/${bootcampId}`}
+                          style={{
+                            backgroundColor: show === day._id ? '#ffbfbe' : '',
+                            padding: '2px'
+                          }}
+                        >
+                          <span className="sub-text pt-5">{day.name}</span>
+                        </Link>
+                      </button>
+
+                      {filterWeeklyQuiz(day._id).length > 0 &&
+                        filterWeeklyQuiz(day._id).map((quiz) => (
+                          <div className="pb-3 pt-3">
+                            <span className="mr-3 ml-4 pl-1">
+                              <img width="30" src="/images/resource/quiz.png" />
+                            </span>
+
+                            {userDetail.user_type === 'StudentUser' && (
+                              <Link
+                                to={
+                                  quizStatus(quiz._id) &&
+                                  quizStatus(quiz._id).status === 'Not Sent'
+                                    ? `/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
+                                    : `/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
+                                }
+                              >
+                                <span className="sub-text">
+                                  Quiz: {quiz.name}
+                                </span>
+                              </Link>
+                            )}
+
+                            {userDetail.user_type !== 'StudentUser' && (
+                              <Link
+                                to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
+                              >
+                                <span className="sub-text">
+                                  Quiz: {quiz.name}
+                                </span>
+                              </Link>
+                            )}
+                          </div>
+                        ))}
+
+                      {filterWeeklyTask(day._id).length > 0 &&
+                        filterWeeklyTask(day._id).map((task) => (
+                          <div className="pb-3">
+                            <span className="mr-3 ml-4 pl-1">
+                              <img
+                                width="30"
+                                src="/images/resource/assignment.png"
+                              />
+                            </span>
+
+                            <Link
+                              to={
+                                userDetail.user_type === 'StudentUser'
+                                  ? `/assignment-details/${task.bootcamp._id}/${task._id}`
+                                  : `/task-details/${task.bootcamp}/${task._id}`
+                              }
+                            >
+                              <span className="sub-text">
+                                Task: {task.projectName}
+                              </span>
+                            </Link>
+                          </div>
+                        ))}
                     </div>
-                  ))}
-              </div>
-              
-              ))}
+                  )
+              )}
             </div>
           </div>
         ))

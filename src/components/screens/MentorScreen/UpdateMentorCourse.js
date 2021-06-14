@@ -28,10 +28,9 @@ export default function UpdateMentorCourse({ match }) {
     dispatch(getDayDetails(weekId, id))
   }, [dispatch, weekId, id])
 
-
   useEffect(() => {
     setName(day.name)
-  
+
     setVideo(day.video_path)
   }, [weekId, id, day])
 
@@ -54,7 +53,6 @@ export default function UpdateMentorCourse({ match }) {
     const data = new FormData()
     data.append('video_path', video)
     data.append('name', name)
-  
 
     dispatch(updateDay(weekId, id, data))
   }
@@ -80,10 +78,13 @@ export default function UpdateMentorCourse({ match }) {
             </p>
           ) : null}
           <div className="inner-container">
-            <div className="row clearfix">
-              <form onSubmit={submitHandler} style={{ display: 'flex' }}>
+            <div>
+              <form onSubmit={submitHandler}>
                 {/* Left Column */}
-                <div className="left-column col-lg-12 col-md-12 col-sm-12">
+                <div
+                  className="left-column col-lg-8 col-md-8 col-sm-12"
+                  style={{ margin: '0 auto' }}
+                >
                   <div className="inner-column">
                     {/* Edit Course Form */}
                     <div className="edit-course-form">
@@ -98,13 +99,14 @@ export default function UpdateMentorCourse({ match }) {
                           onChange={(e) => setName(e.target.value)}
                         />
                       </div>
-
-                     
                     </div>
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="right-column col-lg-8 col-md-12 col-sm-12">
+                <div
+                  className="right-column col-lg-8 col-md-8 col-sm-12"
+                  style={{ margin: '0 auto' }}
+                >
                   <div className="inner-column">
                     <div className="sub-title pb-2">Video</div>
                     {/* Video Box */}

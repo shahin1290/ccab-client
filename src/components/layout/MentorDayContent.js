@@ -191,7 +191,7 @@ export default function DayContent({ bootcampId }) {
                         setShow(day._id)
                         dispatch(getDayDetails(week._id, day._id))
                       }}
-                      className="lightbox-image play-icon m-3"
+                      className="lightbox-image play-icon mt-3 mb-3"
                     >
                       <span
                         className="fa fa-play"
@@ -262,7 +262,7 @@ export default function DayContent({ bootcampId }) {
                       filterWeeklyQuiz(day._id).map((quiz) => (
                         <div className="pt-3">
                           <span className="mr-3">
-                            <img width="3%" src="/images/resource/quiz.png" />
+                            <img width="30" src="/images/resource/quiz.png" />
                           </span>
 
                           {userDetail.user_type !== 'StudentUser' && (
@@ -282,7 +282,7 @@ export default function DayContent({ bootcampId }) {
                         <div className="pt-3">
                           <span className="mr-3">
                             <img
-                              width="3%"
+                              width="30"
                               src="/images/resource/assignment.png"
                             />
                           </span>
