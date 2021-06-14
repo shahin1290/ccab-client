@@ -19,7 +19,6 @@ export default function QuizScreen({ match, location }) {
   const [show, setShow] = useState(
     userDetail.name && userDetail.user_type === 'StudentUser' ? false : true
   )
-
   // getting myAnswerList
   const quizAnswerMyList = useSelector((state) => state.quizAnswerMyList)
   const {

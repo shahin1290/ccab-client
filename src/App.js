@@ -167,7 +167,7 @@ function App() {
 
         <MentorRoute
           exact
-          path="/quiz-details/:bootcampId/:weekId/:id"
+          path="/quiz-details/:bootcampId/:dayId/:id"
           component={QuizDetailsScreen}
         ></MentorRoute>
 
@@ -224,13 +224,13 @@ function App() {
 
         <StudentRoute
           exact
-          path="/quiz/:bootcampId/:weekId/:id"
+          path="/quiz/:bootcampId/:dayId/:id"
           component={QuizScreen}
         ></StudentRoute>
 
         <StudentRoute
           exact
-          path="/quiz-answer/:bootcampId/:weekId/:id"
+          path="/quiz-answer/:bootcampId/:dayId/:id"
           component={QuizAnswerScreen}
         ></StudentRoute>
 

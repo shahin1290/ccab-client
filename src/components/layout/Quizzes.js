@@ -133,7 +133,7 @@ export default function Quizzes() {
                                 {quizStatus(quiz._id) &&
                                 quizStatus(quiz._id).status === 'Not Sent' ? (
                                   <Link
-                                    to={`/quiz/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
+                                    to={`/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`}
                                     style={{
                                       color: '#3366BB'
                                     }}
@@ -185,7 +185,7 @@ export default function Quizzes() {
                                 {quizStatus(quiz._id) &&
                                 quizStatus(quiz._id).status !== 'Not Sent' ? (
                                   <Link
-                                    to={`/quiz-answer/${quiz.bootcamp._id}/${quiz.week}/${quiz._id}`}
+                                    to={`/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`}
                                     className=" text-info"
                                   >
                                     Show Answer

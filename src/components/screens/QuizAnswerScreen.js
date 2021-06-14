@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap'
 import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
 
 export default function QuizAnswerScreen({ match, location }) {
-  const { bootcampId, weekId, id } = match.params
+  const { bootcampId, dayId, id } = match.params
   const history = useHistory()
   const dispatch = useDispatch()
   const redirect = location.search ? location.search.split('=')[1] : '/profile'
@@ -38,10 +38,10 @@ export default function QuizAnswerScreen({ match, location }) {
   }
 
   useEffect(() => {
-    dispatch(getQuizDetails(bootcampId, weekId, id))
+    dispatch(getQuizDetails(bootcampId, dayId, id))
 
     dispatch(getMyQuizAnswerList())
-  }, [dispatch, bootcampId, weekId, id])
+  }, [dispatch, bootcampId, dayId, id])
 
   const submitHandler = (e) => {
     e.preventDefault()

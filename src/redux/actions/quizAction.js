@@ -93,7 +93,7 @@ export const getMyQuizList = () => async (dispatch, getState) => {
 }
 
 export const getQuizDetails =
-  (bootcampId, weekId, id) => async (dispatch, getState) => {
+  (bootcampId, dayId, id) => async (dispatch, getState) => {
     try {
       dispatch({
         type: QUIZ_DETAILS_REQUEST
@@ -109,7 +109,7 @@ export const getQuizDetails =
       }
 
       const response = await axios.get(
-        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       )
 
