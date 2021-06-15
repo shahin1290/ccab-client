@@ -10,7 +10,7 @@ import { toast, ToastContainer } from 'react-toastify'
 // import "react-toastify/dist/ReactToastify.css";
 import { USER_REG_REST } from '../../redux/constences/userConst'
 
-export default function RegisterScreen({ location, setAlert }) {
+export default function RegisterScreen() {
   const history = useHistory()
   /**
    * User registeraton process with React input handling
@@ -34,7 +34,7 @@ export default function RegisterScreen({ location, setAlert }) {
   const [gender, setGender] = useState('')
   const [message, setMessage] = useState(null)
 
-  const redirect = location.search ? location.search.split('=')[1] : '/login'
+  const redirect = '/login'
 
   useEffect(() => {
     if (registerSuccess) {

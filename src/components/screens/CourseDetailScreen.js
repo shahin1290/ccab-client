@@ -47,23 +47,20 @@ export default function CourseDetailScreen({ match }) {
     async function fetchMyAPI() {
       let response = await axios.get('https://ipapi.co/json/')
 
-      setCountryCurrency(response.data.currency)
       validateCounrty(response.data.country_name, response.data.languages)
     }
 
     fetchMyAPI()
+
+    dispatch(createCurrrency())
   }, [])
 
   useEffect(() => {
     dispatch(getCourseDetails(ID))
 
-    if (countryCurrency) {
-      dispatch(createCurrrency(countryCurrency))
-    }
-
     // get order for this course
     dispatch(getOrder(ID))
-  }, [dispatch, ID, countryCurrency])
+  }, [dispatch, ID])
 
   //console.log(countryName);
   // validate the user country
@@ -94,7 +91,6 @@ export default function CourseDetailScreen({ match }) {
     for (let i of KlaranCountry) {
       if (i.name == countryName && countryLang.indexOf(i.lang) !== -1) {
         setcountryCode(i.code)
-        console.log(i.code)
         setShowKlarmaImg(true)
       }
     }
@@ -213,10 +209,11 @@ export default function CourseDetailScreen({ match }) {
 
                   {/* Video Column */}
 
-                  {currencyLoading ? (
+                 
+                    <div className="video-column col-lg-4 col-md-12 col-sm-12">
+                    {currencyLoading ? (
                     <Loader />
                   ) : (
-                    <div className="video-column col-lg-4 col-md-12 col-sm-12">
                       <div className="inner-column sticky-top">
                         {/* Video Box */}
                         <div
@@ -264,12 +261,11 @@ export default function CourseDetailScreen({ match }) {
                         ) : (
                           <>
                             <div className="price mb-3">
-                              {console.log(currency)}
                               {currencySuccess &&
                                 (course.price > 0
                                   ? `${getPriceFormat(
-                                      currency.data * course.price
-                                    )}  ${countryCurrency}`
+                                      currency.data.amount * course.price
+                                    )}  ${currency.data.currency}`
                                   : 'Free Course ')}
                             </div>
                             <a
@@ -305,8 +301,9 @@ export default function CourseDetailScreen({ match }) {
                           </>
                         )}
                       </div>
+                      )}
                     </div>
-                  )}
+                 
                 </div>
               </div>
             </div>

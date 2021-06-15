@@ -15,6 +15,7 @@
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "plyr": "^3.6.8",
     "plyr-react": "^3.0.8",
+    "rc-slider": "^9.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-countup": "^4.3.3",
