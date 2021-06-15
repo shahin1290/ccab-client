@@ -24,6 +24,7 @@ import OnlineEducationProspect from '../layout/OnlineEducationProspect'
 import RatingSection from '../layout/RatingSection'
 import ContactSection from '../layout/ContactSection'
 import HomeVideoSection from '../layout/HomeVideoSection'
+import CurriculamStepsBar from '../layout/CurriculamStepsBar';
 export default function HomeScreen({ match }) {
   const dispatch = useDispatch()
   const { courseList, loading, error } = useSelector(
@@ -117,6 +118,8 @@ export default function HomeScreen({ match }) {
         {/* End Banner Section */}
         {/* End Education Section Two */}
         <TopCourses></TopCourses>
+
+        <CurriculamStepsBar />
 
         <OnlineEducationProspect />
 
@@ -340,6 +343,7 @@ export default function HomeScreen({ match }) {
 
         {/* Rating section */}
         <RatingSection />
+
 
         <div className="auto-container text-center  mb-3 mt-5">
           <img
