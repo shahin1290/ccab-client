@@ -78,6 +78,7 @@ const CheckoutForm = ({ match, history }) => {
         client_token: session.client_token
       })
     }
+    console.log(session);
   }, [sessionSuccess])
 
   useEffect(() => {
