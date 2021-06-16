@@ -236,7 +236,7 @@ export const createKlarnaOrder = (id, data) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_KLARNA_CREATE_SUCCESS,
       // payload: console.log("payload:",  response.data),
-      payload: JSON.parse(response.data.data)
+      payload: response.data.data
     })
   } catch (error) {
     console.log('error:', error)

@@ -11,7 +11,7 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
 
-const KlarnaPayment = ({ ID, method }) => {
+const KlarnaPayment = ({ ID, method, plan }) => {
   const { course } = useSelector((state) => state.courseDetails)
   const userLogin = useSelector((state) => state.userLogin)
   const [widgetLoaded, setWidgetLoaded] = useState(false)
@@ -83,7 +83,6 @@ const KlarnaPayment = ({ ID, method }) => {
     error: CreateOrderError
   } = useSelector((state) => state.KlarnaOrderCreate)
 
-
   /* useEffect(() => {
     console.log(order);
     if (orderSuccess) {
@@ -93,8 +92,7 @@ const KlarnaPayment = ({ ID, method }) => {
     }
   }, [orderSuccess]) */
 
-  const onClickHandler =  () => {
-    dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
+  const onClickHandler = () => {
     // eslint-disable-next-line no-undef
     Klarna.Payments.authorize(
       {
@@ -113,13 +111,27 @@ const KlarnaPayment = ({ ID, method }) => {
         }
       }, */
 
-       function (res) {
-        dispatch(
-          createKlarnaOrder(ID, {
-            token: res.authorization_token,
-            data:  getKlarnaOrderLines(course, currency.data)
-          })
-        )
+      function (res) {
+        if (ID) {
+          dispatch(
+            createKlarnaOrder(ID, {
+              token: res.authorization_token,
+              data: getKlarnaOrderLines(course, currency.data)
+            })
+          )
+        }
+
+        if (plan.subscription) {
+          dispatch(
+            createKlarnaOrder(plan.subscription, {
+              token: res.authorization_token,
+              data: getKlarnaOrderLines(
+                { name: plan.subscription, price: plan.amount },
+                currency.data
+              )
+            })
+          )
+        }
       }
     )
   }

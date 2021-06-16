@@ -232,19 +232,39 @@ const CheckoutForm = ({ match, history }) => {
 
   const _handelcreateKlarnaOrder = () => {
     setWidgetLoaded(true)
-    dispatch(
-      createKlarnaSession(
-        {
-          data: getKlarnaOrderLines(course, {
-            amount: currency.data.amount,
-            country: currency.data.country,
-            currency: currency.data.currency
-          })
-        },
-        ID
+    if(ID){
+      dispatch(
+        createKlarnaSession(
+          {
+            data: getKlarnaOrderLines(course, {
+              amount: currency.data.amount,
+              country: currency.data.country,
+              currency: currency.data.currency
+            })
+          },
+          ID
+        )
       )
-    )
-    setWidgetLoaded(false)
+      setWidgetLoaded(false)
+    }
+    if(subscription){
+      const amount = planPrice[subscription][period]
+      dispatch(
+        createKlarnaSession(
+          {
+            data: getKlarnaOrderLines({name: subscription, price: amount }, {
+              amount: currency.data.amount,
+              country: currency.data.country,
+              currency: currency.data.currency
+            })
+          },
+          subscription
+        )
+      )
+      setWidgetLoaded(false)
+    }
+   
+    
   }
 
   const [klarnaMethod, setKlarnaMethod] = useState()
@@ -612,6 +632,7 @@ const CheckoutForm = ({ match, history }) => {
                     {klarnaMethod && (
                       <KlarnaPayment
                         ID={ID}
+                        plan={{subscription: subscription, amount: planPrice[subscription][period]}}
                         widgetLoaded={widgetLoaded}
                         method={klarnaMethod}
                       />

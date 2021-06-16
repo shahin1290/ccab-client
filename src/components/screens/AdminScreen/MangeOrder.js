@@ -188,7 +188,7 @@ export default function MangeOrder({ match }) {
                                       onClick={() => {
                                         dispatch(
                                           captureOrder(
-                                            order.course._id,
+                                            order.course,
                                             order.orderBy
                                           )
                                         )
