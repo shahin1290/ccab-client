@@ -36,8 +36,19 @@ body {
     text-align: center;
   }
 
+  .display-center-small-screen {
+    width: 300px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
   .header-bg-small-screen {
     background-color: red !important;
+  }
+
+  .curriculum-scroll {
+    display: flex;
+    overflow-x: auto;
   }
 }
 
@@ -319,4 +330,30 @@ input:checked + .slider:before {
 
 .svg {
   filter: invert(0.5) sepia(1) saturate(5);
+}
+
+.curriculum a {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Inter;
+  color: #4a4a4a;
+}
+
+.curriculum a:hover {
+  color: #ea5573;
+}
+
+.progress {
+  background-color: #aaa;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.curriculum-project ul li::before {
+  content: '\2022';
+  color: #ea5573;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
