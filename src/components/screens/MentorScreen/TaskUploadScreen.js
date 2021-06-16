@@ -110,7 +110,7 @@ export default function TaskUploadScreen({ match }) {
   }
 
   const DownloadAssignmentHandler = async (task) => {
-    const res = await fetch('/api/tasks/' + task._id + '/download', config)
+    const res = await fetch('https://server.ccab.tech/api/tasks/' + task._id + '/download', config)
     const blob = await res.blob()
     download(blob, task.projectName + '-Assignment')
   }

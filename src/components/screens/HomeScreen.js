@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import 'malihu-custom-scrollbar-plugin'
 import TopCourses from './../layout/TopCourses'
+import Pricing from './../../components/screens/Pricing';
 import { Carousel } from 'react-bootstrap'
 import CountUp from 'react-countup'
 import { useSelector, useDispatch } from 'react-redux'
@@ -121,9 +122,13 @@ export default function HomeScreen({ match }) {
 
         <CurriculamStepsBar />
 
+        
         <OnlineEducationProspect />
 
         <HomeVideoSection />
+
+        {/* Pricing section */}
+        <Pricing/>
 
         {/* Achievement Section Two */}
         <section className="achievements-section-two">
