@@ -143,7 +143,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('image', section.name) && (
                                       <img
-                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
+                                        src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
                                           'image',
                                           section.name
                                         )}`}

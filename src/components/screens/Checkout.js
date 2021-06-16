@@ -134,7 +134,7 @@ const CheckoutForm = ({ match, history }) => {
       const amount = currency.data.amount * course.price * 100
 
       const { data: clientSecret } = await axios.post(
-        `http://localhost:5001/api/order/${ID}/stripe-payment-intent`,
+        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: currency.data.currency,
