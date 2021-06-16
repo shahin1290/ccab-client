@@ -8,8 +8,7 @@ import {
 } from '../../../redux/actions/orderAction'
 import Message from '../../layout/Message'
 import Loader from '../../layout/Loader'
-import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap'
-import { Tabs, Tab, Table, Col, Row, Modal, Button } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 
 export default function MangeOrder({ match }) {
@@ -29,7 +28,6 @@ export default function MangeOrder({ match }) {
   /************************************************************** */
 
   /************* Functions *************/
- 
 
   // get date format
   const getDate = (date) => {
@@ -61,7 +59,7 @@ export default function MangeOrder({ match }) {
     return priceFormat
   }
 
-  /**************************************************************** */
+  /*****************************************************************/
 
   useEffect(() => {
     dispatch(getAllOrders())
@@ -69,10 +67,7 @@ export default function MangeOrder({ match }) {
 
   useEffect(() => {
     console.log(getNotProcessedOrder())
-    console.log('Verified : ', getVerifiedOrder())
   }, [orderList])
-
-
 
   /************************************************** */
 
@@ -120,7 +115,7 @@ export default function MangeOrder({ match }) {
                               <tr key={order._id}>
                                 <td>{index + 1}</td>
                                 <td style={{ width: '30%' }}>
-                                  {order.course && order.course.name}
+                                  {order.course && order.course}
                                 </td>
                                 <td>{order.orderBy && order.orderBy.name}</td>
                                 <td>{getDate(order.createdAt)}</td>
@@ -176,7 +171,7 @@ export default function MangeOrder({ match }) {
                               <tr key={order._id}>
                                 <td>{index + 1}</td>
                                 <td style={{ width: '30%' }}>
-                                  {order.course && order.course.name}
+                                  {order.course && order.course}
                                 </td>
                                 <td>{order.orderBy && order.orderBy.name}</td>
 
@@ -191,7 +186,12 @@ export default function MangeOrder({ match }) {
                                   {order.orderStatus === 'Verified' ? (
                                     <button
                                       onClick={() => {
-                                        dispatch(captureOrder(order.course._id, order.orderBy))
+                                        dispatch(
+                                          captureOrder(
+                                            order.course._id,
+                                            order.orderBy
+                                          )
+                                        )
                                         dispatch(getAllOrders())
                                       }}
                                       className="btn btn-primary btn-sm bg-success rounded-pill"
@@ -250,7 +250,7 @@ export default function MangeOrder({ match }) {
                               <tr key={order._id}>
                                 <td>{index + 1}</td>
                                 <td style={{ width: '30%' }}>
-                                  {order.course && order.course.name}
+                                  {order.course && order.course}
                                 </td>
                                 <td>{order.orderBy && order.orderBy.name}</td>
 

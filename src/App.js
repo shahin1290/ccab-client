@@ -242,6 +242,12 @@ function App() {
 
         <StudentRoute
           exact
+          path="/checkout/subscription/:plan"
+          component={Checkout}
+        ></StudentRoute>
+
+        <StudentRoute
+          exact
           path="/checkout-klarna/:bootcampId"
           component={CheckoutKlarna}
         ></StudentRoute>

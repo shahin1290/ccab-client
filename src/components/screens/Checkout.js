@@ -35,6 +35,15 @@ const CheckoutForm = ({ match, history }) => {
 
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
+  const subscription = match.params.plan || ''
+
+  const [period, setPeriod] = useState('monthly')
+
+  const planPrice = {
+    basic: { weekly: 899, monthly: 3499 },
+    standard: { weekly: 999, monthly: 3899 },
+    premium: { weekly: 1199, monthly: 4699 }
+  }
 
   const { course } = useSelector((state) => state.courseDetails)
   const {
@@ -78,15 +87,14 @@ const CheckoutForm = ({ match, history }) => {
         client_token: session.client_token
       })
     }
-    console.log(session);
   }, [sessionSuccess])
 
   useEffect(() => {
-    dispatch(getCourseDetails(ID))
-
-    if (course) {
-      dispatch(createCurrrency())
+    if (ID) {
+      dispatch(getCourseDetails(ID))
     }
+
+    dispatch(createCurrrency())
   }, [dispatch, ID])
 
   useEffect(() => {
@@ -130,11 +138,16 @@ const CheckoutForm = ({ match, history }) => {
     }
 
     try {
-      if (!course || !currencySuccess) return
-      const amount = currency.data.amount * course.price * 100
+      let amount
+
+      if (subscription) {
+        amount = planPrice[subscription][period] * 100
+      } else {
+        amount = currency.data.amount * course.price * 100
+      }
 
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/${ID}/stripe-payment-intent`,
+        `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: currency.data.currency,
@@ -190,13 +203,27 @@ const CheckoutForm = ({ match, history }) => {
       if (paymentIntent.status === 'succeeded') {
         setProcessingTo(false)
 
-        dispatch(
-          createOrder(ID, {
-            token: paymentIntent.id,
-            amount: paymentIntent.amount,
-            currency: currency.data.currency
-          })
-        )
+        
+
+        if (ID) {
+          dispatch(
+            createOrder(ID, {
+              token: paymentIntent.id,
+              amount: paymentIntent.amount,
+              currency: currency.data.currency
+            })
+          )
+        }
+
+        if (subscription) {
+          dispatch(
+            createOrder(subscription, {
+              token: paymentIntent.id,
+              amount: paymentIntent.amount,
+              currency: currency.data.currency
+            })
+          )
+        }
       }
     } catch (err) {
       setCheckoutError(err.message)
@@ -236,6 +263,122 @@ const CheckoutForm = ({ match, history }) => {
 
             <div className="checkout-section">
               {/* Checkout Form */}
+
+              {/* Sidebar Side */}
+
+              <div className="sidebar-side col-lg-8 col-md-12 col-sm-12 mt-5">
+                <aside className="sidebar sticky-top  mt-5">
+                  {/* Order Widget */}
+                  <div className="sidebar-widget order-widget">
+                    <div className="widget-content ">
+                      <div className="sidebar-title">
+                        <div className="sub-title">Order Summary</div>
+                      </div>
+
+                      {currencyLoading ? (
+                        <Loader />
+                      ) : (
+                        <div className="order-box bg-white p-2">
+                          {subscription ? (
+                            <ul>
+                              <li className="clearfix mb-3">
+                                Subscription Type:
+                                <span className="pull-right">
+                                  {subscription}
+                                </span>
+                              </li>
+
+                              <li className="clearfix mb-3">
+                                Subscription Period:
+                                <span className="pull-right">
+                                  <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <div className="row clearfix">
+                                      <div className="column col-lg-5 col-md-4 col-sm-12">
+                                        <div className="radio-box">
+                                          <input
+                                            type="radio"
+                                            name="period"
+                                            id="type-1"
+                                            value="weekly"
+                                            onChange={(e) =>
+                                              setPeriod(e.target.value)
+                                            }
+                                            checked={period === 'weekly'}
+                                          />
+                                          <label htmlFor="type-1">Weekly</label>
+                                        </div>
+                                      </div>
+                                      <div className="column col-lg-5 col-md-4 col-sm-12">
+                                        <div className="radio-box">
+                                          <input
+                                            type="radio"
+                                            name="period"
+                                            value="monthly"
+                                            id="type-2"
+                                            onChange={(e) =>
+                                              setPeriod(e.target.value)
+                                            }
+                                            checked={period === 'monthly'}
+                                          />
+                                          <label htmlFor="type-2">
+                                            Monthly
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </span>
+                              </li>
+                              <hr />
+
+                              <li className="clearfix">
+                                <strong>Total</strong>{' '}
+                                <span className="pull-right">
+                                  {currencySuccess &&
+                                    `${planPrice[subscription][period]}  ${currency.data.currency}`}
+                                </span>
+                              </li>
+                            </ul>
+                          ) : (
+                            <ul>
+                              <li className="clearfix mb-3">
+                                Original Price:
+                                <span className="pull-right">
+                                  {currencySuccess &&
+                                    `${getPriceFormat(
+                                      currency.data.amount * course.price * 1.5
+                                    )}  ${currency.data.currency}`}
+                                </span>
+                              </li>
+
+                              <li className="clearfix mb-3">
+                                Coupon discounts:
+                                <span className="pull-right">
+                                  {currencySuccess &&
+                                    `-${getPriceFormat(
+                                      currency.data.amount * course.price * 0.5
+                                    )}  ${currency.data.currency}`}
+                                </span>
+                              </li>
+                              <hr />
+
+                              <li className="clearfix">
+                                <strong>Total</strong>{' '}
+                                <span className="pull-right">
+                                  {currencySuccess &&
+                                    `${getPriceFormat(
+                                      currency.data.amount * course.price
+                                    )}  ${currency.data.currency}`}
+                                </span>
+                              </li>
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </aside>
+              </div>
 
               <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                 <div className="title2">Select Payment Method</div>
@@ -477,60 +620,6 @@ const CheckoutForm = ({ match, history }) => {
                 </Tabs>
               </div>
             </div>
-          </div>
-
-          {/* Sidebar Side */}
-
-          <div className="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-5">
-            <aside className="sidebar sticky-top  mt-5">
-              {/* Order Widget */}
-              <div className="sidebar-widget order-widget">
-                <div className="widget-content ">
-                  <div className="sidebar-title">
-                    <div className="sub-title">Order Summary</div>
-                  </div>
-                  {/* Order Box */}
-                  {currencyLoading ? (
-                    <Loader />
-                  ) : (
-                    <div className="order-box bg-white p-2">
-                      <ul>
-                        <li className="clearfix mb-3">
-                          Original Price:
-                          <span className="pull-right">
-                            {currencySuccess &&
-                              `${getPriceFormat(
-                                currency.data.amount * course.price *1.5
-                              )}  ${currency.data.currency}`}
-                          </span>
-                        </li>
-
-                        <li className="clearfix mb-3">
-                          Coupon discounts:
-                          <span className="pull-right">
-                            {currencySuccess &&
-                              `-${getPriceFormat(
-                                currency.data.amount * course.price *.5
-                              )}  ${currency.data.currency}`}
-                          </span>
-                        </li>
-                        <hr />
-
-                        <li className="clearfix">
-                          <strong>Total</strong>{' '}
-                          <span className="pull-right">
-                            {currencySuccess &&
-                              `${getPriceFormat(
-                                currency.data.amount * course.price
-                              )}  ${currency.data.currency}`}
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </div>

@@ -110,7 +110,10 @@ export default function TaskUploadScreen({ match }) {
   }
 
   const DownloadAssignmentHandler = async (task) => {
-    const res = await fetch('https://server.ccab.tech/api/tasks/' + task._id + '/download', config)
+    const res = await fetch(
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
+      config
+    )
     const blob = await res.blob()
     download(blob, task.projectName + '-Assignment')
   }
@@ -118,7 +121,9 @@ export default function TaskUploadScreen({ match }) {
   return (
     <div className="py-5">
       {console.log(tasks)}
-      <div div className="title mb-4">Task uploading</div>
+      <div div className="title mb-4">
+        Task uploading
+      </div>
 
       <Row>
         <Col lg={3} md={6} sm={12}>
@@ -165,7 +170,7 @@ export default function TaskUploadScreen({ match }) {
           </Form>
         </Col>
         <Col lg={8} md={6} sm={12}>
-          <div className="sub-title mb-2" >Latest Task</div>
+          <div className="sub-title mb-2">Latest Task</div>
 
           <Table striped bordered hover responsive="sm">
             <thead>

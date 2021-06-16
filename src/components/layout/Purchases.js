@@ -22,6 +22,7 @@ export default function Quizzes() {
     dispatch(getOrderList())
   }, [dispatch])
 
+
   return (
     <>
       <div className="pb-5 pt-5 mb-5">
@@ -56,7 +57,7 @@ export default function Quizzes() {
                       orderList.map((order, index) => (
                         <tr key={order._id}>
                           <td>{index + 1}</td>
-                          <td>{order.course && order.course.name}</td>
+                          <td>{order.course && order.course}</td>
 
                           <td>{getDate(order.createdAt)}</td>
                           <td>{order.amount} ({order.currency})</td>

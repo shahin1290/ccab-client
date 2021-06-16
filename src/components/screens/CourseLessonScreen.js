@@ -65,8 +65,6 @@ export default function CourseContentScreen({ match }) {
                 <div className="inner-column sticky-top">
                   <div className="title2 p-2 d-flex justify-content-between">
                     Course Content{' '}
-
-                    
                     <a
                       onClick={() => setOpen(!open)}
                       aria-controls="example-collapse-text"
@@ -143,7 +141,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('image', section.name) && (
                                       <img
-                                        src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
+                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
                                           'image',
                                           section.name
                                         )}`}
