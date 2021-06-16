@@ -227,7 +227,7 @@ const CheckoutForm = ({ match, history }) => {
       <div className="auto-container">
         <div className="row clearfix">
           {/* Content Side */}
-          <div className="content-side col-lg-9 col-md-12 col-sm-12">
+          <div className="content-side col-lg-8 col-md-12 col-sm-12">
             {/* Sec Title */}
             <div className="sec-title">
               <div className="title">Checkout</div>
@@ -481,7 +481,7 @@ const CheckoutForm = ({ match, history }) => {
 
           {/* Sidebar Side */}
 
-          <div className="sidebar-side col-lg-3 col-md-12 col-sm-12 mt-5">
+          <div className="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-5">
             <aside className="sidebar sticky-top  mt-5">
               {/* Order Widget */}
               <div className="sidebar-widget order-widget">
@@ -496,14 +496,25 @@ const CheckoutForm = ({ match, history }) => {
                     <div className="order-box bg-white p-2">
                       <ul>
                         <li className="clearfix mb-3">
-                          Basic Plan{' '}
+                          Original Price:
                           <span className="pull-right">
                             {currencySuccess &&
                               `${getPriceFormat(
-                                currency.data.amount * course.price
+                                currency.data.amount * course.price *1.5
                               )}  ${currency.data.currency}`}
                           </span>
                         </li>
+
+                        <li className="clearfix mb-3">
+                          Coupon discounts:
+                          <span className="pull-right">
+                            {currencySuccess &&
+                              `-${getPriceFormat(
+                                currency.data.amount * course.price *.5
+                              )}  ${currency.data.currency}`}
+                          </span>
+                        </li>
+                        <hr />
 
                         <li className="clearfix">
                           <strong>Total</strong>{' '}
