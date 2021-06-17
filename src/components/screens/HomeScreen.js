@@ -6,6 +6,8 @@ import { Carousel } from 'react-bootstrap'
 import CountUp from 'react-countup'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUesrsNumbers } from './../../redux/actions/userAction'
+import { Row, Col, ProgressBar,Container } from 'react-bootstrap'
+import RegisterScreen from '../screens/RegisterScreen'
 
 import {
   Link,
@@ -130,6 +132,29 @@ export default function HomeScreen({ match }) {
         {/* Pricing section */}
         <Pricing/>
 
+         {/* rigstering section          */}
+          <Container>
+         <Row className="p-3">
+              <Col md={6} className="mt-3 ">
+                <div className="title pb-5">Get Start Now</div>
+              </Col>
+
+              <Col>
+                <img width="45" src="/images/career.png" />
+
+                <span className="sub-title  pl-3 ">Career Serviceability </span>
+                <div className="sub-text  sm-text-center">
+                  We help our graduates to find a job by preparaing them for
+                  technical interviews, set up a suitable resume and solid
+                  GitHub account.
+                </div>
+              </Col>
+            </Row>
+
+            <div className="mt-5">
+              <RegisterScreen />
+            </div>
+          </Container>
         {/* Achievement Section Two */}
         <section className="achievements-section-two">
           {/* Pattern Layer */}

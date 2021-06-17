@@ -26,8 +26,9 @@ const CurriculamStepsBar = (props) => {
           scratch step by step.{' '}
         </div>
 
-        <div className=" row d-flex justify-content-between col-lg-12 col-md-10 col-sm-10 mb-2">
-          <div>
+        <div className=" row d-flex justify-content-between col-lg-12 col-md-10 col-sm-10 mb-2 p-3">
+          
+          <div >
             <a
               onClick={() => setValue(3)}
               className="curriculum"
@@ -37,6 +38,7 @@ const CurriculamStepsBar = (props) => {
             </a>
             <div className="text-center">1 week</div>
           </div>
+
           <div>
             <a
               onClick={() => setValue(32)}
@@ -54,10 +56,11 @@ const CurriculamStepsBar = (props) => {
               className="curriculum "
               style={value === 61 ? { color: '#ea5573' } : {}}
             >
-              Advanced Frontend
+              Advanced Web Developer
             </a>
             <div className="text-center">9 weeks</div>
           </div>
+
           <div>
             <a
               onClick={() => setValue(90)}
@@ -68,34 +71,27 @@ const CurriculamStepsBar = (props) => {
             </a>
             <div className="text-center">9 weeks</div>
           </div>
+
           <div>
             <a
-              onClick={() => setValue(97)}
+              onClick={() => setValue(100)}
               className="curriculum "
-              style={value === 97 ? { color: '#ea5573' } : {}}
+              style={value === 100 ? { color: '#ea5573' } : {}}
             >
               Projects
             </a>
             <div className="text-center">2 weeks</div>
           </div>
 
-          <span className=" mt-2 pl-2">
-            <a
-              onClick={() => setValue(100)}
-              className="curriculum "
-              style={value === 100 ? { color: '#ea5573' } : {}}
-            >
-              Full-Stack-Developer
-            </a>
-          </span>
+
         </div>
         <div className="row no-gutter">
-          <ProgressBar className="col-lg-10 col-md-10 col-sm-10  mt-3 mb-2">
+          <ProgressBar className="col-lg-12 col-md-12 col-sm-12  mt-3 mb-2">
             <ProgressBar variant="warning" now={value} />
           </ProgressBar>
         </div>
         <div className="row  mb-5">
-          <div className=" col-lg-11 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
+          <div className=" col-lg-12 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
           <span>1</span>
             {[...Array(10).keys()].map((week, index) => (
               <span>{(index + 1) * 3}</span>
@@ -127,7 +123,7 @@ const CurriculamStepsBar = (props) => {
                 </div>
               </Col>
 
-              <Col md={6}>
+              <Col md={6} className="p-3">
                 <div className="d-flex">
                   <img width="45" src="/images/html.png" />{' '}
                   <div className="sub-title pl-3 pt-3">HTML5 Basics </div>
@@ -361,20 +357,20 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 97 && (
-          <Row className="curriculum-project">
+        {value === 100 && (
+          <Row className="curriculum-project p-3">
             <div className="sub-title">
               <img width="55" src="/images/rocket.png" />
               <span className="pl-3">
                 Turn an idea into a product in 2 weeks
               </span>
             </div>
-            <div className="sub-text">
+            <div className="sub-text p-2">
               Projects Stage is the ultimate experience of the course: produce,
               cast, design, code and deploy a full project in teams during the
               two final weeks you going to work on 2 final project.
             </div>
-            <ul className="sub-text pl-3">
+            <ul className="sub-text p-4">
               <li>Build a creative prototype with Figma to validate the UX</li>
               <li>
                 Code the Project from scratch: from the back end to the user
@@ -386,30 +382,7 @@ const CurriculamStepsBar = (props) => {
           </Row>
         )}
 
-        {value === 100 && (
-          <>
-            <Row>
-              <Col md={6} className="mt-3 text-center">
-                <div className="title pb-1">Get Start Now</div>
-              </Col>
 
-              <Col>
-                <img width="45" src="/images/career.png" />
-
-                <span className="sub-title  pl-3 ">Career Serviceability </span>
-                <div className="sub-text">
-                  We help our graduates to find a job by preparaing them for
-                  technical interviews, set up a suitable resume and solid
-                  GitHub account.
-                </div>
-              </Col>
-            </Row>
-
-            <div className="mt-5">
-              <RegisterScreen />
-            </div>
-          </>
-        )}
       </div>
     </section>
   )

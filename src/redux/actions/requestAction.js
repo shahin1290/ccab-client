@@ -22,7 +22,7 @@ export const createRequest = (request) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.post(
-      'http://localhost:5001/api/request',
+      'https://server.ccab.tech/api/request',
       request,
       config
     )
@@ -61,7 +61,7 @@ export const getRequests = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get('http://localhost:5001/api/request/', config)
+    const response = await axios.get('https://server.ccab.tech/api/request/', config)
     dispatch({
       type: REQUEST_LIST_SUCCESS,
       payload: response.data
