@@ -37,7 +37,7 @@ const CheckoutForm = ({ match, history }) => {
   const ID = match.params.bootcampId
   const subscription = match.params.plan || ''
 
-  const [period, setPeriod] = useState('monthly')
+  const [period, setPeriod] = useState(subscription && 'monthly')
 
   const planPrice = {
     basic: { weekly: 899, monthly: 3499 },
@@ -203,8 +203,6 @@ const CheckoutForm = ({ match, history }) => {
       if (paymentIntent.status === 'succeeded') {
         setProcessingTo(false)
 
-        
-
         if (ID) {
           dispatch(
             createOrder(ID, {
@@ -232,7 +230,7 @@ const CheckoutForm = ({ match, history }) => {
 
   const _handelcreateKlarnaOrder = () => {
     setWidgetLoaded(true)
-    if(ID){
+    if (ID) {
       dispatch(
         createKlarnaSession(
           {
@@ -247,24 +245,25 @@ const CheckoutForm = ({ match, history }) => {
       )
       setWidgetLoaded(false)
     }
-    if(subscription){
+    if (subscription) {
       const amount = planPrice[subscription][period]
       dispatch(
         createKlarnaSession(
           {
-            data: getKlarnaOrderLines({name: subscription, price: amount }, {
-              amount: currency.data.amount,
-              country: currency.data.country,
-              currency: currency.data.currency
-            })
+            data: getKlarnaOrderLines(
+              { name: subscription, price: amount },
+              {
+                amount: currency.data.amount,
+                country: currency.data.country,
+                currency: currency.data.currency
+              }
+            )
           },
           subscription
         )
       )
       setWidgetLoaded(false)
     }
-   
-    
   }
 
   const [klarnaMethod, setKlarnaMethod] = useState()
@@ -629,10 +628,20 @@ const CheckoutForm = ({ match, history }) => {
                       )}
                     </div>
 
-                    {klarnaMethod && (
+                    {klarnaMethod && ID && (
                       <KlarnaPayment
                         ID={ID}
-                        plan={{subscription: subscription, amount: planPrice[subscription][period]}}
+                        widgetLoaded={widgetLoaded}
+                        method={klarnaMethod}
+                      />
+                    )}
+
+                    {klarnaMethod && subscription && (
+                      <KlarnaPayment
+                        plan={{
+                          subscription: subscription,
+                          amount: planPrice[subscription][period]
+                        }}
                         widgetLoaded={widgetLoaded}
                         method={klarnaMethod}
                       />
