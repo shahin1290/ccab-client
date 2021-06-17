@@ -13,14 +13,23 @@ export default function CourseGridScreen({ match }) {
     (state) => state.courseList
   )
 
-  console.log(match.params.category)
+  const filterSubscriptionCourse = (courseList) => {
+    return courseList.filter((course) => {
+      const titleFirstWord = course.name
+        .toLowerCase()
+        .split(' ')[0]
+        .toLowerCase()
+
+      return !['basic', 'standard', 'premium'].includes(titleFirstWord, 1)
+    })
+  }
 
   /*******************Functions *************/
   const categoryArray = match.params.category
     ? [match.params.category]
     : [
         ...new Set(
-          courseList
+          filterSubscriptionCourse(courseList)
             .filter((val) => {
               if (searchTerm === '') {
                 return val
@@ -34,7 +43,7 @@ export default function CourseGridScreen({ match }) {
       ]
 
   const categoryCourses = (category) =>
-    courseList.filter((course) => {
+    filterSubscriptionCourse(courseList).filter((course) => {
       if (searchTerm === '') {
         return course.category === category
       }
@@ -314,7 +323,7 @@ export default function CourseGridScreen({ match }) {
                   <Loader />
                 ) : error ? (
                   <Message>{error}</Message>
-                ) : courseList.length ? (
+                ) :  filterSubscriptionCourse(courseList).length ? (
                   <div className="cource-block-two col-lg-4 col-md-6 col-sm-12">
                     <div
                       className="inner-box wow fadeInLeft"
@@ -326,7 +335,7 @@ export default function CourseGridScreen({ match }) {
                           <img
                             src={
                               'http://localhost:5001/uploads/Bootcamp/' +
-                              courseList[0].img_path
+                              filterSubscriptionCourse(courseList)[0].img_path
                             }
                             alt=""
                           />
@@ -335,7 +344,7 @@ export default function CourseGridScreen({ match }) {
                       <div className="lower-content">
                         <div>
                           <Link className="sub-title" to="/course/1/details">
-                            {courseList[0].name}
+                            { filterSubscriptionCourse(courseList)[0].name}
                           </Link>
                         </div>
                         <div className="text">
@@ -343,18 +352,18 @@ export default function CourseGridScreen({ match }) {
                             className="sub-text d-inline-block text-truncate"
                             style={{ maxWidth: '240px' }}
                           >
-                            {courseList[0].description}
+                            { filterSubscriptionCourse(courseList)[0].description}
                           </span>
                         </div>
                         <div className="clearfix">
                           <div className="pull-left">
                             <div className="students">
-                              {courseList[0].weeks * 5} Lectures
+                              { filterSubscriptionCourse(courseList)[0].weeks * 5} Lectures
                             </div>
                           </div>
                           <div className="pull-right">
                             <div className="hours">
-                              {courseList[0].weeks * 5 * 2} Hours
+                              { filterSubscriptionCourse(courseList)[0].weeks * 5 * 2} Hours
                             </div>
                           </div>
                         </div>
