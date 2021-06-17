@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getDayList } from '../../redux/actions/dayAction'
 import { getDayDetails } from '../../redux/actions/dayAction'
 import { Card, Tabs, Tab, Accordion } from 'react-bootstrap'
 import Loader from './Loader'
@@ -10,6 +9,7 @@ import { getMyQuizList, getQuizList } from '../../redux/actions/quizAction'
 import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
 import { getWeekList } from '../../redux/actions/weekAction'
 import { getOrderList } from '../../redux/actions/orderAction'
+import { getCourseDetails } from '../../redux/actions/courseAction'
 
 export default function DayContent({ bootcampId, setOpen }) {
   const dispatch = useDispatch()
@@ -18,6 +18,13 @@ export default function DayContent({ bootcampId, setOpen }) {
 
   /****************redux store***************** */
 
+  const {
+    course,
+    loading: courseLoading,
+    error: courseErrror
+  } = useSelector((state) => state.courseDetails)
+
+  console.log(course)
   //weekList
   const { weekList, loading, error } = useSelector((state) => state.weekList)
   const {
@@ -28,6 +35,7 @@ export default function DayContent({ bootcampId, setOpen }) {
 
   //use effect
   useEffect(() => {
+    dispatch(getCourseDetails(bootcampId))
     dispatch(getOrderList())
     dispatch(getWeekList(bootcampId))
   }, [dispatch, bootcampId])
@@ -122,7 +130,6 @@ export default function DayContent({ bootcampId, setOpen }) {
         const size = 2
         return daysBasedOnShow.slice(0, size)
       } else if (foundOrder.course === 'standard') {
-
         const daysBasedOnShow = days.filter((day) => day.show)
         const size = 4
         return daysBasedOnShow.slice(0, size)
@@ -131,7 +138,9 @@ export default function DayContent({ bootcampId, setOpen }) {
         const size = 5
         return daysBasedOnShow.slice(0, size)
       }
-    } else return []
+    } else if (userDetail.user_type === 'StudentUser' && course.price === 0) {
+      return days.filter((day) => day.show)
+    } else return null
   }
 
   /****************useEffect***************** */

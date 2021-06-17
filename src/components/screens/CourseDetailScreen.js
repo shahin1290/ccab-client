@@ -247,7 +247,6 @@ export default function CourseDetailScreen({ match }) {
                         {/* <div className="time-left">
                         23 hours left at this price!
                       </div> */}
-                      {console.log(order)}
                         {order && order.course ? (
                           <a
                             href={'/course-content/' + course._id}
