@@ -191,7 +191,7 @@ const CurriculamStepsBar = (props) => {
                   Create responsive web pages for modern browsers using HTML,
                   CSS, and JavaScript. JavaScript, ECMAScript 6, DOM
                   Manipulation, Regular Expressions, Object Oriented
-                  Programming, Data Structures & Algorithms. ReactJS, JSX.
+                  Programming, Data Structures & Algorithms.
                 </div>
               </Col>
             </Row>
@@ -199,28 +199,31 @@ const CurriculamStepsBar = (props) => {
             <Row>
               <Col md={6}>
                 <div className="d-flex">
-                  <img width="50" src="/images/react.png" />
+                  <img width="50" src="/images/bootstrap.png" />
 
-                  <div className="sub-title pl-3 pt-3">React JS </div>
+                  <div className="sub-title pl-3 pt-3">Advanced Style Technology</div>
                 </div>
                 <div className="sub-text">
-                  Optimize the functionality of apps using React Router and
-                  Redux. Learn up to date advanced React programming with React
-                  Hooks, Custom API, and NextJS.
+                  Build fast, responsive sites with Bootstrap4, Learn how to use Bootstrap, and build 
+                  websites in couple of hours,Advanced Css3 using 
+                  flexbox and Grid System technology, animation and transition.
+                  Sass extension, Sass module, and variables, write optmized and resuable
+                  style using Sass.
+
                 </div>
               </Col>
 
               <Col md={6}>
                 <div className="d-flex">
-                  <img width="45" src="/images/building.png" />
+                  <img width="45" src="/images/screen.png" />
 
                   <div className="sub-title pl-3 pt-3">
-                    Building Web products{' '}
+                    Building Modren Website {' '}
                   </div>
                 </div>
                 <div className="sub-text">
-                  Build a richly interactive, front end single page application
-                  using a modern framework library like React. Collaborate as a
+                  Build a richly interactive, a modern front end application
+                  using advanced Css3,Bootstrap4 and HTML5. Collaborate as a
                   team using Git and GitHub, widely accepted collaboration
                   practices, and Agile development workflows.
                 </div>
@@ -233,30 +236,27 @@ const CurriculamStepsBar = (props) => {
           <>
             <Row className="mb-5">
               <Col md={6}>
-                <div className="d-flex">
-                  <div>
-                    <img width="50" src="/images/internet.png" />
-                  </div>
-                  <div className="sub-title pl-3 pt-2">Internet theory</div>
-                </div>
+              <div className="d-flex">
+                  <img width="50" src="/images/react.png" />
 
-                <div className="sub-text ">
-                  At begning you will learn Web Basics, How the Internet Works.
-                  HTTP Request and Response Cycle, Client and Server
-                  Architecture and Terminologies
+                  <div className="sub-title pl-3 pt-3">React JS </div>
+                </div>
+                <div className="sub-text">
+                  Optimize the functionality of apps using React Router.
+                   Learn up to date advanced React programming with React
+                  Hooks, Custom API, and NextJS.
                 </div>
               </Col>
 
               <Col md={6}>
                 <div className="d-flex">
-                  <img width="45" src="/images/js.png" />{' '}
-                  <div className="sub-title pl-3 pt-3">JavaScript </div>
+                  <img width="45" src="/images/es6.svg" />{' '}
+                  <div className="sub-title pl-3 pt-3">Event-Driven APIs </div>
                 </div>
                 <div className="sub-text">
-                  Create responsive web pages for modern browsers using HTML,
-                  CSS, and JavaScript. JavaScript, ECMAScript 6, DOM
-                  Manipulation, Regular Expressions, Object Oriented
-                  Programming, Data Structures & Algorithms. ReactJS, JSX.
+                Implementing asynchronous APIs to send multiple responses to a single request.
+                API security that is categorized into authentication and authorization.
+                Using event-driven APIs has become key to meet customer demand and provide a better user experience. Since there are several fundamental differences between REST and async APIs
                 </div>
               </Col>
             </Row>
@@ -264,14 +264,13 @@ const CurriculamStepsBar = (props) => {
             <Row>
               <Col md={6}>
                 <div className="d-flex">
-                  <img width="50" src="/images/react.png" />
+                  <img width="50" src="/images/redux.png" />
 
-                  <div className="sub-title pl-3 pt-3">React JS </div>
+                  <div className="sub-title pl-3 pt-3">Redux </div>
                 </div>
                 <div className="sub-text">
-                  Optimize the functionality of apps using React Router and
-                  Redux. Learn up to date advanced React programming with React
-                  Hooks, Custom API, and NextJS.
+                Master an open-source JavaScript library for managing application state. Redux is most commonly used with libraries such as React or Angular for building user interfaces.
+                Centralizing your application's state and logic enables powerful capabilities like undo/redo, state persistence, and much more.
                 </div>
               </Col>
 
