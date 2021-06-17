@@ -357,3 +357,9 @@ input:checked + .slider:before {
   width: 1em;
   margin-left: -1em;
 }
+
+#uncontrolled-tab-example-tab-Bill {
+  color: #EA5573;
+  font-weight: bold;
+  font-size: 1.2em;
+}

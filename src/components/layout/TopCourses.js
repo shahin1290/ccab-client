@@ -16,6 +16,17 @@ export default function TopCourses({ match }) {
     dispatch(getCourseList())
   }, [dispatch])
 
+  const filterSubscriptionCourse = (courseList) => {
+    return courseList.filter((course) => {
+      const titleFirstWord = course.name
+        .toLowerCase()
+        .split(' ')[0]
+        .toLowerCase()
+
+      return !['basic', 'standard', 'premium'].includes(titleFirstWord, 1)
+    })
+  }
+
   return (
     <>
       {/* Institution Section */}
@@ -39,7 +50,7 @@ export default function TopCourses({ match }) {
           <div className="row clearfix">
             {/* Institution Block */}
             {courseList.length &&
-              courseList.map((course) => (
+              filterSubscriptionCourse(courseList).map((course) => (
                 <div
                   className=" cource-block-two col-lg-3 col-md-6 col-sm-12"
                   key={course._id}
@@ -49,7 +60,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                            'http://localhost:5001/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""

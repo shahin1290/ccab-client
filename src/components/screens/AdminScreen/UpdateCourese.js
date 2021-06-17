@@ -295,6 +295,10 @@ export default function UpdateCourese({ match }) {
               <div className="left-column col-lg-8 col-md-12 col-sm-12">
                 <div className="inner-column">
                   <div className="sub-title pb-3">Basic Information</div>
+                  <div className="sub-text pb-3 text-info">
+                    *Add Plan name(Basic or Standard or Premium) as a first word
+                    of the course title if the course is for the subscription plan (Ex. Standard MERN STACK).
+                  </div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">
                     <form method="post" action="index.html">
@@ -563,7 +567,7 @@ export default function UpdateCourese({ match }) {
                     {ImageLable ? (
                       <img
                         src={
-                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (

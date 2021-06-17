@@ -18,6 +18,8 @@ import { getCourseList } from '../../redux/actions/courseAction'
 import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
+import { getRequests } from '../../redux/actions/requestAction'
+import RequestPaymentList from '../layout/RequestPaymentList'
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -51,6 +53,13 @@ export default function ProfileScreen() {
       return courseList.filter((course) => course.mentor._id === userDetail._id)
     }
   }
+
+  //get request payments
+  const { requests, loading: requestLoading } = useSelector(
+    (state) => state.requestList
+  )
+
+  console.log(requests)
 
   // updating process
   const userUpdate = useSelector((state) => state.userUpdate)
@@ -90,6 +99,7 @@ export default function ProfileScreen() {
     dispatch(getProfile())
 
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
+      dispatch(getRequests())
       dispatch(getMyQuizAnswerList())
       dispatch(getMyAnswerList())
       dispatch(getMyTaskList())
@@ -128,7 +138,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/avatar.svg'
                       }
                       alt="avatar"
@@ -227,14 +237,17 @@ export default function ProfileScreen() {
           {/* Lower Content */}
           <div className="lower-content">
             {/* Instructor Info Tabs*/}
-            <Tabs defaultActiveKey="Courses" id="uncontrolled-tab-example">
+            <Tabs
+              defaultActiveKey="Courses"
+              id="uncontrolled-tab-example"
+              className="bill"
+            >
               <Tab eventKey="Courses" title="Courses">
                 <div className="title pt-5 pb-3">My Courses</div>
 
                 <div className="single-item-carousel owl-carousel owl-theme">
                   <div className="slide">
                     <div className="row clearfix">
-                      {console.log(bootcampLoading)}
                       {/* Course Block */}
                       {bootcampLoading ? (
                         <Loader />
@@ -251,7 +264,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'https://server.ccab.tech/uploads/Bootcamp/' +
+                                      'http://localhost:5001/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
@@ -332,6 +345,14 @@ export default function ProfileScreen() {
               {userDetail && userDetail.user_type === 'StudentUser' ? (
                 <Tab eventKey="Purchases" title="Purchases">
                   <Purchases />
+                </Tab>
+              ) : null}
+
+              {requestLoading ? (
+                <Loader />
+              ) : requests.length > 0 ? (
+                <Tab eventKey="Bill" title="Bill">
+                  <RequestPaymentList />
                 </Tab>
               ) : null}
             </Tabs>

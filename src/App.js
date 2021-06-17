@@ -23,6 +23,9 @@ import EditProfileStudent from './components/screens/EditProfileStudent'
 import MangeCoures from './components/screens/AdminScreen/MangeCoures'
 import MangeOrder from './components/screens/AdminScreen/MangeOrder'
 import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
+import RequestPayment from './components/screens/AdminScreen/RequestPayment'
+import RequestList from './components/screens/AdminScreen/RequestList'
+
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
 import UpdateMentorCourse from './components/screens/MentorScreen/UpdateMentorCourse'
@@ -54,7 +57,6 @@ import './App.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Quizzes from './components/layout/Quizzes'
-import AssignmentScreen from './components/screens/AssignmentScreen'
 
 function App() {
   useEffect(() => {
@@ -90,6 +92,18 @@ function App() {
           exact
           path="/admin-coure-update/:id"
           component={UpdateCourese}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-request-payment"
+          component={RequestPayment}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-request-list"
+          component={RequestList}
         ></AdminRoute>
 
         {/* Private Route for Mentor  */}
@@ -237,6 +251,18 @@ function App() {
         <StudentRoute
           exact
           path="/checkout/:bootcampId"
+          component={Checkout}
+        ></StudentRoute>
+
+        <StudentRoute
+          exact
+          path="/checkout/subscription/:plan"
+          component={Checkout}
+        ></StudentRoute>
+
+        <StudentRoute
+          exact
+          path="/checkout/bill/:billId"
           component={Checkout}
         ></StudentRoute>
 

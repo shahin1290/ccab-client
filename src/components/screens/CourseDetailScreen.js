@@ -65,7 +65,6 @@ export default function CourseDetailScreen({ match }) {
   //console.log(countryName);
   // validate the user country
   const validateCounrty = (countryName, countryLang) => {
-    console.log('Validate Country ')
     let KlaranCountry = [
       { name: 'Austria', code: 'de_at', lang: 'de' },
       { name: 'Belgium', code: 'fr_be', lang: 'fr' },
@@ -209,18 +208,17 @@ export default function CourseDetailScreen({ match }) {
 
                   {/* Video Column */}
 
-                 
-                    <div className="video-column col-lg-4 col-md-12 col-sm-12">
+                  <div className="video-column col-lg-4 col-md-12 col-sm-12">
                     {currencyLoading ? (
-                    <Loader />
-                  ) : (
+                      <Loader />
+                    ) : (
                       <div className="inner-column sticky-top">
                         {/* Video Box */}
                         <div
                           className="intro-video"
                           style={{
                             backgroundImage:
-                              'url(https://server.ccab.tech/uploads/Bootcamp/' +
+                              'url(http://localhost:5001/uploads/Bootcamp/' +
                               course.img_path +
                               ')'
                           }}
@@ -301,9 +299,8 @@ export default function CourseDetailScreen({ match }) {
                           </>
                         )}
                       </div>
-                      )}
-                    </div>
-                 
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

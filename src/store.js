@@ -79,6 +79,10 @@ import {
   orderListAllReducer
 } from './redux/reducers/orderReducer'
 import { currencyCreateReducer } from './redux/reducers/currencyReducer'
+import {
+  requestCreateReducer,
+  requestListReducer
+} from './redux/reducers/requestReducer'
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -135,7 +139,9 @@ const reducer = combineReducers({
   klarnaSessionRead: klarnaSessionReadReducer,
   getOrderView: orderVeiwReducer,
   getAllOrders: orderListAllReducer,
-  currencyCreate: currencyCreateReducer
+  currencyCreate: currencyCreateReducer,
+  requestCreate: requestCreateReducer,
+  requestList: requestListReducer
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')
