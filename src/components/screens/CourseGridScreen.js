@@ -323,7 +323,7 @@ export default function CourseGridScreen({ match }) {
                   <Loader />
                 ) : error ? (
                   <Message>{error}</Message>
-                ) :  filterSubscriptionCourse(courseList).length ? (
+                ) : filterSubscriptionCourse(courseList).length ? (
                   <div className="cource-block-two col-lg-4 col-md-6 col-sm-12">
                     <div
                       className="inner-box wow fadeInLeft"
@@ -344,7 +344,7 @@ export default function CourseGridScreen({ match }) {
                       <div className="lower-content">
                         <div>
                           <Link className="sub-title" to="/course/1/details">
-                            { filterSubscriptionCourse(courseList)[0].name}
+                            {filterSubscriptionCourse(courseList)[0].name}
                           </Link>
                         </div>
                         <div className="text">
@@ -352,18 +352,26 @@ export default function CourseGridScreen({ match }) {
                             className="sub-text d-inline-block text-truncate"
                             style={{ maxWidth: '240px' }}
                           >
-                            { filterSubscriptionCourse(courseList)[0].description}
+                            {
+                              filterSubscriptionCourse(courseList)[0]
+                                .description
+                            }
                           </span>
                         </div>
                         <div className="clearfix">
                           <div className="pull-left">
                             <div className="students">
-                              { filterSubscriptionCourse(courseList)[0].weeks * 5} Lectures
+                              {filterSubscriptionCourse(courseList)[0].weeks *
+                                5}{' '}
+                              Lectures
                             </div>
                           </div>
                           <div className="pull-right">
                             <div className="hours">
-                              { filterSubscriptionCourse(courseList)[0].weeks * 5 * 2} Hours
+                              {filterSubscriptionCourse(courseList)[0].weeks *
+                                5 *
+                                2}{' '}
+                              Hours
                             </div>
                           </div>
                         </div>

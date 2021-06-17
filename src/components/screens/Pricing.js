@@ -29,7 +29,11 @@ export default function Pricing() {
                     </div>
                     <h3>Basic Plan</h3>
                     <div className="price">
-                      $29.99 <span>Per month</span>
+                      3499 kr <span>Per month</span>
+                    </div>
+                    <div>or</div>
+                    <div className="price">
+                      899 kr <span>Per week</span>
                     </div>
                     <ul className="list">
                       <li className="check">
@@ -83,7 +87,11 @@ export default function Pricing() {
                     </div>
                     <h3>Standard Plan</h3>
                     <div className="price">
-                      $29.99 <span>Per month</span>
+                      3899 kr <span>Per month</span>
+                    </div>
+                    <div>or</div>
+                    <div className="price">
+                      999 kr <span>Per week</span>
                     </div>
                     <ul className="list">
                       <li className="check">
@@ -137,7 +145,11 @@ export default function Pricing() {
                     </div>
                     <h3>Premium Plan</h3>
                     <div className="price">
-                      $29.99 <span>Per month</span>
+                      4699 kr <span>Per month</span>
+                    </div>
+                    <div>or</div>
+                    <div className="price">
+                      1199 kr <span>Per week</span>
                     </div>
                     <ul className="list">
                       <li className="check">

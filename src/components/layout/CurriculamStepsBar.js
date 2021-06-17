@@ -26,7 +26,7 @@ const CurriculamStepsBar = (props) => {
           scratch step by step.{' '}
         </div>
 
-        <div className=" row d-flex justify-content-between col-lg-10 col-md-10 col-sm-10 mb-2">
+        <div className=" row d-flex justify-content-between col-lg-12 col-md-10 col-sm-10 mb-2">
           <div>
             <a
               onClick={() => setValue(3)}
@@ -78,11 +78,6 @@ const CurriculamStepsBar = (props) => {
             </a>
             <div className="text-center">2 weeks</div>
           </div>
-        </div>
-        <div className="row no-gutter">
-          <ProgressBar className="col-lg-10 col-md-10 col-sm-10 col-xs-8 mt-3 mb-2">
-            <ProgressBar variant="warning" now={value} />
-          </ProgressBar>
 
           <span className=" mt-2 pl-2">
             <a
@@ -94,10 +89,16 @@ const CurriculamStepsBar = (props) => {
             </a>
           </span>
         </div>
-        <div className="row no-gutter mb-5" style={{ marginLeft: '-30px' }}>
-          <div className=" col-lg-10 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
-            {[...Array(weeks).keys()].map((week, index) => (
-              <span>{index}</span>
+        <div className="row no-gutter">
+          <ProgressBar className="col-lg-10 col-md-10 col-sm-10  mt-3 mb-2">
+            <ProgressBar variant="warning" now={value} />
+          </ProgressBar>
+        </div>
+        <div className="row  mb-5">
+          <div className=" col-lg-11 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
+          <span>1</span>
+            {[...Array(10).keys()].map((week, index) => (
+              <span>{(index + 1) * 3}</span>
             ))}
             <span>∞</span>
           </div>
@@ -111,8 +112,7 @@ const CurriculamStepsBar = (props) => {
                   <span
                     style={{
                       backgroundColor: '#F09300',
-                      borderRadius: '3px 3px 3px 3px',
-                     
+                      borderRadius: '3px 3px 3px 3px'
                     }}
                   >
                     <img width="50" src="/images/developer.png" />
