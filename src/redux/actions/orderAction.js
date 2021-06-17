@@ -290,7 +290,6 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
 
 export const readKlarnaSession =
   (id, session) => async (dispatch, getState) => {
-    console.log('id', session)
     try {
       dispatch({
         type: KLARNA_SESSION_READ_REQUEST

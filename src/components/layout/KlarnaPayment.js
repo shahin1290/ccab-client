@@ -93,6 +93,15 @@ const KlarnaPayment = ({ ID, method, plan }) => {
   }, [orderSuccess]) */
 
   const onClickHandler = () => {
+    if (ID) {
+      dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
+    }
+
+    if (plan.subscription) {
+      dispatch(
+        readKlarnaSession(plan.subscription, { session_id: session.session_id })
+      )
+    }
     // eslint-disable-next-line no-undef
     Klarna.Payments.authorize(
       {
@@ -139,7 +148,11 @@ const KlarnaPayment = ({ ID, method, plan }) => {
   return (
     <>
       {orderSuccess ? (
-        <Redirect to={`/confirmation-klarna/${ID}`} />
+        ID ? (
+          <Redirect to={`/confirmation-klarna/${ID}`} />
+        ) : (
+          <Redirect to={`/confirmation-klarna/${plan.subscription}`} />
+        )
       ) : (
         <div className=" bg-white d-flex flex-column justify-content-center">
           {method === 'pay_now' && (

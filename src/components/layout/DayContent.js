@@ -118,18 +118,15 @@ export default function DayContent({ bootcampId, setOpen }) {
       )
 
       if (foundOrder.course === 'basic') {
-        console.log('b')
         const daysBasedOnShow = days.filter((day) => day.show)
         const size = 2
         return daysBasedOnShow.slice(0, size)
       } else if (foundOrder.course === 'standard') {
-        console.log('s')
 
         const daysBasedOnShow = days.filter((day) => day.show)
         const size = 4
         return daysBasedOnShow.slice(0, size)
       } else {
-        console.log('a')
         const daysBasedOnShow = days.filter((day) => day.show)
         const size = 5
         return daysBasedOnShow.slice(0, size)
