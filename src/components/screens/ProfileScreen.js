@@ -19,7 +19,7 @@ import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 import { getRequests } from '../../redux/actions/requestAction'
-import RequestPaymentList from '../layout/RequestPaymentList'
+import PaymentRequest from '../layout/PaymentRequest';
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -352,7 +352,7 @@ export default function ProfileScreen() {
                 <Loader />
               ) : requests.length > 0 ? (
                 <Tab eventKey="Bill" title="Bill">
-                  <RequestPaymentList />
+                  <PaymentRequest />
                 </Tab>
               ) : null}
             </Tabs>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { plans } from '../../util/plans'
 
 export default function Pricing() {
-  const [period, setPeriod] = useState('monthly')
+  const [period, setPeriod] = useState('weekly')
 
   const getPlans = () => {
     return plans.filter((plan) => plan.period === period)

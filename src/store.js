@@ -81,7 +81,8 @@ import {
 import { currencyCreateReducer } from './redux/reducers/currencyReducer'
 import {
   requestCreateReducer,
-  requestListReducer
+  requestListReducer,
+  requestDetailsReducer
 } from './redux/reducers/requestReducer'
 
 const reducer = combineReducers({
@@ -141,7 +142,8 @@ const reducer = combineReducers({
   getAllOrders: orderListAllReducer,
   currencyCreate: currencyCreateReducer,
   requestCreate: requestCreateReducer,
-  requestList: requestListReducer
+  requestList: requestListReducer,
+  requestDetails: requestDetailsReducer
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

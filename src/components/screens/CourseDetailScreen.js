@@ -262,7 +262,9 @@ export default function CourseDetailScreen({ match }) {
                               {currencySuccess &&
                                 (course.price > 0
                                   ? `${getPriceFormat(
-                                      currency.data.amount * course.price
+                                      Math.round(
+                                        currency.data.amount * course.price
+                                      )
                                     )}  ${currency.data.currency}`
                                   : 'Free Course ')}
                             </div>

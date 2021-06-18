@@ -12,12 +12,13 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import {
   createOrder,
-  createKlarnaSession,
-  readKlarnaSession
+  createKlarnaSession
 } from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
+import { getRequestDetails } from '../../redux/actions/requestAction'
+
 import Loader from '../layout/Loader'
-import { Tabs, Tab, Accordion, Card, Button } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../layout/Message'
 import KlarnaPayment from '../layout/KlarnaPayment'
@@ -37,6 +38,7 @@ const CheckoutForm = ({ match, history }) => {
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
   const subscription = match.params.plan
+  const requestId = match.params.requestId
 
   const plan = plans.find((plan) => plan._id === subscription)
 
@@ -53,6 +55,11 @@ const CheckoutForm = ({ match, history }) => {
   } = useSelector((state) => state.currencyCreate)
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
+  const {
+    loading: requestLoading,
+    success: requestSuccess,
+    request
+  } = useSelector((state) => state.requestDetails)
 
   const {
     order,
@@ -77,7 +84,7 @@ const CheckoutForm = ({ match, history }) => {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const apiKey = '0d65e80400de77684ec5'
+      const apiKey = '230d7f66fcc54d2cf6de'
 
       const fromCurrency = 'SEK'
       const toCurrency = 'USD'
@@ -109,6 +116,10 @@ const CheckoutForm = ({ match, history }) => {
   useEffect(() => {
     if (ID) {
       dispatch(getCourseDetails(ID))
+    }
+
+    if (requestId) {
+      dispatch(getRequestDetails(requestId))
     }
 
     dispatch(createCurrrency())
@@ -316,7 +327,7 @@ const CheckoutForm = ({ match, history }) => {
                         <Loader />
                       ) : (
                         <div className="order-box bg-white p-2">
-                          {subscription ? (
+                          {subscription && (
                             <ul>
                               <li className="clearfix mb-3">
                                 Subscription Type:
@@ -345,14 +356,19 @@ const CheckoutForm = ({ match, history }) => {
                                 </span>
                               </li>
                             </ul>
-                          ) : (
+                          )}
+                          {ID && (
                             <ul>
                               <li className="clearfix mb-3">
                                 Original Price:
                                 <span className="pull-right">
                                   {currencySuccess &&
                                     `${getPriceFormat(
-                                      currency.data.amount * course.price * 1.5
+                                      Math.round(
+                                        currency.data.amount *
+                                          course.price *
+                                          1.5
+                                      )
                                     )}  ${currency.data.currency}`}
                                 </span>
                               </li>
@@ -362,7 +378,11 @@ const CheckoutForm = ({ match, history }) => {
                                 <span className="pull-right">
                                   {currencySuccess &&
                                     `-${getPriceFormat(
-                                      currency.data.amount * course.price * 0.5
+                                      Math.round(
+                                        currency.data.amount *
+                                          course.price *
+                                          0.5
+                                      )
                                     )}  ${currency.data.currency}`}
                                 </span>
                               </li>
@@ -371,10 +391,46 @@ const CheckoutForm = ({ match, history }) => {
                               <li className="clearfix">
                                 <strong>Total</strong>{' '}
                                 <span className="pull-right">
+                                  <strong>
+                                    {currencySuccess &&
+                                      `${getPriceFormat(
+                                        Math.round(
+                                          currency.data.amount * course.price
+                                        )
+                                      )}  ${currency.data.currency}`}
+                                  </strong>
+                                </span>
+                              </li>
+                            </ul>
+                          )}
+
+                          {requestId && (
+                            <ul>
+                              <li className="clearfix mb-3">
+                                Bill:
+                                <span className="pull-right">
                                   {currencySuccess &&
                                     `${getPriceFormat(
-                                      currency.data.amount * course.price
+                                      Math.round(
+                                        currency.data.amount * request.amount
+                                      )
                                     )}  ${currency.data.currency}`}
+                                </span>
+                              </li>
+
+                              <hr />
+
+                              <li className="clearfix">
+                                <strong>Total</strong>{' '}
+                                <span className="pull-right">
+                                  <strong>
+                                    {currencySuccess &&
+                                      `${getPriceFormat(
+                                        Math.round(
+                                        currency.data.amount * request.amount
+                                        )
+                                      )}  ${currency.data.currency}`}
+                                  </strong>
                                 </span>
                               </li>
                             </ul>
