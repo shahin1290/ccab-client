@@ -61,8 +61,9 @@ export default function Pricing() {
                     <div className="price-block col  col-sm-12">
                       <div className="inner-box">
                         <div className="icon-box">
-                          <span className="icon">
-                            <img src="images/icons/price-1.png" alt />
+                          <span className="icon" >
+                            {/* <img src="images/icons/price-1.png" alt /> */}
+                            <i className="fas fa-gem planicon"></i>
                           </span>
                         </div>
                         <h3>{plan.name}</h3>
@@ -85,7 +86,7 @@ export default function Pricing() {
                           to={`/checkout/subscription/${plan._id}`}
                           className="theme-btn btn-style-two"
                         >
-                          <span className="txt">Purchase Membership</span>
+                          <span className="txt">Select</span>
                         </Link>
                       </div>
                     </div>

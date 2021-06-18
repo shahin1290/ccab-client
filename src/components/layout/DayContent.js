@@ -120,9 +120,9 @@ export default function DayContent({ bootcampId, setOpen }) {
     if (userDetail.user_type === 'StudentUser'  ) {
       const foundOrder =orderList.length&& orderList.find(
         (order) =>
-          (order.orderStatus === 'Delivered' && order.course === 'basic') ||
-          (order.orderStatus === 'Delivered' && order.course === 'standard') ||
-          (order.orderStatus === 'Delivered' && order.course === 'premium')
+          (order.orderStatus === 'Delivered' && order.course === 'silver') ||
+          (order.orderStatus === 'Delivered' && order.course === 'golden') ||
+          (order.orderStatus === 'Delivered' && order.course === 'diamond')
       )
 
       if (foundOrder&&foundOrder.course === 'basic') {

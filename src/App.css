@@ -80,7 +80,9 @@ body {
   overflow: hidden;
   margin-top: -6px;
 }
-
+.planicon{
+  font-size: 230% !important;
+}
 .title2 {
   font-size: 32px;
   font-weight: 200;
