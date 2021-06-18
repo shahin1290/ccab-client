@@ -117,8 +117,8 @@ export default function DayContent({ bootcampId, setOpen }) {
       return days.filter((day) => day.show)
     }
 
-    if (userDetail.user_type === 'StudentUser' && orderList.length) {
-      const foundOrder = orderList.find(
+    if (userDetail.user_type === 'StudentUser'  ) {
+      const foundOrder =orderList.length&& orderList.find(
         (order) =>
           (order.orderStatus === 'Delivered' && order.course === 'Basic Plan') ||
           (order.orderStatus === 'Delivered' && order.course === 'Standard Plan') ||

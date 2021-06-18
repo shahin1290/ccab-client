@@ -97,7 +97,7 @@ export default function ProfileScreen() {
     dispatch(getProfile())
 
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
-      dispatch(getRequests())
+     // dispatch(getRequests())
       dispatch(getMyQuizAnswerList())
       dispatch(getMyAnswerList())
       dispatch(getMyTaskList())

@@ -91,7 +91,7 @@ const CheckoutForm = ({ match, history }) => {
       const query = fromCurrency + '_' + toCurrency
 
       const url =
-        'https://free.currconv.com/api/v7/convert?q=' +
+        'https://api.currconv.com/api/v7/convert?q=' +
         query +
         '&compact=ultra&apiKey=' +
         apiKey

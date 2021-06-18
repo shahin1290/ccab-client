@@ -34,42 +34,47 @@ const CurriculamStepsBar = (props) => {
               className="curriculum"
               style={value === 3 ? { color: '#ea5573' } : {}}
             >
-              Foundation
+              Foundation 
+              
+              <div className="text-center">1 week</div>
             </a>
-            <div className="text-center">1 week</div>
+           
           </div>
 
           <div>
             <a
-              onClick={() => setValue(32)}
+              onClick={() => setValue(25)}
               className="curriculum"
               style={value === 32 ? { color: '#ea5573' } : {}}
             >
               Basic Frontend
+              <div className="text-center">9 weeks</div>
             </a>
-            <div className="text-center">9 weeks</div>
+            
           </div>
 
           <div>
             <a
-              onClick={() => setValue(61)}
+              onClick={() => setValue(50)}
               className="curriculum "
               style={value === 61 ? { color: '#ea5573' } : {}}
             >
-              Advanced Web Developer
+              Advanced Frontend 
+              <div className="text-center">9 weeks</div>
             </a>
-            <div className="text-center">9 weeks</div>
+           
           </div>
 
           <div>
             <a
-              onClick={() => setValue(90)}
+              onClick={() => setValue(75)}
               className="curriculum "
               style={value === 90 ? { color: '#ea5573' } : {}}
             >
-              Backend & Database
+              Advanced Backend & Database
+              <div className="text-center">9 weeks</div>
             </a>
-            <div className="text-center">9 weeks</div>
+            
           </div>
 
           <div>
@@ -79,8 +84,9 @@ const CurriculamStepsBar = (props) => {
               style={value === 100 ? { color: '#ea5573' } : {}}
             >
               Projects
+              <div className="text-center">2 weeks</div>
             </a>
-            <div className="text-center">2 weeks</div>
+            
           </div>
 
 
@@ -92,11 +98,44 @@ const CurriculamStepsBar = (props) => {
         </div>
         <div className="row  mb-5">
           <div className=" col-lg-12 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
-          <span>1</span>
-            {[...Array(10).keys()].map((week, index) => (
+          <a
+              onClick={() => setValue(3)}
+              className="curriculum "
+              style={value === 3 ? { color: '#ea5573' } : {}}
+            > 
+            <span onClick={() => setValue(3)}>1</span>
+            </a>
+            {/* {[...Array(10).keys()].map((week, index) => (
               <span>{(index + 1) * 3}</span>
-            ))}
-            <span>∞</span>
+            ))} */}
+                        <a
+              onClick={() => setValue(25)}
+              className="curriculum "
+              style={value === 25 ? { color: '#ea5573' } : {}}
+            ><span  onClick={() => setValue(25)}>9</span></a>
+                        
+                        
+                         <a
+              onClick={() => setValue(50)}
+              className="curriculum "
+              style={value === 50 ? { color: '#ea5573' } : {}}
+            ><span onClick={() => setValue(50)}>18</span></a>
+
+                        <a
+              onClick={() => setValue(75)}
+              className="curriculum "
+              style={value === 75 ? { color: '#ea5573' } : {}}
+            > <span onClick={() => setValue(75)}>27</span></a>
+
+                          <a
+              onClick={() => setValue(100)}
+              className="curriculum "
+              style={value === 100 ? { color: '#ea5573' } : {}}
+            > <span onClick={() => setValue(100)}>30</span></a>
+           
+             
+            
+           
           </div>
         </div>
 
@@ -164,7 +203,7 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 32 && (
+        {value === 25 && (
           <>
             <Row className="mb-5">
               <Col md={6}>
@@ -232,7 +271,7 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 61 && (
+        {value === 50 && (
           <>
             <Row className="mb-5">
               <Col md={6}>
@@ -293,7 +332,7 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 90 && (
+        {value === 75 && (
           <>
             <Row className="mb-5">
               <Col md={6}>
