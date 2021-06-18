@@ -1,3 +1,6 @@
+import {getPriceConversion} from './getPriceConversion';
+
+
 export const plans = [
   {
     name: 'Sliver Plan',

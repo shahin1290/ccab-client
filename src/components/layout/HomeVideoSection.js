@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import VideoImage from './../../assets/images/videosImage.gif'
+import VideoImage from './../../assets/images/videoBg.jpg'
 import ModalVideo from 'react-modal-video'
 import { Row, Col } from 'react-bootstrap'
 
@@ -51,7 +51,7 @@ const HomeVideoSection = () => {
                       showinfo: 0
                     }}
                     isOpen={isOpen}
-                    videoId="Uqn5LJd_6gU"
+                    videoId="UDkFztrDrys"
                     onClose={() => setOpen(false)}
                   />
                 </div>
