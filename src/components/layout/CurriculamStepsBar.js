@@ -131,7 +131,7 @@ const CurriculamStepsBar = (props) => {
               onClick={() => setValue(100)}
               className="curriculum "
               style={value === 100 ? { color: '#ea5573' } : {}}
-            > <span onClick={() => setValue(100)}>∞</span></a>
+            > <span onClick={() => setValue(100)}>30</span></a>
            
              
             
