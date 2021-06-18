@@ -84,14 +84,14 @@ const CheckoutForm = ({ match, history }) => {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const apiKey = '230d7f66fcc54d2cf6de'
+      const apiKey = '6068a971e6754bdf9d3b0ddc706779b0'
 
       const fromCurrency = 'SEK'
       const toCurrency = 'USD'
       const query = fromCurrency + '_' + toCurrency
 
       const url =
-        'https://free.currconv.com/api/v7/convert?q=' +
+        'https://api.currconv.com/api/v7/convert?q=' +
         query +
         '&compact=ultra&apiKey=' +
         apiKey
