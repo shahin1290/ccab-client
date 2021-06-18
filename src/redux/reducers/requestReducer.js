@@ -8,6 +8,12 @@ import {
   REQUEST_DETAILS_REQUEST,
   REQUEST_DETAILS_SUCCESS,
   REQUEST_DETAILS_FAIL,
+  REQUEST_UPDATE_REQUEST,
+  REQUEST_UPDATE_SUCCESS,
+  REQUEST_UPDATE_FAIL,
+  REQUEST_DELETE_REQUEST,
+  REQUEST_DELETE_SUCCESS,
+  REQUEST_DELETE_FAIL
 } from '../constences/requestConst'
 
 export const requestCreateReducer = (
@@ -42,27 +48,27 @@ export const requestListReducer = (state = { requests: [] }, action) => {
   switch (action.type) {
     case REQUEST_LIST_REQUEST:
       return {
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case REQUEST_LIST_SUCCESS:
       // console.log("actionP: ", action.payload)
 
       return {
         loading: false, // loading is done laoding!
-        requests: action.payload.data,
-      };
+        requests: action.payload.data
+      }
 
     case REQUEST_LIST_FAIL:
       return {
         loading: false, // loading is done laoding!
-        error: action.payload,
-      };
+        error: action.payload
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const requestDetailsReducer = (
   state = { request: {}, loading: false },
@@ -84,6 +90,52 @@ export const requestDetailsReducer = (
     case REQUEST_DETAILS_FAIL:
       return {
         ...state,
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
+export const requestDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case REQUEST_DELETE_REQUEST:
+      return {
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
+
+    case REQUEST_DELETE_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        successDelete: true
+      }
+    case REQUEST_DELETE_FAIL:
+      return {
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
+export const requestUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case REQUEST_UPDATE_REQUEST:
+      return {
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
+
+    case REQUEST_UPDATE_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        success: true
+      }
+    case REQUEST_UPDATE_FAIL:
+      return {
         loading: false, // loading is done laoding!
         error: action.payload
       }

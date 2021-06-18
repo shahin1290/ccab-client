@@ -84,7 +84,7 @@ const CheckoutForm = ({ match, history }) => {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const apiKey = '230d7f66fcc54d2cf6de'
+      const apiKey = '6068a971e6754bdf9d3b0ddc706779b0'
 
       const fromCurrency = 'SEK'
       const toCurrency = 'USD'
@@ -170,12 +170,18 @@ const CheckoutForm = ({ match, history }) => {
 
       if (subscription) {
         amount = Math.round(plan.price * sekToUsd * currency.data.amount * 100)
-      } else {
+      }
+
+      if (ID) {
         amount = Math.round(currency.data.amount * course.price * 100)
       }
 
+      if (requestId) {
+        amount = Math.round(currency.data.amount * request.amount * 100)
+      }
+
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+        `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: currency.data.currency,
@@ -250,6 +256,16 @@ const CheckoutForm = ({ match, history }) => {
             })
           )
         }
+
+        if (requestId) {
+          dispatch(
+            createOrder('bill', {
+              token: paymentIntent.id,
+              amount: paymentIntent.amount,
+              currency: currency.data.currency
+            })
+          )
+        }
       }
     } catch (err) {
       setCheckoutError(err.message)
@@ -275,7 +291,6 @@ const CheckoutForm = ({ match, history }) => {
     }
     if (subscription) {
       const amount = plan.price * sekToUsd
-      console.log(amount)
       dispatch(
         createKlarnaSession(
           {
@@ -289,6 +304,26 @@ const CheckoutForm = ({ match, history }) => {
             )
           },
           plan.name
+        )
+      )
+      setWidgetLoaded(false)
+    }
+
+    if (requestId) {
+      const amount = request.amount
+      dispatch(
+        createKlarnaSession(
+          {
+            data: getKlarnaOrderLines(
+              { name: 'bill', price: amount },
+              {
+                amount: currency.data.amount,
+                country: currency.data.country,
+                currency: currency.data.currency
+              }
+            )
+          },
+          'bill'
         )
       )
       setWidgetLoaded(false)
@@ -427,7 +462,7 @@ const CheckoutForm = ({ match, history }) => {
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
-                                        currency.data.amount * request.amount
+                                          currency.data.amount * request.amount
                                         )
                                       )}  ${currency.data.currency}`}
                                   </strong>
@@ -684,6 +719,17 @@ const CheckoutForm = ({ match, history }) => {
                         plan={{
                           subscription: plan.name,
                           amount: plan.price * sekToUsd
+                        }}
+                        widgetLoaded={widgetLoaded}
+                        method={klarnaMethod}
+                      />
+                    )}
+
+                    {klarnaMethod && requestId && (
+                      <KlarnaPayment
+                        requestBill={{
+                          bill: 'bill',
+                          amount: request.amount
                         }}
                         widgetLoaded={widgetLoaded}
                         method={klarnaMethod}

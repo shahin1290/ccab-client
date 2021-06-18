@@ -5,15 +5,12 @@ import {
   createKlarnaOrder,
   readKlarnaOrder
 } from '../../redux/actions/orderAction'
-import { getCourseDetails } from '../../redux/actions/courseAction'
 import { Redirect } from 'react-router-dom'
 
-import axios from 'axios'
 import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
 
-const KlarnaPayment = ({ ID, method, plan }) => {
+const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
   const { course } = useSelector((state) => state.courseDetails)
-  const userLogin = useSelector((state) => state.userLogin)
   const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const dispatch = useDispatch()
@@ -94,12 +91,20 @@ const KlarnaPayment = ({ ID, method, plan }) => {
 
   const onClickHandler = () => {
     if (ID) {
+      console.log('ID')
       dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
     }
 
     if (plan && plan.subscription) {
+      console.log('plan')
       dispatch(
         readKlarnaSession(plan.subscription, { session_id: session.session_id })
+      )
+    }
+
+    if (requestBill && requestBill.bill) {
+      dispatch(
+        readKlarnaSession(requestBill.bill, { session_id: session.session_id })
       )
     }
     // eslint-disable-next-line no-undef
@@ -128,14 +133,22 @@ const KlarnaPayment = ({ ID, method, plan }) => {
               data: getKlarnaOrderLines(course, currency.data)
             })
           )
-        }
-
-        if (plan.subscription) {
+        } else if (plan.subscription) {
           dispatch(
             createKlarnaOrder(plan.subscription, {
               token: res.authorization_token,
               data: getKlarnaOrderLines(
                 { name: plan.subscription, price: plan.amount },
+                currency.data
+              )
+            })
+          )
+        } else {
+          dispatch(
+            createKlarnaOrder(requestBill.bill, {
+              token: res.authorization_token,
+              data: getKlarnaOrderLines(
+                { name: requestBill.bill, price: requestBill.amount },
                 currency.data
               )
             })
@@ -148,11 +161,15 @@ const KlarnaPayment = ({ ID, method, plan }) => {
   return (
     <>
       {orderSuccess ? (
-        ID ? (
-          <Redirect to={`/confirmation-klarna/${ID}`} />
-        ) : (
-          <Redirect to={`/confirmation-klarna/${plan.subscription}`} />
-        )
+        <>
+          {ID && <Redirect to={`/confirmation-klarna/${ID}`} />}
+          {plan && plan.subscription && (
+            <Redirect to={`/confirmation-klarna/${plan.subscription}`} />
+          )}
+          {requestBill && requestBill.bill && (
+            <Redirect to={`/confirmation-klarna/${requestBill.bill}`} />
+          )}
+        </>
       ) : (
         <div className=" bg-white d-flex flex-column justify-content-center">
           {method === 'pay_now' && (

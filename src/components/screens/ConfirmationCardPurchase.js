@@ -22,17 +22,23 @@ const ConfirmationKlarna = ({ match }) => {
         <div class="jumbotron text-center">
           <h1 class="display-3">Thank You!</h1>
           <p class="lead">
-            <strong>Your purchase is being verified.</strong> You can now start
-            to learn.
-          </p>
-
-          <p class="lead">
-            <a
-              href={'/course-content/' + course._id}
-              className="btn btn-danger rounded-pill"
-            >
-              Start Learning !
-            </a>{' '}
+            {course && course._id ? (
+              <>
+                <strong>Your purchase is being verified.</strong> You can now
+                start to learn.
+                <a
+                  href={'/course-content/' + course._id}
+                  className="btn btn-danger rounded-pill"
+                >
+                  Start Learning !
+                </a>
+              </>
+            ) : (
+              <div>
+                Your Order is being confirmed. Soon We will add the course to
+                your profile.
+              </div>
+            )}
           </p>
         </div>
       )}

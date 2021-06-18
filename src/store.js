@@ -82,7 +82,9 @@ import { currencyCreateReducer } from './redux/reducers/currencyReducer'
 import {
   requestCreateReducer,
   requestListReducer,
-  requestDetailsReducer
+  requestDetailsReducer,
+  requestDeleteReducer,
+  requestUpdateReducer
 } from './redux/reducers/requestReducer'
 
 const reducer = combineReducers({
@@ -143,7 +145,9 @@ const reducer = combineReducers({
   currencyCreate: currencyCreateReducer,
   requestCreate: requestCreateReducer,
   requestList: requestListReducer,
-  requestDetails: requestDetailsReducer
+  requestDetails: requestDetailsReducer,
+  requestUpdate: requestUpdateReducer,
+  requestDelete: requestDeleteReducer,
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

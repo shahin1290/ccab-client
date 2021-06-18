@@ -79,7 +79,7 @@ export default function TaskDetailsScreen({ match }) {
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task.task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task.task._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -89,7 +89,7 @@ export default function TaskDetailsScreen({ match }) {
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
     const res = await fetch(
-      'https://server.ccab.tech/api/answers/' + answer._id + '/download',
+      'http://localhost:5001/api/answers/' + answer._id + '/download',
       config
     )
     const blob = await res.blob()

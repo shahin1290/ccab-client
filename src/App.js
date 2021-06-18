@@ -25,6 +25,7 @@ import MangeOrder from './components/screens/AdminScreen/MangeOrder'
 import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 import RequestPayment from './components/screens/AdminScreen/RequestPayment'
 import RequestList from './components/screens/AdminScreen/RequestList'
+import EditRequest from './components/screens/AdminScreen/EditRequest'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -98,6 +99,12 @@ function App() {
           exact
           path="/admin-request-payment"
           component={RequestPayment}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-request-edit/:id"
+          component={EditRequest}
         ></AdminRoute>
 
         <AdminRoute
