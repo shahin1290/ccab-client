@@ -40,6 +40,7 @@ const CheckoutForm = ({ match, history }) => {
   const subscription = match.params.plan
   const requestId = match.params.requestId
 
+
   const plan = plans.find((plan) => plan._id === subscription)
 
   const { course } = useSelector((state) => state.courseDetails)
@@ -60,6 +61,8 @@ const CheckoutForm = ({ match, history }) => {
     success: requestSuccess,
     request
   } = useSelector((state) => state.requestDetails)
+
+  console.log(request);
 
   const {
     order,

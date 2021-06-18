@@ -105,7 +105,7 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/request/${id}`,
+      `http://localhost:5001/api/request/${id}`,
       config
     )
 
