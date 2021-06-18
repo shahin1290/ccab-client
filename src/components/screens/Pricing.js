@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { plans } from '../../util/plans'
 
 export default function Pricing() {
+  const [period, setPeriod] = useState('weekly')
+
+  const getPlans = () => {
+    return plans.filter((plan) => plan.period === period)
+  }
+
   return (
     <div>
       {/* Pricing Section */}
@@ -17,181 +24,73 @@ export default function Pricing() {
           </div>
 
           <Container>
+            <div className="curriculum-project">
+              <ul className="d-flex justify-content-center curriculum-project">
+                <li className="pl-5 ">
+                  <a
+                    onClick={() => setPeriod('weekly')}
+                    style={
+                      period === 'weekly'
+                        ? { color: '#ea5573', fontWeight: 'bold' }
+                        : {}
+                    }
+                  >
+                    Weekly
+                  </a>
+                </li>
+                <li className="pl-5 ">
+                  <a
+                    style={
+                      period === 'monthly'
+                        ? { color: '#ea5573', fontWeight: 'bold' }
+                        : {}
+                    }
+                    onClick={() => setPeriod('monthly')}
+                  >
+                    Monthly
+                  </a>
+                </li>
+              </ul>
+            </div>
+
             <Row>
-              <Col>
-                {/* Price Block */}
-                <div className="price-block col  col-sm-12">
-                  <div className="inner-box">
-                    <div className="icon-box">
-                      <span className="icon">
-                        <img src="images/icons/price-1.png" alt />
-                      </span>
+              {getPlans().length &&
+                getPlans().map((plan) => (
+                  <Col className="no-gutter" key={plan._id}>
+                    {/* Price Block */}
+                    <div className="price-block col  col-sm-12">
+                      <div className="inner-box">
+                        <div className="icon-box">
+                          <span className="icon">
+                            <img src="images/icons/price-1.png" alt />
+                          </span>
+                        </div>
+                        <h3>{plan.name}</h3>
+                        <div className="price">
+                          {plan.price} kr{' '}
+                          <span>
+                            {period === 'monthly' ? 'Per month' : 'Per week'}
+                          </span>
+                        </div>
+
+                        <ul className="list">
+                          {plan.offers.map((offer) => (
+                            <li className="check">{offer}</li>
+                          ))}
+                          {plan.notOffers.map((notOffer) => (
+                            <li className="cross">{notOffer}</li>
+                          ))}
+                        </ul>
+                        <Link
+                          to={`/checkout/subscription/${plan._id}`}
+                          className="theme-btn btn-style-two"
+                        >
+                          <span className="txt">Purchase Membership</span>
+                        </Link>
+                      </div>
                     </div>
-                    <h3>Basic Plan</h3>
-                    <div className="price">
-                      3499 kr <span>Per month</span>
-                    </div>
-                    <div>or</div>
-                    <div className="price">
-                      899 kr <span>Per week</span>
-                    </div>
-                    <ul className="list">
-                      <li className="check">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="check">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="check">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="check">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="check">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="check">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="cross">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="cross">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="cross">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="cross">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="cross">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                    </ul>
-                    <Link to="/checkout/subscription/basic" className="theme-btn btn-style-two">
-                      <span className="txt">Purchase Membership</span>
-                    </Link>
-                  </div>
-                </div>
-              </Col>
-              <Col>
-                {/* Price Block */}
-                <div className="price-block col  col-sm-12">
-                  <div className="inner-box">
-                    <div className="icon-box">
-                      <span className="icon">
-                        <img src="images/icons/price-1.png" alt />
-                      </span>
-                    </div>
-                    <h3>Standard Plan</h3>
-                    <div className="price">
-                      3899 kr <span>Per month</span>
-                    </div>
-                    <div>or</div>
-                    <div className="price">
-                      999 kr <span>Per week</span>
-                    </div>
-                    <ul className="list">
-                      <li className="check">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="check">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="check">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="check">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="check">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="check">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="cross">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="cross">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="cross">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="cross">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="cross">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                    </ul>
-                    <Link to="/checkout/subscription/standard" className="theme-btn btn-style-two">
-                      <span className="txt">Purchase Membership</span>
-                    </Link>
-                  </div>
-                </div>
-              </Col>
-              <Col>
-                {/* Price Block */}
-                <div className="price-block col  col-sm-12">
-                  <div className="inner-box">
-                    <div className="icon-box">
-                      <span className="icon">
-                        <img src="images/icons/price-1.png" alt />
-                      </span>
-                    </div>
-                    <h3>Premium Plan</h3>
-                    <div className="price">
-                      4699 kr <span>Per month</span>
-                    </div>
-                    <div>or</div>
-                    <div className="price">
-                      1199 kr <span>Per week</span>
-                    </div>
-                    <ul className="list">
-                      <li className="check">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="check">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="check">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="check">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="check">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="check">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="cross">
-                        Phasellus enim magna, up above the most likedo ut.
-                      </li>
-                      <li className="cross">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="cross">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                      <li className="cross">
-                        Sed consequat justo non profit us
-                      </li>
-                      <li className="cross">
-                        Ut nulla tellus, eleifend euismod pellentesque
-                      </li>
-                    </ul>
-                    <Link to="/checkout/subscription/premium" className="theme-btn btn-style-two">
-                      <span className="txt">Purchase Membership</span>
-                    </Link>
-                  </div>
-                </div>
-              </Col>
+                  </Col>
+                ))}
             </Row>
           </Container>
         </div>

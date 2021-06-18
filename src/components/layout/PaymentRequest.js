@@ -1,13 +1,25 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
 import { Table } from 'react-bootstrap'
-import Message from '../layout/Message'
+import { useSelector, useDispatch } from 'react-redux'
+import Message from './Message'
 import { Link } from 'react-router-dom'
-import Loader from '../layout/Loader'
+import Loader from './Loader'
 import { getDate } from '../../util/getDate'
+import { createCurrrency } from '../../redux/actions/currencyAction'
 
-export default function RequestPaymentList() {
+export default function PaymentRequest() {
+  const dispatch = useDispatch()
+
   const { loading, error, requests } = useSelector((state) => state.requestList)
+  const {
+    loading: currencyLoading,
+    success: currencySuccess,
+    currency
+  } = useSelector((state) => state.currencyCreate)
+
+  useEffect(() => {
+    dispatch(createCurrrency())
+  }, [dispatch])
 
   return (
     <>
@@ -25,7 +37,7 @@ export default function RequestPaymentList() {
                 <th>#</th>
 
                 <th>Request Name</th>
-                <th>Price</th>
+                <th>Amount</th>
                 <th>Requested User</th>
                 <th>Status</th>
                 <th>Requested At</th>
@@ -38,7 +50,13 @@ export default function RequestPaymentList() {
                     <tr key={req._id}>
                       <td>{requests.indexOf(req) + 1}</td>
                       <td>{req.name}</td>
-                      <td>{req.amount}</td>
+                      <td>
+                        <strong>
+                          {currencySuccess &&
+                            Math.round(currency.data.amount * req.amount)}{' '}
+                          {currencySuccess && currency.data.currency}
+                        </strong>
+                      </td>
                       <td>{req.requestedUser.name}</td>
                       <td className="text-danger">Not Paid</td>
                       <td>{getDate(req.createdAt)}</td>

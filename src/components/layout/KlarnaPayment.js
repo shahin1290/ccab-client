@@ -97,7 +97,7 @@ const KlarnaPayment = ({ ID, method, plan }) => {
       dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
     }
 
-    if (plan.subscription) {
+    if (plan && plan.subscription) {
       dispatch(
         readKlarnaSession(plan.subscription, { session_id: session.session_id })
       )
