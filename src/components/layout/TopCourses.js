@@ -23,7 +23,7 @@ export default function TopCourses({ match }) {
         .split(' ')[0]
         .toLowerCase()
 
-      return !['basic', 'standard', 'premium'].includes(titleFirstWord, 1)
+      return !['basic', 'standard', 'premium'].includes(titleFirstWord)
     })
   }
 

@@ -16,7 +16,8 @@ export const getKlarnaOrderLines = (course, geoData) => {
     IT: 'it-IT'
   }
 
-  let amount = geoData.amount * course.price * 100
+  let amount = Math.round(geoData.amount * course.price * 100)
+
 
   const data = {
     purchase_country: geoData.country,

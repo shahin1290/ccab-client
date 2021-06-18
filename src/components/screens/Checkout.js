@@ -24,6 +24,7 @@ import KlarnaPayment from '../layout/KlarnaPayment'
 import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
 import { getPriceFormat } from '../../util/priceFormat'
 import { createCurrrency } from '../../redux/actions/currencyAction'
+import { plans } from '../../util/plans'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
@@ -32,18 +33,12 @@ const CheckoutForm = ({ match, history }) => {
   const elements = useElements()
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
-
+  const [sekToUsd, setSekToUsd] = useState()
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
-  const subscription = match.params.plan || ''
+  const subscription = match.params.plan
 
-  const [period, setPeriod] = useState(subscription && 'monthly')
-
-  const planPrice = {
-    basic: { weekly: 899, monthly: 3499 },
-    standard: { weekly: 999, monthly: 3899 },
-    premium: { weekly: 1199, monthly: 4699 }
-  }
+  const plan = plans.find((plan) => plan._id === subscription)
 
   const { course } = useSelector((state) => state.courseDetails)
   const {
@@ -79,6 +74,28 @@ const CheckoutForm = ({ match, history }) => {
     success: sessionSuccess,
     loading: sessionLoading
   } = useSelector((state) => state.KlarnaSessionCreate)
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const apiKey = '0d65e80400de77684ec5'
+
+      const fromCurrency = 'SEK'
+      const toCurrency = 'USD'
+      const query = fromCurrency + '_' + toCurrency
+
+      const url =
+        'https://free.currconv.com/api/v7/convert?q=' +
+        query +
+        '&compact=ultra&apiKey=' +
+        apiKey
+
+      const resp = await axios.get(url)
+      const amount = resp.data[query]
+      setSekToUsd(amount)
+    }
+
+    fetchMyAPI()
+  }, [])
 
   useEffect(() => {
     if (sessionSuccess) {
@@ -141,9 +158,9 @@ const CheckoutForm = ({ match, history }) => {
       let amount
 
       if (subscription) {
-        amount = planPrice[subscription][period] * 100
+        amount = Math.round(plan.price * sekToUsd * currency.data.amount * 100)
       } else {
-        amount = currency.data.amount * course.price * 100
+        amount = Math.round(currency.data.amount * course.price * 100)
       }
 
       const { data: clientSecret } = await axios.post(
@@ -215,7 +232,7 @@ const CheckoutForm = ({ match, history }) => {
 
         if (subscription) {
           dispatch(
-            createOrder(subscription, {
+            createOrder(plan.name, {
               token: paymentIntent.id,
               amount: paymentIntent.amount,
               currency: currency.data.currency
@@ -246,12 +263,13 @@ const CheckoutForm = ({ match, history }) => {
       setWidgetLoaded(false)
     }
     if (subscription) {
-      const amount = planPrice[subscription][period]
+      const amount = plan.price * sekToUsd
+      console.log(amount)
       dispatch(
         createKlarnaSession(
           {
             data: getKlarnaOrderLines(
-              { name: subscription, price: amount },
+              { name: plan.name, price: amount },
               {
                 amount: currency.data.amount,
                 country: currency.data.country,
@@ -259,7 +277,7 @@ const CheckoutForm = ({ match, history }) => {
               }
             )
           },
-          subscription
+          plan.name
         )
       )
       setWidgetLoaded(false)
@@ -302,50 +320,13 @@ const CheckoutForm = ({ match, history }) => {
                             <ul>
                               <li className="clearfix mb-3">
                                 Subscription Type:
-                                <span className="pull-right">
-                                  {subscription}
-                                </span>
+                                <span className="pull-right">{plan.name}</span>
                               </li>
 
                               <li className="clearfix mb-3">
                                 Subscription Period:
                                 <span className="pull-right">
-                                  <div className="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <div className="row clearfix">
-                                      <div className="column col-lg-5 col-md-4 col-sm-12">
-                                        <div className="radio-box">
-                                          <input
-                                            type="radio"
-                                            name="period"
-                                            id="type-1"
-                                            value="weekly"
-                                            onChange={(e) =>
-                                              setPeriod(e.target.value)
-                                            }
-                                            checked={period === 'weekly'}
-                                          />
-                                          <label htmlFor="type-1">Weekly</label>
-                                        </div>
-                                      </div>
-                                      <div className="column col-lg-5 col-md-4 col-sm-12">
-                                        <div className="radio-box">
-                                          <input
-                                            type="radio"
-                                            name="period"
-                                            value="monthly"
-                                            id="type-2"
-                                            onChange={(e) =>
-                                              setPeriod(e.target.value)
-                                            }
-                                            checked={period === 'monthly'}
-                                          />
-                                          <label htmlFor="type-2">
-                                            Monthly
-                                          </label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                  {plan.period}
                                 </span>
                               </li>
                               <hr />
@@ -353,8 +334,14 @@ const CheckoutForm = ({ match, history }) => {
                               <li className="clearfix">
                                 <strong>Total</strong>{' '}
                                 <span className="pull-right">
-                                  {currencySuccess &&
-                                    `${planPrice[subscription][period]}  ${currency.data.currency}`}
+                                  <strong>
+                                    {currencySuccess &&
+                                      `${Math.round(
+                                        plan.price *
+                                          sekToUsd *
+                                          currency.data.amount
+                                      )}  ${currency.data.currency}`}
+                                  </strong>
                                 </span>
                               </li>
                             </ul>
@@ -639,8 +626,8 @@ const CheckoutForm = ({ match, history }) => {
                     {klarnaMethod && subscription && (
                       <KlarnaPayment
                         plan={{
-                          subscription: subscription,
-                          amount: planPrice[subscription][period]
+                          subscription: plan.name,
+                          amount: plan.price * sekToUsd
                         }}
                         widgetLoaded={widgetLoaded}
                         method={klarnaMethod}
