@@ -90,13 +90,12 @@ const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
   }, [orderSuccess]) */
 
   const onClickHandler = () => {
+    console.log(ID, plan && plan.subscription, requestBill && requestBill.bill)
     if (ID) {
-      console.log('ID')
       dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
     }
 
     if (plan && plan.subscription) {
-      console.log('plan')
       dispatch(
         readKlarnaSession(plan.subscription, { session_id: session.session_id })
       )
@@ -133,7 +132,8 @@ const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
               data: getKlarnaOrderLines(course, currency.data)
             })
           )
-        } else if (plan.subscription) {
+        }
+        if (plan && plan.subscription) {
           dispatch(
             createKlarnaOrder(plan.subscription, {
               token: res.authorization_token,
@@ -143,7 +143,8 @@ const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
               )
             })
           )
-        } else {
+        }
+        if (requestBill && requestBill.bill) {
           dispatch(
             createKlarnaOrder(requestBill.bill, {
               token: res.authorization_token,
