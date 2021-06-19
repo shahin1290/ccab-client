@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { plans } from '../../util/plans'
-
+import {getPriceConversionFromSEK} from './../../util/getPriceConversion';
+import axios from 'axios'
 export default function Pricing() {
   const [period, setPeriod] = useState('weekly')
+  const [sekToUsd, setSekToUsd] = useState()
+
 
   const getPlans = () => {
     return plans.filter((plan) => plan.period === period)
   }
+ 
+
+  console.log(sekToUsd);
+  useEffect(() => {
+   getPriceConversionFromSEK().then(data=>setSekToUsd(data))
+  
+  }, [])
 
   return (
     <div>
@@ -61,13 +71,14 @@ export default function Pricing() {
                     <div className="price-block col  col-sm-12">
                       <div className="inner-box">
                         <div className="icon-box">
-                          <span className="icon">
-                            <img src="images/icons/price-1.png" alt />
+                          <span className="icon" >
+                            {/* <img src="images/icons/price-1.png" alt /> */}
+                            <i className="fas fa-gem planicon"></i>
                           </span>
                         </div>
                         <h3>{plan.name}</h3>
                         <div className="price">
-                          {plan.price} kr{' '}
+                          {(sekToUsd&&(Math.round(sekToUsd[0]*plan.price)))} {sekToUsd&&sekToUsd[1]+' '}
                           <span>
                             {period === 'monthly' ? 'Per month' : 'Per week'}
                           </span>
@@ -85,7 +96,7 @@ export default function Pricing() {
                           to={`/checkout/subscription/${plan._id}`}
                           className="theme-btn btn-style-two"
                         >
-                          <span className="txt">Purchase Membership</span>
+                          <span className="txt">Select</span>
                         </Link>
                       </div>
                     </div>

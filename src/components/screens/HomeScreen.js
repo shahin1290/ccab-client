@@ -95,23 +95,23 @@ export default function HomeScreen({ match }) {
               {/* Content Column */}
               <div className="content-column mt-2 col-lg-6 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <h2 className="text-center-small-screen">Learn new skills with Codify College</h2>
+                  <h2 className="text-center-small-screen">learn to code, <br/>With a New digital life
+</h2>
                   <div className="text header-text text-center-small-screen">
-                    With Codify College, you will learn the most in-demand
-                    skills to flourish in your carrer.
+                  Start your new Work with our weekly remotely , Tech programs in Web Development.
                   </div>
 
-                  {/* <Link
+                  <a
                     activeclassName="active"
                     className="theme-btn btn-style-three"
-                    to="HOW-IT-WORKS"
-                    spy={true}
+                    href="https://meetings.hubspot.com/sl-melad"
+                    target="_blank"
                     smooth={true}
                     offset={-100}
                     duration={500}
                   >
-                    <span className="txt">Learn More</span>
-                  </Link> */}
+                    <span className="txt">Video Call</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function HomeScreen({ match }) {
 
         {/* End Banner Section */}
         {/* End Education Section Two */}
-        <TopCourses></TopCourses>
+
 
         <CurriculamStepsBar />
 
@@ -132,11 +132,13 @@ export default function HomeScreen({ match }) {
         {/* Pricing section */}
         <Pricing/>
 
+        {/* top coruses */}
+        <TopCourses></TopCourses>
          {/* rigstering section          */}
           <Container>
-         <Row className="p-3">
+         <Row className="p-3 mt-5">
               <Col md={6} className="mt-3 ">
-                <div className="title pb-5">Get Start Now</div>
+                <div className="title pb-5 display-4">Get Start Now</div>
               </Col>
 
               <Col>
@@ -272,17 +274,14 @@ export default function HomeScreen({ match }) {
                     </div>
                   </div>
 
-                  <Link
+                  <a
                     activeclassName="active"
                     className="theme-btn btn-style-three"
-                    to="HOW-IT-WORKS"
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={500}
+                    href="https://meetings.hubspot.com/sl-melad"
+               
                   >
-                    <span className="txt">Learn More</span>
-                  </Link>
+                    <span className="txt">Book an Interview</span>
+                  </a>
                 </div>
               </div>
               {/* Image Column */}
@@ -299,7 +298,7 @@ export default function HomeScreen({ match }) {
         {/* End Education Section Two */}
 
         {/* How IT Works Section */}
-        <section
+        {/* <section
           id="HOW-IT-WORKS"
           style={{
             backgroundColor: '#fff',
@@ -315,10 +314,9 @@ export default function HomeScreen({ match }) {
 
                 <div className="sub-title pb-1 text-center-small-screen">When does bootcamp start?</div>
                 <div className="sub-text text-center-small-screen">
-                  When does bootcamp start? We start in February 2021. We're
-                  teaching both full-time and part-time, using the best modern
+                  When does bootcamp start? providing the best modern
                   teaching methods and technology. The main instruction language
-                  is English, but have support in Arabic, German, Hindi and
+                  is English, but have support in Arabic, German and
                   Swedish.
                 </div>
                 <a
@@ -367,7 +365,7 @@ export default function HomeScreen({ match }) {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*End How IT Works Section */}
         <ContactSection />
 
