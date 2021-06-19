@@ -347,7 +347,7 @@ export default function ProfileScreen() {
               userDetail.user_type === 'StudentUser' &&
               requestLoading ? (
                 <Loader />
-              ) : requests.length > 0 && requests[0].status !== 'Paid' ? (
+              ) : requests && requests.length > 0 && requests[0].status !== 'Paid' ? (
                 <Tab eventKey="Bill" title="Bill">
                   <PaymentRequest />
                 </Tab>

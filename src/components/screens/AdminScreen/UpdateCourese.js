@@ -296,9 +296,9 @@ export default function UpdateCourese({ match }) {
                 <div className="inner-column">
                   <div className="sub-title pb-3">Basic Information</div>
                   <div className="sub-text pb-3 text-info">
-                    *Add Plan name(Basic or Standard or Premium) as a first word
+                    *Add Plan name(Silver or Golden or Diamond) as a first word
                     of the course title if the course is for the subscription
-                    plan (Ex. Standard MERN STACK).
+                    plan (Ex. Golden MERN STACK).
                   </div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">

@@ -3,7 +3,7 @@ import {getPriceConversion} from './getPriceConversion';
 
 export const plans = [
   {
-    name: 'Sliver Plan',
+    name: 'Silver Plan',
     period: 'weekly',
     price: '899',
     offers: [
@@ -27,7 +27,7 @@ export const plans = [
     _id:'d8cc4ea7-80a-a8ce-dc839bce88b1'
   },
   {
-    name: 'Sliver Plan',
+    name: 'Silver Plan',
     period: 'monthly',
     price: '3499',
     offers: [

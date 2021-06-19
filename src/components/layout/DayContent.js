@@ -120,16 +120,16 @@ export default function DayContent({ bootcampId, setOpen }) {
     if (userDetail.user_type === 'StudentUser'  ) {
       const foundOrder =orderList.length&& orderList.find(
         (order) =>
-          (order.orderStatus === 'Delivered' && order.course === 'silver') ||
-          (order.orderStatus === 'Delivered' && order.course === 'golden') ||
-          (order.orderStatus === 'Delivered' && order.course === 'diamond')
+          (order.orderStatus === 'Delivered' && order.course === 'Silver Plan') ||
+          (order.orderStatus === 'Delivered' && order.course === 'Golden Plan') ||
+          (order.orderStatus === 'Delivered' && order.course === 'Diamond Plan')
       )
 
-      if (foundOrder && foundOrder.course === 'Basic Plan') {
+      if (foundOrder && foundOrder.course === 'Silver Plan') {
         const daysBasedOnShow = days.filter((day) => day.show)
         const size = 2
         return daysBasedOnShow.slice(0, size)
-      } else if (foundOrder && foundOrder.course === 'Standard Plan') {
+      } else if (foundOrder && foundOrder.course === 'Golden Plan') {
         const daysBasedOnShow = days.filter((day) => day.show)
         const size = 4
         return daysBasedOnShow.slice(0, size)

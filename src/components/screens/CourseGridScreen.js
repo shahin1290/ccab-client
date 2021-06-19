@@ -20,7 +20,7 @@ export default function CourseGridScreen({ match }) {
         .split(' ')[0]
         .toLowerCase()
 
-      return !['basic', 'standard', 'premium'].includes(titleFirstWord)
+      return !['silver', 'golden', 'diamond'].includes(titleFirstWord)
     })
   }
 

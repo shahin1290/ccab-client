@@ -177,7 +177,7 @@ export default function MangeOrder({ match }) {
 
                                 <td>{getDate(order.createdAt)}</td>
                                 <td>
-                                  {getPriceFormat(order.amount) +
+                                  {getPriceFormat(Math.round(order.amount)) +
                                     ' ' +
                                     order.currency}
                                 </td>
