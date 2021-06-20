@@ -19,7 +19,7 @@ import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 import { getRequests } from '../../redux/actions/requestAction'
-import PaymentRequest from '../layout/PaymentRequest';
+import PaymentRequest from '../layout/PaymentRequest'
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -59,8 +59,6 @@ export default function ProfileScreen() {
     (state) => state.requestList
   )
 
-  console.log(requests)
-
   // updating process
   const userUpdate = useSelector((state) => state.userUpdate)
   const { updateSuccess, error: UpdateError } = userUpdate
@@ -99,7 +97,7 @@ export default function ProfileScreen() {
     dispatch(getProfile())
 
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
-     // dispatch(getRequests())
+     dispatch(getRequests())
       dispatch(getMyQuizAnswerList())
       dispatch(getMyAnswerList())
       dispatch(getMyTaskList())
@@ -138,7 +136,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/avatar.svg'
                       }
                       alt="avatar"
@@ -264,7 +262,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'https://server.ccab.tech/uploads/Bootcamp/' +
+                                      'http://localhost:5001/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
@@ -316,13 +314,11 @@ export default function ProfileScreen() {
                   <Assignments />
                 </Tab>
               ) : null}
-
               {userDetail && userDetail.user_type === 'StudentUser' ? (
                 <Tab eventKey="Quizzes" title="Quizzes">
                   <Quizzes />
                 </Tab>
               ) : null}
-
               <Tab eventKey="Personal Info" title="Personal Info">
                 <div className="content mt-4">
                   <div className="card p-5 ">
@@ -347,10 +343,11 @@ export default function ProfileScreen() {
                   <Purchases />
                 </Tab>
               ) : null}
-
-              {requestLoading ? (
+              {userDetail &&
+              userDetail.user_type === 'StudentUser' &&
+              requestLoading ? (
                 <Loader />
-              ) : requests.length > 0 ? (
+              ) : requests && requests.length > 0 && requests[0].status !== 'Paid' ? (
                 <Tab eventKey="Bill" title="Bill">
                   <PaymentRequest />
                 </Tab>

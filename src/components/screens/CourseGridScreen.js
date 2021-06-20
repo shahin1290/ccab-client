@@ -20,7 +20,7 @@ export default function CourseGridScreen({ match }) {
         .split(' ')[0]
         .toLowerCase()
 
-      return !['basic', 'standard', 'premium'].includes(titleFirstWord)
+      return !['silver', 'golden', 'diamond'].includes(titleFirstWord)
     })
   }
 
@@ -183,7 +183,7 @@ export default function CourseGridScreen({ match }) {
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                                            'http://localhost:5001/uploads/Bootcamp/' +
                                             course.img_path
                                           }
                                           alt=""
@@ -334,7 +334,7 @@ export default function CourseGridScreen({ match }) {
                         <Link to="/course/1/details">
                           <img
                             src={
-                              'https://server.ccab.tech/uploads/Bootcamp/' +
+                              'http://localhost:5001/uploads/Bootcamp/' +
                               filterSubscriptionCourse(courseList)[0].img_path
                             }
                             alt=""

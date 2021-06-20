@@ -8,6 +8,12 @@ import {
   REQUEST_DETAILS_REQUEST,
   REQUEST_DETAILS_SUCCESS,
   REQUEST_DETAILS_FAIL,
+  REQUEST_UPDATE_REQUEST,
+  REQUEST_UPDATE_SUCCESS,
+  REQUEST_UPDATE_FAIL,
+  REQUEST_DELETE_REQUEST,
+  REQUEST_DELETE_SUCCESS,
+  REQUEST_DELETE_FAIL
 } from '../constences/requestConst'
 
 import axios from 'axios'
@@ -25,7 +31,7 @@ export const createRequest = (request) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.post(
-      'https://server.ccab.tech/api/request',
+      'http://localhost:5001/api/request',
       request,
       config
     )
@@ -47,9 +53,7 @@ export const createRequest = (request) => async (dispatch, getState) => {
   }
 }
 
-
 export const getRequests = () => async (dispatch, getState) => {
-
   try {
     dispatch({
       type: REQUEST_LIST_REQUEST
@@ -64,7 +68,10 @@ export const getRequests = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get('https://server.ccab.tech/api/request/', config)
+    const response = await axios.get(
+      'http://localhost:5001/api/request/',
+      config
+    )
     dispatch({
       type: REQUEST_LIST_SUCCESS,
       payload: response.data
@@ -82,7 +89,7 @@ export const getRequests = () => async (dispatch, getState) => {
   }
 }
 
-export const getRequestDetails = ( id) => async (dispatch, getState) => {
+export const getRequestDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: REQUEST_DETAILS_REQUEST
@@ -98,7 +105,7 @@ export const getRequestDetails = ( id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/request/${id}`,
+      `http://localhost:5001/api/request/${id}`,
       config
     )
 
@@ -111,6 +118,70 @@ export const getRequestDetails = ( id) => async (dispatch, getState) => {
     console.log(error.response.data.message)
     dispatch({
       type: REQUEST_DETAILS_FAIL,
+      payload: error.response.data.message
+    })
+  }
+}
+
+export const deleteRequest = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: REQUEST_DELETE_REQUEST
+    })
+
+    const {
+      userLogin: { userDetail }
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    await axios.delete(`http://localhost:5001/api/request/${id}`, config)
+
+    dispatch({
+      type: REQUEST_DELETE_SUCCESS
+    })
+  } catch (error) {
+    dispatch({
+      type: REQUEST_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+// update Request
+export const updateRequest = (req, id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: REQUEST_UPDATE_REQUEST
+    })
+
+    const {
+      userLogin: { userDetail }
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    //console.log(REQUEST);
+    await axios.put(`http://localhost:5001/api/request/${id}`, req, config)
+
+    dispatch({
+      type: REQUEST_UPDATE_SUCCESS
+    })
+  } catch (error) {
+    // console.log(error.response.data);
+    dispatch({
+      type: REQUEST_UPDATE_FAIL,
       payload: error.response.data.message
     })
   }

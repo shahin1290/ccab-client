@@ -23,7 +23,7 @@ export default function TopCourses({ match }) {
         .split(' ')[0]
         .toLowerCase()
 
-      return !['basic', 'standard', 'premium'].includes(titleFirstWord)
+      return !['silver', 'diamond', 'goldem'].includes(titleFirstWord)
     })
   }
 
@@ -60,7 +60,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                            'http://localhost:5001/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""
