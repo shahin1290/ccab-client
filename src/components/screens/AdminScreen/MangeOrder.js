@@ -25,6 +25,9 @@ export default function MangeOrder({ match }) {
     orderList
   } = useSelector((state) => state.getAllOrders)
 
+  const {success: captureSuccess} = useSelector((state) => state.KlarnaOrderCapture)
+
+
   /************************************************************** */
 
   /************* Functions *************/
@@ -63,11 +66,9 @@ export default function MangeOrder({ match }) {
 
   useEffect(() => {
     dispatch(getAllOrders())
-  }, [dispatch, pageNumber])
+  }, [dispatch, pageNumber, captureSuccess])
 
-  useEffect(() => {
-    console.log(getNotProcessedOrder())
-  }, [orderList])
+ 
 
   /************************************************** */
 
@@ -192,7 +193,6 @@ export default function MangeOrder({ match }) {
                                             order.orderBy
                                           )
                                         )
-                                        dispatch(getAllOrders())
                                       }}
                                       className="btn btn-primary btn-sm bg-success rounded-pill"
                                     >

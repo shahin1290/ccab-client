@@ -158,27 +158,23 @@ export const quizUpdateReducer = (state = {}, action) => {
   switch (action.type) {
     case QUIZ_UPDATE_REQUEST:
       return {
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case QUIZ_UPDATE_SUCCESS:
       return {
         loading: false, // loading is done laoding!
-        success: true,
-      };
+        success: true
+      }
     case QUIZ_UPDATE_FAIL:
       return {
         loading: false, // loading is done laoding!
-        error: action.payload,
-      };
+        error: action.payload
+      }
 
-case QUIZ_UPDATE_RESET:
-      return {
-        loading: false, // loading is done laoding!
-        error: null,
-        success:false,
-      };
+    case QUIZ_UPDATE_RESET:
+      return {}
     default:
-      return state;
+      return state
   }
-};
+}

@@ -117,13 +117,20 @@ export default function DayContent({ bootcampId, setOpen }) {
       return days.filter((day) => day.show)
     }
 
-    if (userDetail.user_type === 'StudentUser'  ) {
-      const foundOrder =orderList.length&& orderList.find(
-        (order) =>
-          (order.orderStatus === 'Delivered' && order.course === 'Silver Plan') ||
-          (order.orderStatus === 'Delivered' && order.course === 'Golden Plan') ||
-          (order.orderStatus === 'Delivered' && order.course === 'Diamond Plan')
-      )
+    if (userDetail.user_type === 'StudentUser' && course.price === 0) {
+      return days.filter((day) => day.show)
+    } else {
+      const foundOrder =
+        orderList.length &&
+        orderList.find(
+          (order) =>
+            (order.orderStatus === 'Delivered' &&
+              order.course === 'Silver Plan') ||
+            (order.orderStatus === 'Delivered' &&
+              order.course === 'Golden Plan') ||
+            (order.orderStatus === 'Delivered' &&
+              order.course === 'Diamond Plan')
+        )
 
       if (foundOrder && foundOrder.course === 'Silver Plan') {
         const daysBasedOnShow = days.filter((day) => day.show)
@@ -138,9 +145,7 @@ export default function DayContent({ bootcampId, setOpen }) {
         const size = 5
         return daysBasedOnShow.slice(0, size)
       }
-    } else if (userDetail.user_type === 'StudentUser' && course.price === 0) {
-      return days.filter((day) => day.show)
-    } else return null
+    }
   }
 
   /****************useEffect***************** */
@@ -183,7 +188,7 @@ export default function DayContent({ bootcampId, setOpen }) {
             <div eventKey={`${index}`}>
               {daysBasedOnUser(week.days).length &&
                 daysBasedOnUser(week.days).map((day, index) => (
-                  <div className="course-content">
+                  <div key={day._id} className="course-content">
                     <button
                       onClick={() => {
                         setShow(day._id)
@@ -210,7 +215,7 @@ export default function DayContent({ bootcampId, setOpen }) {
 
                     {filterWeeklyQuiz(day._id).length > 0 &&
                       filterWeeklyQuiz(day._id).map((quiz) => (
-                        <div className="pb-3 pt-3">
+                        <div key={quiz._id} className="pb-3 pt-3">
                           <span className="mr-3 ml-4 pl-1">
                             <img width="30" src="/images/resource/quiz.png" />
                           </span>
@@ -244,7 +249,7 @@ export default function DayContent({ bootcampId, setOpen }) {
 
                     {filterWeeklyTask(day._id).length > 0 &&
                       filterWeeklyTask(day._id).map((task) => (
-                        <div className="pb-3">
+                        <div key={task._id} className="pb-3">
                           <span className="mr-3 ml-4 pl-1">
                             <img
                               width="30"

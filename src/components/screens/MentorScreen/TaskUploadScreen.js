@@ -15,6 +15,8 @@ export default function TaskUploadScreen({ match }) {
   const taskCreate = useSelector((state) => state.taskCreate)
   const { success: createSuccess, task, error: CreateTaskError } = taskCreate
 
+  console.log(taskCreate)
+
   const [succ, setSucc] = useState(createSuccess)
 
   // We need to verify the user is logged in
@@ -30,8 +32,6 @@ export default function TaskUploadScreen({ match }) {
     if (!userDetail) {
       history.push('/')
     } else if (createSuccess) {
-      dispatch({ type: TASK_ADD_REST })
-
       toast.success(task.data.projectName + ', successfully created', {
         position: toast.POSITION.BOTTOM_RIGHT
       })
@@ -66,7 +66,6 @@ export default function TaskUploadScreen({ match }) {
 
   const _FileSubmitHandler = (e) => {
     if (e.target.files.length) {
-      console.log(e.target.files[0])
       setDocumentLable(e.target.files[0].name)
       setFile(e.target.files[0])
       setErr('')
@@ -78,8 +77,6 @@ export default function TaskUploadScreen({ match }) {
     e.preventDefault()
 
     if (File.name && AssignmentName && description) {
-      console.log(AssignmentName, ' - ', File, '-', description)
-
       var form_data = new FormData()
       form_data.append('myfile', File)
       form_data.append('AssignmentName', AssignmentName)
@@ -120,7 +117,6 @@ export default function TaskUploadScreen({ match }) {
 
   return (
     <div className="py-5">
-      {console.log(tasks)}
       <div div className="title mb-4">
         Task uploading
       </div>

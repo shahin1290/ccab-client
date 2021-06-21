@@ -22,7 +22,10 @@ import {
   KLARNA_SESSION_CREATE_FAIL,
   KLARNA_SESSION_READ_REQUEST,
   KLARNA_SESSION_READ_SUCCESS,
-  KLARNA_SESSION_READ_FAIL
+  KLARNA_SESSION_READ_FAIL,
+  ORDER_KLARNA_CAPTURE_REQUEST,
+  ORDER_KLARNA_CAPTURE_SUCCESS,
+  ORDER_KLARNA_CAPTURE_FAIL,
 } from '../constences/orderConst'
 
 export const orderCreateReducer = (
@@ -229,6 +232,34 @@ export const orderKlarnaReadReducer = (
         success: true
       }
     case ORDER_KLARNA_READ_FAIL:
+      return {
+        success: false,
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
+export const orderKlarnaCaptureReducer = (
+  state = { order: {}, success: false },
+  action
+) => {
+  switch (action.type) {
+    case ORDER_KLARNA_CAPTURE_REQUEST:
+      return {
+        loading: true
+      }
+
+    case ORDER_KLARNA_CAPTURE_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        order: action.payload,
+        success: true
+      }
+    case ORDER_KLARNA_CAPTURE_FAIL:
       return {
         success: false,
         loading: false, // loading is done laoding!

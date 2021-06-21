@@ -5,6 +5,9 @@ import {
   updateRequest,
   getRequestDetails
 } from '../../../redux/actions/requestAction'
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory({forceRefresh:true});
 
 export default function UpdateRequest({ match }) {
   const dispatch = useDispatch()
@@ -62,7 +65,10 @@ export default function UpdateRequest({ match }) {
     if (ID) {
       dispatch(getRequestDetails(ID))
     }
-  }, [dispatch, ID])
+    if(UpdateSuccess){
+      history.push('/admin-request-list')
+    }
+  }, [dispatch, ID, UpdateSuccess])
 
   useEffect(() => {
     if (request) {

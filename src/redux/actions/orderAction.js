@@ -23,7 +23,10 @@ import {
   KLARNA_SESSION_CREATE_FAIL,
   KLARNA_SESSION_READ_REQUEST,
   KLARNA_SESSION_READ_SUCCESS,
-  KLARNA_SESSION_READ_FAIL
+  KLARNA_SESSION_READ_FAIL,
+  ORDER_KLARNA_CAPTURE_REQUEST,
+  ORDER_KLARNA_CAPTURE_SUCCESS,
+  ORDER_KLARNA_CAPTURE_FAIL,
 } from '../constences/orderConst'
 
 export const createOrder = (id, order) => async (dispatch, getState) => {
@@ -324,7 +327,12 @@ export const readKlarnaSession =
   }
 
 export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
+
   try {
+    dispatch({
+      type: ORDER_KLARNA_CAPTURE_REQUEST
+    })
+
     const {
       userLogin: { userDetail }
     } = getState()
@@ -340,5 +348,20 @@ export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
       { orderBy },
       config
     )
-  } catch (error) {}
+    // console.log("response:", response)
+
+    dispatch({
+      type: ORDER_KLARNA_CAPTURE_SUCCESS,
+      // payload: console.log("payload:",  response.data),
+      payload: response.data.data
+    })
+  } catch (error) {
+    console.log('error:', error)
+    dispatch({
+      type: ORDER_KLARNA_CAPTURE_FAIL,
+      //    payload: error.res
+      payload: error.response.data.message
+    })
+  }
+
 }

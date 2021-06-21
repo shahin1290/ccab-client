@@ -21,12 +21,17 @@ export default function MangeCourse({ match }) {
   /***********   Calling Reducer  ***************/
 
   // Admin course list Reducer
-  const { loading: Deleteloading, error: DeleteError } = useSelector(
-    (state) => state.courseDelete
-  )
-  const { loading: Updateloading, error: UpdateError } = useSelector(
-    (state) => state.courseUpdate
-  )
+  const {
+    loading: Deleteloading,
+    error: DeleteError,
+    successDelete
+  } = useSelector((state) => state.courseDelete)
+  const {
+    loading: Updateloading,
+    error: UpdateError,
+    success: updateSuccess
+  } = useSelector((state) => state.courseUpdate)
+
 
   // Admin course list Reducer
   const { courseList, page, pages, loading, error } = useSelector(
@@ -104,7 +109,6 @@ export default function MangeCourse({ match }) {
         course._id
       )
     )
-    dispatch(getCourseListForAdmin(pageNumber))
   }
 
   // Withhold  course
@@ -116,14 +120,13 @@ export default function MangeCourse({ match }) {
         course._id
       )
     )
-    dispatch(getCourseListForAdmin(pageNumber))
   }
 
   /**************************************************************** */
 
   useEffect(() => {
     dispatch(getCourseListForAdmin(pageNumber))
-  }, [dispatch, pageNumber])
+  }, [dispatch, pageNumber, successDelete, updateSuccess])
 
   /*******************  State ********************* */
   /* to show delete course model */
@@ -313,9 +316,7 @@ export default function MangeCourse({ match }) {
                                         }
                                       )
                                       setShow(false)
-                                      dispatch(
-                                        getCourseListForAdmin(pageNumber)
-                                      )
+                                      
                                     }}
                                   >
                                     Ok

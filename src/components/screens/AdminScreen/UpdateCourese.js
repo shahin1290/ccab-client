@@ -17,11 +17,13 @@ import {
 } from 'react-bootstrap'
 import { Card, Accordion } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid'
-
+import { createBrowserHistory } from 'history'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 export default function UpdateCourese({ match }) {
+  const history = createBrowserHistory({ forceRefresh: true })
+
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/
@@ -81,7 +83,10 @@ export default function UpdateCourese({ match }) {
     // call the getter ( course Details  and users list )
     dispatch(getCourseDetails(ID))
     dispatch(getUsers())
-  }, [ID, dispatch, match])
+    if(UpdateSuccess){
+      history.push('/admin-courses-list')
+    }
+  }, [ID, dispatch, match, UpdateSuccess])
 
   /********* functions  ************/
   const _setDefaultValuse = () => {
@@ -295,10 +300,10 @@ export default function UpdateCourese({ match }) {
               <div className="left-column col-lg-8 col-md-12 col-sm-12">
                 <div className="inner-column">
                   <div className="sub-title pb-3">Basic Information</div>
-                  <div className="sub-text pb-3 text-info">
+                  <div className="sub-title pb-3 text-danger">
                     *Add Plan name(Silver or Golden or Diamond) as a first word
-                    of the course title if the course is for the subscription
-                    plan (Ex. Golden MERN STACK).
+                    of the course title (Ex. Golden MERN STACK){' '}
+                    <u> if the course is only for any subscription plan.</u>
                   </div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">

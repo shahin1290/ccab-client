@@ -47,10 +47,12 @@ export default function AssignmentDetail({ match }) {
     if (!userDetail) {
       history.push('/')
     } else if (createSuccess) {
-      history.push('/profile')
+      
       toast.success('Assignemnt has been sent', {
         position: toast.POSITION.BOTTOM_RIGHT
       })
+
+      history.push('/profile')
     }
 
     dispatch(getUserAnswer(id))
@@ -128,7 +130,6 @@ export default function AssignmentDetail({ match }) {
       config
     )
 
-    console.log(res)
     const blob = await res.blob()
     download(blob, task.projectName + '-Assignment')
   }

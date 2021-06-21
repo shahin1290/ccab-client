@@ -17,7 +17,8 @@ import {
   QUIZ_DELETE_FAIL,
   QUIZ_UPDATE_REQUEST,
   QUIZ_UPDATE_SUCCESS,
-  QUIZ_UPDATE_FAIL
+  QUIZ_UPDATE_FAIL,
+  QUIZ_UPDATE_RESET
 } from '../constences/quizConst'
 
 import axios from 'axios'
@@ -149,6 +150,7 @@ export const createQuiz =
         config
       )
 
+
       dispatch({
         type: QUIZ_CREATE_SUCCESS,
         //   payload: console.log("payload:", resconst response.data),
@@ -230,6 +232,11 @@ export const updateQuiz =
 
       dispatch({
         type: QUIZ_UPDATE_SUCCESS
+      })
+
+      dispatch({
+        type: QUIZ_UPDATE_RESET
+        // this is turnng back to empty {}, not using the ACTION
       })
     } catch (error) {
       console.log(error.response.data)
