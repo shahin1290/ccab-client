@@ -85,7 +85,7 @@ const _handleUpdateUserROle =()=>{
 
   return (
     <>
-    <div className="container " style={{padding:'60px 0'}}>
+    <div className="container-fulid p-5 " style={{padding:'60px 0'}}>
       <div className="title pb-3">Users</div>
       <div className="py-2">
         <Link to="/register">
@@ -107,6 +107,7 @@ const _handleUpdateUserROle =()=>{
               <th>Email</th>
               <th>Phone</th>
               <th>Gender</th>
+              <th>language</th>
               <th>Role</th>
               <th>Action</th>
             </tr>
@@ -121,6 +122,7 @@ const _handleUpdateUserROle =()=>{
                     <td>{user.email}</td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.gender}</td>
+                    <td>{user.language||'not Selected'}</td>
                     <td>{user.user_type}</td>
 
                     <td>

@@ -32,6 +32,7 @@ export default function RegisterScreen() {
   const [phone, setPhone] = useState('')
   const phoneNumber = '00-' + countryCode + '-' + phone
   const [gender, setGender] = useState('')
+  const [language, setLang ] = useState('')
   const [message, setMessage] = useState(null)
 
   const redirect = '/login'
@@ -47,7 +48,7 @@ export default function RegisterScreen() {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      dispatch(register(name, email, password, phoneNumber, gender))
+      dispatch(register(name, email, password, phoneNumber, gender,language))
     }
 
     if (registerSuccess) {
@@ -59,6 +60,7 @@ export default function RegisterScreen() {
       setCode('')
       setPhone('')
       setGender('')
+      setLang('')
     }
   }
   return (
@@ -857,6 +859,33 @@ export default function RegisterScreen() {
                         </div>
                       </div>
 
+                        {/* study with lang  */}
+                      <div className="column col-lg-6 col-md-6 col-sm-12">
+                        <div className="radio-box">
+                          <input
+                            type="radio"
+                            name="lang"
+                            id="type-2-1"
+                            value="en"
+                            onChange={(e) => setLang(e.target.value)}
+                          />
+                          <label htmlFor="type-2-1">Study in English</label>
+                        </div>
+                      </div>
+                      <div className="column col-lg-6 col-md-6 col-sm-12">
+                        <div className="radio-box">
+                          <input
+                            type="radio"
+                            name="lang"
+                            value="ar"
+                            id="type-2-2"
+                            onChange={(e) => setLang(e.target.value)}
+                          />
+                          <label htmlFor="type-2-2">Study in Arabic</label>
+                        </div>
+                      </div>
+
+                      {/* aggreement */}
                       <div className="column col-lg-12 col-md-12 col-sm-12">
                         <div className="check-box">
                           <input

@@ -5,7 +5,7 @@ const RatingSection = () => {
   const switchUpRatting = 4.6
   const facebookRating = 4.7
   const googleRating = 4.8
-  const courseReportRating = 4.3
+  const trustpilot = 4
 
   return (
     <section
@@ -59,12 +59,12 @@ const RatingSection = () => {
           </div>
 
           <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-3">
-            <img src="images/coursereport.png" className="w-25 pt-5" />
-            <div className="sub-text">{courseReportRating}/5 Rating</div>
+            <img src="images/trustpilot.jpg" className="w-25 pt-5" />
+            <div className="sub-text">{trustpilot}/5 Rating</div>
             <div className="star-ratings-sprite">
               <span
                 style={{
-                  width: ` ${Math.round((courseReportRating / 5) * 100)}%`
+                  width: ` ${Math.round((trustpilot / 5) * 100)}%`
                 }}
                 className="star-ratings-sprite-rating"
               ></span>
