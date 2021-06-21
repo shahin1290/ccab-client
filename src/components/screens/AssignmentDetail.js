@@ -126,7 +126,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'http://localhost:5001/api/tasks/' + task._id + '/download',
+      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
       config
     )
 

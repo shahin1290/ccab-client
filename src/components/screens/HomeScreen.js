@@ -100,10 +100,10 @@ export default function HomeScreen({ match }) {
                   <div className="text header-text text-center-small-screen">
                   Start your new Work with our weekly remotely , Tech programs in Web Development.
                   </div>
-
-                  <a
+                <div className="d-flex jutify-content-center " >
+                                    <a
                     activeclassName="active"
-                    className="theme-btn btn-style-three"
+                    className="theme-btn btn-style-three mx-auto"
                     href="https://meetings.hubspot.com/sl-melad"
                     target="_blank"
                     smooth={true}
@@ -112,6 +112,8 @@ export default function HomeScreen({ match }) {
                   >
                     <span className="txt">Video Call</span>
                   </a>
+                </div>
+
                 </div>
               </div>
             </div>
