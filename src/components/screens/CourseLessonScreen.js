@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getWeekList } from '../../redux/actions/weekAction'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import DayContent from '../layout/DayContent'
-import { Collapse, Tabs, Tab, Button } from 'react-bootstrap'
+import { Collapse, Tabs, Tab, ButtonGroup, Button } from 'react-bootstrap'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
 
 export default function CourseContentScreen({ match }) {
-  const dispatch = useDispatch()
   const id = match.params.id
   const [open, setOpen] = useState(false)
+  const [language, setLanguage] = useState('english')
 
   //redux store
   const { day } = useSelector((state) => state.dayDetails)
@@ -88,27 +87,72 @@ export default function CourseContentScreen({ match }) {
               </div>
               {/* Content Column */}
               <div className="content-column col-lg-9 col-md-12 col-sm-12">
-                <div className="title mb-3 pt-3">{day.name}</div>
                 {day.name ? (
                   <div className="inner-column">
-                    <div className="course-video-box">
-                      <Plyr
-                        source={{
-                          type: 'video',
-                          sources: [
-                            {
-                              src: day.video_path,
-                              provider: 'youtube'
-                            }
-                          ]
-                        }}
-                        options={
-                          {
-                            /* ... */
-                          }
+                    <div className="title mb-3 pt-3">{day.name}</div>
+                    <ButtonGroup aria-label="Basic example">
+                      <Button
+                        variant={
+                          language === 'english' ? 'warning' : 'secondary'
                         }
-                      />
-                    </div>
+                        className="mr-2 mb-3"
+                        onClick={() => setLanguage('english')}
+                        disabled={!day.video_path}
+                      >
+                        English
+                      </Button>
+                      <Button
+                        variant={
+                          language === 'arabic' ? 'warning' : 'secondary'
+                        }
+                        className="mr-2 mb-3"
+                        onClick={() => setLanguage('arabic')}
+                        disabled={!day.arabic_video_path}
+                      >
+                        Arabic
+                      </Button>
+                    </ButtonGroup>
+
+                    {day.arabic_video_path && language === 'arabic' && (
+                      <div className="course-video-box">
+                        <Plyr
+                          source={{
+                            type: 'video',
+                            sources: [
+                              {
+                                src: day.arabic_video_path,
+                                provider: 'youtube'
+                              }
+                            ]
+                          }}
+                          options={
+                            {
+                              /* ... */
+                            }
+                          }
+                        />
+                      </div>
+                    )}
+                    {day.video_path && language === 'english' && (
+                      <div className="course-video-box">
+                        <Plyr
+                          source={{
+                            type: 'video',
+                            sources: [
+                              {
+                                src: day.video_path,
+                                provider: 'youtube'
+                              }
+                            ]
+                          }}
+                          options={
+                            {
+                              /* ... */
+                            }
+                          }
+                        />
+                      </div>
+                    )}
 
                     {/* Intro Info Tabs*/}
                     <div className="intro-info-tabs">
@@ -141,7 +185,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('image', section.name) && (
                                       <img
-                                        src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
+                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
                                           'image',
                                           section.name
                                         )}`}

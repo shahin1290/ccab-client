@@ -47,7 +47,6 @@ export default function AssignmentDetail({ match }) {
     if (!userDetail) {
       history.push('/')
     } else if (createSuccess) {
-      
       toast.success('Assignemnt has been sent', {
         position: toast.POSITION.BOTTOM_RIGHT
       })
@@ -126,7 +125,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
       config
     )
 

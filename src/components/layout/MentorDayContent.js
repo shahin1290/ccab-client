@@ -27,7 +27,6 @@ export default function DayContent({ bootcampId }) {
     success: UpdateSuccess
   } = useSelector((state) => state.dayUpdate)
 
-
   //use effect
   useEffect(() => {
     dispatch(getWeekList(bootcampId))
@@ -120,6 +119,7 @@ export default function DayContent({ bootcampId }) {
     const dayData = {
       name: day.name,
       video_path: day.video_path,
+      arabic_video_path: day.arabic_video_path,
       sections: updateSection,
       action: 'delete'
     }
@@ -131,12 +131,11 @@ export default function DayContent({ bootcampId }) {
       updateDay(weekId, day._id, {
         name: day.name,
         video_path: day.video_path,
+        arabic_video_path: day.arabic_video_path,
         show: !day.show
       })
     )
   }
-
-  
 
   return (
     <>
@@ -144,8 +143,7 @@ export default function DayContent({ bootcampId }) {
         style={{ height: '80vh', overflowY: 'scroll' }}
         className="accordion-box style-two"
       >
-        { 
-          weekList.length ?
+        {weekList.length ? (
           weekList.map((week, index) => (
             <div className="accordion block">
               <div className="title bg-light text-dark">{week.name}</div>
@@ -304,8 +302,10 @@ export default function DayContent({ bootcampId }) {
                 </div>
               ))}
             </div>
-          )) : <Loader />
-        }
+          ))
+        ) : (
+          <Loader />
+        )}
       </div>
     </>
   )

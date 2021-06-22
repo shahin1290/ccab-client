@@ -24,7 +24,6 @@ export default function DayContent({ bootcampId, setOpen }) {
     error: courseErrror
   } = useSelector((state) => state.courseDetails)
 
-  console.log(course)
   //weekList
   const { weekList, loading, error } = useSelector((state) => state.weekList)
   const {

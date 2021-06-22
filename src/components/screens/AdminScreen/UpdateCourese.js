@@ -83,7 +83,7 @@ export default function UpdateCourese({ match }) {
     // call the getter ( course Details  and users list )
     dispatch(getCourseDetails(ID))
     dispatch(getUsers())
-    if(UpdateSuccess){
+    if (UpdateSuccess) {
       history.push('/admin-courses-list')
     }
   }, [ID, dispatch, match, UpdateSuccess])
@@ -573,7 +573,7 @@ export default function UpdateCourese({ match }) {
                     {ImageLable ? (
                       <img
                         src={
-                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (
