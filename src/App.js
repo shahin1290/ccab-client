@@ -13,6 +13,7 @@ import CheckoutKlarna from './components/screens/CheckoutKlarna'
 import ConfirmationKlarna from './components/screens/ConfirmationKlarna'
 import ConfirmationCardPurchase from './components/screens/ConfirmationCardPurchase'
 
+
 import ErrorScreen from './components/screens/ErrorScreen'
 
 import Assignments from './components/layout/Assignments'

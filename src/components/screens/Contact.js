@@ -26,8 +26,8 @@ export default function Contact() {
                     </div>
                     <div className="column col-lg-6 col-md-6 col-sm-12">
                     <ul className="contact-info-list">
-                        <li><span className="icon"><img src="images/icons/email.png" alt /></span><a href="mailto:infoakamidia@gmail.com">info@codifycollege.se</a><a href="mailto:info@yourcompany.com">info@yourcompany.com</a></li>
-                        <li><span className="icon"><img src="images/icons/phone.png" alt /></span><a href="tel:+1-123-456-7890">+46-72 33 33 8 99</a><a href="tel:+1-123-456-7890">+1 (123) 456-7890</a></li>
+                        <li><span className="icon"><img src="images/icons/email.png" alt /></span><a href="mailto:infoakamidia@gmail.com">info@codifycollege.se</a></li>
+                        <li><span className="icon"><img src="images/icons/phone.png" alt /></span><a href="tel:+1-123-456-7890">+46-72 33 38 723</a></li>
                     </ul>
                     </div>
                 </div>
