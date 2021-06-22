@@ -97,7 +97,7 @@ export default function ProfileScreen() {
     dispatch(getProfile())
 
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
-     dispatch(getRequests())
+      dispatch(getRequests())
       dispatch(getMyQuizAnswerList())
       dispatch(getMyAnswerList())
       dispatch(getMyTaskList())
@@ -136,7 +136,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/avatar.svg'
                       }
                       alt="avatar"
@@ -262,7 +262,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'https://server.ccab.tech/uploads/Bootcamp/' +
+                                      'http://localhost:5001/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
@@ -347,7 +347,9 @@ export default function ProfileScreen() {
               userDetail.user_type === 'StudentUser' &&
               requestLoading ? (
                 <Loader />
-              ) : requests && requests.length > 0 && requests[0].status !== 'Paid' ? (
+              ) : requests &&
+                requests.length > 0 &&
+                requests[0].status !== 'Paid' ? (
                 <Tab eventKey="Bill" title="Bill">
                   <PaymentRequest />
                 </Tab>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import Message from '../../layout/Message'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -13,23 +14,16 @@ import {
 
 export default function UpdateMentorCourse({ location, match }) {
   const dispatch = useDispatch()
-  const history = useHistory()
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/mentor-courses-list'
+  const history = createBrowserHistory({ forceRefresh: true })
 
   const { quiz: quizDetails } = useSelector((state) => state.quizDetails)
   const { error: updateError, success: updateSuccess } = useSelector(
     (state) => state.quizUpdate
   )
 
-  const {
-    quiz,
-    error: addQuizError,
-    success: addSuccess
-  } = useSelector((state) => state.quizCreate)
+  const createdQuiz = useSelector((state) => state.quizCreate)
 
-  console.log(quiz);
+  const { quiz, error: addQuizError, success: addSuccess } = createdQuiz
 
   const { bootcampId, dayId, id } = match.params
 
@@ -37,10 +31,13 @@ export default function UpdateMentorCourse({ location, match }) {
     if (id) {
       dispatch(getQuizDetails(bootcampId, dayId, id))
     }
-    if (quiz && quiz.success) {
-      history.push(redirect)
+    if (addSuccess) {
+      history.push(`/mentor-quiz-list/${bootcampId}`)
     }
-  }, [quiz, bootcampId, dayId, id, dispatch])
+    if (updateSuccess) {
+      history.push(`/mentor-quiz-list/${bootcampId}`)
+    }
+  }, [quiz, bootcampId, dayId, id, dispatch, addSuccess, updateSuccess])
 
   const [name, setName] = useState()
   const [time, setTime] = useState()
@@ -115,6 +112,10 @@ export default function UpdateMentorCourse({ location, match }) {
             <div className="clearfix">
               <div className="pull-left">
                 <div className="title">Add Quiz</div>
+                <div class="p-3 mb-2 text-info">
+                  *Submit all questions first and then push the Submit Quiz
+                  button
+                </div>
                 {updateError ? (
                   <p className="text-danger bg-light p-2 ">{updateError}</p>
                 ) : updateSuccess ? (
@@ -124,7 +125,7 @@ export default function UpdateMentorCourse({ location, match }) {
                 ) : null}
 
                 {addQuizError ? (
-                  <p className="text-danger bg-light p-2 ">{updateError}</p>
+                  <p className="text-danger bg-light p-2 ">{addQuizError}</p>
                 ) : addSuccess ? (
                   <p className="text-success bg-light p-2 ">
                     Quiz Added successfully
@@ -278,9 +279,9 @@ export default function UpdateMentorCourse({ location, match }) {
                         className="accordion-box style-two"
                         defaultActiveKey="0"
                       >
-                        {questionWithAnswer &&
+                        {questionWithAnswer.length > 0 &&
                           questionWithAnswer.map((x, index) => (
-                            <Card className="accordion block">
+                            <Card key={x.content} className="accordion block">
                               <Card.Header>
                                 <Accordion.Toggle
                                   variant="link"
@@ -292,7 +293,7 @@ export default function UpdateMentorCourse({ location, match }) {
                               <Accordion.Collapse eventKey={`${index}`}>
                                 <Card.Body>
                                   {x.answers.map((answer) => (
-                                    <div>
+                                    <div key={answer.content}>
                                       A1: {answer.content} C1: {answer.correct}
                                     </div>
                                   ))}
@@ -315,15 +316,17 @@ export default function UpdateMentorCourse({ location, match }) {
                           </span>
                         </button>
                       ) : (
-                        <button
-                          type="button"
-                          className="theme-btn btn-style-one"
-                          style={{ zIndex: '0' }}
-                        >
-                          <span className="txt" onClick={_handleAddQuiz}>
-                            Submit Quiz
-                          </span>
-                        </button>
+                        questionWithAnswer.length > 0 && (
+                          <button
+                            type="button"
+                            className="theme-btn btn-style-one"
+                            style={{ zIndex: '0' }}
+                          >
+                            <span className="txt" onClick={_handleAddQuiz}>
+                              Submit Quiz
+                            </span>
+                          </button>
+                        )
                       )}
                     </div>
                   </div>

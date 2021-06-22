@@ -11,6 +11,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import Loader from '../../layout/Loader'
 import { getDate } from '../../../util/getDate'
 
+
+
 export default function RequestList() {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -18,9 +20,10 @@ export default function RequestList() {
   const { userDetail } = userLogin
 
   const { requests, loading } = useSelector((state) => state.requestList)
-  const deke = useSelector((state) => state.requestDelete)
+  const { loading: Deleteloading,
+    error: DeleteError,
+    successDelete} = useSelector((state) => state.requestDelete)
 
-  console.log(requests)
 
   useEffect(() => {
     if (userDetail.user_type === 'AdminUser') {
@@ -28,7 +31,7 @@ export default function RequestList() {
     } else {
       history.push('/')
     }
-  }, [dispatch, userDetail, history])
+  }, [dispatch, userDetail,  successDelete])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure ? ')) {

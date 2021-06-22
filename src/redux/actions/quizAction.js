@@ -17,7 +17,8 @@ import {
   QUIZ_DELETE_FAIL,
   QUIZ_UPDATE_REQUEST,
   QUIZ_UPDATE_SUCCESS,
-  QUIZ_UPDATE_FAIL
+  QUIZ_UPDATE_FAIL,
+  QUIZ_UPDATE_RESET
 } from '../constences/quizConst'
 
 import axios from 'axios'
@@ -39,7 +40,7 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/quizzes/' + bootcampId,
+      'http://localhost:5001/api/quizzes/' + bootcampId,
       config
     )
 
@@ -75,7 +76,7 @@ export const getMyQuizList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      `https://server.ccab.tech/api/quizzes/myquizlist`,
+      `http://localhost:5001/api/quizzes/myquizlist`,
       config
     )
 
@@ -109,7 +110,7 @@ export const getQuizDetails =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       )
 
@@ -144,7 +145,7 @@ export const createQuiz =
         }
       }
       const response = await axios.post(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}`,
         quizData,
         config
       )
@@ -187,7 +188,7 @@ export const quizDelete =
       }
 
       await axios.delete(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}/${id}`,
         config
       )
 
@@ -223,13 +224,18 @@ export const updateQuiz =
       }
 
       await axios.put(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${weekId}/${id}`,
         quiz,
         config
       )
 
       dispatch({
         type: QUIZ_UPDATE_SUCCESS
+      })
+
+      dispatch({
+        type: QUIZ_UPDATE_RESET
+        // this is turnng back to empty {}, not using the ACTION
       })
     } catch (error) {
       console.log(error.response.data)

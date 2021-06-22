@@ -80,7 +80,7 @@ export default function MentorCoursesList() {
                       filterMentorCourses().map((item) => {
                         //console.log(item);
                         return (
-                          <tr>
+                          <tr key={item._id}>
                             <th className="text" scope="col">
                               {item.name}
                             </th>

@@ -76,7 +76,8 @@ import {
   orderKlarnaCreateReducer,
   orderKlarnaReadReducer,
   orderVeiwReducer,
-  orderListAllReducer
+  orderListAllReducer,
+  orderKlarnaCaptureReducer
 } from './redux/reducers/orderReducer'
 import { currencyCreateReducer } from './redux/reducers/currencyReducer'
 import {
@@ -140,6 +141,7 @@ const reducer = combineReducers({
   KlarnaOrderCreate: orderKlarnaCreateReducer,
   KlarnaOrderRead: orderKlarnaReadReducer,
   klarnaSessionRead: klarnaSessionReadReducer,
+  KlarnaOrderCapture: orderKlarnaCaptureReducer,
   getOrderView: orderVeiwReducer,
   getAllOrders: orderListAllReducer,
   currencyCreate: currencyCreateReducer,

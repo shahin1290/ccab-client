@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from './../../../redux/actions/userAction'
 import { createRequest } from '../../../redux/actions/requestAction'
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory({forceRefresh:true});
 
 export default function UpdateCourese({ match }) {
   const dispatch = useDispatch()
@@ -37,7 +40,11 @@ export default function UpdateCourese({ match }) {
   useEffect(() => {
     // call the getter ( users list )
     dispatch(getUsers())
-  }, [dispatch, match])
+
+    if(requestSuccess){
+      history.push('/admin-request-list')
+    }
+  }, [dispatch, match, history, requestSuccess])
 
   /********* functions  ************/
 

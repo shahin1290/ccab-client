@@ -30,12 +30,14 @@ export default function UpdateMentorCourse({ match }) {
 
   useEffect(() => {
     setName(day.name)
+    setArabicVideo(day.arabic_video_path)
 
     setVideo(day.video_path)
   }, [weekId, id, day])
 
   //video show
   const [showVideo, setShowVideo] = useState(false)
+  const [modalVideo, setModalVideo] = useState('')
   const handleCloseVideo = () => {
     setShowVideo(false)
   }
@@ -45,13 +47,14 @@ export default function UpdateMentorCourse({ match }) {
 
   //form submission
   const [name, setName] = useState('')
-
   const [video, setVideo] = useState('')
+  const [arabicVideo, setArabicVideo] = useState('')
 
   const submitHandler = async (e) => {
     e.preventDefault()
     const data = new FormData()
     data.append('video_path', video)
+    data.append('arabic_video_path', arabicVideo)
     data.append('name', name)
 
     dispatch(updateDay(weekId, id, data))
@@ -82,7 +85,7 @@ export default function UpdateMentorCourse({ match }) {
               <form onSubmit={submitHandler}>
                 {/* Left Column */}
                 <div
-                  className="left-column col-lg-8 col-md-8 col-sm-12"
+                  className="left-column col-lg-6 col-md-8 col-sm-12"
                   style={{ margin: '0 auto' }}
                 >
                   <div className="inner-column">
@@ -104,11 +107,11 @@ export default function UpdateMentorCourse({ match }) {
                 </div>
                 {/* Right Column */}
                 <div
-                  className="right-column col-lg-8 col-md-8 col-sm-12"
+                  className="right-column col-lg-6 col-md-8 col-sm-12"
                   style={{ margin: '0 auto' }}
                 >
                   <div className="inner-column">
-                    <div className="sub-title pb-2">Video</div>
+                    <div className="sub-title pb-2">English Video Content</div>
                     {/* Video Box */}
                     <div
                       className="video-boxed"
@@ -119,6 +122,7 @@ export default function UpdateMentorCourse({ match }) {
                     >
                       <a
                         onClick={() => {
+                          setModalVideo('english')
                           handleOpenVideo()
                         }}
                         className="lightbox-image intro-video-box"
@@ -140,7 +144,13 @@ export default function UpdateMentorCourse({ match }) {
                       </Modal.Header>
                       <Modal.Body className=" m-auto">
                         {/* {(AddnewCourseErr|| AddError)&&<Message variant="danger">{AddnewCourseErr||AddError}</Message>} */}
-                        <ReactPlayer url={video} controls></ReactPlayer>
+                        {modalVideo === 'english' && (
+                          <ReactPlayer url={video} controls></ReactPlayer>
+                        )}
+
+                        {modalVideo === 'arabic' && (
+                          <ReactPlayer url={arabicVideo} controls></ReactPlayer>
+                        )}
                       </Modal.Body>
                       <Modal.Footer></Modal.Footer>
                     </Modal>
@@ -148,7 +158,7 @@ export default function UpdateMentorCourse({ match }) {
 
                     {/* Url Box */}
                     <div className="url-boxed">
-                      <label>URL</label>
+                      <label>URL For English Video Content</label>
                       <input
                         type="text"
                         name="video"
@@ -156,6 +166,42 @@ export default function UpdateMentorCourse({ match }) {
                         defaultValue
                         placeholder="https://www.youtube.com/dummy-video.com"
                         onChange={(e) => setVideo(e.target.value)}
+                      />
+                      <span className="valid">Enter valid url address</span>
+                    </div>
+
+                    <div className="sub-title pb-2">Arabic Video Content</div>
+                    {/* Video Box */}
+
+                    <div
+                      className="video-boxed"
+                      style={{
+                        backgroundImage:
+                          'url(images/resource/video-image-3.jpg)'
+                      }}
+                    >
+                      <a
+                        onClick={() => {
+                          setModalVideo('arabic')
+                          handleOpenVideo()
+                        }}
+                        className="lightbox-image intro-video-box"
+                      >
+                        <span className="fa fa-play">
+                          <i className="ripple" />
+                        </span>
+                      </a>
+                    </div>
+
+                    <div className="url-boxed">
+                      <label>URL for Arabic Video Content</label>
+                      <input
+                        type="text"
+                        name="video"
+                        value={arabicVideo}
+                        defaultValue
+                        placeholder="https://www.youtube.com/dummy-video.com"
+                        onChange={(e) => setArabicVideo(e.target.value)}
                       />
                       <span className="valid">Enter valid url address</span>
                     </div>
