@@ -69,7 +69,7 @@ const OnlineEducationProspect = () => {
 
           {/* Setting The Standard In Online Education */}
 
-          {/* <div className="auto-container pt-5 mt-5">
+          <div className="auto-container pt-5 mt-5">
             <div className="title text-center ">
             Ahead of the pack in online education
 
@@ -95,7 +95,7 @@ const OnlineEducationProspect = () => {
                 <img src="images/csn.jpg" className="w-50 h-75" />
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </section>
     </>

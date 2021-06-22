@@ -49,7 +49,7 @@ const ContactForm = () => {
     }
   }
   return (
-    <div className="p-4" style={{ height: '75vh', overflow: 'auto' }}>
+    <div className="p-4 overflow-auto" style={{ height: '75vh'  }}>
       <div className="row clearfix">
         {/* Title Box */}
         <div className="styled-form col-lg-4 col-md-12 col-sm-12">
@@ -58,18 +58,8 @@ const ContactForm = () => {
           <div className="sub-text-bold">
             Fill in the form or call us directly on:
           </div>
-          <div className="phone-text">+353 1539 7973</div>
-          <div style={{ display: 'flex', padding: '55px 0' }}>
-            <img src={logo} width="50px" />
-            <div
-              style={{
-                textShadow: '0 0 1.2px #000',
-                padding: '20px 5px'
-              }}
-            >
-              Coding for Bettter Life
-            </div>
-          </div>
+          <div className="phone-text">+46723338723</div>
+
         </div>
         {/* Login Form */}
         <div className="styled-form col-lg-8 col-md-12 col-sm-12">

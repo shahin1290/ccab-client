@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getUesrsNumbers } from './../../redux/actions/userAction'
 import { Row, Col, ProgressBar,Container } from 'react-bootstrap'
 import RegisterScreen from '../screens/RegisterScreen'
+import Reviews from './../layout/Reviews';
 
 import {
   Link,
@@ -254,6 +255,11 @@ export default function HomeScreen({ match }) {
           </div>
         </section>
         {/* End Achievement Section */}
+
+        {/* Reviews Section */}
+        
+        <Reviews/>
+        {/* End of Reviews Section */}
 
         {/* Program Section */}
         <section className="program-section mt-5 pt-5">
