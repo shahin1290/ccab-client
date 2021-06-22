@@ -157,7 +157,7 @@ const ReviewsSection = function (props) {
 
         <Carousel.Item>
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <Card >
                       <CardContainer>
                         <QuoteIcon>
