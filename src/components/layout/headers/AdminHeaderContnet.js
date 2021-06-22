@@ -15,9 +15,7 @@ export default function AdminHeaderContnet({ logoutHandler }) {
       <div className="collapse navbar-collapse mr-3">
         <ul className="navbar-nav ">
           <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-            <a href="#" className="text-dark">
-              Manage
-            </a>
+            <a className="text-dark">Manage</a>
             <div
               className="dropdown-menu  mt-4 ml-5"
               aria-labelledby="navbarDropdownMenuLink"
@@ -34,6 +32,11 @@ export default function AdminHeaderContnet({ logoutHandler }) {
 
               <a className="dropdown-item" href="/admin-request-list">
                 Request List
+              </a>
+              <div className="dropdown-divider"></div>
+
+              <a className="dropdown-item" href="/admin-job-list">
+                Job List
               </a>
               <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/admin-users-list">
@@ -56,6 +59,7 @@ export default function AdminHeaderContnet({ logoutHandler }) {
           <NavDropdown.Item href="/admin-request-list">
             Request List
           </NavDropdown.Item>
+          <NavDropdown.Item href="/admin-job-list">Job List</NavDropdown.Item>
           <NavDropdown.Item href="/admin-users-list">Users</NavDropdown.Item>
         </Dropdown.Menu>
         <Nav.Link href="/profile" className="text-dark hide-on-big-screen">
