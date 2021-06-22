@@ -79,20 +79,28 @@ const OnlineEducationProspect = () => {
             We make sure all our courses meet the highest standards, which is why we're the only university credit-rated coding bootcamp within Europe. Our education partners are listed below:
             </div>
             <div className="row clearfix mt-5">
-              <div className="text-center col-lg-3 col-md-6 col-sm-12 pb-5">
-                <img src="images/eu.jpg" className=" w-50 h-75" />
+              <div className="text-center col-lg-2 col-md-6 col-sm-12 pb-5">
+                <img src="images/paypal.png" className="  h-75 partnerImage" />
               </div>
 
-              <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-5">
-                <img src="images/scqf.png" className="w-50 h-75" />
+              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5">
+                <img src="images/facebook2.png" className=" h-75 partnerImage" />
               </div>
 
-              <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-5">
-                <img src="images/gateway.jpg" className="w-50 h-75" />
+              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5">
+                <img src="images/hubspot.png" className=" h-75 partnerImage" />
               </div>
 
-              <div className=" text-center col-lg-3 col-md-6 col-sm-12 pb-5">
-                <img src="images/csn.jpg" className="w-50 h-75" />
+              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5">
+                <img src="images/google2.png" className=" h-75 partnerImage" />
+              </div>
+
+              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5">
+                <img src="images/apple.png" className=" h-75 partnerImage " />
+              </div>
+
+              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5">
+                <img src="images/klarna.png" className=" h-75 partnerImage" />
               </div>
             </div>
           </div>

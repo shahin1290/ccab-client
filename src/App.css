@@ -26,6 +26,14 @@ body {
     background-color: red !important;
   }
 }
+.partnerImage{
+  width:50% !important;
+}
+@media (max-width: 767px) {
+  .partnerImage{
+      width:30% !important;
+  }
+}
 
 @media (max-width: 992px) {
   .hide-on-small-screen {
@@ -223,6 +231,7 @@ pre {
  background-color:  #131313 !important;
  
 }
+
 .carousel-control-prev{
  
  left:-12% !important;
