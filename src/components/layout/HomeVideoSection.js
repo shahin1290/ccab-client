@@ -11,7 +11,7 @@ const HomeVideoSection = () => {
     <section
       style={{
         backgroundColor: '#F8F9FD',
-        padding: '100px 0'
+        padding: '0px 0px 40px 0'
       }}
     >
       <div className="auto-container">
