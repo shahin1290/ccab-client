@@ -6,9 +6,11 @@ import WebDevelopmentMarket from '../layout/WebDevelopmentMarket';
 const Jobs = () => {
   return (
     <>
+    <div className="bg-white">
       <JobsBanner />
       <WebDevelopmentMarket />
       <JobsContact />
+      </div>
     </>
   )
 }

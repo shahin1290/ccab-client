@@ -79,7 +79,7 @@ export default function JobList() {
                   <td>{job.email}</td>
                   <td>{job.phone}</td>
                   <td>{job.subject}</td>
-                  <td>{job.message}</td>
+                  <td><div style={{maxHeight: '120px', overflowY: 'scroll'}}>{job.message}</div></td>
                   <td>{getDate(job.createdAt)}</td>
 
                   <td>
