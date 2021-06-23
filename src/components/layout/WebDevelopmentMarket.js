@@ -46,9 +46,9 @@ const WebDevelopmentMarket = () => {
             </div>
           </div>
         </Col>
-        <Col md={6}  className="web-market-text text-center ">
+        <Col md={6} className="web-market-text text-center ">
           <Row className="">
-            <Col md={5} xs={12}className="big green ">
+            <Col md={5} xs={12} className="big green ">
               <div>
                 <div className="number">
                   {' '}
@@ -71,14 +71,14 @@ const WebDevelopmentMarket = () => {
                   {' '}
                   <CountUp
                     start={0}
-                    end={825000}
+                    end={1000000}
                     duration={2.75}
                     separator=" "
                     decimal=","
                   />
                 </div>
                 <div className="sub-title  ">
-                  EU ICT JOBS WILL REMAIN VACANT BY 2022
+                  US ICT JOBS WILL REMAIN VACANT BY 2020{' '}
                 </div>
               </div>
             </Col>{' '}
@@ -102,13 +102,13 @@ const WebDevelopmentMarket = () => {
                 {' '}
                 <CountUp
                   start={0}
-                  end={25}
+                  end={100}
                   duration={2.75}
                   separator=" "
                   decimal=","
                 />
               </div>
-              <div className="sub-title ">INTERNSHIP AVAILABLE</div>
+              <div className="sub-title ">SATISFACTION RATE</div>
             </Col>{' '}
           </Row>
         </Col>
