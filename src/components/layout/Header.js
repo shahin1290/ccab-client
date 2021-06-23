@@ -111,6 +111,10 @@ export default function Header() {
                 </li>
               </ul>
             </div>
+
+            <Nav.Link className="text-dark" href="/jobs">
+              Jobs
+            </Nav.Link>
           </Nav>
           {userDetail.user_type === 'MentorUser' ? (
             <>
@@ -136,6 +140,7 @@ export default function Header() {
                   </li>
                 </ul>
               </div>
+              
 
               <Nav className="text-dark hide-on-big-screen pt-4 ">
                 Manage

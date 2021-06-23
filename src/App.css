@@ -26,12 +26,12 @@ body {
     background-color: red !important;
   }
 }
-.partnerImage{
-  width:50% !important;
+.partnerImage {
+  width: 50% !important;
 }
 @media (max-width: 767px) {
-  .partnerImage{
-      width:30% !important;
+  .partnerImage {
+    width: 30% !important;
   }
 }
 
@@ -57,6 +57,49 @@ body {
   .curriculum-scroll {
     display: flex;
     overflow-x: auto;
+  }
+
+  .banner-text {
+    font-size: 2rem !important;
+  }
+  .banner-container {
+    background-size: contain !important;
+  }
+
+  .big.green {
+    border: 1px dashed #308800;
+    margin: 10px !important;
+  }
+
+  .big.red {
+    border: 1px dashed #fe4a55;
+    margin: 10px !important;
+  }
+
+  .small {
+    background: url(assets/images/jobs/funfacts-shape.png) no-repeat;
+    padding: 70px;
+    text-align: center;
+  }
+
+  .small.pink {
+    border: 1px dashed #ad8360;
+    margin: 10px !important;
+  }
+
+  .small.blue {
+    border: 1px dashed #221638;
+    margin: 10px !important;
+  }
+
+  .white-box .inner-text {
+    padding: 5px !important;
+  }
+
+  .web-market {
+    background-repeat: no-repeat;
+    background-size: 100% 330vh !important;
+    padding: 80px 0 40px 0 !important;
   }
 }
 
@@ -88,11 +131,10 @@ body {
   overflow: hidden;
   margin-top: -6px;
 }
-.planicon{
+.planicon {
   font-size: 230% !important;
 }
 .title2 {
-  
   font-weight: 200;
   font-family: Inter;
   margin-top: 20px;
@@ -220,27 +262,24 @@ pre {
   align-items: center;
   z-index: 3000;
 }
-.carousel-indicators{
-  top:100% !important;
+.carousel-indicators {
+  top: 100% !important;
 }
-.carousel-control-next{
- 
-  left:100% !important;
+.carousel-control-next {
+  left: 100% !important;
 }
-.carousel-control-next-icon,.carousel-control-prev-icon{
- background-color:  #131313 !important;
- 
-}
-
-.carousel-control-prev{
- 
- left:-12% !important;
-}
-.carousel-indicators li{
-  z-index: 2000 !important;
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
   background-color: #131313 !important;
 }
 
+.carousel-control-prev {
+  left: -12% !important;
+}
+.carousel-indicators li {
+  z-index: 2000 !important;
+  background-color: #131313 !important;
+}
 
 .rodal-dialog {
   z-index: 3001 !important;
@@ -393,9 +432,139 @@ input:checked + .slider:before {
 }
 
 #uncontrolled-tab-example-tab-Bill {
-  color: #EA5573;
+  color: #ea5573;
   font-weight: bold;
   font-size: 1.2em;
 }
 
+/* JOBS SECTION */
+.banner-container {
+  display: inline-block;
+  text-align: center;
+  height: 40vh;
+  background: url(assets/images/jobs/jobs-hero.png) no-repeat;
+  background-size: cover;
+  box-shadow: inset 3000px 0 0 0 rgba(0, 0, 0, 0.63);
+}
 
+.banner-text {
+  font-size: 3.1rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+.web-market {
+  background: url(assets/images/jobs/white-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 130vh;
+  padding: 80px 0 200px 0;
+}
+
+.web-market .quote {
+  font-size: 60px;
+  color: #e8e8e8;
+}
+
+.big {
+  background: url(assets/images/jobs/funfacts-shape.png) no-repeat;
+  padding: 100px;
+  text-align: center;
+}
+
+.big.green {
+  border: 1px dashed #308800;
+  margin: 50px 25px 0 0;
+}
+
+.web-market-text .number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fe4a55;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.big.red {
+  border: 1px dashed #fe4a55;
+  margin: 0 0 50px 0;
+}
+
+.small {
+  background: url(assets/images/jobs/funfacts-shape.png) no-repeat;
+  padding: 70px;
+  text-align: center;
+}
+
+.small.pink {
+  border: 1px dashed #ad8360;
+  margin: 30px 25px 0 0;
+}
+
+.small.blue {
+  border: 1px dashed #221638;
+  margin: -20px 0 50px 0;
+}
+
+.web-market .white-box {
+  background-color: white;
+  line-height: 25px;
+  position: relative;
+}
+
+.white-box .inner-text {
+  padding: 0 80px 50px 30px;
+}
+.quarter-circle-top-left {
+  width: 50px;
+  height: 50px;
+  top: 0;
+  background: #fe4a55;
+  border-radius: 0 0 100px 0;
+  -moz-border-radius: 0 0 100px 0;
+  -webkit-border-radius: 0 0 100px 0;
+}
+.address .icon {
+  background-color: #f8f9f8;
+  width: 100px;
+  height: 100px;
+  font-size: 35px;
+  color: #fe4a55;
+  transition: background-color 0.5s ease;
+}
+
+ .icon .fas, .far {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.address .icon:hover {
+  background-color: #fe4a55;
+  color: #fff;
+}
+
+.job-contact {
+  background: url(assets/images/jobs/register-shape.jpg) no-repeat;
+  background-size: cover;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.job-contact input,
+textarea,
+button {
+  background: #c22b34;
+  border-radius: 5px !important;
+}
+
+.job-contact textarea {
+  border: none !important;
+}
+
+.job-contact button {
+  border: none !important;
+}

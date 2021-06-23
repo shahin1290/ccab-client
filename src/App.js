@@ -13,7 +13,6 @@ import CheckoutKlarna from './components/screens/CheckoutKlarna'
 import ConfirmationKlarna from './components/screens/ConfirmationKlarna'
 import ConfirmationCardPurchase from './components/screens/ConfirmationCardPurchase'
 
-
 import ErrorScreen from './components/screens/ErrorScreen'
 
 import Assignments from './components/layout/Assignments'
@@ -27,6 +26,7 @@ import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 import RequestPayment from './components/screens/AdminScreen/RequestPayment'
 import RequestList from './components/screens/AdminScreen/RequestList'
 import EditRequest from './components/screens/AdminScreen/EditRequest'
+import JobList from './components/screens/AdminScreen/JobList';
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -112,6 +112,12 @@ function App() {
           exact
           path="/admin-request-list"
           component={RequestList}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-job-list"
+          component={JobList}
         ></AdminRoute>
 
         {/* Private Route for Mentor  */}
