@@ -18,7 +18,7 @@ const SectionContainer = styled.div`
  
   width: 100%;
   background-color: #fff;
-
+  padding-top:50px;
 `
 
 const ReviewsContainer = styled(Element)`
@@ -145,6 +145,14 @@ const ReviewsSection = function (props) {
 
   return (
     <SectionContainer >
+            <div className="title text-center pt-2">
+            Ahead of the pack in online education
+
+            </div>
+            <hr className="block-seperator mt-4 mb-4" />
+            <div className="sub-text text-center" style={{width :"60%",margin:"auto"}}>
+            We make sure all our courses meet the highest standards, which is why we're the only university credit-rated coding bootcamp within Europe. Our education partners are listed below:
+            </div>
       <ReviewsContainer>
 
 

@@ -7,7 +7,7 @@ const OnlineEducationProspect = () => {
       <section
         style={{
           backgroundColor: '#fff',
-          padding: '50px 0'
+          paddingTop: '50px'
         }}
       >
         <div className="auto-container">

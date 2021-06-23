@@ -18,6 +18,7 @@ import {
   scrollSpy,
   scroller
 } from 'react-scroll'
+
 // images
 import image0 from './../../assets/images/header/image-1.jpg'
 import image1 from './../../assets/images/header/image-2.jpg'
@@ -104,7 +105,7 @@ export default function HomeScreen({ match }) {
                 <div className="d-flex jutify-content-center " >
                                     <a
                     activeclassName="active"
-                    className="theme-btn btn-style-three mx-auto"
+                    className="theme-btn btn-style-three mx-auto mb-5"
                     href="https://meetings.hubspot.com/sl-melad"
                     target="_blank"
                     smooth={true}
