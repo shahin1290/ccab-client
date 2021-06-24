@@ -26,7 +26,7 @@ const ReviewsContainer = styled(Element)`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding-top:70px ;
+  padding-top:30px ;
 `
 
 const StyledCarouselProvider = styled(CarouselProvider)`

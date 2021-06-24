@@ -303,7 +303,7 @@ export default function HomeScreen({ match }) {
         {/* End Achievement Section */}
 
         {/* Reviews Section */}
-        <div className="container">
+        <div style={{width :"100% ;"}} className="overflow-hidden py-2">
            <Reviews/>
         </div>
        
