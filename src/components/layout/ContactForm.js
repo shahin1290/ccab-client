@@ -35,7 +35,7 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('https://server.ccab.tech/contact', {
+      const res = await axios.post('http://localhost:5001/contact', {
         name,
         email,
         phoneNumber,
@@ -49,7 +49,7 @@ const ContactForm = () => {
     }
   }
   return (
-    <div className="p-4 overflow-auto" style={{ height: '75vh'  }}>
+    <div className="p-4 overflow-auto" style={{ height: '75vh' }}>
       <div className="row clearfix">
         {/* Title Box */}
         <div className="styled-form col-lg-4 col-md-12 col-sm-12">
@@ -59,7 +59,6 @@ const ContactForm = () => {
             Fill in the form or call us directly on:
           </div>
           <div className="phone-text">+46723338723</div>
-
         </div>
         {/* Login Form */}
         <div className="styled-form col-lg-8 col-md-12 col-sm-12">

@@ -31,7 +31,7 @@ export const createRequest = (request) => async (dispatch, getState) => {
     const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
 
     const response = await axios.post(
-      'https://server.ccab.tech/api/request',
+      'http://localhost:5001/api/request',
       request,
       config
     )
@@ -48,7 +48,10 @@ export const createRequest = (request) => async (dispatch, getState) => {
     dispatch({
       type: REQUEST_ADD_FAIL,
       //    payload: error.res
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -69,7 +72,7 @@ export const getRequests = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'https://server.ccab.tech/api/request/',
+      'http://localhost:5001/api/request/',
       config
     )
     dispatch({
@@ -105,7 +108,7 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/request/${id}`,
+      `http://localhost:5001/api/request/${id}`,
       config
     )
 
@@ -118,7 +121,10 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     console.log(error.response.data.message)
     dispatch({
       type: REQUEST_DETAILS_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -139,7 +145,7 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete(`https://server.ccab.tech/api/request/${id}`, config)
+    await axios.delete(`http://localhost:5001/api/request/${id}`, config)
 
     dispatch({
       type: REQUEST_DELETE_SUCCESS
@@ -173,7 +179,7 @@ export const updateRequest = (req, id) => async (dispatch, getState) => {
     }
 
     //console.log(REQUEST);
-    await axios.put(`https://server.ccab.tech/api/request/${id}`, req, config)
+    await axios.put(`http://localhost:5001/api/request/${id}`, req, config)
 
     dispatch({
       type: REQUEST_UPDATE_SUCCESS
@@ -182,7 +188,10 @@ export const updateRequest = (req, id) => async (dispatch, getState) => {
     // console.log(error.response.data);
     dispatch({
       type: REQUEST_UPDATE_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }

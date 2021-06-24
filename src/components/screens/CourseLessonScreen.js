@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import DayContent from '../layout/DayContent'
 import { Collapse, Tabs, Tab, ButtonGroup, Button } from 'react-bootstrap'
@@ -8,21 +8,17 @@ import 'plyr-react/dist/plyr.css'
 export default function CourseContentScreen({ match }) {
   const id = match.params.id
   const [open, setOpen] = useState(false)
- 
 
   //redux store
   const { day } = useSelector((state) => state.dayDetails)
 
-
-
   const [language, setLanguage] = useState('')
 
   useEffect(() => {
-    if(day){
-      setLanguage(day.video_path?'english':'arabic')
+    if (day) {
+      setLanguage(day.video_path ? 'english' : 'arabic')
     }
-
-  }, [day]);
+  }, [day])
 
   //functions
   const findElementText = (el, sectionName) => {
@@ -196,7 +192,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText('image', section.name) && (
                                       <img
-                                        src={`https://server.ccab.tech/uploads/Source_Code/${findElementText(
+                                        src={`http://localhost:5001/uploads/Source_Code/${findElementText(
                                           'image',
                                           section.name
                                         )}`}

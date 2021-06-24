@@ -68,8 +68,8 @@ const Jobs = () => {
               We know that anyone can learn to Code, all you need to do is to
               take the First Step. Contact us!
             </p>
-            <Row  className="address">
-              <Col md={2}  className="icon">
+            <Row className="address">
+              <Col md={2} className="job-icon">
                 <i className="fas fa-map-marker-alt"></i>
               </Col>
 
@@ -80,8 +80,8 @@ const Jobs = () => {
                 </div>
               </Col>
             </Row>
-            <Row  className="address mb-3">
-              <Col md={2} className="icon">
+            <Row className="address mb-3">
+              <Col md={2} className="job-icon">
                 <i class="far fa-envelope"></i>
               </Col>
 
@@ -97,7 +97,7 @@ const Jobs = () => {
             </Row>
 
             <Row className="address mb-3">
-              <Col md={2} className="icon">
+              <Col md={2} className="job-icon">
                 <i class="fas fa-phone-volume"></i>
               </Col>
 
@@ -112,7 +112,7 @@ const Jobs = () => {
               </Col>
             </Row>
             <Row className="address">
-              <Col md={2} className="icon">
+              <Col md={2} className="job-icon">
                 <i class="far fa-clock"></i>
               </Col>
 

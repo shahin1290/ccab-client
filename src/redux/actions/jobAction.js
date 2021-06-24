@@ -38,7 +38,10 @@ export const createJob = (job) => async (dispatch, getState) => {
     dispatch({
       type: JOB_ADD_FAIL,
       //    payload: error.res
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -58,10 +61,7 @@ export const getJobs = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get(
-      'http://localhost:5001/api/job/',
-      config
-    )
+    const response = await axios.get('http://localhost:5001/api/job/', config)
     dispatch({
       type: JOB_LIST_SUCCESS,
       payload: response.data
@@ -108,7 +108,10 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     console.log(error.response.data.message)
     dispatch({
       type: JOB_DETAILS_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -172,7 +175,10 @@ export const updateRequest = (req, id) => async (dispatch, getState) => {
     // console.log(error.response.data);
     dispatch({
       type: JOB_UPDATE_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }

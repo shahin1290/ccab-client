@@ -38,7 +38,7 @@ export const createAnswer =
         }
       }
       const response = await axios.put(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${quizId}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${quizId}`,
         answer,
         config
       )
@@ -58,7 +58,10 @@ export const createAnswer =
       dispatch({
         type: ANSWER_CREATE_FAIL,
         //    payload: error.res
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -82,7 +85,7 @@ export const getMyAnswerList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'https://server.ccab.tech/api/answers/myanswers',
+      'http://localhost:5001/api/answers/myanswers',
       config
     )
     dispatch({
@@ -94,7 +97,10 @@ export const getMyAnswerList = () => async (dispatch, getState) => {
     //console.log(error.response.data.message);
     dispatch({
       type: ANSWER_MY_LIST_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -118,7 +124,7 @@ export const getTaskAnswerList =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}`,
         config
       )
 
@@ -130,7 +136,10 @@ export const getTaskAnswerList =
     } catch (error) {
       dispatch({
         type: ANSWER_LIST_FAIL,
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -154,7 +163,7 @@ export const getUserAnswer =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}/${id}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/${id}`,
         config
       )
 
@@ -166,7 +175,10 @@ export const getUserAnswer =
     } catch (error) {
       dispatch({
         type: ANSWER_ONE_FAIL,
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -189,7 +201,7 @@ export const updateAnswerStatus =
       }
 
       const response = await axios.put(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}/${answerId}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/${answerId}`,
         status,
         config
       )
@@ -202,7 +214,10 @@ export const updateAnswerStatus =
     } catch (error) {
       dispatch({
         type: ANSWER_UPDATE_STATUS_FAIL,
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
