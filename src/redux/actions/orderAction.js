@@ -44,7 +44,7 @@ export const createOrder = (id, order) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      `https://server.ccab.tech/api/order/${id}`,
+      `http://localhost:5001/api/order/${id}`,
       order,
       config
     )
@@ -61,7 +61,10 @@ export const createOrder = (id, order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_FAIL,
       //    payload: error.res
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -84,7 +87,7 @@ export const getOrderList = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/myorders`,
+      `http://localhost:5001/api/order/myorders`,
       config
     )
 
@@ -121,7 +124,7 @@ export const getAllOrders = () => async (dispatch, getState) => {
       }
     }
 
-    const response = await axios.get(`https://server.ccab.tech/api/order/`, config)
+    const response = await axios.get(`http://localhost:5001/api/order/`, config)
 
     //console.log("payload: ",response.data.data)
     dispatch({
@@ -156,7 +159,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/` + id,
+      `http://localhost:5001/api/order/` + id,
       config
     )
 
@@ -191,7 +194,7 @@ export const createKlarnaSession =
       }
 
       const response = await axios.post(
-        `https://server.ccab.tech/api/order/${id}/klarna/session`,
+        `http://localhost:5001/api/order/${id}/klarna/session`,
         order,
         config
       )
@@ -206,7 +209,10 @@ export const createKlarnaSession =
       dispatch({
         type: KLARNA_SESSION_CREATE_FAIL,
         //    payload: error.res
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -228,7 +234,7 @@ export const createKlarnaOrder = (id, data) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      `https://server.ccab.tech/api/order/${id}/klarna/order`,
+      `http://localhost:5001/api/order/${id}/klarna/order`,
       data,
       config
     )
@@ -245,7 +251,10 @@ export const createKlarnaOrder = (id, data) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_KLARNA_CREATE_FAIL,
       //    payload: error.res
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -267,7 +276,7 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/order/${id}/klarna/order`,
+      `http://localhost:5001/api/order/${id}/klarna/order`,
       config
     )
 
@@ -283,7 +292,10 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_KLARNA_READ_FAIL,
       //    payload: error.res
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -306,7 +318,7 @@ export const readKlarnaSession =
       }
 
       const response = await axios.post(
-        `https://server.ccab.tech/api/order/${id}/klarna/authorize`,
+        `http://localhost:5001/api/order/${id}/klarna/authorize`,
         session,
         config
       )
@@ -321,7 +333,10 @@ export const readKlarnaSession =
       dispatch({
         type: KLARNA_SESSION_READ_FAIL,
         //    payload: error.res
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -336,13 +351,12 @@ export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
       userLogin: { userDetail }
     } = getState()
     const config = {
-     
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + userDetail.token
+    }
+
     const response = await axios.post(
-      `https://server.ccab.tech/api/order/capture/${id}`,
+      `http://localhost:5001/api/order/capture/${id}`,
       { orderBy },
       config
     )
@@ -358,7 +372,10 @@ export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_KLARNA_CAPTURE_FAIL,
       //    payload: error.res
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }

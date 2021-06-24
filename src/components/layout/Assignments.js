@@ -57,7 +57,7 @@ export default function Assignments() {
     if (myanswers && myanswers.length > 0) {
       const foundAnswer = myanswers.find((ans) => ans.task._id === taskId)
       return foundAnswer
-    }
+    } else return null
   }
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export default function Assignments() {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -168,8 +168,11 @@ export default function Assignments() {
                                 </Message>
                               ) : (
                                 <>
-                                  {taskStatus(task._id) &&
-                                  taskStatus(task._id).status === 'Not Sent' ? (
+                                  {!taskStatus(task._id) ? (
+                                    <td>NA</td>
+                                  ) : taskStatus(task._id) &&
+                                    taskStatus(task._id).status ===
+                                      'Not Sent' ? (
                                     <td style={{ color: 'red' }}>
                                       {taskStatus(task._id).status}
                                     </td>
@@ -181,7 +184,8 @@ export default function Assignments() {
                                         color: '#ffc40c'
                                       }}
                                     >
-                                      {taskStatus(task._id).status}
+                                      {taskStatus(task._id) &&
+                                        taskStatus(task._id).status}
                                     </td>
                                   ) : taskStatus(task._id) &&
                                     taskStatus(task._id).status === 'Failed' ? (
@@ -190,7 +194,8 @@ export default function Assignments() {
                                         color: 'red'
                                       }}
                                     >
-                                      {taskStatus(task._id).status}
+                                      {taskStatus(task._id) &&
+                                        taskStatus(task._id).status}
                                     </td>
                                   ) : taskStatus(task._id) &&
                                     taskStatus(task._id).status === 'Sent' ? (
@@ -203,7 +208,8 @@ export default function Assignments() {
                                         color: '#1aff1a'
                                       }}
                                     >
-                                      {taskStatus(task._id).status}
+                                      {taskStatus(task._id) &&
+                                        taskStatus(task._id).status}
                                     </td>
                                   )}
                                 </>
@@ -213,6 +219,8 @@ export default function Assignments() {
                                 {taskStatus(task._id) &&
                                 taskStatus(task._id).status !== 'Not Sent' ? (
                                   'Submitted'
+                                ) : !taskStatus(task._id) ? (
+                                  'NA'
                                 ) : (
                                   <Link
                                     to={`/assignment-details/${task.bootcamp._id}/${task._id}`}

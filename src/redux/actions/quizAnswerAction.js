@@ -31,7 +31,7 @@ export const getQuizAnswerList =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/quizAnswer/${bootcampId}/${quizId}`,
+        `http://localhost:5001/api/quizAnswer/${bootcampId}/${quizId}`,
         config
       )
 
@@ -43,7 +43,10 @@ export const getQuizAnswerList =
     } catch (error) {
       dispatch({
         type: QUIZ_ANSWER_LIST_FAIL,
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -65,7 +68,7 @@ export const createQuizAnswer =
         }
       }
       const response = await axios.put(
-        `https://server.ccab.tech/api/quizAnswer/${bootcampId}/${quizId}`,
+        `http://localhost:5001/api/quizAnswer/${bootcampId}/${quizId}`,
         answer,
         config
       )
@@ -85,7 +88,10 @@ export const createQuizAnswer =
       dispatch({
         type: QUIZ_ANSWER_CREATE_FAIL,
         //    payload: error.res
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -109,7 +115,7 @@ export const getMyQuizAnswerList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'https://server.ccab.tech/api/quizAnswer/myQuizAnswers',
+      'http://localhost:5001/api/quizAnswer/myQuizAnswers',
       config
     )
 
@@ -122,7 +128,10 @@ export const getMyQuizAnswerList = () => async (dispatch, getState) => {
     //console.log(error.response.data.message);
     dispatch({
       type: QUIZ_ANSWER_MY_LIST_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }

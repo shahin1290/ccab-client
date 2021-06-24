@@ -40,7 +40,7 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/quizzes/' + bootcampId,
+      'http://localhost:5001/api/quizzes/' + bootcampId,
       config
     )
 
@@ -76,7 +76,7 @@ export const getMyQuizList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      `https://server.ccab.tech/api/quizzes/myquizlist`,
+      `http://localhost:5001/api/quizzes/myquizlist`,
       config
     )
 
@@ -88,7 +88,10 @@ export const getMyQuizList = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: MY_QUIZ_LIST_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -110,7 +113,7 @@ export const getQuizDetails =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       )
 
@@ -123,13 +126,16 @@ export const getQuizDetails =
       console.log(error.response.data.message)
       dispatch({
         type: QUIZ_DETAILS_FAIL,
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
 
 export const createQuiz =
-  (quizData, bootcampId, weekId) => async (dispatch, getState) => {
+  (quizData, bootcampId, dayId) => async (dispatch, getState) => {
     try {
       dispatch({
         type: QUIZ_CREATE_REQUEST
@@ -145,7 +151,7 @@ export const createQuiz =
         }
       }
       const response = await axios.post(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}`,
         quizData,
         config
       )
@@ -165,13 +171,17 @@ export const createQuiz =
       dispatch({
         type: QUIZ_CREATE_FAIL,
         //    payload: error.res
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
 
 export const quizDelete =
-  (bootcampId, weekId, id) => async (dispatch, getState) => {
+  (bootcampId, dayId, id) => async (dispatch, getState) => {
+    console.log(bootcampId, dayId, id);
     try {
       dispatch({
         type: QUIZ_DELETE_REQUEST
@@ -187,8 +197,8 @@ export const quizDelete =
         }
       }
 
-      const response = await axios.post(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
+      const response = await axios.delete(
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       )
 
@@ -207,7 +217,7 @@ export const quizDelete =
   }
 
 export const updateQuiz =
-  (bootcampId, weekId, id, quiz) => async (dispatch, getState) => {
+  (bootcampId, dayId, id, quiz) => async (dispatch, getState) => {
     try {
       dispatch({
         type: QUIZ_UPDATE_REQUEST
@@ -223,8 +233,8 @@ export const updateQuiz =
         }
       }
 
-      const response = await axios.post(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${weekId}/${id}`,
+      const response = await axios.put(
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         quiz,
         config
       )
@@ -241,7 +251,10 @@ export const updateQuiz =
       console.log(error.response.data)
       dispatch({
         type: QUIZ_UPDATE_FAIL,
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }

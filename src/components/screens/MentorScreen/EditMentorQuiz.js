@@ -13,6 +13,8 @@ export default function UpdateMentorCourse({ match }) {
 
   const { bootcampId, dayId, id } = match.params
 
+  console.log(bootcampId, dayId, id);
+
   const { quiz, loading, error } = useSelector((state) => state.quizDetails)
   const { error: updateError, success: updateSuccess } = useSelector(
     (state) => state.quizUpdate

@@ -47,7 +47,7 @@ export const login = (email, password) => async (dispatch) => {
       }
     }
     const response = await axios.post(
-      'https://server.ccab.tech/api/users/login',
+      'http://localhost:5001/api/users/login',
       { email, password },
       config
     )
@@ -114,7 +114,10 @@ export const register =
       dispatch({
         type: USER_REG_FAIL,
         //    payload: error.res
-        payload: error.response.data.message
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
       })
     }
   }
@@ -138,7 +141,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
     //console.log('config : ',config);
     const response = await axios.get(
-      'https://server.ccab.tech/api/users/' + id,
+      'http://localhost:5001/api/users/' + id,
       config
     )
     // console.log("response:", response);
@@ -180,7 +183,7 @@ export const getProfile = () => async (dispatch, getState) => {
     }
     //console.log('config : ',config);
     const response = await axios.get(
-      'https://server.ccab.tech/api/users/profile',
+      'http://localhost:5001/api/users/profile',
       config
     )
     // console.log("response:", response);
@@ -218,7 +221,7 @@ export const getUsers = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get('https://server.ccab.tech/api/users/', config)
+    const response = await axios.get('http://localhost:5001/api/users/', config)
     // console.log("response:", response);
     console.log(response.data)
     dispatch({
@@ -255,7 +258,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    await axios.delete('https://server.ccab.tech/api/users/' + id, config)
+    await axios.delete('http://localhost:5001/api/users/' + id, config)
     // console.log("res:", res)
 
     dispatch({
@@ -291,7 +294,7 @@ export const userProfileUpdate = (user) => async (dispatch, getState) => {
       }
     }
     const response = await axios.put(
-      'https://server.ccab.tech/api/users/profile',
+      'http://localhost:5001/api/users/profile',
       user,
       config
     )
@@ -313,7 +316,10 @@ export const userProfileUpdate = (user) => async (dispatch, getState) => {
     console.log(' error.response :', error.response.data.message)
     dispatch({
       type: USER_PROFILE_UPDATE_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -335,7 +341,7 @@ export const UpdateUserRole = (user, id) => async (dispatch, getState) => {
       }
     }
     const response = await axios.put(
-      'https://server.ccab.tech/api/users/' + id,
+      'http://localhost:5001/api/users/' + id,
       user,
       config
     )
@@ -352,7 +358,10 @@ export const UpdateUserRole = (user, id) => async (dispatch, getState) => {
     console.log(' error.response :', error.response.data.message)
     dispatch({
       type: USER_UPDATE_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -370,7 +379,7 @@ export const getUesrsNumbers = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/users/numbers',
+      'http://localhost:5001/api/users/numbers',
       config
     )
 
@@ -384,7 +393,10 @@ export const getUesrsNumbers = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_NUMBERS_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }
@@ -406,7 +418,7 @@ export const isValid = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      'https://server.ccab.tech/api/users/valid',
+      'http://localhost:5001/api/users/valid',
       {},
       config
     )
@@ -424,7 +436,10 @@ export const isValid = (id) => async (dispatch, getState) => {
     console.log('error', error.response.data.message)
     dispatch({
       type: VALID_FAIL,
-      payload: error.response.data.message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
     })
   }
 }

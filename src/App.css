@@ -61,6 +61,7 @@ body {
 
   .banner-text {
     font-size: 2rem !important;
+    display: inline-block !important;
   }
   .banner-container {
     background-size: contain !important;
@@ -524,7 +525,7 @@ input:checked + .slider:before {
   -moz-border-radius: 0 0 100px 0;
   -webkit-border-radius: 0 0 100px 0;
 }
-.address .icon {
+.address .job-icon {
   background-color: #f8f9f8;
   width: 100px;
   height: 100px;
@@ -533,7 +534,7 @@ input:checked + .slider:before {
   transition: background-color 0.5s ease;
 }
 
- .icon .fas, .far {
+ .job-icon .fas, .job-icon .far {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -542,7 +543,7 @@ input:checked + .slider:before {
   transform: translateY(-50%);
 }
 
-.address .icon:hover {
+.address .job-icon:hover {
   background-color: #fe4a55;
   color: #fff;
 }
@@ -555,8 +556,8 @@ input:checked + .slider:before {
 }
 
 .job-contact input,
-textarea,
-button {
+.job-contact textarea,
+.job-contact button {
   background: #c22b34;
   border-radius: 5px !important;
 }
