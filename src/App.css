@@ -525,7 +525,7 @@ input:checked + .slider:before {
   -moz-border-radius: 0 0 100px 0;
   -webkit-border-radius: 0 0 100px 0;
 }
-.address .icon {
+.address .job-icon {
   background-color: #f8f9f8;
   width: 100px;
   height: 100px;
@@ -543,7 +543,7 @@ input:checked + .slider:before {
   transform: translateY(-50%);
 }
 
-.address .icon:hover {
+.address .job-icon:hover {
   background-color: #fe4a55;
   color: #fff;
 }
