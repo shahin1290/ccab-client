@@ -4234,8 +4234,8 @@ img {
 
 .program-section {
   position: relative;
-  padding-top: 60px;
-  padding-bottom: 110px;
+  padding-top:0px;
+  padding-bottom: 40px;
 }
 
 .program-section .image-column {
@@ -4666,7 +4666,7 @@ img {
 .pricing-section {
   position: relative;
   padding-top: 90px;
-  padding-bottom: 40px;
+  padding-bottom: 0px !important;
 }
 
 .pricing-tabs {

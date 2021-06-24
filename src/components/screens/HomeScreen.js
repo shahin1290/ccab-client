@@ -63,7 +63,7 @@ export default function HomeScreen({ match }) {
                   <div className="image titlt " data-tilt data-tilt-max={4}>
                     {/* Slider Section */}
                     <div
-                      className="container carouselContainer"
+                      className="container carouselContainer overflow-hidden"
                       style={{ marginTop: '110px' }}
                     >
                       <Carousel>
@@ -135,6 +135,51 @@ export default function HomeScreen({ match }) {
 
         {/* Pricing section */}
         <Pricing/>
+
+                  {/* Program Section */}
+        <section className="program-section mt-5 pt-5">
+          <div className="auto-container">
+            <div className="row clearfix">
+              {/* Content Column */}
+              <div className="content-column col-lg-6 col-md-12 col-sm-12">
+                <div className="inner-column text-center">
+                  <div className="title">Who is this course for?</div>
+                  <hr className="block-seperator mt-4" />
+                  <div className="text">
+                    <div className="sub-text">
+                      If you're looking to transition to a career as a
+                      developer, or add a tech stack to your existing skill,
+                      then this course is for you.
+                    </div>
+                    <div className="sub-text">
+                      If you're looking for the most efficient way to learn,
+                      come this way
+                    </div>
+                  </div>
+
+                  <a
+                    activeclassName="active"
+                    className="theme-btn btn-style-three"
+                    href="https://meetings.hubspot.com/sl-melad"
+               
+                  >
+                    <span className="txt">Book an Interview</span>
+                  </a>
+                </div>
+              </div>
+              {/* Image Column */}
+              <div className="image-column col-lg-6 col-md-12 col-sm-12">
+                <div className="inner-column">
+                  <div className="image titlt" data-tilt data-tilt-max={4}>
+                    <img src={image4} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* End Education Section Two */}
+
 
         {/* top coruses */}
         <TopCourses></TopCourses>
@@ -258,53 +303,13 @@ export default function HomeScreen({ match }) {
         {/* End Achievement Section */}
 
         {/* Reviews Section */}
-        
-        <Reviews/>
+        <div className="container">
+           <Reviews/>
+        </div>
+       
         {/* End of Reviews Section */}
 
-        {/* Program Section */}
-        <section className="program-section mt-5 pt-5">
-          <div className="auto-container">
-            <div className="row clearfix">
-              {/* Content Column */}
-              <div className="content-column col-lg-6 col-md-12 col-sm-12">
-                <div className="inner-column text-center">
-                  <div className="title">Who is this course for?</div>
-                  <hr className="block-seperator mt-4" />
-                  <div className="text">
-                    <div className="sub-text">
-                      If you're looking to transition to a career as a
-                      developer, or add a tech stack to your existing skill,
-                      then this course is for you.
-                    </div>
-                    <div className="sub-text">
-                      If you're looking for the most efficient way to learn,
-                      come this way
-                    </div>
-                  </div>
 
-                  <a
-                    activeclassName="active"
-                    className="theme-btn btn-style-three"
-                    href="https://meetings.hubspot.com/sl-melad"
-               
-                  >
-                    <span className="txt">Book an Interview</span>
-                  </a>
-                </div>
-              </div>
-              {/* Image Column */}
-              <div className="image-column col-lg-6 col-md-12 col-sm-12">
-                <div className="inner-column">
-                  <div className="image titlt" data-tilt data-tilt-max={4}>
-                    <img src={image4} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* End Education Section Two */}
 
         {/* How IT Works Section */}
         {/* <section
