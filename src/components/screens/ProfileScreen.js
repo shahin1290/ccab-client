@@ -155,7 +155,7 @@ export default function ProfileScreen() {
                           <div className="sub-title">
                             <CountUp
                               start={-2}
-                              end={filterCourseList().length}
+                              end={filterCourseList() && filterCourseList().length}
                               duration={2.75}
                               separator=" "
                               decimal=","
@@ -251,7 +251,7 @@ export default function ProfileScreen() {
                         <Loader />
                       ) : bootcampError ? (
                         <Message>{bootcampError}</Message>
-                      ) : filterCourseList().length ? (
+                      ) : filterCourseList() && filterCourseList().length ? (
                         filterCourseList().map((course) => {
                           return (
                             <div className="shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4">

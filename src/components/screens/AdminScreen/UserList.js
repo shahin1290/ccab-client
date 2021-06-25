@@ -37,6 +37,8 @@ export default function UserlistScreen() {
   const userUpdateRole = useSelector((state) => state.userUpdateRole)
   const { error: updateUserRoleErr } = userUpdateRole
 
+  console.log(userUpdateRole);
+
   const history = useHistory()
 
   useEffect(() => {
@@ -67,6 +69,15 @@ export default function UserlistScreen() {
   // modal
 
   const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    if (userDetail.user_type == 'AdminUser') {
+      dispatch(getUsers())
+    } else {
+      history.push('/')
+    }
+  }, [show])
+  
   const [userClickDelete, setUserClickDelete] = useState('')
 
   const [updatedUser, setupdatedUser] = useState({})
@@ -74,7 +85,6 @@ export default function UserlistScreen() {
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-
   const handleCloseEditUser = () => setShowEditUser(false)
   const handleShowEditUser = () => setShowEditUser(true)
   const _handleUpdateUserROle = () => {
@@ -84,6 +94,7 @@ export default function UserlistScreen() {
     toast.info(updatedUser.name + ' successfuly Updated', {
       position: toast.POSITION.BOTTOM_RIGHT
     })
+    dispatch(getUsers())
     if (!updateUserRoleErr) {
       dispatch({ type: 'USER_UPDATE_REST' })
       dispatch(getUsers())
@@ -253,6 +264,27 @@ export default function UserlistScreen() {
                                       htmlFor="MentorUser"
                                     >
                                       Mentor
+                                    </label>
+                                  </div>
+                                  <div className="form-check">
+                                    <input
+                                      className="form-check-input"
+                                      type="radio"
+                                      value="InstructorUser"
+                                      name="userRole"
+                                      id="InstructorUser"
+                                      onChange={(e) => {
+                                        setupdatedUser({
+                                          ...updatedUser,
+                                          user_type: e.target.value
+                                        })
+                                      }}
+                                    />
+                                    <label
+                                      className="form-check-label"
+                                      htmlFor="InstructorUser"
+                                    >
+                                      Instructor
                                     </label>
                                   </div>
                                 </Modal.Body>

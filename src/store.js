@@ -90,6 +90,16 @@ import {
 
 import { jobCreateReducer, jobListReducer } from './redux/reducers/jobReducer'
 
+import {
+  serviceListReducer,
+  serviceDetailsReducer,
+  serviceDeleteReducer,
+  serviceCreateReducer,
+  adminServiceListReducer,
+  serviceUpdateReducer
+} from './redux/reducers/serviceReducer'
+
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -154,6 +164,12 @@ const reducer = combineReducers({
   requestDelete: requestDeleteReducer,
   jobCreate: jobCreateReducer,
   jobList: jobListReducer,
+  serviceList: serviceListReducer,
+  adminServiceList: adminServiceListReducer,
+  serviceDetails: serviceDetailsReducer,
+  serviceCreate: serviceCreateReducer,
+  serviceDelete: serviceDeleteReducer,
+  serviceUpdate: serviceUpdateReducer,
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

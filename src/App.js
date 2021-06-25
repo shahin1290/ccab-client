@@ -26,7 +26,9 @@ import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 import RequestPayment from './components/screens/AdminScreen/RequestPayment'
 import RequestList from './components/screens/AdminScreen/RequestList'
 import EditRequest from './components/screens/AdminScreen/EditRequest'
-import JobList from './components/screens/AdminScreen/JobList';
+import JobList from './components/screens/AdminScreen/JobList'
+import ManageServices from './components/screens/AdminScreen/ManageServices'
+import UpdateService from './components/screens/AdminScreen/UpdateService'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -76,6 +78,11 @@ function App() {
         {/* Private Route for Admin  */}
         <AdminRoute exact path="/admin-users-list" component={UserListScreen} />
         <AdminRoute exact path="/admin-courses-list" component={MangeCoures} />
+        <AdminRoute
+          exact
+          path="/admin-services-list"
+          component={ManageServices}
+        />
 
         <AdminRoute
           exact
@@ -88,6 +95,12 @@ function App() {
           exact
           path="/admin-order/:pageNumber"
           component={MangeOrder}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-service-update/:id"
+          component={UpdateService}
         ></AdminRoute>
 
         <AdminRoute

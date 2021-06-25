@@ -26,7 +26,12 @@ export default function AdminHeaderContnet({ logoutHandler }) {
               <div className="dropdown-divider"></div>
 
               <a className="dropdown-item" href="/admin-courses-list">
-                Mange Courses
+                Manage Courses
+              </a>
+              <div className="dropdown-divider"></div>
+
+              <a className="dropdown-item" href="/admin-services-list">
+                Manage Services
               </a>
               <div className="dropdown-divider"></div>
 
@@ -54,7 +59,10 @@ export default function AdminHeaderContnet({ logoutHandler }) {
         <Dropdown.Menu show className="border-0">
           <NavDropdown.Item href="/admin-order-list">Orders</NavDropdown.Item>
           <NavDropdown.Item href="/admin-courses-list">
-            Mange Courses
+            Manage Courses
+          </NavDropdown.Item>
+          <NavDropdown.Item href="/admin-services-list">
+            Manage Services
           </NavDropdown.Item>
           <NavDropdown.Item href="/admin-request-list">
             Request List
