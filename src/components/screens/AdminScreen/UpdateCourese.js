@@ -171,7 +171,6 @@ export default function UpdateCourese({ match }) {
   ])
 
   const [titleWithAnswer, setTitleWithAnswer] = useState([])
-  console.log('TitleWithAnswer', course, titleWithAnswer)
 
   const addtitleWithAnswer = () => {
     setTitleWithAnswer([

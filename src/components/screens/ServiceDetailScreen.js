@@ -3,10 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { getServiceDetails } from '../../redux/actions/serviceAction'
 import { getOrder } from '../../redux/actions/orderAction'
-import { getUsers } from '../../redux/actions/userAction'
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
-import ModalVideo from 'react-modal-video'
 import { createCurrrency } from '../../redux/actions/currencyAction'
 import { getPriceFormat } from '../../util/priceFormat'
 
@@ -66,6 +64,7 @@ export default function ServiceDetailScreen({ match }) {
 
       if (foundInstructor) {
         return {
+          name: foundInstructor.name,
           networkAddresses: foundInstructor.networkAddresses,
           bio: foundInstructor.bio,
           skills: foundInstructor.skills
@@ -286,10 +285,106 @@ export default function ServiceDetailScreen({ match }) {
                                 {/* Cource Overview */}
                                 <div className="course-overview">
                                   <div className="inner-box">
-                                    <h4>
+                                    <div className="title">
                                       {selectedInstructorBio() &&
-                                        selectedInstructorBio().bio}
-                                    </h4>
+                                        selectedInstructorBio().name}
+                                    </div>
+                                    <div className=" col-lg-9 col-md-6 col-sm-12">
+                                      <div className=" logo-widget">
+                                        <div className="social-box">
+                                          {selectedInstructorBio() &&
+                                            selectedInstructorBio()
+                                              .networkAddresses &&
+                                            selectedInstructorBio()
+                                              .networkAddresses.length > 0 &&
+                                            selectedInstructorBio().networkAddresses.map(
+                                              (networkAddress) => (
+                                                <>
+                                                  {networkAddress.network ===
+                                                    'facebook' && (
+                                                    <a
+                                                      href={
+                                                        networkAddress.address
+                                                      }
+                                                      className="fa fa-facebook p-2"
+                                                      style={{
+                                                        color: '#3b5998'
+                                                      }}
+                                                    />
+                                                  )}
+
+                                                  {networkAddress.network ===
+                                                    'twitter' && (
+                                                    <a
+                                                      href={
+                                                        networkAddress.address
+                                                      }
+                                                      className="fa fa-twitter p-2"
+                                                      style={{
+                                                        color: '#1DA1F2'
+                                                      }}
+                                                    />
+                                                  )}
+
+                                                  {networkAddress.network ===
+                                                    'linkedin' && (
+                                                    <a
+                                                      href={
+                                                        networkAddress.address
+                                                      }
+                                                      className="fa fa-linkedin p-2"
+                                                      style={{
+                                                        color: '#0A66C2'
+                                                      }}
+                                                    />
+                                                  )}
+
+                                                  {networkAddress.network ===
+                                                    'github' && (
+                                                    <a
+                                                      href={
+                                                        networkAddress.address
+                                                      }
+                                                      className="fa fa-github p-2"
+                                                    />
+                                                  )}
+                                                </>
+                                              )
+                                            )}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="mt-5 mb-5">
+                                      <div className="sub-title">
+                                        About{' '}
+                                        <span>
+                                          {selectedInstructorBio() &&
+                                            selectedInstructorBio().name}
+                                        </span>{' '}
+                                      </div>
+                                      <hr />
+
+                                      <div className="sub-text">
+                                        {selectedInstructorBio() &&
+                                          selectedInstructorBio().bio}
+                                      </div>
+                                    </div>
+
+                                    <div className="sub-title">Skills</div>
+                                    <hr />
+
+                                    {selectedInstructorBio() &&
+                                      selectedInstructorBio().skills &&
+                                      selectedInstructorBio().skills.length >
+                                        0 &&
+                                      selectedInstructorBio().skills.map(
+                                        (skill) => (
+                                          <div className="sub-text">
+                                            {skill}
+                                          </div>
+                                        )
+                                      )}
                                   </div>
                                 </div>
                               </div>

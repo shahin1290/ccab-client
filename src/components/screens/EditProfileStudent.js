@@ -15,7 +15,6 @@ export default function EditProfile() {
     user,
     error: getuserProfileErr
   } = useSelector((state) => state.userProfile)
-  const { userDetail } = useSelector((state) => state.userLogin)
   const { updateSuccess, error } = useSelector((state) => state.userUpdate)
 
   const [selectedImageFile, setSelectedImageFile] = useState()
@@ -51,6 +50,26 @@ export default function EditProfile() {
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const name = firstName + ' ' + lastName
+  const [bio, setBio] = useState('')
+  const [facebookAddress, setFacebookAddress] = useState({})
+  const [twitterAddress, setTwitterAddress] = useState({})
+  const [linkedinAddress, setLinkedinAddress] = useState({})
+  const [githubAddress, setGithubAddress] = useState({})
+
+  /********* SKILLS ARRAY *******************/
+
+  const [skill, setSkill] = useState('')
+  const [skills, setSkills] = useState([])
+
+  // select student
+  const _handleSelectSKill = () => {
+    setSkills([...skills, skill])
+  }
+
+  const _handleUnselectSkill = (skill) => {
+    let NewSkills = skills.filter((item) => item !== skill)
+    setSkills(NewSkills)
+  }
 
   useEffect(() => {
     dispatch(getProfile())
@@ -62,6 +81,15 @@ export default function EditProfile() {
     }
   }, [user])
 
+  const getNetworkAddress = (name) => {
+    const networkAddresses =
+      user && user.networkAddresses.find((nw) => nw.network === name)
+
+    if (networkAddresses) {
+      return networkAddresses
+    } else return {}
+  }
+
   const setUserData = () => {
     const givenFirstName = user.name.split(' ').slice(0, -1).join(' ')
     const givenLastName = user.name.split(' ').slice(-1).join(' ')
@@ -69,6 +97,12 @@ export default function EditProfile() {
     setLastName(givenLastName)
     setEmail(user.email)
     setPhoneNumber(user.phone)
+    setBio(user.bio)
+    setSkills(user.skills)
+    setFacebookAddress(getNetworkAddress('facebook'))
+    setLinkedinAddress(getNetworkAddress('linkedin'))
+    setGithubAddress(getNetworkAddress('github'))
+    setTwitterAddress(getNetworkAddress('twitter'))
   }
   const submitHandler = (e) => {
     e.preventDefault()
@@ -77,11 +111,22 @@ export default function EditProfile() {
     formData.append('email', email)
     formData.append('name', name)
     formData.append('phoneNumber', phoneNumber)
+    formData.append('bio', bio)
+    formData.append('skills', JSON.stringify(skills))
+    formData.append(
+      'networkAddresses',
+      JSON.stringify([
+        facebookAddress && facebookAddress,
+        githubAddress && githubAddress,
+        twitterAddress && twitterAddress,
+        linkedinAddress && linkedinAddress
+      ])
+    )
 
-    for (var pair of formData.entries()) {
+    /* for (var pair of formData.entries()) {
       console.log(pair[0] + ', ' + pair[1])
     }
-
+ */
     dispatch(userProfileUpdate(formData))
     /*  if (updateSuccess) {
       history.push('/profile')
@@ -252,7 +297,140 @@ export default function EditProfile() {
                                   <span className="icon flaticon-edit-1" />
                                 </div>
 
-                                <div className="col-lg-12 col-md-12 col-sm-12 form-group text-right">
+                                {user && user.user_type === 'InstructorUser' && (
+                                  <>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                      <input
+                                        type="text"
+                                        name="facebook"
+                                        value={
+                                          facebookAddress &&
+                                          facebookAddress.address
+                                        }
+                                        placeholder="Facebook Address"
+                                        onChange={(e) =>
+                                          setFacebookAddress({
+                                            network: 'facebook',
+                                            address: e.target.value
+                                          })
+                                        }
+                                      />
+                                      <span className="icon flaticon-edit-1" />
+                                    </div>
+
+                                    <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                      <input
+                                        type="text"
+                                        name="twitter"
+                                        value={
+                                          twitterAddress &&
+                                          twitterAddress.address
+                                        }
+                                        placeholder="Twitter Address"
+                                        onChange={(e) =>
+                                          setTwitterAddress({
+                                            network: 'twitter',
+                                            address: e.target.value
+                                          })
+                                        }
+                                      />
+                                      <span className="icon flaticon-edit-1" />
+                                    </div>
+
+                                    <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                      <input
+                                        type="text"
+                                        name="github"
+                                        value={
+                                          githubAddress && githubAddress.address
+                                        }
+                                        placeholder="Github Address"
+                                        onChange={(e) =>
+                                          setGithubAddress({
+                                            network: 'github',
+                                            address: e.target.value
+                                          })
+                                        }
+                                      />
+                                      <span className="icon flaticon-edit-1" />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                      <input
+                                        type="text"
+                                        name="linkedin"
+                                        value={
+                                          linkedinAddress &&
+                                          linkedinAddress.address
+                                        }
+                                        placeholder="Linkedin Address"
+                                        onChange={(e) =>
+                                          setLinkedinAddress({
+                                            network: 'linkedin',
+                                            address: e.target.value
+                                          })
+                                        }
+                                      />
+                                      <span className="icon flaticon-edit-1" />
+                                    </div>
+                                    <div className="col-lg-12 col-md-12 col-sm-12 form-group">
+                                      <textarea
+                                        type="text"
+                                        name="bio"
+                                        value={bio}
+                                        placeholder="Add Bio"
+                                        onChange={(e) => setBio(e.target.value)}
+                                      />
+                                      <span className="icon flaticon-edit-1" />
+                                    </div>
+
+                                    {/* *********skill********** */}
+                                    <div className="d-flex col-lg-8 col-md-6 col-sm-12 form-group ">
+                                      <input
+                                        type="text"
+                                        name="skill"
+                                        value={skill}
+                                        placeholder="Add Skill"
+                                        onChange={(e) => {
+                                          setSkill(e.target.value)
+                                        }}
+                                        value={skill}
+                                      />
+
+                                      <button
+                                        type="button"
+                                        className="btn btn-success py-2 px-4 ml-3"
+                                        onClick={_handleSelectSKill}
+                                      >
+                                        add
+                                      </button>
+                                    </div>
+
+                                    <div className="col-lg-6 col-md-6 col-sm-12 form-group my-3">
+                                      {skills.length ? (
+                                        skills.map((skill) => {
+                                          return (
+                                            <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
+                                              <a
+                                                onClick={() => {
+                                                  _handleUnselectSkill(skill)
+                                                }}
+                                              >
+                                                <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                              </a>{' '}
+                                              {skill}
+                                            </span>
+                                          )
+                                        })
+                                      ) : (
+                                        <p className="text-warning bg-light p-1">
+                                          * No Skill Added
+                                        </p>
+                                      )}
+                                    </div>
+                                  </>
+                                )}
+
+                                <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                                   <button
                                     className="theme-btn btn-style-three"
                                     type="submit"
