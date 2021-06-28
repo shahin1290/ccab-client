@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Table, Col, Row, Image, Button } from 'react-bootstrap'
 import { getUsers } from '../../../redux/actions/userAction'
 import { createSession } from '../../../redux/actions/sessionAction'
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from 'history'
 
-const history = createBrowserHistory({forceRefresh:true});
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
-export default function NewSession({ match }) {
+const history = createBrowserHistory({ forceRefresh: true })
+
+export default function NewSession({ selectedStudent }) {
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/
@@ -14,7 +18,7 @@ export default function NewSession({ match }) {
   // update course reducer
   const {
     loading: sessionLoading,
-    error,
+    error: AddError,
     success: sessionSuccess
   } = useSelector((state) => state.sessionCreate)
 
@@ -33,7 +37,6 @@ export default function NewSession({ match }) {
   const [price, setPrice] = useState()
 
   const [StudentsList, setStudentsList] = useState([])
-  const [selectedStudent, setSelectedStudent] = useState('')
 
   /*******************/
 
@@ -41,10 +44,10 @@ export default function NewSession({ match }) {
     // call the getter ( users list )
     dispatch(getUsers())
 
-    if(sessionSuccess){
-      history.push('/admin-Session-list')
+    if (sessionSuccess) {
+      history.push('/reports')
     }
-  }, [dispatch, match, history, sessionSuccess])
+  }, [dispatch, history, sessionSuccess])
 
   /********* functions  ************/
 
@@ -52,11 +55,23 @@ export default function NewSession({ match }) {
     return users.filter((user) => user.user_type === role)
   }
 
+  //Pick date and time
+
+  const [notes, setNotes] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
+
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className="p-3 " onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ))
+
   //handle form submit
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createSession({ name, price, selectedStudent }))
+    dispatch(createSession({ startDate, endDate, notes, selectedStudent }))
   }
 
   useEffect(() => {
@@ -70,122 +85,99 @@ export default function NewSession({ match }) {
       {/* <!-- Edit Cource Section --> */}
       <div className="edit-cource-section">
         <div className="auto-container">
-          {/* Sec Title */}
-          <div className="sec-title">
-            <div className="clearfix">
-              <div className="pull-left">
-                <div className="title">Send Session</div>
+          <Row className="mt-2 mb-4">
+            <Col md={1}>
+              <Image
+                width="80"
+                src="/images/resource/avatar.svg"
+                roundedCircle
+              />
+            </Col>
+
+            <Col md={6} className="my-auto title">
+              Axel Magnuseee
+            </Col>
+          </Row>
+
+          <Row className="mt-2 mb-4">
+            <Col md={1}>
+              <i
+                class="far fa-calendar-alt"
+                style={{ color: '#ED9D2B', fontSize: '50px' }}
+              ></i>
+            </Col>
+            <Col md={11}>
+              <div className="d-flex justify-content-between">
+                <div className="title">Start</div>
+                <div className="my-auto sub-text">
+                  <DatePicker
+                    className="border"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    timeInputLabel="Time:"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                    showTimeInput
+                    customInput={<ExampleCustomInput />}
+                  ></DatePicker>
+                </div>{' '}
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
+
+          <Row className="mt-2 mb-4">
+            <Col md={1}></Col>
+            <Col md={11}>
+              <div className="d-flex justify-content-between">
+                <div className="title">End</div>
+                <div className="my-auto">
+                  <DatePicker
+                    className="border"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    timeInputLabel="Time:"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                    showTimeInput
+                    customInput={<ExampleCustomInput />}
+                  ></DatePicker>
+                </div>{' '}
+              </div>
+            </Col>
+          </Row>
           <div>
-            {error ? (
-              <p className="text-danger bg-light p-2 ">{error}</p>
+            {AddError ? (
+              <p className="text-danger bg-light p-2 ">{AddError}</p>
             ) : sessionSuccess ? (
               <p className="text-success bg-light p-2 ">
                 Session Sent successfully
               </p>
             ) : null}
           </div>
-          <div className="inner-container">
-            <div className="row clearfix">
-              {/* Left Column */}
-              <div className="left-column col-lg-8 col-md-12 col-sm-12">
-                <div className="inner-column">
-                  <div className="sub-title pb-3">Basic Information</div>
-                  {/* Edit Course Form */}
+
+          <Row>
+            <Col md={1}></Col>
+            <Col md={11}>
+              <div className="col-lg-12 col-md-12 col-sm-12">
+                <div>
                   <div className="edit-course-form">
                     <form onSubmit={submitHandler}>
-                      {/* Form Group */}
-                      <div className="form-group">
-                        <label>Service Name</label>
-                        <input
+                      <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                        <textarea
                           type="text"
-                          name="service-name"
-                          placeholder="Service Name"
-                          value={name}
+                          value={notes}
+                          placeholder="Your notes here"
+                          onChange={(e) => setNotes(e.target.value)}
                           required
-                          onChange={(e) => {
-                            setName(e.target.value)
-                          }}
                         />
-                      </div>
-
-                      <div className="form-group">
-                        <label>Set Price (in USD)</label>
-                        <input
-                          type="text"
-                          name="service-price"
-                          placeholder="Service Price"
-                          value={price}
-                          required
-                          onChange={(e) => {
-                            setPrice(e.target.value)
-                          }}
-                        />
-                      </div>
-
-                      {/* Right Column */}
-                      <div className=" col-lg-12 col-md-12 col-sm-12">
-                        <div className="inner-column">
-                          <div className="sub-title pb-3">Options</div>
-                          <div className="option-cource-box">
-                            <div className="box-inner">
-                              {/* ******************* */}
-                              <div className="form-group ">
-                                <label
-                                  htmlFor="exampleDataList"
-                                  className="form-label"
-                                >
-                                  Students
-                                </label>
-
-                                <input
-                                  className="form-control bg-light"
-                                  list="datalistOptions"
-                                  id="exampleDataList"
-                                  placeholder="search student..."
-                                  onChange={(e) => {
-                                    setSelectedStudent(e.target.value)
-                                  }}
-                                  value={selectedStudent}
-                                />
-
-                                <datalist id="datalistOptions">
-                                  {StudentsList.length &&
-                                    StudentsList.map((student) => {
-                                      return (
-                                        <option
-                                          data={student._id}
-                                          value={student.email}
-                                          key={student._id}
-                                        >
-                                          {student.name}
-                                        </option>
-                                      )
-                                    })}
-                                </datalist>
-                              </div>
-                            </div>
-                          </div>
-                          {/* Button Box */}
-                          <div className="button-box text-center">
-                            <button
-                              type="submit"
-                              className="theme-btn btn-style-one"
-                              style={{ zIndex: '0' }}
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        </div>
+                        <Button variant="warning" type="submit">
+                          Book
+                        </Button>{' '}
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </div>
       </div>
       {/* End Manage Cource Section */}
