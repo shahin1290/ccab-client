@@ -1,7 +1,6 @@
 import React, { useEffect, useState, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, Col, Row, Image, Button } from 'react-bootstrap'
-import { getUsers } from '../../../redux/actions/userAction'
 import { createSession } from '../../../redux/actions/sessionAction'
 import { createBrowserHistory } from 'history'
 
@@ -10,7 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const history = createBrowserHistory({ forceRefresh: true })
 
-export default function NewSession({ selectedStudent }) {
+export default function NewSession({ selectedAppointment }) {
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/
@@ -33,27 +32,17 @@ export default function NewSession({ selectedStudent }) {
 
   /********* State And Var ************/
 
-  const [name, setName] = useState()
-  const [price, setPrice] = useState()
-
-  const [StudentsList, setStudentsList] = useState([])
-
   /*******************/
 
   useEffect(() => {
-    // call the getter ( users list )
-    dispatch(getUsers())
+ 
 
     if (sessionSuccess) {
       history.push('/reports')
     }
   }, [dispatch, history, sessionSuccess])
 
-  /********* functions  ************/
 
-  const _FilterUsers = (users, role) => {
-    return users.filter((user) => user.user_type === role)
-  }
 
   //Pick date and time
 
@@ -71,14 +60,10 @@ export default function NewSession({ selectedStudent }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createSession({ startDate, endDate, notes, selectedStudent }))
+    dispatch(createSession({ startDate, endDate, notes, selectedAppointment }))
   }
 
-  useEffect(() => {
-    if (users && users.length) {
-      setStudentsList(_FilterUsers(users, 'StudentUser'))
-    }
-  }, [users])
+
 
   return (
     <>

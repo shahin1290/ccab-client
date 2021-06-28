@@ -107,6 +107,14 @@ import {
   sessionUpdateReducer
 } from './redux/reducers/sessionReducer'
 
+import {
+  appointmentCreateReducer,
+  appointmentListReducer,
+  appointmentDetailsReducer,
+  appointmentDeleteReducer,
+  appointmentUpdateReducer
+} from './redux/reducers/appointmentReducer'
+
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -183,6 +191,12 @@ const reducer = combineReducers({
   sessionDetails: sessionDetailsReducer,
   sessionUpdate: sessionUpdateReducer,
   sessionDelete: sessionDeleteReducer,
+  appointmentCreate: appointmentCreateReducer,
+  appointmentList: appointmentListReducer,
+  appointmentDetails: appointmentDetailsReducer,
+  appointmentUpdate: appointmentUpdateReducer,
+  appointmentDelete: appointmentDeleteReducer,
+  
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

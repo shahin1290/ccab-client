@@ -616,7 +616,7 @@ export default function UpdateCourese({ match }) {
                       </div>
                       <label className="mt-2">
                         Selected Instructors : {instructors.length}/
-                        {InstructorList.length > 0}
+                        {InstructorList.length}
                       </label>
                       <div className="my-3">
                         {instructors.length > 0 ? (

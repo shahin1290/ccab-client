@@ -571,17 +571,4 @@ input:checked + .slider:before {
   border: none !important;
 }
 
-/* Session */
-.session-dropdown {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-.session-dropdown::before {
-  position: absolute;
-  content: ' \2193';
-  top: 10px;
-  right: 12px;
-  height: 20px;
-  width: 20px;
-}
+

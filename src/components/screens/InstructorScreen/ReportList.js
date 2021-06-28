@@ -6,6 +6,8 @@ import {
   getSessions,
   deleteSession
 } from '../../../redux/actions/sessionAction'
+import { getAppointments } from '../../../redux/actions/appointmentAction'
+
 import { useHistory, Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import Loader from '../../layout/Loader'
@@ -13,6 +15,7 @@ import NewSession from './NewSession'
 import Rodal from 'rodal'
 // include styles
 import 'rodal/lib/rodal.css'
+import { getDate } from '../../../util/getDate'
 
 export default function SessionList() {
   const dispatch = useDispatch()
@@ -20,22 +23,40 @@ export default function SessionList() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
 
-  const [StudentsList, setStudentsList] = useState([])
-  const [selectedStudent, setSelectedStudent] = useState('')
+  const [selectedAppointment, setSelectedAppointment] = useState('')
 
   // get Users list reducer
-  const {
-    users,
-    loading: getUsersLoading,
-    error: getUsersError
-  } = useSelector((state) => state.userList)
+  const { appointments, loading } = useSelector(
+    (state) => state.appointmentList
+  )
 
-  const { sessions, loading } = useSelector((state) => state.sessionList)
+  const {
+    sessions,
+    loading: sessionLoading,
+    error: sessionError
+  } = useSelector((state) => state.sessionList)
   const {
     loading: Deleteloading,
     error: DeleteError,
     successDelete
   } = useSelector((state) => state.sessionDelete)
+
+  useEffect(() => {
+    // call the getter ( users list )
+    dispatch(getAppointments())
+  }, [dispatch, history])
+
+  const getAllStudentsForInstructor = () => {
+    let studentsList = []
+
+    if (appointments && appointments.length > 0) {
+      appointments.forEach((appointment) =>
+        studentsList.push(appointment.student)
+      )
+    }
+
+    return studentsList
+  }
 
   useEffect(() => {
     if (
@@ -64,7 +85,7 @@ export default function SessionList() {
   })
 
   const [showModal, setShowModal] = useState({ visible: false })
-  const [activeButton, setActiveButton] = useState('upcoming')
+  const [activeButton, setActiveButton] = useState('incoming')
 
   return (
     <section style={{ padding: '60px 0', backgroundColor: 'white' }}>
@@ -73,8 +94,24 @@ export default function SessionList() {
           <Col>
             <Button
               variant="outline-warning"
+              onClick={() => setActiveButton('incoming')}
+              className={
+                activeButton === 'incoming' ? 'bg-warning text-white' : ''
+              }
+            >
+              <div>
+                <i style={{ fontSize: 50 }} class="far fa-calendar-check"></i>
+              </div>
+              <div className="sub-text font-weight-bold">Incoming </div>
+            </Button>
+          </Col>
+          <Col>
+            <Button
+              variant="outline-warning"
               onClick={() => setActiveButton('upcoming')}
-              className={activeButton === 'upcoming' ? 'bg-warning text-white' : ''}
+              className={
+                activeButton === 'upcoming' ? 'bg-warning text-white' : ''
+              }
             >
               <div>
                 <i style={{ fontSize: 50 }} class="far fa-calendar-check"></i>
@@ -86,8 +123,9 @@ export default function SessionList() {
             <Button
               variant="outline-warning"
               onClick={() => setActiveButton('notReported')}
-              className={activeButton === 'notReported' ? 'bg-warning text-white' : ''}
-
+              className={
+                activeButton === 'notReported' ? 'bg-warning text-white' : ''
+              }
             >
               <div>
                 <i style={{ fontSize: 50 }} class="far fa-calendar-check"></i>
@@ -96,8 +134,13 @@ export default function SessionList() {
             </Button>
           </Col>
           <Col>
-            <Button variant="outline-warning" onClick={() => setActiveButton('reported')}
-              className={activeButton === 'reported' ? 'bg-warning text-white' : ''}>
+            <Button
+              variant="outline-warning"
+              onClick={() => setActiveButton('reported')}
+              className={
+                activeButton === 'reported' ? 'bg-warning text-white' : ''
+              }
+            >
               <div>
                 <i style={{ fontSize: 50 }} class="far fa-calendar-check"></i>
               </div>
@@ -111,12 +154,11 @@ export default function SessionList() {
           </Col>
         </Row>
 
-        <div className="form-group session-dropdown ">
+        {/*   <div className="form-group ">
           <input
             className="form-control bg-light "
             list="datalistOptions"
-            id="exampleDataList"
-            placeholder="search student..."
+            placeholder="select a student first"
             onChange={(e) => {
               setSelectedStudent(e.target.value)
             }}
@@ -124,70 +166,124 @@ export default function SessionList() {
           />
 
           <datalist id="datalistOptions">
-            {StudentsList.length > 0 &&
-              StudentsList.map((student) => {
+            {appointments &&
+              appointments.length > 0 &&
+              appointments.map((appointment) => {
                 return (
                   <option
-                    data={student._id}
-                    value={student.name}
-                    key={student._id}
+                    value={appointment.student.name}
+                    key={appointment.student._id}
                   >
-                    {student.name}
+                    email: {appointment.student.email}; service :{' '}
+                    {appointment.service.name}; session :{' '}
+                    {appointment.sessionNumber}
                   </option>
                 )
               })}
           </datalist>
-        </div>
+        </div> */}
 
-        <div className="py-2 sub-title">
-          <div className="buttons-box pull-right">
-            <Button
-              variant="warning"
-              onClick={() => setShowModal({ visible: true })}
-            >
-              <span className="txt">New Session</span>
-            </Button>
-          </div>
+        <div className="py-2 sub-title mb-5">
           <Rodal
             animation="flip"
             visible={showModal.visible}
             onClose={() => setShowModal({ visible: false })}
             width={900}
           >
-            <NewSession selectedStudent={selectedStudent} />
+            <NewSession selectedAppointment={selectedAppointment} />
           </Rodal>
         </div>
-        {sessions &&
-          sessions.map((req) => (
-            <div key={req._id}>
-              <div className="sub-title mt-5 mb-2">
-                {longEnUSFormatter.format(new Date(req.startDate))}{' '}
-              </div>
-              <Row className="pl-5 pr-5">
-                <Col>
-                  {' '}
-                  <Image
-                    width="50"
-                    src="/images/resource/avatar.svg"
-                    roundedCircle
-                  />
-                </Col>{' '}
-                <Col className="my-auto sub-text">
-                  {new Date(req.startDate).toLocaleTimeString(undefined, {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}{' '}
-                  -{' '}
-                  {new Date(req.endDate).toLocaleTimeString(undefined, {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
-                </Col>{' '}
-                <Col className="my-auto sub-text">Math</Col>{' '}
-                <Col className="my-auto sub-text">Axel Magnusse</Col>
-              </Row>
-            </div>
-          ))}
+        {activeButton === 'upcoming' && (
+          <>
+            {sessionLoading ? (
+              <Loader />
+            ) : sessionError ? (
+              <Message>{sessionError}</Message>
+            ) : (
+              sessions &&
+              sessions.map((req) => (
+                <div key={req._id}>
+                  <div className="sub-title mt-5 mb-2">
+                    {longEnUSFormatter.format(new Date(req.startDate))}{' '}
+                  </div>
+                  <Row className="pl-5 pr-5">
+                    <Col>
+                      {' '}
+                      <Image
+                        width="50"
+                        src="/images/resource/avatar.svg"
+                        roundedCircle
+                      />
+                    </Col>{' '}
+                    <Col className="my-auto sub-text">
+                      {new Date(req.startDate).toLocaleTimeString(undefined, {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}{' '}
+                      -{' '}
+                      {new Date(req.endDate).toLocaleTimeString(undefined, {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </Col>{' '}
+                    <Col className="my-auto sub-text">Math</Col>{' '}
+                    <Col className="my-auto sub-text">Axel Magnusse</Col>
+                  </Row>
+                </div>
+              ))
+            )}
+          </>
+        )}
+
+        {activeButton === 'incoming' && (
+          <Table striped bordered hover responsive="sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Student Name</th>
+                <th>Service</th>
+                <th>Registered At</th>
+                <th>Sessions Left</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointments && appointments.length > 0 ? (
+                appointments.map((appointment) => (
+                  <tr key={appointment._id}>
+                    <td>{appointments.indexOf(appointment) + 1}</td>
+                    <td>{appointment.student.name}</td>
+                    <td>{appointment.service.name}</td>
+                    <td>{getDate(appointment.createdAt)}</td>
+                    <td>{appointment.sessionNumber}</td>
+                    <td>
+                      <Container>
+                        <Row>
+                          <div className="buttons-box pull-right">
+                            <Button
+                              disabled={appointment.sessionNumber === 0}
+                              variant="warning"
+                              onClick={() => {
+                                setShowModal({ visible: true })
+                                setSelectedAppointment(appointment._id)
+                              }}
+                            >
+                              <span className="txt">New Session</span>
+                            </Button>
+                          </div>
+                        </Row>
+                      </Container>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                  No Request Found!
+                </p>
+              )}
+            </tbody>
+          </Table>
+        )}
       </div>
     </section>
   )
