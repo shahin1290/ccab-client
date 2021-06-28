@@ -133,7 +133,7 @@ export default function UserlistScreen() {
               </tr>
             </thead>
             <tbody>
-              {users.length
+              {users.length > 0
                 ? users.map((user) => (
                     <tr key={user._id}>
                       <td>{users.indexOf(user) + 1}</td>

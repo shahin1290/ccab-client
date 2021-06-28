@@ -156,7 +156,7 @@ export default function CourseGridScreen({ match }) {
                   <Loader />
                 ) : error ? (
                   <Message>{error}</Message>
-                ) : categoryArray.length ? (
+                ) : categoryArray.length > 0 ? (
                   categoryArray.map((category) => {
                     return (
                       <div>
@@ -171,7 +171,7 @@ export default function CourseGridScreen({ match }) {
                           </div>
                         </div>
                         <div className="row clearfix">
-                          {categoryCourses(category).length ? (
+                          {categoryCourses(category).length >0 ? (
                             categoryCourses(category).map((course) => {
                               return (
                                 <div

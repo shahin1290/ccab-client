@@ -181,7 +181,7 @@ export default function TaskUploadScreen({ match }) {
             <tbody>
               {loading && <Loader />}
               {error && <Message>{error}</Message>}
-              {tasks && tasks.length
+              {tasks && tasks.length > 0
                 ? tasks.map((task) => (
                     <tr key={task._id}>
                       <th>1</th>

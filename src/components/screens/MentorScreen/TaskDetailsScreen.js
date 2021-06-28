@@ -227,7 +227,7 @@ Failed
             <Loader />
           ) : error ? (
             <Message>{error}</Message>
-          ) : answers.length ? (
+          ) : answers.length > 0 ? (
             answers
               .map((answer) => (
                 <tr key={answer._id}>

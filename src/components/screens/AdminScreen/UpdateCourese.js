@@ -605,7 +605,7 @@ export default function UpdateCourese({ match }) {
                     <div className="box-inner">
                       <div className="form-group mb-2">
                         <label> Mentor</label>
-                        {!MentorsList.length && (
+                        {!MentorsList.length > 0 && (
                           <p className="text-warning bg-light p-1">
                             * There is no Mentor Users
                           </p>
@@ -620,7 +620,7 @@ export default function UpdateCourese({ match }) {
                           <option value="" disabled selected>
                             Choose Mentor{' '}
                           </option>
-                          {MentorsList.length &&
+                          {MentorsList.length > 0 &&
                             MentorsList.map((mentor) => {
                               return (
                                 <option value={[mentor._id, mentor.name]}>
@@ -680,7 +680,7 @@ export default function UpdateCourese({ match }) {
                         </button>
 
                         <datalist id="datalistOptions">
-                          {StudentsList.length &&
+                          {StudentsList.length > 0 &&
                             StudentsList.map((student) => {
                               return (
                                 <option

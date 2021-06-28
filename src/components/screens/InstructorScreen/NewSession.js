@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUsers } from './../../../redux/actions/userAction'
-import { createRequest } from '../../../redux/actions/requestAction'
+import { getUsers } from '../../../redux/actions/userAction'
+import { createSession } from '../../../redux/actions/sessionAction'
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory({forceRefresh:true});
 
-export default function RequestPayment({ match }) {
+export default function NewSession({ match }) {
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/
 
   // update course reducer
   const {
-    loading: requestLoading,
+    loading: sessionLoading,
     error,
-    success: requestSuccess
-  } = useSelector((state) => state.requestCreate)
+    success: sessionSuccess
+  } = useSelector((state) => state.sessionCreate)
 
   // get Users list reducer
   const {
@@ -41,10 +41,10 @@ export default function RequestPayment({ match }) {
     // call the getter ( users list )
     dispatch(getUsers())
 
-    if(requestSuccess){
-      history.push('/admin-request-list')
+    if(sessionSuccess){
+      history.push('/admin-Session-list')
     }
-  }, [dispatch, match, history, requestSuccess])
+  }, [dispatch, match, history, sessionSuccess])
 
   /********* functions  ************/
 
@@ -56,7 +56,7 @@ export default function RequestPayment({ match }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createRequest({ name, price, selectedStudent }))
+    dispatch(createSession({ name, price, selectedStudent }))
   }
 
   useEffect(() => {
@@ -74,16 +74,16 @@ export default function RequestPayment({ match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title">Send Request</div>
+                <div className="title">Send Session</div>
               </div>
             </div>
           </div>
           <div>
             {error ? (
               <p className="text-danger bg-light p-2 ">{error}</p>
-            ) : requestSuccess ? (
+            ) : sessionSuccess ? (
               <p className="text-success bg-light p-2 ">
-                Request Sent successfully
+                Session Sent successfully
               </p>
             ) : null}
           </div>

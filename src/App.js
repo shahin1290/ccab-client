@@ -45,10 +45,16 @@ import MentorCoursesList from './components/screens/MentorScreen/MentorCoursesLi
 import TaskDetailsScreen from './components/screens/MentorScreen/TaskDetailsScreen'
 import TaskUploadScreen from './components/screens/MentorScreen/TaskUploadScreen'
 
+/* Instructor Routes */
+import ReportList from './components/screens/InstructorScreen/ReportList'
+import NewSession from './components/screens/InstructorScreen/NewSession'
+
 /* Private Routes  */
 import DefaultRoutes from './components/Route/default/DefaultRoute'
 import StudentRoute from './components/Route/student/StudentRoute'
 import MentorRoute from './components/Route/mentor/MentorRoute'
+import InstructorRoute from './components/Route/instructor/InstructorRoute'
+
 import AdminRoute from './components/Route/admin/AdminRoute'
 import UserListScreen from './components/screens/AdminScreen/UserList'
 
@@ -217,6 +223,18 @@ function App() {
           path="/task-details/:bootcampId/:id"
           component={TaskDetailsScreen}
         ></MentorRoute>
+
+        {/* Private Route for Instructor  */}
+        <InstructorRoute
+          exact
+          path="/reports"
+          component={ReportList}
+        ></InstructorRoute>
+         <InstructorRoute
+          exact
+          path="/instructor-new-session"
+          component={NewSession}
+        ></InstructorRoute>
 
         {/* Private Route for Students  */}
         <StudentRoute

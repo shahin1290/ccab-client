@@ -14,6 +14,8 @@ import { logout, isValid } from '../../redux/actions/userAction'
 
 import AdminHeader from './../layout/headers/AdminHeaderContnet'
 import StudentHeaderContent from './../layout/headers/StudentHeaderContent'
+import InstructorHeaderContent from './../layout/headers/InstructorHeaderContent'
+
 import { getProfile } from '../../redux/actions/userAction'
 
 export default function Header() {
@@ -221,11 +223,13 @@ export default function Header() {
             </>
           ) : userDetail.user_type === 'StudentUser' ? (
             <StudentHeaderContent logoutHandler={logoutHandler} />
-          ) : (
-            userDetail.user_type === 'AdminUser' && (
+          ) : 
+            userDetail.user_type === 'AdminUser' ? (
               <AdminHeader logoutHandler={logoutHandler} />
-            )
-          )}
+            ):  
+              userDetail.user_type === 'InstructorUser' && (
+                <InstructorHeaderContent logoutHandler={logoutHandler} />
+              )}
 
           <Nav>
             {!userDetail.token ? (

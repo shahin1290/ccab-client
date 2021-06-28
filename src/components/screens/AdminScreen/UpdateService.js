@@ -231,7 +231,7 @@ export default function UpdateCourese({ match }) {
     e.preventDefault()
 
     let infoData = []
-    if (titleWithAnswer.length) {
+    if (titleWithAnswer.length ) {
       titleWithAnswer.forEach((item) => {
         infoData.push(item)
       })
@@ -600,7 +600,7 @@ export default function UpdateCourese({ match }) {
                         </button>
 
                         <datalist id="datalistOptions1">
-                          {InstructorList.length &&
+                          {InstructorList.length > 0 &&
                             InstructorList.map((instructor) => {
                               return (
                                 <option
@@ -616,10 +616,10 @@ export default function UpdateCourese({ match }) {
                       </div>
                       <label className="mt-2">
                         Selected Instructors : {instructors.length}/
-                        {InstructorList.length}
+                        {InstructorList.length > 0}
                       </label>
                       <div className="my-3">
-                        {instructors.length ? (
+                        {instructors.length > 0 ? (
                           instructors.map((instructor) => {
                             return (
                               <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
@@ -675,7 +675,7 @@ export default function UpdateCourese({ match }) {
                         </button>
 
                         <datalist id="datalistOptions2">
-                          {StudentsList.length &&
+                          {StudentsList.length > 0 &&
                             StudentsList.map((student) => {
                               return (
                                 <option
