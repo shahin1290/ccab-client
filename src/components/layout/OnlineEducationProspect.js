@@ -78,29 +78,29 @@ const OnlineEducationProspect = () => {
             <div className="sub-text text-center">
             We make sure all our courses meet the highest standards, which is why we're the only university credit-rated coding bootcamp within Europe. Our education partners are listed below:
             </div>
-            <div className="row clearfix mt-5">
-              <div className="text-center col-lg-2 col-md-6 col-sm-12 pb-5 d-flex justify-content-center ">
-                <img src="images/paypal1.png" className=" partnerImage" />
+            <div className="row clearfix my-5 d-flex ">
+              <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">
+                <img src="images/paypal-f.png" className=" " />
               </div>
 
-              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5 d-flex justify-content-center">
-                <img src="images/facebook_2.png" className="partnerImage" />
+              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+                <img src="images/facebook-f.png" className="" />
               </div>
 
-              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5 d-flex justify-content-center">
-                <img src="images/hubspot.png" className="partnerImage" />
+              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+                <img src="images/hubspot-f.png" className="" />
               </div>
 
-              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5 d-flex justify-content-center">
-                <img src="images/google.png" className="partnerImage" />
+              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+                <img src="images/google-f.png" className="" />
               </div>
 
-              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5 d-flex justify-content-center">
-                <img src="images/apple.png" className="partnerImage " />
+              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+                <img src="images/apple-f.png" className=" " />
               </div>
 
-              <div className=" text-center col-lg-2 col-md-6 col-sm-12 pb-5 d-flex justify-content-center">
-                <img src="images/klarna-240.svg" className=" h-75 partnerImage" />
+              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+                <img src="images/klarna-f.png" className=" h-75 " />
               </div>
             </div>
           </div>
