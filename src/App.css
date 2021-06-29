@@ -571,4 +571,32 @@ input:checked + .slider:before {
   border: none !important;
 }
 
+/* schedule/Reports section */
 
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.reports-nav-button {
+  background-color: #ececec;
+  position: relative;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  height: 12vh;
+}
+
+.reports-nav-button:hover {
+  cursor: pointer;
+  background-color: #ec971f;
+  color: #fff;
+}
+
+.reports-nav-button .content {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  font-size: 3vw;
+}

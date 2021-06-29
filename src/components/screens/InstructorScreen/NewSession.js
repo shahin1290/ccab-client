@@ -1,15 +1,20 @@
 import React, { useEffect, useState, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Col, Row, Image, Button } from 'react-bootstrap'
-import { createSession } from '../../../redux/actions/sessionAction'
+import { Col, Row, Image, Button } from 'react-bootstrap'
+import {
+  createSession,
+  updateSession,
+  deleteSession
+} from '../../../redux/actions/sessionAction'
 import { createBrowserHistory } from 'history'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { getAppointmentDetails } from '../../../redux/actions/appointmentAction'
 
 const history = createBrowserHistory({ forceRefresh: true })
 
-export default function NewSession({ selectedAppointment }) {
+export default function NewSession({ selectedAppointment, activeButton }) {
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/
@@ -21,34 +26,47 @@ export default function NewSession({ selectedAppointment }) {
     success: sessionSuccess
   } = useSelector((state) => state.sessionCreate)
 
-  // get Users list reducer
-  const {
-    users,
-    loading: getUsersLoading,
-    error: getUsersError
-  } = useSelector((state) => state.userList)
+  const { success: updateSuccess } = useSelector((state) => state.sessionUpdate)
+  const { success: deleteSuccess } = useSelector((state) => state.sessionDelete)
 
-  /*******************/
-
-  /********* State And Var ************/
+  const { session } = useSelector((state) => state.sessionDetails)
+  const { appointment } = useSelector((state) => state.appointmentDetails)
 
   /*******************/
 
   useEffect(() => {
- 
-
-    if (sessionSuccess) {
+    dispatch(getAppointmentDetails(selectedAppointment))
+    if (sessionSuccess || updateSuccess || deleteSuccess) {
       history.push('/reports')
     }
-  }, [dispatch, history, sessionSuccess])
-
-
+  }, [
+    dispatch,
+    history,
+    sessionSuccess,
+    updateSuccess,
+    deleteSuccess,
+    selectedAppointment
+  ])
 
   //Pick date and time
 
   const [notes, setNotes] = useState('')
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
+
+  useEffect(() => {
+    if (session.startDate) {
+      setStartDate(new Date(session && session.startDate))
+    }
+
+    if (session.endDate) {
+      setEndDate(new Date(session && session.endDate))
+    }
+
+    if (session.notes) {
+      setNotes(session.notes)
+    }
+  }, [session])
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button className="p-3 " onClick={onClick} ref={ref}>
@@ -63,7 +81,17 @@ export default function NewSession({ selectedAppointment }) {
     dispatch(createSession({ startDate, endDate, notes, selectedAppointment }))
   }
 
+  //update form submit
+  const updateHandler = (e) => {
+    e.preventDefault()
 
+    dispatch(
+      updateSession(
+        { startDate, endDate, notes, selectedAppointment },
+        session._id
+      )
+    )
+  }
 
   return (
     <>
@@ -80,7 +108,7 @@ export default function NewSession({ selectedAppointment }) {
             </Col>
 
             <Col md={6} className="my-auto title">
-              Axel Magnuseee
+              {appointment && appointment.student && appointment.student.name}
             </Col>
           </Row>
 
@@ -144,7 +172,7 @@ export default function NewSession({ selectedAppointment }) {
               <div className="col-lg-12 col-md-12 col-sm-12">
                 <div>
                   <div className="edit-course-form">
-                    <form onSubmit={submitHandler}>
+                    <form>
                       <div className="form-group col-lg-12 col-md-12 col-sm-12">
                         <textarea
                           type="text"
@@ -153,9 +181,33 @@ export default function NewSession({ selectedAppointment }) {
                           onChange={(e) => setNotes(e.target.value)}
                           required
                         />
-                        <Button variant="warning" type="submit">
-                          Book
-                        </Button>{' '}
+
+                        {activeButton === 'incoming' && (
+                          <Button variant="warning" onClick={submitHandler}>
+                            Book
+                          </Button>
+                        )}
+                        {activeButton === 'upcoming' && (
+                          <div className="d-flex justify-content-between">
+                            <Button variant="warning" onClick={updateHandler}>
+                              Rebook
+                            </Button>
+
+                            <Button
+                              variant="danger"
+                              onClick={() => {
+                                if (
+                                  window.confirm(
+                                    'Are you sure you wish to delete this item?'
+                                  )
+                                )
+                                  dispatch(deleteSession(session._id))
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </form>
                   </div>

@@ -9,8 +9,10 @@ import { Redirect } from 'react-router-dom'
 
 import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
 
-const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
+const KlarnaPayment = ({ ID, method, plan, requestBill, serviceBill }) => {
   const { course } = useSelector((state) => state.courseDetails)
+  const { service } = useSelector((state) => state.serviceDetails)
+
   const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const dispatch = useDispatch()
@@ -90,9 +92,16 @@ const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
   }, [orderSuccess]) */
 
   const onClickHandler = () => {
-    console.log(ID, plan && plan.subscription, requestBill && requestBill.bill)
     if (ID) {
       dispatch(readKlarnaSession(ID, { session_id: session.session_id }))
+    }
+
+    if (serviceBill && serviceBill.serviceId) {
+      dispatch(
+        readKlarnaSession(serviceBill.serviceId, {
+          session_id: session.session_id
+        })
+      )
     }
 
     if (plan && plan.subscription) {
@@ -133,6 +142,20 @@ const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
             })
           )
         }
+        if (serviceBill && serviceBill.serviceId) {
+          dispatch(
+            createKlarnaOrder(serviceBill.serviceId, {
+              token: res.authorization_token,
+              data: getKlarnaOrderLines(
+                {
+                  name: service.name,
+                  price: serviceBill.amount
+                },
+                currency.data
+              )
+            })
+          )
+        }
         if (plan && plan.subscription) {
           dispatch(
             createKlarnaOrder(plan.subscription, {
@@ -163,13 +186,7 @@ const KlarnaPayment = ({ ID, method, plan, requestBill }) => {
     <>
       {orderSuccess ? (
         <>
-          {ID && <Redirect to={`/confirmation-klarna/${ID}`} />}
-          {plan && plan.subscription && (
-            <Redirect to={`/confirmation-klarna/${plan.subscription}`} />
-          )}
-          {requestBill && requestBill.bill && (
-            <Redirect to={`/confirmation-klarna/${requestBill.bill}`} />
-          )}
+          <Redirect to={`/confirmation-klarna/${order._id}`} />
         </>
       ) : (
         <div className=" bg-white d-flex flex-column justify-content-center">

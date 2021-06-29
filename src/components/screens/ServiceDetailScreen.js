@@ -38,20 +38,20 @@ export default function ServiceDetailScreen({ match }) {
     currency
   } = useSelector((state) => state.currencyCreate)
 
-  const [isOpen, setOpen] = useState(false)
-
   const [countryName, setcountryName] = useState('')
   const [countryCode, setcountryCode] = useState('')
   const [countryLang, setcountryLang] = useState('')
   const [showKlarnaImg, setShowKlarmaImg] = useState(false)
   const [countryCurrency, setCountryCurrency] = useState('')
-  const [Mentor, setMentor] = useState({})
+  const [instructor, setInstructor] = useState({})
   const [selectedInsructor, setSelectedInstructor] = useState('')
 
   // select mentor
-  const _handleSelectMentor = (arr) => {
-    setMentor({ _id: arr[0], name: arr[1] })
+  const _handleSelectInstructor = (arr) => {
+    setInstructor({ _id: arr[0], name: arr[1] })
   }
+
+  const [sessionNumber, setSessionNumber] = useState(0)
 
   //get the bio of selected Instructor
   const selectedInstructorBio = () => {
@@ -133,9 +133,6 @@ export default function ServiceDetailScreen({ match }) {
     }
   }
 
-  const getVideoID = (VideoPath) => {
-    return VideoPath.slice(32)
-  }
   //console.log(service)
   return (
     <>
@@ -460,7 +457,7 @@ export default function ServiceDetailScreen({ match }) {
                                     <select
                                       className="custom-select-box px-2"
                                       onChange={(e) => {
-                                        _handleSelectMentor(
+                                        _handleSelectInstructor(
                                           e.target.value.split(',')
                                         )
                                       }}
@@ -490,10 +487,10 @@ export default function ServiceDetailScreen({ match }) {
                                     </select>
 
                                     <div className="my-3">
-                                      {Mentor.name ? (
+                                      {instructor.name ? (
                                         <span className="rounded-pill  px-2 py-1 m-2 bg-light">
                                           <i className="fas fa-plus-circle text-success"></i>{' '}
-                                          {Mentor.name}
+                                          {instructor.name}
                                         </span>
                                       ) : (
                                         <p className="text-warning bg-light p-1">
@@ -516,6 +513,10 @@ export default function ServiceDetailScreen({ match }) {
                                           type="number"
                                           min="0"
                                           name="quantity"
+                                          value={sessionNumber}
+                                          onChange={(e) =>
+                                            setSessionNumber(e.target.value)
+                                          }
                                         />
                                       </div>
                                     </div>
@@ -524,14 +525,22 @@ export default function ServiceDetailScreen({ match }) {
                               </div>
                             </div>
                             <a
+                              onClick={() =>
+                                localStorage.setItem(
+                                  'appointment',
+                                  JSON.stringify({ instructor, sessionNumber })
+                                )
+                              }
                               href={
                                 !userDetail.token
                                   ? '/login'
-                                  : service.price > 0
-                                  ? '/checkout/' + service._id
-                                  : '/service-content/' + service._id
+                                  : '/checkout/service/' + service._id
                               }
-                              className="theme-btn btn-style-three mt-2"
+                              className={`theme-btn btn-style-three mt-2 ${
+                                sessionNumber === 0 || !instructor.name
+                                  ? 'isDisabled'
+                                  : ''
+                              }`}
                             >
                               <span className="txt">
                                 Book now <i className="fa fa-angle-right"></i>

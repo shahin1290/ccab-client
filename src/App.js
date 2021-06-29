@@ -307,6 +307,12 @@ function App() {
 
         <StudentRoute
           exact
+          path="/checkout/service/:serviceId"
+          component={Checkout}
+        ></StudentRoute>
+
+        <StudentRoute
+          exact
           path="/checkout/bill/:requestId"
           component={Checkout}
         ></StudentRoute>

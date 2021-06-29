@@ -18,7 +18,6 @@ export const getKlarnaOrderLines = (course, geoData) => {
 
   let amount = Math.round(geoData.amount * course.price * 100)
 
-  console.log(amount, course);
 
   const data = {
     purchase_country: geoData.country,
