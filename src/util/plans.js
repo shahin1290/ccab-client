@@ -31,7 +31,7 @@ export const plans = [
     period: 'monthly',
     price: '3499',
     offers: [
-      'minimum purchase 2 month',
+      'minimum purchase 2 months',
       'Industry Curriculum (IC).',
       'leading online learning platform',
       'Flexible, work & learn at the same time',
@@ -40,7 +40,7 @@ export const plans = [
       'Funding options available',
       '16 hours minimum.',
       '2 hours per day live support chanale ',
-      '4 Live session per month'
+      '4 Live session per months'
     ],
     notOffers: [
       '1:1 career support(CV & portfolio & Check Github account & LinkedIn)',
@@ -80,7 +80,7 @@ export const plans = [
     period: 'monthly',
     price: '3899',
     offers: [
-      'minimum purchase 2 month.',
+      'minimum purchase 2 months.',
       'Industry Curriculum (IC).',
       'leading online learning platform',
       'Flexible, work & learn at the same time',
@@ -89,7 +89,7 @@ export const plans = [
       'Funding options available',
       '32 hours minimum.',
       '4 hours per day live support chanale ',
-      '8 Live session per month',
+      '8 Live session per months',
       '1:1 career support(CV & portfolio & Check Github account & LinkedIn)',
       'Book a live lecture one to one (student to lecturer).',
     ],
@@ -127,7 +127,7 @@ export const plans = [
     period: 'monthly',
     price: '4699',
     offers: [
-      'minimum purchase 2 month.',
+      'minimum purchase 2 months.',
       'Industry Curriculum (IC).',
       'leading online learning platform',
       'Flexible, work & learn at the same time',
@@ -136,7 +136,7 @@ export const plans = [
       'Funding options available',
       '48 hours minimum.',
       '6 hours per day live support chanale ',
-      '12 Live session per month',
+      '12 Live session per months',
       '1:1 career support(CV & portfolio & Check Github account & LinkedIn)',
       'Book a live lecture one to one (student to lecturer).',
       'Training on Hiring Interview.',

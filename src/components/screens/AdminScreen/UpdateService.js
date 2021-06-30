@@ -364,13 +364,15 @@ export default function UpdateCourese({ match }) {
                             select an option
                           </option>
 
-                          <option>React </option>
+                          <option>Math </option>
 
-                          <option>Node </option>
+                          <option>Phtsics </option>
 
-                          <option>Front End Development </option>
+                          <option>Programing</option>
 
-                          <option>Web Development </option>
+                          <option>English</option>
+                          <option>Arabic</option>
+                          <option>German</option>
                         </select>
                       </div>
 
@@ -532,12 +534,12 @@ export default function UpdateCourese({ match }) {
                   <div className="url-boxed">
                     {/* Divider */}
                     <div className="border my-3"></div>
-                    {/* ***http://localhost:5001** */}
+                    {/* ***https://server.ccab.tech** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
+                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (
