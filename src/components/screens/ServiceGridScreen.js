@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getCourseList } from '../../redux/actions/courseAction'
+import { getServiceList } from '../../redux/actions/serviceAction'
 import Message from '../layout/Message'
 import Loader from '../layout/Loader'
 
-export default function CourseGridScreen({ match }) {
+export default function ServiceGridScreen({ match }) {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
 
-  const { courseList, loading, error } = useSelector(
-    (state) => state.courseList
+  const { serviceList, loading, error } = useSelector(
+    (state) => state.serviceList
   )
 
-  const filterSubscriptionCourse = (courseList) => {
-    return courseList.filter((course) => {
-      const titleFirstWord = course.name
+  const filterSubscriptionService = (serviceList) => {
+    return serviceList.filter((service) => {
+      const titleFirstWord = service.name
         .toLowerCase()
         .split(' ')[0]
         .toLowerCase()
@@ -29,7 +29,7 @@ export default function CourseGridScreen({ match }) {
     ? [match.params.category]
     : [
         ...new Set(
-          filterSubscriptionCourse(courseList)
+          filterSubscriptionService(serviceList)
             .filter((val) => {
               if (searchTerm === '') {
                 return val
@@ -42,23 +42,23 @@ export default function CourseGridScreen({ match }) {
         )
       ]
 
-  const categoryCourses = (category) =>
-    filterSubscriptionCourse(courseList).filter((course) => {
+  const categoryServices = (category) =>
+    filterSubscriptionService(serviceList).filter((service) => {
       if (searchTerm === '') {
-        return course.category === category
+        return service.category === category
       }
-      if (course.name.toLowerCase().includes(searchTerm)) {
-        return course.category === category
+      if (service.name.toLowerCase().includes(searchTerm)) {
+        return service.category === category
       }
     })
 
   /*  const pagination = (category) => {
-    const filteredCourses = courseList.filter((course) => {
+    const filteredservices = serviceList.filter((service) => {
       if (searchTerm === '') {
-        return course.category === category
+        return service.category === category
       }
-      if (course.name.toLowerCase().includes(searchTerm)) {
-        return course.category === category
+      if (service.name.toLowerCase().includes(searchTerm)) {
+        return service.category === category
       }
     })
 
@@ -66,7 +66,7 @@ export default function CourseGridScreen({ match }) {
 
     for (
       let i = 1;
-      i <= Math.ceil(filteredCourses.length / coursesPerPage);
+      i <= Math.ceil(filteredservices.length / servicesPerPage);
       i++
     ) {
       pageNumbers.push(i)
@@ -93,17 +93,17 @@ export default function CourseGridScreen({ match }) {
   } */
 
   useEffect(() => {
-    dispatch(getCourseList())
+    dispatch(getServiceList())
   }, [dispatch, searchTerm])
 
   /*  useEffect(() => {
-    const currentCoursesArray = []
+    const currentservicesArray = []
     categoryArray.map((category) => {
-      currentCoursesArray.push({ category: category, pageNumber: 1 })
+      currentservicesArray.push({ category: category, pageNumber: 1 })
     })
 
-    setCurrentPage(currentCoursesArray)
-  }, [courseList]) */
+    setCurrentPage(currentservicesArray)
+  }, [serviceList]) */
 
   return (
     <>
@@ -115,7 +115,7 @@ export default function CourseGridScreen({ match }) {
                 <input
                   type="search"
                   name="search-field"
-                  placeholder="Search with course name"
+                  placeholder="Search with service name"
                   required
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -151,12 +151,12 @@ export default function CourseGridScreen({ match }) {
           <div className="row clearfix">
             {/* Content Side  */}
             <div className="content-side col-lg-12 col-md-12 col-sm-12">
-              <div className="our-courses">
+              <div className="our-services">
                 {loading ? (
                   <Loader />
                 ) : error ? (
                   <Message>{error}</Message>
-                ) : categoryArray.length > 0 ? (
+                ) : categoryArray.length ? (
                   categoryArray.map((category) => {
                     return (
                       <div>
@@ -165,26 +165,26 @@ export default function CourseGridScreen({ match }) {
                           <div className="clearfix">
                             <div className="pull-left">
                               <div className="title pt-5">
-                                {category} Courses
+                                {category} services
                               </div>
                             </div>
                           </div>
                         </div>
                         <div className="row clearfix">
-                          {categoryCourses(category).length >0 ? (
-                            categoryCourses(category).map((course) => {
+                          {categoryServices(category).length ? (
+                            categoryServices(category).map((service) => {
                               return (
                                 <div
                                   className="cource-block-two col-lg-3 col-md-6 col-sm-12"
-                                  key={course._id}
+                                  key={service._id}
                                 >
                                   <div className="inner-box">
                                     <div className="image">
-                                      <Link to={`/courses/${course._id}`}>
+                                      <Link to={`/services/${service._id}`}>
                                         <img
                                           src={
-                                            'https://server.ccab.tech/uploads/Bootcamp/' +
-                                            course.img_path
+                                            'http://localhost:5001/uploads/Service/' +
+                                            service.img_path
                                           }
                                           alt=""
                                           style={{
@@ -197,9 +197,9 @@ export default function CourseGridScreen({ match }) {
                                       <div>
                                         <Link
                                           className="sub-title"
-                                          to={`/courses/${course._id}`}
+                                          to={`/services/${service._id}`}
                                         >
-                                          {course.name}
+                                          {service.name}
                                         </Link>
                                       </div>
                                       <div className="text">
@@ -207,18 +207,19 @@ export default function CourseGridScreen({ match }) {
                                           className="sub-text d-inline-block text-truncate"
                                           style={{ maxWidth: '240px' }}
                                         >
-                                          {course.description}
+                                          {service.description}
                                         </span>
                                       </div>
                                       <div className="clearfix">
                                         <div className="pull-left">
                                           <div className="students">
-                                            {course.weeks * 5} Lectures
+                                            {service.instructors.length}{' '}
+                                            Instructors
                                           </div>
                                         </div>
                                         <div className="pull-right">
                                           <div className="hours">
-                                            {course.weeks * 5 * 2} Hours
+                                            {service.students.length} enrolled
                                           </div>
                                         </div>
                                       </div>
@@ -229,7 +230,7 @@ export default function CourseGridScreen({ match }) {
                             })
                           ) : (
                             <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                              No Course found !
+                              No service found !
                             </p>
                           )}
                         </div>
@@ -273,7 +274,7 @@ export default function CourseGridScreen({ match }) {
                               <a
                                 onClick={() => {
                                   const pageNumber = findPageNumber(category)
-                                  categoryCourses(category).length === 3 &&
+                                  categoryservices(category).length === 3 &&
                                     paginate(category, pageNumber + 1)
                                 }}
                               >
@@ -287,7 +288,7 @@ export default function CourseGridScreen({ match }) {
                   })
                 ) : (
                   <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                    No Course found !
+                    No service found !
                   </p>
                 )}
               </div>
@@ -296,8 +297,8 @@ export default function CourseGridScreen({ match }) {
         </div>
       </div>
 
-      {/* Popular Courses  */}
-      <section className="popular-courses-section sidebar-page-container">
+      {/* Popular services  */}
+      <section className="popular-services-section sidebar-page-container">
         <div
           className="patern-layer-one paroller"
           data-paroller-factor="0.40"
@@ -315,7 +316,7 @@ export default function CourseGridScreen({ match }) {
           style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
         ></div>
         <div className="auto-container">
-          <div className="title pb-3">Most Popular Courses</div>
+          <div className="title pb-3">Most Popular services</div>
           <div className="row clearfix">
             <div className="col-lg-9 col-md-12 col-sm-12">
               <div className="row clearfix">
@@ -323,7 +324,7 @@ export default function CourseGridScreen({ match }) {
                   <Loader />
                 ) : error ? (
                   <Message>{error}</Message>
-                ) : filterSubscriptionCourse(courseList).length ? (
+                ) : filterSubscriptionService(serviceList).length ? (
                   <div className="cource-block-two col-lg-4 col-md-6 col-sm-12">
                     <div
                       className="inner-box wow fadeInLeft"
@@ -331,11 +332,11 @@ export default function CourseGridScreen({ match }) {
                       data-wow-duration="1500ms"
                     >
                       <div className="image">
-                        <Link to="/course/1/details">
+                        <Link to="/service/1/details">
                           <img
                             src={
-                              'https://server.ccab.tech/uploads/Bootcamp/' +
-                              filterSubscriptionCourse(courseList)[0].img_path
+                              'http://localhost:5001/uploads/Bootcamp/' +
+                              filterSubscriptionService(serviceList)[0].img_path
                             }
                             alt=""
                           />
@@ -343,8 +344,8 @@ export default function CourseGridScreen({ match }) {
                       </div>
                       <div className="lower-content">
                         <div>
-                          <Link className="sub-title" to="/course/1/details">
-                            {filterSubscriptionCourse(courseList)[0].name}
+                          <Link className="sub-title" to="/service/1/details">
+                            {filterSubscriptionService(serviceList)[0].name}
                           </Link>
                         </div>
                         <div className="text">
@@ -353,7 +354,7 @@ export default function CourseGridScreen({ match }) {
                             style={{ maxWidth: '240px' }}
                           >
                             {
-                              filterSubscriptionCourse(courseList)[0]
+                              filterSubscriptionService(serviceList)[0]
                                 .description
                             }
                           </span>
@@ -361,14 +362,14 @@ export default function CourseGridScreen({ match }) {
                         <div className="clearfix">
                           <div className="pull-left">
                             <div className="students">
-                              {filterSubscriptionCourse(courseList)[0].weeks *
+                              {filterSubscriptionService(serviceList)[0].weeks *
                                 5}{' '}
                               Lectures
                             </div>
                           </div>
                           <div className="pull-right">
                             <div className="hours">
-                              {filterSubscriptionCourse(courseList)[0].weeks *
+                              {filterSubscriptionService(serviceList)[0].weeks *
                                 5 *
                                 2}{' '}
                               Hours
@@ -386,7 +387,7 @@ export default function CourseGridScreen({ match }) {
           </div>
         </div>
       </section>
-      {/* End Popular Courses  */}
+      {/* End Popular services  */}
     </>
   )
 }

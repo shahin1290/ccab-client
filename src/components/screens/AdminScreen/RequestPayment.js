@@ -6,7 +6,7 @@ import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory({forceRefresh:true});
 
-export default function UpdateCourese({ match }) {
+export default function RequestPayment({ match }) {
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/

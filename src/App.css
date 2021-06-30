@@ -537,7 +537,8 @@ input:checked + .slider:before {
   transition: background-color 0.5s ease;
 }
 
- .job-icon .fas, .job-icon .far {
+.job-icon .fas,
+.job-icon .far {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -571,4 +572,46 @@ input:checked + .slider:before {
 
 .job-contact button {
   border: none !important;
+}
+
+/* schedule/Reports section */
+
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.reports-nav-button {
+  background-color: #ececec;
+  position: relative;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  height: 120px;
+}
+
+.reports-nav-button:hover {
+  cursor: pointer;
+  background-color: #ec971f;
+  color: #fff;
+}
+
+.reports-nav-button .content {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  font-size: 3vw;
+}
+
+.upcoming-row-content {
+  background-color: #ececec;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  padding: 0 30px 30px 30px;
+}
+
+.upcoming-row-content:hover {
+  cursor: pointer;
+  background-color: #F5FBFF;
 }

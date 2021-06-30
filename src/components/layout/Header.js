@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getCourseList } from '../../redux/actions/courseAction'
+import { getServiceList } from '../../redux/actions/serviceAction'
 
 // include styles
 import 'rodal/lib/rodal.css'
@@ -13,6 +14,8 @@ import { logout, isValid } from '../../redux/actions/userAction'
 
 import AdminHeader from './../layout/headers/AdminHeaderContnet'
 import StudentHeaderContent from './../layout/headers/StudentHeaderContent'
+import InstructorHeaderContent from './../layout/headers/InstructorHeaderContent'
+
 import { getProfile } from '../../redux/actions/userAction'
 
 export default function Header() {
@@ -22,9 +25,14 @@ export default function Header() {
   const { loading, user, error } = useSelector((state) => state.userProfile)
 
   const { courseList } = useSelector((state) => state.courseList)
+  const { serviceList } = useSelector((state) => state.serviceList)
 
   /*******************Functions *************/
   const categoryArray = [...new Set(courseList.map((item) => item.category))]
+
+  const serviceCategoryArray = [
+    ...new Set(serviceList.map((item) => item.category))
+  ]
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -32,6 +40,7 @@ export default function Header() {
   useEffect(() => {
     dispatch(getProfile())
     dispatch(getCourseList())
+    dispatch(getServiceList())
   }, [dispatch])
 
   const logoutHandler = () => {
@@ -70,6 +79,23 @@ export default function Header() {
                 <NavDropdown.Item href="/course-grid">
                   All Courses
                 </NavDropdown.Item>
+                {serviceCategoryArray.length &&
+                  serviceCategoryArray.map((category) => (
+                    <NavDropdown.Item
+                      key={category}
+                      href={`/service-grid/${category}`}
+                    >
+                      {category}
+                    </NavDropdown.Item>
+                  ))}
+              </Dropdown.Menu>
+            </div>
+            <div className="text-dark hide-on-big-screen pt-4">
+              Services
+              <Dropdown.Menu show className="border-0">
+                <NavDropdown.Item href="/course-grid">
+                  All Services
+                </NavDropdown.Item>
                 {categoryArray.length &&
                   categoryArray.map((category) => (
                     <NavDropdown.Item
@@ -97,6 +123,36 @@ export default function Header() {
                     <div className="dropdown-divider"></div>
                     {categoryArray.length &&
                       categoryArray.map((category) => (
+                        <div key={category}>
+                          <a
+                            className="dropdown-item"
+                            href={`/course-grid/${category}`}
+                          >
+                            {category}
+                          </a>
+                          <div className="dropdown-divider"></div>
+                        </div>
+                      ))}
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="collapse navbar-collapse mr-3">
+              <ul className="navbar-nav ">
+                <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                  <a href="#" className="text-dark pb-5 pt-5">
+                    Services
+                  </a>
+                  <div
+                    className="dropdown-menu  mt-4 ml-5"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                    <a className="dropdown-item" href="/service-grid">
+                      All Services
+                    </a>
+                    <div className="dropdown-divider"></div>
+                    {serviceCategoryArray.length &&
+                      serviceCategoryArray.map((category) => (
                         <div key={category}>
                           <a
                             className="dropdown-item"
@@ -167,11 +223,13 @@ export default function Header() {
             </>
           ) : userDetail.user_type === 'StudentUser' ? (
             <StudentHeaderContent logoutHandler={logoutHandler} />
-          ) : (
-            userDetail.user_type === 'AdminUser' && (
+          ) : 
+            userDetail.user_type === 'AdminUser' ? (
               <AdminHeader logoutHandler={logoutHandler} />
-            )
-          )}
+            ):  
+              userDetail.user_type === 'InstructorUser' && (
+                <InstructorHeaderContent logoutHandler={logoutHandler} />
+              )}
 
           <Nav>
             {!userDetail.token ? (
@@ -187,7 +245,7 @@ export default function Header() {
               <div className="collapse navbar-collapse mr-3">
                 <ul className="navbar-nav">
                   <li className="nav-item dropdown dropdown-slide dropdown-hover">
-                    <a href="/">
+                    <a>
                       <div className="logo-image pb-1">
                         <img
                           src={

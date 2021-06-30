@@ -10,7 +10,10 @@ import LoginScreen from '../../screens/LoginScreen'
 import RegisterScreen from '../../screens/RegisterScreen'
 import CoueseListScreen from '../../screens/CourseListScreen'
 import CourseDetailScreen from '../../screens/CourseDetailScreen'
+import ServiceDetailScreen from '../../screens/ServiceDetailScreen'
+
 import CourseGridScreen from '../../screens/CourseGridScreen'
+import ServiceGridScreen from '../../screens/ServiceGridScreen'
 import NotFound from './../../screens/NotFound'
 import Contact from './../../screens/Contact'
 import Privacy from './../../screens/privacy'
@@ -44,10 +47,16 @@ export default function DefaultRoute() {
         ></Route>
         <Route
           exact
+          path="/service-grid/:category?"
+          component={ServiceGridScreen}
+        ></Route>
+        <Route
+          exact
           path="/page/:pageNumber"
           component={CourseGridScreen}
         ></Route>
         <Route exact path="/courses/:id" component={CourseDetailScreen}></Route>
+        <Route exact path="/services/:id" component={ServiceDetailScreen}></Route>
         <Route exact path="/jobs" component={Jobs} />
 
         <Route path="/contact" component={Contact} />

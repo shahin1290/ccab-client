@@ -26,7 +26,9 @@ import UpdateCourese from './components/screens/AdminScreen/UpdateCourese'
 import RequestPayment from './components/screens/AdminScreen/RequestPayment'
 import RequestList from './components/screens/AdminScreen/RequestList'
 import EditRequest from './components/screens/AdminScreen/EditRequest'
-import JobList from './components/screens/AdminScreen/JobList';
+import JobList from './components/screens/AdminScreen/JobList'
+import ManageServices from './components/screens/AdminScreen/ManageServices'
+import UpdateService from './components/screens/AdminScreen/UpdateService'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -43,10 +45,16 @@ import MentorCoursesList from './components/screens/MentorScreen/MentorCoursesLi
 import TaskDetailsScreen from './components/screens/MentorScreen/TaskDetailsScreen'
 import TaskUploadScreen from './components/screens/MentorScreen/TaskUploadScreen'
 
+/* Instructor Routes */
+import ReportList from './components/screens/InstructorScreen/ReportList'
+import NewSession from './components/screens/InstructorScreen/NewSession'
+
 /* Private Routes  */
 import DefaultRoutes from './components/Route/default/DefaultRoute'
 import StudentRoute from './components/Route/student/StudentRoute'
 import MentorRoute from './components/Route/mentor/MentorRoute'
+import InstructorRoute from './components/Route/instructor/InstructorRoute'
+
 import AdminRoute from './components/Route/admin/AdminRoute'
 import UserListScreen from './components/screens/AdminScreen/UserList'
 
@@ -76,6 +84,11 @@ function App() {
         {/* Private Route for Admin  */}
         <AdminRoute exact path="/admin-users-list" component={UserListScreen} />
         <AdminRoute exact path="/admin-courses-list" component={MangeCoures} />
+        <AdminRoute
+          exact
+          path="/admin-services-list"
+          component={ManageServices}
+        />
 
         <AdminRoute
           exact
@@ -88,6 +101,12 @@ function App() {
           exact
           path="/admin-order/:pageNumber"
           component={MangeOrder}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-service-update/:id"
+          component={UpdateService}
         ></AdminRoute>
 
         <AdminRoute
@@ -119,6 +138,8 @@ function App() {
           path="/admin-job-list"
           component={JobList}
         ></AdminRoute>
+
+        
 
         {/* Private Route for Mentor  */}
         <MentorRoute
@@ -205,6 +226,18 @@ function App() {
           component={TaskDetailsScreen}
         ></MentorRoute>
 
+        {/* Private Route for Instructor  */}
+        <InstructorRoute
+          exact
+          path="/reports"
+          component={ReportList}
+        ></InstructorRoute>
+         <InstructorRoute
+          exact
+          path="/instructor-new-session"
+          component={NewSession}
+        ></InstructorRoute>
+
         {/* Private Route for Students  */}
         <StudentRoute
           exact
@@ -271,6 +304,12 @@ function App() {
         <StudentRoute
           exact
           path="/checkout/subscription/:plan"
+          component={Checkout}
+        ></StudentRoute>
+
+        <StudentRoute
+          exact
+          path="/checkout/service/:serviceId"
           component={Checkout}
         ></StudentRoute>
 

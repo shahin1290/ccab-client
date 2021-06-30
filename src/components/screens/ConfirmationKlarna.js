@@ -3,12 +3,14 @@ import { getCourseDetails } from '../../redux/actions/courseAction'
 import { useSelector, useDispatch } from 'react-redux'
 import { readKlarnaOrder } from '../../redux/actions/orderAction'
 import Loader from '../layout/Loader'
+import { createAppointment } from '../../redux/actions/appointmentAction';
 
 const ConfirmationKlarna = ({ match }) => {
   const ID = match.params.bootcampId
   const dispatch = useDispatch()
 
   const { course, loading, error } = useSelector((state) => state.courseDetails)
+  const { service} = useSelector((state) => state.serviceDetails)
 
   const {
     order,
@@ -20,6 +22,15 @@ const ConfirmationKlarna = ({ match }) => {
   useEffect(() => {
     dispatch(getCourseDetails(ID))
     dispatch(readKlarnaOrder(ID))
+    dispatch(
+      createAppointment({
+        instructor: JSON.parse(localStorage.getItem('appointment'))
+          .instructor,
+        service: service._id,
+        sessionNumber: JSON.parse(localStorage.getItem('appointment'))
+          .sessionNumber
+      })
+    )
   }, [dispatch, ID])
 
   //console.log(html&&html);

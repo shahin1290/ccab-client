@@ -49,7 +49,7 @@ export default function UserlistScreen() {
               </tr>
             </thead>
             <tbody>
-              {users.length
+              {users.length > 0
                 ? users.map((user) =>
                     user.students.map((student, index) => (
                       <tr key={user._id}>

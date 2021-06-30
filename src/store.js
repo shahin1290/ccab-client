@@ -90,6 +90,32 @@ import {
 
 import { jobCreateReducer, jobListReducer } from './redux/reducers/jobReducer'
 
+import {
+  serviceListReducer,
+  serviceDetailsReducer,
+  serviceDeleteReducer,
+  serviceCreateReducer,
+  adminServiceListReducer,
+  serviceUpdateReducer
+} from './redux/reducers/serviceReducer'
+
+import {
+  sessionCreateReducer,
+  sessionListReducer,
+  sessionDetailsReducer,
+  sessionDeleteReducer,
+  sessionUpdateReducer
+} from './redux/reducers/sessionReducer'
+
+import {
+  appointmentCreateReducer,
+  appointmentListReducer,
+  appointmentDetailsReducer,
+  appointmentDeleteReducer,
+  appointmentUpdateReducer
+} from './redux/reducers/appointmentReducer'
+
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -154,6 +180,23 @@ const reducer = combineReducers({
   requestDelete: requestDeleteReducer,
   jobCreate: jobCreateReducer,
   jobList: jobListReducer,
+  serviceList: serviceListReducer,
+  adminServiceList: adminServiceListReducer,
+  serviceDetails: serviceDetailsReducer,
+  serviceCreate: serviceCreateReducer,
+  serviceDelete: serviceDeleteReducer,
+  serviceUpdate: serviceUpdateReducer,
+  sessionCreate: sessionCreateReducer,
+  sessionList: sessionListReducer,
+  sessionDetails: sessionDetailsReducer,
+  sessionUpdate: sessionUpdateReducer,
+  sessionDelete: sessionDeleteReducer,
+  appointmentCreate: appointmentCreateReducer,
+  appointmentList: appointmentListReducer,
+  appointmentDetails: appointmentDetailsReducer,
+  appointmentUpdate: appointmentUpdateReducer,
+  appointmentDelete: appointmentDeleteReducer,
+  
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

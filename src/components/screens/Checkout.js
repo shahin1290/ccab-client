@@ -16,6 +16,7 @@ import {
 } from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
 import { getRequestDetails } from '../../redux/actions/requestAction'
+import { getServiceDetails } from '../../redux/actions/serviceAction'
 
 import Loader from '../layout/Loader'
 import { Tabs, Tab } from 'react-bootstrap'
@@ -25,6 +26,8 @@ import KlarnaPayment from '../layout/KlarnaPayment'
 import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
 import { getPriceFormat } from '../../util/priceFormat'
 import { createCurrrency } from '../../redux/actions/currencyAction'
+import { createAppointment } from '../../redux/actions/appointmentAction'
+
 import { plans } from '../../util/plans'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
@@ -39,22 +42,32 @@ const CheckoutForm = ({ match, history }) => {
   const ID = match.params.bootcampId
   const subscription = match.params.plan
   const requestId = match.params.requestId
+  const serviceId = match.params.serviceId
 
   const plan = plans.find((plan) => plan._id === subscription)
 
   const { course } = useSelector((state) => state.courseDetails)
+  const { service } = useSelector((state) => state.serviceDetails)
+
   const {
     loading,
     success: orderSuccess,
     error
   } = useSelector((state) => state.orderCreate)
+
   const {
     loading: currencyLoading,
     success: currencySuccess,
     currency
   } = useSelector((state) => state.currencyCreate)
+
+  const appointment = useSelector((state) => state.appointmentCreate)
+
+  console.log(appointment)
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
+  
   const {
     loading: requestLoading,
     success: requestSuccess,
@@ -122,12 +135,35 @@ const CheckoutForm = ({ match, history }) => {
       dispatch(getRequestDetails(requestId))
     }
 
+    if (serviceId) {
+      dispatch(getServiceDetails(serviceId))
+    }
+
     dispatch(createCurrrency())
   }, [dispatch, ID])
 
   useEffect(() => {
     if (orderSuccess) {
-      history.push(`/confirmation-card-purchase/${ID}`)
+      if (ID) {
+        history.push(`/confirmation-card-purchase/${ID}`)
+      }
+
+      if (requestId) {
+        history.push(`/confirmation-card-purchase/${requestId}`)
+      }
+
+      if (serviceId) {
+        dispatch(
+          createAppointment({
+            instructor: JSON.parse(localStorage.getItem('appointment'))
+              .instructor,
+            service: service._id,
+            sessionNumber: JSON.parse(localStorage.getItem('appointment'))
+              .sessionNumber
+          })
+        )
+        //history.push(`/confirmation-card-purchase/${serviceId}`)
+      }
     }
   }, [orderSuccess])
 
@@ -178,6 +214,15 @@ const CheckoutForm = ({ match, history }) => {
 
       if (requestId) {
         amount = Math.round(currency.data.amount * request.amount * 100)
+      }
+
+      if (serviceId) {
+        amount = Math.round(
+          currency.data.amount *
+            (service.price *
+              JSON.parse(localStorage.getItem('appointment')).sessionNumber) *
+            100
+        )
       }
 
       const { data: clientSecret } = await axios.post(
@@ -266,6 +311,15 @@ const CheckoutForm = ({ match, history }) => {
             })
           )
         }
+        if (serviceId) {
+          dispatch(
+            createOrder(serviceId, {
+              token: paymentIntent.id,
+              amount: paymentIntent.amount,
+              currency: currency.data.currency
+            })
+          )
+        }
       }
     } catch (err) {
       setCheckoutError(err.message)
@@ -324,6 +378,28 @@ const CheckoutForm = ({ match, history }) => {
             )
           },
           'bill'
+        )
+      )
+      setWidgetLoaded(false)
+    }
+
+    if (serviceId) {
+      const amount =
+        service.price *
+        JSON.parse(localStorage.getItem('appointment')).sessionNumber
+      dispatch(
+        createKlarnaSession(
+          {
+            data: getKlarnaOrderLines(
+              { name: service.name, price: amount },
+              {
+                amount: currency.data.amount,
+                country: currency.data.country,
+                currency: currency.data.currency
+              }
+            )
+          },
+          serviceId
         )
       )
       setWidgetLoaded(false)
@@ -463,6 +539,61 @@ const CheckoutForm = ({ match, history }) => {
                                       `${getPriceFormat(
                                         Math.round(
                                           currency.data.amount * request.amount
+                                        )
+                                      )}  ${currency.data.currency}`}
+                                  </strong>
+                                </span>
+                              </li>
+                            </ul>
+                          )}
+
+                          {serviceId && (
+                            <ul>
+                              <li className="clearfix mb-3">
+                                Service:
+                                <span className="pull-right">
+                                  {service && service.name}
+                                </span>
+                              </li>
+                              <li className="clearfix mb-3">
+                                Price(per session):
+                                <span className="pull-right">
+                                  {currencySuccess &&
+                                    `${getPriceFormat(
+                                      Math.round(
+                                        currency.data.amount * service.price
+                                      )
+                                    )}  ${currency.data.currency}`}
+                                </span>
+                              </li>
+
+                              <li className="clearfix mb-3">
+                                Sessions:
+                                <span className="pull-right">
+                                  {
+                                    JSON.parse(
+                                      localStorage.getItem('appointment')
+                                    ).sessionNumber
+                                  }
+                                </span>
+                              </li>
+
+                              <hr />
+
+                              <li className="clearfix">
+                                <strong>Total</strong>{' '}
+                                <span className="pull-right">
+                                  <strong>
+                                    {currencySuccess &&
+                                      `${getPriceFormat(
+                                        Math.round(
+                                          currency.data.amount *
+                                            (service.price *
+                                              JSON.parse(
+                                                localStorage.getItem(
+                                                  'appointment'
+                                                )
+                                              ).sessionNumber)
                                         )
                                       )}  ${currency.data.currency}`}
                                   </strong>
@@ -712,6 +843,21 @@ const CheckoutForm = ({ match, history }) => {
                     {klarnaMethod && ID && (
                       <KlarnaPayment
                         ID={ID}
+                        widgetLoaded={widgetLoaded}
+                        method={klarnaMethod}
+                      />
+                    )}
+
+                    {klarnaMethod && serviceId && (
+                      <KlarnaPayment
+                        serviceBill={{
+                          serviceId: serviceId,
+                          amount: Math.round(
+                            service.price *
+                              JSON.parse(localStorage.getItem('appointment'))
+                                .sessionNumber
+                          )
+                        }}
                         widgetLoaded={widgetLoaded}
                         method={klarnaMethod}
                       />

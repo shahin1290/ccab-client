@@ -76,7 +76,7 @@ export default function MentorCoursesList() {
                       <Loader />
                     ) : error ? (
                       <Message>{error}</Message>
-                    ) : filterMentorCourses().length ? (
+                    ) : filterMentorCourses().length > 0 ? (
                       filterMentorCourses().map((item) => {
                         //console.log(item);
                         return (

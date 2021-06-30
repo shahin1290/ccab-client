@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ReactPlayer from 'react-player'
 import {
-  getCourseDetails,
-  updateCourse
-} from './../../../redux/actions/courseAction'
-import { getUsers } from './../../../redux/actions/userAction'
-import {
-  Table,
-  Col,
-  Row,
-  Modal,
-  Button,
-  Container,
-  Form
-} from 'react-bootstrap'
+  getServiceDetails,
+  updateService
+} from '../../../redux/actions/serviceAction'
+import { getUsers } from '../../../redux/actions/userAction'
+
 import { Card, Accordion } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid'
 import { createBrowserHistory } from 'history'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 
 export default function UpdateCourese({ match }) {
   const history = createBrowserHistory({ forceRefresh: true })
@@ -28,12 +17,12 @@ export default function UpdateCourese({ match }) {
 
   /********* Call Reduser ************/
 
-  // update course reducer
+  // update service reducer
   const {
     loading: Updateloading,
     error,
     success: UpdateSuccess
-  } = useSelector((state) => state.courseUpdate)
+  } = useSelector((state) => state.serviceUpdate)
 
   // get Users list reducer
   const {
@@ -42,35 +31,36 @@ export default function UpdateCourese({ match }) {
     error: getUsersError
   } = useSelector((state) => state.userList)
 
-  // get course Details Reducer
+  // get service Details Reducer
   const {
-    course,
-    loading: CourseDetailsloading,
-    error: CourseDetailsError
-  } = useSelector((state) => state.courseDetails)
+    service,
+    loading: serviceDetailsloading,
+    error: serviceDetailsError
+  } = useSelector((state) => state.serviceDetails)
 
   /*******************/
 
   /********* State And Var ************/
   const ID = match.params.id
-
   const [students, setStudents] = useState([]) // done
-  const [Mentor, setMentor] = useState({}) // done
-  const [price, setPrice] = useState(course.price)
-  const [name, setName] = useState(course.name)
-  const [description, setDescription] = useState(course.description)
-  const [category, setCategory] = useState(course.category)
+  const [instructors, setInstructors] = useState([]) // done
+  const [price, setPrice] = useState(service.price)
+  const [name, setName] = useState(service.name)
+  const [description, setDescription] = useState(service.description)
+  const [category, setCategory] = useState(service.category)
   const [startDate, setStartDate] = useState(new Date())
-  const [seats, setSeats] = useState(course.seats)
-  const [published, SetPublished] = useState(course.published)
+  const [seats, setSeats] = useState(service.seats)
+  const [published, SetPublished] = useState(service.published)
   const [VideoUrl, setVideoUrl] = useState('')
   const [ImageUrl, setImageUrl] = useState('')
   const [ImageLable, setImageLable] = useState('jpg,png file...')
-  const [weeks, setWeeks] = useState(course.weeks)
-  const [MentorsList, setMentorsList] = useState([])
+  const [weeks, setWeeks] = useState(service.weeks)
+  const [InstructorList, setInstructorsList] = useState([])
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState('')
   const [selectStudentErr, setSelectStudentErr] = useState('')
+  const [selectedInstructor, setSelectedInstructor] = useState('')
+  const [selectInstructorErr, setSelectInstructorErr] = useState('')
 
   //video
   const [showVideo, setShowVideo] = useState(false)
@@ -80,39 +70,38 @@ export default function UpdateCourese({ match }) {
   /*******************/
 
   useEffect(() => {
-    // call the getter ( course Details  and users list )
-    dispatch(getCourseDetails(ID))
+    // call the getter ( service Details  and users list )
+    dispatch(getServiceDetails(ID))
     dispatch(getUsers())
     if (UpdateSuccess) {
-      history.push('/admin-courses-list')
+      history.push('/admin-services-list')
     }
   }, [ID, dispatch, match, UpdateSuccess])
 
   /********* functions  ************/
   const _setDefaultValuse = () => {
-    setMentor({ name: course.mentor.name, _id: course.mentor._id })
-    setName(course.name)
-    setDescription(course.description)
-    setCategory(course.category)
-    setPrice(course.price)
-    setSeats(course.seats)
-    setStudents(course.students)
-    setStartDate(new Date(course.start_date))
-    SetPublished(course.published)
-    setVideoUrl(course.video_path)
-    setImageLable(course.img_path)
-
-    setTitleWithAnswer(course.info_list)
-    setWeeks(course.weeks)
+    setName(service.name)
+    setDescription(service.description)
+    setCategory(service.category)
+    setPrice(service.price)
+    setSeats(service.seats)
+    setStudents(service.students)
+    setInstructors(service.instructors)
+    setStartDate(new Date(service.start_date))
+    SetPublished(service.published)
+    setVideoUrl(service.video_path)
+    setImageLable(service.img_path)
+    setTitleWithAnswer(service.info_list)
+    setWeeks(service.weeks)
   }
 
   const _FilterUsers = (users, role) => {
-    if (role == 'MentorUser') {
+    if (role === 'MentorUser') {
       return users.filter(
-        (user) => user.user_type == role || user.user_type == 'AdminUser'
+        (user) => user.user_type === role || user.user_type === 'AdminUser'
       )
     }
-    return users.filter((user) => user.user_type == role)
+    return users.filter((user) => user.user_type === role)
   }
 
   // select student
@@ -149,9 +138,38 @@ export default function UpdateCourese({ match }) {
     //console.log('student removed ');
   }
 
-  // select mentor
-  const _handleSelectMentor = (arr) => {
-    setMentor({ _id: arr[0], name: arr[1] })
+  // select Instructors
+  const _handleSelectInstructor = () => {
+    let item
+    let exist = false
+    // find the user id
+    let instructor = InstructorList.filter(
+      (item) => item.name === selectedInstructor
+    )
+    // console.log('after filtering : ', students.length&&students[0]._id);
+    for (item of instructors) {
+      if (item._id === instructor[0]._id) {
+        //console.log('existing item ' , item.name);
+        exist = true
+      }
+    }
+    if (exist) setSelectInstructorErr('Student Already Selected')
+    else {
+      if (instructors.length < Number(seats))
+        setInstructors([
+          ...instructors,
+          { name: instructor[0].name, _id: instructor[0]._id }
+        ])
+      else {
+        setSelectInstructorErr('Seats available are only ' + seats)
+      }
+    }
+
+    //console.log(selectStudentErr,student);
+  }
+  const _handleUnselectInstructor = (id) => {
+    let newInstructors = instructors.filter((item) => item._id !== id)
+    setInstructors(newInstructors)
   }
 
   // close video
@@ -213,31 +231,31 @@ export default function UpdateCourese({ match }) {
     e.preventDefault()
 
     let infoData = []
-    if (titleWithAnswer.length) {
+    if (titleWithAnswer.length ) {
       titleWithAnswer.forEach((item) => {
         infoData.push(item)
       })
       dispatch(
-        updateCourse(
+        updateService(
           { info_list: infoData, name: name, video_path: VideoUrl },
-          course._id
+          service._id
         )
       )
     }
   }
 
   useEffect(() => {
-    if (course.name) {
+    if (service.name) {
       _setDefaultValuse()
     }
 
     if (users && users.length) {
       setStudentsList(_FilterUsers(users, 'StudentUser'))
-      setMentorsList(_FilterUsers(users, 'MentorUser'))
+      setInstructorsList(_FilterUsers(users, 'InstructorUser'))
     }
-  }, [course, users])
+  }, [service, users])
 
-  const _handleupdateCourse = () => {
+  const _handleupdateService = () => {
     // set array for students ids
     let StudentsIds = []
     if (students.length) {
@@ -245,26 +263,32 @@ export default function UpdateCourese({ match }) {
         StudentsIds.push(item._id)
       })
     }
+
+    // set array for instructor ids
+    let InstructorsIds = []
+    if (instructors.length) {
+      instructors.forEach((item) => {
+        InstructorsIds.push(item._id)
+      })
+    }
     //const infoData = { infoList:  }
 
     //console.log('StudentsIds',StudentsIds);
     var form_data = new FormData()
-    if (ImageUrl) form_data.append('img_path', ImageUrl)
-    form_data.append('_id', course._id)
+    if (ImageUrl) form_data.append('service_image_path', ImageUrl)
+    form_data.append('_id', service._id)
     form_data.append('name', name)
     form_data.append('description', description)
     form_data.append('category', category)
-    form_data.append('video_path', VideoUrl)
     form_data.append('seats', seats)
-    form_data.append('weeks', weeks)
-    form_data.append('mentor', Mentor._id)
     form_data.append('students', JSON.stringify(StudentsIds))
+    form_data.append('instructors', JSON.stringify(InstructorsIds))
     form_data.append('price', price)
     form_data.append('start_date', startDate)
-    form_data.append('published', course.published)
+    form_data.append('published', service.published)
     //form_data.append('des_List',infoData)
     //console.log(infoData);
-    dispatch(updateCourse(form_data, course._id))
+    dispatch(updateService(form_data, service._id))
   }
   return (
     <>
@@ -275,12 +299,7 @@ export default function UpdateCourese({ match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title">Edit Courses</div>
-              </div>
-              <div className="pull-right">
-                <a href="/mentor-courses-list" className="see-all">
-                  Add Content
-                </a>
+                <div className="title">Edit Service</div>
               </div>
             </div>
           </div>
@@ -289,7 +308,7 @@ export default function UpdateCourese({ match }) {
               <p className="text-danger bg-light p-2 ">{error}</p>
             ) : UpdateSuccess ? (
               <p className="text-success bg-light p-2 ">
-                Course Updated successfully
+                service Updated successfully
               </p>
             ) : null}
           </div>
@@ -299,22 +318,18 @@ export default function UpdateCourese({ match }) {
               <div className="left-column col-lg-8 col-md-12 col-sm-12">
                 <div className="inner-column">
                   <div className="sub-title pb-3">Basic Information</div>
-                  <div className="sub-title pb-3 text-danger">
-                    *Add Plan name(Silver or Golden or Diamond) as a first word
-                    of the course title (Ex. Golden MERN STACK){' '}
-                    <u> if the course is only for any subscription plan.</u>
-                  </div>
-                  {/* Edit Course Form */}
+
+                  {/* Edit service Form */}
                   <div className="edit-course-form">
                     <form method="post" action="index.html">
                       {/* Form Group */}
                       <div className="form-group">
-                        <label>Course Title</label>
+                        <label>service Title</label>
                         <input
                           type="text"
-                          name="course-title"
+                          name="service-title"
                           defaultValue
-                          placeholder="Course Title"
+                          placeholder="service Title"
                           value={name}
                           required
                           onChange={(e) => {
@@ -329,7 +344,7 @@ export default function UpdateCourese({ match }) {
                         <span className="support"></span>
                         <textarea
                           name="message"
-                          placeholder="Shortly describe this course"
+                          placeholder="Shortly describe this service"
                           defaultValue={description}
                           onChange={(e) => {
                             setDescription(e.target.value)
@@ -372,7 +387,7 @@ export default function UpdateCourese({ match }) {
                           {/* Left Column */}
                           <div className="left-column col-lg-12 col-md-12 col-sm-12">
                             <div className="inner-column">
-                              {/* Edit Course Form */}
+                              {/* Edit service Form */}
                               <div className="edit-course-form">
                                 <form>
                                   <div className="sub-title pb-3">
@@ -513,66 +528,16 @@ export default function UpdateCourese({ match }) {
               {/* Right Column */}
               <div className="right-column col-lg-4 col-md-12 col-sm-12">
                 <div className="inner-column">
-                  <div className="sub-title pb-3">Video & Image</div>
-                  {/* Video Box */}
-                  <div
-                    className="video-boxed"
-                    style={{
-                      backgroundImage: 'url(images/resource/video-image-3.jpg)'
-                    }}
-                  >
-                    <a
-                      onClick={() => {
-                        handleOpenVideo()
-                      }}
-                      className="lightbox-image intro-video-box"
-                    >
-                      <span className="fa fa-play">
-                        <i className="ripple" />
-                      </span>
-                    </a>
-                  </div>
-                  {/* video Modal */}
-                  <Modal
-                    show={showVideo}
-                    onHide={handleCloseVideo}
-                    size="lg"
-                    centered
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title>Watch Video</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className=" m-auto">
-                      {/* {(AddnewCourseErr|| AddError)&&<Message variant="danger">{AddnewCourseErr||AddError}</Message>} */}
-                      <ReactPlayer url={VideoUrl} controls></ReactPlayer>
-                    </Modal.Body>
-                    <Modal.Footer></Modal.Footer>
-                  </Modal>
-                  {/* End Video Box */}
-
                   {/* Url Box */}
                   <div className="url-boxed">
-                    <label>Video URL</label>
-                    <input
-                      type="url"
-                      name="videoUrl"
-                      value={VideoUrl}
-                      placeholder="https://www.youtube.com/dummy-video.com"
-                      required
-                      onChange={(e) => {
-                        setVideoUrl(e.target.value)
-                      }}
-                    />
-                    <span className="valid">Enter valid url address</span>
-
                     {/* Divider */}
                     <div className="border my-3"></div>
-                    {/* ***https://server.ccab.tech** */}
+                    {/* ***http://localhost:5001** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (
@@ -603,47 +568,77 @@ export default function UpdateCourese({ match }) {
                   <div className="sub-title pb-3">Options</div>
                   <div className="option-cource-box">
                     <div className="box-inner">
-                      <div className="form-group mb-2">
-                        <label> Mentor</label>
-                        {!MentorsList.length > 0 && (
-                          <p className="text-warning bg-light p-1">
-                            * There is no Mentor Users
+                      {/* ******************* */}
+                      <div className="form-group ">
+                        <label htmlFor="exampleDataList" className="form-label">
+                          Instructors
+                        </label>
+                        {/* error message */}
+                        {selectInstructorErr && (
+                          <p className="text-danger bg-light p-1">
+                            {selectInstructorErr}
                           </p>
                         )}
-                        {/* <span className="select-category">Select a category</span> */}
-                        <select
-                          className="custom-select-box px-2"
+                        <input
+                          className="form-control bg-light"
+                          list="datalistOptions1"
+                          id="exampleDataList1"
+                          placeholder="search instructor..."
                           onChange={(e) => {
-                            _handleSelectMentor(e.target.value.split(','))
+                            setSelectInstructorErr('')
+                            setSelectedInstructor(e.target.value)
                           }}
+                          value={selectedInstructor}
+                        />
+
+                        <button
+                          type="button"
+                          className="btn btn-success py-2 px-4 mt-2"
+                          onClick={_handleSelectInstructor}
                         >
-                          <option value="" disabled selected>
-                            Choose Mentor{' '}
-                          </option>
-                          {MentorsList.length > 0 &&
-                            MentorsList.map((mentor) => {
+                          add
+                        </button>
+
+                        <datalist id="datalistOptions1">
+                          {InstructorList.length > 0 &&
+                            InstructorList.map((instructor) => {
                               return (
-                                <option value={[mentor._id, mentor.name]}>
-                                  {mentor.name}
-                                  {mentor.user_type == 'AdminUser' &&
-                                    ' (Admin)'}
+                                <option
+                                  data={instructor._id}
+                                  value={instructor.name}
+                                  key={instructor._id}
+                                >
+                                  {instructor.email}
                                 </option>
                               )
                             })}
-                        </select>
-
-                        <div className="my-3">
-                          {Mentor.name ? (
-                            <span className="rounded-pill  px-2 py-1 m-2 bg-light">
-                              <i className="fas fa-plus-circle text-success"></i>{' '}
-                              {Mentor.name}
-                            </span>
-                          ) : (
-                            <p className="text-warning bg-light p-1">
-                              * Nothing Selected
-                            </p>
-                          )}
-                        </div>
+                        </datalist>
+                      </div>
+                      <label className="mt-2">
+                        Selected Instructors : {instructors.length}/
+                        {InstructorList.length}
+                      </label>
+                      <div className="my-3">
+                        {instructors.length > 0 ? (
+                          instructors.map((instructor) => {
+                            return (
+                              <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
+                                <a
+                                  onClick={() => {
+                                    _handleUnselectInstructor(instructor._id)
+                                  }}
+                                >
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                </a>{' '}
+                                {instructor.name}
+                              </span>
+                            )
+                          })
+                        ) : (
+                          <p className="text-warning bg-light p-1">
+                            * Nothing Selected
+                          </p>
+                        )}
                       </div>
 
                       {/* Divider */}
@@ -661,8 +656,8 @@ export default function UpdateCourese({ match }) {
                         )}
                         <input
                           className="form-control bg-light"
-                          list="datalistOptions"
-                          id="exampleDataList"
+                          list="datalistOptions2"
+                          id="exampleDataList2"
                           placeholder="search student..."
                           onChange={(e) => {
                             setSelectStudentErr('')
@@ -679,7 +674,7 @@ export default function UpdateCourese({ match }) {
                           add
                         </button>
 
-                        <datalist id="datalistOptions">
+                        <datalist id="datalistOptions2">
                           {StudentsList.length > 0 &&
                             StudentsList.map((student) => {
                               return (
@@ -726,7 +721,7 @@ export default function UpdateCourese({ match }) {
                       {/* ******************* */}
                       <div className="form-group">
                         <span className="price">price</span>
-                        <div className="total-price">Set Course Price :</div>
+                        <div className="total-price">Set service Price :</div>
                         <div className="item-quantity">
                           <input
                             className="quantity-spinner"
@@ -745,7 +740,7 @@ export default function UpdateCourese({ match }) {
                       {/* ******************* */}
                       <div className="form-group">
                         <span className="price">seats</span>
-                        <div className="total-price">Set Course seats :</div>
+                        <div className="total-price">Set service seats :</div>
                         <p>More than 99 seat, it will be unlimited</p>
                         <div className="item-quantity">
                           <input
@@ -760,34 +755,6 @@ export default function UpdateCourese({ match }) {
                           />
                         </div>
                       </div>
-
-                      <div className="form-group">
-                        <span className="price">weeks</span>
-                        <div className="total-price">Set Course weeks :</div>
-                        <div className="item-quantity">
-                          <input
-                            className="quantity-spinner"
-                            type="number"
-                            min={1}
-                            defaultValue={weeks}
-                            name="quantity"
-                            onChange={(e) => {
-                              setWeeks(e.target.value)
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-group">
-                        <span className="price">start date</span>
-                        <div className="total-price">Set Course starts :</div>
-                        <div className="item-quantity">
-                          <DatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                          ></DatePicker>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   {/* Button Box */}
@@ -797,7 +764,7 @@ export default function UpdateCourese({ match }) {
                       className="theme-btn btn-style-one"
                       style={{ zIndex: '0' }}
                     >
-                      <span className="txt" onClick={_handleupdateCourse}>
+                      <span className="txt" onClick={_handleupdateService}>
                         Save Changes
                       </span>
                     </button>
