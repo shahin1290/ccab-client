@@ -4987,7 +4987,7 @@ img {
 .program-section {
   position: relative;
   padding-top: 60px;
-  padding-bottom: 110px;
+  padding-bottom: 40px;
 }
 
 .program-section .image-column {
@@ -5417,7 +5417,7 @@ img {
 
 .pricing-section{
 	position:relative;
-	padding:70px 0px 80px;
+	padding:70px 0px 0px;
 }
 
 .pricing-section .inner-container{

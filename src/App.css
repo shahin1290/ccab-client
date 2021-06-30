@@ -29,10 +29,13 @@ body {
 .partnerImage {
   width: 50% !important;
 }
-@media (max-width: 767px) {
-  .partnerImage {
-    width: 30% !important;
-  }
+
+.partnerImage img {
+ max-width: 100% !important;
+}
+
+@media screen and (max-width: 767px) {
+
 }
 
 @media (max-width: 992px) {

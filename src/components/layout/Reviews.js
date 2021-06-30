@@ -26,7 +26,7 @@ const ReviewsContainer = styled(Element)`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding-top:70px ;
+  padding-top:30px ;
 `
 
 const StyledCarouselProvider = styled(CarouselProvider)`
@@ -146,7 +146,7 @@ const ReviewsSection = function (props) {
   return (
     <SectionContainer >
             <div className="title text-center pt-2">
-            Ahead of the pack in online education
+           Our Review
 
             </div>
             <hr className="block-seperator mt-4 mb-4" />
