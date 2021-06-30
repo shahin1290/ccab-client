@@ -35,7 +35,8 @@ export default function NewSession({ selectedAppointment, activeButton }) {
   /*******************/
 
   useEffect(() => {
-    dispatch(getAppointmentDetails(selectedAppointment))
+    activeButton === 'incoming' &&
+      dispatch(getAppointmentDetails(selectedAppointment))
     if (sessionSuccess || updateSuccess || deleteSuccess) {
       history.push('/reports')
     }
@@ -52,15 +53,21 @@ export default function NewSession({ selectedAppointment, activeButton }) {
 
   const [notes, setNotes] = useState('')
   const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(new Date())
+
+  const [endTime, setEndTime] = useState(new Date())
+  const [startTime, setStartTime] = useState(new Date())
 
   useEffect(() => {
     if (session.startDate) {
       setStartDate(new Date(session && session.startDate))
     }
 
+    if (session.startDate) {
+      setStartTime(new Date(session && session.startDate))
+    }
+
     if (session.endDate) {
-      setEndDate(new Date(session && session.endDate))
+      setEndTime(new Date(session && session.endDate))
     }
 
     if (session.notes) {
@@ -69,7 +76,7 @@ export default function NewSession({ selectedAppointment, activeButton }) {
   }, [session])
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <button className="p-3 " onClick={onClick} ref={ref}>
+    <button className="p-3 ml-5 font-weight-bold" onClick={onClick} ref={ref}>
       {value}
     </button>
   ))
@@ -78,16 +85,34 @@ export default function NewSession({ selectedAppointment, activeButton }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createSession({ startDate, endDate, notes, selectedAppointment }))
+    const combineStartDate = (startDate.getDate(), startTime)
+    const combineEndDate = (startDate.getDate(), endTime)
+
+    dispatch(
+      createSession({
+        startDate: combineStartDate,
+        endDate: combineEndDate,
+        notes,
+        selectedAppointment
+      })
+    )
   }
 
   //update form submit
   const updateHandler = (e) => {
     e.preventDefault()
 
+    const combineStartDate = (startDate.getDate(), startTime)
+    const combineEndDate = (startDate.getDate(), endTime)
+
     dispatch(
       updateSession(
-        { startDate, endDate, notes, selectedAppointment },
+        {
+          startDate: combineStartDate,
+          endDate: combineEndDate,
+          notes,
+          selectedAppointment
+        },
         session._id
       )
     )
@@ -98,8 +123,8 @@ export default function NewSession({ selectedAppointment, activeButton }) {
       {/* <!-- Edit Cource Section --> */}
       <div className="edit-cource-section">
         <div className="auto-container">
-          <Row className="mt-2 mb-4">
-            <Col md={1}>
+          <Row className="mt-2 mb-4 ">
+            <Col md={2} xs={12} className=" text-center-small-screen">
               <Image
                 width="80"
                 src="/images/resource/avatar.svg"
@@ -107,51 +132,64 @@ export default function NewSession({ selectedAppointment, activeButton }) {
               />
             </Col>
 
-            <Col md={6} className="my-auto title">
-              {appointment && appointment.student && appointment.student.name}
+            <Col md={10} className=" title text-center-small-screen">
+              {activeButton === 'incoming' &&
+                appointment &&
+                appointment.student &&
+                appointment.student.name}
+              {activeButton === 'upcoming' &&
+                session &&
+                session.student &&
+                session.student.name}
             </Col>
           </Row>
 
-          <Row className="mt-2 mb-4">
-            <Col md={1}>
+          <Row className="mt-2 mb-4 text-center-small-screen">
+            <Col md={2} >
               <i
-                class="far fa-calendar-alt"
-                style={{ color: '#ED9D2B', fontSize: '50px' }}
+                class="far fa-calendar-alt "
+                style={{ color: '#ED9D2B', fontSize: '70px' }}
               ></i>
             </Col>
-            <Col md={11}>
-              <div className="d-flex justify-content-between">
-                <div className="title">Start</div>
-                <div className="my-auto sub-text">
-                  <DatePicker
-                    className="border"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    timeInputLabel="Time:"
-                    dateFormat="MMMM d, yyyy h:mm aa"
-                    showTimeInput
-                    customInput={<ExampleCustomInput />}
-                  ></DatePicker>
-                </div>{' '}
+            <Col md={2} className="title">Start</Col>
+            <Col md={6} className="my-auto sub-text ">
+              <div className="d-flex justify-content-center">
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  customInput={<ExampleCustomInput />}
+                />
+
+                <DatePicker
+                  selected={startTime}
+                  onChange={(date) => setStartTime(date)}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={10}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  customInput={<ExampleCustomInput />}
+                />
               </div>
             </Col>
           </Row>
 
           <Row className="mt-2 mb-4">
-            <Col md={1}></Col>
-            <Col md={11}>
-              <div className="d-flex justify-content-between">
-                <div className="title">End</div>
-                <div className="my-auto">
+            <Col md={2}></Col>
+            <Col md={8}>
+              <div className="d-flex justify-content-between text-center-small-screen">
+                <div className="title ">End</div>
+                <div className=" mr-4 ">
                   <DatePicker
-                    className="border"
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    timeInputLabel="Time:"
-                    dateFormat="MMMM d, yyyy h:mm aa"
-                    showTimeInput
+                    selected={endTime}
+                    onChange={(date) => setEndTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={10}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
                     customInput={<ExampleCustomInput />}
-                  ></DatePicker>
+                  />
                 </div>{' '}
               </div>
             </Col>
@@ -173,7 +211,7 @@ export default function NewSession({ selectedAppointment, activeButton }) {
                 <div>
                   <div className="edit-course-form">
                     <form>
-                      <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                      <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center-small-screen">
                         <textarea
                           type="text"
                           value={notes}
@@ -183,7 +221,13 @@ export default function NewSession({ selectedAppointment, activeButton }) {
                         />
 
                         {activeButton === 'incoming' && (
-                          <Button variant="warning" onClick={submitHandler}>
+                          <Button
+                            variant="warning"
+                            onClick={submitHandler}
+                            size="md"
+                            className="w-25"
+                            style={{ margin: '0 auto' }}
+                          >
                             Book
                           </Button>
                         )}

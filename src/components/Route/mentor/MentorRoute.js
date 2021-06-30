@@ -13,29 +13,29 @@ const MentorRoute = ({ component: Component, ...rest }) => {
   let Token = userDetail.token
 
   useEffect(() => {
-    console.log('userDetail', userDetail)
-    console.log((Token && userDetail.user_type == 'StudentUser') || !Token)
+   console.log('userDetail',userDetail);
+    console.log((Token && userDetail.user_type =='StudentUser')||!Token );
   }, [userDetail])
 
   return (
     <>
-      <Header />
-      <Route
-        {...rest}
-        render={(props) => {
-          userDetail.user_type !== 'AdminUser' ||
-          userDetail.user_type !== 'MentorUser' ? (
-            <Redirect to="/login" />
-          ) : (
-            <div className=" container">
+      <Header/>
+    <Route
+      {...rest}
+      render={(props) =>
+       ( Token && userDetail.user_type =='StudentUser')||!Token? (
+          // <Redirect to="/login" />
+          <>
+          </>
+        ) : (
+          <div className=" container">
               {/* hide on mobile */}
 
               <Component {...props} />
             </div>
           )
-        }}
+        }
       />
-
       <Footer />
     </>
   )

@@ -51,7 +51,8 @@ export default function SessionList() {
   useEffect(() => {
     if (
       userDetail.user_type === 'InstructorUser' ||
-      userDetail.user_type === 'AdminUser'
+      userDetail.user_type === 'AdminUser' ||
+      userDetail.user_type === 'StudentUser'
     ) {
       dispatch(getSessions())
     } else {
@@ -74,9 +75,9 @@ export default function SessionList() {
     sessions && sessions.filter((session) => session.status !== 'Reported')
 
   return (
-    <section style={{ padding: '60px 0', backgroundColor: 'white' }}>
-      <div className="container ">
-        <Row className="mt-2 mx-auto">
+    <section style={{ padding: '100px 0 300px 0', backgroundColor: 'white' }}>
+      <div className="auto-container ">
+        <Row className="mt-2 d-flex justify-content-center" >
           <Col
             md={2}
             xs={5}
@@ -88,10 +89,9 @@ export default function SessionList() {
               activeButton === 'incoming' ? 'bg-warning text-white' : ''
             }`}
           >
-            <div className="d-flex flex-column text-center content">
+            <div className="d-flex flex-column text-center content ">
               <i class="far fa-calendar-plus hide-on-small-screen text-center"></i>
-
-              <div className="sub-text font-weight-bold">Incoming </div>
+              <div className="sub-text font-weight-bold ">Incoming </div>
             </div>
           </Col>
           <Col
@@ -108,34 +108,38 @@ export default function SessionList() {
               <div className="sub-text font-weight-bold">Upcoming </div>
             </div>
           </Col>
-          <Col
-            md={2}
-            xs={5}
-            onClick={() => setActiveButton('notReported')}
-            className={`reports-nav-button mr-3 mb-1 ${
-              activeButton === 'notReported' ? 'bg-warning text-white' : ''
-            }`}
-          >
-            <div className="d-flex flex-column text-center content">
-              <i class="fas fa-chart-bar hide-on-small-screen"></i>
+          {userDetail.user_type === 'InstructorUser' && (
+            <>
+              <Col
+                md={2}
+                xs={5}
+                onClick={() => setActiveButton('notReported')}
+                className={`reports-nav-button mr-3 mb-1 ${
+                  activeButton === 'notReported' ? 'bg-warning text-white' : ''
+                }`}
+              >
+                <div className="d-flex flex-column text-center content">
+                  <i class="fas fa-chart-bar hide-on-small-screen"></i>
 
-              <div className="sub-text font-weight-bold">Not Reported </div>
-            </div>
-          </Col>
-          <Col
-            md={2}
-            xs={5}
-            onClick={() => setActiveButton('reported')}
-            className={`reports-nav-button mr-3 mb-1 ${
-              activeButton === 'reported' ? 'bg-warning text-white' : ''
-            }`}
-          >
-            <div className="d-flex flex-column text-center content">
-              <i class="far fa-calendar-check hide-on-small-screen"></i>
+                  <div className="sub-text font-weight-bold">Not Reported </div>
+                </div>
+              </Col>
+              <Col
+                md={2}
+                xs={5}
+                onClick={() => setActiveButton('reported')}
+                className={`reports-nav-button mr-3 mb-1 ${
+                  activeButton === 'reported' ? 'bg-warning text-white' : ''
+                }`}
+              >
+                <div className="d-flex flex-column text-center content">
+                  <i class="far fa-calendar-check hide-on-small-screen"></i>
 
-              <div className="sub-text font-weight-bold">Reported </div>
-            </div>
-          </Col>
+                  <div className="sub-text font-weight-bold">Reported </div>
+                </div>
+              </Col>
+            </>
+          )}
         </Row>
 
         <div className="py-2 sub-title mb-5">
@@ -162,27 +166,35 @@ export default function SessionList() {
             ) : sessionError ? (
               <Message>{sessionError}</Message>
             ) : (
-              sessions &&
-              sessions.map((req) => (
-                <a
+              notReportedSessions() &&
+              notReportedSessions().length > 0 &&
+              notReportedSessions().map((req) => (
+                <div
                   key={req._id}
                   onClick={() => {
                     setSelectedAppointment(req._id)
                     setShowModal({ visible: true })
                   }}
+                  style={{
+                    pointerEvents:
+                      userDetail.user_type !== 'InstructorUser'
+                        ? 'none'
+                        : 'auto'
+                  }}
+                  className="text-center-small-screen upcoming-row-content"
                 >
-                  <div className="sub-title mt-5 mb-2">
+                  <div className="sub-text font-weight-bold">
                     {longEnUSFormatter.format(new Date(req.startDate))}{' '}
                   </div>
-                  <Row className="pl-5 pr-5">
-                    <Col>
+                  <Row className="pl-4 pr-5 mt-2">
+                    <Col md={2}>
                       {' '}
                       <Image
                         width="50"
                         src="/images/resource/avatar.svg"
                         roundedCircle
                       />
-                    </Col>{' '}
+                    </Col>
                     <Col className="my-auto sub-text">
                       {new Date(req.startDate).toLocaleTimeString(undefined, {
                         hour: '2-digit',
@@ -193,11 +205,76 @@ export default function SessionList() {
                         hour: '2-digit',
                         minute: '2-digit'
                       })}
+                    </Col>
+                    <Col md={2} className="my-auto sub-text">
+                      {req.service.name}
                     </Col>{' '}
-                    <Col className="my-auto sub-text">{req.service.name}</Col>{' '}
-                    <Col className="my-auto sub-text">{req.student.name}</Col>
+                    <Col md={2} className="my-auto sub-text">
+                      {req.student.name}
+                    </Col>
                   </Row>
-                </a>
+                </div>
+              ))
+            )}
+
+            {sessionLoading ? (
+              <Loader />
+            ) : sessionError ? (
+              <Message>{sessionError}</Message>
+            ) : (
+              reportedSessions() &&
+              reportedSessions().length > 0 &&
+              reportedSessions().map((req) => (
+                <div
+                  key={req._id}
+                  onClick={() => {
+                    setSelectedAppointment(req._id)
+                    setShowModal({ visible: true })
+                  }}
+                  style={{
+                    pointerEvents:
+                      userDetail.user_type !== 'InstructorUser'
+                        ? 'none'
+                        : 'auto'
+                  }}
+                  className="text-center-small-screen upcoming-row-content"
+                >
+                  <div className="sub-text font-weight-bold">
+                    {longEnUSFormatter.format(new Date(req.startDate))}{' '}
+                  </div>
+                  <Row className="pl-4 pr-5 mt-2">
+                    <Col md={2}>
+                      {' '}
+                      <Image
+                        width="50"
+                        src="/images/resource/avatar.svg"
+                        roundedCircle
+                      />
+                    </Col>
+                    <Col className="my-auto sub-text">
+                      {new Date(req.startDate).toLocaleTimeString(undefined, {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}{' '}
+                      -{' '}
+                      {new Date(req.endDate).toLocaleTimeString(undefined, {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </Col>
+                    <Col md={2} className="my-auto sub-text">
+                      {req.service.name}
+                    </Col>{' '}
+                    <Col md={2} className="my-auto sub-text">
+                      {req.student.name}
+                    </Col>
+                    {userDetail.user_type === 'StudentUser' && (
+                      <Col md={2} className="my-auto sub-text">
+                        <Button variant="success">Finished</Button>
+                      </Col>
+                    )}
+                  </Row>
+                </div>
               ))
             )}
           </>
@@ -212,7 +289,7 @@ export default function SessionList() {
                 <th>Service</th>
                 <th>Registered At</th>
                 <th>Sessions Left</th>
-                <th>Action</th>
+                {userDetail.user_type === 'InstructorUser' && <th>Action</th>}
               </tr>
             </thead>
             <tbody>
@@ -224,24 +301,33 @@ export default function SessionList() {
                     <td>{appointment.service.name}</td>
                     <td>{getDate(appointment.createdAt)}</td>
                     <td>{appointment.sessionNumber}</td>
-                    <td>
-                      <Container>
-                        <Row>
-                          <div className="buttons-box pull-right">
-                            <a
-                              disabled={appointment.sessionNumber === 0}
-                              variant="warning"
-                              onClick={() => {
-                                setShowModal({ visible: true })
-                                setSelectedAppointment(appointment._id)
-                              }}
-                            >
-                              <span className="sub-title text-warning"><i class="fas fa-plus-square"></i> New Session</span>
-                            </a>
-                          </div>
-                        </Row>
-                      </Container>
-                    </td>
+                    {userDetail.user_type === 'InstructorUser' && (
+                      <td>
+                        <Container>
+                          <Row>
+                            <div className="buttons-box pull-right">
+                              <button
+                                disabled={appointment.sessionNumber === 0}
+                                variant="warning"
+                                onClick={() => {
+                                  setShowModal({ visible: true })
+                                  setSelectedAppointment(appointment._id)
+                                }}
+                                className={`${
+                                  appointment.sessionNumber === 0
+                                    ? 'isDisabled'
+                                    : ''
+                                }`}
+                              >
+                                <span className="sub-title text-warning">
+                                  <i class="fas fa-plus-square"></i> New Session
+                                </span>
+                              </button>
+                            </div>
+                          </Row>
+                        </Container>
+                      </td>
+                    )}
                   </tr>
                 ))
               ) : (
@@ -261,18 +347,12 @@ export default function SessionList() {
               <Message>{sessionError}</Message>
             ) : notReportedSessions() && notReportedSessions().length > 0 ? (
               notReportedSessions().map((req) => (
-                <a
-                  key={req._id}
-                  onClick={() => {
-                    setSelectedAppointment(req._id)
-                    setShowModal({ visible: true })
-                  }}
-                >
+                <div key={req._id} className="text-center-small-screen">
                   <div className="sub-title mt-5 mb-2">
                     {longEnUSFormatter.format(new Date(req.startDate))}{' '}
                   </div>
                   <Row className="pl-5 pr-5">
-                    <Col>
+                    <Col md={2}>
                       {' '}
                       <Image
                         width="50"
@@ -280,7 +360,7 @@ export default function SessionList() {
                         roundedCircle
                       />
                     </Col>{' '}
-                    <Col className="my-auto sub-text">
+                    <Col md={3} className="my-auto sub-text">
                       {new Date(req.startDate).toLocaleTimeString(undefined, {
                         hour: '2-digit',
                         minute: '2-digit'
@@ -291,11 +371,16 @@ export default function SessionList() {
                         minute: '2-digit'
                       })}
                     </Col>{' '}
-                    <Col className="my-auto sub-text">{req.service.name}</Col>{' '}
-                    <Col className="my-auto sub-text">{req.student.name}</Col>
-                    <Col className="my-auto sub-title text-warning">
+                    <Col md={2} className="my-auto sub-text">
+                      {req.service.name}
+                    </Col>{' '}
+                    <Col md={2} className="my-auto sub-text">
+                      {req.student.name}
+                    </Col>
+                    <Col md={2} className="my-auto sub-title text-warning">
                       <a
                         onClick={() => {
+                          setSelectedAppointment(req._id)
                           setShowModal({ visible: true })
                         }}
                       >
@@ -303,7 +388,7 @@ export default function SessionList() {
                       </a>
                     </Col>
                   </Row>
-                </a>
+                </div>
               ))
             ) : (
               <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
@@ -320,14 +405,14 @@ export default function SessionList() {
             ) : sessionError ? (
               <Message>{sessionError}</Message>
             ) : (
-              reportedSessions() &&
+              reportedSessions() && reportedSessions().length > 0 ?
               reportedSessions().map((req) => (
-                <div>
+                <div key={req._id} className="text-center-small-screen">
                   <div className="sub-title mt-5 mb-2">
                     {longEnUSFormatter.format(new Date(req.startDate))}{' '}
                   </div>
                   <Row className="pl-5 pr-5">
-                    <Col>
+                    <Col md={2}>
                       {' '}
                       <Image
                         width="50"
@@ -335,7 +420,7 @@ export default function SessionList() {
                         roundedCircle
                       />
                     </Col>{' '}
-                    <Col className="my-auto sub-text">
+                    <Col md={2} className="my-auto sub-text">
                       {new Date(req.startDate).toLocaleTimeString(undefined, {
                         hour: '2-digit',
                         minute: '2-digit'
@@ -346,11 +431,19 @@ export default function SessionList() {
                         minute: '2-digit'
                       })}
                     </Col>{' '}
-                    <Col className="my-auto sub-text">{req.service.name}</Col>{' '}
-                    <Col className="my-auto sub-text">{req.student.name}</Col>
+                    <Col md={2} className="my-auto sub-text">
+                      {req.service.name}
+                    </Col>{' '}
+                    <Col md={2} className="my-auto sub-text">
+                      {req.student.name}
+                    </Col>
                   </Row>
                 </div>
-              ))
+              )): (
+                <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                  Nothing being reported yet !
+                </p>
+              )
             )}
           </>
         )}

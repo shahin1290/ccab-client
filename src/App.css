@@ -585,7 +585,7 @@ input:checked + .slider:before {
   position: relative;
   border-radius: 10px;
   transition: all 0.2s ease-out;
-  height: 12vh;
+  height: 120px;
 }
 
 .reports-nav-button:hover {
@@ -599,4 +599,16 @@ input:checked + .slider:before {
   top: 10%;
   left: 25%;
   font-size: 3vw;
+}
+
+.upcoming-row-content {
+  background-color: #ececec;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  padding: 0 30px 30px 30px;
+}
+
+.upcoming-row-content:hover {
+  cursor: pointer;
+  background-color: #F5FBFF;
 }

@@ -10,25 +10,24 @@ const InstructorRoute = ({ component: Component, ...rest }) => {
   let Token = userDetail.token
 
   return (
-    <Route
-      {...rest}
-      render={(props) =>
-        (Token && userDetail.user_type !== 'InstructorUser') || !Token ? (
-          <Redirect to="/login" />
-        ) : (
-          <>
-            <Header />
-
-            <div className=" page-wrapper">
+    <>
+      <Header />
+      <Route
+        {...rest}
+        render={(props) =>
+          (Token && userDetail.user_type === 'MentorUser') || !Token ? (
+            <Redirect to="/login" />
+          ) : (
+            <div className=" container">
               {/* hide on mobile */}
 
               <Component {...props} />
             </div>
-            <Footer />
-          </>
-        )
-      }
-    />
+          )
+        }
+      />
+      <Footer />
+    </>
   )
 }
 
