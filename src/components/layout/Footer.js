@@ -33,7 +33,7 @@ export default function Footer() {
 
                       <div className="social-box">
                         <a
-                          href="https://www.facebook.com/CodifyCollege"
+                          href="https://www.facebook.com/CFCollege"
                           className="fa fa-facebook"
                         />
                         <a
@@ -41,7 +41,7 @@ export default function Footer() {
                           className="fa fa-instagram"
                         />
                         <a
-                          href="https://www.twitter.com/CodifyCollege"
+                          href="https://www.twitter.com/CFCollege"
                           className="fa fa-twitter"
                         />
                         <a
@@ -96,7 +96,7 @@ export default function Footer() {
           {/* Footer Bottom */}
           <div className="footer-bottom text-center">
             <div className="copyright">
-              Copyright © 2021 cc Codify College AB
+              Copyright © 2021 cc CF College AB
             </div>
           </div>
         </div>

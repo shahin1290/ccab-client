@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-import Logo from './../../assets/images/whiteLogo.jpg'
+import Logo from './../../assets/images/whiteLogo.png'
 import CountUp from 'react-countup'
 
 const WebDevelopmentMarket = () => {
