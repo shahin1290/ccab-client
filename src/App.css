@@ -31,11 +31,10 @@ body {
 }
 
 .partnerImage img {
- max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 @media screen and (max-width: 767px) {
-
 }
 
 @media (max-width: 992px) {
@@ -578,9 +577,9 @@ input:checked + .slider:before {
 
 .isDisabled {
   color: currentColor;
-  cursor: not-allowed;
   opacity: 0.5;
   text-decoration: none;
+  pointer-events: none;
 }
 
 .reports-nav-button {
@@ -613,5 +612,5 @@ input:checked + .slider:before {
 
 .upcoming-row-content:hover {
   cursor: pointer;
-  background-color: #F5FBFF;
+  background-color: #f5fbff;
 }

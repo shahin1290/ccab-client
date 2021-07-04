@@ -223,13 +223,13 @@ export default function Header() {
             </>
           ) : userDetail.user_type === 'StudentUser' ? (
             <StudentHeaderContent logoutHandler={logoutHandler} />
-          ) : 
-            userDetail.user_type === 'AdminUser' ? (
-              <AdminHeader logoutHandler={logoutHandler} />
-            ):  
-              userDetail.user_type === 'InstructorUser' && (
-                <InstructorHeaderContent logoutHandler={logoutHandler} />
-              )}
+          ) : userDetail.user_type === 'AdminUser' ? (
+            <AdminHeader logoutHandler={logoutHandler} />
+          ) : (
+            userDetail.user_type === 'InstructorUser' && (
+              <InstructorHeaderContent logoutHandler={logoutHandler} />
+            )
+          )}
 
           <Nav>
             {!userDetail.token ? (
@@ -250,7 +250,7 @@ export default function Header() {
                         <img
                           src={
                             user.avatar
-                              ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                              ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                               : '/images/resource/avatar.svg'
                           }
                           alt="avatar"

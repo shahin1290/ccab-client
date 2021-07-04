@@ -63,11 +63,10 @@ const CheckoutForm = ({ match, history }) => {
 
   const appointment = useSelector((state) => state.appointmentCreate)
 
-  console.log(appointment)
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
-  
+
   const {
     loading: requestLoading,
     success: requestSuccess,
@@ -226,7 +225,7 @@ const CheckoutForm = ({ match, history }) => {
       }
 
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+        `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: currency.data.currency,

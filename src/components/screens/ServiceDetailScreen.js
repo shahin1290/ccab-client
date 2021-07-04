@@ -88,7 +88,7 @@ export default function ServiceDetailScreen({ match }) {
   }, [])
 
   useEffect(() => {
-    if (service.name) {
+    if (service.name && service.instructors.length) {
       setSelectedInstructor(service.instructors[0]._id)
     }
   }, [service])
@@ -195,18 +195,13 @@ export default function ServiceDetailScreen({ match }) {
                                 <div className="course-overview">
                                   <div className="inner-box">
                                     <h4>About the service</h4>
-                                    <p>{service.description}</p>
+                                    <p className="sub-text">
+                                      {service.description}
+                                    </p>
 
                                     <ul className="student-list">
                                       <li className="text-dark bg-warning p-2 rounded ">
-                                        {service.seats < 99
-                                          ? service.seats -
-                                            service.students.length
-                                          : 'unlimited'}{' '}
-                                        Seats available
-                                      </li>
-                                      <li className="text-dark bg-success p-2 rounded ">
-                                        {service.weeks * 5} lectures{' '}
+                                        {service.instructors.length} Instructors
                                       </li>
                                     </ul>
                                     {service.info_list.length ? (
@@ -217,7 +212,10 @@ export default function ServiceDetailScreen({ match }) {
                                             <ul className="review-list">
                                               {item.items.map((itemList) => {
                                                 return (
-                                                  <li key={itemList.content}>
+                                                  <li
+                                                    className="sub-text"
+                                                    key={itemList.content}
+                                                  >
                                                     {itemList.content}
                                                   </li>
                                                 )
@@ -524,7 +522,7 @@ export default function ServiceDetailScreen({ match }) {
                                 </div>
                               </div>
                             </div>
-                            <a
+                            <button
                               onClick={() =>
                                 localStorage.setItem(
                                   'appointment',
@@ -545,7 +543,7 @@ export default function ServiceDetailScreen({ match }) {
                               <span className="txt">
                                 Book now <i className="fa fa-angle-right"></i>
                               </span>
-                            </a>
+                            </button>
                             <div
                               style={{
                                 margin: '10px auto 0 auto',

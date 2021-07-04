@@ -171,7 +171,7 @@ export default function CourseGridScreen({ match }) {
                           </div>
                         </div>
                         <div className="row clearfix">
-                          {categoryCourses(category).length >0 ? (
+                          {categoryCourses(category).length > 0 ? (
                             categoryCourses(category).map((course) => {
                               return (
                                 <div
@@ -183,7 +183,7 @@ export default function CourseGridScreen({ match }) {
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            'https://server.ccab.tech/uploads/Bootcamp/' +
+                                            'http://localhost:5001/uploads/Bootcamp/' +
                                             course.img_path
                                           }
                                           alt=""
@@ -334,7 +334,7 @@ export default function CourseGridScreen({ match }) {
                         <Link to="/course/1/details">
                           <img
                             src={
-                              'https://server.ccab.tech/uploads/Bootcamp/' +
+                              'http://localhost:5001/uploads/Bootcamp/' +
                               filterSubscriptionCourse(courseList)[0].img_path
                             }
                             alt=""
@@ -343,7 +343,10 @@ export default function CourseGridScreen({ match }) {
                       </div>
                       <div className="lower-content">
                         <div>
-                          <Link className="sub-title" to="/course/1/details">
+                          <Link
+                            className="sub-title"
+                            to={`/courses/${courseList[0]._id}`}
+                          >
                             {filterSubscriptionCourse(courseList)[0].name}
                           </Link>
                         </div>

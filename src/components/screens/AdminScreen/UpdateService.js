@@ -6,12 +6,15 @@ import {
 } from '../../../redux/actions/serviceAction'
 import { getUsers } from '../../../redux/actions/userAction'
 
-import { Card, Accordion } from 'react-bootstrap'
+import { Card, Accordion, Button } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid'
 import { createBrowserHistory } from 'history'
+import Rodal from 'rodal'
+import AddStudentToService from './AddStudentToService'
 
 export default function UpdateCourese({ match }) {
   const history = createBrowserHistory({ forceRefresh: true })
+  const [showModal, setShowModal] = useState({ visible: false })
 
   const dispatch = useDispatch()
 
@@ -231,7 +234,7 @@ export default function UpdateCourese({ match }) {
     e.preventDefault()
 
     let infoData = []
-    if (titleWithAnswer.length ) {
+    if (titleWithAnswer.length) {
       titleWithAnswer.forEach((item) => {
         infoData.push(item)
       })
@@ -302,6 +305,29 @@ export default function UpdateCourese({ match }) {
                 <div className="title">Edit Service</div>
               </div>
             </div>
+          </div>
+
+          <div className="buttons-box pull-right">
+            <Button
+              variant="danger"
+              onClick={() => {
+                setShowModal({ visible: true })
+              }}
+            >
+              <span className="sub-title text-white">
+                <i class="fas fa-plus-square"></i> Add Student
+              </span>
+            </Button>
+          </div>
+          <div className="py-2 sub-title mb-5">
+            <Rodal
+              animation="zoom"
+              visible={showModal.visible}
+              onClose={() => setShowModal({ visible: false })}
+              width={900}
+            >
+              <AddStudentToService />
+            </Rodal>
           </div>
           <div>
             {error ? (
@@ -730,27 +756,6 @@ export default function UpdateCourese({ match }) {
                             name="quantity"
                             onChange={(e) => {
                               setPrice(e.target.value)
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Divider */}
-                      <div className="border my-3"></div>
-                      {/* ******************* */}
-                      <div className="form-group">
-                        <span className="price">seats</span>
-                        <div className="total-price">Set service seats :</div>
-                        <p>More than 99 seat, it will be unlimited</p>
-                        <div className="item-quantity">
-                          <input
-                            className="quantity-spinner"
-                            type="number"
-                            min="0"
-                            defaultValue={seats}
-                            name="quantity"
-                            onChange={(e) => {
-                              setSeats(e.target.value)
                             }}
                           />
                         </div>

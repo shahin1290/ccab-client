@@ -136,7 +136,7 @@ export default function ProfileScreen() {
                     <img
                       src={
                         user.avatar
-                          ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                          ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                           : '/images/resource/avatar.svg'
                       }
                       alt="avatar"
@@ -155,7 +155,9 @@ export default function ProfileScreen() {
                           <div className="sub-title">
                             <CountUp
                               start={-2}
-                              end={filterCourseList() && filterCourseList().length}
+                              end={
+                                filterCourseList() && filterCourseList().length
+                              }
                               duration={2.75}
                               separator=" "
                               decimal=","
@@ -262,7 +264,7 @@ export default function ProfileScreen() {
                                 <div className="image">
                                   <img
                                     src={
-                                      'https://server.ccab.tech/uploads/Bootcamp/' +
+                                      'http://localhost:5001/uploads/Bootcamp/' +
                                       course.img_path
                                     }
                                     alt="bootcamp"
