@@ -86,7 +86,7 @@ const CheckoutForm = ({ match, history }) => {
   const [city, setCity] = useState('')
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
-  const [AmountOfWeeks , setAmountOfWeeks ] = useState(4)
+  const [AmountOfWeeks , setAmountOfWeeks ] = useState(plan.period=='weekly'?4:2)
   const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const {

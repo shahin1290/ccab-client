@@ -223,14 +223,14 @@ export default function CourseDetailScreen({ match }) {
                               ')'
                           }}
                         >
-                          <a
+                          {/* <a
                             className="lightbox-image intro-video-box"
                             onClick={() => setOpen(true)}
                           >
                             <span className="fa fa-play">
                               <i className="ripple"></i>
                             </span>
-                          </a>
+                          </a> */}
 
                           <ModalVideo
                             channel="youtube"
@@ -239,7 +239,7 @@ export default function CourseDetailScreen({ match }) {
                             videoId={getVideoID(course.video_path)}
                             onClose={() => setOpen(false)}
                           />
-                          <h4>Preview this course</h4>
+                          <h4 style={{visibility:'hidden'}}>Preview this course</h4>
                         </div>
 
                         {/* End Video Box */}
@@ -258,7 +258,9 @@ export default function CourseDetailScreen({ match }) {
                           </a>
                         ) : (
                           <>
+                               
                             <div className="price mb-3">
+                            <p className="txt" style={{color:'#ff5773',fontSize:'90% !important'}}>Start From </p>
                               {currencySuccess &&
                                 (course.price > 0
                                   ? `${getPriceFormat(
@@ -273,7 +275,7 @@ export default function CourseDetailScreen({ match }) {
                                 !userDetail.token
                                   ? '/login'
                                   : course.price > 0
-                                  ? '/checkout/' + course._id
+                                  ? '/pricing-plans'
                                   : '/course-content/' + course._id
                               }
                               className="theme-btn btn-style-three"
