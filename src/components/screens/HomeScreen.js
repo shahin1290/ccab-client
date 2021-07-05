@@ -100,7 +100,9 @@ export default function HomeScreen({ match }) {
                   <h2 className="text-center-small-screen">learn to code, <br/>With a New digital life
 </h2>
                   <div className="text header-text text-center-small-screen">
-                  Start your new Work with our weekly remotely , Tech programs in Web Development.
+                  Start your new Work with our weekly remotely<br/> Tech programs in Web Development.
+                  <br/>
+                  We have a new course every month.
                   </div>
                 <div className="d-flex jutify-content-center " >
                                     <a
@@ -303,9 +305,9 @@ export default function HomeScreen({ match }) {
         {/* End Achievement Section */}
 
         {/* Reviews Section */}
-        <div style={{width :"100% ;"}} className="overflow-hidden py-2">
+        {/* <div style={{width :"100% ;"}} className="overflow-hidden py-2">
            <Reviews/>
-        </div>
+        </div> */}
        
         {/* End of Reviews Section */}
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Message from '../layout/Message'
 import axios from 'axios'
-import logo from './../../assets/images/whiteLogo.jpg'
+import logo from './../../assets/images/whiteLogo.png'
 
 const ContactForm = () => {
   const [firstName, setFirstName] = useState('')

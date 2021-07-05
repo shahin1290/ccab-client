@@ -215,6 +215,11 @@ pre {
   background-color: #e84d1b;
   margin: 0 auto;
 }
+.price .txt{
+  font-size:90% !important;
+  margin: 0px !important;
+}
+
 
 .star-ratings-sprite {
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')

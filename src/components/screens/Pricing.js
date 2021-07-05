@@ -21,7 +21,7 @@ export default function Pricing() {
   }, [])
 
   return (
-    <div>
+    <div id="pricing">
       {/* Pricing Section */}
       <section className="pricing-section">
         <div className="auto-container">
@@ -29,7 +29,7 @@ export default function Pricing() {
           <div className="sec-title style-two centered">
             <h2>Plans &amp; Pricing</h2>
             <div className="text">
-              There are many variations of passages of Lorem Ipsum available,
+            Register now and start coding from today. No experience needed !
             </div>
           </div>
 
@@ -77,6 +77,8 @@ export default function Pricing() {
                           </span>
                         </div>
                         <h3>{plan.name}</h3>
+                       
+                        <p><del className="price" style={{fontSize : "120%"}}>{(sekToUsd&&(Math.round(sekToUsd[0]*(Number(plan.price)+200))))}  {sekToUsd&&sekToUsd[1]+' '}</del></p>
                         <div className="price">
                           {(sekToUsd&&(Math.round(sekToUsd[0]*plan.price)))} {sekToUsd&&sekToUsd[1]+' '}
                           <span>

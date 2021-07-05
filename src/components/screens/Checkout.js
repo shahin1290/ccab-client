@@ -85,7 +85,7 @@ const CheckoutForm = ({ match, history }) => {
   const [city, setCity] = useState('')
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
-
+  const [AmountOfWeeks , setAmountOfWeeks ] = useState(plan.period=='weekly'?4:2)
   const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const {
@@ -439,6 +439,56 @@ const CheckoutForm = ({ match, history }) => {
                         <div className="order-box bg-white p-2">
                           {subscription && (
                             <ul>
+                                <li className="clearfix mb-3">
+                                Total Of Weeks:
+                                <select
+                                      className="custom-select-box px-2"
+                                      onChange={(e) => {
+                                       setAmountOfWeeks(Number(e.target.value))
+                                      }}
+                                    >{plan.period=='weekly'?
+                                    <>
+                                    <option value="4"  selected>
+                                        4 weeks
+                                      </option>
+                                      <option value="5"  >
+                                        5 weeks
+                                      </option>
+                                      <option value="6"  >
+                                     6 weeks
+                                      </option>
+                                      <option value="7"  >
+                                     7 weeks
+                                      </option>
+                                      <option value="8"  >
+                                     8 weeks
+                                      </option>
+                                      </>
+                                  :
+                                  <>
+                                  <option value="2"  selected>
+                                  2 Months
+                                </option>
+                                <option value="3"  >
+                                3 Months
+                                </option>
+                                <option value="4"  >
+                               4 Months
+                                </option>
+                                <option value="5"  >
+                                5 Months
+                                </option>
+                                <option value="6"  >
+                                6 Months
+                                </option>
+                                  
+                                  </>
+                                  
+                                  }
+                                    
+
+                                    </select>
+                              </li>
                               <li className="clearfix mb-3">
                                 Subscription Type:
                                 <span className="pull-right">{plan.name}</span>
@@ -460,7 +510,8 @@ const CheckoutForm = ({ match, history }) => {
                                       `${Math.round(
                                         plan.price *
                                           sekToUsd *
-                                          currency.data.amount
+                                          currency.data.amount*
+                                          AmountOfWeeks
                                       )}  ${currency.data.currency}`}
                                   </strong>
                                 </span>

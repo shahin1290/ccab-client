@@ -6,8 +6,9 @@ import { getServiceList } from '../../redux/actions/serviceAction'
 // include styles
 import 'rodal/lib/rodal.css'
 import { Nav, Dropdown, NavDropdown, Navbar } from 'react-bootstrap'
+import {Link} from 'react-scroll';
 // imgaes
-import Logo from './../../assets/images/whiteLogo.jpg'
+import Logo from './../../assets/images/whiteLogo.png'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, isValid } from '../../redux/actions/userAction'
@@ -63,7 +64,7 @@ export default function Header() {
       >
         <Navbar.Brand href="/">
           <img className="ml-5" src={Logo} title="Bootcamp" width="40px" />
-          <span className="ml-2 text-dark ">Codify College </span>
+          <span className="ml-2 text-dark ">CF College </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -90,7 +91,7 @@ export default function Header() {
                   ))}
               </Dropdown.Menu>
             </div>
-            <div className="text-dark hide-on-big-screen pt-4">
+            {/* <div className="text-dark hide-on-big-screen pt-4">
               Services
               <Dropdown.Menu show className="border-0">
                 <NavDropdown.Item href="/course-grid">
@@ -106,13 +107,13 @@ export default function Header() {
                     </NavDropdown.Item>
                   ))}
               </Dropdown.Menu>
-            </div>
+            </div> */}
             <div className="collapse navbar-collapse mr-3">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                  <a href="#" className="text-dark pb-5 pt-5">
+                  <Link to="pricing" spy={true} smooth={true} className="text-dark pb-5 pt-5">
                     Courses
-                  </a>
+                  </Link>
                   <div
                     className="dropdown-menu  mt-4 ml-5"
                     aria-labelledby="navbarDropdownMenuLink"
@@ -137,7 +138,7 @@ export default function Header() {
                 </li>
               </ul>
             </div>
-            <div className="collapse navbar-collapse mr-3">
+            {/* <div className="collapse navbar-collapse mr-3">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown dropdown-slide dropdown-hover ">
                   <a href="#" className="text-dark pb-5 pt-5">
@@ -166,7 +167,7 @@ export default function Header() {
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             <Nav.Link className="text-dark" href="/jobs">
               Jobs

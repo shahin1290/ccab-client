@@ -1,5 +1,8 @@
  export const getPriceFormat = (price) => {
-    //console.log(`price in : ${price}`);
+    //console.log(`price in : ${price.toString().length}`);
+    if (price.toString().length >2 ){
+      console.log('price length : ',price.length);
+   
     let priceFormat = Math.floor(price / 1000)
     let mode = price%1000 
     // if the mode less than 3 digits 
@@ -14,5 +17,9 @@
     priceFormat += ' ' + mode
   //console.log(`price out: ${priceFormat}`);
     return priceFormat
+    }
+    else{
+      return price
+    }
   }
 

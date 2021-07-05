@@ -76,7 +76,7 @@ const OnlineEducationProspect = () => {
             </div>
             <hr className="block-seperator mt-4 mb-4" />
             <div className="sub-text text-center">
-            We make sure all our courses meet the highest standards, which is why we're the only university credit-rated coding bootcamp within Europe. Our education partners are listed below:
+            We make sure all our courses meet the highest standards. Our partners are listed below:
             </div>
             <div className="row clearfix my-5 d-flex ">
               <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">
