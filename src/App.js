@@ -29,6 +29,7 @@ import EditRequest from './components/screens/AdminScreen/EditRequest'
 import JobList from './components/screens/AdminScreen/JobList'
 import ManageServices from './components/screens/AdminScreen/ManageServices'
 import UpdateService from './components/screens/AdminScreen/UpdateService'
+import ServiceCategoryList from './components/screens/AdminScreen/ServiceCategoryList'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -139,7 +140,11 @@ function App() {
           component={JobList}
         ></AdminRoute>
 
-        
+        <AdminRoute
+          exact
+          path="/manage-service-category"
+          component={ServiceCategoryList}
+        ></AdminRoute>
 
         {/* Private Route for Mentor  */}
         <MentorRoute
@@ -232,7 +237,7 @@ function App() {
           path="/reports"
           component={ReportList}
         ></InstructorRoute>
-         <InstructorRoute
+        <InstructorRoute
           exact
           path="/instructor-new-session"
           component={NewSession}

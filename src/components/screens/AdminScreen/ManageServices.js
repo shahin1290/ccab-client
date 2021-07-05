@@ -10,7 +10,7 @@ import {
 import Message from '../../layout/Message'
 import Loader from '../../layout/Loader'
 import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap'
-import { Table, Col, Row, Modal, Button } from 'react-bootstrap'
+import { Table, Modal, Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 
 export default function MangeService({ match }) {
@@ -184,6 +184,15 @@ export default function MangeService({ match }) {
                     </Button>
                   </Modal.Footer>
                 </Modal>
+
+                {/* Manage Categories */}
+
+                <Link
+                  to="/manage-service-category"
+                  className="btn btn-danger bordered "
+                >
+                  Manage Categories
+                </Link>
               </div>
             </div>
           </div>

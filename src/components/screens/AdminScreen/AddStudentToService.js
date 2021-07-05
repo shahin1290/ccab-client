@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getUsers } from '../../../redux/actions/userAction'
-import { Table, Col, Row, Modal, Card, Accordion } from 'react-bootstrap'
 import { createBrowserHistory } from 'history'
 import { createAppointment } from '../../../redux/actions/appointmentAction'
 
