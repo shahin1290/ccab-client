@@ -189,7 +189,7 @@ export default function MangeService({ match }) {
 
                 <Link
                   to="/manage-service-category"
-                  className="btn btn-danger bordered "
+                  className="btn btn-info bordered ml-2"
                 >
                   Manage Categories
                 </Link>

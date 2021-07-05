@@ -164,7 +164,7 @@ export default function CourseGridScreen({ match }) {
                         <div className="options-view">
                           <div className="clearfix">
                             <div className="pull-left">
-                              <div className="title pt-5">
+                              <div className="title pt-5 text-capitalize">
                                 {category} Courses
                               </div>
                             </div>

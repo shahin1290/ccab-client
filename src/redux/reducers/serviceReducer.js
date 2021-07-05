@@ -17,7 +17,10 @@ import {
   SERVICE_ADD_FAIL,
   ADMIN_SERVICE_LIST_REQUEST,
   ADMIN_SERVICE_LIST_SUCCESS,
-  ADMIN_SERVICE_LIST_FAIL
+  ADMIN_SERVICE_LIST_FAIL,
+  SERVICE_INSTRUCTOR_UPDATE_REQUEST,
+  SERVICE_INSTRUCTOR_UPDATE_SUCCESS,
+  SERVICE_INSTRUCTOR_UPDATE_FAIL,
 } from '../constences/serviceConst'
 
 export const serviceListReducer = (state = { serviceList: [] }, action) => {
@@ -184,6 +187,30 @@ export const serviceUpdateReducer = (state = {}, action) => {
         error: null,
         success: false
       }
+    default:
+      return state
+  }
+}
+
+export const serviceInstructorUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SERVICE_INSTRUCTOR_UPDATE_REQUEST:
+      return {
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
+
+    case SERVICE_INSTRUCTOR_UPDATE_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        success: true
+      }
+    case SERVICE_INSTRUCTOR_UPDATE_FAIL:
+      return {
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+
     default:
       return state
   }

@@ -100,7 +100,7 @@ export default function Header() {
                   categoryArray.map((category) => (
                     <NavDropdown.Item
                       key={category}
-                      href={`/course-grid/${category}`}
+                      href={`/service-grid/${category}`}
                     >
                       {category}
                     </NavDropdown.Item>
@@ -156,7 +156,7 @@ export default function Header() {
                         <div key={category}>
                           <a
                             className="dropdown-item"
-                            href={`/course-grid/${category}`}
+                            href={`/service-grid/${category}`}
                           >
                             {category}
                           </a>

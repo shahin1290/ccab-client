@@ -5,12 +5,15 @@ import {
   updateService
 } from '../../../redux/actions/serviceAction'
 import { getUsers } from '../../../redux/actions/userAction'
+import { getServiceCategories } from '../../../redux/actions/serviceCategoryAction'
 
 import { Card, Accordion, Button } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid'
 import { createBrowserHistory } from 'history'
 import Rodal from 'rodal'
 import AddStudentToService from './AddStudentToService'
+import Loader from '../../layout/Loader'
+import Message from '../../layout/Message'
 
 export default function UpdateCourese({ match }) {
   const history = createBrowserHistory({ forceRefresh: true })
@@ -41,6 +44,13 @@ export default function UpdateCourese({ match }) {
     error: serviceDetailsError
   } = useSelector((state) => state.serviceDetails)
 
+  // get serviceCategories Reducer
+  const {
+    serviceCategories,
+    loading: categoryListLoading,
+    error: categoryListError
+  } = useSelector((state) => state.serviceCategoryList)
+
   /*******************/
 
   /********* State And Var ************/
@@ -65,9 +75,6 @@ export default function UpdateCourese({ match }) {
   const [selectedInstructor, setSelectedInstructor] = useState('')
   const [selectInstructorErr, setSelectInstructorErr] = useState('')
 
-  //video
-  const [showVideo, setShowVideo] = useState(false)
-
   // update err
   const [updateErr, setUpdateErr] = useState('')
   /*******************/
@@ -75,6 +82,8 @@ export default function UpdateCourese({ match }) {
   useEffect(() => {
     // call the getter ( service Details  and users list )
     dispatch(getServiceDetails(ID))
+    dispatch(getServiceCategories())
+
     dispatch(getUsers())
     if (UpdateSuccess) {
       history.push('/admin-services-list')
@@ -173,14 +182,6 @@ export default function UpdateCourese({ match }) {
   const _handleUnselectInstructor = (id) => {
     let newInstructors = instructors.filter((item) => item._id !== id)
     setInstructors(newInstructors)
-  }
-
-  // close video
-  const handleCloseVideo = () => {
-    setShowVideo(false)
-  }
-  const handleOpenVideo = () => {
-    setShowVideo(true)
   }
 
   /********************* ************/
@@ -390,397 +391,403 @@ export default function UpdateCourese({ match }) {
                             select an option
                           </option>
 
-                          <option>React </option>
+                          {categoryListLoading ? (
+                            <Loader />
+                          ) : categoryListError ? (
+                            <Message>{categoryListError}</Message>
+                          ) : serviceCategories ? (
+                            serviceCategories.map((req) => (
+                              <option key={req._id}>{req.name}</option>
+                            ))
+                          ) : (
+                            <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                              No serviceCatyegory Found!
+                            </p>
+                          )}
+                        </select>
+                      </div>
 
-                          <option>Node </option>
+                      <div className="my-3">
+                        <span className="rounded-pill  px-2 py-1 m-2 bg-light">
+                          <i className="fas fa-plus-circle text-success"></i>{' '}
+                          {category}
+                        </span>
+                      </div>
 
-                          <option>Front End Development </option>
-
-                            <option>Web Development </option>
-                          </select>
-                        </div>
-
-                        <div className="my-3">
-                          <span className="rounded-pill  px-2 py-1 m-2 bg-light">
-                            <i className="fas fa-plus-circle text-success"></i>{' '}
-                            {category}
-                          </span>
-                        </div>
-
-                        {/* Form Group */}
-                        <div className="inner-container">
-                          <div className="row clearfix">
-                            {/* Left Column */}
-                            <div className="left-column col-lg-12 col-md-12 col-sm-12">
-                              <div className="inner-column">
-                                {/* Edit service Form */}
-                                <div className="edit-course-form">
-                                  <form>
-                                    <div className="sub-title pb-3">
-                                      Add Describtion Info List
-                                    </div>
-                                    <div className="form-group">
-                                      <label>List Title</label>
-                                      <input
-                                        type="text"
-                                        placeholder="Title"
-                                        name="title"
-                                        value={title}
-                                        onChange={(e) => setTitle(e.target.value)}
-                                      />
-                                    </div>
-                                    {inputFields.map((inputField, index) => (
-                                      <Card key={inputField.id}>
-                                        <div style={{ display: 'flex' }}>
-                                          <div className="form-group form-group col-lg-7 col-md-12 col-sm-12">
-                                            <label>{`Item ${1 + index}`} </label>
-                                            <input
-                                              type="text"
-                                              placeholder="Write Item text"
-                                              name="content"
-                                              value={inputField.content}
-                                              onChange={(event) =>
-                                                handleChangeInput(
-                                                  inputField.id,
-                                                  event
-                                                )
-                                              }
-                                            />
-                                          </div>
-                                        </div>
-                                        <div
-                                          style={{
-                                            fontSize: '30px',
-                                            display: 'flex',
-                                            width: '70px',
-                                            justifyContent: 'space-between',
-                                            margin: '0 auto'
-                                          }}
-                                        >
-                                          <button
-                                            type="button"
-                                            onClick={handleAddFields}
-                                          >
-                                            <i className="fas fa-plus-square"></i>
-                                          </button>
-                                          <button
-                                            type="button"
-                                            disabled={inputFields.length === 1}
-                                            onClick={() =>
-                                              handleRemoveFields(inputField.id)
+                      {/* Form Group */}
+                      <div className="inner-container">
+                        <div className="row clearfix">
+                          {/* Left Column */}
+                          <div className="left-column col-lg-12 col-md-12 col-sm-12">
+                            <div className="inner-column">
+                              {/* Edit service Form */}
+                              <div className="edit-course-form">
+                                <form>
+                                  <div className="sub-title pb-3">
+                                    Add Describtion Info List
+                                  </div>
+                                  <div className="form-group">
+                                    <label>List Title</label>
+                                    <input
+                                      type="text"
+                                      placeholder="Title"
+                                      name="title"
+                                      value={title}
+                                      onChange={(e) => setTitle(e.target.value)}
+                                    />
+                                  </div>
+                                  {inputFields.map((inputField, index) => (
+                                    <Card key={inputField.id}>
+                                      <div style={{ display: 'flex' }}>
+                                        <div className="form-group form-group col-lg-7 col-md-12 col-sm-12">
+                                          <label>{`Item ${1 + index}`} </label>
+                                          <input
+                                            type="text"
+                                            placeholder="Write Item text"
+                                            name="content"
+                                            value={inputField.content}
+                                            onChange={(event) =>
+                                              handleChangeInput(
+                                                inputField.id,
+                                                event
+                                              )
                                             }
-                                          >
-                                            <i className="fas fa-minus-square"></i>
-                                          </button>
+                                          />
                                         </div>
-                                      </Card>
-                                    ))}
-
-                                    <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">
-                                      <div
-                                        className="theme-btn btn-style-two"
-                                        onClick={addtitleWithAnswer}
-                                      >
-                                        <span className="txt">
-                                          Add List{' '}
-                                          <i className="fa fa-angle-right" />
-                                        </span>
                                       </div>
+                                      <div
+                                        style={{
+                                          fontSize: '30px',
+                                          display: 'flex',
+                                          width: '70px',
+                                          justifyContent: 'space-between',
+                                          margin: '0 auto'
+                                        }}
+                                      >
+                                        <button
+                                          type="button"
+                                          onClick={handleAddFields}
+                                        >
+                                          <i className="fas fa-plus-square"></i>
+                                        </button>
+                                        <button
+                                          type="button"
+                                          disabled={inputFields.length === 1}
+                                          onClick={() =>
+                                            handleRemoveFields(inputField.id)
+                                          }
+                                        >
+                                          <i className="fas fa-minus-square"></i>
+                                        </button>
+                                      </div>
+                                    </Card>
+                                  ))}
+
+                                  <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+                                    <div
+                                      className="theme-btn btn-style-two"
+                                      onClick={addtitleWithAnswer}
+                                    >
+                                      <span className="txt">
+                                        Add List{' '}
+                                        <i className="fa fa-angle-right" />
+                                      </span>
                                     </div>
-                                  </form>
-                                </div>
+                                  </div>
+                                </form>
                               </div>
                             </div>
-                            {/* Right Column */}
-                            <div className="right-column col-lg-12 col-md-12 col-sm-12">
-                              <div className="inner-column">
-                                <div className="edit-course-form">
-                                  {/* Form Group */}
-                                  <div className="form-group">
-                                    <div className="sub-title pb-3">
-                                      INFO LIST
-                                    </div>
+                          </div>
+                          {/* Right Column */}
+                          <div className="right-column col-lg-12 col-md-12 col-sm-12">
+                            <div className="inner-column">
+                              <div className="edit-course-form">
+                                {/* Form Group */}
+                                <div className="form-group">
+                                  <div className="sub-title pb-3">
+                                    INFO LIST
+                                  </div>
 
-                                    <Accordion
-                                      className="accordion-box style-two"
-                                      defaultActiveKey="0"
-                                    >
-                                      {titleWithAnswer &&
-                                        titleWithAnswer.map((x, index) => (
-                                          <Card className="accordion block">
-                                            <Card.Header>
-                                              <Accordion.Toggle
-                                                variant="link"
-                                                eventKey={`${index}`}
-                                              >
-                                                {x.title}
-                                              </Accordion.Toggle>
-                                            </Card.Header>
-                                            <Accordion.Collapse
+                                  <Accordion
+                                    className="accordion-box style-two"
+                                    defaultActiveKey="0"
+                                  >
+                                    {titleWithAnswer &&
+                                      titleWithAnswer.map((x, index) => (
+                                        <Card className="accordion block">
+                                          <Card.Header>
+                                            <Accordion.Toggle
+                                              variant="link"
                                               eventKey={`${index}`}
                                             >
-                                              <Card.Body>
-                                                {x.items.map((answer) => (
-                                                  <div className="mb-3">
-                                                    {'- ' + answer.content}
-                                                  </div>
-                                                ))}
-                                              </Card.Body>
-                                            </Accordion.Collapse>
-                                          </Card>
-                                        ))}
-                                    </Accordion>
-                                  </div>
+                                              {x.title}
+                                            </Accordion.Toggle>
+                                          </Card.Header>
+                                          <Accordion.Collapse
+                                            eventKey={`${index}`}
+                                          >
+                                            <Card.Body>
+                                              {x.items.map((answer) => (
+                                                <div className="mb-3">
+                                                  {'- ' + answer.content}
+                                                </div>
+                                              ))}
+                                            </Card.Body>
+                                          </Accordion.Collapse>
+                                        </Card>
+                                      ))}
+                                  </Accordion>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        {/*  bootcamp sections  */}
+                      </div>
+                      {/*  bootcamp sections  */}
 
-                        <div className="form-group">
-                          <button
-                            type="button"
-                            className="theme-btn btn-style-two"
-                            onClick={submitHandler}
-                          >
-                            <span className="txt">Add Section</span>
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+                      <div className="form-group">
+                        <button
+                          type="button"
+                          className="theme-btn btn-style-two"
+                          onClick={submitHandler}
+                        >
+                          <span className="txt">Add Section</span>
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                {/* Right Column */}
-                <div className="right-column col-lg-4 col-md-12 col-sm-12">
-                  <div className="inner-column">
-                    {/* Url Box */}
-                    <div className="url-boxed">
+              </div>
+              {/* Right Column */}
+              <div className="right-column col-lg-4 col-md-12 col-sm-12">
+                <div className="inner-column">
+                  {/* Url Box */}
+                  <div className="url-boxed">
+                    {/* Divider */}
+                    <div className="border my-3"></div>
+                    {/* ***http://localhost:5001** */}
+                    <label>Image URL</label>
+                    {ImageLable ? (
+                      <img
+                        src={
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
+                        }
+                      />
+                    ) : (
+                      <p className="text-warning bg-light p-1">
+                        * No Image Uploaded
+                      </p>
+                    )}
+                    <span className="valid mb-3">
+                      Select (jpg / png )image{' '}
+                    </span>
+                    <div className="input-group ">
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          setImageLable(e.target.files[0].name)
+                          setImageUrl(e.target.files[0])
+                          setUpdateErr('')
+                        }}
+                        className="form-control"
+                        id="inputGroupFile02"
+                      />
+                    </div>
+                  </div>
+
+                  <div className=""></div>
+                  {/* End Url Box */}
+
+                  <div className="sub-title pb-3">Options</div>
+                  <div className="option-cource-box">
+                    <div className="box-inner">
+                      {/* ******************* */}
+                      <div className="form-group ">
+                        <label htmlFor="exampleDataList" className="form-label">
+                          Instructors
+                        </label>
+                        {/* error message */}
+                        {selectInstructorErr && (
+                          <p className="text-danger bg-light p-1">
+                            {selectInstructorErr}
+                          </p>
+                        )}
+                        <input
+                          className="form-control bg-light"
+                          list="datalistOptions1"
+                          id="exampleDataList1"
+                          placeholder="search instructor..."
+                          onChange={(e) => {
+                            setSelectInstructorErr('')
+                            setSelectedInstructor(e.target.value)
+                          }}
+                          value={selectedInstructor}
+                        />
+
+                        <button
+                          type="button"
+                          className="btn btn-success py-2 px-4 mt-2"
+                          onClick={_handleSelectInstructor}
+                        >
+                          add
+                        </button>
+
+                        <datalist id="datalistOptions1">
+                          {InstructorList.length > 0 &&
+                            InstructorList.map((instructor) => {
+                              return (
+                                <option
+                                  data={instructor._id}
+                                  value={instructor.name}
+                                  key={instructor._id}
+                                >
+                                  {instructor.email}
+                                </option>
+                              )
+                            })}
+                        </datalist>
+                      </div>
+                      <label className="mt-2">
+                        Selected Instructors : {instructors.length}/
+                        {InstructorList.length}
+                      </label>
+                      <div className="my-3">
+                        {instructors.length > 0 ? (
+                          instructors.map((instructor) => {
+                            return (
+                              <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
+                                <a
+                                  onClick={() => {
+                                    _handleUnselectInstructor(instructor._id)
+                                  }}
+                                >
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                </a>{' '}
+                                {instructor.name}
+                              </span>
+                            )
+                          })
+                        ) : (
+                          <p className="text-warning bg-light p-1">
+                            * Nothing Selected
+                          </p>
+                        )}
+                      </div>
+
                       {/* Divider */}
                       <div className="border my-3"></div>
-                      {/* ***http://localhost:5001** */}
-                      <label>Image URL</label>
-                      {ImageLable ? (
-                        <img
-                          src={
-                            'http://localhost:5001/uploads/Bootcamp/' + ImageLable
-                          }
-                        />
-                      ) : (
-                        <p className="text-warning bg-light p-1">
-                          * No Image Uploaded
-                        </p>
-                      )}
-                      <span className="valid mb-3">
-                        Select (jpg / png )image{' '}
-                      </span>
-                      <div className="input-group ">
+                      {/* ******************* */}
+                      <div className="form-group ">
+                        <label htmlFor="exampleDataList" className="form-label">
+                          Students
+                        </label>
+                        {/* error message */}
+                        {selectStudentErr && (
+                          <p className="text-danger bg-light p-1">
+                            {selectStudentErr}
+                          </p>
+                        )}
                         <input
-                          type="file"
+                          className="form-control bg-light"
+                          list="datalistOptions2"
+                          id="exampleDataList2"
+                          placeholder="search student..."
                           onChange={(e) => {
-                            setImageLable(e.target.files[0].name)
-                            setImageUrl(e.target.files[0])
-                            setUpdateErr('')
+                            setSelectStudentErr('')
+                            setSelectedStudent(e.target.value)
                           }}
-                          className="form-control"
-                          id="inputGroupFile02"
+                          value={selectedStudent}
                         />
+
+                        <button
+                          type="button"
+                          className="btn btn-success py-2 px-4 mt-2"
+                          onClick={_handleSelectStudent}
+                        >
+                          add
+                        </button>
+
+                        <datalist id="datalistOptions2">
+                          {StudentsList.length > 0 &&
+                            StudentsList.map((student) => {
+                              return (
+                                <option
+                                  data={student._id}
+                                  value={student.name}
+                                  key={student._id}
+                                >
+                                  {student.email}
+                                </option>
+                              )
+                            })}
+                        </datalist>
                       </div>
-                    </div>
+                      <label className="mt-2">
+                        Selected Students : {students.length}/
+                        {StudentsList.length}
+                      </label>
+                      <div className="my-3">
+                        {students.length ? (
+                          students.map((student) => {
+                            return (
+                              <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
+                                <a
+                                  onClick={() => {
+                                    _handleUnselectStudent(student._id)
+                                  }}
+                                >
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                </a>{' '}
+                                {student.name}
+                              </span>
+                            )
+                          })
+                        ) : (
+                          <p className="text-warning bg-light p-1">
+                            * Nothing Selected
+                          </p>
+                        )}
+                      </div>
 
-                    <div className=""></div>
-                    {/* End Url Box */}
-
-                    <div className="sub-title pb-3">Options</div>
-                    <div className="option-cource-box">
-                      <div className="box-inner">
-                        {/* ******************* */}
-                        <div className="form-group ">
-                          <label htmlFor="exampleDataList" className="form-label">
-                            Instructors
-                          </label>
-                          {/* error message */}
-                          {selectInstructorErr && (
-                            <p className="text-danger bg-light p-1">
-                              {selectInstructorErr}
-                            </p>
-                          )}
+                      {/* Divider */}
+                      <div className="border my-3"></div>
+                      {/* ******************* */}
+                      <div className="form-group">
+                        <span className="price">price</span>
+                        <div className="total-price">Set service Price :</div>
+                        <div className="item-quantity">
                           <input
-                            className="form-control bg-light"
-                            list="datalistOptions1"
-                            id="exampleDataList1"
-                            placeholder="search instructor..."
+                            className="quantity-spinner"
+                            type="number"
+                            defaultValue={price}
+                            name="quantity"
                             onChange={(e) => {
-                              setSelectInstructorErr('')
-                              setSelectedInstructor(e.target.value)
+                              setPrice(e.target.value)
                             }}
-                            value={selectedInstructor}
                           />
-
-                          <button
-                            type="button"
-                            className="btn btn-success py-2 px-4 mt-2"
-                            onClick={_handleSelectInstructor}
-                          >
-                            add
-                          </button>
-
-                          <datalist id="datalistOptions1">
-                            {InstructorList.length > 0 &&
-                              InstructorList.map((instructor) => {
-                                return (
-                                  <option
-                                    data={instructor._id}
-                                    value={instructor.name}
-                                    key={instructor._id}
-                                  >
-                                    {instructor.email}
-                                  </option>
-                                )
-                              })}
-                          </datalist>
-                        </div>
-                        <label className="mt-2">
-                          Selected Instructors : {instructors.length}/
-                          {InstructorList.length}
-                        </label>
-                        <div className="my-3">
-                          {instructors.length > 0 ? (
-                            instructors.map((instructor) => {
-                              return (
-                                <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
-                                  <a
-                                    onClick={() => {
-                                      _handleUnselectInstructor(instructor._id)
-                                    }}
-                                  >
-                                    <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
-                                  </a>{' '}
-                                  {instructor.name}
-                                </span>
-                              )
-                            })
-                          ) : (
-                            <p className="text-warning bg-light p-1">
-                              * Nothing Selected
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border my-3"></div>
-                        {/* ******************* */}
-                        <div className="form-group ">
-                          <label htmlFor="exampleDataList" className="form-label">
-                            Students
-                          </label>
-                          {/* error message */}
-                          {selectStudentErr && (
-                            <p className="text-danger bg-light p-1">
-                              {selectStudentErr}
-                            </p>
-                          )}
-                          <input
-                            className="form-control bg-light"
-                            list="datalistOptions2"
-                            id="exampleDataList2"
-                            placeholder="search student..."
-                            onChange={(e) => {
-                              setSelectStudentErr('')
-                              setSelectedStudent(e.target.value)
-                            }}
-                            value={selectedStudent}
-                          />
-
-                          <button
-                            type="button"
-                            className="btn btn-success py-2 px-4 mt-2"
-                            onClick={_handleSelectStudent}
-                          >
-                            add
-                          </button>
-
-                          <datalist id="datalistOptions2">
-                            {StudentsList.length > 0 &&
-                              StudentsList.map((student) => {
-                                return (
-                                  <option
-                                    data={student._id}
-                                    value={student.name}
-                                    key={student._id}
-                                  >
-                                    {student.email}
-                                  </option>
-                                )
-                              })}
-                          </datalist>
-                        </div>
-                        <label className="mt-2">
-                          Selected Students : {students.length}/
-                          {StudentsList.length}
-                        </label>
-                        <div className="my-3">
-                          {students.length ? (
-                            students.map((student) => {
-                              return (
-                                <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
-                                  <a
-                                    onClick={() => {
-                                      _handleUnselectStudent(student._id)
-                                    }}
-                                  >
-                                    <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
-                                  </a>{' '}
-                                  {student.name}
-                                </span>
-                              )
-                            })
-                          ) : (
-                            <p className="text-warning bg-light p-1">
-                              * Nothing Selected
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border my-3"></div>
-                        {/* ******************* */}
-                        <div className="form-group">
-                          <span className="price">price</span>
-                          <div className="total-price">Set service Price :</div>
-                          <div className="item-quantity">
-                            <input
-                              className="quantity-spinner"
-                              type="number"
-                              defaultValue={price}
-                              name="quantity"
-                              onChange={(e) => {
-                                setPrice(e.target.value)
-                              }}
-                            />
-                          </div>
                         </div>
                       </div>
                     </div>
-                    {/* Button Box */}
-                    <div className="button-box text-center">
-                      <button
-                        type="button"
-                        className="theme-btn btn-style-one"
-                        style={{ zIndex: '0' }}
-                      >
-                        <span className="txt" onClick={_handleupdateService}>
-                          Save Changes
-                        </span>
-                      </button>
-                    </div>
+                  </div>
+                  {/* Button Box */}
+                  <div className="button-box text-center">
+                    <button
+                      type="button"
+                      className="theme-btn btn-style-one"
+                      style={{ zIndex: '0' }}
+                    >
+                      <span className="txt" onClick={_handleupdateService}>
+                        Save Changes
+                      </span>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* End Manage Cource Section */}
-      </>
-    )
-  }
+      </div>
+      {/* End Manage Cource Section */}
+    </>
+  )
+}

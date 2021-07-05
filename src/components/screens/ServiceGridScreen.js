@@ -164,7 +164,7 @@ export default function ServiceGridScreen({ match }) {
                         <div className="options-view">
                           <div className="clearfix">
                             <div className="pull-left">
-                              <div className="title pt-5">
+                              <div className="title pt-5 text-capitalize">
                                 {category} services
                               </div>
                             </div>

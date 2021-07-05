@@ -122,7 +122,7 @@ export default function ServiceCatyegoryList() {
   return (
     <>
       <div className="container " style={{ padding: '60px 0' }}>
-        <div className="title pb-3">ServiceCategories</div>
+        <div className="title pb-3">Category List</div>
 
         <a
           href="#"
@@ -138,7 +138,7 @@ export default function ServiceCatyegoryList() {
               </Spinner>{' '}
             </span>
           ) : (
-            'Add Course'
+            'Add Category'
           )}
         </a>
 
@@ -218,7 +218,7 @@ export default function ServiceCatyegoryList() {
             <tr>
               <th>#</th>
 
-              <th>serviceCatyegory Name</th>
+              <th>Catyegory Name</th>
 
               <th>Action</th>
             </tr>

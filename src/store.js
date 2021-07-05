@@ -96,7 +96,8 @@ import {
   serviceDeleteReducer,
   serviceCreateReducer,
   adminServiceListReducer,
-  serviceUpdateReducer
+  serviceUpdateReducer,
+  serviceInstructorUpdateReducer
 } from './redux/reducers/serviceReducer'
 
 import {
@@ -193,6 +194,7 @@ const reducer = combineReducers({
   serviceCreate: serviceCreateReducer,
   serviceDelete: serviceDeleteReducer,
   serviceUpdate: serviceUpdateReducer,
+  serviceInstructorUpdate: serviceInstructorUpdateReducer,
   sessionCreate: sessionCreateReducer,
   sessionList: sessionListReducer,
   sessionDetails: sessionDetailsReducer,

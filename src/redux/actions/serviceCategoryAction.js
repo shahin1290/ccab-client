@@ -60,6 +60,7 @@ export const createServiceCategory =
   }
 
 export const getServiceCategories = () => async (dispatch, getState) => {
+  console.log('hh');
   try {
     dispatch({
       type: SERVICE_CATEGORY_LIST_REQUEST
