@@ -21,7 +21,7 @@ export default function Pricing() {
   }, [])
 
   return (
-    <div>
+    <div id="pricing">
       {/* Pricing Section */}
       <section className="pricing-section">
         <div className="auto-container">

@@ -6,6 +6,7 @@ import { getServiceList } from '../../redux/actions/serviceAction'
 // include styles
 import 'rodal/lib/rodal.css'
 import { Nav, Dropdown, NavDropdown, Navbar } from 'react-bootstrap'
+import {Link} from 'react-scroll';
 // imgaes
 import Logo from './../../assets/images/whiteLogo.png'
 
@@ -110,9 +111,9 @@ export default function Header() {
             <div className="collapse navbar-collapse mr-3">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                  <a href="#" className="text-dark pb-5 pt-5">
+                  <Link to="pricing" spy={true} smooth={true} className="text-dark pb-5 pt-5">
                     Courses
-                  </a>
+                  </Link>
                   <div
                     className="dropdown-menu  mt-4 ml-5"
                     aria-labelledby="navbarDropdownMenuLink"
