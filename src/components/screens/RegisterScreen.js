@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button } from 'react-bootstrap'
-import FormContainer from '../layout/FormContainer'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, login } from '../../redux/actions/userAction'
-import Loader from '../layout/Loader'
 import Message from '../layout/Message'
 import { useHistory, Link } from 'react-router-dom'
-import { toast, ToastContainer } from 'react-toastify'
 // import "react-toastify/dist/ReactToastify.css";
-import { USER_REG_REST } from '../../redux/constences/userConst'
 
 export default function RegisterScreen() {
   const history = useHistory()
@@ -32,23 +27,37 @@ export default function RegisterScreen() {
   const [phone, setPhone] = useState('')
   const phoneNumber = '00-' + countryCode + '-' + phone
   const [gender, setGender] = useState('')
-  const [language, setLang ] = useState('')
-  const [message, setMessage] = useState(null)
+  const [language, setLang] = useState('')
+  const [message, setMessage] = useState('')
 
-  const redirect = '/login'
+  const [agree, setAgree] = useState(false)
+
 
   useEffect(() => {
-    if (registerSuccess) {
-      history.push(redirect)
+    if(userDetail && userDetail.name){
+      history.push('/profile')
     }
-  }, [registerSuccess, redirect, history])
+    if (registerSuccess) {
+      history.push({
+        pathname: '/login',
+        state: {
+          message: 'User Registration Successful! Please Login.'
+        }
+      })
+    }
+  }, [registerSuccess, history])
 
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
+    } else if (!gender) {
+      setMessage('Please select the gender')
+    } else if (!agree) {
+      setMessage('Please accept the terms and conditions')
     } else {
-      dispatch(register(name, email, password, phoneNumber, gender,language))
+      setMessage('')
+      dispatch(register(name, email, password, phoneNumber, gender, language))
     }
 
     if (registerSuccess) {
@@ -136,7 +145,7 @@ export default function RegisterScreen() {
                         }}
                       >
                         <option value="" selected>
-                          select Country Code
+                          Select Country Code
                         </option>
                         <option data-countrycode="GB" value="44" selected>
                           UK (+44)
@@ -859,7 +868,7 @@ export default function RegisterScreen() {
                         </div>
                       </div>
 
-                        {/* study with lang  */}
+                      {/* study with lang  */}
                       <div className="column col-lg-6 col-md-6 col-sm-12">
                         <div className="radio-box">
                           <input
@@ -892,7 +901,7 @@ export default function RegisterScreen() {
                             type="checkbox"
                             name="aggreement"
                             id="type-4"
-                            required
+                            onChange={() => setAgree(!agree)}
                           />
                           <label htmlFor="type-4">
                             I agree the user agreement and{' '}

@@ -13,6 +13,7 @@ export default function QuizAnswerScreen({ match, location }) {
   const dispatch = useDispatch()
   const redirect = location.search ? location.search.split('=')[1] : '/profile'
 
+
   const {
     quiz,
     loading: quizLoading,
