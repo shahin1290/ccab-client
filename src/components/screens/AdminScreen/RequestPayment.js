@@ -31,7 +31,7 @@ export default function RequestPayment({ match }) {
 
   const [name, setName] = useState()
   const [price, setPrice] = useState()
-
+  const [currency, setCurrency] = useState('EUR')
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState('')
 
@@ -56,7 +56,7 @@ export default function RequestPayment({ match }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createRequest({ name, price, selectedStudent }))
+    dispatch(createRequest({ name, price, selectedStudent, currency }))
   }
 
   useEffect(() => {
@@ -67,14 +67,13 @@ export default function RequestPayment({ match }) {
 
   return (
     <>
-      {/* <!-- Edit Cource Section --> */}
-      <div className="edit-cource-section">
+       <div className="edit-cource-section">
         <div className="auto-container">
           {/* Sec Title */}
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title">Send Request</div>
+                <div className="title">Edit Request</div>
               </div>
             </div>
           </div>
@@ -83,7 +82,7 @@ export default function RequestPayment({ match }) {
               <p className="text-danger bg-light p-2 ">{error}</p>
             ) : requestSuccess ? (
               <p className="text-success bg-light p-2 ">
-                Request Sent successfully
+                Request Send successfully
               </p>
             ) : null}
           </div>
@@ -97,9 +96,10 @@ export default function RequestPayment({ match }) {
                   <div className="edit-course-form">
                     <form onSubmit={submitHandler}>
                       {/* Form Group */}
-                      <div className="form-group">
+                      <div className="">
                         <label>Service Name</label>
                         <input
+                          class="form-control"
                           type="text"
                           name="service-name"
                           placeholder="Service Name"
@@ -111,9 +111,58 @@ export default function RequestPayment({ match }) {
                         />
                       </div>
 
-                      <div className="form-group">
-                        <label>Set Price (in USD)</label>
+                      <div className="">
+                        <label>Set Price </label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio1"
+                            value="EUR"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked = {currency === 'EUR'}
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            EUR
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio2"
+                            value="USD"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked = {currency === 'USD'}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            USD
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio3"
+                            value="SEK"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked = {currency === 'SEK'}
+                          />
+                          <label class="form-check-label" for="inlineRadio3">
+                            SEK
+                          </label>
+                        </div>{' '}
                         <input
+                          class="form-control"
                           type="text"
                           name="service-price"
                           placeholder="Service Price"
@@ -128,20 +177,16 @@ export default function RequestPayment({ match }) {
                       {/* Right Column */}
                       <div className=" col-lg-12 col-md-12 col-sm-12">
                         <div className="inner-column">
-                          <div className="sub-title pb-3">Options</div>
-                          <div className="option-cource-box">
-                            <div className="box-inner">
+                          <div className="">
+                            <div className="">
                               {/* ******************* */}
-                              <div className="form-group ">
-                                <label
-                                  htmlFor="exampleDataList"
-                                  className="form-label"
-                                >
+                              <div className="">
+                                <label htmlFor="exampleDataList" className="">
                                   Students
                                 </label>
 
                                 <input
-                                  className="form-control bg-light"
+                                  className="form-control"
                                   list="datalistOptions"
                                   id="exampleDataList"
                                   placeholder="search student..."
@@ -170,11 +215,7 @@ export default function RequestPayment({ match }) {
                           </div>
                           {/* Button Box */}
                           <div className="button-box text-center">
-                            <button
-                              type="submit"
-                              className="theme-btn btn-style-one"
-                              style={{ zIndex: '0' }}
-                            >
+                            <button type="submit" class="btn btn-warning">
                               Submit
                             </button>
                           </div>
@@ -188,7 +229,6 @@ export default function RequestPayment({ match }) {
           </div>
         </div>
       </div>
-      {/* End Manage Cource Section */}
     </>
   )
 }

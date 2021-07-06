@@ -59,6 +59,7 @@ export default function RequestList() {
 
               <th>Request Name</th>
               <th>Price</th>
+              <th>currency</th>
               <th>Requested User</th>
               <th>Status</th>
               <th>Created At</th>
@@ -72,6 +73,7 @@ export default function RequestList() {
                     <td>{requests.indexOf(req) + 1}</td>
                     <td>{req.name}</td>
                     <td>{req.amount}</td>
+                    <td>{req.currency}</td>
                     <td>{req.requestedUser.email}</td>
                     <td>{req.status}</td>
                     <td>{getDate(req.createdAt)}</td>

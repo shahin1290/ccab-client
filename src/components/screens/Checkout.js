@@ -58,6 +58,7 @@ const CheckoutForm = ({ match, history }) => {
   const {
     loading: currencyLoading,
     success: currencySuccess,
+    error: currencyError,
     currency
   } = useSelector((state) => state.currencyCreate)
 
@@ -85,7 +86,7 @@ const CheckoutForm = ({ match, history }) => {
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
   const [AmountOfWeeks, setAmountOfWeeks] = useState(
-    plan.period == 'weekly' ? 4 : 2
+    plan && plan.period == 'weekly' ? 4 : 2
   )
   const [widgetLoaded, setWidgetLoaded] = useState(false)
 
@@ -129,6 +130,7 @@ const CheckoutForm = ({ match, history }) => {
   useEffect(() => {
     if (ID) {
       dispatch(getCourseDetails(ID))
+      dispatch(createCurrrency('USD'))
     }
 
     if (requestId) {
@@ -137,10 +139,15 @@ const CheckoutForm = ({ match, history }) => {
 
     if (serviceId) {
       dispatch(getServiceDetails(serviceId))
+      dispatch(createCurrrency('USD'))
     }
-
-    dispatch(createCurrrency())
   }, [dispatch, ID])
+
+  useEffect(() => {
+    if (request.currency) {
+      dispatch(createCurrrency(request.currency))
+    }
+  }, [request.currency, dispatch])
 
   useEffect(() => {
     if (orderSuccess) {
@@ -417,517 +424,529 @@ const CheckoutForm = ({ match, history }) => {
   return (
     <div className="sidebar-page-container">
       <div className="auto-container">
-        <div className="row clearfix">
+      {currencyLoading ? (
+            <Loader />
+          ) : currencyError ? (
+            <Message>{currencyError}</Message>
+          ) : (
+            currencySuccess && (
+        <div className="">
           {/* Content Side */}
-          <div className="content-side col-lg-8 col-md-12 col-sm-12">
-            {/* Sec Title */}
-            <div className="sec-title">
-              <div className="title">Checkout</div>
-              {checkoutError && <Message>{checkoutError}</Message>}{' '}
-            </div>
+         
+              <div className="content-side col-lg-10 col-md-12 col-sm-12" style={{ margin: '0 auto' }}>
+                {/* Sec Title */}
+                <div className="sec-title">
+                  <div className="title">Checkout</div>
+                  {checkoutError && <Message>{checkoutError}</Message>}{' '}
+                </div>
 
-            <div className="checkout-section">
-              {/* Checkout Form */}
+                <div className="checkout-section">
+                  {/* Checkout Form */}
 
-              {/* Sidebar Side */}
+                  {/* Sidebar Side */}
 
-              <div className="sidebar-side col-lg-8 col-md-12 col-sm-12 mt-5">
-                <aside className="sidebar sticky-top  mt-5">
-                  {/* Order Widget */}
-                  <div className="sidebar-widget order-widget">
-                    <div className="widget-content ">
-                      <div className="sidebar-title">
-                        <div className="sub-title">Order Summary</div>
-                      </div>
+                  <div className="sidebar-side col-lg-8 col-md-12 col-sm-12 mt-5">
+                    <aside className="sidebar sticky-top  mt-5">
+                      {/* Order Widget */}
+                      <div className="sidebar-widget order-widget">
+                        <div className="widget-content ">
+                          <div className="sidebar-title">
+                            <div className="sub-title">Order Summary</div>
+                          </div>
 
-                      {currencyLoading ? (
-                        <Loader />
-                      ) : (
-                        <div className="order-box bg-white p-2">
-                          {subscription && (
-                            <ul>
-                              <li className="clearfix mb-3">
-                                Total Of Weeks:
-                                <select
-                                  className="custom-select-box px-2"
-                                  onChange={(e) => {
-                                    setAmountOfWeeks(Number(e.target.value))
-                                  }}
-                                >
-                                  {plan.period == 'weekly' ? (
-                                    <>
-                                      <option value="4" selected>
-                                        4 weeks
-                                      </option>
-                                      <option value="5">5 weeks</option>
-                                      <option value="6">6 weeks</option>
-                                      <option value="7">7 weeks</option>
-                                      <option value="8">8 weeks</option>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <option value="2" selected>
-                                        2 Months
-                                      </option>
-                                      <option value="3">3 Months</option>
-                                      <option value="4">4 Months</option>
-                                      <option value="5">5 Months</option>
-                                      <option value="6">6 Months</option>
-                                    </>
-                                  )}
-                                </select>
-                              </li>
-                              <li className="clearfix mb-3">
-                                Subscription Type:
-                                <span className="pull-right">{plan.name}</span>
-                              </li>
+                          <div className="order-box bg-white p-2">
+                            {subscription && (
+                              <ul>
+                                <li className="clearfix mb-3">
+                                  Total Of Weeks:
+                                  <select
+                                    className="custom-select-box px-2"
+                                    onChange={(e) => {
+                                      setAmountOfWeeks(Number(e.target.value))
+                                    }}
+                                  >
+                                    {plan.period == 'weekly' ? (
+                                      <>
+                                        <option value="4" selected>
+                                          4 weeks
+                                        </option>
+                                        <option value="5">5 weeks</option>
+                                        <option value="6">6 weeks</option>
+                                        <option value="7">7 weeks</option>
+                                        <option value="8">8 weeks</option>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <option value="2" selected>
+                                          2 Months
+                                        </option>
+                                        <option value="3">3 Months</option>
+                                        <option value="4">4 Months</option>
+                                        <option value="5">5 Months</option>
+                                        <option value="6">6 Months</option>
+                                      </>
+                                    )}
+                                  </select>
+                                </li>
+                                <li className="clearfix mb-3">
+                                  Subscription Type:
+                                  <span className="pull-right">
+                                    {plan.name}
+                                  </span>
+                                </li>
 
-                              <li className="clearfix mb-3">
-                                Subscription Period:
-                                <span className="pull-right">
-                                  {plan.period}
-                                </span>
-                              </li>
-                              <hr />
+                                <li className="clearfix mb-3">
+                                  Subscription Period:
+                                  <span className="pull-right">
+                                    {plan.period}
+                                  </span>
+                                </li>
+                                <hr />
 
-                              <li className="clearfix">
-                                <strong>Total</strong>{' '}
-                                <span className="pull-right">
-                                  <strong>
-                                    {currencySuccess &&
-                                      `${Math.round(
-                                        plan.price *
-                                          sekToUsd *
-                                          currency.data.amount *
-                                          AmountOfWeeks
-                                      )}  ${currency.data.currency}`}
-                                  </strong>
-                                </span>
-                              </li>
-                            </ul>
-                          )}
-                          {ID && (
-                            <ul>
-                              <li className="clearfix mb-3">
-                                Original Price:
-                                <span className="pull-right">
-                                  {currencySuccess &&
-                                    `${getPriceFormat(
-                                      Math.round(
-                                        currency.data.amount *
-                                          course.price *
-                                          1.5
-                                      )
-                                    )}  ${currency.data.currency}`}
-                                </span>
-                              </li>
-
-                              <li className="clearfix mb-3">
-                                Coupon discounts:
-                                <span className="pull-right">
-                                  {currencySuccess &&
-                                    `-${getPriceFormat(
-                                      Math.round(
-                                        currency.data.amount *
-                                          course.price *
-                                          0.5
-                                      )
-                                    )}  ${currency.data.currency}`}
-                                </span>
-                              </li>
-                              <hr />
-
-                              <li className="clearfix">
-                                <strong>Total</strong>{' '}
-                                <span className="pull-right">
-                                  <strong>
+                                <li className="clearfix">
+                                  <strong>Total</strong>{' '}
+                                  <span className="pull-right">
+                                    <strong>
+                                      {currencySuccess &&
+                                        `${Math.round(
+                                          plan.price *
+                                            sekToUsd *
+                                            currency.data.amount *
+                                            AmountOfWeeks
+                                        )}  ${currency.data.currency}`}
+                                    </strong>
+                                  </span>
+                                </li>
+                              </ul>
+                            )}
+                            {ID && (
+                              <ul>
+                                <li className="clearfix mb-3">
+                                  Original Price:
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
-                                          currency.data.amount * course.price
+                                          currency.data.amount *
+                                            course.price *
+                                            1.5
                                         )
                                       )}  ${currency.data.currency}`}
-                                  </strong>
-                                </span>
-                              </li>
-                            </ul>
-                          )}
+                                  </span>
+                                </li>
 
-                          {requestId && (
-                            <ul>
-                              <li className="clearfix mb-3">
-                                Bill:
-                                <span className="pull-right">
-                                  {currencySuccess &&
-                                    `${getPriceFormat(
-                                      Math.round(
-                                        currency.data.amount * request.amount
-                                      )
-                                    )}  ${currency.data.currency}`}
-                                </span>
-                              </li>
+                                <li className="clearfix mb-3">
+                                  Coupon discounts:
+                                  <span className="pull-right">
+                                    {currencySuccess &&
+                                      `-${getPriceFormat(
+                                        Math.round(
+                                          currency.data.amount *
+                                            course.price *
+                                            0.5
+                                        )
+                                      )}  ${currency.data.currency}`}
+                                  </span>
+                                </li>
+                                <hr />
 
-                              <hr />
+                                <li className="clearfix">
+                                  <strong>Total</strong>{' '}
+                                  <span className="pull-right">
+                                    <strong>
+                                      {currencySuccess &&
+                                        `${getPriceFormat(
+                                          Math.round(
+                                            currency.data.amount * course.price
+                                          )
+                                        )}  ${currency.data.currency}`}
+                                    </strong>
+                                  </span>
+                                </li>
+                              </ul>
+                            )}
 
-                              <li className="clearfix">
-                                <strong>Total</strong>{' '}
-                                <span className="pull-right">
-                                  <strong>
+                            {requestId && (
+                              <ul>
+                                <li className="clearfix mb-3">
+                                  Bill:
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
                                           currency.data.amount * request.amount
                                         )
                                       )}  ${currency.data.currency}`}
-                                  </strong>
-                                </span>
-                              </li>
-                            </ul>
-                          )}
+                                  </span>
+                                </li>
 
-                          {serviceId && (
-                            <ul>
-                              <li className="clearfix mb-3">
-                                Service:
-                                <span className="pull-right">
-                                  {service && service.name}
-                                </span>
-                              </li>
-                              <li className="clearfix mb-3">
-                                Price(per session):
-                                <span className="pull-right">
-                                  {currencySuccess &&
-                                    `${getPriceFormat(
-                                      Math.round(
-                                        currency.data.amount * service.price
-                                      )
-                                    )}  ${currency.data.currency}`}
-                                </span>
-                              </li>
+                                <hr />
 
-                              <li className="clearfix mb-3">
-                                Sessions:
-                                <span className="pull-right">
-                                  {
-                                    JSON.parse(
-                                      localStorage.getItem('appointment')
-                                    ).sessionNumber
-                                  }
-                                </span>
-                              </li>
+                                <li className="clearfix">
+                                  <strong>Total</strong>{' '}
+                                  <span className="pull-right">
+                                    <strong>
+                                      {currencySuccess &&
+                                        `${getPriceFormat(
+                                          Math.round(
+                                            currency.data.amount *
+                                              request.amount
+                                          )
+                                        )}  ${currency.data.currency}`}
+                                    </strong>
+                                  </span>
+                                </li>
+                              </ul>
+                            )}
 
-                              <hr />
-
-                              <li className="clearfix">
-                                <strong>Total</strong>{' '}
-                                <span className="pull-right">
-                                  <strong>
+                            {serviceId && (
+                              <ul>
+                                <li className="clearfix mb-3">
+                                  Service:
+                                  <span className="pull-right">
+                                    {service && service.name}
+                                  </span>
+                                </li>
+                                <li className="clearfix mb-3">
+                                  Price(per session):
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
-                                          currency.data.amount *
-                                            (service.price *
-                                              JSON.parse(
-                                                localStorage.getItem(
-                                                  'appointment'
-                                                )
-                                              ).sessionNumber)
+                                          currency.data.amount * service.price
                                         )
                                       )}  ${currency.data.currency}`}
-                                  </strong>
-                                </span>
-                              </li>
-                            </ul>
-                          )}
+                                  </span>
+                                </li>
+
+                                <li className="clearfix mb-3">
+                                  Sessions:
+                                  <span className="pull-right">
+                                    {
+                                      JSON.parse(
+                                        localStorage.getItem('appointment')
+                                      ).sessionNumber
+                                    }
+                                  </span>
+                                </li>
+
+                                <hr />
+
+                                <li className="clearfix">
+                                  <strong>Total</strong>{' '}
+                                  <span className="pull-right">
+                                    <strong>
+                                      {currencySuccess &&
+                                        `${getPriceFormat(
+                                          Math.round(
+                                            currency.data.amount *
+                                              (service.price *
+                                                JSON.parse(
+                                                  localStorage.getItem(
+                                                    'appointment'
+                                                  )
+                                                ).sessionNumber)
+                                          )
+                                        )}  ${currency.data.currency}`}
+                                    </strong>
+                                  </span>
+                                </li>
+                              </ul>
+                            )}
+                          </div>
                         </div>
-                      )}
+                      </div>
+                    </aside>
+                  </div>
+
+                  <div className="col-lg-12 col-md-12 col-sm-12 form-group">
+                    <div className="title2">Select Payment Method</div>
+                    <div className="auto-container mt-3 mb-5">
+                      <img
+                        width="50"
+                        className="pr-2"
+                        src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+                      />
+                      <img
+                        width="160"
+                        src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+                      />
                     </div>
                   </div>
-                </aside>
-              </div>
 
-              <div className="col-lg-12 col-md-12 col-sm-12 form-group">
-                <div className="title2">Select Payment Method</div>
-                <div className="auto-container mt-3 mb-5">
-                  <img
-                    width="50"
-                    className="pr-2"
-                    src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
-                  />
-                  <img
-                    width="160"
-                    src="https://cdn.jotfor.ms/images/credit-card-logo.png"
-                  />
-                </div>
-              </div>
-
-              {/* Signup Info Tabs*/}
-              <div className="checkout-info-tabs col-lg-9 col-md-12 col-sm-12">
-                <Tabs
-                  defaultActiveKey="card"
-                  transition={false}
-                  onSelect={(e) => {
-                    if (e === 'klarna') _handelcreateKlarnaOrder()
-                  }}
-                >
-                  <Tab eventKey="card" title="Credit/ Debit card">
-                    <form onSubmit={submitHandler}>
-                      <div className="sub-title p-3">Payment Information</div>
-                      {isProcessing && <Loader />}
-
-                      <div
-                        className="row clearfix p-3"
-                        style={{
-                          boxShadow: ' 0 2px 2px 0 rgba(0,0,0,0.2)',
-                          backgroundColor: 'white'
-                        }}
-                      >
-                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                          <label>Holder Name</label>
-
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '0.3em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <input
-                              type="text"
-                              value={name}
-                              placeholder="Emily J Smith"
-                              required
-                              onChange={(e) => setName(e.target.value)}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                          <label htmlFor="cardNumber">Card Number</label>
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '0.5em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <CardNumberElement
-                              id="cardNumber"
-                              options={ELEMENT_OPTIONS}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group col-lg-6 col-md-6 col-sm-12">
-                          <label>Expiration Date</label>
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '0.5em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <CardExpiryElement />
-                          </div>
-                        </div>
-
-                        <div className="form-group col-lg-6 col-md-6 col-sm-12">
-                          <label>CVC Code</label>
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '0.5em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <CardCvcElement />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="sub-title p-3">Billing Address</div>
-                      <div
-                        className="row clearfix"
-                        style={{
-                          boxShadow: ' 0 2px 2px 0 rgba(0,0,0,0.2)',
-                          backgroundColor: 'white'
-                        }}
-                      >
-                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                          <label>Street</label>
-
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '0.3em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <input
-                              type="text"
-                              value={street}
-                              placeholder="542 W. 15th Street"
-                              required
-                              onChange={(e) => setStreet(e.target.value)}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                          <label>City</label>
-
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '0.3em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <input
-                              type="text"
-                              value={city}
-                              placeholder="New York"
-                              required
-                              onChange={(e) => setCity(e.target.value)}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                          <label>Country</label>
-
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '.3em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <input
-                              type="text"
-                              value={country}
-                              placeholder="USA"
-                              required
-                              onChange={(e) => setCountry(e.target.value)}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                          <label>Zip</label>
-
-                          <div
-                            style={{
-                              boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                              padding: '.3em',
-                              backgroundColor: 'white'
-                            }}
-                          >
-                            <input
-                              type="text"
-                              value={zip}
-                              placeholder="58648"
-                              required
-                              onChange={(e) => setZip(e.target.value)}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div style={{ padding: '20px 0' }}>
-                        <button
-                          className="theme-btn btn-style-one"
-                          type="submit"
-                          name="submit-form"
-                        >
-                          <span className="txt">Confirm Checkout</span>
-                        </button>
-                      </div>
-                    </form>
-                  </Tab>
-                  <Tab eventKey="klarna" title="Klarna">
-                    {widgetLoaded && <Loader />}
-                    <div
-                      onChange={(e) => setKlarnaMethod(e.target.value)}
-                      className="p-4"
+                  {/* Signup Info Tabs*/}
+                  <div className="checkout-info-tabs col-lg-9 col-md-12 col-sm-12">
+                    <Tabs
+                      defaultActiveKey="card"
+                      transition={false}
+                      onSelect={(e) => {
+                        if (e === 'klarna') _handelcreateKlarnaOrder()
+                      }}
                     >
-                      {sessionLoading ? (
-                        <Loader />
-                      ) : (
-                        sessionSuccess &&
-                        session.payment_method_categories.map((method) => (
+                      <Tab eventKey="card" title="Credit/ Debit card">
+                        <form onSubmit={submitHandler}>
+                          <div className="sub-title p-3">
+                            Payment Information
+                          </div>
+                          {isProcessing && <Loader />}
+
                           <div
-                            key={method.identifier}
-                            className="m-2 p-2 border border-secondary bg-white text-dark "
+                            className="row clearfix p-3"
+                            style={{
+                              boxShadow: ' 0 2px 2px 0 rgba(0,0,0,0.2)',
+                              backgroundColor: 'white'
+                            }}
                           >
-                            <input
-                              value={method.identifier}
-                              className="form-check-input ml-3"
-                              type="radio"
-                              name="flexRadioDefault"
-                              id={method.identifier}
-                            />
-                            <div className="d-flex justify-content-between">
-                              <label
-                                className="form-check-label ml-5"
-                                for={method.identifier}
+                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                              <label>Holder Name</label>
+
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '0.3em',
+                                  backgroundColor: 'white'
+                                }}
                               >
-                                {method.name}
-                              </label>
-                              <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" />
+                                <input
+                                  type="text"
+                                  value={name}
+                                  placeholder="Emily J Smith"
+                                  required
+                                  onChange={(e) => setName(e.target.value)}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                              <label htmlFor="cardNumber">Card Number</label>
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '0.5em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <CardNumberElement
+                                  id="cardNumber"
+                                  options={ELEMENT_OPTIONS}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="form-group col-lg-6 col-md-6 col-sm-12">
+                              <label>Expiration Date</label>
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '0.5em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <CardExpiryElement />
+                              </div>
+                            </div>
+
+                            <div className="form-group col-lg-6 col-md-6 col-sm-12">
+                              <label>CVC Code</label>
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '0.5em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <CardCvcElement />
+                              </div>
                             </div>
                           </div>
-                        ))
-                      )}
-                    </div>
+                          <div className="sub-title p-3">Billing Address</div>
+                          <div
+                            className="row clearfix"
+                            style={{
+                              boxShadow: ' 0 2px 2px 0 rgba(0,0,0,0.2)',
+                              backgroundColor: 'white'
+                            }}
+                          >
+                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                              <label>Street</label>
 
-                    {klarnaMethod && ID && (
-                      <KlarnaPayment
-                        ID={ID}
-                        widgetLoaded={widgetLoaded}
-                        method={klarnaMethod}
-                      />
-                    )}
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '0.3em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <input
+                                  type="text"
+                                  value={street}
+                                  placeholder="542 W. 15th Street"
+                                  required
+                                  onChange={(e) => setStreet(e.target.value)}
+                                />
+                              </div>
+                            </div>
 
-                    {klarnaMethod && serviceId && (
-                      <KlarnaPayment
-                        serviceBill={{
-                          serviceId: serviceId,
-                          amount: Math.round(
-                            service.price *
-                              JSON.parse(localStorage.getItem('appointment'))
-                                .sessionNumber
-                          )
-                        }}
-                        widgetLoaded={widgetLoaded}
-                        method={klarnaMethod}
-                      />
-                    )}
+                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                              <label>City</label>
 
-                    {klarnaMethod && subscription && (
-                      <KlarnaPayment
-                        plan={{
-                          subscription: plan.name,
-                          amount: plan.price * sekToUsd * AmountOfWeeks
-                        }}
-                        widgetLoaded={widgetLoaded}
-                        method={klarnaMethod}
-                      />
-                    )}
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '0.3em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <input
+                                  type="text"
+                                  value={city}
+                                  placeholder="New York"
+                                  required
+                                  onChange={(e) => setCity(e.target.value)}
+                                />
+                              </div>
+                            </div>
 
-                    {klarnaMethod && requestId && (
-                      <KlarnaPayment
-                        requestBill={{
-                          bill: 'bill',
-                          amount: request.amount
-                        }}
-                        widgetLoaded={widgetLoaded}
-                        method={klarnaMethod}
-                      />
-                    )}
-                  </Tab>
-                </Tabs>
+                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                              <label>Country</label>
+
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '.3em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <input
+                                  type="text"
+                                  value={country}
+                                  placeholder="USA"
+                                  required
+                                  onChange={(e) => setCountry(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                              <label>Zip</label>
+
+                              <div
+                                style={{
+                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
+                                  padding: '.3em',
+                                  backgroundColor: 'white'
+                                }}
+                              >
+                                <input
+                                  type="text"
+                                  value={zip}
+                                  placeholder="58648"
+                                  required
+                                  onChange={(e) => setZip(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div style={{ padding: '20px 0' }}>
+                            <button
+                              className="theme-btn btn-style-one"
+                              type="submit"
+                              name="submit-form"
+                            >
+                              <span className="txt">Confirm Checkout</span>
+                            </button>
+                          </div>
+                        </form>
+                      </Tab>
+                      <Tab eventKey="klarna" title="Klarna">
+                        {widgetLoaded && <Loader />}
+                        <div
+                          onChange={(e) => setKlarnaMethod(e.target.value)}
+                          className="p-4"
+                        >
+                          {sessionLoading ? (
+                            <Loader />
+                          ) : (
+                            sessionSuccess &&
+                            session.payment_method_categories.map((method) => (
+                              <div
+                                key={method.identifier}
+                                className="m-2 p-2 border border-secondary bg-white text-dark "
+                              >
+                                <input
+                                  value={method.identifier}
+                                  className="form-check-input ml-3"
+                                  type="radio"
+                                  name="flexRadioDefault"
+                                  id={method.identifier}
+                                />
+                                <div className="d-flex justify-content-between">
+                                  <label
+                                    className="form-check-label ml-5"
+                                    for={method.identifier}
+                                  >
+                                    {method.name}
+                                  </label>
+                                  <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" />
+                                </div>
+                              </div>
+                            ))
+                          )}
+                        </div>
+
+                        {klarnaMethod && ID && (
+                          <KlarnaPayment
+                            ID={ID}
+                            widgetLoaded={widgetLoaded}
+                            method={klarnaMethod}
+                          />
+                        )}
+
+                        {klarnaMethod && serviceId && (
+                          <KlarnaPayment
+                            serviceBill={{
+                              serviceId: serviceId,
+                              amount: Math.round(
+                                service.price *
+                                  JSON.parse(
+                                    localStorage.getItem('appointment')
+                                  ).sessionNumber
+                              )
+                            }}
+                            widgetLoaded={widgetLoaded}
+                            method={klarnaMethod}
+                          />
+                        )}
+
+                        {klarnaMethod && subscription && (
+                          <KlarnaPayment
+                            plan={{
+                              subscription: plan.name,
+                              amount: plan.price * sekToUsd * AmountOfWeeks
+                            }}
+                            widgetLoaded={widgetLoaded}
+                            method={klarnaMethod}
+                          />
+                        )}
+
+                        {klarnaMethod && requestId && (
+                          <KlarnaPayment
+                            requestBill={{
+                              bill: 'bill',
+                              amount: request.amount
+                            }}
+                            widgetLoaded={widgetLoaded}
+                            method={klarnaMethod}
+                          />
+                        )}
+                      </Tab>
+                    </Tabs>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+           
         </div>
+         )
+         )}
       </div>
     </div>
   )

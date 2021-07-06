@@ -5,9 +5,9 @@ import {
   updateRequest,
   getRequestDetails
 } from '../../../redux/actions/requestAction'
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from 'history'
 
-const history = createBrowserHistory({forceRefresh:true});
+const history = createBrowserHistory({ forceRefresh: true })
 
 export default function UpdateRequest({ match }) {
   const dispatch = useDispatch()
@@ -35,16 +35,18 @@ export default function UpdateRequest({ match }) {
     request
   } = useSelector((state) => state.requestDetails)
 
-  
-  const {success: UpdateSuccess,loading: Updateloading, error: UpdateError } = useSelector(
-    (state) => state.requestUpdate
-  )
+  const {
+    success: UpdateSuccess,
+    loading: Updateloading,
+    error: UpdateError
+  } = useSelector((state) => state.requestUpdate)
 
   /*******************/
 
   const _setDefaultValuse = () => {
     setName(request && request.name)
     setPrice(request && request.amount)
+    setCurrency(request && request.currency)
     setSelectedStudent(request.requestedUser && request.requestedUser.email)
   }
 
@@ -52,7 +54,7 @@ export default function UpdateRequest({ match }) {
 
   const [name, setName] = useState()
   const [price, setPrice] = useState()
-
+  const [currency, setCurrency] = useState()
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState()
 
@@ -65,7 +67,7 @@ export default function UpdateRequest({ match }) {
     if (ID) {
       dispatch(getRequestDetails(ID))
     }
-    if(UpdateSuccess){
+    if (UpdateSuccess) {
       history.push('/admin-request-list')
     }
   }, [dispatch, ID, UpdateSuccess])
@@ -80,13 +82,15 @@ export default function UpdateRequest({ match }) {
 
   const _FilterUsers = (users, role) => {
     return users.filter((user) => user.user_type === role)
-  } 
+  }
 
   //handle form submit
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(updateRequest({ name, amount: price, selectedStudent }, ID))
+    dispatch(
+      updateRequest({ name, amount: price, selectedStudent, currency }, ID)
+    )
   }
 
   useEffect(() => {
@@ -127,9 +131,10 @@ export default function UpdateRequest({ match }) {
                   <div className="edit-course-form">
                     <form onSubmit={submitHandler}>
                       {/* Form Group */}
-                      <div className="form-group">
+                      <div className="">
                         <label>Service Name</label>
                         <input
+                          class="form-control"
                           type="text"
                           name="service-name"
                           placeholder="Service Name"
@@ -141,9 +146,58 @@ export default function UpdateRequest({ match }) {
                         />
                       </div>
 
-                      <div className="form-group">
-                        <label>Set Price (in USD)</label>
+                      <div className="">
+                        <label>Set Price </label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio1"
+                            value="euro"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked={currency === 'euro'}
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            EURO
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio2"
+                            value="usd"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked={currency === 'usd'}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            USD
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio3"
+                            value="sek"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked={currency === 'sek'}
+                          />
+                          <label class="form-check-label" for="inlineRadio3">
+                            SEK
+                          </label>
+                        </div>{' '}
                         <input
+                          class="form-control"
                           type="text"
                           name="service-price"
                           placeholder="Service Price"
@@ -158,53 +212,25 @@ export default function UpdateRequest({ match }) {
                       {/* Right Column */}
                       <div className=" col-lg-12 col-md-12 col-sm-12">
                         <div className="inner-column">
-                          <div className="sub-title pb-3">Options</div>
-                          <div className="option-cource-box">
-                            <div className="box-inner">
+                          <div className="">
+                            <div className="">
                               {/* ******************* */}
-                              <div className="form-group ">
-                                <label
-                                  htmlFor="exampleDataList"
-                                  className="form-label"
-                                >
+                              <div className="">
+                                <label htmlFor="exampleDataList" className="">
                                   Students
                                 </label>
 
                                 <input
-                                  className="form-control bg-light"
-                                  list="datalistOptions"
-                                  id="exampleDataList"
-                                  placeholder="search student..."
-                                  onChange={(e) => {
-                                    setSelectedStudent(e.target.value)
-                                  }}
+                                  className="form-control"
                                   value={selectedStudent}
+                                  disabled
                                 />
-
-                                <datalist id="datalistOptions">
-                                  {StudentsList.length &&
-                                    StudentsList.map((student) => {
-                                      return (
-                                        <option
-                                          data={student._id}
-                                          value={student.email}
-                                          key={student._id}
-                                        >
-                                          {student.name}
-                                        </option>
-                                      )
-                                    })}
-                                </datalist>
                               </div>
                             </div>
                           </div>
                           {/* Button Box */}
                           <div className="button-box text-center">
-                            <button
-                              type="submit"
-                              className="theme-btn btn-style-one"
-                              style={{ zIndex: '0' }}
-                            >
+                            <button type="submit" class="btn btn-warning">
                               Submit
                             </button>
                           </div>

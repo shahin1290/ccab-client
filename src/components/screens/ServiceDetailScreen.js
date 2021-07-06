@@ -84,7 +84,7 @@ export default function ServiceDetailScreen({ match }) {
 
     fetchMyAPI()
 
-    dispatch(createCurrrency())
+    dispatch(createCurrrency('usd'))
   }, [])
 
   useEffect(() => {
