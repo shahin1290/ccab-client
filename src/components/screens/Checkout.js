@@ -37,7 +37,7 @@ const CheckoutForm = ({ match, history }) => {
   const elements = useElements()
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
-  const [sekToUsd, setSekToUsd] = useState()
+  const [sekToEUR, setSekToEUR] = useState()
   const dispatch = useDispatch()
   const ID = match.params.bootcampId
   const subscription = match.params.plan
@@ -48,6 +48,7 @@ const CheckoutForm = ({ match, history }) => {
 
   const { course } = useSelector((state) => state.courseDetails)
   const { service } = useSelector((state) => state.serviceDetails)
+
 
   const {
     loading,
@@ -101,7 +102,7 @@ const CheckoutForm = ({ match, history }) => {
       const apiKey = '6068a971e6754bdf9d3b0ddc706779b0'
 
       const fromCurrency = 'SEK'
-      const toCurrency = 'USD'
+      const toCurrency = 'EUR'
       const query = fromCurrency + '_' + toCurrency
 
       const url =
@@ -112,7 +113,7 @@ const CheckoutForm = ({ match, history }) => {
 
       const resp = await axios.get(url)
       const amount = resp.data[query]
-      setSekToUsd(amount)
+      setSekToEUR(amount)
     }
 
     fetchMyAPI()
@@ -141,13 +142,21 @@ const CheckoutForm = ({ match, history }) => {
       dispatch(getServiceDetails(serviceId))
       dispatch(createCurrrency('USD'))
     }
-  }, [dispatch, ID])
+
+    
+  }, [dispatch, ID, subscription, serviceId, requestId])
 
   useEffect(() => {
-    if (request.currency) {
+    if (request) {
       dispatch(createCurrrency(request.currency))
     }
-  }, [request.currency, dispatch])
+  }, [request])
+
+  useEffect(() => {
+    if (subscription) {
+      dispatch(createCurrrency('EUR'))
+    }
+  }, [subscription])
 
   useEffect(() => {
     if (orderSuccess) {
@@ -217,9 +226,10 @@ const CheckoutForm = ({ match, history }) => {
 
       if (subscription) {
         amount = Math.round(
-          plan.price * sekToUsd * currency.data.amount * AmountOfWeeks * 100
+          plan.price * sekToEUR * currency.data.amount * AmountOfWeeks * 100
         )
       }
+
 
       if (ID) {
         amount = Math.round(currency.data.amount * course.price * 100)
@@ -357,7 +367,7 @@ const CheckoutForm = ({ match, history }) => {
       setWidgetLoaded(false)
     }
     if (subscription) {
-      const amount = plan.price * sekToUsd * AmountOfWeeks
+      const amount = plan.price * sekToEUR * AmountOfWeeks
       dispatch(
         createKlarnaSession(
           {
@@ -506,11 +516,12 @@ const CheckoutForm = ({ match, history }) => {
                                 <li className="clearfix">
                                   <strong>Total</strong>{' '}
                                   <span className="pull-right">
+                                    {console.log(plan.price,sekToEUR, currency.data.amount )}
                                     <strong>
                                       {currencySuccess &&
                                         `${Math.round(
                                           plan.price *
-                                            sekToUsd *
+                                            sekToEUR *
                                             currency.data.amount *
                                             AmountOfWeeks
                                         )}  ${currency.data.currency}`}
@@ -928,7 +939,7 @@ const CheckoutForm = ({ match, history }) => {
                           <KlarnaPayment
                             plan={{
                               subscription: plan.name,
-                              amount: plan.price * sekToUsd * AmountOfWeeks
+                              amount: plan.price * sekToEUR * AmountOfWeeks
                             }}
                             widgetLoaded={widgetLoaded}
                             method={klarnaMethod}

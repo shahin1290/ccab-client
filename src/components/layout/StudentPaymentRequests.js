@@ -14,9 +14,13 @@ export default function PaymentRequest() {
 
   const { loading, error, requests } = useSelector((state) => state.requestList)
 
+  console.log(requests);
+
   useEffect(() => {
     dispatch(getRequests())
   }, [dispatch])
+
+  
 
   return (
     <>

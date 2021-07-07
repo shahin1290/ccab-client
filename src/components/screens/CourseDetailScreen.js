@@ -52,7 +52,7 @@ export default function CourseDetailScreen({ match }) {
 
     fetchMyAPI()
 
-    dispatch(createCurrrency('usd'))
+    dispatch(createCurrrency('EUR'))
   }, [])
 
   useEffect(() => {

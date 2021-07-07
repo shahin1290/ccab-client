@@ -8,24 +8,12 @@ import { getDate } from '../../util/getDate'
 import { createCurrrency } from '../../redux/actions/currencyAction'
 
 export default function PaymentRequest({ req, index }) {
-  console.log(req.currency)
-  const dispatch = useDispatch()
-
-  const {
-    loading: currencyLoading,
-    success: currencySuccess,
-    currency
-  } = useSelector((state) => state.currencyCreate)
-
-  useEffect(() => {
-    dispatch(createCurrrency(req.currency))
-  }, [req])
+  
+  
 
   return (
     <>
-      {currencyLoading ? (
-        <Loader />
-      ) : (
+     
         <tr key={req._id}>
           <td>{index + 1}</td>
           <td>{req.name}</td>
@@ -54,7 +42,6 @@ export default function PaymentRequest({ req, index }) {
             <td className="font-weight-bold">-</td>
           )}
         </tr>
-      )}
     </>
   )
 }

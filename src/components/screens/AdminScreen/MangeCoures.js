@@ -155,13 +155,13 @@ export default function MangeCourse({ match }) {
               <div className="pull-left">
                 <div className="title">Manage Courses</div>
               </div>
-              <div className="pull-right ">
+              <div className="pull-right">
                 {/* Add couse Button */}
                 <a
                   href="/mentor-courses-list"
-                  className="btn btn-danger bordered "
+                  className="btn btn-danger bordered mr-1 "
                 >
-                  Mange Tests
+                  Update Content
                 </a>
 
                 <a

@@ -351,13 +351,15 @@ export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
       userLogin: { userDetail }
     } = getState()
     const config = {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + userDetail.token
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
     }
 
     const response = await axios.post(
       `http://localhost:5001/api/order/capture/${id}`,
-      { orderBy },
+      orderBy,
       config
     )
     // console.log("response:", response)

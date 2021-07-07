@@ -190,7 +190,7 @@ export default function MangeOrder({ match }) {
                                         dispatch(
                                           captureOrder(
                                             order.course,
-                                            order.orderBy
+                                            {orderBy: order.orderBy}
                                           )
                                         )
                                       }}
