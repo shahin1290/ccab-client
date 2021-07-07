@@ -6,7 +6,7 @@ import { getServiceList } from '../../redux/actions/serviceAction'
 // include styles
 import 'rodal/lib/rodal.css'
 import { Nav, Dropdown, NavDropdown, Navbar } from 'react-bootstrap'
-import {Link} from 'react-scroll';
+import { Link } from 'react-scroll'
 // imgaes
 import Logo from './../../assets/images/whiteLogo.png'
 
@@ -16,6 +16,7 @@ import { logout, isValid } from '../../redux/actions/userAction'
 import AdminHeader from './../layout/headers/AdminHeaderContnet'
 import StudentHeaderContent from './../layout/headers/StudentHeaderContent'
 import InstructorHeaderContent from './../layout/headers/InstructorHeaderContent'
+import AccountantHeaderContent from './../layout/headers/AccountantHeaderContent'
 
 import { getProfile } from '../../redux/actions/userAction'
 
@@ -111,7 +112,12 @@ export default function Header() {
             <div className="collapse navbar-collapse mr-3">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                  <Link to="pricing" spy={true} smooth={true} className="text-dark pb-5 pt-5">
+                  <Link
+                    to="pricing"
+                    spy={true}
+                    smooth={true}
+                    className="text-dark pb-5 pt-5"
+                  >
                     Courses
                   </Link>
                   <div
@@ -226,9 +232,11 @@ export default function Header() {
             <StudentHeaderContent logoutHandler={logoutHandler} />
           ) : userDetail.user_type === 'AdminUser' ? (
             <AdminHeader logoutHandler={logoutHandler} />
+          ) : userDetail.user_type === 'InstructorUser' ? (
+            <InstructorHeaderContent logoutHandler={logoutHandler} />
           ) : (
-            userDetail.user_type === 'InstructorUser' && (
-              <InstructorHeaderContent logoutHandler={logoutHandler} />
+            userDetail.user_type === 'AccountantUser' && (
+              <AccountantHeaderContent logoutHandler={logoutHandler} />
             )
           )}
 

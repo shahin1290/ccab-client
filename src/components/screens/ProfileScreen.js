@@ -125,7 +125,7 @@ export default function ProfileScreen() {
           ) : (
             user.name && (
               <div>
-                <div className="upper-content">
+                <div className="upper-content mb-5">
                   <div className="row clearfix">
                     {/* Left Column */}
                     <div className="left-column col-lg-9 col-md-12 col-sm-12">
@@ -142,85 +142,87 @@ export default function ProfileScreen() {
                             alt="avatar"
                           />
                         </div>
-                        <div className="sub-title">{userDetail.name}</div>
-                        <div className="designation">
+                        <div className="sub-title pt-3 pl-3">{userDetail.name}</div>
+                        <div className="designation pl-3">
                           {userDetail.user_type}
                         </div>
 
                         {/* Fact Counter */}
-                        <div className="fact-counter2">
-                          <div className="row clearfix">
-                            {/* Column */}
-                            <div className="column counter-column col-lg-3 col-md-6 col-sm-12 ">
-                              <div className="inner">
-                                <div className="sub-title">Courses</div>
-                                <div className="sub-title">
-                                  <CountUp
-                                    start={-2}
-                                    end={
-                                      filterCourseList() &&
-                                      filterCourseList().length
-                                    }
-                                    duration={2.75}
-                                    separator=" "
-                                    decimal=","
-                                    suffix=""
-                                  />
+                        {userDetail && userDetail.user_type === 'StudentUser' && (
+                          <div className="fact-counter2">
+                            <div className="row clearfix">
+                              {/* Column */}
+                              <div className="column counter-column col-lg-3 col-md-6 col-sm-12 ">
+                                <div className="inner">
+                                  <div className="sub-title">Courses</div>
+                                  <div className="sub-title">
+                                    <CountUp
+                                      start={-2}
+                                      end={
+                                        filterCourseList() &&
+                                        filterCourseList().length
+                                      }
+                                      duration={2.75}
+                                      separator=" "
+                                      decimal=","
+                                      suffix=""
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            {/* Column */}
-                            <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
-                              <div className="inner">
-                                <div className="sub-title">Assignments</div>
-                                <div className="sub-title">
-                                  <CountUp
-                                    start={-2}
-                                    end={myTasks.length}
-                                    duration={2.75}
-                                    separator=" "
-                                    decimal=","
-                                    suffix=""
-                                  />
+                              {/* Column */}
+                              <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
+                                <div className="inner">
+                                  <div className="sub-title">Assignments</div>
+                                  <div className="sub-title">
+                                    <CountUp
+                                      start={-2}
+                                      end={myTasks.length}
+                                      duration={2.75}
+                                      separator=" "
+                                      decimal=","
+                                      suffix=""
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            {/* Column */}
-                            <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
-                              <div className="inner">
-                                <div className="sub-title">Quizzes</div>
-                                <div className="sub-title">
-                                  <CountUp
-                                    start={-2}
-                                    end={myQuizList.length}
-                                    duration={2.75}
-                                    separator=" "
-                                    decimal=","
-                                    suffix=""
-                                  />
+                              {/* Column */}
+                              <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
+                                <div className="inner">
+                                  <div className="sub-title">Quizzes</div>
+                                  <div className="sub-title">
+                                    <CountUp
+                                      start={-2}
+                                      end={myQuizList.length}
+                                      duration={2.75}
+                                      separator=" "
+                                      decimal=","
+                                      suffix=""
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            {/* Column */}
-                            <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
-                              <div className="inner">
-                                <div className="sub-title">Answers</div>
-                                <div className="sub-title">
-                                  <CountUp
-                                    start={-2}
-                                    end={
-                                      myanswers.length + myQuizAnswers.length
-                                    }
-                                    duration={2.75}
-                                    separator=" "
-                                    decimal=","
-                                    suffix=""
-                                  />
+                              {/* Column */}
+                              <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
+                                <div className="inner">
+                                  <div className="sub-title">Answers</div>
+                                  <div className="sub-title">
+                                    <CountUp
+                                      start={-2}
+                                      end={
+                                        myanswers.length + myQuizAnswers.length
+                                      }
+                                      duration={2.75}
+                                      separator=" "
+                                      decimal=","
+                                      suffix=""
+                                    />
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     </div>
                     {/* Right Column */}

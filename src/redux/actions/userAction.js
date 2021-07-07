@@ -223,7 +223,6 @@ export const getUsers = () => async (dispatch, getState) => {
     }
     const response = await axios.get('http://localhost:5001/api/users/', config)
     // console.log("response:", response);
-    console.log(response.data)
     dispatch({
       type: USER_LIST_SUCCESS,
       payload: response.data
@@ -383,7 +382,6 @@ export const getUesrsNumbers = () => async (dispatch, getState) => {
       config
     )
 
-    console.log('res: ', response.data)
     dispatch({
       type: USER_NUMBERS_SUCCESS,
       payload: response.data,

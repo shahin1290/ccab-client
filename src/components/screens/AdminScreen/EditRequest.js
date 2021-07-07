@@ -15,6 +15,8 @@ export default function UpdateRequest({ match }) {
 
   /********* Call Reduser ************/
 
+  const { userDetail } = useSelector((state) => state.userLogin)
+
   // update course reducer
   const {
     loading: requestLoading,
@@ -70,7 +72,9 @@ export default function UpdateRequest({ match }) {
       dispatch(getRequestDetails(ID))
     }
     if (UpdateSuccess) {
-      history.push('/admin-request-list')
+      userDetail.user_type === 'AdminUser'
+        ? history.push('/admin-request-list')
+        : history.push('/accountant-request-list')
     }
   }, [dispatch, ID, UpdateSuccess])
 

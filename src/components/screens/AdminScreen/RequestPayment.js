@@ -11,6 +11,8 @@ export default function RequestPayment({ match }) {
 
   /********* Call Reduser ************/
 
+  const { userDetail } = useSelector((state) => state.userLogin)
+
   // update course reducer
   const {
     loading: requestLoading,
@@ -43,7 +45,9 @@ export default function RequestPayment({ match }) {
     dispatch(getUsers())
 
     if (requestSuccess) {
-      history.push('/admin-request-list')
+      userDetail.user_type === 'AdminUser'
+        ? history.push('/admin-request-list')
+        : history.push('/accountant-request-list')
     }
   }, [dispatch, match, history, requestSuccess])
 
@@ -216,7 +220,6 @@ export default function RequestPayment({ match }) {
                           </label>
                         </div>
                       </div>
-
 
                       <div className="">
                         <div className="">

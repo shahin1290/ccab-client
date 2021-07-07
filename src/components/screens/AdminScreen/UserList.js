@@ -32,12 +32,9 @@ export default function UserlistScreen() {
 
   const userDelete = useSelector((state) => state.userDelete)
   const { deleteSuccess } = userDelete
-  console.log('users: ', users)
 
   const userUpdateRole = useSelector((state) => state.userUpdateRole)
   const { error: updateUserRoleErr } = userUpdateRole
-
-  console.log(userUpdateRole);
 
   const history = useHistory()
 
@@ -77,7 +74,7 @@ export default function UserlistScreen() {
       history.push('/')
     }
   }, [show])
-  
+
   const [userClickDelete, setUserClickDelete] = useState('')
 
   const [updatedUser, setupdatedUser] = useState({})
@@ -285,6 +282,28 @@ export default function UserlistScreen() {
                                       htmlFor="InstructorUser"
                                     >
                                       Instructor
+                                    </label>
+                                  </div>
+
+                                  <div className="form-check">
+                                    <input
+                                      className="form-check-input"
+                                      type="radio"
+                                      value="AccountantUser"
+                                      name="userRole"
+                                      id="AccountantUser"
+                                      onChange={(e) => {
+                                        setupdatedUser({
+                                          ...updatedUser,
+                                          user_type: e.target.value
+                                        })
+                                      }}
+                                    />
+                                    <label
+                                      className="form-check-label"
+                                      htmlFor="AccountantUser"
+                                    >
+                                      Accountant
                                     </label>
                                   </div>
                                 </Modal.Body>
