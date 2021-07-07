@@ -46,7 +46,7 @@ export default function Header() {
 
   const logoutHandler = () => {
     dispatch(logout())
-    history.push('/login')
+    history.push('/')
   }
 
   return (

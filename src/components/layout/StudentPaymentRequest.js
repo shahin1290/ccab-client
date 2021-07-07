@@ -7,7 +7,7 @@ import Loader from './Loader'
 import { getDate } from '../../util/getDate'
 import { createCurrrency } from '../../redux/actions/currencyAction'
 
-export default function PaymentRequest({ req }) {
+export default function PaymentRequest({ req, index }) {
   console.log(req.currency)
   const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ export default function PaymentRequest({ req }) {
         <Loader />
       ) : (
         <tr key={req._id}>
-          <td>{2}</td>
+          <td>{index + 1}</td>
           <td>{req.name}</td>
           <td>
             <strong>
@@ -51,7 +51,7 @@ export default function PaymentRequest({ req }) {
               </Link>
             </td>
           ) : (
-            <td>-</td>
+            <td className="font-weight-bold">-</td>
           )}
         </tr>
       )}

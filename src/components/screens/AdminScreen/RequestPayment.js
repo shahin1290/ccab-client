@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from './../../../redux/actions/userAction'
 import { createRequest } from '../../../redux/actions/requestAction'
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from 'history'
 
-const history = createBrowserHistory({forceRefresh:true});
+const history = createBrowserHistory({ forceRefresh: true })
 
 export default function RequestPayment({ match }) {
   const dispatch = useDispatch()
@@ -32,6 +32,7 @@ export default function RequestPayment({ match }) {
   const [name, setName] = useState()
   const [price, setPrice] = useState()
   const [currency, setCurrency] = useState('EUR')
+  const [status, setStatus] = useState('Not Paid')
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState('')
 
@@ -41,7 +42,7 @@ export default function RequestPayment({ match }) {
     // call the getter ( users list )
     dispatch(getUsers())
 
-    if(requestSuccess){
+    if (requestSuccess) {
       history.push('/admin-request-list')
     }
   }, [dispatch, match, history, requestSuccess])
@@ -56,7 +57,7 @@ export default function RequestPayment({ match }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createRequest({ name, price, selectedStudent, currency }))
+    dispatch(createRequest({ name, price, selectedStudent, currency, status }))
   }
 
   useEffect(() => {
@@ -67,13 +68,13 @@ export default function RequestPayment({ match }) {
 
   return (
     <>
-       <div className="edit-cource-section">
+      <div className="edit-cource-section">
         <div className="auto-container">
           {/* Sec Title */}
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title">Edit Request</div>
+                <div className="title">Add Request</div>
               </div>
             </div>
           </div>
@@ -89,15 +90,14 @@ export default function RequestPayment({ match }) {
           <div className="inner-container">
             <div className="row clearfix">
               {/* Left Column */}
-              <div className="left-column col-lg-8 col-md-12 col-sm-12">
+              <div className="mx-auto">
                 <div className="inner-column">
-                  <div className="sub-title pb-3">Basic Information</div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">
                     <form onSubmit={submitHandler}>
                       {/* Form Group */}
                       <div className="">
-                        <label>Service Name</label>
+                        <label className="sub-text">Service Name</label>
                         <input
                           class="form-control"
                           type="text"
@@ -111,8 +111,8 @@ export default function RequestPayment({ match }) {
                         />
                       </div>
 
-                      <div className="">
-                        <label>Set Price </label>
+                      <div className="mt-4">
+                        <label className="sub-text mr-2">Set Currency </label>
                         <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
@@ -123,7 +123,8 @@ export default function RequestPayment({ match }) {
                             onChange={(e) => {
                               setCurrency(e.target.value)
                             }}
-                            checked = {currency === 'EUR'}
+                            checked={currency === 'EUR'}
+                            required
                           />
                           <label class="form-check-label" for="inlineRadio1">
                             EUR
@@ -139,7 +140,7 @@ export default function RequestPayment({ match }) {
                             onChange={(e) => {
                               setCurrency(e.target.value)
                             }}
-                            checked = {currency === 'USD'}
+                            checked={currency === 'USD'}
                           />
                           <label class="form-check-label" for="inlineRadio2">
                             USD
@@ -155,12 +156,17 @@ export default function RequestPayment({ match }) {
                             onChange={(e) => {
                               setCurrency(e.target.value)
                             }}
-                            checked = {currency === 'SEK'}
+                            checked={currency === 'SEK'}
                           />
                           <label class="form-check-label" for="inlineRadio3">
                             SEK
                           </label>
                         </div>{' '}
+                      </div>
+
+                      <div className="">
+                        <label className="sub-text">Set Price </label>
+
                         <input
                           class="form-control"
                           type="text"
@@ -174,52 +180,89 @@ export default function RequestPayment({ match }) {
                         />
                       </div>
 
-                      {/* Right Column */}
-                      <div className=" col-lg-12 col-md-12 col-sm-12">
-                        <div className="inner-column">
+                      <div className="mt-4">
+                        <label className="sub-text mr-2">Set Status </label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="status"
+                            id="inlineRadio1"
+                            value="Not Paid"
+                            onChange={(e) => {
+                              setStatus(e.target.value)
+                            }}
+                            checked={status === 'Not Paid'}
+                            required
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            Not Paid
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="status"
+                            id="inlineRadio2"
+                            value="Paid"
+                            onChange={(e) => {
+                              setStatus(e.target.value)
+                            }}
+                            status={status === 'Paid'}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            Paid
+                          </label>
+                        </div>
+                      </div>
+
+
+                      <div className="">
+                        <div className="">
+                          {/* ******************* */}
                           <div className="">
-                            <div className="">
-                              {/* ******************* */}
-                              <div className="">
-                                <label htmlFor="exampleDataList" className="">
-                                  Students
-                                </label>
+                            <label
+                              htmlFor="exampleDataList"
+                              className="sub-text"
+                            >
+                              Select Student
+                            </label>
 
-                                <input
-                                  className="form-control"
-                                  list="datalistOptions"
-                                  id="exampleDataList"
-                                  placeholder="search student..."
-                                  onChange={(e) => {
-                                    setSelectedStudent(e.target.value)
-                                  }}
-                                  value={selectedStudent}
-                                />
+                            <input
+                              className="form-control"
+                              list="datalistOptions"
+                              id="exampleDataList"
+                              placeholder="search student..."
+                              onChange={(e) => {
+                                setSelectedStudent(e.target.value)
+                              }}
+                              value={selectedStudent}
+                              required
+                            />
 
-                                <datalist id="datalistOptions">
-                                  {StudentsList.length &&
-                                    StudentsList.map((student) => {
-                                      return (
-                                        <option
-                                          data={student._id}
-                                          value={student.email}
-                                          key={student._id}
-                                        >
-                                          {student.name}
-                                        </option>
-                                      )
-                                    })}
-                                </datalist>
-                              </div>
-                            </div>
-                          </div>
-                          {/* Button Box */}
-                          <div className="button-box text-center">
-                            <button type="submit" class="btn btn-warning">
-                              Submit
-                            </button>
+                            <datalist id="datalistOptions">
+                              {StudentsList.length &&
+                                StudentsList.map((student) => {
+                                  return (
+                                    <option
+                                      data={student._id}
+                                      value={student.email}
+                                      key={student._id}
+                                    >
+                                      {student.name}
+                                    </option>
+                                  )
+                                })}
+                            </datalist>
                           </div>
                         </div>
+                      </div>
+                      {/* Button Box */}
+                      <div className="button-box text-center">
+                        <button type="submit" class="btn btn-danger mt-5">
+                          Submit
+                        </button>
                       </div>
                     </form>
                   </div>

@@ -569,6 +569,13 @@ const CheckoutForm = ({ match, history }) => {
                             {requestId && (
                               <ul>
                                 <li className="clearfix mb-3">
+                                  Service:
+                                  <span className="pull-right">
+                                    {request.name}
+                                       
+                                  </span>
+                                </li>
+                                <li className="clearfix mb-3">
                                   Bill:
                                   <span className="pull-right">
                                     {currencySuccess &&

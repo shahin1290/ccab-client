@@ -32,7 +32,7 @@ export default function AdminHeader() {
 
   const logoutHandler = () => {
     dispatch(logout())
-    history.push('/login')
+    history.push('/')
   }
 
   return (

@@ -42,7 +42,7 @@ export default function PaymentRequest() {
             </thead>
             <tbody>
               {requests &&
-                requests.map((req) => <StudentPaymentRequest req={req} />)}
+                requests.map((req, index) => <StudentPaymentRequest req={req} index={index} />)}
             </tbody>
           </Table>
         )}

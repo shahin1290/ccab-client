@@ -49,7 +49,7 @@ export default function RequestList() {
         <div className="py-2 sub-title">
           <Link to="/admin-request-payment">
             {' '}
-            <i class="fas fa-file-invoice-dollar"></i> Add Request
+            <i class="far fa-plus-square text-danger"></i> Add Request
           </Link>
         </div>
         <Table striped bordered hover responsive="sm">

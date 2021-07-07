@@ -47,6 +47,7 @@ export default function UpdateRequest({ match }) {
     setName(request && request.name)
     setPrice(request && request.amount)
     setCurrency(request && request.currency)
+    setStatus(request && request.status)
     setSelectedStudent(request.requestedUser && request.requestedUser.email)
   }
 
@@ -55,6 +56,7 @@ export default function UpdateRequest({ match }) {
   const [name, setName] = useState()
   const [price, setPrice] = useState()
   const [currency, setCurrency] = useState()
+  const [status, setStatus] = useState()
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState()
 
@@ -84,20 +86,23 @@ export default function UpdateRequest({ match }) {
     return users.filter((user) => user.user_type === role)
   }
 
-  //handle form submit
-  const submitHandler = (e) => {
-    e.preventDefault()
-
-    dispatch(
-      updateRequest({ name, amount: price, selectedStudent, currency }, ID)
-    )
-  }
-
   useEffect(() => {
     if (users && users.length) {
       setStudentsList(_FilterUsers(users, 'StudentUser'))
     }
   }, [users])
+
+  //handle form submit
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    dispatch(
+      updateRequest(
+        { name, amount: price, selectedStudent, currency, status },
+        ID
+      )
+    )
+  }
 
   return (
     <>
@@ -124,14 +129,13 @@ export default function UpdateRequest({ match }) {
           <div className="inner-container">
             <div className="row clearfix">
               {/* Left Column */}
-              <div className="left-column col-lg-8 col-md-12 col-sm-12">
+              <div className="mx-auto">
                 <div className="inner-column">
-                  <div className="sub-title pb-3">Basic Information</div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">
                     <form onSubmit={submitHandler}>
                       {/* Form Group */}
-                      <div className="">
+                      <div className="sub-text">
                         <label>Service Name</label>
                         <input
                           class="form-control"
@@ -146,22 +150,23 @@ export default function UpdateRequest({ match }) {
                         />
                       </div>
 
-                      <div className="">
-                        <label>Set Price </label>
+                      <div className="mt-4">
+                        <label className="sub-text mr-2">Set Currency </label>
                         <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
                             type="radio"
                             name="price"
                             id="inlineRadio1"
-                            value="euro"
+                            value="EUR"
                             onChange={(e) => {
                               setCurrency(e.target.value)
                             }}
-                            checked={currency === 'euro'}
+                            checked={currency === 'EUR'}
+                            required
                           />
                           <label class="form-check-label" for="inlineRadio1">
-                            EURO
+                            EUR
                           </label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -170,11 +175,11 @@ export default function UpdateRequest({ match }) {
                             type="radio"
                             name="price"
                             id="inlineRadio2"
-                            value="usd"
+                            value="USD"
                             onChange={(e) => {
                               setCurrency(e.target.value)
                             }}
-                            checked={currency === 'usd'}
+                            checked={currency === 'USD'}
                           />
                           <label class="form-check-label" for="inlineRadio2">
                             USD
@@ -186,16 +191,21 @@ export default function UpdateRequest({ match }) {
                             type="radio"
                             name="price"
                             id="inlineRadio3"
-                            value="sek"
+                            value="SEK"
                             onChange={(e) => {
                               setCurrency(e.target.value)
                             }}
-                            checked={currency === 'sek'}
+                            checked={currency === 'SEK'}
                           />
                           <label class="form-check-label" for="inlineRadio3">
                             SEK
                           </label>
                         </div>{' '}
+                      </div>
+
+                      <div className="">
+                        <label className="sub-text">Set Price </label>
+
                         <input
                           class="form-control"
                           type="text"
@@ -209,32 +219,88 @@ export default function UpdateRequest({ match }) {
                         />
                       </div>
 
-                      {/* Right Column */}
-                      <div className=" col-lg-12 col-md-12 col-sm-12">
-                        <div className="inner-column">
-                          <div className="">
-                            <div className="">
-                              {/* ******************* */}
-                              <div className="">
-                                <label htmlFor="exampleDataList" className="">
-                                  Students
-                                </label>
+                      <div className="mt-4">
+                        <label className="sub-text mr-2">Set Status </label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="status"
+                            id="inlineRadio1"
+                            value="Not Paid"
+                            onChange={(e) => {
+                              setStatus(e.target.value)
+                            }}
+                            checked={status === 'Not Paid'}
+                            required
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            Not Paid
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="status"
+                            id="inlineRadio2"
+                            value="Paid"
+                            onChange={(e) => {
+                              setStatus(e.target.value)
+                            }}
+                            checked={status === 'Paid'}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            Paid
+                          </label>
+                        </div>
+                      </div>
 
-                                <input
-                                  className="form-control"
-                                  value={selectedStudent}
-                                  disabled
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          {/* Button Box */}
-                          <div className="button-box text-center">
-                            <button type="submit" class="btn btn-warning">
-                              Submit
-                            </button>
+                      <div className="">
+                        <div className="">
+                          {/* ******************* */}
+                          <div className="">
+                            <label
+                              htmlFor="exampleDataList"
+                              className="sub-text"
+                            >
+                              Select Student
+                            </label>
+
+                            <input
+                              className="form-control"
+                              list="datalistOptions"
+                              id="exampleDataList"
+                              placeholder="search student..."
+                              onChange={(e) => {
+                                setSelectedStudent(e.target.value)
+                              }}
+                              value={selectedStudent}
+                              required
+                            />
+
+                            <datalist id="datalistOptions">
+                              {StudentsList.length &&
+                                StudentsList.map((student) => {
+                                  return (
+                                    <option
+                                      data={student._id}
+                                      value={student.email}
+                                      key={student._id}
+                                    >
+                                      {student.name}
+                                    </option>
+                                  )
+                                })}
+                            </datalist>
                           </div>
                         </div>
+                      </div>
+                      {/* Button Box */}
+                      <div className="button-box text-center">
+                        <button type="submit" class="btn btn-danger mt-5">
+                          Submit
+                        </button>
                       </div>
                     </form>
                   </div>
