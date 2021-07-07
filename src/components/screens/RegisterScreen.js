@@ -32,9 +32,8 @@ export default function RegisterScreen() {
 
   const [agree, setAgree] = useState(false)
 
-
   useEffect(() => {
-    if(userDetail && userDetail.name){
+    if (userDetail && userDetail.name) {
       history.push('/profile')
     }
     if (registerSuccess) {
@@ -53,6 +52,8 @@ export default function RegisterScreen() {
       setMessage('Passwords do not match')
     } else if (!gender) {
       setMessage('Please select the gender')
+    } else if (!language) {
+      setMessage('Please select the language of study')
     } else if (!agree) {
       setMessage('Please accept the terms and conditions')
     } else {

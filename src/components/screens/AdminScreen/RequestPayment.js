@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from './../../../redux/actions/userAction'
 import { createRequest } from '../../../redux/actions/requestAction'
 import { createBrowserHistory } from 'history'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const history = createBrowserHistory({ forceRefresh: true })
 
@@ -37,6 +39,7 @@ export default function RequestPayment({ match }) {
   const [status, setStatus] = useState('Not Paid')
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState('')
+  const [expiryDate, setExpiryDate] = useState()
 
   /*******************/
 
@@ -61,7 +64,7 @@ export default function RequestPayment({ match }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createRequest({ name, price, selectedStudent, currency, status }))
+    dispatch(createRequest({ name, price, selectedStudent, currency, status, expiryDate }))
   }
 
   useEffect(() => {
@@ -203,6 +206,8 @@ export default function RequestPayment({ match }) {
                             Not Paid
                           </label>
                         </div>
+
+                       
                         <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
@@ -219,7 +224,20 @@ export default function RequestPayment({ match }) {
                             Paid
                           </label>
                         </div>
+
+
                       </div>
+
+
+                      <div className="form-group">
+                          <div className="total-price sub-text">Set Expiry Date :</div>
+                          <div className="item-quantity">
+                            <DatePicker
+                              selected={expiryDate}
+                              onChange={(date) => setExpiryDate(date)}
+                            ></DatePicker>
+                          </div>
+                        </div>
 
                       <div className="">
                         <div className="">

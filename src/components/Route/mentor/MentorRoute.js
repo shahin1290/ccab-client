@@ -12,10 +12,7 @@ const MentorRoute = ({ component: Component, ...rest }) => {
   const { userDetail } = userLogin
   let Token = userDetail.token
 
-  useEffect(() => {
-   console.log('userDetail',userDetail);
-    console.log((Token && userDetail.user_type =='StudentUser')||!Token );
-  }, [userDetail])
+
 
   return (
     <>

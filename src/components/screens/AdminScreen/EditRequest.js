@@ -6,6 +6,8 @@ import {
   getRequestDetails
 } from '../../../redux/actions/requestAction'
 import { createBrowserHistory } from 'history'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const history = createBrowserHistory({ forceRefresh: true })
 
@@ -51,6 +53,7 @@ export default function UpdateRequest({ match }) {
     setCurrency(request && request.currency)
     setStatus(request && request.status)
     setSelectedStudent(request.requestedUser && request.requestedUser.email)
+    setExpiryDate(request.expireAt && new Date(request.expireAt))
   }
 
   /********* State And Var ************/
@@ -61,6 +64,8 @@ export default function UpdateRequest({ match }) {
   const [status, setStatus] = useState()
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState()
+  const [expiryDate, setExpiryDate] = useState(new Date())
+
 
   /*******************/
 
@@ -102,7 +107,7 @@ export default function UpdateRequest({ match }) {
 
     dispatch(
       updateRequest(
-        { name, amount: price, selectedStudent, currency, status },
+        { name, amount: price, selectedStudent, currency, status, expireAt: expiryDate },
         ID
       )
     )
@@ -259,6 +264,17 @@ export default function UpdateRequest({ match }) {
                           </label>
                         </div>
                       </div>
+
+
+                      <div className="form-group">
+                          <div className="total-price sub-text">Set Expiry Date :</div>
+                          <div className="item-quantity">
+                            <DatePicker
+                              selected={expiryDate}
+                              onChange={(date) => setExpiryDate(date)}
+                            ></DatePicker>
+                          </div>
+                        </div>
 
                       <div className="">
                         <div className="">
