@@ -34,7 +34,7 @@ export default function RegisterScreen() {
 
   useEffect(() => {
     if (userDetail && userDetail.name) {
-      history.push('/profile')
+      history.push('/')
     }
     if (registerSuccess) {
       history.push({

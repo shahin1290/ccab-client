@@ -26,9 +26,7 @@ export default function LoginScreen({ location }) {
       history.goBack()
     }
 
-    if (userDetail && userDetail.name) {
-      history.push('/profile')
-    }
+    
   }, [loginSuccess, history])
 
   const submitHandler = (e) => {
