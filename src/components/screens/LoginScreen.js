@@ -25,8 +25,6 @@ export default function LoginScreen({ location }) {
     if (loginSuccess) {
       history.goBack()
     }
-
-    
   }, [loginSuccess, history])
 
   const submitHandler = (e) => {
@@ -40,7 +38,18 @@ export default function LoginScreen({ location }) {
       {/* Login Section */}
       <section className="login-section">
         <div className="auto-container">
+          
+
           <div className="login-box">
+          {loading && (
+            <div id="backdrop">
+              <div class="textt-center loading">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          )}
             {location.state && <Message>{location.state.message}</Message>}
             {/* Title Box */}
             <div className="title-box">
@@ -93,6 +102,7 @@ export default function LoginScreen({ location }) {
               </form>
             </div>
           </div>
+          
         </div>
       </section>
       {/* End Login Section */}
