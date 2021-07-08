@@ -116,8 +116,11 @@ export default function EditProfile() {
   }
 
   useEffect(() => {
+    if (updateSuccess) {
+      history.push('/profile')
+    }
     dispatch(getProfile())
-  }, [dispatch])
+  }, [dispatch, updateSuccess])
 
   useEffect(() => {
     if (user && user.name) {
@@ -495,88 +498,86 @@ export default function EditProfile() {
                                     </div>
 
                                     <div className="border my-3"></div>
-                                {/* ******************* */}
-                                <div className="form-group col-lg-8 col-md-6 col-sm-12  ">
-                                  <label
-                                    htmlFor="exampleDataList"
-                                    className="form-label"
-                                  >
-                                    Teaching Fields
-                                  </label>
-                                  {/* error message */}
-                                  {selectCategoryErr && (
-                                    <p className="text-danger bg-light p-1">
-                                      {selectCategoryErr}
-                                    </p>
-                                  )}
-                                  <input
-                                    className="form-control bg-light"
-                                    list="datalistOptions"
-                                    placeholder="Search Teaching Fields..."
-                                    onChange={(e) => {
-                                      setSelectCategoryErr('')
-                                      setSelectedCategory(e.target.value)
-                                    }}
-                                    value={selectedCategory}
-                                  />
+                                    {/* ******************* */}
+                                    <div className="form-group col-lg-8 col-md-6 col-sm-12  ">
+                                      <label
+                                        htmlFor="exampleDataList"
+                                        className="form-label"
+                                      >
+                                        Teaching Fields
+                                      </label>
+                                      {/* error message */}
+                                      {selectCategoryErr && (
+                                        <p className="text-danger bg-light p-1">
+                                          {selectCategoryErr}
+                                        </p>
+                                      )}
+                                      <input
+                                        className="form-control bg-light"
+                                        list="datalistOptions"
+                                        placeholder="Search Teaching Fields..."
+                                        onChange={(e) => {
+                                          setSelectCategoryErr('')
+                                          setSelectedCategory(e.target.value)
+                                        }}
+                                        value={selectedCategory}
+                                      />
 
-                                  <button
-                                    type="button"
-                                    className="btn btn-success py-2 px-4 mt-2"
-                                    onClick={_handleSelectCategory}
-                                  >
-                                    add
-                                  </button>
+                                      <button
+                                        type="button"
+                                        className="btn btn-success py-2 px-4 mt-2"
+                                        onClick={_handleSelectCategory}
+                                      >
+                                        add
+                                      </button>
 
-                                  <datalist id="datalistOptions">
-                                    {categoryList &&
-                                      categoryList.length > 0 &&
-                                      categoryList.map((Category) => {
-                                        return (
-                                          <option
-                                            data={Category._id}
-                                            value={Category.name}
-                                            key={Category._id}
-                                          >
-                                            {Category.email}
-                                          </option>
-                                        )
-                                      })}
-                                  </datalist>
-                                </div>
-                                <label className="col-lg-4 col-md-6 col-sm-12 form-group">
-                                  Selected Teaching  Fields:{' '}
-                                  {categories && categories.length}/
-                                  {categoryList && categoryList.length}
-                                </label>
-                                <div className="my-3">
-                                  {categories && categories.length ? (
-                                    categories.map((category) => {
-                                      return (
-                                        <span className="rounded-pill  px-4 py-1  my-1 d-inline-block text-truncate bg-light">
-                                          <a
-                                            onClick={() => {
-                                              _handleUnselectCategory(
-                                                category._id
-                                              )
-                                            }}
-                                          >
-                                            <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
-                                          </a>{' '}
-                                          {category.name}
-                                        </span>
-                                      )
-                                    })
-                                  ) : (
-                                    <p className="text-warning bg-light p-1">
-                                      * Nothing Selected
-                                    </p>
-                                  )}
-                                </div>
+                                      <datalist id="datalistOptions">
+                                        {categoryList &&
+                                          categoryList.length > 0 &&
+                                          categoryList.map((Category) => {
+                                            return (
+                                              <option
+                                                data={Category._id}
+                                                value={Category.name}
+                                                key={Category._id}
+                                              >
+                                                {Category.email}
+                                              </option>
+                                            )
+                                          })}
+                                      </datalist>
+                                    </div>
+                                    <label className="col-lg-4 col-md-6 col-sm-12 form-group">
+                                      Selected Teaching Fields:{' '}
+                                      {categories && categories.length}/
+                                      {categoryList && categoryList.length}
+                                    </label>
+                                    <div className="my-3">
+                                      {categories && categories.length ? (
+                                        categories.map((category) => {
+                                          return (
+                                            <span className="rounded-pill  px-4 py-1  my-1 d-inline-block text-truncate bg-light">
+                                              <a
+                                                onClick={() => {
+                                                  _handleUnselectCategory(
+                                                    category._id
+                                                  )
+                                                }}
+                                              >
+                                                <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                              </a>{' '}
+                                              {category.name}
+                                            </span>
+                                          )
+                                        })
+                                      ) : (
+                                        <p className="text-warning bg-light p-1">
+                                          * Nothing Selected
+                                        </p>
+                                      )}
+                                    </div>
                                   </>
                                 )}
-
-                                
 
                                 <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                                   <button

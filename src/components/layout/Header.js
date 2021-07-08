@@ -81,11 +81,11 @@ export default function Header() {
                 <NavDropdown.Item href="/course-grid">
                   All Courses
                 </NavDropdown.Item>
-                {serviceCategoryArray.length &&
-                  serviceCategoryArray.map((category) => (
+                {categoryArray.length &&
+                  categoryArray.map((category) => (
                     <NavDropdown.Item
                       key={category}
-                      href={`/service-grid/${category}`}
+                      href={`/course-grid/${category}`}
                     >
                       {category}
                     </NavDropdown.Item>
@@ -98,8 +98,8 @@ export default function Header() {
                 <NavDropdown.Item href="/course-grid">
                   All Services
                 </NavDropdown.Item>
-                {categoryArray.length &&
-                  categoryArray.map((category) => (
+                {serviceCategoryArray.length &&
+                  serviceCategoryArray.map((category) => (
                     <NavDropdown.Item
                       key={category}
                       href={`/service-grid/${category}`}
