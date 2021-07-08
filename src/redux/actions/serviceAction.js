@@ -16,7 +16,10 @@ import {
   SERVICE_ADD_FAIL,
   ADMIN_SERVICE_LIST_REQUEST,
   ADMIN_SERVICE_LIST_SUCCESS,
-  ADMIN_SERVICE_LIST_FAIL
+  ADMIN_SERVICE_LIST_FAIL,
+  SERVICE_INSTRUCTOR_UPDATE_REQUEST,
+  SERVICE_INSTRUCTOR_UPDATE_SUCCESS,
+  SERVICE_INSTRUCTOR_UPDATE_FAIL
 } from '../constences/serviceConst'
 
 import axios from 'axios'
@@ -80,7 +83,6 @@ export const getServiceListForAdmin =
         `https://server.ccab.tech/api/service/manage?pageNumber=${pageNumber}`,
         config
       )
-
 
       dispatch({
         type: ADMIN_SERVICE_LIST_SUCCESS,
@@ -172,7 +174,7 @@ export const createService = () => async (dispatch, getState) => {
 }
 
 export const deleteService = (id) => async (dispatch, getState) => {
-  console.log(id);
+  console.log(id)
   try {
     dispatch({
       type: SERVICE_DELETE_REQUEST
@@ -238,3 +240,43 @@ export const updateService = (service, id) => async (dispatch, getState) => {
     })
   }
 }
+
+// update service
+export const updateServiceInstructor =
+  (categories, id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: SERVICE_INSTRUCTOR_UPDATE_REQUEST
+      })
+
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userDetail.token
+        }
+      }
+
+      //console.log(service);
+      await axios.put(
+        'http://localhost:5001/api/service/update-instructors',
+        categories,
+        config
+      )
+
+      dispatch({
+        type: SERVICE_INSTRUCTOR_UPDATE_SUCCESS
+      })
+    } catch (error) {
+      // console.log(error.response.data);
+      dispatch({
+        type: SERVICE_INSTRUCTOR_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }

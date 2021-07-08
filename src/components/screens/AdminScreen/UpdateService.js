@@ -5,13 +5,19 @@ import {
   updateService
 } from '../../../redux/actions/serviceAction'
 import { getUsers } from '../../../redux/actions/userAction'
+import { getServiceCategories } from '../../../redux/actions/serviceCategoryAction'
 
-import { Card, Accordion } from 'react-bootstrap'
+import { Card, Accordion, Button } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid'
 import { createBrowserHistory } from 'history'
+import Rodal from 'rodal'
+import AddStudentToService from './AddStudentToService'
+import Loader from '../../layout/Loader'
+import Message from '../../layout/Message'
 
 export default function UpdateCourese({ match }) {
   const history = createBrowserHistory({ forceRefresh: true })
+  const [showModal, setShowModal] = useState({ visible: false })
 
   const dispatch = useDispatch()
 
@@ -38,6 +44,13 @@ export default function UpdateCourese({ match }) {
     error: serviceDetailsError
   } = useSelector((state) => state.serviceDetails)
 
+  // get serviceCategories Reducer
+  const {
+    serviceCategories,
+    loading: categoryListLoading,
+    error: categoryListError
+  } = useSelector((state) => state.serviceCategoryList)
+
   /*******************/
 
   /********* State And Var ************/
@@ -62,9 +75,6 @@ export default function UpdateCourese({ match }) {
   const [selectedInstructor, setSelectedInstructor] = useState('')
   const [selectInstructorErr, setSelectInstructorErr] = useState('')
 
-  //video
-  const [showVideo, setShowVideo] = useState(false)
-
   // update err
   const [updateErr, setUpdateErr] = useState('')
   /*******************/
@@ -72,6 +82,8 @@ export default function UpdateCourese({ match }) {
   useEffect(() => {
     // call the getter ( service Details  and users list )
     dispatch(getServiceDetails(ID))
+    dispatch(getServiceCategories())
+
     dispatch(getUsers())
     if (UpdateSuccess) {
       history.push('/admin-services-list')
@@ -172,14 +184,6 @@ export default function UpdateCourese({ match }) {
     setInstructors(newInstructors)
   }
 
-  // close video
-  const handleCloseVideo = () => {
-    setShowVideo(false)
-  }
-  const handleOpenVideo = () => {
-    setShowVideo(true)
-  }
-
   /********************* ************/
   /* Field Section */
 
@@ -231,7 +235,7 @@ export default function UpdateCourese({ match }) {
     e.preventDefault()
 
     let infoData = []
-    if (titleWithAnswer.length ) {
+    if (titleWithAnswer.length) {
       titleWithAnswer.forEach((item) => {
         infoData.push(item)
       })
@@ -303,6 +307,29 @@ export default function UpdateCourese({ match }) {
               </div>
             </div>
           </div>
+
+          <div className="buttons-box pull-right">
+            <Button
+              variant="danger"
+              onClick={() => {
+                setShowModal({ visible: true })
+              }}
+            >
+              <span className="sub-title text-white">
+                <i class="fas fa-plus-square"></i> Add Student
+              </span>
+            </Button>
+          </div>
+          <div className="py-2 sub-title mb-5">
+            <Rodal
+              animation="zoom"
+              visible={showModal.visible}
+              onClose={() => setShowModal({ visible: false })}
+              width={900}
+            >
+              <AddStudentToService />
+            </Rodal>
+          </div>
           <div>
             {error ? (
               <p className="text-danger bg-light p-2 ">{error}</p>
@@ -364,15 +391,19 @@ export default function UpdateCourese({ match }) {
                             select an option
                           </option>
 
-                          <option>Math </option>
-
-                          <option>Phtsics </option>
-
-                          <option>Programing</option>
-
-                          <option>English</option>
-                          <option>Arabic</option>
-                          <option>German</option>
+                          {categoryListLoading ? (
+                            <Loader />
+                          ) : categoryListError ? (
+                            <Message>{categoryListError}</Message>
+                          ) : serviceCategories ? (
+                            serviceCategories.map((req) => (
+                              <option key={req._id}>{req.name}</option>
+                            ))
+                          ) : (
+                            <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                              No serviceCatyegory Found!
+                            </p>
+                          )}
                         </select>
                       </div>
 
@@ -732,27 +763,6 @@ export default function UpdateCourese({ match }) {
                             name="quantity"
                             onChange={(e) => {
                               setPrice(e.target.value)
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Divider */}
-                      <div className="border my-3"></div>
-                      {/* ******************* */}
-                      <div className="form-group">
-                        <span className="price">seats</span>
-                        <div className="total-price">Set service seats :</div>
-                        <p>More than 99 seat, it will be unlimited</p>
-                        <div className="item-quantity">
-                          <input
-                            className="quantity-spinner"
-                            type="number"
-                            min="0"
-                            defaultValue={seats}
-                            name="quantity"
-                            onChange={(e) => {
-                              setSeats(e.target.value)
                             }}
                           />
                         </div>

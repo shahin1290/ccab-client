@@ -164,7 +164,7 @@ export default function ServiceGridScreen({ match }) {
                         <div className="options-view">
                           <div className="clearfix">
                             <div className="pull-left">
-                              <div className="title pt-5">
+                              <div className="title pt-5 text-capitalize">
                                 {category} services
                               </div>
                             </div>
@@ -215,11 +215,6 @@ export default function ServiceGridScreen({ match }) {
                                           <div className="students">
                                             {service.instructors.length}{' '}
                                             Instructors
-                                          </div>
-                                        </div>
-                                        <div className="pull-right">
-                                          <div className="hours">
-                                            {service.students.length} enrolled
                                           </div>
                                         </div>
                                       </div>
@@ -344,7 +339,10 @@ export default function ServiceGridScreen({ match }) {
                       </div>
                       <div className="lower-content">
                         <div>
-                          <Link className="sub-title" to="/service/1/details">
+                          <Link
+                            className="sub-title"
+                            to={`/services/${serviceList[0]._id}`}
+                          >
                             {filterSubscriptionService(serviceList)[0].name}
                           </Link>
                         </div>
@@ -362,17 +360,7 @@ export default function ServiceGridScreen({ match }) {
                         <div className="clearfix">
                           <div className="pull-left">
                             <div className="students">
-                              {filterSubscriptionService(serviceList)[0].weeks *
-                                5}{' '}
-                              Lectures
-                            </div>
-                          </div>
-                          <div className="pull-right">
-                            <div className="hours">
-                              {filterSubscriptionService(serviceList)[0].weeks *
-                                5 *
-                                2}{' '}
-                              Hours
+                              {serviceList[0].instructors.length} Instructors
                             </div>
                           </div>
                         </div>

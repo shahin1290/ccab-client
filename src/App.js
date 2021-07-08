@@ -12,7 +12,7 @@ import Checkout from './components/screens/Checkout'
 import CheckoutKlarna from './components/screens/CheckoutKlarna'
 import ConfirmationKlarna from './components/screens/ConfirmationKlarna'
 import ConfirmationCardPurchase from './components/screens/ConfirmationCardPurchase'
-import Pricing from './components/screens/Pricing';
+import Pricing from './components/screens/Pricing'
 import ErrorScreen from './components/screens/ErrorScreen'
 
 import Assignments from './components/layout/Assignments'
@@ -29,6 +29,7 @@ import EditRequest from './components/screens/AdminScreen/EditRequest'
 import JobList from './components/screens/AdminScreen/JobList'
 import ManageServices from './components/screens/AdminScreen/ManageServices'
 import UpdateService from './components/screens/AdminScreen/UpdateService'
+import ServiceCategoryList from './components/screens/AdminScreen/ServiceCategoryList'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -56,6 +57,8 @@ import MentorRoute from './components/Route/mentor/MentorRoute'
 import InstructorRoute from './components/Route/instructor/InstructorRoute'
 
 import AdminRoute from './components/Route/admin/AdminRoute'
+import AccountantRoute from './components/Route/accountant/AccountantRoute'
+
 import UserListScreen from './components/screens/AdminScreen/UserList'
 
 /*****************************************/
@@ -139,7 +142,31 @@ function App() {
           component={JobList}
         ></AdminRoute>
 
-        
+        <AdminRoute
+          exact
+          path="/manage-service-category"
+          component={ServiceCategoryList}
+        ></AdminRoute>
+
+        {/* Private Route for Accountant  */}
+
+        <AccountantRoute
+          exact
+          path="/accountant-request-list"
+          component={RequestList}
+        ></AccountantRoute>
+
+        <AccountantRoute
+          exact
+          path="/accountant-request-edit/:id"
+          component={EditRequest}
+        ></AccountantRoute>
+
+        <AccountantRoute
+          exact
+          path="/accountant-request-payment"
+          component={RequestPayment}
+        ></AccountantRoute>
 
         {/* Private Route for Mentor  */}
         <MentorRoute
@@ -232,7 +259,7 @@ function App() {
           path="/reports"
           component={ReportList}
         ></InstructorRoute>
-         <InstructorRoute
+        <InstructorRoute
           exact
           path="/instructor-new-session"
           component={NewSession}

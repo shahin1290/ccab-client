@@ -6,7 +6,7 @@ import { getServiceList } from '../../redux/actions/serviceAction'
 // include styles
 import 'rodal/lib/rodal.css'
 import { Nav, Dropdown, NavDropdown, Navbar } from 'react-bootstrap'
-import {Link} from 'react-scroll';
+import { Link } from 'react-scroll'
 // imgaes
 import Logo from './../../assets/images/whiteLogo.png'
 
@@ -16,6 +16,7 @@ import { logout, isValid } from '../../redux/actions/userAction'
 import AdminHeader from './../layout/headers/AdminHeaderContnet'
 import StudentHeaderContent from './../layout/headers/StudentHeaderContent'
 import InstructorHeaderContent from './../layout/headers/InstructorHeaderContent'
+import AccountantHeaderContent from './../layout/headers/AccountantHeaderContent'
 
 import { getProfile } from '../../redux/actions/userAction'
 
@@ -46,7 +47,7 @@ export default function Header() {
 
   const logoutHandler = () => {
     dispatch(logout())
-    history.push('/login')
+    history.push('/')
   }
 
   return (
@@ -101,7 +102,7 @@ export default function Header() {
                   categoryArray.map((category) => (
                     <NavDropdown.Item
                       key={category}
-                      href={`/course-grid/${category}`}
+                      href={`/service-grid/${category}`}
                     >
                       {category}
                     </NavDropdown.Item>
@@ -111,7 +112,12 @@ export default function Header() {
             <div className="collapse navbar-collapse mr-3">
               <ul className="navbar-nav ">
                 <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                  <Link to="pricing" spy={true} smooth={true} className="text-dark pb-5 pt-5">
+                  <Link
+                    to="pricing"
+                    spy={true}
+                    smooth={true}
+                    className="text-dark pb-5 pt-5"
+                  >
                     Courses
                   </Link>
                   <div
@@ -157,7 +163,7 @@ export default function Header() {
                         <div key={category}>
                           <a
                             className="dropdown-item"
-                            href={`/course-grid/${category}`}
+                            href={`/service-grid/${category}`}
                           >
                             {category}
                           </a>
@@ -224,13 +230,15 @@ export default function Header() {
             </>
           ) : userDetail.user_type === 'StudentUser' ? (
             <StudentHeaderContent logoutHandler={logoutHandler} />
-          ) : 
-            userDetail.user_type === 'AdminUser' ? (
-              <AdminHeader logoutHandler={logoutHandler} />
-            ):  
-              userDetail.user_type === 'InstructorUser' && (
-                <InstructorHeaderContent logoutHandler={logoutHandler} />
-              )}
+          ) : userDetail.user_type === 'AdminUser' ? (
+            <AdminHeader logoutHandler={logoutHandler} />
+          ) : userDetail.user_type === 'InstructorUser' ? (
+            <InstructorHeaderContent logoutHandler={logoutHandler} />
+          ) : (
+            userDetail.user_type === 'AccountantUser' && (
+              <AccountantHeaderContent logoutHandler={logoutHandler} />
+            )
+          )}
 
           <Nav>
             {!userDetail.token ? (
@@ -251,7 +259,7 @@ export default function Header() {
                         <img
                           src={
                             user.avatar
-                              ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                              ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                               : '/images/resource/avatar.svg'
                           }
                           alt="avatar"

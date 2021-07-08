@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { userProfileUpdate, getProfile } from '../../redux/actions/userAction'
+import { getServiceCategories } from '../../redux/actions/serviceCategoryAction'
+import { updateServiceInstructor } from '../../redux/actions/serviceAction'
+
 import { useHistory } from 'react-router-dom'
 import { useDropzone } from 'react-dropzone'
 import Message from '../layout/Message'
@@ -16,6 +19,12 @@ export default function EditProfile() {
     error: getuserProfileErr
   } = useSelector((state) => state.userProfile)
   const { updateSuccess, error } = useSelector((state) => state.userUpdate)
+
+  const {
+    serviceCategories,
+    loading: categoryListLoading,
+    error: categoryListError
+  } = useSelector((state) => state.serviceCategoryList)
 
   const [selectedImageFile, setSelectedImageFile] = useState()
   const [file, setFile] = React.useState()
@@ -61,7 +70,12 @@ export default function EditProfile() {
   const [skill, setSkill] = useState('')
   const [skills, setSkills] = useState([])
 
-  // select student
+  // select Category
+  const [categories, setCategories] = useState([])
+  const [categoryList, setCategoryList] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectCategoryErr, setSelectCategoryErr] = useState('')
+
   const _handleSelectSKill = () => {
     setSkills([...skills, skill])
   }
@@ -69,6 +83,36 @@ export default function EditProfile() {
   const _handleUnselectSkill = (skill) => {
     let NewSkills = skills.filter((item) => item !== skill)
     setSkills(NewSkills)
+  }
+
+  // select Category
+  const _handleSelectCategory = () => {
+    let item
+    let exist = false
+    // find the user id
+    let category = categoryList.filter((item) => item.name === selectedCategory)
+    // console.log('after filtering : ', Categories.length&&Categories[0]._id);
+    for (item of categories) {
+      if (item._id === category[0]._id) {
+        //console.log('existing item ' , item.name);
+        exist = true
+      }
+    }
+    if (exist) setSelectCategoryErr('Category Already Selected')
+    else {
+      setCategories([
+        ...categories,
+        { name: category[0].name, _id: category[0]._id }
+      ])
+    }
+
+    //console.log(selectCategoryErr,Category);
+  }
+
+  const _handleUnselectCategory = (id) => {
+    let NewCategories = categories.filter((item) => item._id !== id)
+    setCategories(NewCategories)
+    //console.log('Category removed ');
   }
 
   useEffect(() => {
@@ -79,7 +123,17 @@ export default function EditProfile() {
     if (user && user.name) {
       setUserData()
     }
+
+    if (user && user.user_type === 'InstructorUser') {
+      dispatch(getServiceCategories())
+    }
   }, [user])
+
+  useEffect(() => {
+    if (serviceCategories && serviceCategories.length > 0) {
+      setCategoryList(serviceCategories)
+    }
+  }, [serviceCategories])
 
   const getNetworkAddress = (name) => {
     const networkAddresses =
@@ -103,9 +157,18 @@ export default function EditProfile() {
     setLinkedinAddress(getNetworkAddress('linkedin'))
     setGithubAddress(getNetworkAddress('github'))
     setTwitterAddress(getNetworkAddress('twitter'))
+    setCategories(user.teachingFields ? user.teachingFields : [])
   }
   const submitHandler = (e) => {
     e.preventDefault()
+    // set array for students ids
+    let categoriesId = []
+    if (categories.length) {
+      categories.forEach((item) => {
+        categoriesId.push(item._id)
+      })
+    }
+
     const formData = new FormData()
     formData.append('avatar', file)
     formData.append('email', email)
@@ -122,15 +185,18 @@ export default function EditProfile() {
         linkedinAddress && linkedinAddress
       ])
     )
+    formData.append('teachingFields', JSON.stringify(categoriesId))
 
-    /* for (var pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1])
-    }
- */
     dispatch(userProfileUpdate(formData))
-    /*  if (updateSuccess) {
-      history.push('/profile')
-    } */
+
+    let categoriesName = []
+    if (categories.length) {
+      categories.forEach((item) => {
+        categoriesName.push(item.name)
+      })
+    }
+
+    dispatch(updateServiceInstructor({ categories: categoriesName }))
   }
 
   return (
@@ -168,7 +234,7 @@ export default function EditProfile() {
                       preview
                         ? preview
                         : user.avatar
-                        ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                        ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                         : 'https://via.placeholder.com/200x112'
                     }
                     alt="avatar"
@@ -427,8 +493,90 @@ export default function EditProfile() {
                                         </p>
                                       )}
                                     </div>
+
+                                    <div className="border my-3"></div>
+                                {/* ******************* */}
+                                <div className="form-group col-lg-8 col-md-6 col-sm-12  ">
+                                  <label
+                                    htmlFor="exampleDataList"
+                                    className="form-label"
+                                  >
+                                    Teaching Fields
+                                  </label>
+                                  {/* error message */}
+                                  {selectCategoryErr && (
+                                    <p className="text-danger bg-light p-1">
+                                      {selectCategoryErr}
+                                    </p>
+                                  )}
+                                  <input
+                                    className="form-control bg-light"
+                                    list="datalistOptions"
+                                    placeholder="Search Teaching Fields..."
+                                    onChange={(e) => {
+                                      setSelectCategoryErr('')
+                                      setSelectedCategory(e.target.value)
+                                    }}
+                                    value={selectedCategory}
+                                  />
+
+                                  <button
+                                    type="button"
+                                    className="btn btn-success py-2 px-4 mt-2"
+                                    onClick={_handleSelectCategory}
+                                  >
+                                    add
+                                  </button>
+
+                                  <datalist id="datalistOptions">
+                                    {categoryList &&
+                                      categoryList.length > 0 &&
+                                      categoryList.map((Category) => {
+                                        return (
+                                          <option
+                                            data={Category._id}
+                                            value={Category.name}
+                                            key={Category._id}
+                                          >
+                                            {Category.email}
+                                          </option>
+                                        )
+                                      })}
+                                  </datalist>
+                                </div>
+                                <label className="col-lg-4 col-md-6 col-sm-12 form-group">
+                                  Selected Teaching  Fields:{' '}
+                                  {categories && categories.length}/
+                                  {categoryList && categoryList.length}
+                                </label>
+                                <div className="my-3">
+                                  {categories && categories.length ? (
+                                    categories.map((category) => {
+                                      return (
+                                        <span className="rounded-pill  px-4 py-1  my-1 d-inline-block text-truncate bg-light">
+                                          <a
+                                            onClick={() => {
+                                              _handleUnselectCategory(
+                                                category._id
+                                              )
+                                            }}
+                                          >
+                                            <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                          </a>{' '}
+                                          {category.name}
+                                        </span>
+                                      )
+                                    })
+                                  ) : (
+                                    <p className="text-warning bg-light p-1">
+                                      * Nothing Selected
+                                    </p>
+                                  )}
+                                </div>
                                   </>
                                 )}
+
+                                
 
                                 <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                                   <button

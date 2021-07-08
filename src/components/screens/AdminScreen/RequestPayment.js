@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from './../../../redux/actions/userAction'
 import { createRequest } from '../../../redux/actions/requestAction'
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from 'history'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
-const history = createBrowserHistory({forceRefresh:true});
+const history = createBrowserHistory({ forceRefresh: true })
 
 export default function RequestPayment({ match }) {
   const dispatch = useDispatch()
 
   /********* Call Reduser ************/
+
+  const { userDetail } = useSelector((state) => state.userLogin)
 
   // update course reducer
   const {
@@ -31,9 +35,11 @@ export default function RequestPayment({ match }) {
 
   const [name, setName] = useState()
   const [price, setPrice] = useState()
-
+  const [currency, setCurrency] = useState('EUR')
+  const [status, setStatus] = useState('Not Paid')
   const [StudentsList, setStudentsList] = useState([])
   const [selectedStudent, setSelectedStudent] = useState('')
+  const [expiryDate, setExpiryDate] = useState()
 
   /*******************/
 
@@ -41,8 +47,10 @@ export default function RequestPayment({ match }) {
     // call the getter ( users list )
     dispatch(getUsers())
 
-    if(requestSuccess){
-      history.push('/admin-request-list')
+    if (requestSuccess) {
+      userDetail.user_type === 'AdminUser'
+        ? history.push('/admin-request-list')
+        : history.push('/accountant-request-list')
     }
   }, [dispatch, match, history, requestSuccess])
 
@@ -56,7 +64,7 @@ export default function RequestPayment({ match }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(createRequest({ name, price, selectedStudent }))
+    dispatch(createRequest({ name, price, selectedStudent, currency, status, expiryDate }))
   }
 
   useEffect(() => {
@@ -67,14 +75,13 @@ export default function RequestPayment({ match }) {
 
   return (
     <>
-      {/* <!-- Edit Cource Section --> */}
       <div className="edit-cource-section">
         <div className="auto-container">
           {/* Sec Title */}
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title">Send Request</div>
+                <div className="title">Add Request</div>
               </div>
             </div>
           </div>
@@ -83,23 +90,23 @@ export default function RequestPayment({ match }) {
               <p className="text-danger bg-light p-2 ">{error}</p>
             ) : requestSuccess ? (
               <p className="text-success bg-light p-2 ">
-                Request Sent successfully
+                Request Send successfully
               </p>
             ) : null}
           </div>
           <div className="inner-container">
             <div className="row clearfix">
               {/* Left Column */}
-              <div className="left-column col-lg-8 col-md-12 col-sm-12">
+              <div className="mx-auto">
                 <div className="inner-column">
-                  <div className="sub-title pb-3">Basic Information</div>
                   {/* Edit Course Form */}
                   <div className="edit-course-form">
                     <form onSubmit={submitHandler}>
                       {/* Form Group */}
-                      <div className="form-group">
-                        <label>Service Name</label>
+                      <div className="">
+                        <label className="sub-text">Service Name</label>
                         <input
+                          class="form-control"
                           type="text"
                           name="service-name"
                           placeholder="Service Name"
@@ -111,9 +118,64 @@ export default function RequestPayment({ match }) {
                         />
                       </div>
 
-                      <div className="form-group">
-                        <label>Set Price (in USD)</label>
+                      <div className="mt-4">
+                        <label className="sub-text mr-2">Set Currency </label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio1"
+                            value="EUR"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked={currency === 'EUR'}
+                            required
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            EUR
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio2"
+                            value="USD"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked={currency === 'USD'}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            USD
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="price"
+                            id="inlineRadio3"
+                            value="SEK"
+                            onChange={(e) => {
+                              setCurrency(e.target.value)
+                            }}
+                            checked={currency === 'SEK'}
+                          />
+                          <label class="form-check-label" for="inlineRadio3">
+                            SEK
+                          </label>
+                        </div>{' '}
+                      </div>
+
+                      <div className="">
+                        <label className="sub-text">Set Price </label>
+
                         <input
+                          class="form-control"
                           type="text"
                           name="service-price"
                           placeholder="Service Price"
@@ -125,60 +187,103 @@ export default function RequestPayment({ match }) {
                         />
                       </div>
 
-                      {/* Right Column */}
-                      <div className=" col-lg-12 col-md-12 col-sm-12">
-                        <div className="inner-column">
-                          <div className="sub-title pb-3">Options</div>
-                          <div className="option-cource-box">
-                            <div className="box-inner">
-                              {/* ******************* */}
-                              <div className="form-group ">
-                                <label
-                                  htmlFor="exampleDataList"
-                                  className="form-label"
-                                >
-                                  Students
-                                </label>
+                      <div className="mt-4">
+                        <label className="sub-text mr-2">Set Status </label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="status"
+                            id="inlineRadio1"
+                            value="Not Paid"
+                            onChange={(e) => {
+                              setStatus(e.target.value)
+                            }}
+                            checked={status === 'Not Paid'}
+                            required
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            Not Paid
+                          </label>
+                        </div>
 
-                                <input
-                                  className="form-control bg-light"
-                                  list="datalistOptions"
-                                  id="exampleDataList"
-                                  placeholder="search student..."
-                                  onChange={(e) => {
-                                    setSelectedStudent(e.target.value)
-                                  }}
-                                  value={selectedStudent}
-                                />
+                       
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="status"
+                            id="inlineRadio2"
+                            value="Paid"
+                            onChange={(e) => {
+                              setStatus(e.target.value)
+                            }}
+                            status={status === 'Paid'}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            Paid
+                          </label>
+                        </div>
 
-                                <datalist id="datalistOptions">
-                                  {StudentsList.length &&
-                                    StudentsList.map((student) => {
-                                      return (
-                                        <option
-                                          data={student._id}
-                                          value={student.email}
-                                          key={student._id}
-                                        >
-                                          {student.name}
-                                        </option>
-                                      )
-                                    })}
-                                </datalist>
-                              </div>
-                            </div>
-                          </div>
-                          {/* Button Box */}
-                          <div className="button-box text-center">
-                            <button
-                              type="submit"
-                              className="theme-btn btn-style-one"
-                              style={{ zIndex: '0' }}
-                            >
-                              Submit
-                            </button>
+
+                      </div>
+
+
+                      <div className="form-group">
+                          <div className="total-price sub-text">Set Expiry Date :</div>
+                          <div className="item-quantity">
+                            <DatePicker
+                              selected={expiryDate}
+                              onChange={(date) => setExpiryDate(date)}
+                            ></DatePicker>
                           </div>
                         </div>
+
+                      <div className="">
+                        <div className="">
+                          {/* ******************* */}
+                          <div className="">
+                            <label
+                              htmlFor="exampleDataList"
+                              className="sub-text"
+                            >
+                              Select Student
+                            </label>
+
+                            <input
+                              className="form-control"
+                              list="datalistOptions"
+                              id="exampleDataList"
+                              placeholder="search student..."
+                              onChange={(e) => {
+                                setSelectedStudent(e.target.value)
+                              }}
+                              value={selectedStudent}
+                              required
+                            />
+
+                            <datalist id="datalistOptions">
+                              {StudentsList.length &&
+                                StudentsList.map((student) => {
+                                  return (
+                                    <option
+                                      data={student._id}
+                                      value={student.email}
+                                      key={student._id}
+                                    >
+                                      {student.name}
+                                    </option>
+                                  )
+                                })}
+                            </datalist>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Button Box */}
+                      <div className="button-box text-center">
+                        <button type="submit" class="btn btn-danger mt-5">
+                          Submit
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -188,7 +293,6 @@ export default function RequestPayment({ match }) {
           </div>
         </div>
       </div>
-      {/* End Manage Cource Section */}
     </>
   )
 }

@@ -6,7 +6,7 @@ import {
 
 import axios from 'axios'
 
-export const createCurrrency = () => async (dispatch, getState) => {
+export const createCurrrency = (fromCurrency) => async (dispatch, getState) => {
   try {
     dispatch({
       type: CURRENCY_CREATE_REQUEST
@@ -21,8 +21,8 @@ export const createCurrrency = () => async (dispatch, getState) => {
     let res = await axios.get('https://ipapi.co/json/')
 
     const response = await axios.post(
-      'https://server.ccab.tech/currency-convert',
-      { currency: res.data.currency, country: res.data.country },
+      'http://localhost:5001/currency-convert',
+      { currency: res.data.currency, country: res.data.country, fromCurrency },
       config
     )
 

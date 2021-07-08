@@ -43,7 +43,6 @@ export default function HomeScreen({ match }) {
   useEffect(() => {
     dispatch(getUesrsNumbers())
   }, [dispatch])
-  console.log(usersCount)
 
   return (
     <>

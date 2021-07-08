@@ -10,7 +10,9 @@ const ConfirmationKlarna = ({ match }) => {
   const { course, loading, error } = useSelector((state) => state.courseDetails)
 
   useEffect(() => {
-    dispatch(getCourseDetails(ID))
+    if (ID) {
+      dispatch(getCourseDetails(ID))
+    }
   }, [dispatch, ID])
 
   //console.log(html&&html);
@@ -35,8 +37,7 @@ const ConfirmationKlarna = ({ match }) => {
               </>
             ) : (
               <div>
-                Your Order is being confirmed. Soon We will add the course to
-                your profile.
+                Your purchase is being verified.
               </div>
             )}
           </p>

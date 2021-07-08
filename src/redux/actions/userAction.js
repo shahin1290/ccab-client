@@ -47,7 +47,7 @@ export const login = (email, password) => async (dispatch) => {
       }
     }
     const response = await axios.post(
-      'https://server.ccab.tech/api/users/login',
+      'http://localhost:5001/api/users/login',
       { email, password },
       config
     )
@@ -97,7 +97,7 @@ export const register =
         }
       }
       const response = await axios.post(
-        'https://server.ccab.tech/api/users/register',
+        'http://localhost:5001/api/users/register',
         { name, email, password, phoneNumber, gender, language },
         config
       )
@@ -141,7 +141,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
     //console.log('config : ',config);
     const response = await axios.get(
-      'https://server.ccab.tech/api/users/' + id,
+      'http://localhost:5001/api/users/' + id,
       config
     )
     // console.log("response:", response);
@@ -183,7 +183,7 @@ export const getProfile = () => async (dispatch, getState) => {
     }
     //console.log('config : ',config);
     const response = await axios.get(
-      'https://server.ccab.tech/api/users/profile',
+      'http://localhost:5001/api/users/profile',
       config
     )
     // console.log("response:", response);
@@ -221,9 +221,8 @@ export const getUsers = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get('https://server.ccab.tech/api/users/', config)
+    const response = await axios.get('http://localhost:5001/api/users/', config)
     // console.log("response:", response);
-    console.log(response.data)
     dispatch({
       type: USER_LIST_SUCCESS,
       payload: response.data
@@ -258,7 +257,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    await axios.delete('https://server.ccab.tech/api/users/' + id, config)
+    await axios.delete('http://localhost:5001/api/users/' + id, config)
     // console.log("res:", res)
 
     dispatch({
@@ -294,7 +293,7 @@ export const userProfileUpdate = (user) => async (dispatch, getState) => {
       }
     }
     const response = await axios.put(
-      'https://server.ccab.tech/api/users/profile',
+      'http://localhost:5001/api/users/profile',
       user,
       config
     )
@@ -341,7 +340,7 @@ export const UpdateUserRole = (user, id) => async (dispatch, getState) => {
       }
     }
     const response = await axios.put(
-      'https://server.ccab.tech/api/users/' + id,
+      'http://localhost:5001/api/users/' + id,
       user,
       config
     )
@@ -379,11 +378,10 @@ export const getUesrsNumbers = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/users/numbers',
+      'http://localhost:5001/api/users/numbers',
       config
     )
 
-    console.log('res: ', response.data)
     dispatch({
       type: USER_NUMBERS_SUCCESS,
       payload: response.data,
@@ -418,7 +416,7 @@ export const isValid = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      'https://server.ccab.tech/api/users/valid',
+      'http://localhost:5001/api/users/valid',
       {},
       config
     )

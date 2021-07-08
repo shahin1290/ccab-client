@@ -31,11 +31,10 @@ body {
 }
 
 .partnerImage img {
- max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 @media screen and (max-width: 767px) {
-
 }
 
 @media (max-width: 992px) {
@@ -216,11 +215,10 @@ pre {
   background-color: #e84d1b;
   margin: 0 auto;
 }
-.price .txt{
-  font-size:90% !important;
+.price .txt {
+  font-size: 90% !important;
   margin: 0px !important;
 }
-
 
 .star-ratings-sprite {
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
@@ -440,12 +438,6 @@ input:checked + .slider:before {
   margin-left: -1em;
 }
 
-#uncontrolled-tab-example-tab-Bill {
-  color: #ea5573;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
 /* JOBS SECTION */
 .banner-container {
   display: inline-block;
@@ -583,9 +575,9 @@ input:checked + .slider:before {
 
 .isDisabled {
   color: currentColor;
-  cursor: not-allowed;
   opacity: 0.5;
   text-decoration: none;
+  pointer-events: none;
 }
 
 .reports-nav-button {
@@ -618,5 +610,5 @@ input:checked + .slider:before {
 
 .upcoming-row-content:hover {
   cursor: pointer;
-  background-color: #F5FBFF;
+  background-color: #f5fbff;
 }

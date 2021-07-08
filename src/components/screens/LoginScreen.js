@@ -20,15 +20,14 @@ export default function LoginScreen({ location }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const redirect = location.search ? location.search.split('=')[1] : '/profile'
 
   useEffect(() => {
-    if (userDetail && userDetail.name) {
-      history.push(redirect)
-    } else {
-      history.push('/login')
+    if (loginSuccess) {
+      history.goBack()
     }
-  }, [history, userDetail, redirect])
+
+    
+  }, [loginSuccess, history])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -42,6 +41,7 @@ export default function LoginScreen({ location }) {
       <section className="login-section">
         <div className="auto-container">
           <div className="login-box">
+            {location.state && <Message>{location.state.message}</Message>}
             {/* Title Box */}
             <div className="title-box">
               <h2>Login</h2>

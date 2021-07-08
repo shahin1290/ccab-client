@@ -96,7 +96,8 @@ import {
   serviceDeleteReducer,
   serviceCreateReducer,
   adminServiceListReducer,
-  serviceUpdateReducer
+  serviceUpdateReducer,
+  serviceInstructorUpdateReducer
 } from './redux/reducers/serviceReducer'
 
 import {
@@ -115,6 +116,13 @@ import {
   appointmentUpdateReducer
 } from './redux/reducers/appointmentReducer'
 
+import {
+  serviceCategoryCreateReducer,
+  serviceCategoryListReducer,
+  serviceCategoryDetailsReducer,
+  serviceCategoryDeleteReducer,
+  serviceCategoryUpdateReducer
+} from './redux/reducers/serviceCategoryReducer'
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -186,6 +194,7 @@ const reducer = combineReducers({
   serviceCreate: serviceCreateReducer,
   serviceDelete: serviceDeleteReducer,
   serviceUpdate: serviceUpdateReducer,
+  serviceInstructorUpdate: serviceInstructorUpdateReducer,
   sessionCreate: sessionCreateReducer,
   sessionList: sessionListReducer,
   sessionDetails: sessionDetailsReducer,
@@ -196,7 +205,11 @@ const reducer = combineReducers({
   appointmentDetails: appointmentDetailsReducer,
   appointmentUpdate: appointmentUpdateReducer,
   appointmentDelete: appointmentDeleteReducer,
-  
+  serviceCategoryCreate: serviceCategoryCreateReducer,
+  serviceCategoryList: serviceCategoryListReducer,
+  serviceCategoryDetails: serviceCategoryDetailsReducer,
+  serviceCategoryUpdate: serviceCategoryUpdateReducer,
+  serviceCategoryDelete: serviceCategoryDeleteReducer
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')
