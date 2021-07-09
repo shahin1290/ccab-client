@@ -50,6 +50,8 @@ export default function DayContent({ bootcampId, setOpen }) {
     error: quizError
   } = useSelector((state) => state.myQuizList)
 
+  console.log(myQuizList);
+
   // getting myAnswerList
 
   const quizAnswerMyList = useSelector((state) => state.quizAnswerMyList)

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, login } from '../../redux/actions/userAction'
 import Message from '../layout/Message'
-import { useHistory, Link } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 // import "react-toastify/dist/ReactToastify.css";
 
 export default function RegisterScreen() {
-  const history = useHistory()
+  const history = createBrowserHistory({ forceRefresh: true })
+
   /**
    * User registeraton process with React input handling
    */
@@ -34,11 +35,11 @@ export default function RegisterScreen() {
 
   useEffect(() => {
     if (userDetail && userDetail.name) {
-      history.push('/')
+      history.push('/profile')
     }
     if (registerSuccess) {
       history.push({
-        pathname: '/login',
+        pathname: '/profile',
         state: {
           message: 'User Registration Successful! Please Login.'
         }

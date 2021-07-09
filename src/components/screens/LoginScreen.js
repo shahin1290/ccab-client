@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import Message from '../layout/Message'
-import FormContainer from '../layout/FormContainer'
-import { Link, useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import Loader from '../layout/Loader'
+
 import 'react-toastify/dist/ReactToastify.css'
 import { login } from '../../redux/actions/userAction'
+import { createBrowserHistory } from 'history'
 
 export default function LoginScreen({ location }) {
   const dispatch = useDispatch()
-  const history = useHistory()
+  const history = createBrowserHistory({ forceRefresh: true })
 
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, userDetail, error, loginSuccess } = userLogin
