@@ -4,14 +4,14 @@ import { userProfileUpdate, getProfile } from '../../redux/actions/userAction'
 import { getServiceCategories } from '../../redux/actions/serviceCategoryAction'
 import { updateServiceInstructor } from '../../redux/actions/serviceAction'
 
-import { useHistory } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import { useDropzone } from 'react-dropzone'
 import Message from '../layout/Message'
 import CropImage from '../layout/CropImage'
 
 export default function EditProfile() {
   const dispatch = useDispatch()
-  const history = useHistory()
+  const history = createBrowserHistory({ forceRefresh: true })
 
   const {
     loading,

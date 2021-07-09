@@ -19,6 +19,7 @@ import { getMyQuizList } from '../../redux/actions/quizAction'
 import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 import PaymentRequest from '../layout/StudentPaymentRequests'
+import { getServiceList } from '../../redux/actions/serviceAction'
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -32,15 +33,38 @@ export default function ProfileScreen() {
     error: bootcampError
   } = useSelector((state) => state.courseList)
 
+  const {
+    serviceList,
+    loading: serviceLoading,
+    error: serviceError
+  } = useSelector((state) => state.serviceList)
+
+  //Get Acc's Bootcamps
+
+  const filterServiceList = () => {
+    if (userDetail.user_type === 'InstructorUser') {
+      const filteredServices = serviceList.filter(
+        (service) =>
+          service.price === 0 ||
+          service.instructors.some(
+            (instructor) =>
+              instructor._id === userDetail._id || service.price === 0
+          )
+      )
+
+      return filteredServices.length > 0 ? filteredServices : []
+    }
+  }
+
   //Get Student's Bootcamps
 
   const filterCourseList = () => {
     if (userDetail.user_type === 'StudentUser') {
       return courseList.filter(
         (course) =>
-          course.price == 0 ||
+          course.price === 0 ||
           course.students.some(
-            (student) => student._id === userDetail._id || course.price == 0
+            (student) => student._id === userDetail._id || course.price === 0
           )
       )
     }
@@ -97,8 +121,8 @@ export default function ProfileScreen() {
       dispatch(getMyQuizList())
     }
 
-    if (userDetail.name && userDetail.user_type === 'AdminUser') {
-      dispatch(getProfile())
+    if (userDetail.name && userDetail.user_type === 'InstructorUser') {
+      dispatch(getServiceList())
     }
   }, [
     dispatch,
@@ -142,7 +166,9 @@ export default function ProfileScreen() {
                             alt="avatar"
                           />
                         </div>
-                        <div className="sub-title pt-3 pl-3">{userDetail.name}</div>
+                        <div className="sub-title pt-3 pl-3">
+                          {userDetail.name}
+                        </div>
                         <div className="designation pl-3">
                           {userDetail.user_type}
                         </div>
@@ -245,81 +271,161 @@ export default function ProfileScreen() {
                 <div className="lower-content">
                   {/* Instructor Info Tabs*/}
                   <Tabs
-                    defaultActiveKey="Courses"
+                    defaultActiveKey={
+                      userDetail.user_type === 'InstructorUser'
+                        ? 'Services'
+                        : userDetail.user_type === 'AccountantUser'
+                        ? 'Personal Info'
+                        : 'Courses'
+                    }
                     id="uncontrolled-tab-example"
                     className="bill"
                   >
-                    <Tab eventKey="Courses" title="Courses">
-                      <div className="title pt-5 pb-3">My Courses</div>
+                    {userDetail &&
+                      userDetail.user_type !== 'InstructorUser' &&
+                      userDetail &&
+                      userDetail.user_type !== 'AccountantUser' && (
+                        <Tab eventKey="Courses" title="Courses">
+                          <div className="title pt-5 pb-3">My Courses</div>
 
-                      <div className="single-item-carousel owl-carousel owl-theme">
-                        <div className="slide">
-                          <div className="row clearfix">
-                            {/* Course Block */}
-                            {bootcampLoading ? (
-                              <Loader />
-                            ) : bootcampError ? (
-                              <Message>{bootcampError}</Message>
-                            ) : filterCourseList() &&
-                              filterCourseList().length ? (
-                              filterCourseList().map((course) => {
-                                return (
-                                  <div className="shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4">
-                                    <Link
-                                      className="inner-box"
-                                      to={`/course-content/${course._id}`}
-                                    >
-                                      <div className="image">
-                                        <img
-                                          src={
-                                            'http://localhost:5001/uploads/Bootcamp/' +
-                                            course.img_path
-                                          }
-                                          alt="bootcamp"
-                                        />
-                                        <div className="time text-light pl-1 py-1">
-                                          {course.weeks * 5 * 2} hours
-                                        </div>
-                                      </div>
-                                      <div className="lower-content">
-                                        <div className="my-2 sub-title">
-                                          {course.name}
-                                        </div>
-                                        <div className="sub-text">
-                                          <span
-                                            className="d-inline-block text-truncate"
-                                            style={{ maxWidth: '240px' }}
-                                          >
-                                            {course.description}
-                                          </span>
-                                        </div>
-                                        <div className="clearfix">
-                                          <div className="pull-left">
-                                            <div className="author">
-                                              By:{' '}
-                                              <span>{course.mentor.name}</span>
+                          <div className="single-item-carousel owl-carousel owl-theme">
+                            <div className="slide">
+                              <div className="row clearfix">
+                                {/* Course Block */}
+                                {bootcampLoading ? (
+                                  <Loader />
+                                ) : bootcampError ? (
+                                  <Message>{bootcampError}</Message>
+                                ) : filterCourseList() &&
+                                  filterCourseList().length ? (
+                                  filterCourseList().map((course) => {
+                                    return (
+                                      <div className="shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4">
+                                        <Link
+                                          className="inner-box"
+                                          to={`/course-content/${course._id}`}
+                                        >
+                                          <div className="image">
+                                            <img
+                                              src={
+                                                'http://localhost:5001/uploads/Bootcamp/' +
+                                                course.img_path
+                                              }
+                                              alt="bootcamp"
+                                            />
+                                            <div className="time text-light pl-1 py-1">
+                                              {course.weeks * 5 * 2} hours
                                             </div>
                                           </div>
-                                          <div className="pull-right">
-                                            <div className="price">
-                                              ${course.price}
+                                          <div className="lower-content">
+                                            <div className="my-2 sub-title">
+                                              {course.name}
+                                            </div>
+                                            <div className="sub-text">
+                                              <span
+                                                className="d-inline-block text-truncate"
+                                                style={{ maxWidth: '240px' }}
+                                              >
+                                                {course.description}
+                                              </span>
+                                            </div>
+                                            <div className="clearfix">
+                                              <div className="pull-left">
+                                                <div className="author">
+                                                  By:{' '}
+                                                  <span>
+                                                    {course.mentor.name}
+                                                  </span>
+                                                </div>
+                                              </div>
+                                              <div className="pull-right">
+                                                <div className="price">
+                                                  ${course.price}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </Link>
+                                      </div>
+                                    )
+                                  })
+                                ) : (
+                                  <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                                    You Don't have Any Courses yet !
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </Tab>
+                      )}
+
+                    {userDetail && userDetail.user_type === 'InstructorUser' && (
+                      <Tab eventKey="Services" title="Services">
+                        <div className="title pt-5 pb-3">My Services</div>
+
+                        <div className="single-item-carousel owl-carousel owl-theme">
+                          <div className="slide">
+                            <div className="row clearfix">
+                              {/* Course Block */}
+                              {serviceLoading ? (
+                                <Loader />
+                              ) : serviceError ? (
+                                <Message>{serviceError}</Message>
+                              ) : filterServiceList() &&
+                                filterServiceList().length ? (
+                                filterServiceList().map((service) => {
+                                  return (
+                                    <div className="shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4">
+                                      <Link
+                                        className="inner-box"
+                                        to={`/reports`}
+                                      >
+                                        <div className="image">
+                                          <img
+                                            src={
+                                              'http://localhost:5001/uploads/Service/' +
+                                              service.img_path
+                                            }
+                                            alt="service"
+                                          />
+                                        </div>
+                                        <div className="lower-content">
+                                          <div className="my-2 sub-title">
+                                            {service.name}
+                                          </div>
+                                          <div className="sub-text">
+                                            <span
+                                              className="d-inline-block text-truncate"
+                                              style={{ maxWidth: '240px' }}
+                                            >
+                                              {service.description}
+                                            </span>
+                                          </div>
+                                          <div className="clearfix">
+                                            <div className="pull-left">
+                                              <div className="students">
+                                                {service.instructors.length}{' '}
+                                                Instructor(s)
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
-                                      </div>
-                                    </Link>
-                                  </div>
-                                )
-                              })
-                            ) : (
-                              <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                                You Don't have Any Courses yet !
-                              </p>
-                            )}
+                                      </Link>
+                                    </div>
+                                  )
+                                })
+                              ) : (
+                                <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                                  You Don't have Any Services yet !
+                                </p>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Tab>
+                      </Tab>
+                    )}
+
                     {userDetail && userDetail.user_type === 'StudentUser' ? (
                       <Tab eventKey="Assignments" title="Assignments">
                         <Assignments />
