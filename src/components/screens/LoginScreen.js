@@ -6,17 +6,32 @@ import 'react-toastify/dist/ReactToastify.css'
 import { login } from '../../redux/actions/userAction'
 import { createBrowserHistory } from 'history'
 
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required()
+})
+
 export default function LoginScreen({ location }) {
   const dispatch = useDispatch()
   const history = createBrowserHistory({ forceRefresh: true })
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    resolver: yupResolver(schema)
+  })
 
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, userDetail, error, loginSuccess } = userLogin
 
   // initializing componet level state
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
   useEffect(() => {
     if (loginSuccess) {
@@ -24,8 +39,7 @@ export default function LoginScreen({ location }) {
     }
   }, [loginSuccess, history])
 
-  const submitHandler = (e) => {
-    e.preventDefault()
+  const submitHandler = ({ email, password }) => {
     dispatch(login(email, password))
   }
 
@@ -57,26 +71,34 @@ export default function LoginScreen({ location }) {
             {/* Login Form */}
             <div className="styled-form">
               {error && <Message>{error}</Message>}
-              <form onSubmit={submitHandler}>
+              <form onSubmit={handleSubmit(submitHandler)}>
                 <div className="form-group">
                   <label>Email</label>
                   <input
                     type="email"
-                    name="email"
                     placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    {...register('email')}
+                    className={`form-control ${
+                      errors.email ? 'is-invalid' : ''
+                    }`}
                   />
+                  <div className="invalid-feedback">
+                    {errors.email?.message}
+                  </div>
                 </div>
                 <div className="form-group">
                   <label>Password</label>
                   <input
                     type="password"
-                    name="password"
                     placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    {...register('password')}
+                    className={`form-control ${
+                      errors.password ? 'is-invalid' : ''
+                    }`}
                   />
+                  <div className="invalid-feedback">
+                    {errors.password?.message}
+                  </div>
                 </div>
 
                 <div className="form-group text-center">

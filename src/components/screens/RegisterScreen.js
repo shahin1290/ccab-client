@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { register, login } from '../../redux/actions/userAction'
+import { registerUser, login } from '../../redux/actions/userAction'
 import Message from '../layout/Message'
 import { createBrowserHistory } from 'history'
-// import "react-toastify/dist/ReactToastify.css";
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { registerSchema } from '../../util/registerSchema'
 
 export default function RegisterScreen() {
   const history = createBrowserHistory({ forceRefresh: true })
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    resolver: yupResolver(registerSchema)
+  })
 
   /**
    * User registeraton process with React input handling
@@ -17,29 +28,13 @@ export default function RegisterScreen() {
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, registerSuccess } = userRegister
 
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const name = firstName + ' ' + lastName
-
-  const [countryCode, setCode] = useState('')
-  const [phone, setPhone] = useState('')
-  const phoneNumber = '00-' + countryCode + '-' + phone
-  const [gender, setGender] = useState('')
-  const [language, setLang] = useState('')
-  const [message, setMessage] = useState('')
-
-  const [agree, setAgree] = useState(false)
-
   useEffect(() => {
     if (userDetail && userDetail.name) {
       history.push('/profile')
     }
     if (registerSuccess) {
       history.push({
-        pathname: '/profile',
+        pathname: '/login',
         state: {
           message: 'User Registration Successful! Please Login.'
         }
@@ -47,22 +42,22 @@ export default function RegisterScreen() {
     }
   }, [registerSuccess, history])
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
-    } else if (!gender) {
-      setMessage('Please select the gender')
-    } else if (!language) {
-      setMessage('Please select the language of study')
-    } else if (!agree) {
-      setMessage('Please accept the terms and conditions')
-    } else {
-      setMessage('')
-      dispatch(register(name, email, password, phoneNumber, gender, language))
-    }
+  const submitHandler = ({
+    firstName,
+    lastName,
+    email,
+    password,
+    gender,
+    language,
+    code,
+    phone
+  }) => {
+    const phoneNumber = '00-' + code + '-' + phone
+    const name = firstName + ' ' + lastName
 
-    if (registerSuccess) {
+    dispatch(registerUser(name, email, password, phoneNumber, gender, language))
+
+    /* if (registerSuccess) {
       setFirstName('')
       setLastName('')
       setEmail('')
@@ -72,7 +67,7 @@ export default function RegisterScreen() {
       setPhone('')
       setGender('')
       setLang('')
-    }
+    } */
   }
   return (
     <>
@@ -89,67 +84,74 @@ export default function RegisterScreen() {
                 that you are visiting
               </div>
               {error && <Message>{error}</Message>}
-              {message && <Message>{message}</Message>}
             </div>
             {/* Login Form */}
             <div className="styled-form">
-              <form onSubmit={submitHandler}>
+              <form onSubmit={handleSubmit(submitHandler)}>
                 <div className="row clearfix">
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>First Name</label>
                     <input
                       type="text"
-                      name="firstName"
-                      value={firstName}
                       placeholder="First Name"
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
+                      {...register('firstName')}
+                      className={`form-control ${
+                        errors.firstName ? 'is-invalid' : ''
+                      }`}
                     />
+                    <div className="invalid-feedback">
+                      {errors.firstName?.message}{' '}
+                    </div>
                   </div>
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Last Name</label>
                     <input
-                      type="text"
                       name="lastName"
-                      value={lastName}
                       placeholder="Last Name"
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
+                      {...register('lastName')}
+                      className={`form-control ${
+                        errors.lastName ? 'is-invalid' : ''
+                      }`}
                     />
+                    <div className="invalid-feedback">
+                      {errors.lastName?.message}{' '}
+                    </div>
                   </div>
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Email Address</label>
                     <input
-                      type="email"
                       name="email"
-                      value={email}
+                      type="email"
+                      {...register('email')}
+                      className={`form-control ${
+                        errors.email ? 'is-invalid' : ''
+                      }`}
                       placeholder="abcd@gmail.com"
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
                     />
+                    <div className="invalid-feedback">
+                      {errors.email?.message}
+                    </div>
                   </div>
 
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Phone Number</label>
                     <div style={{ display: 'flex' }}>
                       <select
-                        required
                         name="countryCode"
-                        style={{ width: '50%' }}
-                        className="custom-select myDropDown"
-                        value={countryCode}
+                        {...register('code')}
+                        style={{ height: '53px' }}
                         id="country"
-                        onChange={(e) => {
-                          setCode(e.target.value)
-                        }}
+                        className={`form-control w-50 custom-select myDropDown ${
+                          errors.code ? 'is-invalid' : ''
+                        }`}
                       >
                         <option value="" selected>
-                          Select Country Code
+                          Country Code
                         </option>
-                        <option data-countrycode="GB" value="44" selected>
+                        <option data-countrycode="GB" value="44">
                           UK (+44)
                         </option>
                         <option data-countrycode="US" value="1">
@@ -796,39 +798,56 @@ export default function RegisterScreen() {
                           </option>
                         </optgroup>
                       </select>
+
                       <input
                         type="text"
                         name="phone"
-                        value={phone}
                         placeholder="123-4567-89"
-                        required
-                        onChange={(e) => setPhone(e.target.value)}
+                        {...register('phone')}
+                        className={`form-control ${
+                          errors.phone ? 'is-invalid' : ''
+                        }`}
                       />
+                      <div className="invalid-feedback">
+                        {errors.code?.message}
+                      </div>
+
+                      <div className="invalid-feedback">
+                        {errors.phone?.message}
+                      </div>
                     </div>
                   </div>
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Password</label>
                     <input
-                      type="password"
                       name="password"
-                      value={password}
+                      type="password"
+                      {...register('password')}
+                      className={`form-control ${
+                        errors.password ? 'is-invalid' : ''
+                      }`}
                       placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
                     />
+                    <div className="invalid-feedback">
+                      {errors.password?.message}
+                    </div>
                   </div>
                   {/* Form Group */}
                   <div className="form-group col-lg-6 col-md-12 col-sm-12">
                     <label>Confirm Password</label>
                     <input
-                      type="password"
                       name="confirmPassword"
-                      value={confirmPassword}
+                      type="password"
+                      {...register('confirmPassword')}
+                      className={`form-control ${
+                        errors.confirmPassword ? 'is-invalid' : ''
+                      }`}
                       placeholder="Confirm Password"
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      required
                     />
+                    <div className="invalid-feedback">
+                      {errors.confirmPassword?.message}
+                    </div>
                   </div>
                   <div className="form-group col-lg-12 col-md-12 col-sm-12">
                     <div className="row clearfix">
@@ -839,9 +858,15 @@ export default function RegisterScreen() {
                             name="gender"
                             id="type-1"
                             value="male"
-                            onChange={(e) => setGender(e.target.value)}
+                            {...register('gender')}
+                            className={`form-check-input  ${
+                              errors.gender ? 'is-invalid' : ''
+                            }`}
                           />
                           <label htmlFor="type-1">Male</label>
+                          <div className="invalid-feedback hide-on-small-screen">
+                            {errors.gender?.message}
+                          </div>
                         </div>
                       </div>
                       <div className="column col-lg-3 col-md-4 col-sm-12">
@@ -851,7 +876,10 @@ export default function RegisterScreen() {
                             name="gender"
                             value="female"
                             id="type-2"
-                            onChange={(e) => setGender(e.target.value)}
+                            {...register('gender')}
+                            className={`form-check-input ${
+                              errors.gender ? 'is-invalid' : ''
+                            }`}
                           />
                           <label htmlFor="type-2">Female</label>
                         </div>
@@ -864,38 +892,65 @@ export default function RegisterScreen() {
                             name="gender"
                             id="type-3"
                             value="others"
-                            onChange={(e) => setGender(e.target.value)}
+                            {...register('gender')}
+                            className={`form-check-input ${
+                              errors.gender ? 'is-invalid' : ''
+                            }`}
                           />
                           <label htmlFor="type-3">Others</label>
+
+                          <div className="invalid-feedback hide-on-big-screen">
+                            {errors.gender?.message}
+                          </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
 
+                  <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                    <div className="row clearfix">
                       {/* study with lang  */}
-                      <div className="column col-lg-6 col-md-6 col-sm-12">
+                      <div className="column col-lg-4 col-md-6 col-sm-12">
                         <div className="radio-box">
                           <input
                             type="radio"
                             name="lang"
                             id="type-2-1"
                             value="en"
-                            onChange={(e) => setLang(e.target.value)}
+                            {...register('language')}
+                            className={`form-check-input ${
+                              errors.language ? 'is-invalid' : ''
+                            }`}
                           />
                           <label htmlFor="type-2-1">Study in English</label>
+                          <div className="invalid-feedback hide-on-small-screen mr-5">
+                            {errors.language?.message}
+                          </div>
                         </div>
                       </div>
-                      <div className="column col-lg-6 col-md-6 col-sm-12">
+                      <div className="column col-lg-4 col-md-6 col-sm-12">
                         <div className="radio-box">
                           <input
                             type="radio"
                             name="lang"
                             value="ar"
                             id="type-2-2"
-                            onChange={(e) => setLang(e.target.value)}
+                            {...register('language')}
+                            className={`form-check-input ${
+                              errors.language ? 'is-invalid' : ''
+                            }`}
                           />
                           <label htmlFor="type-2-2">Study in Arabic</label>
+                          <div className="invalid-feedback hide-on-big-screen">
+                            {errors.language?.message}
+                          </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
 
+                  <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                    <div className="row clearfix">
                       {/* aggreement */}
                       <div className="column col-lg-12 col-md-12 col-sm-12">
                         <div className="check-box">
@@ -903,16 +958,23 @@ export default function RegisterScreen() {
                             type="checkbox"
                             name="aggreement"
                             id="type-4"
-                            onChange={() => setAgree(!agree)}
+                            {...register('acceptTerms')}
+                            className={`form-check-input ${
+                              errors.acceptTerms ? 'is-invalid' : ''
+                            }`}
                           />
                           <label htmlFor="type-4">
                             I agree the user agreement and{' '}
                             <a href="privacy.html">Terms &amp; Conditions</a>
                           </label>
+                          <div className="invalid-feedback">
+                            {errors.acceptTerms?.message}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+
                   <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">
                     <button type="submit" className="theme-btn btn-style-three">
                       <span className="txt">
