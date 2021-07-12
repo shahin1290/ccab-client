@@ -24,7 +24,7 @@ export const createJob = (job) => async (dispatch, getState) => {
       type: JOB_ADD_REQUEST
     })
 
-    const response = await axios.post('http://localhost:5001/api/job', job)
+    const response = await axios.post('https://server.ccab.tech/api/job', job)
 
     // console.log("response:", response)
 
@@ -61,7 +61,7 @@ export const getJobs = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
-    const response = await axios.get('http://localhost:5001/api/job/', config)
+    const response = await axios.get('https://server.ccab.tech/api/job/', config)
     dispatch({
       type: JOB_LIST_SUCCESS,
       payload: response.data
@@ -95,7 +95,7 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/request/${id}`,
+      `https://server.ccab.tech/api/request/${id}`,
       config
     )
 
@@ -132,7 +132,7 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete(`http://localhost:5001/api/request/${id}`, config)
+    await axios.delete(`https://server.ccab.tech/api/request/${id}`, config)
 
     dispatch({
       type: JOB_DELETE_SUCCESS
@@ -166,7 +166,7 @@ export const updateRequest = (req, id) => async (dispatch, getState) => {
     }
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/request/${id}`, req, config)
+    await axios.put(`https://server.ccab.tech/api/request/${id}`, req, config)
 
     dispatch({
       type: JOB_UPDATE_SUCCESS

@@ -29,7 +29,9 @@ export default function RegisterScreen() {
   const { loading, error, registerSuccess } = userRegister
 
   useEffect(() => {
-    if (userDetail && userDetail.name) {
+   // console.log(`redirect ${redirect}`);
+    if (userDetail && userDetail.name ) {
+      
       history.push('/profile')
     }
     if (registerSuccess) {

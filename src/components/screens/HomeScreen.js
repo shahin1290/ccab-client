@@ -203,9 +203,15 @@ export default function HomeScreen({ match }) {
               </Col>
             </Row>
 
+          {userDetail && userDetail.name?(
+            null
+
+          ):(
             <div className="mt-5">
-              <RegisterScreen />
-            </div>
+            <RegisterScreen  />
+          </div>
+          )}
+
           </Container>
         {/* Achievement Section Two */}
         <section className="achievements-section-two">
