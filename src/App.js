@@ -18,7 +18,7 @@ import ErrorScreen from './components/screens/ErrorScreen'
 import Assignments from './components/layout/Assignments'
 import AssignmentDetail from './components/screens/AssignmentDetail'
 import Privacy from './components/screens/privacy'
-import EditProfileStudent from './components/screens/EditProfileStudent'
+import EditProfile from './components/screens/EditProfile'
 /* Admin Screen*/
 import MangeCoures from './components/screens/AdminScreen/MangeCoures'
 import MangeOrder from './components/screens/AdminScreen/MangeOrder'
@@ -283,7 +283,7 @@ function App() {
         <StudentRoute
           exact
           path="/edit-profile-student"
-          component={EditProfileStudent}
+          component={EditProfile}
         ></StudentRoute>
 
         <StudentRoute

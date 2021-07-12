@@ -40,6 +40,7 @@ export default function PaymentRequest() {
                 <th>Request Name</th>
                 <th>Amount</th>
                 <th>Requested At</th>
+                <th>Due Date</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>

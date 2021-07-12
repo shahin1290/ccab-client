@@ -16,8 +16,8 @@ export default function PaymentRequest({ req, index }) {
       <tr
         key={req._id}
         className={
-          new Date(req.expireAt).getTime() > new Date().getTime()
-            ? 'isDisabled bg-warning'
+          new Date(req.expireAt).getTime() < new Date().getTime()
+            ? 'text-danger'
             : ''
         }
       >
@@ -30,6 +30,7 @@ export default function PaymentRequest({ req, index }) {
         </td>
 
         <td>{getDate(req.createdAt)}</td>
+        <td>{getDate(req.expireAt)}</td>
         {req.status !== 'Paid' ? (
           <td className="text-danger font-weight-bold">Not Paid</td>
         ) : (

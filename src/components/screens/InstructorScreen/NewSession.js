@@ -85,13 +85,14 @@ export default function NewSession({ selectedAppointment, activeButton }) {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    const combineStartDate = (startDate.getDate(), startTime)
-    const combineEndDate = (startDate.getDate(), endTime)
-
     dispatch(
       createSession({
-        startDate: combineStartDate,
-        endDate: combineEndDate,
+        startDate: new Date(
+          startDate.toLocaleDateString() + ' ' + startTime.toLocaleTimeString()
+        ),
+        endDate: new Date(
+          startDate.toLocaleDateString() + ' ' + endTime.toLocaleTimeString()
+        ),
         notes,
         selectedAppointment
       })
@@ -102,14 +103,17 @@ export default function NewSession({ selectedAppointment, activeButton }) {
   const updateHandler = (e) => {
     e.preventDefault()
 
-    const combineStartDate = (startDate.getDate(), startTime)
-    const combineEndDate = (startDate.getDate(), endTime)
-
     dispatch(
       updateSession(
         {
-          startDate: combineStartDate,
-          endDate: combineEndDate,
+          startDate: new Date(
+            startDate.toLocaleDateString() +
+              ' ' +
+              startTime.toLocaleTimeString()
+          ),
+          endDate: new Date(
+            startDate.toLocaleDateString() + ' ' + endTime.toLocaleTimeString()
+          ),
           notes,
           selectedAppointment
         },
@@ -145,13 +149,15 @@ export default function NewSession({ selectedAppointment, activeButton }) {
           </Row>
 
           <Row className="mt-2 mb-4 text-center-small-screen">
-            <Col md={2} >
+            <Col md={2}>
               <i
                 class="far fa-calendar-alt "
                 style={{ color: '#ED9D2B', fontSize: '70px' }}
               ></i>
             </Col>
-            <Col md={2} className="title">Start</Col>
+            <Col md={2} className="title">
+              Start
+            </Col>
             <Col md={6} className="my-auto sub-text ">
               <div className="d-flex justify-content-center">
                 <DatePicker

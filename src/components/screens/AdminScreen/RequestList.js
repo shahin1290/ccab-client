@@ -82,6 +82,8 @@ export default function RequestList() {
                   <th>Requested User</th>
                   <th>Status</th>
                   <th>Created At</th>
+                  <th>Expire At</th>
+
                   <th>Action</th>
                 </tr>
               </thead>
@@ -96,6 +98,7 @@ export default function RequestList() {
                       <td>{req.requestedUser.email}</td>
                       <td>{req.status}</td>
                       <td>{getDate(req.createdAt)}</td>
+                      <td>{getDate(req.expireAt)}</td>
 
                       <td>
                         <Container>

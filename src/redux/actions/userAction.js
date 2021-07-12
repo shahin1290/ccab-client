@@ -79,7 +79,7 @@ export const logout = () => (dispatch) => {
   })
 }
 
-export const register =
+export const registerUser =
   (name, email, password, phoneNumber, gender, language) =>
   async (dispatch, getState) => {
     try {

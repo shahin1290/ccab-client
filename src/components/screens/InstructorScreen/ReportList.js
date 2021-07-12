@@ -77,7 +77,7 @@ export default function SessionList() {
   return (
     <section style={{ padding: '100px 0 300px 0', backgroundColor: 'white' }}>
       <div className="auto-container ">
-        <Row className="mt-2 d-flex justify-content-center" >
+        <Row className="mt-2 d-flex justify-content-center">
           <Col
             md={2}
             xs={5}
@@ -181,7 +181,7 @@ export default function SessionList() {
                         ? 'none'
                         : 'auto'
                   }}
-                  className="text-center-small-screen upcoming-row-content"
+                  className="text-center-small-screen upcoming-row-content mb-3"
                 >
                   <div className="sub-text font-weight-bold">
                     {longEnUSFormatter.format(new Date(req.startDate))}{' '}
@@ -206,10 +206,10 @@ export default function SessionList() {
                         minute: '2-digit'
                       })}
                     </Col>
-                    <Col md={2} className="my-auto sub-text">
+                    <Col md={3} className="my-auto sub-text">
                       {req.service.name}
                     </Col>{' '}
-                    <Col md={2} className="my-auto sub-text">
+                    <Col md={3} className="my-auto sub-text">
                       {req.student.name}
                     </Col>
                   </Row>
@@ -217,7 +217,7 @@ export default function SessionList() {
               ))
             )}
 
-            {sessionLoading ? (
+            {userDetail.user_type === 'StudentUser' ? sessionLoading ? (
               <Loader />
             ) : sessionError ? (
               <Message>{sessionError}</Message>
@@ -268,15 +268,13 @@ export default function SessionList() {
                     <Col md={2} className="my-auto sub-text">
                       {req.student.name}
                     </Col>
-                    {userDetail.user_type === 'StudentUser' && (
-                      <Col md={2} className="my-auto sub-text">
-                        <Button variant="success">Finished</Button>
-                      </Col>
-                    )}
+                    <Col md={2} className="my-auto sub-text">
+                      <Button variant="success">Finished</Button>
+                    </Col>
                   </Row>
                 </div>
               ))
-            )}
+            ): null}
           </>
         )}
 
@@ -378,14 +376,19 @@ export default function SessionList() {
                       {req.student.name}
                     </Col>
                     <Col md={2} className="my-auto sub-title text-warning">
-                      <a
-                        onClick={() => {
-                          setSelectedAppointment(req._id)
-                          setShowModal({ visible: true })
-                        }}
-                      >
-                        Report
-                      </a>
+                      {new Date(req.endDate).getTime() <
+                      new Date().getTime() ? (
+                        <a
+                          onClick={() => {
+                            setSelectedAppointment(req._id)
+                            setShowModal({ visible: true })
+                          }}
+                        >
+                          Report
+                        </a>
+                      ) : (
+                        ''
+                      )}
                     </Col>
                   </Row>
                 </div>
@@ -404,8 +407,7 @@ export default function SessionList() {
               <Loader />
             ) : sessionError ? (
               <Message>{sessionError}</Message>
-            ) : (
-              reportedSessions() && reportedSessions().length > 0 ?
+            ) : reportedSessions() && reportedSessions().length > 0 ? (
               reportedSessions().map((req) => (
                 <div key={req._id} className="text-center-small-screen">
                   <div className="sub-title mt-5 mb-2">
@@ -439,11 +441,11 @@ export default function SessionList() {
                     </Col>
                   </Row>
                 </div>
-              )): (
-                <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
-                  Nothing being reported yet !
-                </p>
-              )
+              ))
+            ) : (
+              <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                Nothing being reported yet !
+              </p>
             )}
           </>
         )}
