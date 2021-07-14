@@ -37,7 +37,7 @@ export default function AdminHeader() {
 
   return (
     <>
-      {user.avatar && (
+     
         <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
           <div className="container">
             <Navbar.Brand>Admin DashBoard</Navbar.Brand>
@@ -103,6 +103,8 @@ export default function AdminHeader() {
                     <Nav.Link href="/get-start">Register</Nav.Link>
                   </>
                 ) : (
+
+                  user.avatar && (
                   <div
                     className="collapse navbar-collapse"
                     style={{ marginLeft: '350px' }}
@@ -137,12 +139,13 @@ export default function AdminHeader() {
                       </li>
                     </ul>
                   </div>
+                  )
                 )}
               </Nav>
             </Navbar.Collapse>
           </div>
         </Navbar>
-      )}
+    
     </>
   )
 }
