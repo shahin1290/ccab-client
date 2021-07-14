@@ -49,7 +49,6 @@ const CheckoutForm = ({ match, history }) => {
   const { course } = useSelector((state) => state.courseDetails)
   const { service } = useSelector((state) => state.serviceDetails)
 
-
   const {
     loading,
     success: orderSuccess,
@@ -142,8 +141,6 @@ const CheckoutForm = ({ match, history }) => {
       dispatch(getServiceDetails(serviceId))
       dispatch(createCurrrency('USD'))
     }
-
-    
   }, [dispatch, ID, subscription, serviceId, requestId])
 
   useEffect(() => {
@@ -230,7 +227,6 @@ const CheckoutForm = ({ match, history }) => {
         )
       }
 
-
       if (ID) {
         amount = Math.round(currency.data.amount * course.price * 100)
       }
@@ -249,7 +245,7 @@ const CheckoutForm = ({ match, history }) => {
       }
 
       const { data: clientSecret } = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+        `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
         {
           paymentMethodType: 'card',
           currency: currency.data.currency,
@@ -434,16 +430,19 @@ const CheckoutForm = ({ match, history }) => {
   return (
     <div className="sidebar-page-container">
       <div className="auto-container">
-      {currencyLoading ? (
-            <Loader />
-          ) : currencyError ? (
-            <Message>{currencyError}</Message>
-          ) : (
-            currencySuccess && (
-        <div className="">
-          {/* Content Side */}
-         
-              <div className="content-side col-lg-10 col-md-12 col-sm-12" style={{ margin: '0 auto' }}>
+        {currencyLoading ? (
+          <Loader />
+        ) : currencyError ? (
+          <Message>{currencyError}</Message>
+        ) : (
+          currencySuccess && (
+            <div className="">
+              {/* Content Side */}
+
+              <div
+                className="content-side col-lg-10 col-md-12 col-sm-12"
+                style={{ margin: '0 auto' }}
+              >
                 {/* Sec Title */}
                 <div className="sec-title">
                   <div className="title">Checkout</div>
@@ -516,7 +515,11 @@ const CheckoutForm = ({ match, history }) => {
                                 <li className="clearfix">
                                   <strong>Total</strong>{' '}
                                   <span className="pull-right">
-                                    {console.log(plan.price,sekToEUR, currency.data.amount )}
+                                    {console.log(
+                                      plan.price,
+                                      sekToEUR,
+                                      currency.data.amount
+                                    )}
                                     <strong>
                                       {currencySuccess &&
                                         `${Math.round(
@@ -583,7 +586,6 @@ const CheckoutForm = ({ match, history }) => {
                                   Service:
                                   <span className="pull-right">
                                     {request.name}
-                                       
                                   </span>
                                 </li>
                                 <li className="clearfix mb-3">
@@ -961,10 +963,9 @@ const CheckoutForm = ({ match, history }) => {
                   </div>
                 </div>
               </div>
-           
-        </div>
-         )
-         )}
+            </div>
+          )
+        )}
       </div>
     </div>
   )

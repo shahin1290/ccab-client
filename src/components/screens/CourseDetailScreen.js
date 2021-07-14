@@ -218,7 +218,7 @@ export default function CourseDetailScreen({ match }) {
                           className="intro-video"
                           style={{
                             backgroundImage:
-                              'url(https://server.ccab.tech/uploads/Bootcamp/' +
+                              'url(http://localhost:5001/uploads/Bootcamp/' +
                               course.img_path +
                               ')'
                           }}
@@ -239,7 +239,9 @@ export default function CourseDetailScreen({ match }) {
                             videoId={getVideoID(course.video_path)}
                             onClose={() => setOpen(false)}
                           />
-                          <h4 style={{visibility:'hidden'}}>Preview this course</h4>
+                          <h4 style={{ visibility: 'hidden' }}>
+                            Preview this course
+                          </h4>
                         </div>
 
                         {/* End Video Box */}
@@ -258,9 +260,16 @@ export default function CourseDetailScreen({ match }) {
                           </a>
                         ) : (
                           <>
-                               
                             <div className="price mb-3">
-                            <p className="txt" style={{color:'#ff5773',fontSize:'90% !important'}}>Start From </p>
+                              <p
+                                className="txt"
+                                style={{
+                                  color: '#ff5773',
+                                  fontSize: '90% !important'
+                                }}
+                              >
+                                Start From{' '}
+                              </p>
                               {currencySuccess &&
                                 (course.price > 0
                                   ? `${getPriceFormat(

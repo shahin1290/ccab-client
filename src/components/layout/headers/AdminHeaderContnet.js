@@ -12,10 +12,9 @@ import React from 'react'
 export default function AdminHeaderContnet({ logoutHandler }) {
   return (
     <>
-    
       <div className="collapse navbar-collapse mr-3">
         <ul className="navbar-nav ">
-        <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+          <li className="nav-item dropdown dropdown-slide dropdown-hover ">
             <a href="#" className="text-dark pb-5 pt-5">
               Schedule
             </a>
@@ -26,7 +25,6 @@ export default function AdminHeaderContnet({ logoutHandler }) {
               <a className="dropdown-item" href="/reports">
                 Reports
               </a>
-              
             </div>
           </li>
           <li className="nav-item dropdown dropdown-slide dropdown-hover ">
@@ -42,6 +40,11 @@ export default function AdminHeaderContnet({ logoutHandler }) {
 
               <a className="dropdown-item" href="/admin-courses-list">
                 Manage Courses
+              </a>
+              <div className="dropdown-divider"></div>
+
+              <a className="dropdown-item" href="/mentor-courses-list">
+                Manage Content
               </a>
               <div className="dropdown-divider"></div>
 
@@ -67,11 +70,10 @@ export default function AdminHeaderContnet({ logoutHandler }) {
           </li>
         </ul>
       </div>
-      
 
       {/* Items  hide-on-big-screen */}
-       <Nav className="text-dark hide-on-big-screen pr-5">
-      Schedule
+      <Nav className="text-dark hide-on-big-screen pr-5">
+        Schedule
         <Dropdown.Menu show className="border-0">
           <NavDropdown.Item href="/reports">Reports</NavDropdown.Item>
         </Dropdown.Menu>
@@ -91,6 +93,10 @@ export default function AdminHeaderContnet({ logoutHandler }) {
           <NavDropdown.Item href="/admin-order-list">Orders</NavDropdown.Item>
           <NavDropdown.Item href="/admin-courses-list">
             Manage Courses
+          </NavDropdown.Item>
+
+          <NavDropdown.Item href="/mentor-courses-list">
+            Manage Content
           </NavDropdown.Item>
           <NavDropdown.Item href="/admin-services-list">
             Manage Services

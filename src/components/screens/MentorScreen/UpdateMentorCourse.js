@@ -7,6 +7,7 @@ import Message from '../../layout/Message'
 import Loader from '../../layout/Loader'
 import { Modal } from 'react-bootstrap'
 
+
 export default function UpdateMentorCourse({ match }) {
   const dispatch = useDispatch()
 
@@ -26,7 +27,9 @@ export default function UpdateMentorCourse({ match }) {
 
   useEffect(() => {
     dispatch(getDayDetails(weekId, id))
-  }, [dispatch, weekId, id])
+    if(UpdateSuccess){
+    }
+  }, [dispatch, weekId, id, UpdateSuccess])
 
   useEffect(() => {
     setName(day.name)
