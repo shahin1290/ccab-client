@@ -20,6 +20,8 @@ import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 import PaymentRequest from '../layout/StudentPaymentRequests'
 import { getServiceList } from '../../redux/actions/serviceAction'
+import LineChart from '../layout/LineChart'
+import DoughnutChart from '../layout/DoughnutChart';
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -266,6 +268,10 @@ export default function ProfileScreen() {
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="m-5">
+                  <LineChart />
+                  <DoughnutChart />
                 </div>
                 {/* Lower Content */}
                 <div className="lower-content">

@@ -50,8 +50,6 @@ export default function DayContent({ bootcampId, setOpen }) {
     error: quizError
   } = useSelector((state) => state.myQuizList)
 
-  console.log(myQuizList);
-
   // getting myAnswerList
 
   const quizAnswerMyList = useSelector((state) => state.quizAnswerMyList)
@@ -190,6 +188,7 @@ export default function DayContent({ bootcampId, setOpen }) {
               {daysBasedOnUser(week.days).length &&
                 daysBasedOnUser(week.days).map((day, index) => (
                   <div key={day._id} className="course-content">
+                    
                     <button
                       onClick={() => {
                         setShow(day._id)
@@ -210,9 +209,10 @@ export default function DayContent({ bootcampId, setOpen }) {
                           padding: '2px'
                         }}
                       >
-                        <span className="sub-text pt-5">{day.name}</span>
+                        <span className="sub-text pt-5">{day.name} <i class="fas fa-check-square"></i></span>
                       </Link>
                     </button>
+                    
 
                     {filterWeeklyQuiz(day._id).length > 0 &&
                       filterWeeklyQuiz(day._id).map((quiz) => (

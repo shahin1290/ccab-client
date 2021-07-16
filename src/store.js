@@ -124,6 +124,14 @@ import {
   serviceCategoryUpdateReducer
 } from './redux/reducers/serviceCategoryReducer'
 
+import {
+  performanceCreateReducer,
+  performanceListReducer,
+  performanceDetailsReducer,
+  performanceDeleteReducer,
+  performanceUpdateReducer
+} from './redux/reducers/performanceReducer'
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -209,7 +217,12 @@ const reducer = combineReducers({
   serviceCategoryList: serviceCategoryListReducer,
   serviceCategoryDetails: serviceCategoryDetailsReducer,
   serviceCategoryUpdate: serviceCategoryUpdateReducer,
-  serviceCategoryDelete: serviceCategoryDeleteReducer
+  serviceCategoryDelete: serviceCategoryDeleteReducer,
+  performanceCreate: performanceCreateReducer,
+  performanceList: performanceListReducer,
+  performanceDetails: performanceDetailsReducer,
+  performanceUpdate: performanceUpdateReducer,
+  performanceDelete: performanceDeleteReducer,
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

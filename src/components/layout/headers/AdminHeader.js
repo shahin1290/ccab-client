@@ -104,7 +104,7 @@ export default function AdminHeader() {
                   </>
                 ) : (
 
-                  user.avatar && (
+                  user.name && (
                   <div
                     className="collapse navbar-collapse"
                     style={{ marginLeft: '350px' }}

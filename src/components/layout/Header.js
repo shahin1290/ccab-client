@@ -252,7 +252,7 @@ export default function Header() {
                 </Nav.Link>
               </>
             ) : (
-              user.avatar && (
+              user.name && (
                 <div className="collapse navbar-collapse mr-3">
                   <ul className="navbar-nav">
                     <li className="nav-item dropdown dropdown-slide dropdown-hover">

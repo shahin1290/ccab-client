@@ -1,6 +1,6 @@
+import React, { useEffect } from 'react'
 import Footer from './components/layout/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Container, Image } from 'react-bootstrap'
 
 import ProfileScreen from './components/screens/ProfileScreen'
 import CourseLessonScreen from './components/screens/CourseLessonScreen'
@@ -63,9 +63,7 @@ import UserListScreen from './components/screens/AdminScreen/UserList'
 
 /*****************************************/
 import 'malihu-custom-scrollbar-plugin'
-import react, { useEffect } from 'react'
 import WOW from 'wowjs'
-import { script } from './assets/js/script'
 import './App.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
@@ -73,9 +71,6 @@ import Quizzes from './components/layout/Quizzes'
 
 function App() {
   useEffect(() => {
-    console.log('hi***')
-
-    //script()
     new WOW.WOW({
       live: false
     }).init()

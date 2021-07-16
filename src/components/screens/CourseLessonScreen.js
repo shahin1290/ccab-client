@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import DayContent from '../layout/DayContent'
 import { Collapse, Tabs, Tab, ButtonGroup, Button } from 'react-bootstrap'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
+import {
+  updatePerformance,
+  getPerformances
+} from '../../redux/actions/performanceAction'
 
 export default function CourseContentScreen({ match }) {
   const id = match.params.id
   const [open, setOpen] = useState(false)
+  const ref = useRef()
+  const dispatch = useDispatch()
 
   //redux store
   const { day } = useSelector((state) => state.dayDetails)
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, userDetail, error, loginSuccess } = userLogin
+
+  const { loading: performanceLoading, performances } = useSelector(
+    (state) => state.performanceList
+  )
 
   const [language, setLanguage] = useState('')
 
@@ -19,6 +32,23 @@ export default function CourseContentScreen({ match }) {
       setLanguage(day.video_path ? 'english' : 'arabic')
     }
   }, [day])
+
+  useEffect(() => {
+    if (userDetail.user_type === 'StudentUser') {
+      dispatch(getPerformances())
+    }
+    if (day && ref.current) {
+      ref.current.plyr.on('ended', () => {
+        console.log(day._id, performances[0]._id)
+        dispatch(
+          updatePerformance(
+            { dayId: day._id, bootcampId: id },
+            performances[0]._id
+          )
+        )
+      })
+    }
+  }, [ref.current, day])
 
   //functions
   const findElementText = (el, sectionName) => {
@@ -152,6 +182,7 @@ export default function CourseContentScreen({ match }) {
                               }
                             ]
                           }}
+                          ref={ref}
                           options={
                             {
                               /* ... */
