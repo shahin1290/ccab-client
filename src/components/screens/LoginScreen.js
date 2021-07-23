@@ -37,9 +37,9 @@ export default function LoginScreen({ location }) {
   useEffect(() => {
     if (loginSuccess) {
       //create new performance
-      if (userDetail.user_type === 'StudentUser') {
+      /* if (userDetail.user_type === 'StudentUser') {
         dispatch(createPerformance({}))
-      }
+      } */
 
       //set the user online status
       dispatch(

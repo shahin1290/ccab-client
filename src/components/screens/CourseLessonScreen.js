@@ -39,13 +39,7 @@ export default function CourseContentScreen({ match }) {
     }
     if (day && ref.current) {
       ref.current.plyr.on('ended', () => {
-        console.log(day._id, performances[0]._id)
-        dispatch(
-          updatePerformance(
-            { dayId: day._id, bootcampId: id },
-            performances[0]._id
-          )
-        )
+        dispatch(updatePerformance({ dayId: day._id, bootcampId: id }))
       })
     }
   }, [ref.current, day])

@@ -1,13 +1,42 @@
 import React from 'react'
-import { Line } from 'react-chartjs-2'
+import { Bar, Line } from 'react-chartjs-2'
 
-const LineChart = () => {
+const LineChart = ({ performances, chart }) => {
+  const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric'
+  })
+
   const data = {
-    labels: ['1', '2', '3', '4', '5', '6', '7'],
+    labels:
+      performances &&
+      performances.map((performance) =>
+        longEnUSFormatter.format(new Date(performance.createdAt))
+      ),
     datasets: [
       {
         label: 'study performance',
-        data: [65, 60, 80, 80, 100, 55, 40],
+        data:
+          performances &&
+          performances.map((performance) => {
+            const {
+              watchingLectureScore,
+              submittedQuizScore,
+              quizResultScore,
+              submittedTaskScore,
+              taskResultScore,
+              onlineScore
+            } = performance
+            return Math.trunc(
+              (watchingLectureScore +
+                submittedQuizScore +
+                quizResultScore +
+                submittedTaskScore +
+                taskResultScore +
+                onlineScore) /
+                4
+            )
+          }),
         fill: false,
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgba(255, 99, 132, 0.2)'
@@ -20,16 +49,20 @@ const LineChart = () => {
       yAxes: [
         {
           ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
+            beginAtZero: true
+          }
+        }
+      ]
+    }
+  }
 
   return (
     <div>
-      <Line data={data} options={options} width={400}/>
+      {chart === 'line' ? (
+        <Line data={data} options={options} />
+      ) : (
+        <Bar data={data} options={options} />
+      )}
     </div>
   )
 }

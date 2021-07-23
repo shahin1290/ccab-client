@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Footer from './components/layout/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
+import socketIOClient from 'socket.io-client'
 import ProfileScreen from './components/screens/ProfileScreen'
 import CourseLessonScreen from './components/screens/CourseLessonScreen'
 import ResultScreen from './components/screens/ResultScreen'
@@ -68,12 +69,31 @@ import './App.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Quizzes from './components/layout/Quizzes'
+import { updatePerformance } from './redux/actions/performanceAction'
 
 function App() {
+  const { userDetail } = useSelector((state) => state.userLogin)
+  const dispatch = useDispatch()
+
+  new WOW.WOW({
+    live: false
+  }).init()
+
+  const socket = socketIOClient('http://localhost:5001')
+
   useEffect(() => {
-    new WOW.WOW({
-      live: false
-    }).init()
+    socket.emit('login', { userId: userDetail._id }, () => {
+      dispatch(updatePerformance({ connected: true }))
+    })
+
+    socket.emit('myCustomEvent', (data) => {
+      console.log(data)
+  })
+
+    /* return () => {
+      socket.emit('disconnect')
+      socket.off()
+    } */
   }, [])
 
   return (

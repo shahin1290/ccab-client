@@ -165,7 +165,7 @@ export const deletePerformance = (id) => async (dispatch, getState) => {
 }
 
 // update Request
-export const updatePerformance = (req, id) => async (dispatch, getState) => {
+export const updatePerformance = (req) => async (dispatch, getState) => {
   try {
     dispatch({
       type: PERFORMANCE_UPDATE_REQUEST
@@ -182,7 +182,7 @@ export const updatePerformance = (req, id) => async (dispatch, getState) => {
     }
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/performance/${id}`, req, config)
+    await axios.put(`http://localhost:5001/api/performance/daily-performance`, req, config)
 
     dispatch({
       type: PERFORMANCE_UPDATE_SUCCESS

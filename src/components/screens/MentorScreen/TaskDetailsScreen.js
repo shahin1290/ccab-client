@@ -14,6 +14,7 @@ import { getTaskDetails } from '../../../redux/actions/taskAction'
 
 import Loader from '../../layout/Loader'
 import { ANSWER_UPDATE_STATUS_REST } from '../../../redux/constences/answerConst'
+import { updatePerformance } from '../../../redux/actions/performanceAction'
 
 export default function TaskDetailsScreen({ match }) {
   const dispatch = useDispatch()
@@ -75,7 +76,6 @@ export default function TaskDetailsScreen({ match }) {
       Authorization: 'Bearer ' + userDetail.token
     }
   }
-  console.log(answers)
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
@@ -157,6 +157,10 @@ Failed
     if (textMessage && value) {
       dispatch(
         updateAnswerStatus(bootcampId, id, answer._id, { status: value })
+      )
+
+      dispatch(
+        updatePerformance({ taskResult: value, student: answer.user._id })
       )
 
       toast.info(answer.user.name + ' ' + textMessage, {

@@ -15,6 +15,7 @@ import { createAnswer, getUserAnswer } from '../../redux/actions/answerAction'
 // importing component
 import Loader from '../layout/Loader'
 import Message from '../layout/Message'
+import { updatePerformance } from '../../redux/actions/performanceAction';
 
 export default function AssignmentDetail({ match }) {
   const history = useHistory()
@@ -103,6 +104,10 @@ export default function AssignmentDetail({ match }) {
       form_data.append('AssignmentLink', AssignemntLink)
 
       dispatch(createAnswer(form_data, bootcampId, taskDetail.task._id))
+
+      if (userDetail.user_type === 'StudentUser') {
+        dispatch(updatePerformance({ taskId: taskDetail.task._id }))
+      }
 
       //clear the fields
       setFile({})
