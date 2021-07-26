@@ -1,3 +1,4 @@
+import socketIOClient from 'socket.io-client'
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -72,7 +73,15 @@ export const login = (email, password) => async (dispatch) => {
     })
   }
 }
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch, getState) => {
+  const {
+    userLogin: { userDetail }
+  } = getState()
+
+  const socket = socketIOClient('http://localhost:5001')
+
+  socket.emit('logout', { userId: userDetail._id })
+
   localStorage.removeItem('userDetail')
   dispatch({
     type: USER_LOGOUT

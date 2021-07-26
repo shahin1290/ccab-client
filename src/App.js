@@ -86,10 +86,6 @@ function App() {
       dispatch(updatePerformance({ connected: true }))
     })
 
-    socket.emit('myCustomEvent', (data) => {
-      console.log(data)
-  })
-
     /* return () => {
       socket.emit('disconnect')
       socket.off()

@@ -99,6 +99,25 @@ export default function UserlistScreen() {
     }
   }
 
+  //filter
+  const [filterUser, setFilterUser] = useState('all')
+
+  const getFilteredUser = () => {
+    if (filterUser === 'all') {
+      return users
+    }
+    return users.length && users.filter((user) => user.user_type === filterUser)
+  }
+
+  const getFilteredUserLength = (userType) => {
+    if (userType === 'all') {
+      return users.length
+    }
+    return (
+      users.length && users.filter((user) => user.user_type === userType).length
+    )
+  }
+
   return (
     <>
       <div className="container-fulid p-5 " style={{ padding: '60px 0' }}>
@@ -114,225 +133,314 @@ export default function UserlistScreen() {
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
-          <Table striped bordered hover responsive="sm">
-            <thead>
-              <tr>
-                <th>#</th>
-
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Gender</th>
-                <th>language</th>
-                <th>Role</th>
-                <th>Registered At</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.length > 0
-                ? users.map((user) => (
-                    <tr key={user._id}>
-                      <td>{users.indexOf(user) + 1}</td>
-
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.phoneNumber}</td>
-                      <td>{user.gender}</td>
-                      <td>{user.language || 'not Selected'}</td>
-                      <td>{user.user_type}</td>
-                      <td>{user.createdAt ? getDate(user.createdAt) : '-'}</td>
-                      <td>
-                        <Container>
-                          <Row>
-                            <Col style={{ padding: '0px' }}>
-                              <a>
-                                <i
-                                  className="fas fa-trash-restore text-danger"
-                                  onClick={() => {
-                                    setUserClickDelete(user)
-                                    handleShow()
-                                  }}
-                                ></i>
-                              </a>
-
-                              <Modal show={show} onHide={handleClose}>
-                                <Modal.Header closeButton>
-                                  <Modal.Title>Deleting User</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body style={{ color: 'red' }}>
-                                  Are you sure to delete {userClickDelete.name}{' '}
-                                  ?
-                                </Modal.Body>
-                                <Modal.Footer>
-                                  <Button
-                                    variant="secondary"
+          <div>
+            <div className="d-flex mb-2 mt-2">
+              <a
+                className="mr-2"
+                onClick={() => setFilterUser('all')}
+                style={
+                  filterUser === 'all'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                {` All(${getFilteredUserLength('all')})`}
+              </a>
+              <span className="mr-2">| </span>
+              <a
+                className="mr-2"
+                onClick={() => setFilterUser('StudentUser')}
+                style={
+                  filterUser === 'StudentUser'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                {` Students(${getFilteredUserLength('StudentUser')})`}
+              </a>
+              <span className="mr-2">| </span>
+              <a
+                className="mr-2"
+                onClick={() => setFilterUser('InstructorUser')}
+                style={
+                  filterUser === 'InstructorUser'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                {' '}
+                {` Instructors(${getFilteredUserLength('InstructorUser')})`}
+              </a>
+              <span className="mr-2">|</span>
+              <a
+                className="mr-2"
+                onClick={() => setFilterUser('MentorUser')}
+                style={
+                  filterUser === 'MentorUser'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                {' '}
+                {` Mentors(${getFilteredUserLength('MentorUser')})`}
+              </a>{' '}
+              <span className="mr-2">|</span>
+              <a
+                className="mr-2"
+                onClick={() => setFilterUser('AdminUser')}
+                style={
+                  filterUser === 'AdminUser'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                {` Admins(${getFilteredUserLength('AdminUser')})`}
+              </a>
+              <span className="mr-2">|</span>
+              <a
+                onClick={() => setFilterUser('AccountantUser')}
+                style={
+                  filterUser === 'AccountantUser'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                {` Accountants(${getFilteredUserLength('AccountantUser')})`}
+              </a>
+            </div>
+            <Table striped bordered hover responsive="sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Online</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Gender</th>
+                  <th>language</th>
+                  <th>Role</th>
+                  <th>Registered At</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {getFilteredUser() && getFilteredUser().length > 0
+                  ? getFilteredUser().map((user) => (
+                      <tr key={user._id}>
+                        <td>{getFilteredUser().indexOf(user) + 1}</td>
+                        <td>
+                          <i
+                            className="fas fa-user"
+                            style={
+                              user.status === 'online'
+                                ? { color: 'rgb(46, 146, 119)' }
+                                : {}
+                            }
+                          ></i>
+                        </td>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{user.phoneNumber}</td>
+                        <td>{user.gender}</td>
+                        <td>{user.language || 'not Selected'}</td>
+                        <td>{user.user_type}</td>
+                        <td>
+                          {user.createdAt ? getDate(user.createdAt) : '-'}
+                        </td>
+                        <td>
+                          <Container>
+                            <Row>
+                              <Col style={{ padding: '0px' }}>
+                                <a>
+                                  <i
+                                    className="fas fa-trash-restore text-danger"
                                     onClick={() => {
-                                      handleClose()
+                                      setUserClickDelete(user)
+                                      handleShow()
                                     }}
-                                  >
-                                    Close
-                                  </Button>
-                                  <Button
-                                    variant="danger"
+                                  ></i>
+                                </a>
+
+                                <Modal show={show} onHide={handleClose}>
+                                  <Modal.Header closeButton>
+                                    <Modal.Title>Deleting User</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body style={{ color: 'red' }}>
+                                    Are you sure to delete{' '}
+                                    {userClickDelete.name} ?
+                                  </Modal.Body>
+                                  <Modal.Footer>
+                                    <Button
+                                      variant="secondary"
+                                      onClick={() => {
+                                        handleClose()
+                                      }}
+                                    >
+                                      Close
+                                    </Button>
+                                    <Button
+                                      variant="danger"
+                                      onClick={() => {
+                                        dispatch(
+                                          deleteUser(userClickDelete._id)
+                                        )
+                                        toast.info(
+                                          userClickDelete.name +
+                                            ' successfuly removed',
+                                          {
+                                            position:
+                                              toast.POSITION.BOTTOM_RIGHT
+                                          }
+                                        )
+
+                                        setShow(false)
+                                      }}
+                                    >
+                                      Ok
+                                    </Button>
+                                  </Modal.Footer>
+                                </Modal>
+                              </Col>
+
+                              <Col style={{ padding: '0px' }}>
+                                <a>
+                                  <i
+                                    className="fas fa-user-edit text-danger"
                                     onClick={() => {
-                                      dispatch(deleteUser(userClickDelete._id))
-                                      toast.info(
-                                        userClickDelete.name +
-                                          ' successfuly removed',
-                                        {
-                                          position: toast.POSITION.BOTTOM_RIGHT
-                                        }
-                                      )
-
-                                      setShow(false)
+                                      setupdatedUser(user)
+                                      handleShowEditUser()
                                     }}
-                                  >
-                                    Ok
-                                  </Button>
-                                </Modal.Footer>
-                              </Modal>
-                            </Col>
+                                  ></i>
+                                </a>
 
-                            <Col style={{ padding: '0px' }}>
-                              <a>
-                                <i
-                                  className="fas fa-user-edit text-danger"
-                                  onClick={() => {
-                                    setupdatedUser(user)
-                                    handleShowEditUser()
-                                  }}
-                                ></i>
-                              </a>
-
-                              <Modal
-                                show={showEditUser}
-                                onHide={handleCloseEditUser}
-                              >
-                                <Modal.Header closeButton>
-                                  <Modal.Title>Update User Role</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                  {updateUserRoleErr && (
-                                    <p className="text-danger p-2">
-                                      {updateUserRoleErr}
-                                    </p>
-                                  )}
-                                  Choose the new role for:{' '}
-                                  <i>{updatedUser.name}</i> ?
-                                  <div className="form-check">
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      value="StudentUser"
-                                      name="userRole"
-                                      id="StudentUser"
-                                      defaultChecked
-                                      onChange={(e) => {
-                                        setupdatedUser({
-                                          ...updatedUser,
-                                          user_type: e.target.value
-                                        })
+                                <Modal
+                                  show={showEditUser}
+                                  onHide={handleCloseEditUser}
+                                >
+                                  <Modal.Header closeButton>
+                                    <Modal.Title>Update User Role</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    {updateUserRoleErr && (
+                                      <p className="text-danger p-2">
+                                        {updateUserRoleErr}
+                                      </p>
+                                    )}
+                                    Choose the new role for:{' '}
+                                    <i>{updatedUser.name}</i> ?
+                                    <div className="form-check">
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        value="StudentUser"
+                                        name="userRole"
+                                        id="StudentUser"
+                                        defaultChecked
+                                        onChange={(e) => {
+                                          setupdatedUser({
+                                            ...updatedUser,
+                                            user_type: e.target.value
+                                          })
+                                        }}
+                                      />
+                                      <label
+                                        className="form-check-label"
+                                        for="StudentUser"
+                                      >
+                                        Student
+                                      </label>
+                                    </div>
+                                    <div className="form-check">
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        value="MentorUser"
+                                        name="userRole"
+                                        id="MentorUser"
+                                        onChange={(e) => {
+                                          setupdatedUser({
+                                            ...updatedUser,
+                                            user_type: e.target.value
+                                          })
+                                        }}
+                                      />
+                                      <label
+                                        className="form-check-label"
+                                        htmlFor="MentorUser"
+                                      >
+                                        Mentor
+                                      </label>
+                                    </div>
+                                    <div className="form-check">
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        value="InstructorUser"
+                                        name="userRole"
+                                        id="InstructorUser"
+                                        onChange={(e) => {
+                                          setupdatedUser({
+                                            ...updatedUser,
+                                            user_type: e.target.value
+                                          })
+                                        }}
+                                      />
+                                      <label
+                                        className="form-check-label"
+                                        htmlFor="InstructorUser"
+                                      >
+                                        Instructor
+                                      </label>
+                                    </div>
+                                    <div className="form-check">
+                                      <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        value="AccountantUser"
+                                        name="userRole"
+                                        id="AccountantUser"
+                                        onChange={(e) => {
+                                          setupdatedUser({
+                                            ...updatedUser,
+                                            user_type: e.target.value
+                                          })
+                                        }}
+                                      />
+                                      <label
+                                        className="form-check-label"
+                                        htmlFor="AccountantUser"
+                                      >
+                                        Accountant
+                                      </label>
+                                    </div>
+                                  </Modal.Body>
+                                  <Modal.Footer>
+                                    <Button
+                                      variant="secondary"
+                                      onClick={() => {
+                                        handleCloseEditUser()
                                       }}
-                                    />
-                                    <label
-                                      className="form-check-label"
-                                      for="StudentUser"
                                     >
-                                      Student
-                                    </label>
-                                  </div>
-                                  <div className="form-check">
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      value="MentorUser"
-                                      name="userRole"
-                                      id="MentorUser"
-                                      onChange={(e) => {
-                                        setupdatedUser({
-                                          ...updatedUser,
-                                          user_type: e.target.value
-                                        })
-                                      }}
-                                    />
-                                    <label
-                                      className="form-check-label"
-                                      htmlFor="MentorUser"
+                                      Cancel
+                                    </Button>
+                                    <Button
+                                      variant="success"
+                                      onClick={_handleUpdateUserROle}
                                     >
-                                      Mentor
-                                    </label>
-                                  </div>
-                                  <div className="form-check">
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      value="InstructorUser"
-                                      name="userRole"
-                                      id="InstructorUser"
-                                      onChange={(e) => {
-                                        setupdatedUser({
-                                          ...updatedUser,
-                                          user_type: e.target.value
-                                        })
-                                      }}
-                                    />
-                                    <label
-                                      className="form-check-label"
-                                      htmlFor="InstructorUser"
-                                    >
-                                      Instructor
-                                    </label>
-                                  </div>
-
-                                  <div className="form-check">
-                                    <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      value="AccountantUser"
-                                      name="userRole"
-                                      id="AccountantUser"
-                                      onChange={(e) => {
-                                        setupdatedUser({
-                                          ...updatedUser,
-                                          user_type: e.target.value
-                                        })
-                                      }}
-                                    />
-                                    <label
-                                      className="form-check-label"
-                                      htmlFor="AccountantUser"
-                                    >
-                                      Accountant
-                                    </label>
-                                  </div>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                  <Button
-                                    variant="secondary"
-                                    onClick={() => {
-                                      handleCloseEditUser()
-                                    }}
-                                  >
-                                    Cancel
-                                  </Button>
-                                  <Button
-                                    variant="success"
-                                    onClick={_handleUpdateUserROle}
-                                  >
-                                    Save Changes
-                                  </Button>
-                                </Modal.Footer>
-                              </Modal>
-                            </Col>
-                          </Row>
-                        </Container>
-                      </td>
-                    </tr>
-                  ))
-                : ''}
-            </tbody>
-          </Table>
+                                      Save Changes
+                                    </Button>
+                                  </Modal.Footer>
+                                </Modal>
+                              </Col>
+                            </Row>
+                          </Container>
+                        </td>
+                      </tr>
+                    ))
+                  : ''}
+              </tbody>
+            </Table>
+          </div>
         )}
         {<ToastContainer />}
       </div>

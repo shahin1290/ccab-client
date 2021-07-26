@@ -36,20 +36,6 @@ export default function LoginScreen({ location }) {
 
   useEffect(() => {
     if (loginSuccess) {
-      //create new performance
-      /* if (userDetail.user_type === 'StudentUser') {
-        dispatch(createPerformance({}))
-      } */
-
-      //set the user online status
-      dispatch(
-        userProfileUpdate({
-          name: userDetail.name,
-          email: userDetail.email,
-          status: 'online'
-        })
-      )
-
       history.goBack()
     }
   }, [history, loginSuccess])
