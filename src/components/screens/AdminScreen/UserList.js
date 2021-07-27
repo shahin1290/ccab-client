@@ -23,6 +23,7 @@ import { getDate } from '../../../util/getDate'
 
 export default function UserlistScreen() {
   const dispatch = useDispatch()
+  const [searchTerm, setSearchTerm] = useState('')
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
@@ -102,19 +103,36 @@ export default function UserlistScreen() {
   //filter
   const [filterUser, setFilterUser] = useState('all')
 
+  const searchBy = (user) => {
+    return (
+      user.name.toLowerCase().indexOf(searchTerm) > -1 ||
+      user.email.toLowerCase().indexOf(searchTerm) > -1 ||
+      (user.phoneNumber &&
+        user.phoneNumber.toLowerCase().indexOf(searchTerm) > -1) ||
+      (user.gender && user.gender.toLowerCase().indexOf(searchTerm) > -1) ||
+      (user.language && user.language.toLowerCase().indexOf(searchTerm) > -1) ||
+      user.createdAt.toLowerCase().indexOf(searchTerm) > -1
+    )
+  }
+
   const getFilteredUser = () => {
     if (filterUser === 'all') {
-      return users
+      return users.length && users.filter((user) => searchBy(user))
     }
-    return users.length && users.filter((user) => user.user_type === filterUser)
+    return (
+      users.length &&
+      users.filter((user) => user.user_type === filterUser && searchBy(user))
+    )
   }
 
   const getFilteredUserLength = (userType) => {
     if (userType === 'all') {
-      return users.length
+      return users.length && users.filter((user) => searchBy(user)).length
     }
     return (
-      users.length && users.filter((user) => user.user_type === userType).length
+      users.length &&
+      users.filter((user) => user.user_type === userType && searchBy(user))
+        .length
     )
   }
 
@@ -122,91 +140,105 @@ export default function UserlistScreen() {
     <>
       <div className="container-fulid p-5 " style={{ padding: '60px 0' }}>
         <div className="title pb-3">Users</div>
-        <div className="py-2">
-          <Link to="/register">
-            {' '}
-            <i className="fas fa-user-plus"></i> Add User
-          </Link>
-        </div>
+
         {loading ? (
           <Loader />
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
           <div>
-            <div className="d-flex mb-2 mt-2">
-              <a
-                className="mr-2"
-                onClick={() => setFilterUser('all')}
-                style={
-                  filterUser === 'all'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
-                    : {}
-                }
-              >
-                {` All(${getFilteredUserLength('all')})`}
-              </a>
-              <span className="mr-2">| </span>
-              <a
-                className="mr-2"
-                onClick={() => setFilterUser('StudentUser')}
-                style={
-                  filterUser === 'StudentUser'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
-                    : {}
-                }
-              >
-                {` Students(${getFilteredUserLength('StudentUser')})`}
-              </a>
-              <span className="mr-2">| </span>
-              <a
-                className="mr-2"
-                onClick={() => setFilterUser('InstructorUser')}
-                style={
-                  filterUser === 'InstructorUser'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
-                    : {}
-                }
-              >
-                {' '}
-                {` Instructors(${getFilteredUserLength('InstructorUser')})`}
-              </a>
-              <span className="mr-2">|</span>
-              <a
-                className="mr-2"
-                onClick={() => setFilterUser('MentorUser')}
-                style={
-                  filterUser === 'MentorUser'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
-                    : {}
-                }
-              >
-                {' '}
-                {` Mentors(${getFilteredUserLength('MentorUser')})`}
-              </a>{' '}
-              <span className="mr-2">|</span>
-              <a
-                className="mr-2"
-                onClick={() => setFilterUser('AdminUser')}
-                style={
-                  filterUser === 'AdminUser'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
-                    : {}
-                }
-              >
-                {` Admins(${getFilteredUserLength('AdminUser')})`}
-              </a>
-              <span className="mr-2">|</span>
-              <a
-                onClick={() => setFilterUser('AccountantUser')}
-                style={
-                  filterUser === 'AccountantUser'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
-                    : {}
-                }
-              >
-                {` Accountants(${getFilteredUserLength('AccountantUser')})`}
-              </a>
+            <div className="d-flex justify-content-between mb-3">
+              <div className="d-flex mb-2 mt-2">
+                <a
+                  className="mr-2"
+                  onClick={() => setFilterUser('all')}
+                  style={
+                    filterUser === 'all'
+                      ? { color: '#ea5573', fontWeight: 'bold' }
+                      : {}
+                  }
+                >
+                  {` All(${getFilteredUserLength('all')})`}
+                </a>
+                <span className="mr-2">| </span>
+                <a
+                  className="mr-2"
+                  onClick={() => setFilterUser('StudentUser')}
+                  style={
+                    filterUser === 'StudentUser'
+                      ? { color: '#ea5573', fontWeight: 'bold' }
+                      : {}
+                  }
+                >
+                  {` Students(${getFilteredUserLength('StudentUser')})`}
+                </a>
+                <span className="mr-2">| </span>
+                <a
+                  className="mr-2"
+                  onClick={() => setFilterUser('InstructorUser')}
+                  style={
+                    filterUser === 'InstructorUser'
+                      ? { color: '#ea5573', fontWeight: 'bold' }
+                      : {}
+                  }
+                >
+                  {' '}
+                  {` Instructors(${getFilteredUserLength('InstructorUser')})`}
+                </a>
+                <span className="mr-2">|</span>
+                <a
+                  className="mr-2"
+                  onClick={() => setFilterUser('MentorUser')}
+                  style={
+                    filterUser === 'MentorUser'
+                      ? { color: '#ea5573', fontWeight: 'bold' }
+                      : {}
+                  }
+                >
+                  {' '}
+                  {` Mentors(${getFilteredUserLength('MentorUser')})`}
+                </a>{' '}
+                <span className="mr-2">|</span>
+                <a
+                  className="mr-2"
+                  onClick={() => setFilterUser('AdminUser')}
+                  style={
+                    filterUser === 'AdminUser'
+                      ? { color: '#ea5573', fontWeight: 'bold' }
+                      : {}
+                  }
+                >
+                  {` Admins(${getFilteredUserLength('AdminUser')})`}
+                </a>
+                <span className="mr-2">|</span>
+                <a
+                  onClick={() => setFilterUser('AccountantUser')}
+                  style={
+                    filterUser === 'AccountantUser'
+                      ? { color: '#ea5573', fontWeight: 'bold' }
+                      : {}
+                  }
+                >
+                  {` Accountants(${getFilteredUserLength('AccountantUser')})`}
+                </a>
+              </div>
+
+              <div className="container">
+                <div className="input-group border border-secondary">
+                  <div className="input-group-prepend">
+                    <div className="input-group-text">
+                      <i className="fas fa-search"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="search by name - email - phone - gender - language - date"
+                    className="form-control "
+                    name="search"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+              </div>
             </div>
             <Table striped bordered hover responsive="sm">
               <thead>
