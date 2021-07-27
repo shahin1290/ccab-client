@@ -209,7 +209,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                           padding: '2px'
                         }}
                       >
-                        <span className="sub-text pt-5">{day.name} <i class="fas fa-check-square"></i></span>
+                        <span className="sub-text pt-5">{day.name} </span>
                       </Link>
                     </button>
                     

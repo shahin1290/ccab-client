@@ -44,6 +44,8 @@ const LineChart = ({ performances, chart }) => {
     ]
   }
 
+  
+
   const options = {
     scales: {
       yAxes: [

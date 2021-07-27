@@ -138,36 +138,7 @@ const DoughnutChart = ({ performances }) => {
     day: 'numeric'
   })
 
-  const todayPerformance = () => {
-    const foundToday =
-      performances &&
-      performances.length &&
-      performances.find(
-        (performance) =>
-          new Date(performance.createdAt).setHours(0, 0, 0, 0) ===
-          new Date().setHours(0, 0, 0, 0)
-      )
-
-    if (foundToday) {
-      const {
-        watchingLectureScore,
-        submittedQuizScore,
-        quizResultScore,
-        submittedTaskScore,
-        taskResultScore,
-        onlineScore
-      } = foundToday
-      return Math.trunc(
-        (watchingLectureScore +
-          submittedQuizScore +
-          quizResultScore +
-          submittedTaskScore +
-          taskResultScore +
-          onlineScore) /
-          4
-      )
-    }
-  }
+ 
 
   const averagePerformance = () => {
     const allPerformances =
@@ -203,16 +174,11 @@ const DoughnutChart = ({ performances }) => {
 
   return (
     <Row className="mt-5">
-      <Col md={6}>
+      <Col md={7}>
         <Doughnut data={data} />
       </Col>
-      <Col md={6} className="mt-5">
-        <div className="title text-center pb-5">
-          Today Performance Ratio <div>{todayPerformance()} %</div>
-        </div>
-        <div className="title text-center">
+      <Col md={5} className="my-auto sub-title text-center">
           Total Performance Ratio <div>{averagePerformance()} %</div>
-        </div>
       </Col>
     </Row>
   )
