@@ -31,6 +31,7 @@ import JobList from './components/screens/AdminScreen/JobList'
 import ManageServices from './components/screens/AdminScreen/ManageServices'
 import UpdateService from './components/screens/AdminScreen/UpdateService'
 import ServiceCategoryList from './components/screens/AdminScreen/ServiceCategoryList'
+import ManageMediaCenters from './components/screens/AdminScreen/ManageMediaCenters'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -70,6 +71,7 @@ import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Quizzes from './components/layout/Quizzes'
 import { updatePerformance } from './redux/actions/performanceAction'
+import UpdateMediaCenter from './components/screens/AdminScreen/UpdateMediaCenter';
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -100,6 +102,11 @@ function App() {
         <AdminRoute exact path="/admin-courses-list" component={MangeCoures} />
         <AdminRoute
           exact
+          path="/admin-media-center-list"
+          component={ManageMediaCenters}
+        />
+        <AdminRoute
+          exact
           path="/admin-services-list"
           component={ManageServices}
         />
@@ -121,6 +128,12 @@ function App() {
           exact
           path="/admin-service-update/:id"
           component={UpdateService}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/admin-media-center-update/:id"
+          component={UpdateMediaCenter}
         ></AdminRoute>
 
         <AdminRoute

@@ -132,6 +132,16 @@ import {
   performanceUpdateReducer
 } from './redux/reducers/performanceReducer'
 
+import {
+  mediaCenterListReducer,
+  mediaCenterDetailsReducer,
+  mediaCenterDeleteReducer,
+  mediaCenterCreateReducer,
+  adminMediaCenterListReducer,
+  mediaCenterUpdateReducer
+} from './redux/reducers/mediaCenterReducer'
+
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -223,6 +233,12 @@ const reducer = combineReducers({
   performanceDetails: performanceDetailsReducer,
   performanceUpdate: performanceUpdateReducer,
   performanceDelete: performanceDeleteReducer,
+  mediaCenterList: mediaCenterListReducer,
+  adminmediaCenterList: adminMediaCenterListReducer,
+  mediaCenterDetails: mediaCenterDetailsReducer,
+  mediaCenterCreate: mediaCenterCreateReducer,
+  mediaCenterDelete: mediaCenterDeleteReducer,
+  mediaCenterUpdate: mediaCenterUpdateReducer,
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')
