@@ -9,6 +9,7 @@ import {
 import { useHistory } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import CountDown from '../layout/CountDown'
+import { updatePerformance } from '../../redux/actions/performanceAction'
 
 export default function QuizScreen({ match, location }) {
   const { bootcampId, dayId, id } = match.params
@@ -81,6 +82,9 @@ export default function QuizScreen({ match, location }) {
     e.preventDefault()
     dispatch(createQuizAnswer(inputFields, bootcampId, id))
     localStorage.removeItem('timestamp')
+    if (userDetail.user_type === 'StudentUser') {
+      dispatch(updatePerformance({ quizId: id }))
+    }
   }
 
   //handle delete quiz question (for mentor)
@@ -147,14 +151,17 @@ export default function QuizScreen({ match, location }) {
           <div className={show ? 'd-none' : 'd-block'}>
             <div className="sub-title pt-5 pb-3"> Instructions</div>
             <ul className="list-group ">
-            <li className="list-group-item">
-              <i class="fas fa-crosshairs"></i> Only one attempt to finish the quiz{' '}
+              <li className="list-group-item">
+                <i class="fas fa-crosshairs"></i> Only one attempt to finish the
+                quiz{' '}
               </li>
               <li className="list-group-item">
-              <i class="fas fa-stopwatch"></i> Complete the quiz with allotted times
+                <i class="fas fa-stopwatch"></i> Complete the quiz with allotted
+                times
               </li>
               <li className="list-group-item">
-              <i class="fas fa-dice-one"></i> Only one choice for each question{' '}
+                <i class="fas fa-dice-one"></i> Only one choice for each
+                question{' '}
               </li>
             </ul>
           </div>

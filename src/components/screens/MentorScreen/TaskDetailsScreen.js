@@ -14,6 +14,7 @@ import { getTaskDetails } from '../../../redux/actions/taskAction'
 
 import Loader from '../../layout/Loader'
 import { ANSWER_UPDATE_STATUS_REST } from '../../../redux/constences/answerConst'
+import { updatePerformance } from '../../../redux/actions/performanceAction'
 
 export default function TaskDetailsScreen({ match }) {
   const dispatch = useDispatch()
@@ -75,11 +76,10 @@ export default function TaskDetailsScreen({ match }) {
       Authorization: 'Bearer ' + userDetail.token
     }
   }
-  console.log(answers)
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task.task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task.task._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -89,7 +89,7 @@ export default function TaskDetailsScreen({ match }) {
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
     const res = await fetch(
-      'https://server.ccab.tech/api/answers/' + answer._id + '/download',
+      'http://localhost:5001/api/answers/' + answer._id + '/download',
       config
     )
     const blob = await res.blob()
@@ -157,6 +157,10 @@ Failed
     if (textMessage && value) {
       dispatch(
         updateAnswerStatus(bootcampId, id, answer._id, { status: value })
+      )
+
+      dispatch(
+        updatePerformance({ taskResult: value, student: answer.user._id })
       )
 
       toast.info(answer.user.name + ' ' + textMessage, {

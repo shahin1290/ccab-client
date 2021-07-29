@@ -1,7 +1,8 @@
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Footer from './components/layout/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Container, Image } from 'react-bootstrap'
-
+import socketIOClient from 'socket.io-client'
 import ProfileScreen from './components/screens/ProfileScreen'
 import CourseLessonScreen from './components/screens/CourseLessonScreen'
 import ResultScreen from './components/screens/ResultScreen'
@@ -63,22 +64,32 @@ import UserListScreen from './components/screens/AdminScreen/UserList'
 
 /*****************************************/
 import 'malihu-custom-scrollbar-plugin'
-import react, { useEffect } from 'react'
 import WOW from 'wowjs'
-import { script } from './assets/js/script'
 import './App.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Quizzes from './components/layout/Quizzes'
+import { updatePerformance } from './redux/actions/performanceAction'
 
 function App() {
-  useEffect(() => {
-    console.log('hi***')
+  const { userDetail } = useSelector((state) => state.userLogin)
+  const dispatch = useDispatch()
 
-    //script()
-    new WOW.WOW({
-      live: false
-    }).init()
+  new WOW.WOW({
+    live: false
+  }).init()
+
+  const socket = socketIOClient('http://localhost:5001')
+
+  useEffect(() => {
+    socket.emit('login', { userId: userDetail._id }, () => {
+      dispatch(updatePerformance({ connected: true }))
+    })
+
+    /* return () => {
+      socket.emit('disconnect')
+      socket.off()
+    } */
   }, [])
 
   return (

@@ -20,6 +20,7 @@ import CountUp from 'react-countup'
 import Purchases from '../layout/Purchases'
 import PaymentRequest from '../layout/StudentPaymentRequests'
 import { getServiceList } from '../../redux/actions/serviceAction'
+import PerformanceChart from '../layout/PerformanceChart'
 
 export default function ProfileScreen() {
   const dispatch = useDispatch()
@@ -160,7 +161,7 @@ export default function ProfileScreen() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : '/images/resource/avatar.svg'
                             }
                             alt="avatar"
@@ -267,6 +268,7 @@ export default function ProfileScreen() {
                     </div>
                   </div>
                 </div>
+
                 {/* Lower Content */}
                 <div className="lower-content">
                   {/* Instructor Info Tabs*/}
@@ -308,7 +310,7 @@ export default function ProfileScreen() {
                                           <div className="image">
                                             <img
                                               src={
-                                                'https://server.ccab.tech/uploads/Bootcamp/' +
+                                                'http://localhost:5001/uploads/Bootcamp/' +
                                                 course.img_path
                                               }
                                               alt="bootcamp"
@@ -384,7 +386,7 @@ export default function ProfileScreen() {
                                         <div className="image">
                                           <img
                                             src={
-                                              'https://server.ccab.tech/uploads/Service/' +
+                                              'http://localhost:5001/uploads/Service/' +
                                               service.img_path
                                             }
                                             alt="service"
@@ -425,6 +427,14 @@ export default function ProfileScreen() {
                         </div>
                       </Tab>
                     )}
+
+                    {userDetail && userDetail.user_type === 'StudentUser' ? (
+                      <Tab eventKey="Performance" title="Performance">
+                        <div className="m-5">
+                          <PerformanceChart />
+                        </div>
+                      </Tab>
+                    ) : null}
 
                     {userDetail && userDetail.user_type === 'StudentUser' ? (
                       <Tab eventKey="Assignments" title="Assignments">

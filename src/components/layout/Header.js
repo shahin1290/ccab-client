@@ -19,6 +19,7 @@ import InstructorHeaderContent from './../layout/headers/InstructorHeaderContent
 import AccountantHeaderContent from './../layout/headers/AccountantHeaderContent'
 
 import { getProfile } from '../../redux/actions/userAction'
+import Loader from './Loader'
 
 export default function Header() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -251,37 +252,39 @@ export default function Header() {
                 </Nav.Link>
               </>
             ) : (
-              <div className="collapse navbar-collapse mr-3">
-                <ul className="navbar-nav">
-                  <li className="nav-item dropdown dropdown-slide dropdown-hover">
-                    <a>
-                      <div className="logo-image pb-1">
-                        <img
-                          src={
-                            user.avatar
-                              ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
-                              : '/images/resource/avatar.svg'
-                          }
-                          alt="avatar"
-                        />
-                      </div>
-                    </a>
-                    <div
-                      className="dropdown-menu  mt-3"
-                      aria-labelledby="navbarDropdownMenuLink"
-                    >
-                      <a className="dropdown-item" href="/profile">
-                        My Profile
+              user.name && (
+                <div className="collapse navbar-collapse mr-3">
+                  <ul className="navbar-nav">
+                    <li className="nav-item dropdown dropdown-slide dropdown-hover">
+                      <a>
+                        <div className="logo-image pb-1">
+                          <img
+                            src={
+                              user.avatar
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                : '/images/resource/avatar.svg'
+                            }
+                            alt="avatar"
+                          />
+                        </div>
                       </a>
-                      <div className="dropdown-divider"></div>
+                      <div
+                        className="dropdown-menu  mt-3"
+                        aria-labelledby="navbarDropdownMenuLink"
+                      >
+                        <a className="dropdown-item" href="/profile">
+                          My Profile
+                        </a>
+                        <div className="dropdown-divider"></div>
 
-                      <a className="dropdown-item" onClick={logoutHandler}>
-                        Logout
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                        <a className="dropdown-item" onClick={logoutHandler}>
+                          Logout
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )
             )}
           </Nav>
         </Navbar.Collapse>

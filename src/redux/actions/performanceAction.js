@@ -1,28 +1,28 @@
 import {
-  APPOINTMENT_ADD_REQUEST,
-  APPOINTMENT_ADD_SUCCESS,
-  APPOINTMENT_ADD_FAIL,
-  APPOINTMENT_LIST_REQUEST,
-  APPOINTMENT_LIST_SUCCESS,
-  APPOINTMENT_LIST_FAIL,
-  APPOINTMENT_DETAILS_REQUEST,
-  APPOINTMENT_DETAILS_SUCCESS,
-  APPOINTMENT_DETAILS_FAIL,
-  APPOINTMENT_UPDATE_REQUEST,
-  APPOINTMENT_UPDATE_SUCCESS,
-  APPOINTMENT_UPDATE_FAIL,
-  APPOINTMENT_DELETE_REQUEST,
-  APPOINTMENT_DELETE_SUCCESS,
-  APPOINTMENT_DELETE_FAIL
-} from '../constences/appointmentConst'
+  PERFORMANCE_ADD_REQUEST,
+  PERFORMANCE_ADD_SUCCESS,
+  PERFORMANCE_ADD_FAIL,
+  PERFORMANCE_LIST_REQUEST,
+  PERFORMANCE_LIST_SUCCESS,
+  PERFORMANCE_LIST_FAIL,
+  PERFORMANCE_DETAILS_REQUEST,
+  PERFORMANCE_DETAILS_SUCCESS,
+  PERFORMANCE_DETAILS_FAIL,
+  PERFORMANCE_UPDATE_REQUEST,
+  PERFORMANCE_UPDATE_SUCCESS,
+  PERFORMANCE_UPDATE_FAIL,
+  PERFORMANCE_DELETE_REQUEST,
+  PERFORMANCE_DELETE_SUCCESS,
+  PERFORMANCE_DELETE_FAIL
+} from '../constences/performanceConst'
 
 import axios from 'axios'
 
-export const createAppointment =
-  (appointment) => async (dispatch, getState) => {
+export const createPerformance =
+  (performance) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: APPOINTMENT_ADD_REQUEST
+        type: PERFORMANCE_ADD_REQUEST
       })
 
       // Descruct from getState()
@@ -34,22 +34,22 @@ export const createAppointment =
       }
 
       const response = await axios.post(
-        'http://localhost:5001/api/appointment',
-        appointment,
+        'http://localhost:5001/api/performance',
+        performance,
         config
       )
 
       // console.log("response:", response)
 
       dispatch({
-        type: APPOINTMENT_ADD_SUCCESS,
+        type: PERFORMANCE_ADD_SUCCESS,
         //   payload: console.log("payload:", resconst response.data),
         payload: response.data
       })
     } catch (error) {
       console.log('error:', error)
       dispatch({
-        type: APPOINTMENT_ADD_FAIL,
+        type: PERFORMANCE_ADD_FAIL,
         //    payload: error.res
         payload:
           error.response && error.response.data.message
@@ -59,10 +59,10 @@ export const createAppointment =
     }
   }
 
-export const getAppointments = () => async (dispatch, getState) => {
+export const getPerformances = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_LIST_REQUEST
+      type: PERFORMANCE_LIST_REQUEST
     })
 
     // Descruct from getState()
@@ -75,17 +75,17 @@ export const getAppointments = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'http://localhost:5001/api/appointment/',
+      'http://localhost:5001/api/performance/',
       config
     )
     dispatch({
-      type: APPOINTMENT_LIST_SUCCESS,
+      type: PERFORMANCE_LIST_SUCCESS,
       payload: response.data
     })
   } catch (error) {
     // console.log("error:", error)
     dispatch({
-      type: APPOINTMENT_LIST_FAIL,
+      type: PERFORMANCE_LIST_FAIL,
       //    payload: error.res
       payload:
         error.response && error.response.data.message
@@ -95,10 +95,10 @@ export const getAppointments = () => async (dispatch, getState) => {
   }
 }
 
-export const getAppointmentDetails = (id) => async (dispatch, getState) => {
+export const getPerformanceDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_DETAILS_REQUEST
+      type: PERFORMANCE_DETAILS_REQUEST
     })
     const {
       userLogin: { userDetail }
@@ -111,19 +111,19 @@ export const getAppointmentDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/appointment/${id}`,
+      `http://localhost:5001/api/performance/${id}`,
       config
     )
 
     dispatch({
-      type: APPOINTMENT_DETAILS_SUCCESS,
+      type: PERFORMANCE_DETAILS_SUCCESS,
       payload: response.data.data
       // payload: console.log("payload: ", response.data),
     })
   } catch (error) {
     console.log(error.response.data.message)
     dispatch({
-      type: APPOINTMENT_DETAILS_FAIL,
+      type: PERFORMANCE_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -132,10 +132,10 @@ export const getAppointmentDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-export const deleteAppointment = (id) => async (dispatch, getState) => {
+export const deletePerformance = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_DELETE_REQUEST
+      type: PERFORMANCE_DELETE_REQUEST
     })
 
     const {
@@ -148,14 +148,14 @@ export const deleteAppointment = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete(`http://localhost:5001/api/appointment/${id}`, config)
+    await axios.delete(`http://localhost:5001/api/performance/${id}`, config)
 
     dispatch({
-      type: APPOINTMENT_DELETE_SUCCESS
+      type: PERFORMANCE_DELETE_SUCCESS
     })
   } catch (error) {
     dispatch({
-      type: APPOINTMENT_DELETE_FAIL,
+      type: PERFORMANCE_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -165,10 +165,10 @@ export const deleteAppointment = (id) => async (dispatch, getState) => {
 }
 
 // update Request
-export const updateAppointment = (req, id) => async (dispatch, getState) => {
+export const updatePerformance = (req) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_UPDATE_REQUEST
+      type: PERFORMANCE_UPDATE_REQUEST
     })
 
     const {
@@ -182,15 +182,15 @@ export const updateAppointment = (req, id) => async (dispatch, getState) => {
     }
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/appointment/${id}`, req, config)
+    await axios.put(`http://localhost:5001/api/performance/daily-performance`, req, config)
 
     dispatch({
-      type: APPOINTMENT_UPDATE_SUCCESS
+      type: PERFORMANCE_UPDATE_SUCCESS
     })
   } catch (error) {
     // console.log(error.response.data);
     dispatch({
-      type: APPOINTMENT_UPDATE_FAIL,
+      type: PERFORMANCE_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

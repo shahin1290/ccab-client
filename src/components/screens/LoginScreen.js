@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Message from '../layout/Message'
-
+import { userProfileUpdate, getProfile } from '../../redux/actions/userAction'
 import 'react-toastify/dist/ReactToastify.css'
 import { login } from '../../redux/actions/userAction'
 import { createBrowserHistory } from 'history'
@@ -9,6 +9,7 @@ import { createBrowserHistory } from 'history'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { createPerformance } from '../../redux/actions/performanceAction'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -37,7 +38,7 @@ export default function LoginScreen({ location }) {
     if (loginSuccess) {
       history.goBack()
     }
-  }, [loginSuccess, history])
+  }, [history, loginSuccess])
 
   const submitHandler = ({ email, password }) => {
     dispatch(login(email, password))

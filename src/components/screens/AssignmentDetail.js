@@ -15,6 +15,7 @@ import { createAnswer, getUserAnswer } from '../../redux/actions/answerAction'
 // importing component
 import Loader from '../layout/Loader'
 import Message from '../layout/Message'
+import { updatePerformance } from '../../redux/actions/performanceAction';
 
 export default function AssignmentDetail({ match }) {
   const history = useHistory()
@@ -104,6 +105,10 @@ export default function AssignmentDetail({ match }) {
 
       dispatch(createAnswer(form_data, bootcampId, taskDetail.task._id))
 
+      if (userDetail.user_type === 'StudentUser') {
+        dispatch(updatePerformance({ taskId: taskDetail.task._id }))
+      }
+
       //clear the fields
       setFile({})
       setAssignemntLink('')
@@ -125,7 +130,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
       config
     )
 
