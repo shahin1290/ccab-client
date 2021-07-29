@@ -32,6 +32,8 @@ import ManageServices from './components/screens/AdminScreen/ManageServices'
 import UpdateService from './components/screens/AdminScreen/UpdateService'
 import ServiceCategoryList from './components/screens/AdminScreen/ServiceCategoryList'
 import ManageMediaCenters from './components/screens/AdminScreen/ManageMediaCenters'
+import UpdateMediaCenterDayContent from './components/screens/AdminScreen/UpdateMediaCenterDayContent'
+import EditMediaCenterDay from './components/screens/AdminScreen/EditMediaCenterDay'
 
 /* Mentor Screen*/
 import ManageMentorCourses from './components/screens/MentorScreen/ManageMentorCourses'
@@ -71,7 +73,8 @@ import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Quizzes from './components/layout/Quizzes'
 import { updatePerformance } from './redux/actions/performanceAction'
-import UpdateMediaCenter from './components/screens/AdminScreen/UpdateMediaCenter';
+import UpdateMediaCenter from './components/screens/AdminScreen/UpdateMediaCenter'
+import ManageMediaCenterContent from './components/screens/AdminScreen/ManageMediaCenterContent'
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -84,9 +87,11 @@ function App() {
   const socket = socketIOClient('http://localhost:5001')
 
   useEffect(() => {
-    socket.emit('login', { userId: userDetail._id }, () => {
-      dispatch(updatePerformance({ connected: true }))
-    })
+    if (userDetail.user_type === 'StudentUser') {
+      socket.emit('login', { userId: userDetail._id }, () => {
+        dispatch(updatePerformance({ connected: true }))
+      })
+    }
 
     /* return () => {
       socket.emit('disconnect')
@@ -104,6 +109,11 @@ function App() {
           exact
           path="/admin-media-center-list"
           component={ManageMediaCenters}
+        />
+        <AdminRoute
+          exact
+          path="/manage-media-center-content"
+          component={ManageMediaCenterContent}
         />
         <AdminRoute
           exact
@@ -134,6 +144,18 @@ function App() {
           exact
           path="/admin-media-center-update/:id"
           component={UpdateMediaCenter}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/update-media-center-day-content/:id"
+          component={UpdateMediaCenterDayContent}
+        ></AdminRoute>
+
+        <AdminRoute
+          exact
+          path="/edit-media-center-day/:weekId/:id"
+          component={EditMediaCenterDay}
         ></AdminRoute>
 
         <AdminRoute

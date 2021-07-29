@@ -7,6 +7,7 @@ import {
   createCourse,
   deleteCourse
 } from './../../../redux/actions/courseAction'
+import { getMediaCenterListForAdmin } from '../../../redux/actions/mediaCenterAction'
 import Message from './../../layout/Message'
 import Loader from './../../layout/Loader'
 import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap'
@@ -32,6 +33,8 @@ export default function MangeCourse({ match }) {
     success: updateSuccess
   } = useSelector((state) => state.courseUpdate)
 
+  // Admin mediaCenter list Reducer
+  const { mediaCenterList } = useSelector((state) => state.adminmediaCenterList)
 
   // Admin course list Reducer
   const { courseList, page, pages, loading, error } = useSelector(
@@ -39,7 +42,7 @@ export default function MangeCourse({ match }) {
   )
 
   // add course  Reducer
-  const { loading: Addloading, error: AddError } = useSelector(
+  const { loading: Addloading, error: AddError, success: AddSuccess } = useSelector(
     (state) => state.courseCreate
   )
   /************************************************************** */
@@ -78,7 +81,7 @@ export default function MangeCourse({ match }) {
   /* add course handles */
   const handleCloseAdd = () => {
     setShowAdd(false)
-    setWeeks('')
+    setMediaCenter('')
     setAddnewCourseErr('')
     dispatch({ type: 'COURSE_ADD_RESET' })
   }
@@ -86,12 +89,12 @@ export default function MangeCourse({ match }) {
   const handleShowAdd = () => setShowAdd(true)
   // add course  function
   const _addBootcampHandler = () => {
-    if (!weeks) {
-      setAddnewCourseErr('weeks should not be empty')
+    if (!mediaCenter) {
+      setAddnewCourseErr('must select media center for this course')
     } else {
-      dispatch(createCourse({ weeks: weeks }))
+      dispatch(createCourse({ mediaCenter }))
       dispatch(getCourseListForAdmin(pageNumber))
-      setWeeks('')
+      setMediaCenter('')
       handleCloseAdd()
     }
   }
@@ -126,7 +129,8 @@ export default function MangeCourse({ match }) {
 
   useEffect(() => {
     dispatch(getCourseListForAdmin(pageNumber))
-  }, [dispatch, pageNumber, successDelete, updateSuccess])
+    dispatch(getMediaCenterListForAdmin(pageNumber))
+  }, [dispatch, pageNumber, successDelete, updateSuccess, AddSuccess])
 
   /*******************  State ********************* */
   /* to show delete course model */
@@ -135,15 +139,13 @@ export default function MangeCourse({ match }) {
   /* to show add course model */
   const [showAdd, setShowAdd] = useState(false)
 
-  const [weeks, setWeeks] = useState('')
+  const [mediaCenter, setMediaCenter] = useState('')
   const [AddnewCourseErr, setAddnewCourseErr] = useState('')
   // item id
   const [DeletedCourse, setDeletedCourse] = useState('')
-  //console.log(DeletedCourse);
 
   /************************************************** */
 
-  //console.log(courseList);
   return (
     <>
       {/* Manage Cource Section */}
@@ -193,7 +195,30 @@ export default function MangeCourse({ match }) {
                       </Message>
                     )}
 
-                    <label className="d-block">
+                    {/* Media Center */}
+                    <div className="form-group mb-2">
+                      <label> Media Center</label>
+
+                      <select
+                        className="custom-select-box px-2 ml-2"
+                        onChange={(e) => setMediaCenter(e.target.value)}
+                        defaultValue={'default'}
+                      >
+                        <option value="default" disabled>
+                          select an option
+                        </option>
+
+                        {mediaCenterList &&
+                          mediaCenterList.length > 0 &&
+                          mediaCenterList.map((mediaCenter) => (
+                            <option value={mediaCenter._id}>
+                              {mediaCenter.name}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+
+                    {/* <label className="d-block">
                       Enter the total weeks to the new course :
                     </label>
                     <input
@@ -205,7 +230,7 @@ export default function MangeCourse({ match }) {
                         setWeeks(e.target.value)
                       }}
                     />
-                    <p>You need to update the course after you add it!</p>
+                    <p>You need to update the course after you add it!</p> */}
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseAdd}>
@@ -316,7 +341,6 @@ export default function MangeCourse({ match }) {
                                         }
                                       )
                                       setShow(false)
-                                      
                                     }}
                                   >
                                     Ok

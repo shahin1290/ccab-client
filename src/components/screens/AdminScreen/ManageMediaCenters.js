@@ -146,7 +146,7 @@ export default function MangeMediaCenters({ match }) {
               <div className="pull-right">
                 {/* Add couse Button */}
                 <a
-                  href="/admin-media-Centers-list"
+                  href="/manage-media-center-content"
                   className="btn btn-danger bordered mr-1 "
                 >
                   Update Content

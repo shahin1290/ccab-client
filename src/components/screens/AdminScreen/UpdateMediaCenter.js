@@ -99,7 +99,6 @@ export default function UpdateMediaCenter({ match }) {
     SetPublished(mediaCenter.published)
     setVideoUrl(mediaCenter.video_path)
     setImageLable(mediaCenter.img_path)
-
     setTitleWithAnswer(mediaCenter.info_list)
     setWeeks(mediaCenter.weeks)
   }
@@ -248,7 +247,6 @@ export default function UpdateMediaCenter({ match }) {
     //console.log('StudentsIds',StudentsIds);
     var form_data = new FormData()
     if (ImageUrl) form_data.append('img_path', ImageUrl)
-    form_data.append('_id', mediaCenter._id)
     form_data.append('name', name)
     form_data.append('description', description)
     form_data.append('category', category)
@@ -302,7 +300,7 @@ export default function UpdateMediaCenter({ match }) {
                     <u> if the mediaCenter is only for any subscription plan.</u>
                   </div>
                   {/* Edit mediaCenter Form */}
-                  <div className="edit-mediaCenter-form">
+                  <div className="edit-course-form">
                     <form method="post" action="index.html">
                       {/* Form Group */}
                       <div className="form-group">
