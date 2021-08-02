@@ -13,7 +13,10 @@ import {
   PERFORMANCE_UPDATE_FAIL,
   PERFORMANCE_DELETE_REQUEST,
   PERFORMANCE_DELETE_SUCCESS,
-  PERFORMANCE_DELETE_FAIL
+  PERFORMANCE_DELETE_FAIL,
+  PERFORMANCE_LECTURE_LIST_SUCCESS,
+  PERFORMANCE_LECTURE_LIST_FAIL,
+  PERFORMANCE_LECTURE_LIST_REQUEST
 } from '../constences/performanceConst'
 
 import axios from 'axios'
@@ -59,10 +62,49 @@ export const createPerformance =
     }
   }
 
-export const getPerformances = () => async (dispatch, getState) => {
+export const getPerformances =
+  (bootcampId, userId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PERFORMANCE_LIST_REQUEST
+      })
+
+      // Descruct from getState()
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + userDetail.token
+        }
+      }
+
+      const response = await axios.get(
+        `http://localhost:5001/api/performance/${bootcampId}/${userId}`,
+        config
+      )
+
+      dispatch({
+        type: PERFORMANCE_LIST_SUCCESS,
+        payload: response.data
+      })
+    } catch (error) {
+      // console.log("error:", error)
+      dispatch({
+        type: PERFORMANCE_LIST_FAIL,
+        //    payload: error.res
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+
+export const getWatchingLectures = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: PERFORMANCE_LIST_REQUEST
+      type: PERFORMANCE_LECTURE_LIST_REQUEST
     })
 
     // Descruct from getState()
@@ -74,18 +116,19 @@ export const getPerformances = () => async (dispatch, getState) => {
         Authorization: 'Bearer ' + userDetail.token
       }
     }
+
     const response = await axios.get(
-      'http://localhost:5001/api/performance/',
+      `http://localhost:5001/api/performance/watching-lectures/${id}`,
       config
     )
     dispatch({
-      type: PERFORMANCE_LIST_SUCCESS,
+      type: PERFORMANCE_LECTURE_LIST_SUCCESS,
       payload: response.data
     })
   } catch (error) {
     // console.log("error:", error)
     dispatch({
-      type: PERFORMANCE_LIST_FAIL,
+      type: PERFORMANCE_LECTURE_LIST_FAIL,
       //    payload: error.res
       payload:
         error.response && error.response.data.message
@@ -165,7 +208,7 @@ export const deletePerformance = (id) => async (dispatch, getState) => {
 }
 
 // update Request
-export const updatePerformance = (req) => async (dispatch, getState) => {
+export const updatePerformance = (req, id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: PERFORMANCE_UPDATE_REQUEST
@@ -181,8 +224,11 @@ export const updatePerformance = (req) => async (dispatch, getState) => {
       }
     }
 
-    //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/performance/daily-performance`, req, config)
+    await axios.put(
+      `http://localhost:5001/api/performance/daily-performance/${id}`,
+      req,
+      config
+    )
 
     dispatch({
       type: PERFORMANCE_UPDATE_SUCCESS

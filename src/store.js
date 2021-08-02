@@ -127,6 +127,7 @@ import {
 import {
   performanceCreateReducer,
   performanceListReducer,
+  performanceLectureListReducer,
   performanceDetailsReducer,
   performanceDeleteReducer,
   performanceUpdateReducer
@@ -140,7 +141,6 @@ import {
   adminMediaCenterListReducer,
   mediaCenterUpdateReducer
 } from './redux/reducers/mediaCenterReducer'
-
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -234,11 +234,12 @@ const reducer = combineReducers({
   performanceUpdate: performanceUpdateReducer,
   performanceDelete: performanceDeleteReducer,
   mediaCenterList: mediaCenterListReducer,
+  performanceLectureList: performanceLectureListReducer,
   adminmediaCenterList: adminMediaCenterListReducer,
   mediaCenterDetails: mediaCenterDetailsReducer,
   mediaCenterCreate: mediaCenterCreateReducer,
   mediaCenterDelete: mediaCenterDeleteReducer,
-  mediaCenterUpdate: mediaCenterUpdateReducer,
+  mediaCenterUpdate: mediaCenterUpdateReducer
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')

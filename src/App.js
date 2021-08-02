@@ -88,9 +88,7 @@ function App() {
 
   useEffect(() => {
     if (userDetail.user_type === 'StudentUser') {
-      socket.emit('login', { userId: userDetail._id }, () => {
-        dispatch(updatePerformance({ connected: true }))
-      })
+      socket.emit('login', { userId: userDetail._id })
     }
 
     /* return () => {

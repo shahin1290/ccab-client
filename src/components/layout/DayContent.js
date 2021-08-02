@@ -10,6 +10,7 @@ import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
 import { getWeekList } from '../../redux/actions/weekAction'
 import { getOrderList } from '../../redux/actions/orderAction'
 import { getCourseDetails } from '../../redux/actions/courseAction'
+import { getWatchingLectures } from '../../redux/actions/performanceAction'
 
 export default function DayContent({ bootcampId, setOpen }) {
   const dispatch = useDispatch()
@@ -43,6 +44,17 @@ export default function DayContent({ bootcampId, setOpen }) {
   const taskListMy = useSelector((state) => state.taskListMy)
   const { myTasks, loading: myTasksLoading, error: myTasksError } = taskListMy
 
+  // getting myAnswerList
+  const { myanswers } = useSelector((state) => state.answerMyList)
+
+
+  const taskStatus = (taskId) => {
+    if (myanswers && myanswers.length > 0) {
+      const foundAnswer = myanswers.find((ans) => ans.task._id === taskId)
+      return foundAnswer
+    } else return null
+  }
+
   //get quiz list list for students
   const {
     myQuizList,
@@ -71,6 +83,8 @@ export default function DayContent({ bootcampId, setOpen }) {
   const { tasks } = useSelector((state) => state.taskList)
   //get task list for mentor_route
   const { quizzes } = useSelector((state) => state.quizList)
+
+  const { lectures } = useSelector((state) => state.performanceLectureList)
 
   /****************function***************** */
 
@@ -147,6 +161,13 @@ export default function DayContent({ bootcampId, setOpen }) {
     }
   }
 
+  //check if the daily video is watched
+  const watched = (dayId) => {
+    const uniqueLectures =
+      lectures && lectures.length > 0 ? [...new Set(lectures)] : []
+
+    return uniqueLectures.some((lecture) => lecture === dayId)
+  }
   /****************useEffect***************** */
 
   useEffect(() => {
@@ -154,6 +175,7 @@ export default function DayContent({ bootcampId, setOpen }) {
       dispatch(getMyTaskList())
       dispatch(getMyQuizList())
       dispatch(getMyQuizAnswerList())
+      dispatch(getWatchingLectures(bootcampId))
     }
 
     if (
@@ -188,89 +210,114 @@ export default function DayContent({ bootcampId, setOpen }) {
               {daysBasedOnUser(week.days).length &&
                 daysBasedOnUser(week.days).map((day, index) => (
                   <div key={day._id} className="course-content">
-                    
-                    <button
-                      onClick={() => {
-                        setShow(day._id)
-                        dispatch(getDayDetails(week._id, day._id))
-                        setOpen && setOpen(false)
-                      }}
-                      className="lightbox-image play-icon m-2"
-                    >
-                      <span
-                        className="fa fa-play"
-                        style={{ paddingTop: '10px' }}
-                      ></span>
+                    <div className=" d-flex p-2 mt-2 mb-2">
+                      <div
+                        className="pr-4 text-warning "
+                        style={{ fontSize: '25px' }}
+                      >
+                        {watched(day._id) ? (
+                          <i class="fas fa-check-circle"></i>
+                        ) : (
+                          <i class="far fa-circle"></i>
+                        )}
+                      </div>
 
-                      <Link
-                        to={`/course-content/${bootcampId}`}
-                        style={{
-                          backgroundColor: show === day._id ? '#ffbfbe' : '',
-                          padding: '2px'
+                      <div
+                        onClick={() => {
+                          setShow(day._id)
+                          dispatch(getDayDetails(week._id, day._id))
+                          setOpen && setOpen(false)
                         }}
                       >
-                        <span className="sub-text pt-5">{day.name} </span>
-                      </Link>
-                    </button>
-                    
+                        <Link
+                          to={`/course-content/${bootcampId}`}
+                          style={{
+                            backgroundColor: show === day._id ? '#ffbfbe' : ''
+                          }}
+                          className="sub-text text-left"
+                        >
+                          {day.name} What is web develpment
+                        </Link>
+                      </div>
+                    </div>
 
                     {filterWeeklyQuiz(day._id).length > 0 &&
                       filterWeeklyQuiz(day._id).map((quiz) => (
-                        <div key={quiz._id} className="pb-3 pt-3">
-                          <span className="mr-3 ml-4 pl-1">
+                        <div className=" d-flex m-2">
+                          <div
+                            className="pr-4 text-warning "
+                            style={{ fontSize: '25px' }}
+                          >
+                            {quizStatus(quiz._id) &&
+                            quizStatus(quiz._id).status === 'Not Sent' ? (
+                              <i class="far fa-circle"></i>
+                            ) : (
+                              <i class="fas fa-check-circle"></i>
+                            )}
+                          </div>
+                          <div key={quiz._id}>
                             <img width="30" src="/images/resource/quiz.png" />
-                          </span>
 
-                          {userDetail.user_type === 'StudentUser' && (
-                            <Link
-                              to={
-                                quizStatus(quiz._id) &&
-                                quizStatus(quiz._id).status === 'Not Sent'
-                                  ? `/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
-                                  : `/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
-                              }
-                            >
-                              <span className="sub-text">
+                            {userDetail.user_type === 'StudentUser' && (
+                              <Link
+                                to={
+                                  quizStatus(quiz._id) &&
+                                  quizStatus(quiz._id).status === 'Not Sent'
+                                    ? `/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
+                                    : `/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
+                                }
+                                className="sub-text  ml-2"
+                              >
                                 Quiz: {quiz.name}
-                              </span>
-                            </Link>
-                          )}
+                              </Link>
+                            )}
 
-                          {userDetail.user_type !== 'StudentUser' && (
-                            <Link
-                              to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
-                            >
-                              <span className="sub-text">
+                            {userDetail.user_type !== 'StudentUser' && (
+                              <Link
+                                to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
+                                className="sub-text  ml-2"
+                              >
                                 Quiz: {quiz.name}
-                              </span>
-                            </Link>
-                          )}
+                              </Link>
+                            )}
+                          </div>
                         </div>
                       ))}
 
                     {filterWeeklyTask(day._id).length > 0 &&
                       filterWeeklyTask(day._id).map((task) => (
-                        <div key={task._id} className="pb-3">
-                          <span className="mr-3 ml-4 pl-1">
+                        <div className=" d-flex m-2">
+                          <div
+                            className="pr-4 text-warning "
+                            style={{ fontSize: '25px' }}
+                          >
+                            {taskStatus(task._id) &&
+                            taskStatus(task._id).status === 'Not Sent' ? (
+                              <i class="far fa-circle"></i>
+                            ) : (
+                              <i class="fas fa-check-circle"></i>
+                            )}
+                          </div>
+                          <div key={task._id}>
                             <img
                               width="30"
                               src="/images/resource/assignment.png"
                             />
-                          </span>
 
-                          <Link
-                            to={
-                              userDetail.user_type === 'StudentUser'
-                                ? `/assignment-details/${task.bootcamp._id}/${task._id}`
-                                : `/task-details/${task.bootcamp}/${task._id}`
-                            }
-                          >
-                            <span className="sub-text">
+                            <Link
+                              to={
+                                userDetail.user_type === 'StudentUser'
+                                  ? `/assignment-details/${task.bootcamp._id}/${task._id}`
+                                  : `/task-details/${task.bootcamp}/${task._id}`
+                              }
+                              className="sub-text  ml-2"
+                            >
                               Task: {task.projectName}
-                            </span>
-                          </Link>
+                            </Link>
+                          </div>
                         </div>
                       ))}
+                    <hr />
                   </div>
                 ))}
             </div>

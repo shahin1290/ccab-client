@@ -13,7 +13,10 @@ import {
   PERFORMANCE_UPDATE_FAIL,
   PERFORMANCE_DELETE_REQUEST,
   PERFORMANCE_DELETE_SUCCESS,
-  PERFORMANCE_DELETE_FAIL
+  PERFORMANCE_DELETE_FAIL,
+  PERFORMANCE_LECTURE_LIST_SUCCESS,
+  PERFORMANCE_LECTURE_LIST_FAIL,
+  PERFORMANCE_LECTURE_LIST_REQUEST
 } from '../constences/performanceConst'
 
 export const performanceCreateReducer = (
@@ -69,6 +72,33 @@ export const performanceListReducer = (state = { performances: [] }, action) => 
       return state
   }
 }
+
+export const performanceLectureListReducer = (state = { lectures: [] }, action) => {
+  switch (action.type) {
+    case PERFORMANCE_LECTURE_LIST_REQUEST:
+      return {
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
+
+    case PERFORMANCE_LECTURE_LIST_SUCCESS:
+      // console.log("actionP: ", action.payload)
+
+      return {
+        loading: false, // loading is done laoding!
+        lectures: action.payload.data
+      }
+
+    case PERFORMANCE_LECTURE_LIST_FAIL:
+      return {
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
 
 export const performanceDetailsReducer = (
   state = { performance: {}, loading: false },

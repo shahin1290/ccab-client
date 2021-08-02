@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import LineChart from './LineChart'
 import DoughnutChart from './DoughnutChart'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Form } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPerformances } from '../../redux/actions/performanceAction'
+import { todayPerformance } from '../../util/performances'
 
-const PerformanceChart = () => {
+const PerformanceChart = ({ courses, student }) => {
   const dispatch = useDispatch()
 
   const [selectedDate, setSelectedDate] = useState('today')
-
+  const [course, setCourse] = useState(courses[0]._id)
   const [chart, setChart] = useState('line')
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -54,49 +55,30 @@ const PerformanceChart = () => {
     }
   }
 
-  const todayPerformance = () => {
-    const foundToday =
-      performances &&
-      performances.length &&
-      performances.find(
-        (performance) =>
-          new Date(performance.createdAt).setHours(0, 0, 0, 0) ===
-          new Date().setHours(0, 0, 0, 0)
-      )
-
-    if (foundToday) {
-      const {
-        watchingLectureScore,
-        submittedQuizScore,
-        quizResultScore,
-        submittedTaskScore,
-        taskResultScore,
-        onlineScore
-      } = foundToday
-      return Math.trunc(
-        (watchingLectureScore +
-          submittedQuizScore +
-          quizResultScore +
-          submittedTaskScore +
-          taskResultScore +
-          onlineScore) /
-          4
-      )
-    }
-  }
-
   useEffect(() => {
     if (userDetail.user_type === 'StudentUser') {
-      dispatch(getPerformances())
+      dispatch(getPerformances(course, userDetail._id))
     }
-  }, [])
+
+    if (userDetail.user_type === 'AdminUser') {
+      dispatch(getPerformances(course, student))
+    }
+  }, [course, dispatch, student])
 
   return (
     <div className="">
       <div className="title pb-3">Performance Ratio</div>
 
+      <div className="d-flex justify-content-between mb-4">
+        <select onChange={(e) => setCourse(e.target.value)}>
+          {courses.map((course) => (
+            <option value={course._id}>{course.name}</option>
+          ))}
+        </select>
+      </div>
+
       <div className="d-flex justify-content-between">
-        <div className="mb-5">
+        <div className="mb-1">
           <a
             onClick={() => setSelectedDate('today')}
             style={
@@ -160,7 +142,8 @@ const PerformanceChart = () => {
           <LineChart performances={filterPerformances()} chart={chart} />
         </Col>
         <Col md={3} className="my-auto sub-title text-center">
-          Today Performance Ratio <div>{todayPerformance()} %</div>
+          Today Performance Ratio{' '}
+          <div>{todayPerformance(performances && performances)} %</div>
         </Col>
       </Row>
       <div className="p-5">

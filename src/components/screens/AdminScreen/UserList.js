@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import Rodal from 'rodal'
+// include styles
+import 'rodal/lib/rodal.css'
 import {
   Container,
   Table,
@@ -20,10 +23,15 @@ import { useHistory, Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import Loader from '../../layout/Loader'
 import { getDate } from '../../../util/getDate'
+import PerformanceChart from '../../layout/PerformanceChart'
 
 export default function UserlistScreen() {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
+  const [showPerformanceModal, setShowPerformanceModal] = useState('')
+  const [studentId, setStudentId] = useState('')
+
+  const history = useHistory()
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userDetail } = userLogin
@@ -37,32 +45,31 @@ export default function UserlistScreen() {
   const userUpdateRole = useSelector((state) => state.userUpdateRole)
   const { error: updateUserRoleErr } = userUpdateRole
 
-  const history = useHistory()
+  //get all courses
+  const {
+    courseList,
+    loading: bootcampLoading,
+    error: bootcampError
+  } = useSelector((state) => state.courseList)
+
+  //Filter Student's courses
+  const filterCourseList = () => {
+    return courseList.filter(
+      (course) =>
+        course.price === 0 ||
+        course.students.some(
+          (student) => student._id === studentId || course.price === 0
+        )
+    )
+  }
 
   useEffect(() => {
-    if (userDetail.user_type == 'AdminUser') {
+    if (userDetail.user_type === 'AdminUser') {
       dispatch(getUsers())
     } else {
       history.push('/')
     }
   }, [dispatch, userDetail, getUsers, history, deleteSuccess])
-
-  // const deleteHandler = (id) => {
-  //   if (window.confirm("Are you sure ? ")) {
-  //     dispatch(deleteUser(id));
-  //     toast.info("User successfuly removed", {
-  //       position: toast.POSITION.BOTTOM_RIGHT,
-  //     });
-  //   }
-  // };
-  /**
-   * Notification
-   */
-  const notify = () => {
-    toast.info('User successfuly removed', {
-      position: toast.POSITION.BOTTOM_RIGHT
-    })
-  }
 
   // modal
 
@@ -270,7 +277,24 @@ export default function UserlistScreen() {
                             }
                           ></i>
                         </td>
-                        <td>{user.name}</td>
+                        <td>
+                          {user.user_type === 'StudentUser' ? (
+                            <a
+                              onClick={() => {
+                                setStudentId(user._id)
+                                setShowPerformanceModal({ visible: true })
+                              }}
+                              className="text-info"
+                            >
+                              {user.name}
+                              <span className="ml-2">
+                                <i class="fas fa-chart-bar"></i>{' '}
+                              </span>
+                            </a>
+                          ) : (
+                            <div>{user.name}</div>
+                          )}
+                        </td>
                         <td>{user.email}</td>
                         <td>{user.phoneNumber}</td>
                         <td>{user.gender}</td>
@@ -475,6 +499,25 @@ export default function UserlistScreen() {
           </div>
         )}
         {<ToastContainer />}
+
+        {studentId && (
+          <div className="py-2 sub-title mb-5">
+            <Rodal
+              animation="zoom"
+              visible={showPerformanceModal.visible}
+              onClose={() => setShowPerformanceModal({ visible: false })}
+              width={900}
+            >
+              <PerformanceChart
+                courses={
+                  filterCourseList(studentId).length > 0 &&
+                  filterCourseList(studentId)
+                }
+                student={studentId}
+              />
+            </Rodal>
+          </div>
+        )}
       </div>
     </>
   )
