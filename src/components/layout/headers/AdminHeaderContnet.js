@@ -38,6 +38,12 @@ export default function AdminHeaderContnet({ logoutHandler }) {
               </a>
               <div className="dropdown-divider"></div>
 
+
+              <a className="dropdown-item" href="/admin-media-center-list">
+                Manage Media Centers
+              </a>
+              <div className="dropdown-divider"></div>
+
               <a className="dropdown-item" href="/admin-courses-list">
                 Manage Courses
               </a>
@@ -91,6 +97,10 @@ export default function AdminHeaderContnet({ logoutHandler }) {
         Manage
         <Dropdown.Menu show className="border-0">
           <NavDropdown.Item href="/admin-order-list">Orders</NavDropdown.Item>
+          <NavDropdown.Item href="/admin-media-center-list">
+            Manage Media Centers
+          </NavDropdown.Item>
+
           <NavDropdown.Item href="/admin-courses-list">
             Manage Courses
           </NavDropdown.Item>

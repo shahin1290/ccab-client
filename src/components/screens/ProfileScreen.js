@@ -431,7 +431,9 @@ export default function ProfileScreen() {
                     {userDetail && userDetail.user_type === 'StudentUser' ? (
                       <Tab eventKey="Performance" title="Performance">
                         <div className="m-5">
-                          <PerformanceChart />
+                          {filterCourseList() && filterCourseList().length && (
+                            <PerformanceChart courses={filterCourseList()} />
+                          )}
                         </div>
                       </Tab>
                     ) : null}

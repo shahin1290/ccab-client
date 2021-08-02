@@ -2,48 +2,45 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  getCourseListForAdmin,
-  updateCourse,
-  createCourse,
-  deleteCourse
-} from './../../../redux/actions/courseAction'
-import { getMediaCenterListForAdmin } from '../../../redux/actions/mediaCenterAction'
-import Message from './../../layout/Message'
-import Loader from './../../layout/Loader'
+  getMediaCenterListForAdmin,
+  updateMediaCenter,
+  createMediaCenter,
+  deleteMediaCenter
+} from '../../../redux/actions/mediaCenterAction'
+import Message from '../../layout/Message'
+import Loader from '../../layout/Loader'
 import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap'
 import { Table, Col, Row, Modal, Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 
-export default function MangeCourse({ match }) {
+export default function MangeMediaCenters({ match }) {
   const dispatch = useDispatch()
 
   const pageNumber = match.params.pageNumber || 1
 
   /***********   Calling Reducer  ***************/
 
-  // Admin course list Reducer
+  // Admin mediaCenter list Reducer
   const {
     loading: Deleteloading,
     error: DeleteError,
     successDelete
-  } = useSelector((state) => state.courseDelete)
+  } = useSelector((state) => state.mediaCenterDelete)
   const {
     loading: Updateloading,
     error: UpdateError,
     success: updateSuccess
-  } = useSelector((state) => state.courseUpdate)
+  } = useSelector((state) => state.mediaCenterUpdate)
+
 
   // Admin mediaCenter list Reducer
-  const { mediaCenterList } = useSelector((state) => state.adminmediaCenterList)
-
-  // Admin course list Reducer
-  const { courseList, page, pages, loading, error } = useSelector(
-    (state) => state.AdminCourseList
+  const { mediaCenterList, page, pages, loading, error } = useSelector(
+    (state) => state.adminmediaCenterList
   )
 
-  // add course  Reducer
-  const { loading: Addloading, error: AddError, success: AddSuccess } = useSelector(
-    (state) => state.courseCreate
+  // add mediaCenter  Reducer
+  const { loading: Addloading, error: AddError } = useSelector(
+    (state) => state.mediaCenterCreate
   )
   /************************************************************** */
 
@@ -61,91 +58,80 @@ export default function MangeCourse({ match }) {
     </Tooltip>
   )
 
-  // get date format
-  const getDate = (date) => {
-    let d = new Date(date)
-    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
-  }
-
-  // count the current week for each course
-  const getWeeksLeft = (StartDate) => {
-    let d = new Date(StartDate)
-    let timePassed = new Date().getTime() - d.getTime()
-    return Math.ceil(timePassed / 1000 / 60 / 60 / 24 / 7)
-  }
 
   /* delete couse handlers  */
   const handleCloseDelete = () => setShow(false)
   const handleShowDelete = () => setShow(true)
 
-  /* add course handles */
+  /* add mediaCenter handles */
   const handleCloseAdd = () => {
     setShowAdd(false)
-    setMediaCenter('')
-    setAddnewCourseErr('')
-    dispatch({ type: 'COURSE_ADD_RESET' })
+    setWeeks('')
+    setAddnewmediaCenterErr('')
+    dispatch({ type: 'mediaCenter_ADD_RESET' })
   }
 
   const handleShowAdd = () => setShowAdd(true)
-  // add course  function
+  // add mediaCenter  function
   const _addBootcampHandler = () => {
-    if (!mediaCenter) {
-      setAddnewCourseErr('must select media center for this course')
+    if (!weeks) {
+      setAddnewmediaCenterErr('weeks should not be empty')
     } else {
-      dispatch(createCourse({ mediaCenter }))
-      dispatch(getCourseListForAdmin(pageNumber))
-      setMediaCenter('')
+      dispatch(createMediaCenter({ weeks: weeks }))
+      dispatch(getMediaCenterListForAdmin(pageNumber))
+      setWeeks('')
       handleCloseAdd()
     }
   }
 
-  // publish course
-  const publishhnadler = (course) => {
-    //console.log({...course , published:true,});
+  // publish mediaCenter
+  const publishhnadler = (mediaCenter) => {
+    //console.log({...mediaCenter , published:true,});
     dispatch(
-      updateCourse(
+      updateMediaCenter(
         {
-          ...course,
-          students: JSON.stringify(course.students),
+          ...mediaCenter,
+          students: JSON.stringify(mediaCenter.students),
           published: true
         },
-        course._id
+        mediaCenter._id
       )
     )
   }
 
-  // Withhold  course
-  const WithholdHnadler = (course) => {
-    //console.log({...course , published:true,});
+  // Withhold  mediaCenter
+  const WithholdHnadler = (mediaCenter) => {
+    //console.log({...mediaCenter , published:true,});
     dispatch(
-      updateCourse(
-        { name: course.name, video_path: course.video_path, published: false },
-        course._id
+      updateMediaCenter(
+        { name: mediaCenter.name, video_path: mediaCenter.video_path, published: false },
+        mediaCenter._id
       )
     )
   }
 
-  /**************************************************************** */
+  /*****************************************************************/
 
   useEffect(() => {
-    dispatch(getCourseListForAdmin(pageNumber))
     dispatch(getMediaCenterListForAdmin(pageNumber))
-  }, [dispatch, pageNumber, successDelete, updateSuccess, AddSuccess])
+  }, [dispatch, pageNumber, successDelete, updateSuccess])
 
   /*******************  State ********************* */
-  /* to show delete course model */
+  /* to show delete mediaCenter model */
   const [show, setShow] = useState(false)
 
-  /* to show add course model */
+  /* to show add mediaCenter model */
   const [showAdd, setShowAdd] = useState(false)
 
-  const [mediaCenter, setMediaCenter] = useState('')
-  const [AddnewCourseErr, setAddnewCourseErr] = useState('')
+  const [weeks, setWeeks] = useState('')
+  const [AddnewmediaCenterErr, setAddnewmediaCenterErr] = useState('')
   // item id
-  const [DeletedCourse, setDeletedCourse] = useState('')
+  const [DeletedmediaCenter, setDeletedmediaCenter] = useState('')
+  //console.log(DeletedmediaCenter);
 
   /************************************************** */
 
+  //console.log(mediaCenterList);
   return (
     <>
       {/* Manage Cource Section */}
@@ -155,12 +141,12 @@ export default function MangeCourse({ match }) {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title">Manage Courses</div>
+                <div className="title">Manage Media Centers</div>
               </div>
               <div className="pull-right">
                 {/* Add couse Button */}
                 <a
-                  href="/mentor-courses-list"
+                  href="/manage-media-center-content"
                   className="btn btn-danger bordered mr-1 "
                 >
                   Update Content
@@ -180,57 +166,34 @@ export default function MangeCourse({ match }) {
                       </Spinner>{' '}
                     </>
                   ) : (
-                    'Add Course'
+                    'Add mediaCenter'
                   )}
                 </a>
 
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Add New Course</Modal.Title>
+                    <Modal.Title>Add New mediaCenter</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    {(AddnewCourseErr || AddError) && (
+                    {(AddnewmediaCenterErr || AddError) && (
                       <Message variant="danger">
-                        {AddnewCourseErr || AddError}
+                        {AddnewmediaCenterErr || AddError}
                       </Message>
                     )}
 
-                    {/* Media Center */}
-                    <div className="form-group mb-2">
-                      <label> Media Center</label>
-
-                      <select
-                        className="custom-select-box px-2 ml-2"
-                        onChange={(e) => setMediaCenter(e.target.value)}
-                        defaultValue={'default'}
-                      >
-                        <option value="default" disabled>
-                          select an option
-                        </option>
-
-                        {mediaCenterList &&
-                          mediaCenterList.length > 0 &&
-                          mediaCenterList.map((mediaCenter) => (
-                            <option value={mediaCenter._id}>
-                              {mediaCenter.name}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-
-                    {/* <label className="d-block">
-                      Enter the total weeks to the new course :
+                    <label className="d-block">
+                      Enter the total weeks to the new mediaCenter :
                     </label>
                     <input
                       type="number"
                       value={weeks}
                       className="border py-2"
                       onChange={(e) => {
-                        setAddnewCourseErr('')
+                        setAddnewmediaCenterErr('')
                         setWeeks(e.target.value)
                       }}
                     />
-                    <p>You need to update the course after you add it!</p> */}
+                    <p>You need to update the mediaCenter after you add it!</p>
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseAdd}>
@@ -254,9 +217,7 @@ export default function MangeCourse({ match }) {
                     <th>
                       <h5>Title</h5>
                     </th>
-                    <th>
-                      <h5>Start Date</h5>
-                    </th>
+                   
                     <th>
                       <h5>Weeks</h5>
                     </th>
@@ -274,19 +235,17 @@ export default function MangeCourse({ match }) {
                       <Loader />
                     ) : error ? (
                       <Message>{error}</Message>
-                    ) : courseList.length ? (
-                      courseList.map((item) => {
+                    ) : mediaCenterList.length ? (
+                      mediaCenterList.map((item) => {
                         //console.log(item);
                         return (
                           <tr>
                             <th className="title" scope="col">
                               {item.name}
                             </th>
-                            <th className="post-date" scope="col">
-                              {getDate(item.start_date)}
-                            </th>
+                          
                             <th className="sales" scope="col">
-                              {getWeeksLeft(item.start_date)}/{item.weeks}
+                              {item.weeks}
                             </th>
 
                             <th className="category" scope="col">
@@ -299,16 +258,16 @@ export default function MangeCourse({ match }) {
                               )}
                             </th>
                             <th className="actions" scope="col">
-                              <Link to={'/admin-coure-update/' + item._id}>
+                              <Link to={'/admin-media-center-update/' + item._id}>
                                 <i className="fas fa-edit"></i>
                               </Link>
 
-                              {/* delete course button */}
+                              {/* delete mediaCenter button */}
                               <a>
                                 <i
                                   className="fas fa-trash-alt"
                                   onClick={() => {
-                                    setDeletedCourse(item)
+                                    setDeletedmediaCenter(item)
                                     handleShowDelete()
                                   }}
                                 ></i>
@@ -316,10 +275,10 @@ export default function MangeCourse({ match }) {
 
                               <Modal show={show} onHide={handleCloseDelete}>
                                 <Modal.Header closeButton>
-                                  <Modal.Title>Deleting Course</Modal.Title>
+                                  <Modal.Title>Deleting mediaCenter</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body style={{ color: 'red' }}>
-                                  Are you sure to delete {DeletedCourse.name} ?
+                                  Are you sure to delete {DeletedmediaCenter.name} ?
                                 </Modal.Body>
                                 <Modal.Footer>
                                   <Button
@@ -331,16 +290,17 @@ export default function MangeCourse({ match }) {
                                   <Button
                                     variant="danger"
                                     onClick={() => {
-                                      dispatch(deleteCourse(DeletedCourse._id))
+                                      dispatch(deleteMediaCenter(DeletedmediaCenter._id))
 
                                       toast.info(
-                                        DeletedCourse.name +
+                                        DeletedmediaCenter.name +
                                           ' successfuly removed',
                                         {
                                           position: toast.POSITION.BOTTOM_RIGHT
                                         }
                                       )
                                       setShow(false)
+                                      
                                     }}
                                   >
                                     Ok

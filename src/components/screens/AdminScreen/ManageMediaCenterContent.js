@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getCourseList } from '../../../redux/actions/courseAction'
+import { getMediaCenterList } from '../../../redux/actions/mediaCenterAction'
 import Message from '../../layout/Message'
 import Loader from '../../layout/Loader'
 import { Table, Nav } from 'react-bootstrap'
 import { getDate } from '../../../util/getDate'
 
-export default function MentorCoursesList() {
+export default function ManageMediaCenterContent() {
   const dispatch = useDispatch()
   const { userDetail } = useSelector((state) => state.userLogin)
 
-  const { courseList, loading, error } = useSelector(
-    (state) => state.courseList
+  const { mediaCenterList, loading, error } = useSelector(
+    (state) => state.mediaCenterList
   )
 
-  // count the current week for each course
+  console.log(mediaCenterList);
+
+  // count the current week for each mediaCenter
   const getWeeksLeft = (StartDate) => {
     let d = new Date(StartDate)
     let timePassed = new Date().getTime() - d.getTime()
@@ -23,12 +25,11 @@ export default function MentorCoursesList() {
   }
 
   useEffect(() => {
-    dispatch(getCourseList())
+    dispatch(getMediaCenterList())
   }, [dispatch])
 
-  const filterMentorCourses = () =>
-    courseList.filter((course) => course.mentor._id === userDetail._id)
-  //console.log(filterMentorCourses());
+  const filterMentorMediaCenters = () =>
+    mediaCenterList.filter((mediaCenter) => mediaCenter.mentor._id === userDetail._id)
   return (
     <>
       {/* Manage Cource Section */}
@@ -38,7 +39,7 @@ export default function MentorCoursesList() {
           <div className="sec-title">
             <div className="clearfix">
               <div className="pull-left">
-                <div className="title ">Manage Course Content</div>
+                <div className="title ">Manage Media Center Content</div>
               </div>
             </div>
           </div>
@@ -50,9 +51,7 @@ export default function MentorCoursesList() {
                     <th>
                       <div className="text">Title</div>
                     </th>
-                    <th>
-                      <div className="text">Start Date</div>
-                    </th>
+                  
                     <th>
                       <div className="text">Weeks</div>
                     </th>
@@ -76,19 +75,17 @@ export default function MentorCoursesList() {
                       <Loader />
                     ) : error ? (
                       <Message>{error}</Message>
-                    ) : filterMentorCourses().length > 0 ? (
-                      filterMentorCourses().map((item) => {
+                    ) : filterMentorMediaCenters().length > 0 ? (
+                      filterMentorMediaCenters().map((item) => {
                         //console.log(item);
                         return (
                           <tr key={item._id}>
                             <th className="text" scope="col">
                               {item.name}
                             </th>
-                            <th className="post-date" scope="col">
-                              {getDate(item.start_date)}
-                            </th>
+                            
                             <th className="sales" scope="col">
-                              {getWeeksLeft(item.start_date)}/{item.weeks}
+                              {item.weeks}
                             </th>
 
                             <th className="category" scope="col">
@@ -103,7 +100,7 @@ export default function MentorCoursesList() {
                             <th>
                               {' '}
                               <Nav.Link
-                                href={`/manage-mentor-course/${item._id}`}
+                                href={`/update-media-center-day-content/${item._id}`}
                               >
                                 <i className="fas fa-edit">Edit content</i>
                               </Nav.Link>

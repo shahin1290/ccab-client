@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getPerformances } from '../../redux/actions/performanceAction'
+import { averagePerformance } from '../../util/performances'
 import { Doughnut } from 'react-chartjs-2'
 import { Row, Col } from 'react-bootstrap'
 
@@ -133,52 +133,30 @@ const DoughnutChart = ({ performances }) => {
     ]
   }
 
-  const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    day: 'numeric'
-  })
-
- 
-
-  const averagePerformance = () => {
-    const allPerformances =
-      performances &&
-      performances.length &&
-      performances.map((performance) => {
-        const {
-          watchingLectureScore,
-          submittedQuizScore,
-          quizResultScore,
-          submittedTaskScore,
-          taskResultScore,
-          onlineScore
-        } = performance
-        return Math.trunc(
-          (watchingLectureScore +
-            submittedQuizScore +
-            quizResultScore +
-            submittedTaskScore +
-            taskResultScore +
-            onlineScore) /
-            4
-        )
-      })
-
-    return (
-      allPerformances &&
-      Math.ceil(
-        allPerformances.reduce((a, b) => a + b) / allPerformances.length
-      )
-    )
+  const dataZero = {
+    labels: ['Zero Performance'],
+    datasets: [
+      {
+        label: 'My First Dataset',
+        data: [100],
+        backgroundColor: ['rgba(201, 203, 207)'],
+        hoverOffset: 4
+      }
+    ]
   }
 
   return (
     <Row className="mt-5">
       <Col md={7}>
-        <Doughnut data={data} />
+        {averagePerformance(performances && performances) === 0 ? (
+          <Doughnut data={dataZero} />
+        ) : (
+          <Doughnut data={data} />
+        )}
       </Col>
       <Col md={5} className="my-auto sub-title text-center">
-          Total Performance Ratio <div>{averagePerformance()} %</div>
+        Total Performance Ratio{' '}
+        <div>{averagePerformance(performances && performances)} %</div>
       </Col>
     </Row>
   )

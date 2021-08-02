@@ -1,13 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DayContent from '../layout/DayContent'
-import { Collapse, Tabs, Tab, ButtonGroup, Button } from 'react-bootstrap'
+import {
+  Collapse,
+  Tabs,
+  Tab,
+  ButtonGroup,
+  Button,
+  Row,
+  Col
+} from 'react-bootstrap'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
 import {
   updatePerformance,
-  getPerformances
+  getPerformances,
+  getWatchingLectures
 } from '../../redux/actions/performanceAction'
+import { todayPerformance, averagePerformance } from '../../util/performances'
 
 export default function CourseContentScreen({ match }) {
   const id = match.params.id
@@ -25,7 +35,21 @@ export default function CourseContentScreen({ match }) {
     (state) => state.performanceList
   )
 
-  const [language, setLanguage] = useState('')
+  console.log(
+    performances && performances.length > 0 && todayPerformance(performances)
+  )
+
+  const { success: updateSuccess } = useSelector(
+    (state) => state.performanceUpdate
+  )
+
+  const {
+    course,
+    loading: courseLoading,
+    error: courseErrror
+  } = useSelector((state) => state.courseDetails)
+
+  const [language, setLanguage] = useState()
 
   useEffect(() => {
     if (day) {
@@ -34,12 +58,19 @@ export default function CourseContentScreen({ match }) {
   }, [day])
 
   useEffect(() => {
-    if (userDetail.user_type === 'StudentUser') {
-      dispatch(getPerformances())
+    if (updateSuccess) {
+      dispatch(getWatchingLectures(id))
     }
-    if (day && ref.current) {
+
+    if (userDetail.user_type === 'StudentUser') {
+      dispatch(getPerformances(id, userDetail._id))
+    }
+  }, [updateSuccess, userDetail])
+
+  useEffect(() => {
+    if (ref.current) {
       ref.current.plyr.on('ended', () => {
-        dispatch(updatePerformance({ dayId: day._id, bootcampId: id }))
+        dispatch(updatePerformance({ dayId: day._id }, id))
       })
     }
   }, [ref.current, day])
@@ -94,7 +125,22 @@ export default function CourseContentScreen({ match }) {
               <div className="accordian-column col-lg-3 col-md-12 col-sm-12">
                 <div className="inner-column sticky-top">
                   <div className="title2 p-2 d-flex justify-content-between">
-                    Course Content{' '}
+                    <div>
+                      <div className="sub-title p-2 text-center">
+                        {course && course.name}
+                        <hr />
+                      </div>
+                      <Row className="text-center text-info  mb-1">
+                        <Col md={6} className="font-weight-bold">
+                          Today Performance ratio{' '}
+                          {todayPerformance(performances && performances)} %
+                        </Col>
+                        <Col md={6} className="font-weight-bold">
+                          Total Performance ratio{' '}
+                          {averagePerformance(performances && performances)} %
+                        </Col>
+                      </Row>
+                    </div>
                     <a
                       onClick={() => setOpen(!open)}
                       aria-controls="example-collapse-text"
@@ -144,47 +190,23 @@ export default function CourseContentScreen({ match }) {
                       </Button>
                     </ButtonGroup>
 
-                    {day.arabic_video_path && language === 'arabic' && (
-                      <div className="course-video-box">
-                        <Plyr
-                          source={{
-                            type: 'video',
-                            sources: [
-                              {
-                                src: day.arabic_video_path,
-                                provider: 'youtube'
-                              }
-                            ]
-                          }}
-                          options={
+                    <div className="course-video-box">
+                      <Plyr
+                        source={{
+                          type: 'video',
+                          sources: [
                             {
-                              /* ... */
+                              src:
+                                day.video_path && language === 'english'
+                                  ? day.video_path
+                                  : day.arabic_video_path,
+                              provider: 'youtube'
                             }
-                          }
-                        />
-                      </div>
-                    )}
-                    {day.video_path && language === 'english' && (
-                      <div className="course-video-box">
-                        <Plyr
-                          source={{
-                            type: 'video',
-                            sources: [
-                              {
-                                src: day.video_path,
-                                provider: 'youtube'
-                              }
-                            ]
-                          }}
-                          ref={ref}
-                          options={
-                            {
-                              /* ... */
-                            }
-                          }
-                        />
-                      </div>
-                    )}
+                          ]
+                        }}
+                        ref={ref}
+                      />
+                    </div>
 
                     {/* Intro Info Tabs*/}
                     <div className="intro-info-tabs">
