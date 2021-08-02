@@ -160,7 +160,10 @@ Failed
       )
 
       dispatch(
-        updatePerformance({ taskResult: value, student: answer.user._id })
+        updatePerformance(
+          { taskResult: value, student: answer.user._id },
+          bootcampId
+        )
       )
 
       toast.info(answer.user.name + ' ' + textMessage, {

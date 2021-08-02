@@ -83,7 +83,7 @@ export default function QuizScreen({ match, location }) {
     dispatch(createQuizAnswer(inputFields, bootcampId, id))
     localStorage.removeItem('timestamp')
     if (userDetail.user_type === 'StudentUser') {
-      dispatch(updatePerformance({ quizId: id }))
+      dispatch(updatePerformance({ quizId: id }, bootcampId))
     }
   }
 

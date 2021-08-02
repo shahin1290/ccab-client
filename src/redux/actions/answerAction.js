@@ -146,7 +146,7 @@ export const getTaskAnswerList =
 
 //get specific answer for specific user
 export const getUserAnswer =
-  (bootcampId, taskId, id) => async (dispatch, getState) => {
+  (bootcampId, taskId) => async (dispatch, getState) => {
     try {
       dispatch({
         type: ANSWER_ONE_REQUEST
@@ -163,7 +163,7 @@ export const getUserAnswer =
       }
 
       const response = await axios.get(
-        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/${id}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/myAnswer`,
         config
       )
 
