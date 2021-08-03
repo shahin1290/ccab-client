@@ -8,7 +8,8 @@ import {
   ButtonGroup,
   Button,
   Row,
-  Col
+  Col,
+  Modal
 } from 'react-bootstrap'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
@@ -17,6 +18,7 @@ import {
   getPerformances,
   getWatchingLectures
 } from '../../redux/actions/performanceAction'
+import { getDayVideoList } from '../../redux/actions/dayAction'
 import { todayPerformance, averagePerformance } from '../../util/performances'
 
 export default function CourseContentScreen({ match }) {
@@ -24,33 +26,25 @@ export default function CourseContentScreen({ match }) {
   const [open, setOpen] = useState(false)
   const ref = useRef()
   const dispatch = useDispatch()
+  const [showModal, setShowModal] = useState(false)
+  const [language, setLanguage] = useState()
 
   //redux store
   const { day } = useSelector((state) => state.dayDetails)
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, userDetail, error, loginSuccess } = userLogin
+  const { userDetail } = useSelector((state) => state.userLogin)
 
-  const { loading: performanceLoading, performances } = useSelector(
-    (state) => state.performanceList
-  )
-
-  console.log(
-    performances && performances.length > 0 && todayPerformance(performances)
-  )
+  const { performances } = useSelector((state) => state.performanceList)
 
   const { success: updateSuccess } = useSelector(
     (state) => state.performanceUpdate
   )
 
-  const {
-    course,
-    loading: courseLoading,
-    error: courseErrror
-  } = useSelector((state) => state.courseDetails)
+  const { course } = useSelector((state) => state.courseDetails)
 
-  const [language, setLanguage] = useState()
+  const { dayVideoList } = useSelector((state) => state.dayVideoList)
 
+  //use effects
   useEffect(() => {
     if (day) {
       setLanguage(day.video_path ? 'english' : 'arabic')
@@ -58,6 +52,7 @@ export default function CourseContentScreen({ match }) {
   }, [day])
 
   useEffect(() => {
+    dispatch(getDayVideoList(id))
     if (updateSuccess) {
       dispatch(getWatchingLectures(id))
     }
@@ -65,12 +60,13 @@ export default function CourseContentScreen({ match }) {
     if (userDetail.user_type === 'StudentUser') {
       dispatch(getPerformances(id, userDetail._id))
     }
-  }, [updateSuccess, userDetail])
+  }, [updateSuccess, userDetail, dispatch])
 
   useEffect(() => {
     if (ref.current) {
       ref.current.plyr.on('ended', () => {
         dispatch(updatePerformance({ dayId: day._id }, id))
+        setShowModal(true)
       })
     }
   }, [ref.current, day])
@@ -95,6 +91,22 @@ export default function CourseContentScreen({ match }) {
         }
       }
     }
+  }
+
+  const _playNextVideo = () => {
+    const videoIds =
+      dayVideoList &&
+      dayVideoList.length > 0 &&
+      dayVideoList.map((dayVideo) => dayVideo._id)
+
+    const currentIndex = videoIds.indexOf(day._id)
+
+    document.getElementById(videoIds[currentIndex + 1]).click()
+
+    setShowModal(false)
+    /* const btn = document.querySelectorAll('[data-plyr="play"]')[0]
+
+    btn.click() */
   }
 
   return (
@@ -207,6 +219,28 @@ export default function CourseContentScreen({ match }) {
                         ref={ref}
                       />
                     </div>
+
+                    {/* show modal on video ended */}
+                    <Modal
+                      show={showModal}
+                      onHide={() => setShowModal(false)}
+                      centered
+                    >
+                      <Modal.Body className=" m-auto title p-5 ">
+                        Good Job! Keep going!
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={() => setShowModal(false)}
+                        >
+                          Close
+                        </Button>
+                        <Button variant="danger" onClick={_playNextVideo}>
+                          Play next
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
 
                     {/* Intro Info Tabs*/}
                     <div className="intro-info-tabs">

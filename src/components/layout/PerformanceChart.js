@@ -69,12 +69,15 @@ const PerformanceChart = ({ courses, student }) => {
     <div className="">
       <div className="title pb-3">Performance Ratio</div>
 
-      <div className="d-flex justify-content-between mb-4">
+      <div className="d-flex mb-4 sub-title">
         <select onChange={(e) => setCourse(e.target.value)}>
           {courses.map((course) => (
             <option value={course._id}>{course.name}</option>
           ))}
         </select>
+        <a onClick={() => dispatch(getPerformances(course, userDetail._id))}>
+          <i className="fas fa-sync-alt ml-5"></i>
+        </a>
       </div>
 
       <div className="d-flex justify-content-between">

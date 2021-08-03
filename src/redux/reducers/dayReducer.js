@@ -8,7 +8,10 @@ import {
   DAY_UPDATE_REQUEST,
   DAY_UPDATE_SUCCESS,
   DAY_UPDATE_FAIL,
-  DAY_UPDATE_RESET
+  DAY_UPDATE_RESET,
+  DAY_VIDEO_LIST_REQUEST,
+  DAY_VIDEO_LIST_SUCCESS,
+  DAY_VIDEO_LIST_FAIL,
 } from '../constences/dayConst'
 
 export const dayListReducer = (state = { dayList: [] }, action) => {
@@ -24,6 +27,30 @@ export const dayListReducer = (state = { dayList: [] }, action) => {
         dayList: action.payload
       }
     case DAY_LIST_FAIL:
+      return {
+        ...state,
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
+export const dayVideoListReducer = (state = { dayVideoList: [] }, action) => {
+  switch (action.type) {
+    case DAY_VIDEO_LIST_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case DAY_VIDEO_LIST_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        dayVideoList: action.payload
+      }
+    case DAY_VIDEO_LIST_FAIL:
       return {
         ...state,
         loading: false, // loading is done laoding!
