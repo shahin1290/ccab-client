@@ -8,6 +8,7 @@ import { getQuizList, quizDelete } from '../../../redux/actions/quizAction'
 
 import { useHistory, Link } from 'react-router-dom'
 import Loader from '../../layout/Loader'
+import { getCourseDetails } from '../../../redux/actions/courseAction'
 
 export default function QuizListScreen({ match }) {
   const dispatch = useDispatch()
@@ -22,6 +23,13 @@ export default function QuizListScreen({ match }) {
 
   const deleteTransaction = useSelector((state) => state.quizDelete)
   const { successDelete, error: delError } = deleteTransaction
+
+  //check if bootcamp or mediacenter
+  const { course } = useSelector((state) => state.courseDetails)
+
+  useEffect(() => {
+    dispatch(getCourseDetails(match.params.bootcampId))
+  }, [dispatch, match.params.bootcampId])
 
   useEffect(() => {
     if (!userDetail) {
@@ -80,12 +88,16 @@ export default function QuizListScreen({ match }) {
                 <tr key={quiz._id}>
                   <td>{quizzes.indexOf(quiz) + 1}</td>
                   <td>
-                    <Link
-                      className="text-info"
-                      to={`/quiz-details/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
-                    >
-                      {quiz.name}
-                    </Link>
+                    {course.name ? (
+                      <Link
+                        className="text-info"
+                        to={`/quiz-details/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
+                      >
+                        {quiz.name}
+                      </Link>
+                    ) : (
+                      quiz.name
+                    )}
                   </td>
                   <td>{quiz.description.substring(0, 20)}</td>
                   <td>

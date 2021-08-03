@@ -11,6 +11,7 @@ import {
   TASK_CHECKED_UPDATE_RESET,
   TASK_PASSED_UPDATE_RESET
 } from '../../../redux/constences/taskConst'
+import { getCourseDetails } from '../../../redux/actions/courseAction'
 
 export default function TaskListScreen({ match }) {
   const dispatch = useDispatch()
@@ -19,6 +20,10 @@ export default function TaskListScreen({ match }) {
   // user must be logged in before!!!
   const { userDetail } = useSelector((state) => state.userLogin)
   const { tasks, loading, error } = useSelector((state) => state.taskList)
+
+  //check if bootcamp or mediacenter
+  const { course } = useSelector((state) => state.courseDetails)
+
 
   // Update Check mark
   const taskCheck = useSelector((state) => state.taskCheck)
@@ -52,6 +57,10 @@ export default function TaskListScreen({ match }) {
   const { successDelete, error: delError } = deleteTransaction
 
   const [delSucc, setDelSucc] = useState(successDelete)
+
+  useEffect(() => {
+    dispatch(getCourseDetails(match.params.bootcampId))
+  }, [dispatch, match.params.bootcampId])
 
   useEffect(() => {
     if (!userDetail) {
@@ -167,12 +176,16 @@ export default function TaskListScreen({ match }) {
                 <tr key={task._id}>
                   <td>{tasks.indexOf(task) + 1}</td>
                   <td>
-                    <Link
-                      className="text-info"
-                      to={`/task-details/${task.bootcamp}/${task._id}`}
-                    >
-                      {task.projectName}
-                    </Link>
+                    {course._id ? (
+                      <Link
+                        className="text-info"
+                        to={`/task-details/${task.bootcamp}/${task._id}`}
+                      >
+                        {task.projectName}
+                      </Link>
+                    ) : (
+                      task.projectName
+                    )}
                   </td>
                   <td>{task.description.substring(0, 20)}</td>
                   <td>

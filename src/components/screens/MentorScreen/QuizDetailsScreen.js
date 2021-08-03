@@ -9,6 +9,7 @@ import { getQuizAnswerList } from '../../../redux/actions/quizAnswerAction'
 import { getQuizDetails } from '../../../redux/actions/quizAction'
 
 import Loader from '../../layout/Loader'
+import { getCourseDetails } from '../../../redux/actions/courseAction'
 
 export default function TaskDetailsScreen({ match }) {
   const dispatch = useDispatch()
@@ -92,7 +93,7 @@ export default function TaskDetailsScreen({ match }) {
               .map((answer) => (
                 <tr key={answer._id}>
                   <td>{answers.indexOf(answer) + 1}</td>
-                  <td>{answer.user.name}</td>
+                  <td>{answer.user && answer.user.name}</td>
 
                   {answer.status !== 'Not Sent' ? (
                     <>

@@ -198,8 +198,9 @@ export default function QuizScreen({ match, location }) {
                                   onChange={(e) => {
                                     handleChangeInput(q.content, e)
                                   }}
+                                  id={a._id}
                                 />
-                                <label style={{ marginLeft: '10px' }}>
+                                <label style={{ marginLeft: '10px' }} for={a._id}>
                                   {a.content}{' '}
                                 </label>
                               </Card.Text>
