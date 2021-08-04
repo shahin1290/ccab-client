@@ -31,7 +31,7 @@ export const getDayList = (id) => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      `http://localhost:5001/api/content/` + id,
+      `https://server.ccab.tech/api/content/` + id,
       config
     )
 
@@ -68,7 +68,7 @@ export const getDayVideoList = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/content/videos/${id}`,
+      `https://server.ccab.tech/api/content/videos/${id}`,
       config
     )
     dispatch({
@@ -103,7 +103,7 @@ export const getDayDetails = (weekId, id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/content/${weekId}/${id}`,
+      `https://server.ccab.tech/api/content/${weekId}/${id}`,
       config
     )
 
@@ -142,7 +142,7 @@ export const updateDay = (weekId, id, day) => async (dispatch, getState) => {
     }
 
     await axios.put(
-      `http://localhost:5001/api/content/${weekId}/${id}`,
+      `https://server.ccab.tech/api/content/${weekId}/${id}`,
       day,
       config
     )

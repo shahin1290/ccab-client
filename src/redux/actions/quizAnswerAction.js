@@ -31,7 +31,7 @@ export const getQuizAnswerList =
       }
 
       const response = await axios.get(
-        `http://localhost:5001/api/quizAnswer/${bootcampId}/${quizId}`,
+        `https://server.ccab.tech/api/quizAnswer/${bootcampId}/${quizId}`,
         config
       )
 
@@ -68,7 +68,7 @@ export const createQuizAnswer =
         }
       }
       const response = await axios.put(
-        `http://localhost:5001/api/quizAnswer/${bootcampId}/${quizId}`,
+        `https://server.ccab.tech/api/quizAnswer/${bootcampId}/${quizId}`,
         answer,
         config
       )
@@ -115,7 +115,7 @@ export const getMyQuizAnswerList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'http://localhost:5001/api/quizAnswer/myQuizAnswers',
+      'https://server.ccab.tech/api/quizAnswer/myQuizAnswers',
       config
     )
 
