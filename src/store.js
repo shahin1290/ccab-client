@@ -52,7 +52,8 @@ import {
 import {
   dayListReducer,
   dayDetailsReducer,
-  dayUpdateReducer
+  dayUpdateReducer,
+  dayVideoListReducer
 } from './redux/reducers/dayReducer'
 import {
   myQuizListReducer,
@@ -181,6 +182,7 @@ const reducer = combineReducers({
   dayList: dayListReducer,
   dayDetails: dayDetailsReducer,
   dayUpdate: dayUpdateReducer,
+  dayVideoList: dayVideoListReducer,
   myQuizList: myQuizListReducer,
   quizDetails: quizDetailsReducer,
   quizCreate: quizCreateReducer,

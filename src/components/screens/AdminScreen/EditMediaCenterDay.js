@@ -7,7 +7,6 @@ import Message from '../../layout/Message'
 import Loader from '../../layout/Loader'
 import { Modal } from 'react-bootstrap'
 
-
 export default function UpdateMentorCourse({ match }) {
   const dispatch = useDispatch()
 
@@ -27,7 +26,7 @@ export default function UpdateMentorCourse({ match }) {
 
   useEffect(() => {
     dispatch(getDayDetails(weekId, id))
-    if(UpdateSuccess){
+    if (UpdateSuccess) {
     }
   }, [dispatch, weekId, id, UpdateSuccess])
 
@@ -208,10 +207,6 @@ export default function UpdateMentorCourse({ match }) {
                       />
                       <span className="valid">Enter valid url address</span>
                     </div>
-
-                    {/* End Url Box */}
-
-                    {/* Button Box */}
                   </div>
 
                   <div className="button-box text-center">

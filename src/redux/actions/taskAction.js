@@ -123,8 +123,6 @@ export const createTask =
         config
       )
 
-      console.log('create:', response)
-
       dispatch({
         type: TASK_ADD_SUCCESS,
         //   payload: console.log("payload:", resconst response.data),

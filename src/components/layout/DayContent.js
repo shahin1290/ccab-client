@@ -18,7 +18,6 @@ export default function DayContent({ bootcampId, setOpen }) {
   const [show, setShow] = useState('')
 
   /****************redux store***************** */
-
   const {
     course,
     loading: courseLoading,
@@ -46,7 +45,6 @@ export default function DayContent({ bootcampId, setOpen }) {
 
   // getting myAnswerList
   const { myanswers } = useSelector((state) => state.answerMyList)
-
 
   const taskStatus = (taskId) => {
     if (myanswers && myanswers.length > 0) {
@@ -121,7 +119,6 @@ export default function DayContent({ bootcampId, setOpen }) {
   }
 
   //show days based on user and subscription
-
   const daysBasedOnUser = (days) => {
     if (
       userDetail.user_type === 'AdminUser' ||
@@ -235,8 +232,9 @@ export default function DayContent({ bootcampId, setOpen }) {
                             backgroundColor: show === day._id ? '#ffbfbe' : ''
                           }}
                           className="sub-text text-left"
+                          id={day._id}
                         >
-                          {day.name} What is web develpment
+                          {day.name}
                         </Link>
                       </div>
                     </div>

@@ -224,6 +224,8 @@ export const updatePerformance = (req, id) => async (dispatch, getState) => {
       }
     }
 
+    console.log('update performance', id);
+
     await axios.put(
       `http://localhost:5001/api/performance/daily-performance/${id}`,
       req,
