@@ -5,7 +5,7 @@ export const plans = [
   {
     name: 'Silver Plan',
     period: 'weekly',
-    price: '899',
+    price: '599',
     
     offers: [
       '25% studying time',
@@ -25,14 +25,14 @@ export const plans = [
       'Book a live lecture one to one (student to lecturer).',
       'Training on Hiring Interview.',
       'Global hiring partners.',
-      'You can book your live sessions during your comfort'
+      
     ],
     _id:'d8cc4ea7-80a-a8ce-dc839bce88b1'
   },
   {
     name: 'Silver Plan',
     period: 'monthly',
-    price: '3499',
+    price: '2299',
     offers: [
       '25% studying time',
       'minimum purchase 2 months',
@@ -51,7 +51,7 @@ export const plans = [
       'Book a live lecture one to one (student to lecturer).',
       'Training on Hiring Interview.',
       'Global hiring partners.',
-      'You can book your live sessions during your comfort'
+     
     ],
     _id:'d8cc4ea7-8092-480a-a8839bce88b1'
   },
@@ -59,7 +59,7 @@ export const plans = [
     name: 'Golden Plan',
     period: 'weekly',
     
-    price: '1499',
+    price: '699',
     offers: [
       '60% studying time',
      ' minimum purchase 4 weeks.',
@@ -79,14 +79,14 @@ export const plans = [
     notOffers: [
       'Training on Hiring Interview.',
       'Global hiring partners.',
-      'You can book your live sessions during your comfort'
+      
     ],
     _id:'d8cc4ea7-809a-a8ce-dc839bce88b1'
   },
   {
     name: 'Golden Plan',
     period: 'monthly',
-    price: '5899',
+    price: '2699',
     offers: [
       '60% studying time',
       'minimum purchase 2 months.',
@@ -105,14 +105,14 @@ export const plans = [
     notOffers: [
       'Training on Hiring Interview.',
       'Global hiring partners.',
-      'You can book your live sessions during your comfort'
+      
     ],
     _id:'d8cc4e92-480a-a8ce-dc839bce88b1'
   },
   {
     name: 'Diamond Plan',
     period: 'weekly',
-    price: '2000',
+    price: '899',
     
     offers: [
       '100% studying time',
@@ -130,7 +130,7 @@ export const plans = [
       'Book a live lecture one to one (student to lecturer).',
       'Training on Hiring Interview.',
       'Global hiring partners.',
-      'You can book your live sessions during your comfort'
+     
     ],
     notOffers: [],
     _id:'4ea7-8092-480a-a8ce-dc839bce88b1'
@@ -138,7 +138,7 @@ export const plans = [
   {
     name: 'Diamond Plan',
     period: 'monthly',
-    price: '7999',
+    price: '3499',
     offers: [
       '100% studying time',
       'minimum purchase 2 months.',
@@ -155,7 +155,7 @@ export const plans = [
       'Book a live lecture one to one (student to lecturer).',
       'Training on Hiring Interview.',
       'Global hiring partners.',
-      'You can book your live sessions during your comfort'
+      
     ],
     notOffers: [],
     _id:'d8cc4ea7-8092-480a-a8ce-dc888b1'
