@@ -20,6 +20,7 @@ import {
 } from '../../redux/actions/performanceAction'
 import { getDayVideoList } from '../../redux/actions/dayAction'
 import { todayPerformance, averagePerformance } from '../../util/performances'
+import Compiler from '../layout/Compiler'
 
 export default function CourseContentScreen({ match }) {
   const id = match.params.id
@@ -28,6 +29,7 @@ export default function CourseContentScreen({ match }) {
   const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
   const [language, setLanguage] = useState()
+  const [lastVideo, setLastVideo] = useState(false)
 
   //redux store
   const { day } = useSelector((state) => state.dayDetails)
@@ -101,7 +103,13 @@ export default function CourseContentScreen({ match }) {
 
     const currentIndex = videoIds.indexOf(day._id)
 
-    document.getElementById(videoIds[currentIndex + 1]).click()
+    if (currentIndex + 1 < videoIds.length) {
+      document.getElementById(videoIds[currentIndex + 1]).click()
+    }
+
+    if (currentIndex + 2 === videoIds.length) {
+      setLastVideo(true)
+    }
 
     setShowModal(false)
     /* const btn = document.querySelectorAll('[data-plyr="play"]')[0]
@@ -201,24 +209,37 @@ export default function CourseContentScreen({ match }) {
                         Arabic
                       </Button>
                     </ButtonGroup>
+                    <Button
+                      variant={
+                        language === 'playcode' ? 'warning' : 'secondary'
+                      }
+                      className="mr-2 mb-3 pull-right"
+                      onClick={() => setLanguage('playcode')}
+                    >
+                      Playcode
+                    </Button>
 
-                    <div className="course-video-box">
-                      <Plyr
-                        source={{
-                          type: 'video',
-                          sources: [
-                            {
-                              src:
-                                day.video_path && language === 'english'
-                                  ? day.video_path
-                                  : day.arabic_video_path,
-                              provider: 'youtube'
-                            }
-                          ]
-                        }}
-                        ref={ref}
-                      />
-                    </div>
+                    {language === 'playcode' ? (
+                      <Compiler />
+                    ) : (
+                      <div className="course-video-box">
+                        <Plyr
+                          source={{
+                            type: 'video',
+                            sources: [
+                              {
+                                src:
+                                  day.video_path && language === 'english'
+                                    ? day.video_path
+                                    : day.arabic_video_path,
+                                provider: 'youtube'
+                              }
+                            ]
+                          }}
+                          ref={ref}
+                        />
+                      </div>
+                    )}
 
                     {/* show modal on video ended */}
                     <Modal
@@ -236,9 +257,12 @@ export default function CourseContentScreen({ match }) {
                         >
                           Close
                         </Button>
-                        <Button variant="danger" onClick={_playNextVideo}>
-                          Play next
-                        </Button>
+
+                        {!lastVideo && (
+                          <Button variant="danger" onClick={_playNextVideo}>
+                            Play next
+                          </Button>
+                        )}
                       </Modal.Footer>
                     </Modal>
 

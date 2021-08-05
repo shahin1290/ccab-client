@@ -49,6 +49,13 @@ export default function StudentHeaderContnet({ logoutHandler }) {
               
             </div>
           </li>
+
+          <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+            <a href="/compile" className="text-dark pb-5 pt-5">
+              Playcode
+            </a>
+            
+          </li>
         </ul>
       </div>
 
@@ -63,6 +70,9 @@ export default function StudentHeaderContnet({ logoutHandler }) {
         </Dropdown.Menu>
         <Nav.Link href="/profile" className="text-dark hide-on-big-screen">
           My Profile
+        </Nav.Link>
+        <Nav.Link href="/compile" className="text-dark hide-on-big-screen">
+         Playcode
         </Nav.Link>
         <Nav.Link
           onClick={logoutHandler}

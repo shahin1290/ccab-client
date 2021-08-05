@@ -75,6 +75,7 @@ import Quizzes from './components/layout/Quizzes'
 import { updatePerformance } from './redux/actions/performanceAction'
 import UpdateMediaCenter from './components/screens/AdminScreen/UpdateMediaCenter'
 import ManageMediaCenterContent from './components/screens/AdminScreen/ManageMediaCenterContent'
+import Compiler from './components/layout/Compiler'
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -413,6 +414,8 @@ function App() {
           path="/pricing-plans"
           component={Pricing}
         ></StudentRoute>
+
+        <StudentRoute exact path="/compile" component={Compiler}></StudentRoute>
 
         {/* default Routes for guests  */}
         <Route component={DefaultRoutes}></Route>
