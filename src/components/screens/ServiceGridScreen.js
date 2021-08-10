@@ -183,7 +183,7 @@ export default function ServiceGridScreen({ match }) {
                                       <Link to={`/services/${service._id}`}>
                                         <img
                                           src={
-                                            'https://server.ccab.tech/uploads/Service/' +
+                                            'http://localhost:5001/uploads/Service/' +
                                             service.img_path
                                           }
                                           alt=""
@@ -330,7 +330,7 @@ export default function ServiceGridScreen({ match }) {
                         <Link to="/service/1/details">
                           <img
                             src={
-                              'https://server.ccab.tech/uploads/Bootcamp/' +
+                              'http://localhost:5001/uploads/Bootcamp/' +
                               filterSubscriptionService(serviceList)[0].img_path
                             }
                             alt=""

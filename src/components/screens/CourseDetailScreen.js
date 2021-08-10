@@ -218,7 +218,7 @@ export default function CourseDetailScreen({ match }) {
                           className="intro-video"
                           style={{
                             backgroundImage:
-                              'url(https://server.ccab.tech/uploads/Bootcamp/' +
+                              'url(http://localhost:5001/uploads/Bootcamp/' +
                               course.img_path +
                               ')'
                           }}

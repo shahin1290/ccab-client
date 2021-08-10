@@ -297,7 +297,10 @@ export default function UpdateMediaCenter({ match }) {
                   <div className="sub-title pb-3 text-danger">
                     *Add Plan name(Silver or Golden or Diamond) as a first word
                     of the mediaCenter title (Ex. Golden MERN STACK){' '}
-                    <u> if the mediaCenter is only for any subscription plan.</u>
+                    <u>
+                      {' '}
+                      if the mediaCenter is only for any subscription plan.
+                    </u>
                   </div>
                   {/* Edit mediaCenter Form */}
                   <div className="edit-course-form">
@@ -562,12 +565,12 @@ export default function UpdateMediaCenter({ match }) {
 
                     {/* Divider */}
                     <div className="border my-3"></div>
-                    {/* ***https://server.ccab.tech** */}
+                    {/* ***http://localhost:5001** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (
@@ -721,7 +724,9 @@ export default function UpdateMediaCenter({ match }) {
                       {/* ******************* */}
                       <div className="form-group">
                         <span className="price">price</span>
-                        <div className="total-price">Set mediaCenter Price :</div>
+                        <div className="total-price">
+                          Set mediaCenter Price :
+                        </div>
                         <div className="item-quantity">
                           <input
                             className="quantity-spinner"
@@ -740,7 +745,9 @@ export default function UpdateMediaCenter({ match }) {
                       {/* ******************* */}
                       <div className="form-group">
                         <span className="price">seats</span>
-                        <div className="total-price">Set mediaCenter seats :</div>
+                        <div className="total-price">
+                          Set mediaCenter seats :
+                        </div>
                         <p>More than 99 seat, it will be unlimited</p>
                         <div className="item-quantity">
                           <input
@@ -758,7 +765,9 @@ export default function UpdateMediaCenter({ match }) {
 
                       <div className="form-group">
                         <span className="price">weeks</span>
-                        <div className="total-price">Set mediaCenter weeks :</div>
+                        <div className="total-price">
+                          Set mediaCenter weeks :
+                        </div>
                         <div className="item-quantity">
                           <input
                             className="quantity-spinner"
@@ -772,7 +781,6 @@ export default function UpdateMediaCenter({ match }) {
                           />
                         </div>
                       </div>
-
                     </div>
                   </div>
                   {/* Button Box */}

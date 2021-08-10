@@ -16,7 +16,10 @@ import {
   PERFORMANCE_DELETE_FAIL,
   PERFORMANCE_LECTURE_LIST_SUCCESS,
   PERFORMANCE_LECTURE_LIST_FAIL,
-  PERFORMANCE_LECTURE_LIST_REQUEST
+  PERFORMANCE_LECTURE_LIST_REQUEST,
+  TOP_PERFORMANCE_LIST_REQUEST,
+  TOP_PERFORMANCE_LIST_SUCCESS,
+  TOP_PERFORMANCE_LIST_FAIL
 } from '../constences/performanceConst'
 
 import axios from 'axios'
@@ -37,7 +40,7 @@ export const createPerformance =
       }
 
       const response = await axios.post(
-        'https://server.ccab.tech/api/performance',
+        'http://localhost:5001/api/performance',
         performance,
         config
       )
@@ -80,7 +83,7 @@ export const getPerformances =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/performance/${bootcampId}/${userId}`,
+        `http://localhost:5001/api/performance/${bootcampId}/${userId}`,
         config
       )
 
@@ -92,6 +95,45 @@ export const getPerformances =
       // console.log("error:", error)
       dispatch({
         type: PERFORMANCE_LIST_FAIL,
+        //    payload: error.res
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+
+export const getTopPerformances =
+  (bootcampId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: TOP_PERFORMANCE_LIST_REQUEST
+      })
+
+      // Descruct from getState()
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + userDetail.token
+        }
+      }
+
+      const response = await axios.get(
+        `http://localhost:5001/api/performance/top-ten/${bootcampId}`,
+        config
+      )
+
+      dispatch({
+        type: TOP_PERFORMANCE_LIST_SUCCESS,
+        payload: response.data
+      })
+    } catch (error) {
+      // console.log("error:", error)
+      dispatch({
+        type: TOP_PERFORMANCE_LIST_FAIL,
         //    payload: error.res
         payload:
           error.response && error.response.data.message
@@ -118,7 +160,7 @@ export const getWatchingLectures = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/performance/watching-lectures/${id}`,
+      `http://localhost:5001/api/performance/watching-lectures/${id}`,
       config
     )
     dispatch({
@@ -154,7 +196,7 @@ export const getPerformanceDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/performance/${id}`,
+      `http://localhost:5001/api/performance/${id}`,
       config
     )
 
@@ -191,7 +233,7 @@ export const deletePerformance = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete(`https://server.ccab.tech/api/performance/${id}`, config)
+    await axios.delete(`http://localhost:5001/api/performance/${id}`, config)
 
     dispatch({
       type: PERFORMANCE_DELETE_SUCCESS
@@ -224,10 +266,10 @@ export const updatePerformance = (req, id) => async (dispatch, getState) => {
       }
     }
 
-    console.log('update performance', id);
+    console.log('update performance', id)
 
     await axios.put(
-      `https://server.ccab.tech/api/performance/daily-performance/${id}`,
+      `http://localhost:5001/api/performance/daily-performance/${id}`,
       req,
       config
     )

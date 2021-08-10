@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import LineChart from './LineChart'
 import DoughnutChart from './DoughnutChart'
-import { Row, Col, Form } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPerformances } from '../../redux/actions/performanceAction'
 import { todayPerformance } from '../../util/performances'
+import Rodal from 'rodal'
+// include styles
+import 'rodal/lib/rodal.css'
+import PerformanceRating from './PerformanceRating'
 
 const PerformanceChart = ({ courses, student }) => {
   const dispatch = useDispatch()
+  const [showPerformanceModal, setShowPerformanceModal] = useState('')
 
   const [selectedDate, setSelectedDate] = useState('today')
   const [course, setCourse] = useState(courses[0]._id)
@@ -67,7 +72,29 @@ const PerformanceChart = ({ courses, student }) => {
 
   return (
     <div className="">
-      <div className="title pb-3">Performance Ratio</div>
+      <div className="d-flex justify-content-between">
+        <div className="title pb-3">Performance Ratio</div>
+
+        <Button
+          variant="info"
+          onClick={() => {
+            setShowPerformanceModal({ visible: true })
+          }}
+        >
+          Top Ten Performances
+        </Button>
+      </div>
+
+      <div className="py-2 sub-title mb-5">
+        <Rodal
+          animation="flip"
+          visible={showPerformanceModal.visible}
+          onClose={() => setShowPerformanceModal({ visible: false })}
+          width={900}
+        >
+          <PerformanceRating bootcampId={course} />
+        </Rodal>
+      </div>
 
       <div className="d-flex mb-4 sub-title">
         <select onChange={(e) => setCourse(e.target.value)}>
