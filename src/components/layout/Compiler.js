@@ -54,7 +54,7 @@ class Compiler extends Component {
   syncUpdates = () => {
     const data = { ...this.state }
 
-    axios.post('http://localhost:5001/update-editor', data).catch(console.error)
+    axios.post('https://server.ccab.tech/update-editor', data).catch(console.error)
   }
 
   runCode = () => {

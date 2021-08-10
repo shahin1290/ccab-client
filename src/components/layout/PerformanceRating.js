@@ -30,7 +30,7 @@ export default function PerformanceRating({ bootcampId}) {
           <div className="title mb-4">
             <div className="clearfix">
               <div className="pull-left">
-                <div>Top Ten Performance Rating</div>
+                <div>Top 10 Rating</div>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function PerformanceRating({ bootcampId}) {
                             <img
                               src={
                                 performance.avatar
-                                  ? `http://localhost:5001/uploads/Avatar/${performance.avatar}`
+                                  ? `https://server.ccab.tech/uploads/Avatar/${performance.avatar}`
                                   : '/images/resource/avatar.svg'
                               }
                               alt="avatar"

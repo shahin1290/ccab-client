@@ -81,7 +81,7 @@ const PerformanceChart = ({ courses, student }) => {
             setShowPerformanceModal({ visible: true })
           }}
         >
-          Top Ten Performances
+          Top 10 Rating
         </Button>
       </div>
 
