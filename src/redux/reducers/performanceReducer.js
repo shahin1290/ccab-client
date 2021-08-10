@@ -16,7 +16,10 @@ import {
   PERFORMANCE_DELETE_FAIL,
   PERFORMANCE_LECTURE_LIST_SUCCESS,
   PERFORMANCE_LECTURE_LIST_FAIL,
-  PERFORMANCE_LECTURE_LIST_REQUEST
+  PERFORMANCE_LECTURE_LIST_REQUEST,
+  TOP_PERFORMANCE_LIST_REQUEST,
+  TOP_PERFORMANCE_LIST_SUCCESS,
+  TOP_PERFORMANCE_LIST_FAIL,
 } from '../constences/performanceConst'
 
 export const performanceCreateReducer = (
@@ -72,6 +75,33 @@ export const performanceListReducer = (state = { performances: [] }, action) => 
       return state
   }
 }
+
+export const topPerformanceListReducer = (state = { topPerformances: [] }, action) => {
+  switch (action.type) {
+    case TOP_PERFORMANCE_LIST_REQUEST:
+      return {
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
+
+    case TOP_PERFORMANCE_LIST_SUCCESS:
+      // console.log("actionP: ", action.payload)
+
+      return {
+        loading: false, // loading is done laoding!
+        topPerformances: action.payload.data
+      }
+
+    case TOP_PERFORMANCE_LIST_FAIL:
+      return {
+        loading: false, // loading is done laoding!
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
 
 export const performanceLectureListReducer = (state = { lectures: [] }, action) => {
   switch (action.type) {

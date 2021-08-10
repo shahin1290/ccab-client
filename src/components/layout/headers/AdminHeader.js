@@ -37,74 +37,69 @@ export default function AdminHeader() {
 
   return (
     <>
-     
-        <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
-          <div className="container">
-            <Navbar.Brand>Admin DashBoard</Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav" className="text-danger">
-              <Nav>
-                <Nav.Link className="text-dark  mr-3" href="/">
-                  Home
-                </Nav.Link>
-                {/* Items  hide-on-big-screen */}
-                <div className="text-dark hide-on-big-screen pt-4 ">
-                  Courses
-                  <Dropdown.Menu show className="border-0">
-                    <NavDropdown.Item href="/course-grid" show>
-                      All Courses
-                    </NavDropdown.Item>
-                    {categoryArray.length &&
-                      categoryArray.map((category) => (
-                        <NavDropdown.Item
-                          href={`/course-grid/${category}`}
-                          show
-                        >
-                          {category}
-                        </NavDropdown.Item>
-                      ))}
-                  </Dropdown.Menu>
-                </div>
-                <div className="collapse navbar-collapse mr-3">
-                  <ul className="navbar-nav ">
-                    <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                      <a href="#" className="text-dark">
-                        Courses
+      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
+        <div className="container">
+          <Navbar.Brand>Admin DashBoard</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav" className="text-danger">
+            <Nav>
+              <Nav.Link className="text-dark  mr-3" href="/">
+                Home
+              </Nav.Link>
+              {/* Items  hide-on-big-screen */}
+              <div className="text-dark hide-on-big-screen pt-4 ">
+                Courses
+                <Dropdown.Menu show className="border-0">
+                  <NavDropdown.Item href="/course-grid" show>
+                    All Courses
+                  </NavDropdown.Item>
+                  {categoryArray.length &&
+                    categoryArray.map((category) => (
+                      <NavDropdown.Item href={`/course-grid/${category}`} show>
+                        {category}
+                      </NavDropdown.Item>
+                    ))}
+                </Dropdown.Menu>
+              </div>
+              <div className="collapse navbar-collapse mr-3">
+                <ul className="navbar-nav ">
+                  <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                    <a href="#" className="text-dark">
+                      Courses
+                    </a>
+                    <div
+                      className="dropdown-menu  mt-4 ml-5"
+                      aria-labelledby="navbarDropdownMenuLink"
+                    >
+                      <a className="dropdown-item" href="/course-grid">
+                        All Courses
                       </a>
-                      <div
-                        className="dropdown-menu  mt-4 ml-5"
-                        aria-labelledby="navbarDropdownMenuLink"
-                      >
-                        <a className="dropdown-item" href="/course-grid">
-                          All Courses
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        {categoryArray.length &&
-                          categoryArray.map((category) => (
-                            <>
-                              <a
-                                className="dropdown-item"
-                                href={`/course-grid/${category}`}
-                              >
-                                {category}
-                              </a>
-                              <div className="dropdown-divider"></div>
-                            </>
-                          ))}
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <AdminHeaderContnet></AdminHeaderContnet>
+                      <div className="dropdown-divider"></div>
+                      {categoryArray.length &&
+                        categoryArray.map((category) => (
+                          <>
+                            <a
+                              className="dropdown-item"
+                              href={`/course-grid/${category}`}
+                            >
+                              {category}
+                            </a>
+                            <div className="dropdown-divider"></div>
+                          </>
+                        ))}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <AdminHeaderContnet></AdminHeaderContnet>
 
-                {!userDetail.token ? (
-                  <>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/get-start">Register</Nav.Link>
-                  </>
-                ) : (
-
-                  user.name && (
+              {!userDetail.token ? (
+                <>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link href="/get-start">Register</Nav.Link>
+                </>
+              ) : (
+                user.name && (
                   <div
                     className="collapse navbar-collapse"
                     style={{ marginLeft: '350px' }}
@@ -116,7 +111,7 @@ export default function AdminHeader() {
                             <img
                               src={
                                 user.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                  ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                   : '/images/resource/avatar.svg'
                               }
                               alt="avatar"
@@ -139,13 +134,12 @@ export default function AdminHeader() {
                       </li>
                     </ul>
                   </div>
-                  )
-                )}
-              </Nav>
-            </Navbar.Collapse>
-          </div>
-        </Navbar>
-    
+                )
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </div>
+      </Navbar>
     </>
   )
 }

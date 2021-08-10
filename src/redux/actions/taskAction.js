@@ -45,7 +45,7 @@ export const getTaskList = (bootcampId) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/tasks/' + bootcampId,
+      'http://localhost:5001/api/tasks/' + bootcampId,
       config
     )
 
@@ -82,7 +82,7 @@ export const getTaskDetails =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/tasks/${bootcampId}/${id}`,
+        `http://localhost:5001/api/tasks/${bootcampId}/${id}`,
         config
       )
 
@@ -118,7 +118,7 @@ export const createTask =
       }
 
       const response = await axios.post(
-        `https://server.ccab.tech/api/tasks/${bootcampId}/${weekId}`,
+        `http://localhost:5001/api/tasks/${bootcampId}/${weekId}`,
         task,
         config
       )
@@ -162,7 +162,7 @@ export const taskDelete = (bootcampId, id) => async (dispatch, getState) => {
     }
 
     await axios.delete(
-      `https://server.ccab.tech/api/tasks/${bootcampId}/${id}`,
+      `http://localhost:5001/api/tasks/${bootcampId}/${id}`,
       config
     )
 
@@ -198,7 +198,7 @@ export const taskChecked = (task) => async (dispatch, getState) => {
     }
 
     const response = await axios.put(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/checked',
+      'http://localhost:5001/api/tasks/' + task._id + '/checked',
       {},
       config
     )
@@ -237,7 +237,7 @@ export const taskAsPassed = (task) => async (dispatch, getState) => {
     }
 
     const response = await axios.put(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/passed',
+      'http://localhost:5001/api/tasks/' + task._id + '/passed',
       {},
       config
     )
@@ -276,7 +276,7 @@ export const taskAsNotPassed = (task) => async (dispatch, getState) => {
     }
 
     const response = await axios.put(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/nopassed',
+      'http://localhost:5001/api/tasks/' + task._id + '/nopassed',
       {},
       config
     )
@@ -315,7 +315,7 @@ export const getMyTaskList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'https://server.ccab.tech/api/tasks/mytasklist',
+      'http://localhost:5001/api/tasks/mytasklist',
       config
     )
 

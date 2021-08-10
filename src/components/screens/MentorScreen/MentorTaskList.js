@@ -24,7 +24,6 @@ export default function TaskListScreen({ match }) {
   //check if bootcamp or mediacenter
   const { course } = useSelector((state) => state.courseDetails)
 
-
   // Update Check mark
   const taskCheck = useSelector((state) => state.taskCheck)
   const {
@@ -107,7 +106,7 @@ export default function TaskListScreen({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     try {
       const res = await fetch(
-        'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+        'http://localhost:5001/api/tasks/' + task._id + '/download',
         config
       )
       const blob = await res.blob()

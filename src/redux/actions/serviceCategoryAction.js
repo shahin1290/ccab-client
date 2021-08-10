@@ -34,7 +34,7 @@ export const createServiceCategory =
       }
 
       const response = await axios.post(
-        'https://server.ccab.tech/api/serviceCategory',
+        'http://localhost:5001/api/serviceCategory',
         serviceCategory,
         config
       )
@@ -76,7 +76,7 @@ export const getServiceCategories = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'https://server.ccab.tech/api/serviceCategory/',
+      'http://localhost:5001/api/serviceCategory/',
       config
     )
 
@@ -113,7 +113,7 @@ export const getServiceCategoryDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/serviceCategory/${id}`,
+      `http://localhost:5001/api/serviceCategory/${id}`,
       config
     )
 
@@ -151,7 +151,7 @@ export const deleteServiceCategory = (id) => async (dispatch, getState) => {
     }
 
     await axios.delete(
-      `https://server.ccab.tech/api/serviceCategory/${id}`,
+      `http://localhost:5001/api/serviceCategory/${id}`,
       config
     )
 
@@ -189,7 +189,7 @@ export const updateServiceCategory =
 
       //console.log(REQUEST);
       await axios.put(
-        `https://server.ccab.tech/api/serviceCategory/${id}`,
+        `http://localhost:5001/api/serviceCategory/${id}`,
         req,
         config
       )

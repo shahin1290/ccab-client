@@ -93,7 +93,6 @@ export default function AssignmentDetail({ match }) {
     }
   }
 
-
   const submitHanlder = (e) => {
     e.preventDefault()
     //console.log(AssignemntLink);
@@ -131,7 +130,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      'http://localhost:5001/api/tasks/' + task._id + '/download',
       config
     )
 

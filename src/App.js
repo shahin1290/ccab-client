@@ -75,6 +75,8 @@ import Quizzes from './components/layout/Quizzes'
 import { updatePerformance } from './redux/actions/performanceAction'
 import UpdateMediaCenter from './components/screens/AdminScreen/UpdateMediaCenter'
 import ManageMediaCenterContent from './components/screens/AdminScreen/ManageMediaCenterContent'
+import Compiler from './components/layout/Compiler'
+import PerformanceRating from './components/layout/PerformanceRating'
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -84,7 +86,7 @@ function App() {
     live: false
   }).init()
 
-  const socket = socketIOClient('https://server.ccab.tech')
+  const socket = socketIOClient('http://localhost:5001')
 
   useEffect(() => {
     if (userDetail.user_type === 'StudentUser') {
@@ -412,6 +414,13 @@ function App() {
           exact
           path="/pricing-plans"
           component={Pricing}
+        ></StudentRoute>
+
+        <StudentRoute exact path="/compile" component={Compiler}></StudentRoute>
+        <StudentRoute
+          exact
+          path="/performance-rating"
+          component={PerformanceRating}
         ></StudentRoute>
 
         {/* default Routes for guests  */}

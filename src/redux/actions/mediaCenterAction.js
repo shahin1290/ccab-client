@@ -39,7 +39,7 @@ export const getMediaCenterList =
         }
       }
       const response = await axios.get(
-        `https://server.ccab.tech/api/mediaCenter?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/mediaCenter?pageNumber=${pageNumber}`,
         config
       )
 
@@ -77,7 +77,7 @@ export const getMediaCenterListForAdmin =
         }
       }
       const response = await axios.get(
-        `https://server.ccab.tech/api/mediaCenter/mange?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/mediaCenter/mange?pageNumber=${pageNumber}`,
         config
       )
 
@@ -113,7 +113,7 @@ export const getMediaCenterDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/mediaCenter/' + id,
+      'http://localhost:5001/api/mediaCenter/' + id,
       config
     )
 
@@ -133,43 +133,46 @@ export const getMediaCenterDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-export const createMediaCenter = (mediaCenter) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: MEDIA_CENTER_ADD_REQUEST
-    })
+export const createMediaCenter =
+  (mediaCenter) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: MEDIA_CENTER_ADD_REQUEST
+      })
 
-    // Descruct from getState()
-    const {
-      userLogin: { userDetail }
-    } = getState()
-    const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
+      // Descruct from getState()
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: { Authorization: 'Bearer ' + userDetail.token }
+      }
 
-    const response = await axios.post(
-      'https://server.ccab.tech/api/mediaCenter',
-      mediaCenter,
-      config
-    )
+      const response = await axios.post(
+        'http://localhost:5001/api/mediaCenter',
+        mediaCenter,
+        config
+      )
 
-    // console.log("response:", response)
+      // console.log("response:", response)
 
-    dispatch({
-      type: MEDIA_CENTER_ADD_SUCCESS,
-      //   payload: console.log("payload:", resconst response.data),
-      payload: response.data
-    })
-  } catch (error) {
-    console.log('error:', error)
-    dispatch({
-      type: MEDIA_CENTER_ADD_FAIL,
-      //    payload: error.res
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
+      dispatch({
+        type: MEDIA_CENTER_ADD_SUCCESS,
+        //   payload: console.log("payload:", resconst response.data),
+        payload: response.data
+      })
+    } catch (error) {
+      console.log('error:', error)
+      dispatch({
+        type: MEDIA_CENTER_ADD_FAIL,
+        //    payload: error.res
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
   }
-}
 
 export const deleteMediaCenter = (id) => async (dispatch, getState) => {
   try {
@@ -187,7 +190,7 @@ export const deleteMediaCenter = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete('https://server.ccab.tech/api/mediaCenter/' + id, config)
+    await axios.delete('http://localhost:5001/api/mediaCenter/' + id, config)
 
     dispatch({
       type: MEDIA_CENTER_DELETE_SUCCESS
@@ -204,36 +207,41 @@ export const deleteMediaCenter = (id) => async (dispatch, getState) => {
 }
 
 // update mediaCenter
-export const updateMediaCenter = (mediaCenter, id) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: MEDIA_CENTER_UPDATE_REQUEST
-    })
+export const updateMediaCenter =
+  (mediaCenter, id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: MEDIA_CENTER_UPDATE_REQUEST
+      })
 
-    const {
-      userLogin: { userDetail }
-    } = getState()
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userDetail.token
+        }
       }
+
+      //console.log(mediaCenter);
+      await axios.put(
+        'http://localhost:5001/api/mediaCenter/' + id,
+        mediaCenter,
+        config
+      )
+
+      dispatch({
+        type: MEDIA_CENTER_UPDATE_SUCCESS
+      })
+    } catch (error) {
+      // console.log(error.response.data);
+      dispatch({
+        type: MEDIA_CENTER_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
     }
-
-    //console.log(mediaCenter);
-    await axios.put('https://server.ccab.tech/api/mediaCenter/' + id, mediaCenter, config)
-
-    dispatch({
-      type: MEDIA_CENTER_UPDATE_SUCCESS
-    })
-  } catch (error) {
-    // console.log(error.response.data);
-    dispatch({
-      type: MEDIA_CENTER_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
   }
-}

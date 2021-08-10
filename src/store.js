@@ -130,6 +130,7 @@ import {
   performanceListReducer,
   performanceLectureListReducer,
   performanceDetailsReducer,
+  topPerformanceListReducer,
   performanceDeleteReducer,
   performanceUpdateReducer
 } from './redux/reducers/performanceReducer'
@@ -232,6 +233,7 @@ const reducer = combineReducers({
   serviceCategoryDelete: serviceCategoryDeleteReducer,
   performanceCreate: performanceCreateReducer,
   performanceList: performanceListReducer,
+  topPerformanceList: topPerformanceListReducer,
   performanceDetails: performanceDetailsReducer,
   performanceUpdate: performanceUpdateReducer,
   performanceDelete: performanceDeleteReducer,
