@@ -41,7 +41,9 @@ export default function Header() {
   const history = useHistory()
 
   useEffect(() => {
-    dispatch(getProfile())
+    if (userDetail.name) {
+      dispatch(getProfile())
+    }
     dispatch(getCourseList())
     dispatch(getServiceList())
   }, [dispatch])

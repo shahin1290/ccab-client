@@ -638,7 +638,7 @@ input:checked + .slider:before {
   width: 570px;
   height: 650px;
   z-index: 999;
-  background-color: rgb(0, 0, 0, 0.2);
+  background-color: #f0f5fb;
 }
 
 /* compiler */
