@@ -46,51 +46,8 @@ export default function AdminHeader() {
               <Nav.Link className="text-dark  mr-3" href="/">
                 Home
               </Nav.Link>
-              {/* Items  hide-on-big-screen */}
-              <div className="text-dark hide-on-big-screen pt-4 ">
-                Courses
-                <Dropdown.Menu show className="border-0">
-                  <NavDropdown.Item href="/course-grid" show>
-                    All Courses
-                  </NavDropdown.Item>
-                  {categoryArray.length &&
-                    categoryArray.map((category) => (
-                      <NavDropdown.Item href={`/course-grid/${category}`} show>
-                        {category}
-                      </NavDropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-              </div>
-              <div className="collapse navbar-collapse mr-3">
-                <ul className="navbar-nav ">
-                  <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-                    <a href="#" className="text-dark">
-                      Courses
-                    </a>
-                    <div
-                      className="dropdown-menu  mt-4 ml-5"
-                      aria-labelledby="navbarDropdownMenuLink"
-                    >
-                      <a className="dropdown-item" href="/course-grid">
-                        All Courses
-                      </a>
-                      <div className="dropdown-divider"></div>
-                      {categoryArray.length &&
-                        categoryArray.map((category) => (
-                          <>
-                            <a
-                              className="dropdown-item"
-                              href={`/course-grid/${category}`}
-                            >
-                              {category}
-                            </a>
-                            <div className="dropdown-divider"></div>
-                          </>
-                        ))}
-                    </div>
-                  </li>
-                </ul>
-              </div>
+          
+              
               <AdminHeaderContnet></AdminHeaderContnet>
 
               {!userDetail.token ? (

@@ -15,7 +15,7 @@ import ConfirmationKlarna from './components/screens/ConfirmationKlarna'
 import ConfirmationCardPurchase from './components/screens/ConfirmationCardPurchase'
 import Pricing from './components/screens/Pricing'
 import ErrorScreen from './components/screens/ErrorScreen'
-
+import {SideBarStateProvider } from './util/sidebarState'
 import Assignments from './components/layout/Assignments'
 import AssignmentDetail from './components/screens/AssignmentDetail'
 import Privacy from './components/screens/privacy'
@@ -77,6 +77,7 @@ import UpdateMediaCenter from './components/screens/AdminScreen/UpdateMediaCente
 import ManageMediaCenterContent from './components/screens/AdminScreen/ManageMediaCenterContent'
 import Compiler from './components/layout/Compiler'
 import PerformanceRating from './components/layout/PerformanceRating'
+import Sidebar from './components/layout/Sidebar';
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -101,10 +102,13 @@ function App() {
 
   return (
     <div className="App">
+      <SideBarStateProvider>
       <Switch>
         {/* Private Route for Admin  */}
         <AdminRoute exact path="/admin-users-list" component={UserListScreen} />
         <AdminRoute exact path="/admin-courses-list" component={MangeCoures} />
+        <AdminRoute exact path="/admin-sidebar" component={Sidebar} />
+
         <AdminRoute
           exact
           path="/admin-media-center-list"
@@ -426,6 +430,7 @@ function App() {
         {/* default Routes for guests  */}
         <Route component={DefaultRoutes}></Route>
       </Switch>
+      </SideBarStateProvider>
     </div>
   )
 }

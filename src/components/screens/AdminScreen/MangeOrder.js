@@ -11,10 +11,10 @@ import Loader from '../../layout/Loader'
 import { Tabs, Tab } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 
-export default function MangeOrder({ match }) {
+export default function MangeOrder() {
   const dispatch = useDispatch()
 
-  const pageNumber = match.params.pageNumber || 1
+  const pageNumber = 1
 
   /***********   Calling Reducer  ***************/
 
@@ -25,8 +25,9 @@ export default function MangeOrder({ match }) {
     orderList
   } = useSelector((state) => state.getAllOrders)
 
-  const {success: captureSuccess} = useSelector((state) => state.KlarnaOrderCapture)
-
+  const { success: captureSuccess } = useSelector(
+    (state) => state.KlarnaOrderCapture
+  )
 
   /************************************************************** */
 
@@ -67,8 +68,6 @@ export default function MangeOrder({ match }) {
   useEffect(() => {
     dispatch(getAllOrders())
   }, [dispatch, pageNumber, captureSuccess])
-
- 
 
   /************************************************** */
 
@@ -188,10 +187,9 @@ export default function MangeOrder({ match }) {
                                     <button
                                       onClick={() => {
                                         dispatch(
-                                          captureOrder(
-                                            order.course,
-                                            {orderBy: order.orderBy}
-                                          )
+                                          captureOrder(order.course, {
+                                            orderBy: order.orderBy
+                                          })
                                         )
                                       }}
                                       className="btn btn-primary btn-sm bg-success rounded-pill"

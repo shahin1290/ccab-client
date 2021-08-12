@@ -8,71 +8,23 @@ import {
   Button
 } from 'react-bootstrap'
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useSideBar } from '../../../util/sidebarState'
 
 export default function AdminHeaderContnet({ logoutHandler }) {
+  const { openSideBar } = useSideBar()
   return (
     <>
       <div className="collapse navbar-collapse mr-3">
         <ul className="navbar-nav ">
           <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-            <a href="#" className="text-dark pb-5 pt-5">
-              Schedule
-            </a>
-            <div
-              className="dropdown-menu  mt-4 ml-5"
-              aria-labelledby="navbarDropdownMenuLink"
+            <Link
+              className="text-dark"
+              to="/admin-sidebar"
+              onClick={() => openSideBar()}
             >
-              <a className="dropdown-item" href="/reports">
-                Reports
-              </a>
-            </div>
-          </li>
-          <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-            <a className="text-dark">Manage</a>
-            <div
-              className="dropdown-menu  mt-4 ml-5"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a className="dropdown-item" href="/admin-order-list">
-                Orders
-              </a>
-              <div className="dropdown-divider"></div>
-
-
-              <a className="dropdown-item" href="/admin-media-center-list">
-                Manage Media Centers
-              </a>
-              <div className="dropdown-divider"></div>
-
-              <a className="dropdown-item" href="/admin-courses-list">
-                Manage Courses
-              </a>
-              <div className="dropdown-divider"></div>
-
-              <a className="dropdown-item" href="/mentor-courses-list">
-                Manage Content
-              </a>
-              <div className="dropdown-divider"></div>
-
-              <a className="dropdown-item" href="/admin-services-list">
-                Manage Services
-              </a>
-              <div className="dropdown-divider"></div>
-
-              <a className="dropdown-item" href="/admin-request-list">
-                Request List
-              </a>
-              <div className="dropdown-divider"></div>
-
-              <a className="dropdown-item" href="/admin-job-list">
-                Job List
-              </a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="/admin-users-list">
-                Users
-              </a>
-              <div className="dropdown-divider"></div>
-            </div>
+              Manage
+            </Link>
           </li>
         </ul>
       </div>

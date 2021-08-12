@@ -13,10 +13,10 @@ import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap'
 import { Table, Modal, Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 
-export default function MangeService({ match }) {
+export default function MangeService() {
   const dispatch = useDispatch()
 
-  const pageNumber = match.params.pageNumber || 1
+  const pageNumber =  1
 
   /***********   Calling Reducer  ***************/
 

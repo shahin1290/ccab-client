@@ -13,10 +13,10 @@ import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap'
 import { Table, Col, Row, Modal, Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 
-export default function MangeMediaCenters({ match }) {
+export default function MangeMediaCenters() {
   const dispatch = useDispatch()
 
-  const pageNumber = match.params.pageNumber || 1
+  const pageNumber = 1
 
   /***********   Calling Reducer  ***************/
 
@@ -31,7 +31,6 @@ export default function MangeMediaCenters({ match }) {
     error: UpdateError,
     success: updateSuccess
   } = useSelector((state) => state.mediaCenterUpdate)
-
 
   // Admin mediaCenter list Reducer
   const { mediaCenterList, page, pages, loading, error } = useSelector(
@@ -57,7 +56,6 @@ export default function MangeMediaCenters({ match }) {
       Withhold
     </Tooltip>
   )
-
 
   /* delete couse handlers  */
   const handleCloseDelete = () => setShow(false)
@@ -104,7 +102,11 @@ export default function MangeMediaCenters({ match }) {
     //console.log({...mediaCenter , published:true,});
     dispatch(
       updateMediaCenter(
-        { name: mediaCenter.name, video_path: mediaCenter.video_path, published: false },
+        {
+          name: mediaCenter.name,
+          video_path: mediaCenter.video_path,
+          published: false
+        },
         mediaCenter._id
       )
     )
@@ -217,7 +219,7 @@ export default function MangeMediaCenters({ match }) {
                     <th>
                       <h5>Title</h5>
                     </th>
-                   
+
                     <th>
                       <h5>Weeks</h5>
                     </th>
@@ -243,7 +245,7 @@ export default function MangeMediaCenters({ match }) {
                             <th className="title" scope="col">
                               {item.name}
                             </th>
-                          
+
                             <th className="sales" scope="col">
                               {item.weeks}
                             </th>
@@ -258,7 +260,9 @@ export default function MangeMediaCenters({ match }) {
                               )}
                             </th>
                             <th className="actions" scope="col">
-                              <Link to={'/admin-media-center-update/' + item._id}>
+                              <Link
+                                to={'/admin-media-center-update/' + item._id}
+                              >
                                 <i className="fas fa-edit"></i>
                               </Link>
 
@@ -275,10 +279,13 @@ export default function MangeMediaCenters({ match }) {
 
                               <Modal show={show} onHide={handleCloseDelete}>
                                 <Modal.Header closeButton>
-                                  <Modal.Title>Deleting mediaCenter</Modal.Title>
+                                  <Modal.Title>
+                                    Deleting mediaCenter
+                                  </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body style={{ color: 'red' }}>
-                                  Are you sure to delete {DeletedmediaCenter.name} ?
+                                  Are you sure to delete{' '}
+                                  {DeletedmediaCenter.name} ?
                                 </Modal.Body>
                                 <Modal.Footer>
                                   <Button
@@ -290,7 +297,11 @@ export default function MangeMediaCenters({ match }) {
                                   <Button
                                     variant="danger"
                                     onClick={() => {
-                                      dispatch(deleteMediaCenter(DeletedmediaCenter._id))
+                                      dispatch(
+                                        deleteMediaCenter(
+                                          DeletedmediaCenter._id
+                                        )
+                                      )
 
                                       toast.info(
                                         DeletedmediaCenter.name +
@@ -300,7 +311,6 @@ export default function MangeMediaCenters({ match }) {
                                         }
                                       )
                                       setShow(false)
-                                      
                                     }}
                                   >
                                     Ok
