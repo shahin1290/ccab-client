@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import RedirectToAuthRoutes from '../auth/RedirectToAuthRoutes'
 
 import HomeScreen from '../../screens/HomeScreen'
+import ServiceHomeScreen from '../../screens/ServiceHomeScreen'
 import Footer from '../../layout/Footer'
 import Header from './../../layout/Header'
 import LoginScreen from '../../screens/LoginScreen'
@@ -36,6 +37,7 @@ export default function DefaultRoute() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomeScreen}></Route>
+        <Route exact path="/Services" component={ServiceHomeScreen}></Route>
         {/* <Route  path={`/auth`} component={()=><RedirectToAuthRoutes authPath={AuthPath}/>} ></Route> */}
         <Route exact path="/login" component={LoginScreen}></Route>
         <Route exact path="/get-start" component={RegisterScreen}></Route>

@@ -36,40 +36,88 @@ const Menu = ({ open, setBarSelected, barSelected }) => {
     <StyledMenu open={open}>
       <div className="sidebar-nav">
         <div className="d-flex ">
-          <div className="title mr-5 sidebar-brand text-white pt-2">Manage</div>{' '}
-          <Button variant="danger" onClick={() => toggleSideBar()}>
-            <span className="title">&times;</span>
-          </Button>{' '}
+          <div className="title mr-5 sidebar-brand text-white">Manage</div>{' '}
+          <a
+            style={{ color: 'white' }}
+            onClick={() => toggleSideBar()}
+          >
+            <span className="title ml-1">&times;</span>
+          </a>{' '}
         </div>
 
-        <hr />
+        <hr style={{ height: '1px', background: 'grey', border: '0' }} />
         <li>
           {' '}
-          <a onClick={() => setBarSelected('course')} style={{background: barSelected === 'course' ? 'red' : ''}}>Manage Courses</a>
+          <a
+            onClick={() => setBarSelected('course')}
+            style={{ background: barSelected === 'course' ? '#d9534f' : '' }}
+          >
+            Manage Courses
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('content')}>Manage Course Content</a>
+          <a
+            onClick={() => setBarSelected('content')}
+            style={{ background: barSelected === 'content' ? '#d9534f' : '' }}
+          >
+            Manage Course Content
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('media')}>Manage Media Centers</a>
+          <a
+            onClick={() => setBarSelected('media')}
+            style={{ background: barSelected === 'media' ? '#d9534f' : '' }}
+          >
+            Manage Media Centers
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('service')}>Manage Services</a>
+          <a
+            onClick={() => setBarSelected('service')}
+            style={{ background: barSelected === 'service' ? '#d9534f' : '' }}
+          >
+            Manage Services
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('request')}>Request List</a>
+          <a
+            onClick={() => setBarSelected('request')}
+            style={{ background: barSelected === 'request' ? '#d9534f' : '' }}
+          >
+            Request List
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('order')}>Order List</a>
+          <a
+            onClick={() => setBarSelected('order')}
+            style={{ background: barSelected === 'order' ? '#d9534f' : '' }}
+          >
+            Order List
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('job')}>Job List</a>
+          <a
+            onClick={() => setBarSelected('job')}
+            style={{ background: barSelected === 'job' ? '#d9534f' : '' }}
+          >
+            Job List
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('user')}>User List</a>
+          <a
+            onClick={() => setBarSelected('user')}
+            style={{ background: barSelected === 'user' ? '#d9534f' : '' }}
+          >
+            User List
+          </a>
         </li>
         <li>
-          <a onClick={() => setBarSelected('report')}>Report List</a>
+          <a
+            onClick={() => setBarSelected('report')}
+            style={{ background: barSelected === 'report' ? '#d9534f' : '' }}
+          >
+            Report List
+          </a>
         </li>
       </div>
     </StyledMenu>
@@ -77,7 +125,7 @@ const Menu = ({ open, setBarSelected, barSelected }) => {
 }
 
 const Sidebar = () => {
-  const { sideBarOpen } = useSideBar()
+  const { sideBarOpen, openSideBar } = useSideBar()
   const [barSelected, setBarSelected] = useState('course')
 
   return (
@@ -93,7 +141,20 @@ const Sidebar = () => {
       {barSelected === 'report' && <ReportList />}
 
       <div>
-        <Menu open={sideBarOpen} setBarSelected={setBarSelected} />
+        <a
+          id="show-sidebar"
+          className="btn btn-sm btn-dark"
+          href="#"
+          onClick={() => openSideBar()}
+          style={{ left: sideBarOpen ? '-40px' : '0' }}
+        >
+          <i className="fas fa-bars"></i>
+        </a>
+        <Menu
+          open={sideBarOpen}
+          setBarSelected={setBarSelected}
+          barSelected={barSelected}
+        />
       </div>
     </div>
   )

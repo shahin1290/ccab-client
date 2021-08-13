@@ -74,6 +74,14 @@ body {
     background-size: contain !important;
   }
 
+  .service-banner-text {
+    font-size: 2rem !important;
+    display: inline-block !important;
+  }
+  .service-banner-container {
+    background-size: contain !important;
+  }
+
   .big.green {
     border: 1px dashed #308800;
     margin: 10px !important;
@@ -685,7 +693,7 @@ input:checked + .slider:before {
 }
 
 /* Sidebar Styles */
-.sidebar-nav{
+.sidebar-nav {
   margin-bottom: 160px;
 }
 .sidebar-nav li {
@@ -694,7 +702,6 @@ input:checked + .slider:before {
   color: white;
   border-bottom: 1px solid white;
   font-weight: 300;
-
 }
 
 .sidebar-nav li a:hover {
@@ -712,4 +719,55 @@ input:checked + .slider:before {
   color: #999999;
 }
 
+#show-sidebar {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  border-radius: 0 4px 4px 0px;
+  width: 35px;
+  transition-delay: 0.3s;
+}
 
+/* Service Section */
+.service-banner-container {
+  display: inline-block;
+  text-align: center;
+  height: 45vh;
+  background: url(assets/images/services/serviceWallpaper.png) no-repeat;
+  background-size: cover;
+  width: 100%;
+  position: relative;
+}
+
+.service-banner-text {
+  font-size: 3.1rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+.service-banner-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.select-box {
+  width: 650px;
+  height: 80px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+}
+
+.select-box-content {
+  width: 610px;
+  height: 50px;
+}
+
+.service-focus img {
+  height: 170px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+}
