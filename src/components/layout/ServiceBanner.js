@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getServiceCategories } from '../../redux/actions/serviceCategoryAction'
-
 import { Row, Col, Button } from 'react-bootstrap'
 import Select from 'react-select'
+import { useHistory } from 'react-router-dom'
 
 const style = {
   control: (base) => ({
@@ -14,6 +14,13 @@ const style = {
   })
 }
 
+const error = {
+  control: (base) => ({
+    ...base,
+    border: '1px solid red'
+  })
+}
+
 const labelWithIcon = (
   <span className="fas fa-book-open">
     <span className="sub-title pl-2">choose subject</span>
@@ -21,8 +28,10 @@ const labelWithIcon = (
 )
 
 const ServiceBanner = () => {
+  let history = useHistory()
   const dispatch = useDispatch()
   const [selectedOption, setSelectedOption] = useState(null)
+  const [colorError, setColorError] = useState(false)
 
   const {
     serviceCategories,
@@ -34,6 +43,17 @@ const ServiceBanner = () => {
     serviceCategories &&
     serviceCategories.length > 0 &&
     serviceCategories.map((c) => ({ value: c.name, label: c.name }))
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    if (!(selectedOption && selectedOption.value)) {
+      setColorError(true)
+    } else {
+      setColorError(false)
+      history.push(`/service-grid/${selectedOption && selectedOption.value}`)
+    }
+  }
 
   useEffect(() => {
     dispatch(getServiceCategories())
@@ -48,22 +68,28 @@ const ServiceBanner = () => {
           </div>
 
           <div className="select-box mt-5">
-            <div className=" select-box-content d-flex justify-content-center mt-3">
+            <form
+              onSubmit={submitHandler}
+              className=" select-box-content d-flex justify-content-center mt-3"
+            >
               <Select
-                className="w-75"
                 options={options}
-                styles={style}
+                styles={!colorError ? style : error}
                 defaultValue={{ label: labelWithIcon }}
                 onChange={setSelectedOption}
+                isSearchable={true}
+                className="w-50 mr-5"
               />
 
               <Button
                 variant="danger"
-                href={`/service-grid/${selectedOption && selectedOption.value}`}
+                className="ml-5 pl-3"
+                type="submit"
+                /* href={`/service-grid/${selectedOption && selectedOption.value}`} */
               >
-                Show result
+                Show the result &gt;
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
