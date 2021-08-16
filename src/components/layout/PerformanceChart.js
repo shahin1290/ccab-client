@@ -72,20 +72,18 @@ const PerformanceChart = ({ courses, student }) => {
 
   return (
     <div className="">
-      <Row >
-        <Col className="title pb-3">Performance Ratio</Col>
+      <div className="d-flex justify-content-between">
+        <div className="title pb-3">Performance Ratio</div>
 
-        <Col>
-          <Button
-            variant="info"
-            onClick={() => {
-              setShowPerformanceModal({ visible: true })
-            }}
-          >
-            Top Ten Performances
-          </Button>
-        </Col>
-      </Row>
+        <Button
+          variant="info"
+          onClick={() => {
+            setShowPerformanceModal({ visible: true })
+          }}
+        >
+          Top 10 Rating
+        </Button>
+      </div>
 
       <div className="py-2 sub-title mb-5">
         <Rodal

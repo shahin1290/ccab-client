@@ -52,7 +52,7 @@ export default function StudentHeaderContnet({ logoutHandler }) {
 
           <li className="nav-item dropdown dropdown-slide dropdown-hover ">
             <a href="/compile" className="text-dark pb-5 pt-5">
-              Playcode
+              Live-code
             </a>
             
           </li>
