@@ -159,124 +159,118 @@ export default function SessionList() {
             )}
           </Rodal>
         </div>
-        {activeButton === 'upcoming' && (
-          <>
-            {sessionLoading ? (
-              <Loader />
-            ) : sessionError ? (
-              <Message>{sessionError}</Message>
-            ) : (
-              notReportedSessions() &&
-              notReportedSessions().length > 0 &&
-              notReportedSessions().map((req) => (
-                <div
-                  key={req._id}
-                  onClick={() => {
-                    setSelectedAppointment(req._id)
-                    setShowModal({ visible: true })
-                  }}
-                  style={{
-                    pointerEvents:
-                      userDetail.user_type !== 'InstructorUser'
-                        ? 'none'
-                        : 'auto'
-                  }}
-                  className="text-center-small-screen upcoming-row-content mb-3"
-                >
-                  <div className="sub-text font-weight-bold">
-                    {longEnUSFormatter.format(new Date(req.startDate))}{' '}
+        {activeButton === 'upcoming' &&
+          (sessionLoading ? (
+            <Loader />
+          ) : sessionError ? (
+            <Message>{sessionError}</Message>
+          ) : (
+            <>
+              {notReportedSessions() &&
+                notReportedSessions().length > 0 &&
+                notReportedSessions().map((req) => (
+                  <div
+                    key={req._id}
+                    onClick={() => {
+                      setSelectedAppointment(req._id)
+                      setShowModal({ visible: true })
+                    }}
+                    style={{
+                      pointerEvents:
+                        userDetail.user_type !== 'InstructorUser'
+                          ? 'none'
+                          : 'auto'
+                    }}
+                    className="text-center-small-screen upcoming-row-content mb-3"
+                  >
+                    <div className="sub-text font-weight-bold">
+                      {longEnUSFormatter.format(new Date(req.startDate))}{' '}
+                    </div>
+                    <Row className="pl-4 pr-5 mt-2">
+                      <Col md={2}>
+                        {' '}
+                        <Image
+                          width="50"
+                          src="/images/resource/avatar.svg"
+                          roundedCircle
+                        />
+                      </Col>
+                      <Col className="my-auto sub-text">
+                        {new Date(req.startDate).toLocaleTimeString(undefined, {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}{' '}
+                        -{' '}
+                        {new Date(req.endDate).toLocaleTimeString(undefined, {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </Col>
+                      <Col md={3} className="my-auto sub-text">
+                        {req.service.name}
+                      </Col>{' '}
+                      <Col md={3} className="my-auto sub-text">
+                        {req.student.name}
+                      </Col>
+                    </Row>
                   </div>
-                  <Row className="pl-4 pr-5 mt-2">
-                    <Col md={2}>
-                      {' '}
-                      <Image
-                        width="50"
-                        src="/images/resource/avatar.svg"
-                        roundedCircle
-                      />
-                    </Col>
-                    <Col className="my-auto sub-text">
-                      {new Date(req.startDate).toLocaleTimeString(undefined, {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}{' '}
-                      -{' '}
-                      {new Date(req.endDate).toLocaleTimeString(undefined, {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </Col>
-                    <Col md={3} className="my-auto sub-text">
-                      {req.service.name}
-                    </Col>{' '}
-                    <Col md={3} className="my-auto sub-text">
-                      {req.student.name}
-                    </Col>
-                  </Row>
-                </div>
-              ))
-            )}
+                ))}
 
-            {userDetail.user_type === 'StudentUser' ? sessionLoading ? (
-              <Loader />
-            ) : sessionError ? (
-              <Message>{sessionError}</Message>
-            ) : (
-              reportedSessions() &&
-              reportedSessions().length > 0 &&
-              reportedSessions().map((req) => (
-                <div
-                  key={req._id}
-                  onClick={() => {
-                    setSelectedAppointment(req._id)
-                    setShowModal({ visible: true })
-                  }}
-                  style={{
-                    pointerEvents:
-                      userDetail.user_type !== 'InstructorUser'
-                        ? 'none'
-                        : 'auto'
-                  }}
-                  className="text-center-small-screen upcoming-row-content"
-                >
-                  <div className="sub-text font-weight-bold">
-                    {longEnUSFormatter.format(new Date(req.startDate))}{' '}
+              {userDetail.user_type === 'StudentUser' &&
+                reportedSessions() &&
+                reportedSessions().length > 0 &&
+                reportedSessions().map((req) => (
+                  <div
+                    key={req._id}
+                    onClick={() => {
+                      setSelectedAppointment(req._id)
+                      setShowModal({ visible: true })
+                    }}
+                    style={{
+                      pointerEvents:
+                        userDetail.user_type !== 'InstructorUser'
+                          ? 'none'
+                          : 'auto'
+                    }}
+                    className="text-center-small-screen upcoming-row-content"
+                  >
+                    <div className="sub-text font-weight-bold">
+                      {longEnUSFormatter.format(new Date(req.startDate))}{' '}
+                    </div>
+                    <Row className="pl-4 pr-5 mt-2">
+                      <Col md={2}>
+                        {' '}
+                        <Image
+                          width="50"
+                          src="/images/resource/avatar.svg"
+                          roundedCircle
+                        />
+                      </Col>
+                      <Col className="my-auto sub-text">
+                        {new Date(req.startDate).toLocaleTimeString(undefined, {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}{' '}
+                        -{' '}
+                        {new Date(req.endDate).toLocaleTimeString(undefined, {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </Col>
+                      <Col md={2} className="my-auto sub-text">
+                        {req.service.name}
+                      </Col>{' '}
+                      <Col md={2} className="my-auto sub-text">
+                        {req.student.name}
+                      </Col>
+                      <Col md={2} className="my-auto sub-text">
+                        <Button variant="success">Finished</Button>
+                      </Col>
+                    </Row>
                   </div>
-                  <Row className="pl-4 pr-5 mt-2">
-                    <Col md={2}>
-                      {' '}
-                      <Image
-                        width="50"
-                        src="/images/resource/avatar.svg"
-                        roundedCircle
-                      />
-                    </Col>
-                    <Col className="my-auto sub-text">
-                      {new Date(req.startDate).toLocaleTimeString(undefined, {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}{' '}
-                      -{' '}
-                      {new Date(req.endDate).toLocaleTimeString(undefined, {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </Col>
-                    <Col md={2} className="my-auto sub-text">
-                      {req.service.name}
-                    </Col>{' '}
-                    <Col md={2} className="my-auto sub-text">
-                      {req.student.name}
-                    </Col>
-                    <Col md={2} className="my-auto sub-text">
-                      <Button variant="success">Finished</Button>
-                    </Col>
-                  </Row>
-                </div>
-              ))
-            ): null}
-          </>
-        )}
+                ))}
+            </>
+          ))}
 
         {activeButton === 'incoming' && (
           <Table striped bordered hover responsive="sm">

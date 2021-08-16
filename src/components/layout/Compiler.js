@@ -54,7 +54,7 @@ class Compiler extends Component {
   syncUpdates = () => {
     const data = { ...this.state }
 
-    axios.post('https://server.ccab.tech/update-editor', data).catch(console.error)
+    axios.post('http://localhost:5001/update-editor', data).catch(console.error)
   }
 
   runCode = () => {
@@ -101,7 +101,9 @@ class Compiler extends Component {
       <Container>
         <div className="text-center mt-2 mb-5">
           <div className="title">Javascript Playground</div>
-          <div className="sub-title">Simplest javascript playground with real-time result view.</div>
+          <div className="sub-title">
+            Simplest javascript playground with real-time result view.
+          </div>
         </div>
         <Row className="shadow p-3 mb-5 bg-white rounded">
           <Col md={6} className="playground">

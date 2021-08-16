@@ -40,7 +40,7 @@ export const createPerformance =
       }
 
       const response = await axios.post(
-        'https://server.ccab.tech/api/performance',
+        'http://localhost:5001/api/performance',
         performance,
         config
       )
@@ -83,7 +83,7 @@ export const getPerformances =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/performance/${bootcampId}/${userId}`,
+        `http://localhost:5001/api/performance/${bootcampId}/${userId}`,
         config
       )
 
@@ -122,7 +122,7 @@ export const getTopPerformances =
       }
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/performance/top-ten/${bootcampId}`,
+        `http://localhost:5001/api/performance/top-ten/${bootcampId}`,
         config
       )
 
@@ -160,7 +160,7 @@ export const getWatchingLectures = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/performance/watching-lectures/${id}`,
+      `http://localhost:5001/api/performance/watching-lectures/${id}`,
       config
     )
     dispatch({
@@ -196,7 +196,7 @@ export const getPerformanceDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/performance/${id}`,
+      `http://localhost:5001/api/performance/${id}`,
       config
     )
 
@@ -233,7 +233,7 @@ export const deletePerformance = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete(`https://server.ccab.tech/api/performance/${id}`, config)
+    await axios.delete(`http://localhost:5001/api/performance/${id}`, config)
 
     dispatch({
       type: PERFORMANCE_DELETE_SUCCESS
@@ -269,7 +269,7 @@ export const updatePerformance = (req, id) => async (dispatch, getState) => {
     console.log('update performance', id)
 
     await axios.put(
-      `https://server.ccab.tech/api/performance/daily-performance/${id}`,
+      `http://localhost:5001/api/performance/daily-performance/${id}`,
       req,
       config
     )
