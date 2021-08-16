@@ -82,6 +82,19 @@ body {
     background-size: contain !important;
   }
 
+  .select-box {
+    width: 90vw !important;
+    margin: 0 !important;
+  }
+  
+  .select-box-content {
+    width: 90vw  !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  
+
   .big.green {
     border: 1px dashed #308800;
     margin: 10px !important;
@@ -732,7 +745,7 @@ input:checked + .slider:before {
 .service-banner-container {
   display: inline-block;
   text-align: center;
-  height: 45vh;
+  height: 70vh;
   background: url(assets/images/services/serviceWallpaper.png) no-repeat;
   background-size: cover;
   width: 100%;

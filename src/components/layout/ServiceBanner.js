@@ -5,22 +5,6 @@ import { Row, Col, Button } from 'react-bootstrap'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 
-const style = {
-  control: (base) => ({
-    ...base,
-    border: 0,
-    // This line disable the blue border
-    boxShadow: 'none'
-  })
-}
-
-const error = {
-  control: (base) => ({
-    ...base,
-    border: '1px solid red'
-  })
-}
-
 const labelWithIcon = (
   <span className="fas fa-book-open">
     <span className="sub-title pl-2">choose subject</span>
@@ -74,11 +58,17 @@ const ServiceBanner = () => {
             >
               <Select
                 options={options}
-                styles={!colorError ? style : error}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    boxShadow: 'none',
+                    border: colorError ? '1px solid red' : '0'
+                  })
+                }}
                 defaultValue={{ label: labelWithIcon }}
                 onChange={setSelectedOption}
                 isSearchable={true}
-                className="w-50 mr-5"
+                className="w-50 mr-2 mt-1"
               />
 
               <Button

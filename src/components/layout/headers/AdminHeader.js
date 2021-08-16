@@ -46,9 +46,8 @@ export default function AdminHeader() {
               <Nav.Link className="text-dark  mr-3" href="/">
                 Home
               </Nav.Link>
-          
-              
-              <AdminHeaderContnet></AdminHeaderContnet>
+
+              <AdminHeaderContnet logoutHandler={logoutHandler} />
 
               {!userDetail.token ? (
                 <>

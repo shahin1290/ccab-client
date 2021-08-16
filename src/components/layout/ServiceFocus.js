@@ -15,10 +15,10 @@ const ServiceFocus = () => {
           throughout Sweden
         </div>
         <Row className="service-focus">
-          <Col md={4}>
+          <Col lg={4}>
             <Card
               style={{
-                width: '23rem',
+                width: '97%',
                 border: 0,
                 boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)'
               }}
@@ -26,7 +26,10 @@ const ServiceFocus = () => {
               <Card.Img variant="top" src={image1} />
               <Card.Body>
                 <Card.Title className="d-flex">
-                  <div className="res-circle mt-1 mr-1" style={{marginLeft: '-20px'}}>
+                  <div
+                    className="res-circle mt-1 mr-1"
+                    style={{ marginLeft: '-20px' }}
+                  >
                     <div className="circle-txt">1</div>
                   </div>
                   <div className="sub-title">
@@ -41,10 +44,10 @@ const ServiceFocus = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col lg={4}>
             <Card
               style={{
-                width: '23rem',
+                width: '97%',
                 border: 0,
                 boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
                 borderRadius: '5px'
@@ -53,7 +56,10 @@ const ServiceFocus = () => {
               <Card.Img variant="top" src={image2} />
               <Card.Body>
                 <Card.Title className="d-flex">
-                  <div className="res-circle mt-1 mr-1" style={{marginLeft: '-20px'}}>
+                  <div
+                    className="res-circle mt-1 mr-1"
+                    style={{ marginLeft: '-20px' }}
+                  >
                     <div className="circle-txt">2</div>
                   </div>
                   <div className="sub-title">
@@ -68,10 +74,10 @@ const ServiceFocus = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col lg={4}>
             <Card
               style={{
-                width: '23rem',
+                width: '97%',
                 border: 0,
                 boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
                 borderRadius: '5px'
@@ -80,7 +86,10 @@ const ServiceFocus = () => {
               <Card.Img variant="top" src={image3} />
               <Card.Body>
                 <Card.Title className="d-flex">
-                  <div className="res-circle mt-1 mr-1" style={{marginLeft: '-20px'}}>
+                  <div
+                    className="res-circle mt-1 mr-1"
+                    style={{ marginLeft: '-20px' }}
+                  >
                     <div className="circle-txt">3</div>
                   </div>
                   <div className="sub-title">
