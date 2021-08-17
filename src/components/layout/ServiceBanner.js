@@ -44,7 +44,7 @@ const ServiceBanner = () => {
   }, [dispatch])
 
   return (
-    <div className="auto-container mb-5">
+    <div className=" mb-5">
       <div class="service-banner-container ">
         <div className="service-banner-box ">
           <div className="service-banner-text">
@@ -63,6 +63,14 @@ const ServiceBanner = () => {
                     ...base,
                     boxShadow: 'none',
                     border: colorError ? '1px solid red' : '0'
+                  }),
+                  option: (provided, state) => ({
+                    ...provided,
+                    borderBottom: '1px dotted pink',
+                    backgroundColor: state.isFocused ? "#EB6C85" : '',
+                    color: state.isFocused ? "#fff" : '#222',
+                    padding: 10,
+                    textAlign: 'left'
                   })
                 }}
                 defaultValue={{ label: labelWithIcon }}
@@ -72,7 +80,7 @@ const ServiceBanner = () => {
               />
 
               <Button
-                variant="danger"
+                style={{ backgroundColor: '#EB6C85' }}
                 className="ml-5 pl-3"
                 type="submit"
                 /* href={`/service-grid/${selectedOption && selectedOption.value}`} */

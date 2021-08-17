@@ -9,7 +9,7 @@ const ServiceFocus = () => {
     <section className="mb-5" style={{ background: '#FAFAFA' }}>
       <div className="auto-container">
         <div className="title pt-5 pb-5 text-center">
-          <span style={{ color: '#A5CA33' }}>
+          <span style={{ color: '#EB6C85' }}>
             Homework help for all subjects & ages,
           </span>{' '}
           throughout Sweden
