@@ -8,7 +8,7 @@ const ServiceFocus = () => {
   return (
     <section className="mb-5" style={{ background: '#FAFAFA' }}>
       <div className="auto-container">
-        <div className="title pt-5 pb-5 text-center">
+        <div className="title pt-5 pb-5 text-center letter-spacing">
           <span style={{ color: '#EB6C85' }}>
             Homework help for all subjects & ages,
           </span>{' '}
