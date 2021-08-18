@@ -6,7 +6,7 @@ import image3 from '../../assets/images/header/image-3.jpg'
 
 const ServiceFocus = () => {
   return (
-    <section className="mb-5" style={{ background: '#FAFAFA' }}>
+    <section className="pb-5" style={{ background: '#FAFAFA' }}>
       <div className="auto-container">
         <div className="title pt-5 pb-5 text-center letter-spacing">
           <span style={{ color: '#EB6C85' }}>

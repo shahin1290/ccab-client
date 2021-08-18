@@ -44,14 +44,14 @@ const ServiceBanner = () => {
   }, [dispatch])
 
   return (
-    <div className=" mb-5">
+    <div>
       <div class="service-banner-container ">
         <div className="service-banner-box ">
           <div className="service-banner-text">
             Tutoring That Gives Best Result
           </div>
 
-          <div className="select-box mt-5">
+          <div className="select-box mt-5 mx-auto">
             <form
               onSubmit={submitHandler}
               className=" select-box-content d-flex justify-content-center mt-3"
@@ -76,7 +76,7 @@ const ServiceBanner = () => {
                 defaultValue={{ label: labelWithIcon }}
                 onChange={setSelectedOption}
                 isSearchable={true}
-                className="w-50 mr-2 mt-1"
+                className="w-50  mt-1"
               />
 
               <Button
