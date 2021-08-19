@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import Loader from '../layout/Loader'
 import { getOrderList } from '../../redux/actions/orderAction'
 import { getDate } from '../../util/getDate'
+import { Button } from 'react-bootstrap'
+import axios from 'axios'
 
 export default function Quizzes() {
   const dispatch = useDispatch()
@@ -18,10 +20,28 @@ export default function Quizzes() {
     error: orderError
   } = useSelector((state) => state.orderList)
 
+  const cancelSubscription = async (subscriptionId) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    const res = await axios.post(
+      `http://localhost:5001/api/order/stripe/cancel-subscription`,
+      {
+        subscriptionId
+      },
+      config
+    )
+
+    console.log(res.data)
+  }
+
   useEffect(() => {
     dispatch(getOrderList())
   }, [dispatch])
-
 
   return (
     <>
@@ -60,8 +80,22 @@ export default function Quizzes() {
                           <td>{order.course && order.course}</td>
 
                           <td>{getDate(order.createdAt)}</td>
-                          <td>{order.amount} ({order.currency})</td>
-                          <td>{order.orderStatus}</td>
+                          <td>
+                            {order.amount} ({order.currency})
+                          </td>
+
+                          <td>
+                            {order.orderStatus}{' '}
+                            {order.orderStatus === 'Active' && (
+                              <Button
+                                variant="danger"
+                                className="ml-2"
+                                onClick={() => cancelSubscription(order.charge)}
+                              >
+                                cancel subscription
+                              </Button>
+                            )}
+                          </td>
                         </tr>
                       ))
                     ) : (
