@@ -67,7 +67,7 @@ export default function AdminHeader() {
                             <img
                               src={
                                 user.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                  ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                   : '/images/resource/avatar.svg'
                               }
                               alt="avatar"

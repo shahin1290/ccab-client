@@ -565,12 +565,12 @@ export default function UpdateMediaCenter({ match }) {
 
                     {/* Divider */}
                     <div className="border my-3"></div>
-                    {/* ***https://server.ccab.tech** */}
+                    {/* ***http://localhost:5001** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          'https://server.ccab.tech/uploads/Bootcamp/' + ImageLable
+                          'http://localhost:5001/uploads/Bootcamp/' + ImageLable
                         }
                       />
                     ) : (

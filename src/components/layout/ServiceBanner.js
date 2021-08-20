@@ -44,14 +44,14 @@ const ServiceBanner = () => {
   }, [dispatch])
 
   return (
-    <div className="auto-container mb-5">
+    <div>
       <div class="service-banner-container ">
         <div className="service-banner-box ">
           <div className="service-banner-text">
             Tutoring That Gives Best Result
           </div>
 
-          <div className="select-box mt-5">
+          <div className="select-box mt-5 mx-auto">
             <form
               onSubmit={submitHandler}
               className=" select-box-content d-flex justify-content-center mt-3"
@@ -63,16 +63,24 @@ const ServiceBanner = () => {
                     ...base,
                     boxShadow: 'none',
                     border: colorError ? '1px solid red' : '0'
+                  }),
+                  option: (provided, state) => ({
+                    ...provided,
+                    borderBottom: '1px dotted pink',
+                    backgroundColor: state.isFocused ? "#EB6C85" : '',
+                    color: state.isFocused ? "#fff" : '#222',
+                    padding: 10,
+                    textAlign: 'left'
                   })
                 }}
                 defaultValue={{ label: labelWithIcon }}
                 onChange={setSelectedOption}
                 isSearchable={true}
-                className="w-50 mr-2 mt-1"
+                className="w-50  mt-1"
               />
 
               <Button
-                variant="danger"
+                style={{ backgroundColor: '#EB6C85' }}
                 className="ml-5 pl-3"
                 type="submit"
                 /* href={`/service-grid/${selectedOption && selectedOption.value}`} */

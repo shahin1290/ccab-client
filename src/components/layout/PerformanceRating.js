@@ -7,8 +7,7 @@ import Rodal from 'rodal'
 // include styles
 import 'rodal/lib/rodal.css'
 
-
-export default function PerformanceRating({ bootcampId}) {
+export default function PerformanceRating({ bootcampId }) {
   const dispatch = useDispatch()
 
   //Get Student's Bootcamps
@@ -60,7 +59,7 @@ export default function PerformanceRating({ bootcampId}) {
                             <img
                               src={
                                 performance.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${performance.avatar}`
+                                  ? `http://localhost:5001/uploads/Avatar/${performance.avatar}`
                                   : '/images/resource/avatar.svg'
                               }
                               alt="avatar"
