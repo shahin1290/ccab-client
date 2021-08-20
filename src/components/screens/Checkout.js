@@ -140,9 +140,14 @@ const CheckoutForm = ({ match, history }) => {
 
     if (serviceId) {
       dispatch(getServiceDetails(serviceId))
-      dispatch(createCurrrency('USD'))
     }
   }, [dispatch, ID, subscription, serviceId, requestId])
+
+  useEffect(() => {
+    if (service) {
+      dispatch(createCurrrency('EUR'))
+    }
+  }, [service])
 
   useEffect(() => {
     if (request) {
@@ -180,7 +185,7 @@ const CheckoutForm = ({ match, history }) => {
               .sessionNumber
           })
         )
-        //history.push(`/confirmation-card-purchase/${serviceId}`)
+        history.push(`/confirmation-card-purchase/${serviceId}`)
       }
     }
   }, [orderSuccess])
@@ -774,6 +779,7 @@ const CheckoutForm = ({ match, history }) => {
                                 <li className="clearfix mb-3">
                                   Price(per session):
                                   <span className="pull-right">
+                                    {console.log(currency.data.amount)}
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(

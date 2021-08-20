@@ -62,7 +62,6 @@ export default function UpdateCourese({ match }) {
   const [description, setDescription] = useState(service.description)
   const [category, setCategory] = useState(service.category)
   const [startDate, setStartDate] = useState(new Date())
-  const [seats, setSeats] = useState(service.seats)
   const [published, SetPublished] = useState(service.published)
   const [VideoUrl, setVideoUrl] = useState('')
   const [ImageUrl, setImageUrl] = useState('')
@@ -96,10 +95,8 @@ export default function UpdateCourese({ match }) {
     setDescription(service.description)
     setCategory(service.category)
     setPrice(service.price)
-    setSeats(service.seats)
     setStudents(service.students)
     setInstructors(service.instructors)
-    setStartDate(new Date(service.start_date))
     SetPublished(service.published)
     setVideoUrl(service.video_path)
     setImageLable(service.img_path)
@@ -131,14 +128,11 @@ export default function UpdateCourese({ match }) {
     }
     if (exist) setSelectStudentErr('Student Already Selected')
     else {
-      if (students.length < Number(seats))
+      if (students.length)
         setStudents([
           ...students,
           { name: student[0].name, _id: student[0]._id }
         ])
-      else {
-        setSelectStudentErr('Seats available are only ' + seats)
-      }
     }
 
     //console.log(selectStudentErr,student);
@@ -167,14 +161,11 @@ export default function UpdateCourese({ match }) {
     }
     if (exist) setSelectInstructorErr('Student Already Selected')
     else {
-      if (instructors.length < Number(seats))
+      if (instructors.length)
         setInstructors([
           ...instructors,
           { name: instructor[0].name, _id: instructor[0]._id }
         ])
-      else {
-        setSelectInstructorErr('Seats available are only ' + seats)
-      }
     }
 
     //console.log(selectStudentErr,student);
@@ -284,7 +275,6 @@ export default function UpdateCourese({ match }) {
     form_data.append('name', name)
     form_data.append('description', description)
     form_data.append('category', category)
-    form_data.append('seats', seats)
     form_data.append('students', JSON.stringify(StudentsIds))
     form_data.append('instructors', JSON.stringify(InstructorsIds))
     form_data.append('price', price)
