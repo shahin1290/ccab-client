@@ -6,7 +6,7 @@ export const plans = [
     name: 'Silver Plan',
     period: 'weekly',
     price: '599',
-    
+    stripeSubscriptionId: 'price_1JQUF8BDalVdaGO2VxrDawWH',
     offers: [
       '25% studying time',
       'minimum purchase 4 weeks.',
@@ -33,6 +33,7 @@ export const plans = [
     name: 'Silver Plan',
     period: 'monthly',
     price: '2299',
+    stripeSubscriptionId: 'price_1JQUF8BDalVdaGO22YjXN0Qs',
     offers: [
       '25% studying time',
       'minimum purchase 2 months',
@@ -58,8 +59,8 @@ export const plans = [
   {
     name: 'Golden Plan',
     period: 'weekly',
-    
     price: '699',
+    stripeSubscriptionId: 'price_1JQUF8BDalVdaGO2iucJbhOj',
     offers: [
       '60% studying time',
      ' minimum purchase 4 weeks.',
@@ -87,6 +88,7 @@ export const plans = [
     name: 'Golden Plan',
     period: 'monthly',
     price: '2699',
+    stripeSubscriptionId: 'price_1JQUF8BDalVdaGO2CeL53NQp',
     offers: [
       '60% studying time',
       'minimum purchase 2 months.',
@@ -113,7 +115,7 @@ export const plans = [
     name: 'Diamond Plan',
     period: 'weekly',
     price: '899',
-    
+    stripeSubscriptionId: 'price_1JQUF8BDalVdaGO2tRzUCERv',
     offers: [
       '100% studying time',
       'minimum purchase 4 weeks.',
@@ -139,6 +141,7 @@ export const plans = [
     name: 'Diamond Plan',
     period: 'monthly',
     price: '3499',
+    stripeSubscriptionId: 'price_1JQUF8BDalVdaGO2vI1gRfC3',
     offers: [
       '100% studying time',
       'minimum purchase 2 months.',

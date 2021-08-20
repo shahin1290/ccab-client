@@ -244,7 +244,8 @@ const CheckoutForm = ({ match, history }) => {
         const res = await axios.post(
           `http://localhost:5001/api/order/stripe/stripe-subscription`,
           {
-            payment_method: paymentMethod.id
+            payment_method: paymentMethod.id,
+            planId: plan.stripeSubscriptionId
           },
           config
         )
@@ -284,7 +285,7 @@ const CheckoutForm = ({ match, history }) => {
           // success
           setProcessingTo(false)
           dispatch(
-            createOrder('subscription', {
+            createOrder(`subscription ${plan.stripeSubscriptionId}`, {
               token: subscriptionId,
               amount: (
                 plan.price *
@@ -550,9 +551,9 @@ const CheckoutForm = ({ match, history }) => {
                                   <div className="sub-title mr-2 mb-2">
                                     Billing Type{' '}
                                   </div>
-                                  <div class="form-check form-check-inline">
+                                  <div className="form-check form-check-inline">
                                     <input
-                                      class="form-check-input"
+                                      className="form-check-input"
                                       type="radio"
                                       name="price"
                                       id="inlineRadio1"
@@ -564,15 +565,15 @@ const CheckoutForm = ({ match, history }) => {
                                       required
                                     />
                                     <label
-                                      class="form-check-label"
+                                      className="form-check-label"
                                       for="inlineRadio1"
                                     >
                                       Subscription(cancel anytime)
                                     </label>
                                   </div>
-                                  <div class="form-check form-check-inline">
+                                  <div className="form-check form-check-inline">
                                     <input
-                                      class="form-check-input"
+                                      className="form-check-input"
                                       type="radio"
                                       name="price"
                                       id="inlineRadio2"
@@ -583,7 +584,7 @@ const CheckoutForm = ({ match, history }) => {
                                       checked={billingType === 'oneTime'}
                                     />
                                     <label
-                                      class="form-check-label"
+                                      className="form-check-label"
                                       for="inlineRadio2"
                                     >
                                       One time payment
