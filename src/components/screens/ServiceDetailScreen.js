@@ -84,7 +84,7 @@ export default function ServiceDetailScreen({ match }) {
 
     fetchMyAPI()
 
-    dispatch(createCurrrency('usd'))
+    dispatch(createCurrrency('EUR'))
   }, [])
 
   useEffect(() => {
@@ -522,7 +522,7 @@ export default function ServiceDetailScreen({ match }) {
                                 </div>
                               </div>
                             </div>
-                            <button
+                            <a
                               onClick={() =>
                                 localStorage.setItem(
                                   'appointment',
@@ -543,7 +543,7 @@ export default function ServiceDetailScreen({ match }) {
                               <span className="txt">
                                 Book now <i className="fa fa-angle-right"></i>
                               </span>
-                            </button>
+                            </a>
                             <div
                               style={{
                                 margin: '10px auto 0 auto',

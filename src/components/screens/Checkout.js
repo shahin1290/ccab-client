@@ -88,6 +88,7 @@ const CheckoutForm = ({ match, history }) => {
   const [AmountOfWeeks, setAmountOfWeeks] = useState(
     plan && plan.period == 'weekly' ? 4 : 2
   )
+  const [billingType, setBillingType] = useState('subscription')
   const [widgetLoaded, setWidgetLoaded] = useState(false)
 
   const {
@@ -139,9 +140,14 @@ const CheckoutForm = ({ match, history }) => {
 
     if (serviceId) {
       dispatch(getServiceDetails(serviceId))
-      dispatch(createCurrrency('USD'))
     }
   }, [dispatch, ID, subscription, serviceId, requestId])
+
+  useEffect(() => {
+    if (service) {
+      dispatch(createCurrrency('EUR'))
+    }
+  }, [service])
 
   useEffect(() => {
     if (request) {
@@ -179,7 +185,7 @@ const CheckoutForm = ({ match, history }) => {
               .sessionNumber
           })
         )
-        //history.push(`/confirmation-card-purchase/${serviceId}`)
+        history.push(`/confirmation-card-purchase/${serviceId}`)
       }
     }
   }, [orderSuccess])
@@ -219,125 +225,204 @@ const CheckoutForm = ({ match, history }) => {
     }
 
     try {
-      let amount
-
-      if (subscription) {
-        amount = Math.round(
-          plan.price * sekToEUR * currency.data.amount * AmountOfWeeks * 100
-        )
-      }
-
-      if (ID) {
-        amount = Math.round(currency.data.amount * course.price * 100)
-      }
-
-      if (requestId) {
-        amount = Math.round(currency.data.amount * request.amount * 100)
-      }
-
-      if (serviceId) {
-        amount = Math.round(
-          currency.data.amount *
-            (service.price *
-              JSON.parse(localStorage.getItem('appointment')).sessionNumber) *
-            100
-        )
-      }
-
-      const { data: clientSecret } = await axios.post(
-        `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
-        {
-          paymentMethodType: 'card',
-          currency: currency.data.currency,
-          amount
-        },
-        config
-      )
-
-      const paymentMethodReq = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-        billing_details: {
-          name,
-          address: {
-            line1: street,
-            state: country,
-            city,
-            postal_code: zip
-          }
-        }
-      })
-
-      if (paymentMethodReq.error) {
-        setCheckoutError(paymentMethodReq.error.message)
-        setProcessingTo(false)
-        return
-      }
-
-      const { error, paymentIntent } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: {
-            card: cardElement,
-            billing_details: {
-              name,
-              address: {
-                line1: street,
-                state: country,
-                city,
-                postal_code: zip
-              }
+      if (subscription && billingType === 'subscription') {
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+          type: 'card',
+          card: cardElement,
+          billing_details: {
+            name,
+            address: {
+              line1: street,
+              state: country,
+              city,
+              postal_code: zip
             }
           }
+        })
+
+        if (error) {
+          setCheckoutError(error.message)
+          setProcessingTo(false)
+          return
         }
-      )
 
-      if (error) {
-        setCheckoutError(error.message)
-        setProcessingTo(false)
-        return
-      }
+        const res = await axios.post(
+          `http://localhost:5001/api/order/stripe/stripe-subscription`,
+          {
+            payment_method: paymentMethod.id,
+            planId: plan.stripeSubscriptionId
+          },
+          config
+        )
 
-      if (paymentIntent.status === 'succeeded') {
-        setProcessingTo(false)
+        // The subscription contains an invoice
+        // If the invoice's payment succeeded then you're good,
+        // otherwise, the payment intent must be confirmed
 
-        if (ID) {
+        const { latest_invoice, id: subscriptionId } = res.data.data
+
+        if (latest_invoice.payment_intent) {
+          const { client_secret, status } = latest_invoice.payment_intent
+
+          if (status === 'requires_action') {
+            const { error: confirmationError } =
+              await stripe.confirmCardPayment(client_secret, {
+                payment_method: {
+                  card: cardElement,
+                  billing_details: {
+                    name,
+                    address: {
+                      line1: street,
+                      state: country,
+                      city,
+                      postal_code: zip
+                    }
+                  }
+                }
+              })
+            if (confirmationError) {
+              setProcessingTo(false)
+              setCheckoutError(error.message)
+              return
+            }
+          }
+
+          // success
+          setProcessingTo(false)
           dispatch(
-            createOrder(ID, {
-              token: paymentIntent.id,
-              amount: paymentIntent.amount,
+            createOrder(`subscription ${plan.stripeSubscriptionId}`, {
+              token: subscriptionId,
+              amount: (
+                plan.price *
+                sekToEUR *
+                currency.data.amount *
+                100
+              ).toFixed(),
               currency: currency.data.currency
             })
           )
         }
+      } else {
+        let amount
 
         if (subscription) {
-          dispatch(
-            createOrder(plan.name, {
-              token: paymentIntent.id,
-              amount: paymentIntent.amount,
-              currency: currency.data.currency
-            })
+          amount = Math.round(
+            plan.price * sekToEUR * currency.data.amount * AmountOfWeeks * 100
           )
+        }
+
+        if (ID) {
+          amount = Math.round(currency.data.amount * course.price * 100)
         }
 
         if (requestId) {
-          dispatch(
-            createOrder('bill', {
-              token: paymentIntent.id,
-              amount: paymentIntent.amount,
-              currency: currency.data.currency
-            })
+          amount = Math.round(currency.data.amount * request.amount * 100)
+        }
+
+        if (serviceId) {
+          amount = Math.round(
+            currency.data.amount *
+              (service.price *
+                JSON.parse(localStorage.getItem('appointment')).sessionNumber) *
+              100
           )
         }
-        if (serviceId) {
-          dispatch(
-            createOrder(serviceId, {
-              token: paymentIntent.id,
-              amount: paymentIntent.amount,
-              currency: currency.data.currency
-            })
-          )
+
+        const { data: clientSecret } = await axios.post(
+          `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
+          {
+            paymentMethodType: 'card',
+            currency: currency.data.currency,
+            amount
+          },
+          config
+        )
+
+        const paymentMethodReq = await stripe.createPaymentMethod({
+          type: 'card',
+          card: cardElement,
+          billing_details: {
+            name,
+            address: {
+              line1: street,
+              state: country,
+              city,
+              postal_code: zip
+            }
+          }
+        })
+
+        if (paymentMethodReq.error) {
+          setCheckoutError(paymentMethodReq.error.message)
+          setProcessingTo(false)
+          return
+        }
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(
+          clientSecret,
+          {
+            payment_method: {
+              card: cardElement,
+              billing_details: {
+                name,
+                address: {
+                  line1: street,
+                  state: country,
+                  city,
+                  postal_code: zip
+                }
+              }
+            }
+          }
+        )
+
+        if (error) {
+          setCheckoutError(error.message)
+          setProcessingTo(false)
+          return
+        }
+
+        if (paymentIntent.status === 'succeeded') {
+          setProcessingTo(false)
+
+          if (ID) {
+            dispatch(
+              createOrder(ID, {
+                token: paymentIntent.id,
+                amount: paymentIntent.amount,
+                currency: currency.data.currency
+              })
+            )
+          }
+
+          if (subscription) {
+            dispatch(
+              createOrder(plan.name, {
+                token: paymentIntent.id,
+                amount: paymentIntent.amount,
+                currency: currency.data.currency
+              })
+            )
+          }
+
+          if (requestId) {
+            dispatch(
+              createOrder('bill', {
+                token: paymentIntent.id,
+                amount: paymentIntent.amount,
+                currency: currency.data.currency
+              })
+            )
+          }
+          if (serviceId) {
+            dispatch(
+              createOrder(serviceId, {
+                token: paymentIntent.id,
+                amount: paymentIntent.amount,
+                currency: currency.data.currency
+              })
+            )
+          }
         }
       }
     } catch (err) {
@@ -345,6 +430,7 @@ const CheckoutForm = ({ match, history }) => {
     }
   }
 
+  //KLARNA PAYMENTS
   const _handelcreateKlarnaOrder = () => {
     setWidgetLoaded(true)
     if (ID) {
@@ -465,73 +551,136 @@ const CheckoutForm = ({ match, history }) => {
 
                           <div className="order-box bg-white p-2">
                             {subscription && (
-                              <ul>
-                                <li className="clearfix mb-3">
-                                  Total Of Weeks:
-                                  <select
-                                    className="custom-select-box px-2"
-                                    onChange={(e) => {
-                                      setAmountOfWeeks(Number(e.target.value))
-                                    }}
-                                  >
-                                    {plan.period == 'weekly' ? (
-                                      <>
-                                        <option value="4" selected>
-                                          4 weeks
-                                        </option>
-                                        <option value="5">5 weeks</option>
-                                        <option value="6">6 weeks</option>
-                                        <option value="7">7 weeks</option>
-                                        <option value="8">8 weeks</option>
-                                      </>
+                              <>
+                                <div className="">
+                                  <div className="sub-title mr-2 mb-2">
+                                    Billing Type{' '}
+                                  </div>
+                                  <div className="form-check form-check-inline">
+                                    <input
+                                      className="form-check-input"
+                                      type="radio"
+                                      name="price"
+                                      id="inlineRadio1"
+                                      value="subscription"
+                                      onChange={(e) => {
+                                        setBillingType(e.target.value)
+                                      }}
+                                      checked={billingType === 'subscription'}
+                                      required
+                                    />
+                                    <label
+                                      className="form-check-label"
+                                      for="inlineRadio1"
+                                    >
+                                      Subscription(cancel anytime)
+                                    </label>
+                                  </div>
+                                  <div className="form-check form-check-inline">
+                                    <input
+                                      className="form-check-input"
+                                      type="radio"
+                                      name="price"
+                                      id="inlineRadio2"
+                                      value="oneTime"
+                                      onChange={(e) => {
+                                        setBillingType(e.target.value)
+                                      }}
+                                      checked={billingType === 'oneTime'}
+                                    />
+                                    <label
+                                      className="form-check-label"
+                                      for="inlineRadio2"
+                                    >
+                                      One time payment
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="sub-title mt-3 mr-2 mb-2">
+                                  Order Details{' '}
+                                </div>
+                                <ul className="pt-2">
+                                  {billingType === 'oneTime' && (
+                                    <li className="clearfix mb-3">
+                                      Total Of Weeks:
+                                      <select
+                                        className="custom-select-box px-2"
+                                        onChange={(e) => {
+                                          setAmountOfWeeks(
+                                            Number(e.target.value)
+                                          )
+                                        }}
+                                      >
+                                        {plan.period == 'weekly' ? (
+                                          <>
+                                            <option value="4" selected>
+                                              4 weeks
+                                            </option>
+                                            <option value="5">5 weeks</option>
+                                            <option value="6">6 weeks</option>
+                                            <option value="7">7 weeks</option>
+                                            <option value="8">8 weeks</option>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <option value="2" selected>
+                                              2 Months
+                                            </option>
+                                            <option value="3">3 Months</option>
+                                            <option value="4">4 Months</option>
+                                            <option value="5">5 Months</option>
+                                            <option value="6">6 Months</option>
+                                          </>
+                                        )}
+                                      </select>
+                                    </li>
+                                  )}
+                                  <li className="clearfix mb-3">
+                                    Subscription Type:
+                                    <span className="pull-right">
+                                      {plan.name}
+                                    </span>
+                                  </li>
+
+                                  <li className="clearfix mb-3">
+                                    Subscription Period:
+                                    <span className="pull-right">
+                                      {plan.period}
+                                    </span>
+                                  </li>
+                                  <hr />
+
+                                  <li className="clearfix">
+                                    <strong>Total</strong>{' '}
+                                    {billingType === 'oneTime' ? (
+                                      <span className="pull-right">
+                                        <strong>
+                                          {currencySuccess &&
+                                            `${Math.round(
+                                              plan.price *
+                                                sekToEUR *
+                                                currency.data.amount *
+                                                AmountOfWeeks
+                                            )}  ${currency.data.currency}`}
+                                        </strong>
+                                      </span>
                                     ) : (
-                                      <>
-                                        <option value="2" selected>
-                                          2 Months
-                                        </option>
-                                        <option value="3">3 Months</option>
-                                        <option value="4">4 Months</option>
-                                        <option value="5">5 Months</option>
-                                        <option value="6">6 Months</option>
-                                      </>
+                                      <span className="pull-right">
+                                        <strong>
+                                          {currencySuccess &&
+                                            `${Math.round(
+                                              plan.price *
+                                                sekToEUR *
+                                                currency.data.amount
+                                            )}  ${currency.data.currency} (${
+                                              plan.period
+                                            })`}
+                                        </strong>
+                                      </span>
                                     )}
-                                  </select>
-                                </li>
-                                <li className="clearfix mb-3">
-                                  Subscription Type:
-                                  <span className="pull-right">
-                                    {plan.name}
-                                  </span>
-                                </li>
-
-                                <li className="clearfix mb-3">
-                                  Subscription Period:
-                                  <span className="pull-right">
-                                    {plan.period}
-                                  </span>
-                                </li>
-                                <hr />
-
-                                <li className="clearfix">
-                                  <strong>Total</strong>{' '}
-                                  <span className="pull-right">
-                                    {console.log(
-                                      plan.price,
-                                      sekToEUR,
-                                      currency.data.amount
-                                    )}
-                                    <strong>
-                                      {currencySuccess &&
-                                        `${Math.round(
-                                          plan.price *
-                                            sekToEUR *
-                                            currency.data.amount *
-                                            AmountOfWeeks
-                                        )}  ${currency.data.currency}`}
-                                    </strong>
-                                  </span>
-                                </li>
-                              </ul>
+                                  </li>
+                                </ul>
+                              </>
                             )}
                             {ID && (
                               <ul>
@@ -630,6 +779,7 @@ const CheckoutForm = ({ match, history }) => {
                                 <li className="clearfix mb-3">
                                   Price(per session):
                                   <span className="pull-right">
+                                    {console.log(currency.data.amount)}
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(

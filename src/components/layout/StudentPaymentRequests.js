@@ -14,13 +14,9 @@ export default function PaymentRequest() {
 
   const { loading, error, requests } = useSelector((state) => state.requestList)
 
-  console.log(requests);
-
   useEffect(() => {
     dispatch(getRequests())
   }, [dispatch])
-
-  
 
   return (
     <>
@@ -47,7 +43,9 @@ export default function PaymentRequest() {
             </thead>
             <tbody>
               {requests &&
-                requests.map((req, index) => <StudentPaymentRequest req={req} index={index} />)}
+                requests.map((req, index) => (
+                  <StudentPaymentRequest req={req} index={index} />
+                ))}
             </tbody>
           </Table>
         )}
