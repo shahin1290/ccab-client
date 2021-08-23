@@ -258,7 +258,6 @@ const CheckoutForm = ({ match, history }) => {
         // The subscription contains an invoice
         // If the invoice's payment succeeded then you're good,
         // otherwise, the payment intent must be confirmed
-
         const { latest_invoice, id: subscriptionId } = res.data.data
 
         if (latest_invoice.payment_intent) {

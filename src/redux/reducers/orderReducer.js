@@ -26,6 +26,9 @@ import {
   ORDER_KLARNA_CAPTURE_REQUEST,
   ORDER_KLARNA_CAPTURE_SUCCESS,
   ORDER_KLARNA_CAPTURE_FAIL,
+  STRIPE_SUBSCRIPTION_VIEW_REQUEST,
+  STRIPE_SUBSCRIPTION_VIEW_SUCCESS,
+  STRIPE_SUBSCRIPTION_VIEW_FAIL,
 } from '../constences/orderConst'
 
 export const orderCreateReducer = (
@@ -125,6 +128,33 @@ export const orderVeiwReducer = (
         loading: false, // loading is done laoding!
         error: action.payload,
         order: {}
+      }
+
+    default:
+      return state
+  }
+}
+
+export const stripeSubscriptionInvoiceReducer = (
+  state = { invoice: {}, loading: false },
+  action
+) => {
+  switch (action.type) {
+    case STRIPE_SUBSCRIPTION_VIEW_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case STRIPE_SUBSCRIPTION_VIEW_SUCCESS:
+      return {
+        loading: false, // loading is done laoding!
+        invoice: action.payload
+      }
+    case STRIPE_SUBSCRIPTION_VIEW_FAIL:
+      return {
+        loading: false, // loading is done laoding!
+        error: action.payload,
+        invoice: {}
       }
 
     default:

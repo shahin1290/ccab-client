@@ -161,11 +161,10 @@ export default function UpdateCourese({ match }) {
     }
     if (exist) setSelectInstructorErr('Student Already Selected')
     else {
-      if (instructors.length)
-        setInstructors([
-          ...instructors,
-          { name: instructor[0].name, _id: instructor[0]._id }
-        ])
+      setInstructors([
+        ...instructors,
+        { name: instructor[0].name, _id: instructor[0]._id }
+      ])
     }
 
     //console.log(selectStudentErr,student);
@@ -261,7 +260,7 @@ export default function UpdateCourese({ match }) {
 
     // set array for instructor ids
     let InstructorsIds = []
-    if (instructors.length) {
+    {
       instructors.forEach((item) => {
         InstructorsIds.push(item._id)
       })
