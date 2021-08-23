@@ -26,7 +26,10 @@ import {
   KLARNA_SESSION_READ_FAIL,
   ORDER_KLARNA_CAPTURE_REQUEST,
   ORDER_KLARNA_CAPTURE_SUCCESS,
-  ORDER_KLARNA_CAPTURE_FAIL
+  ORDER_KLARNA_CAPTURE_FAIL,
+  STRIPE_SUBSCRIPTION_VIEW_REQUEST,
+  STRIPE_SUBSCRIPTION_VIEW_SUCCESS,
+  STRIPE_SUBSCRIPTION_VIEW_FAIL
 } from '../constences/orderConst'
 
 export const createOrder = (id, order) => async (dispatch, getState) => {
@@ -178,6 +181,44 @@ export const getOrder = (id) => async (dispatch, getState) => {
     })
   }
 }
+
+export const getStripeSubscriptionInvoice =
+  () => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: STRIPE_SUBSCRIPTION_VIEW_REQUEST
+      })
+
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userDetail.token
+        }
+      }
+
+      const response = await axios.get(
+        'http://localhost:5001/api/order/stripe/view-subscription',
+        config
+      )
+
+      //console.log("payload: ",response.data.data)
+      dispatch({
+        type: STRIPE_SUBSCRIPTION_VIEW_SUCCESS,
+        payload: response.data.data
+      })
+    } catch (error) {
+      dispatch({
+        type: STRIPE_SUBSCRIPTION_VIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
 
 export const createKlarnaSession =
   (order, id) => async (dispatch, getState) => {
