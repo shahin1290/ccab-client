@@ -4,15 +4,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   getAllOrders,
   captureOrder,
-  getOrder
+  getStripeSubscriptionInvoice
 } from '../../../redux/actions/orderAction'
 import Message from '../../layout/Message'
 import Loader from '../../layout/Loader'
 import { Tabs, Tab } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
+import StripeSubscriptionDetails from '../../layout/StripeSubscriptionDetails'
 
 export default function MangeOrder() {
   const dispatch = useDispatch()
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState({
+    visible: false
+  })
 
   const pageNumber = 1
 
@@ -54,6 +58,11 @@ export default function MangeOrder() {
   const getDeliveredOrder = () =>
     orderList.filter((order) => {
       return order.orderStatus === 'Delivered'
+    })
+
+  const getSubscribedOrder = () =>
+    orderList.filter((order) => {
+      return order.orderStatus === 'Active' || order.orderStatus === 'Canceled'
     })
 
   const getPriceFormat = (price) => {
@@ -261,6 +270,107 @@ export default function MangeOrder() {
                                 <td>
                                   {order.orderStatus}
                                   <i className="ml-2 fas fa-check-circle text-success"></i>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <>
+                              <tr>
+                                <td></td>
+
+                                <p className="pl-4 py-2 mt-4 text-dark ">
+                                  There isn't any Delivered orders yet !
+                                </p>
+                              </tr>
+                            </>
+                          )}
+                        </tbody>
+                      </table>
+                    </>
+                  )}
+                </div>
+              </div>
+            </Tab>
+
+            <Tab eventKey="Subscriptions" title="Subscriptions">
+              <div className="inner-container">
+                <div className="table-responsive">
+                  {orderLoading ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      <h5>
+                        Total Incoming Orders : {getSubscribedOrder().length}
+                      </h5>
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Bootcamp</th>
+                            <th>order by</th>
+                            <th>Purchase Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {orderError ? (
+                            <Message variant="danger">{orderError}</Message>
+                          ) : getSubscribedOrder().length ? (
+                            getSubscribedOrder().map((order, index) => (
+                              <tr key={order._id}>
+                                <td>{index + 1}</td>
+                                <td style={{ width: '30%' }}>
+                                  {order.course && order.course}
+                                </td>
+                                <td>{order.orderBy && order.orderBy.name}</td>
+
+                                <td>{getDate(order.createdAt)}</td>
+                                <td>
+                                  {getPriceFormat(order.amount) +
+                                    ' ' +
+                                    order.currency}
+                                </td>
+                                <td>
+                                  {order.orderStatus === 'Active' ? (
+                                    <div className="text-center">
+                                      <div className="text-info font-weight-bold pb-2">
+                                        {order.orderStatus}
+                                      </div>
+                                      <button
+                                        className="bg-info  text-white p-1"
+                                        onClick={() => {
+                                          dispatch(
+                                            getStripeSubscriptionInvoice(
+                                              order.orderBy
+                                            )
+                                          )
+                                          setShowSubscriptionModal({
+                                            visible: true
+                                          })
+                                        }}
+                                      >
+                                        view
+                                      </button>
+                                    </div>
+                                  ) : order.orderStatus === 'Canceled' ? (
+                                    <div className="text-danger font-weight-bold">
+                                      {order.orderStatus}
+                                    </div>
+                                  ) : (
+                                    <div>{order.orderStatus}</div>
+                                  )}
+                                  {showSubscriptionModal.visible === true && (
+                                    <StripeSubscriptionDetails
+                                      order={order}
+                                      showSubscriptionModal={
+                                        showSubscriptionModal
+                                      }
+                                      setShowSubscriptionModal={
+                                        setShowSubscriptionModal
+                                      }
+                                    />
+                                  )}
                                 </td>
                               </tr>
                             ))
