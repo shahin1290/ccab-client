@@ -12,7 +12,8 @@ import {
   ValidReducer,
   UpdateUserRoleReducer,
   userNumbersReducer,
-  userProfileReducer
+  userProfileReducer,
+  forgotPasswordReducer
 } from './redux/reducers/userReducer'
 
 import {
@@ -155,6 +156,7 @@ const reducer = combineReducers({
   userUpdateRole: UpdateUserRoleReducer,
   userNumbers: userNumbersReducer,
   userProfile: userProfileReducer,
+  forgotPassword: forgotPasswordReducer,
   //task
   taskDetails: taskDetailsReducer,
   taskList: taskListReducer,
