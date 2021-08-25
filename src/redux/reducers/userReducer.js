@@ -36,7 +36,10 @@ import {
   USER_NUMBERS_FAIL,
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAIL
+  FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL
 } from '../constences/userConst'
 
 export const userLoginReducer = (state = { userDetail: {} }, action) => {
@@ -331,6 +334,35 @@ export const ValidReducer = (
         error: '',
         success: false,
         userDetail: {}
+      }
+
+    default:
+      return state
+  }
+}
+
+export const resetPasswordReducer = (state = { passwordReset: {} }, action) => {
+  switch (action.type) {
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        success: false
+      }
+
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        passwordReset: action.payload
+      }
+
+    case RESET_PASSWORD_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+        success: false,
+        passwordReset: {}
       }
 
     default:

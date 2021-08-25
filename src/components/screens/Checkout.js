@@ -556,7 +556,7 @@ const CheckoutForm = ({ match, history }) => {
                                   <div className="sub-title mr-2 mb-2">
                                     Billing Type{' '}
                                   </div>
-                                  <div className="form-check form-check-inline">
+                                  <div className="form-check m-3">
                                     <input
                                       className="form-check-input"
                                       type="radio"
@@ -570,13 +570,13 @@ const CheckoutForm = ({ match, history }) => {
                                       required
                                     />
                                     <label
-                                      className="form-check-label"
+                                      className="form-check-label font-weight-bold"
                                       for="inlineRadio1"
                                     >
                                       Subscription(cancel anytime)
                                     </label>
                                   </div>
-                                  <div className="form-check form-check-inline">
+                                  <div className="form-check m-3">
                                     <input
                                       className="form-check-input"
                                       type="radio"
@@ -589,14 +589,14 @@ const CheckoutForm = ({ match, history }) => {
                                       checked={billingType === 'oneTime'}
                                     />
                                     <label
-                                      className="form-check-label"
+                                      className="form-check-label font-weight-bold"
                                       for="inlineRadio2"
                                     >
-                                      One time payment
+                                      Full payment
                                     </label>
                                   </div>
                                 </div>
-                                <div className="sub-title mt-3 mr-2 mb-2">
+                                <div className="sub-title mt-5 mr-2 mb-2">
                                   Order Details{' '}
                                 </div>
                                 <ul className="pt-2">
