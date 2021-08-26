@@ -16,29 +16,24 @@ const CurriculamStepsBar = (props) => {
       }}
     >
       <div className="curriculum no-gutter auto-container">
-        <div className="title text-center p-4">
-          Full Stack Developer curriculm
-        </div>
+        <div className="title text-center pb-1">Comprehensive Curriculum</div>
         <hr className="block-seperator mb-3" />
         <div className="sub-text text-center mb-5">
-          Our Full Stack Developer Courses is made to give you an easy and fast
-          path in Web Development. you can build your own web application from
-          scratch step by step.{' '}
+          Our Full Stack Developer Courses are made to give you and easy and
+          rapid path in web development. You can build your own web application
+          from scratch with the comprehensive curriculum provided
         </div>
 
         <div className=" row d-flex justify-content-between col-lg-12 col-md-10 col-sm-10 mb-2 p-3">
-          
-          <div >
+          <div>
             <a
               onClick={() => setValue(3)}
               className="curriculum"
               style={value === 3 ? { color: '#ea5573' } : {}}
             >
-              Foundation 
-              
+              Foundation
               <div className="text-center">1 week</div>
             </a>
-           
           </div>
 
           <div>
@@ -50,7 +45,6 @@ const CurriculamStepsBar = (props) => {
               Basic Frontend
               <div className="text-center">9 weeks</div>
             </a>
-            
           </div>
 
           <div>
@@ -59,10 +53,9 @@ const CurriculamStepsBar = (props) => {
               className="curriculum "
               style={value === 61 ? { color: '#ea5573' } : {}}
             >
-              Advanced Frontend 
+              Advanced Frontend
               <div className="text-center">9 weeks</div>
             </a>
-           
           </div>
 
           <div>
@@ -74,7 +67,6 @@ const CurriculamStepsBar = (props) => {
               Advanced Backend & Database
               <div className="text-center">9 weeks</div>
             </a>
-            
           </div>
 
           <div>
@@ -86,10 +78,7 @@ const CurriculamStepsBar = (props) => {
               Projects
               <div className="text-center">2 weeks</div>
             </a>
-            
           </div>
-
-
         </div>
         <div className="row no-gutter">
           <ProgressBar className="col-lg-12 col-md-12 col-sm-12  mt-3 mb-2">
@@ -98,44 +87,49 @@ const CurriculamStepsBar = (props) => {
         </div>
         <div className="row  mb-5">
           <div className=" col-lg-12 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
-          <a
+            <a
               onClick={() => setValue(3)}
               className="curriculum "
               style={value === 3 ? { color: '#ea5573' } : {}}
-            > 
-            <span onClick={() => setValue(3)}>1</span>
+            >
+              <span onClick={() => setValue(3)}>1</span>
             </a>
             {/* {[...Array(10).keys()].map((week, index) => (
               <span>{(index + 1) * 3}</span>
             ))} */}
-                        <a
+            <a
               onClick={() => setValue(25)}
               className="curriculum "
               style={value === 25 ? { color: '#ea5573' } : {}}
-            ><span  onClick={() => setValue(25)}>9</span></a>
-                        
-                        
-                         <a
+            >
+              <span onClick={() => setValue(25)}>9</span>
+            </a>
+
+            <a
               onClick={() => setValue(50)}
               className="curriculum "
               style={value === 50 ? { color: '#ea5573' } : {}}
-            ><span onClick={() => setValue(50)}>18</span></a>
+            >
+              <span onClick={() => setValue(50)}>18</span>
+            </a>
 
-                        <a
+            <a
               onClick={() => setValue(75)}
               className="curriculum "
               style={value === 75 ? { color: '#ea5573' } : {}}
-            > <span onClick={() => setValue(75)}>27</span></a>
+            >
+              {' '}
+              <span onClick={() => setValue(75)}>27</span>
+            </a>
 
-                          <a
+            <a
               onClick={() => setValue(100)}
               className="curriculum "
               style={value === 100 ? { color: '#ea5573' } : {}}
-            > <span onClick={() => setValue(100)}>30</span></a>
-           
-             
-            
-           
+            >
+              {' '}
+              <span onClick={() => setValue(100)}>30</span>
+            </a>
           </div>
         </div>
 
@@ -240,15 +234,16 @@ const CurriculamStepsBar = (props) => {
                 <div className="d-flex">
                   <img width="50" src="/images/bootstrap.png" />
 
-                  <div className="sub-title pl-3 pt-3">Advanced Style Technology</div>
+                  <div className="sub-title pl-3 pt-3">
+                    Advanced Style Technology
+                  </div>
                 </div>
                 <div className="sub-text">
-                  Build fast, responsive sites with Bootstrap4, Learn how to use Bootstrap, and build 
-                  websites in couple of hours,Advanced Css3 using 
-                  flexbox and Grid System technology, animation and transition.
-                  Sass extension, Sass module, and variables, write optmized and resuable
-                  style using Sass.
-
+                  Build fast, responsive sites with Bootstrap4, Learn how to use
+                  Bootstrap, and build websites in couple of hours,Advanced Css3
+                  using flexbox and Grid System technology, animation and
+                  transition. Sass extension, Sass module, and variables, write
+                  optmized and resuable style using Sass.
                 </div>
               </Col>
 
@@ -257,7 +252,7 @@ const CurriculamStepsBar = (props) => {
                   <img width="45" src="/images/screen.png" />
 
                   <div className="sub-title pl-3 pt-3">
-                    Building Modren Website {' '}
+                    Building Modren Website{' '}
                   </div>
                 </div>
                 <div className="sub-text">
@@ -275,15 +270,15 @@ const CurriculamStepsBar = (props) => {
           <>
             <Row className="mb-5">
               <Col md={6}>
-              <div className="d-flex">
+                <div className="d-flex">
                   <img width="50" src="/images/react.png" />
 
                   <div className="sub-title pl-3 pt-3">React JS </div>
                 </div>
                 <div className="sub-text">
-                  Optimize the functionality of apps using React Router.
-                   Learn up to date advanced React programming with React
-                  Hooks, Custom API, and NextJS.
+                  Optimize the functionality of apps using React Router. Learn
+                  up to date advanced React programming with React Hooks, Custom
+                  API, and NextJS.
                 </div>
               </Col>
 
@@ -293,9 +288,12 @@ const CurriculamStepsBar = (props) => {
                   <div className="sub-title pl-3 pt-3">Event-Driven APIs </div>
                 </div>
                 <div className="sub-text">
-                Implementing asynchronous APIs to send multiple responses to a single request.
-                API security that is categorized into authentication and authorization.
-                Using event-driven APIs has become key to meet customer demand and provide a better user experience. Since there are several fundamental differences between REST and async APIs
+                  Implementing asynchronous APIs to send multiple responses to a
+                  single request. API security that is categorized into
+                  authentication and authorization. Using event-driven APIs has
+                  become key to meet customer demand and provide a better user
+                  experience. Since there are several fundamental differences
+                  between REST and async APIs
                 </div>
               </Col>
             </Row>
@@ -308,8 +306,12 @@ const CurriculamStepsBar = (props) => {
                   <div className="sub-title pl-3 pt-3">Redux </div>
                 </div>
                 <div className="sub-text">
-                Master an open-source JavaScript library for managing application state. Redux is most commonly used with libraries such as React or Angular for building user interfaces.
-                Centralizing your application's state and logic enables powerful capabilities like undo/redo, state persistence, and much more.
+                  Master an open-source JavaScript library for managing
+                  application state. Redux is most commonly used with libraries
+                  such as React or Angular for building user interfaces.
+                  Centralizing your application's state and logic enables
+                  powerful capabilities like undo/redo, state persistence, and
+                  much more.
                 </div>
               </Col>
 
@@ -419,8 +421,6 @@ const CurriculamStepsBar = (props) => {
             </ul>
           </Row>
         )}
-
-
       </div>
     </section>
   )

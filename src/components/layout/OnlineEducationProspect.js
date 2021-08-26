@@ -11,7 +11,7 @@ const OnlineEducationProspect = () => {
         }}
       >
         <div className="auto-container">
-          <div className="title text-center p-4 ">Great online education</div>
+          <div className="title text-center p-4 ">What Stands Us Out</div>
           <hr className="block-seperator mb-5" />
           <Row className="pt-3 pb-1">
             <Col md={1} className="mt-3 text-center">
@@ -22,8 +22,8 @@ const OnlineEducationProspect = () => {
                 Build skills for a new career
               </div>
               <div className="sub-text">
-              We start with the languages that you'll need most to work : JavaScript, Express JS and more...
-
+                We start with the languages that you'll need most to work :
+                JavaScript, Express JS and more...
               </div>
             </Col>
 
@@ -33,9 +33,9 @@ const OnlineEducationProspect = () => {
             <Col md={5} className="mt-3 text-center-small-screen">
               <div className="sub-title pb-1">Match-up with an employer</div>
               <div className="sub-text">
-                Our students' skills are in demand so we have
-                employment partners over the globe. We work hard to find a place
-                that suits you.
+                Our students' skills are in demand so we have employment
+                partners over the globe. We work hard to find a place that suits
+                you.
               </div>
             </Col>
           </Row>
@@ -65,18 +65,14 @@ const OnlineEducationProspect = () => {
             </Col>
           </Row>
 
-
-
           {/* Setting The Standard In Online Education */}
 
           <div className="auto-container pt-5 mt-5">
-            <div className="title text-center ">
-            Ahead of the pack in online education
-
-            </div>
-            <hr className="block-seperator mt-4 mb-4" />
+            <div className="title text-center ">Stands out from the crowd</div>
+            <hr className="block-seperator mt-2 mb-4" />
             <div className="sub-text text-center">
-            We make sure all our courses meet the highest standards. Our partners are listed below:
+              Our course cocurricular meet what the industry required Our
+              partners
             </div>
             <div className="row clearfix my-5 d-flex ">
               <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">

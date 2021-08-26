@@ -60,21 +60,19 @@ const HomeVideoSection = () => {
             {/* End Video Section Two */}
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
-            <div className="title ">Learner outcomes</div>
-            <hr
-              style={{
-                width: '10%',
-                height: '2px',
-                backgroundColor: '#e84d1b'
-              }}
-              className="title t mt-2"
-            />
+            <div className="sub-title">Success Story</div>
+
             <div className="sub-title pb-3 pt-3 ">
-            We have a 90% graduate employment rate within 6 months after completion
+              90% of our graduates were employed after 6 months upon graduation
             </div>
             <div className="sub-text pb-5 ">
-            Everything we do is designed to make you employable in the modern workplace. We offer 
-            online, on-demand, and fully-supported practical education. Our courses are convenient so you can make the most of your time, learn at your own pace and not lose hours to travel. We have 1000+ partners who need employees with the skill you'll have at the end of our course. This means we can find you the right job.
+              Everything we do is designed to make you employable in the modern
+              workplace. We offer online, on-demand, and fully-supported
+              practical education. Our courses are convenient so you can make
+              the most of your time, learn at your own pace and not lose hours
+              to travel. We have 1000+ partners who need employees with the
+              skill you'll have at the end of our course. This means we can find
+              you the right job.
             </div>
             {/* <Link
               activeClass="active"
