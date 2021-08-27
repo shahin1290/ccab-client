@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import 'malihu-custom-scrollbar-plugin'
 import TopCourses from './../layout/TopCourses'
 import Pricing from './../../components/screens/Pricing'
@@ -15,24 +15,49 @@ import StudentReview from '../layout/StudentReview'
 import AchievementSection from '../layout/AchievementSection'
 import ProgramSection from '../layout/ProgramSection'
 import FaqSection from '../layout/FaqSection'
+import Particles from '../layout/Particles'
+import { Link } from 'react-router-dom';
+import Rodal from 'rodal'
+// include styles
+import 'rodal/lib/rodal.css'
+import ContactForm from '../layout/ContactForm';
 
 export default function HomeScreen({ match }) {
+  const [showModal, setShowModal] = useState({ visible: false })
+
   return (
     <>
       <div className="home">
         {/* <HomeCarousel /> */}
 
-        <section className="bg-white">
-          <div className="">
-            <div className="home-banner"></div>
+        <section className="home-hero-banner">
+          
+          <div className="hero-banner">
+            <div> "your future is created by what </div>
+            <div> you do today</div>
+
+            <div>not tomorrow"</div>
           </div>
+          <span style={{width: '100%', height: '300px'}}>
+            {' '}
+            <Particles />
+          </span>
         </section>
 
         {/* Education Section Two */}
 
-        <div className="handle handle1"></div>
-        <div className="handle handle2"></div>
-        <div className="handle handle3"></div>
+        <Link to="/get-start" className="handle handle1"></Link>
+        <a href="https://meetings.hubspot.com/sl-melad" className="handle handle2" target="_blank"></a>
+        <Link className="handle handle3" onClick={() =>  setShowModal({ visible: true })}></Link>
+
+        <Rodal
+        animation="rotate"
+        visible={showModal.visible}
+        onClose={() => setShowModal({ visible: false })}
+        width="900"
+      >
+        <ContactForm />
+      </Rodal>
 
         {/* End Banner Section */}
         {/* End Education Section Two */}
@@ -166,7 +191,6 @@ export default function HomeScreen({ match }) {
         {/* <AchievementSection />
 
         <ContactSection /> */}
-
 
         <FaqSection />
 

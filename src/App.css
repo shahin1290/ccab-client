@@ -958,36 +958,73 @@ input:checked + .slider:before {
   color: white;
 }
 .handle2:after {
-  content: 'Book an appointment';
+  content: 'Book an Appointment';
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
 
 .handle3:after {
-  content: 'Career Serviceability';
+  content: 'Ask an Advisor';
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
-.handle:hover {
-  cursor: pointer;
-}
 
-.home-banner {
+
+/* .home-banner {
   display: inline-block;
   text-align: center;
-  height: 400px;
+  height: 500px;
   background: url(assets/images/background/home-banner.jpg) no-repeat center;
   background-size: cover;
   width: 100%;
   position: relative;
-}
+} */
 
 /* FAQ SECTION */
 
 .faq-row-wrapper .faq-body .faq-row .row-title {
   padding: 10px;
+}
+
+.home-hero-banner {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  background-color: #504b4c;
+  position: relative;
+}
+
+.hero-banner {
+  position: absolute;
+  top: 10;
+  font-weight: 700;
+  text-align: center;
+  font-size: 60px;
+  font-family: Hack, sans-serif;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  letter-spacing: 5px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
 }
 
 
