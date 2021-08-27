@@ -16,11 +16,11 @@ import AchievementSection from '../layout/AchievementSection'
 import ProgramSection from '../layout/ProgramSection'
 import FaqSection from '../layout/FaqSection'
 import Particles from '../layout/Particles'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import Rodal from 'rodal'
 // include styles
 import 'rodal/lib/rodal.css'
-import ContactForm from '../layout/ContactForm';
+import ContactForm from '../layout/ContactForm'
 
 export default function HomeScreen({ match }) {
   const [showModal, setShowModal] = useState({ visible: false })
@@ -31,15 +31,17 @@ export default function HomeScreen({ match }) {
         {/* <HomeCarousel /> */}
 
         <section className="home-hero-banner">
-          
-          <div className="hero-banner">
-            <div> "your future is created by what </div>
-            <div> you do today</div>
-
-            <div>not tomorrow"</div>
+          <div class="quote--container banner-quote">
+            <p class="quote">
+             Your future is created by what you do {' '} 
+              <span class="quote--highlight">TODAY</span> {' '}not tomorrow
+            </p>
+            <p class="quote--author">&ndash; Robert Kiyosaki</p>
           </div>
-          <span style={{width: '100%', height: '300px'}}>
-            {' '}
+          
+
+          <div className="hero-banner pt-5">Brighten your future</div>
+          <span style={{ width: '100%', height: '300px' }}>
             <Particles />
           </span>
         </section>
@@ -47,17 +49,24 @@ export default function HomeScreen({ match }) {
         {/* Education Section Two */}
 
         <Link to="/get-start" className="handle handle1"></Link>
-        <a href="https://meetings.hubspot.com/sl-melad" className="handle handle2" target="_blank"></a>
-        <Link className="handle handle3" onClick={() =>  setShowModal({ visible: true })}></Link>
+        <a
+          href="https://meetings.hubspot.com/sl-melad"
+          className="handle handle2"
+          target="_blank"
+        ></a>
+        <Link
+          className="handle handle3"
+          onClick={() => setShowModal({ visible: true })}
+        ></Link>
 
         <Rodal
-        animation="rotate"
-        visible={showModal.visible}
-        onClose={() => setShowModal({ visible: false })}
-        width="900"
-      >
-        <ContactForm />
-      </Rodal>
+          animation="rotate"
+          visible={showModal.visible}
+          onClose={() => setShowModal({ visible: false })}
+          width="900"
+        >
+          <ContactForm />
+        </Rodal>
 
         {/* End Banner Section */}
         {/* End Education Section Two */}

@@ -971,7 +971,6 @@ input:checked + .slider:before {
   color: white;
 }
 
-
 /* .home-banner {
   display: inline-block;
   text-align: center;
@@ -988,6 +987,9 @@ input:checked + .slider:before {
   padding: 10px;
 }
 
+/* HOME BANNER */
+
+
 .home-hero-banner {
   margin: 0;
   padding: 0;
@@ -1001,7 +1003,7 @@ input:checked + .slider:before {
 
 .hero-banner {
   position: absolute;
-  top: 10;
+  top: 15;
   font-weight: 700;
   text-align: center;
   font-size: 60px;
@@ -1027,4 +1029,55 @@ input:checked + .slider:before {
   }
 }
 
+
+/* BANNER QUOTE */
+
+.banner-quote {
+  position: absolute;
+  top: 0;
+  font-family: "EB Garamond";
+  font-size: 32px;
+  line-height: 1.4rem;
+  height: 100%;
+  padding: 0.5rem;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -webkit-font-kerning: normal;
+          font-kerning: normal;
+  color: #fff;
+}
+
+.quote {
+  position: relative;
+  letter-spacing: 0.03em;
+}
+.quote:before {
+  content: "“";
+  position: absolute;
+  left: -0.7em;
+}
+.quote:after {
+  content: "”";
+  margin-right: -1rem;
+}
+
+.quote--container {
+ 
+  width: 17em;
+  border-bottom: 2px dotted #c6d1bf;
+  padding-bottom: 0.5rem;
+}
+
+.quote--highlight {
+  color: #d24335;
+}
+
+.quote--author {
+  font-family: "Open Sans Condensed";
+  font-size: 0.8rem;
+  text-align: right;
+  font-weight: 300;
+}
 
