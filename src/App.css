@@ -200,9 +200,9 @@ body {
   font-size: 15px;
   font-weight: 400;
   font-family: Inter;
-  line-height: 20px;
+  line-height: 19px;
   white-space: pre-wrap;
-  word-spacing: -1px;
+  word-spacing: -2px;
 }
 
 .line-clamp {
@@ -983,3 +983,11 @@ input:checked + .slider:before {
   width: 100%;
   position: relative;
 }
+
+/* FAQ SECTION */
+
+.faq-row-wrapper .faq-body .faq-row .row-title {
+  padding: 10px;
+}
+
+

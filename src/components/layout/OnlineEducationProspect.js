@@ -74,7 +74,7 @@ const OnlineEducationProspect = () => {
               Our course cocurricular meet what the industry required Our
               partners
             </div>
-            <div className="row clearfix my-5 d-flex ">
+            <div className="row clearfix d-flex ">
               <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">
                 <img src="images/paypal-f.png" className=" " />
               </div>

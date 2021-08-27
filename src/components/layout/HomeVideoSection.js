@@ -10,11 +10,10 @@ const HomeVideoSection = () => {
   return (
     <section
       style={{
-        backgroundColor: '#F8F9FD',
-        padding: '0px 0px 40px 0'
+        backgroundColor: '#fff'
       }}
     >
-      <div className="auto-container">
+      <div className="auto-container pt-5">
         <div className="row clearfix ">
           <div className="text-center col-lg-6 col-md-6 col-sm-12">
             {' '}

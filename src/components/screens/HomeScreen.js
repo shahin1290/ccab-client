@@ -4,7 +4,6 @@ import TopCourses from './../layout/TopCourses'
 import Pricing from './../../components/screens/Pricing'
 import { Row, Col, ProgressBar, Container } from 'react-bootstrap'
 import RegisterScreen from '../screens/RegisterScreen'
-import FAQSECTION from './../layout/FAQSECTION'
 import homeBanner from './../../assets/images/background/home-banner.jpg'
 import OnlineEducationProspect from '../layout/OnlineEducationProspect'
 import HomeCarousel from '../layout/HomeCarousel'
@@ -15,6 +14,7 @@ import CurriculamStepsBar from '../layout/CurriculamStepsBar'
 import StudentReview from '../layout/StudentReview'
 import AchievementSection from '../layout/AchievementSection'
 import ProgramSection from '../layout/ProgramSection'
+import FaqSection from '../layout/FaqSection'
 
 export default function HomeScreen({ match }) {
   return (
@@ -167,7 +167,8 @@ export default function HomeScreen({ match }) {
 
         <ContactSection /> */}
 
-        <FAQSECTION />
+
+        <FaqSection />
 
         {/* Rating section */}
         <RatingSection />

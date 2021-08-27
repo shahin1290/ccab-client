@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Faq from 'react-faq-component'
-import { Container } from 'react-bootstrap'
 
-export const data = {
+const data = {
   rows: [
     {
       title: 'What is the refund policy?',
@@ -44,34 +43,34 @@ export const data = {
   ]
 }
 
-const FAQSECTION = () => {
+const FaqSection = () => {
+  const styles = {
+    // bgColor: 'white',
+    rowTitleColor: '#2670cb',
+    // rowContentColor: 'grey',
+    arrowColor: 'red',
+    rowContentPaddingTop: '10px',
+    rowContentPaddingRight: '10px',
+    rowContentPaddingLeft: '30px',
+    rowContentPaddingBottom: '20px'
+  }
+
+  const config = {
+    animate: true,
+    tabFocus: true
+  }
   return (
-    <section className="mt-5 mb-5">
-      <Container className="p-5">
+    <div className="mt-5 mb-5">
+      <div className="auto-container">
         <div className="sub-title text-center mb-5">
-          Frequently Asked Questions
+          Frequenly asked questions
         </div>
-        <Faq
-          data={data}
-          styles={{
-            bgColor: 'white',
-            titleTextColor: '#48482a',
-            rowTitleTextSize: 'large',
-            rowContentColor: '#48484a',
-            rowContentTextSize: '16px',
-            rowContentPaddingTop: '10px',
-            rowContentPaddingBottom: '10px',
-            rowContentPaddingLeft: '50px',
-            rowContentPaddingRight: '150px',
-            arrowColor: 'red'
-          }}
-          config={{
-            animate: true
-          }}
-        />
-      </Container>
-    </section>
+        <div className="">
+          <Faq data={data} styles={styles} config={config} />
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default FAQSECTION
+export default FaqSection
