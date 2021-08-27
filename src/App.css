@@ -13,8 +13,8 @@ body {
   font-size: 34px;
   font-weight: 600;
   font-family: Inter;
-  color: #2670CB;
-  word-spacing: -3px
+  color: #2670cb;
+  word-spacing: -3px;
 }
 
 .navbar {
@@ -178,15 +178,14 @@ body {
   font-weight: 600;
   font-family: Inter;
   color: #4a4a4a !important;
-  
 }
 
 .sub-title2 {
   font-size: 1rem;
   font-weight: 600;
   font-family: Inter;
-  color: #2670CB;
-  word-spacing: -3px
+  color: #2670cb;
+  word-spacing: -3px;
 }
 
 .sub-text2 {
@@ -196,12 +195,22 @@ body {
   line-height: 20px;
   white-space: pre-wrap;
 }
+
+.sub-text3 {
+  font-size: 15px;
+  font-weight: 400;
+  font-family: Inter;
+  line-height: 20px;
+  white-space: pre-wrap;
+  word-spacing: -1px;
+}
+
 .line-clamp {
   display: -webkit-box;
-    max-width: 200px;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden; 
+  max-width: 200px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .sub-text {
   font-size: 17px;
@@ -913,12 +922,9 @@ input:checked + .slider:before {
 }
 
 /* STRICKY SIDE SECTION */
-
-.handle1 {
+.handle {
   position: fixed;
   width: 3rem;
-  background-color: #e82910;
-  top: 158px;
   right: 0;
   height: 10rem;
   border-radius: 5px 0 0 5px;
@@ -927,53 +933,43 @@ input:checked + .slider:before {
   align-items: center;
   justify-content: center;
   z-index: 2;
+  text-align: center;
+}
+
+.handle1 {
+  background-color: #e82910;
+  top: 158px;
 }
 
 .handle2 {
-  position: fixed;
-  width: 3rem;
   background-color: #fad966;
-  top: 350px;
-  right: 0;
-  height: 10rem;
-  border-radius: 5px 0 0 5px;
-  transition: left 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  top: 318px;
 }
 
 .handle3 {
-  position: fixed;
-  width: 3rem;
   background-color: #4cb0f0;
-  top: 542px;
-  right: 0;
-  height: 10rem;
-  border-radius: 5px 0 0 5px;
-  transition: left 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  top: 478px;
 }
 
-@media (max-height: 400px) {
-  .handle {
-    top: 0;
-    bottom: 0;
-    margin-top: 0;
-    height: 100%;
-  }
-}
 .handle1:after {
-  content: 'career serviceability';
+  content: 'Sign Up';
+  transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+}
+.handle2:after {
+  content: 'Book an appointment';
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
 
+.handle3:after {
+  content: 'Career Serviceability';
+  transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+}
 .handle:hover {
   cursor: pointer;
 }

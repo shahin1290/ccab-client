@@ -23,16 +23,16 @@ export default function HomeScreen({ match }) {
         {/* <HomeCarousel /> */}
 
         <section className="bg-white">
-          <div className="auto-container">
+          <div className="">
             <div className="home-banner"></div>
           </div>
         </section>
 
         {/* Education Section Two */}
 
-        <div className="handle1 text-center sub-text"></div>
-        <div className="handle2"></div>
-        <div className="handle3"></div>
+        <div className="handle handle1"></div>
+        <div className="handle handle2"></div>
+        <div className="handle handle3"></div>
 
         {/* End Banner Section */}
         {/* End Education Section Two */}
