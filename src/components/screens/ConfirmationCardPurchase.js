@@ -17,7 +17,8 @@ const ConfirmationKlarna = ({ match }) => {
 
   //console.log(html&&html);
   return (
-    <div className="auto-container">
+    <div style={{width: '100%', height: '500px'}}>
+    <div className="auto-container mt-5">
       {loading ? (
         <Loader />
       ) : (
@@ -43,6 +44,7 @@ const ConfirmationKlarna = ({ match }) => {
           </p>
         </div>
       )}
+    </div>
     </div>
   )
 }

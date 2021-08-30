@@ -1,23 +1,20 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { plans } from '../../util/plans'
-import {getPriceConversionFromSEK} from './../../util/getPriceConversion';
+import { getPriceConversionFromSEK } from './../../util/getPriceConversion'
 import axios from 'axios'
 export default function Pricing() {
   const [period, setPeriod] = useState('weekly')
   const [sekToUsd, setSekToUsd] = useState()
 
-
   const getPlans = () => {
     return plans.filter((plan) => plan.period === period)
   }
- 
 
-  console.log(sekToUsd);
+  console.log(sekToUsd)
   useEffect(() => {
-   getPriceConversionFromSEK().then(data=>setSekToUsd(data))
-  
+    getPriceConversionFromSEK().then((data) => setSekToUsd(data))
   }, [])
 
   return (
@@ -27,9 +24,13 @@ export default function Pricing() {
         <div className="auto-container">
           {/* Sec Title */}
           <div className="sec-title style-two centered">
-            <h2>Plans &amp; Pricing</h2>
+            <div className="title">
+              Different course plans tailored to your needs
+            </div>
+            <hr className="block-seperator mb-3" />
             <div className="text">
-            Register now and start coding from today. No experience needed !
+              Register yourself now to get the success <span className="text-warning font-weight-bold">CODE</span> to your
+              life
             </div>
           </div>
 
@@ -71,16 +72,25 @@ export default function Pricing() {
                     <div className="price-block col  col-sm-12">
                       <div className="inner-box">
                         <div className="icon-box">
-                          <span className="icon" >
+                          <span className="icon">
                             {/* <img src="images/icons/price-1.png" alt /> */}
                             <i className="fas fa-gem planicon"></i>
                           </span>
                         </div>
                         <h3>{plan.name}</h3>
-                       
-                        <p><del className="price" style={{fontSize : "120%"}}>{(sekToUsd&&(Math.round(sekToUsd[0]*(Number(plan.price)+200))))}  {sekToUsd&&sekToUsd[1]+' '}</del></p>
+
+                        <p>
+                          <del className="price" style={{ fontSize: '120%' }}>
+                            {sekToUsd &&
+                              Math.round(
+                                sekToUsd[0] * (Number(plan.price) + 200)
+                              )}{' '}
+                            {sekToUsd && sekToUsd[1] + ' '}
+                          </del>
+                        </p>
                         <div className="price">
-                          {(sekToUsd&&(Math.round(sekToUsd[0]*plan.price)))} {sekToUsd&&sekToUsd[1]+' '}
+                          {sekToUsd && Math.round(sekToUsd[0] * plan.price)}{' '}
+                          {sekToUsd && sekToUsd[1] + ' '}
                           <span>
                             {period === 'monthly' ? 'Per month' : 'Per week'}
                           </span>

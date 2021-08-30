@@ -186,6 +186,7 @@ export const getUserAnswer =
 export const updateAnswerStatus =
   (bootcampId, taskId, answerId, status) => async (dispatch, getState) => {
     try {
+      console.log(bootcampId, taskId, answerId, status);
       dispatch({
         type: ANSWER_UPDATE_STATUS_REQUEST
       })

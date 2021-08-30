@@ -34,301 +34,370 @@ import {
   USER_NUMBERS_SUCCESS,
   USER_NUMBERS_REQUEST,
   USER_NUMBERS_FAIL,
-} from "../constences/userConst";
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL
+} from '../constences/userConst'
 
-export const userLoginReducer = (state = {userDetail:{}}, action) => {
+export const userLoginReducer = (state = { userDetail: {} }, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
       return {
         ...state,
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_LOGIN_SUCCESS:
       return {
         loading: false, // loading is done laoding!
         userDetail: action.payload,
-        loginSuccess: true,
-      };
+        loginSuccess: true
+      }
 
     case USER_LOGIN_FAIL:
       return {
         ...state,
         loading: false, // loading is done laoding!
         error: action.payload,
-        user:{}
-      };
+        user: {}
+      }
     case USER_LOGOUT:
-      return {userDetail:{}}; // returning empty object
+      return { userDetail: {} } // returning empty object
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REG_REQUEST:
       return {
         ...state,
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_REG_SUCCESS:
       return {
         ...state,
         loading: false, // loading is done laoding!
-        registerSuccess: true,
-      };
+        registerSuccess: true
+      }
 
     case USER_REG_FAIL:
       return {
         ...state,
         loading: false, // loading is done laoding!
-        error: action.payload,
-      };
+        error: action.payload
+      }
     case USER_REG_REST:
-      return { 
+      return {
         ...state,
         loading: false,
-        error:'',
-        registerSuccess: false };
+        error: '',
+        registerSuccess: false
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const userDetailsReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return {
         ...state,
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_DETAILS_SUCCESS:
       return {
         loading: false, // loading is done laoding!
         // user: console.log("user8: ", action.payload),
-        user: action.payload,
-      };
+        user: action.payload
+      }
 
     case USER_DETAILS_FAIL:
       return {
         loading: false, // loading is done laoding!
         error: action.payload,
-        user:{}
-      };
+        user: {}
+      }
 
     default:
-      return state;
+      return state
   }
-};
-
+}
 
 export const userProfileReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_PROFILE_REQUEST:
       return {
         ...state,
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_PROFILE_SUCCESS:
       return {
         loading: false, // loading is done laoding!
         // user: console.log("user8: ", action.payload),
-        user: action.payload,
-      };
+        user: action.payload
+      }
 
     case USER_PROFILE_FAIL:
       return {
         loading: false, // loading is done laoding!
         error: action.payload,
-        user:{}
-      };
+        user: {}
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const userListReducer = (state = { users: [] }, action) => {
   switch (action.type) {
     case USER_LIST_REQUEST:
       return {
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_LIST_SUCCESS:
       // console.log("actionP: ", action.payload)
 
       return {
         loading: false, // loading is done laoding!
-        users: action.payload.data,
-      };
+        users: action.payload.data
+      }
 
     case USER_LIST_FAIL:
       return {
         loading: false, // loading is done laoding!
-        error: action.payload,
-      };
+        error: action.payload
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-
-export const userNumbersReducer = (state = { usersCount:0 }, action) => {
+export const userNumbersReducer = (state = { usersCount: 0 }, action) => {
   switch (action.type) {
     case USER_NUMBERS_REQUEST:
       return {
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_NUMBERS_SUCCESS:
       // console.log("actionP: ", action.payload)
 
       return {
         loading: false, // loading is done laoding!
-        usersCount: action.payload.data,
-      };
+        usersCount: action.payload.data
+      }
 
     case USER_NUMBERS_FAIL:
       return {
         loading: false, // loading is done laoding!
-        error: action.payload,
-      };
+        error: action.payload
+      }
 
     default:
-      return state;
+      return state
   }
-};
-
+}
 
 export const userDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_DELETE_REQUEST:
       return {
-        loading: true, // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
-      };
+        loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
+      }
 
     case USER_DELETE_SUCCESS:
       return {
         loading: false, // loading is done laoding!
-        deleteSuccess: true,
-      };
+        deleteSuccess: true
+      }
     case USER_DELETE_FAIL:
       return {
         loading: false, // loading is done laoding!
-        error: action.payload,
-      };
+        error: action.payload
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export const userUpdateProfileReducer = (state = {userDetail:{}}, action) => {
+export const userUpdateProfileReducer = (
+  state = { userDetail: {} },
+  action
+) => {
   switch (action.type) {
     case USER_PROFILE_UPDATE_REQUEST:
       return {
-        loading: true,
-      };
+        loading: true
+      }
 
     case USER_PROFILE_UPDATE_SUCCESS:
       return {
         loading: false,
         userDetail: action.payload,
-        updateSuccess: true,
-      };
+        updateSuccess: true
+      }
     case USER_PROFILE_UPDATE_FAIL:
       return {
         loading: false,
         error: action.payload,
-        updateSuccess: false,
-      };
+        updateSuccess: false
+      }
     case USER_PROFILE_UPDATE_REST:
       return {
         ...state,
         loading: false,
         error: '',
-        updateSuccess: false,};
-        
-    default:
-      return state;
-  }
-};
+        updateSuccess: false
+      }
 
-export const UpdateUserRoleReducer = (state = {userDetail:{}}, action) => {
+    default:
+      return state
+  }
+}
+
+export const UpdateUserRoleReducer = (state = { userDetail: {} }, action) => {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
       return {
-        loading: true,
-      };
+        loading: true
+      }
 
     case USER_UPDATE_SUCCESS:
       return {
         loading: false,
         userDetail: action.payload,
-        updateSuccess: true,
-      };
+        updateSuccess: true
+      }
     case USER_UPDATE_FAIL:
       return {
         loading: false,
         error: action.payload,
-        updateSuccess: false,
-      };
+        updateSuccess: false
+      }
     case USER_UPDATE_REST:
       return {
         ...state,
         loading: false,
         error: '',
-        updateSuccess: false,};
-        
+        updateSuccess: false
+      }
+
     default:
-      return state;
+      return state
   }
-};
+}
 
-
-export const ValidReducer = (state = {userDetail:{},loading: true}, action) => {
+export const ValidReducer = (
+  state = { userDetail: {}, loading: true },
+  action
+) => {
   switch (action.type) {
-
     case VALID_REQUEST:
       return {
         ...state,
         loading: true,
-        success:false,
-      };
+        success: false
+      }
 
     case VALID_SUCCESS:
       return {
         loading: false,
         success: true,
-        userDetail:action.payload,
-      };
+        userDetail: action.payload
+      }
 
-      case VALID_FAIL:
-        return {
+    case VALID_FAIL:
+      return {
         loading: false,
         error: action.payload,
         success: false,
-        userDetail:{},
-        };
+        userDetail: {}
+      }
 
-      case VALID_REST:
-        return {
-          loading: false,
-          error: '',
-          success: false,
-          userDetail:{}
-        };
+    case VALID_REST:
+      return {
+        loading: false,
+        error: '',
+        success: false,
+        userDetail: {}
+      }
 
-      default:
-        return state;
-       }
+    default:
+      return state
+  }
+}
 
+export const resetPasswordReducer = (state = { passwordReset: {} }, action) => {
+  switch (action.type) {
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        success: false
+      }
 
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        passwordReset: action.payload
+      }
+
+    case RESET_PASSWORD_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+        success: false,
+        passwordReset: {}
+      }
+
+    default:
+      return state
+  }
+}
+
+export const forgotPasswordReducer = (
+  state = { forgotPassword: {} },
+  action
+) => {
+  switch (action.type) {
+    case FORGOT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        success: false
+      }
+
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        forgotPassword: action.payload
+      }
+
+    case FORGOT_PASSWORD_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+        success: false,
+        forgotPassword: {}
+      }
+
+    default:
+      return state
+  }
 }

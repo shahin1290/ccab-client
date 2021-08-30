@@ -32,18 +32,21 @@ export default function TopCourses({ match }) {
       {/* Institution Section */}
 
       <section
-        className="institution-section"
+      className="pt-3"
         style={{
           backgroundColor: '#F8F9FD'
         }}
       >
         <div className="auto-container">
           {/* Sec Title */}
-          <div className="title text-center p-4 ">Discover our courses</div>
+          <div className="title text-center p-2 ">
+            Change your life with Coding
+          </div>
           <hr className="block-seperator mb-3" />
 
-          <div className="sub-text text-center mb-5">
-            Each course consists of video-lectures, assignments and quizzes.
+          <div className="sub-text text-center mb-3">
+            We help you with career transition or add a tech stak to your
+            existing skill
           </div>
           {loading ? <Loader /> : error && <Message>{error}</Message>}
 
@@ -70,15 +73,15 @@ export default function TopCourses({ match }) {
                     <div className="lower-content">
                       <div>
                         <Link
-                          className="sub-title"
+                          className="sub-title2"
                           to={`/courses/${course._id}`}
                         >
                           {course.name}
                         </Link>
                       </div>
-                      <div className="text">
+                      <div className="pt-3 pb-5">
                         <span
-                          className="sub-text d-inline-block text-truncate"
+                          className="sub-text2 line-clamp"
                           style={{ maxWidth: '240px' }}
                         >
                           {course.description}

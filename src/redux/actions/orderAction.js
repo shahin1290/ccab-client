@@ -183,7 +183,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
 }
 
 export const getStripeSubscriptionInvoice =
-  () => async (dispatch, getState) => {
+  (orderBy) => async (dispatch, getState) => {
     try {
       dispatch({
         type: STRIPE_SUBSCRIPTION_VIEW_REQUEST
@@ -199,8 +199,9 @@ export const getStripeSubscriptionInvoice =
         }
       }
 
-      const response = await axios.get(
+      const response = await axios.post(
         'http://localhost:5001/api/order/stripe/view-subscription',
+        { orderBy },
         config
       )
 

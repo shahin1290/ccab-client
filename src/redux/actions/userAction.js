@@ -31,7 +31,13 @@ import {
   VALID_FAIL,
   USER_NUMBERS_SUCCESS,
   USER_NUMBERS_REQUEST,
-  USER_NUMBERS_FAIL
+  USER_NUMBERS_FAIL,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL
 } from '../constences/userConst'
 
 import axios from 'axios'
@@ -450,3 +456,90 @@ export const isValid = (id) => async (dispatch, getState) => {
     })
   }
 }
+
+// is token valid
+export const getForgotPassword = (email) => async (dispatch, getState) => {
+  try {
+    const {
+      userLogin: { userDetail }
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userDetail.token
+      }
+    }
+
+    dispatch({
+      type: FORGOT_PASSWORD_REQUEST
+    })
+
+    const response = await axios.post(
+      'http://localhost:5001/api/users/forgot-password',
+      { email },
+      config
+    )
+
+    // console.log("res: ", res);
+    dispatch({
+      type: FORGOT_PASSWORD_SUCCESS,
+      payload: response.data.message,
+      // payload: console.log("payload:", res.data),
+      success: true
+    })
+  } catch (error) {
+    console.log('error', error.response.data.message)
+    dispatch({
+      type: FORGOT_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+// is token valid
+export const resetPassword =
+  (token, password) => async (dispatch, getState) => {
+    try {
+      const {
+        userLogin: { userDetail }
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userDetail.token
+        }
+      }
+
+      dispatch({
+        type: RESET_PASSWORD_REQUEST
+      })
+
+      const response = await axios.put(
+        'http://localhost:5001/api/users/reset-password/' + token,
+        { password },
+        config
+      )
+
+      // console.log("res: ", res);
+      dispatch({
+        type: RESET_PASSWORD_SUCCESS,
+        payload: response.data,
+        // payload: console.log("payload:", res.data),
+        success: true
+      })
+
+      localStorage.setItem('userDetail', JSON.stringify(response.data))
+    } catch (error) {
+      console.log('error', error.response.data.message)
+      dispatch({
+        type: RESET_PASSWORD_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }

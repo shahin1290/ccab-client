@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Message from '../layout/Message'
-import { userProfileUpdate, getProfile } from '../../redux/actions/userAction'
+import { resetPassword } from '../../redux/actions/userAction'
 import 'react-toastify/dist/ReactToastify.css'
 import { login } from '../../redux/actions/userAction'
 import { createBrowserHistory } from 'history'
@@ -9,15 +9,15 @@ import { createBrowserHistory } from 'history'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { createPerformance } from '../../redux/actions/performanceAction'
-import { Link } from 'react-router-dom';
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required()
+  password: yup.string().min(8).max(32).required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'passwords must match')
 })
 
-export default function LoginScreen({ location }) {
+export default function ResetPassword({ match }) {
   const dispatch = useDispatch()
   const history = createBrowserHistory({ forceRefresh: true })
 
@@ -30,19 +30,18 @@ export default function LoginScreen({ location }) {
     resolver: yupResolver(schema)
   })
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, userDetail, error, loginSuccess } = userLogin
+  const userLogin = useSelector((state) => state.passwordReset)
+  const { loading, passwordReset, error, success } = userLogin
 
-  // initializing componet level state
-
+  console.log(userLogin)
   useEffect(() => {
-    if (loginSuccess) {
-      history.goBack()
+    if (success) {
+      history.push('/profile')
     }
-  }, [history, loginSuccess])
+  }, [history, success])
 
-  const submitHandler = ({ email, password }) => {
-    dispatch(login(email, password))
+  const submitHandler = ({ password }) => {
+    dispatch(resetPassword(match.params.token, password))
   }
 
   return (
@@ -61,33 +60,15 @@ export default function LoginScreen({ location }) {
                 </div>
               </div>
             )}
-            {location.state && <Message>{location.state.message}</Message>}
             {/* Title Box */}
             <div className="title-box">
-              <h2>Login</h2>
-              <div className="text">
-                <span className="theme_color">Welcome!</span> Please confirm
-                that you are visiting
-              </div>
+              <h2>Set a new Password</h2>
             </div>
             {/* Login Form */}
             <div className="styled-form">
               {error && <Message>{error}</Message>}
+              {success && <Message>You have successfully changed your password</Message>}
               <form onSubmit={handleSubmit(submitHandler)}>
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    {...register('email')}
-                    className={`form-control ${
-                      errors.email ? 'is-invalid' : ''
-                    }`}
-                  />
-                  <div className="invalid-feedback">
-                    {errors.email?.message}
-                  </div>
-                </div>
                 <div className="form-group">
                   <label>Password</label>
                   <input
@@ -102,15 +83,20 @@ export default function LoginScreen({ location }) {
                     {errors.password?.message}
                   </div>
                 </div>
-
                 <div className="form-group">
-              <div className="clearfix">
-               
-                <div className="pull-right">
-                  <Link to="/forgot-password" className="forgot">Forget Password?</Link> 
+                  <label>Confirm Password</label>
+                  <input
+                    type="password"
+                    placeholder="Confirm password"
+                    {...register('confirmPassword')}
+                    className={`form-control ${
+                      errors.confirmPassword ? 'is-invalid' : ''
+                    }`}
+                  />
+                  <div className="invalid-feedback">
+                    {errors.confirmPassword?.message}
+                  </div>
                 </div>
-              </div>
-            </div>
 
                 <div className="form-group text-center">
                   <button
@@ -118,14 +104,9 @@ export default function LoginScreen({ location }) {
                     className="theme-btn btn-style-three  mt-4"
                   >
                     <span className="txt">
-                      Login <i className="fa fa-angle-right" />
+                      Set password <i className="fa fa-angle-right" />
                     </span>
                   </button>
-                </div>
-                <div className="form-group ">
-                  <div className="users">
-                    New User? <a href="/get-start">Sign Up</a>
-                  </div>
                 </div>
               </form>
             </div>

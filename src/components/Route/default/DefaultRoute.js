@@ -12,13 +12,14 @@ import RegisterScreen from '../../screens/RegisterScreen'
 import CoueseListScreen from '../../screens/CourseListScreen'
 import CourseDetailScreen from '../../screens/CourseDetailScreen'
 import ServiceDetailScreen from '../../screens/ServiceDetailScreen'
-
+import ForgotPassword from '../../screens/ForgotPassword'
 import CourseGridScreen from '../../screens/CourseGridScreen'
 import ServiceGridScreen from '../../screens/ServiceGridScreen'
 import NotFound from './../../screens/NotFound'
 import Contact from './../../screens/Contact'
 import Privacy from './../../screens/privacy'
 import Jobs from '../../screens/Jobs'
+import ResetPassword from '../../screens/ResetPassword';
 
 export default function DefaultRoute() {
   const [AuthPath, setAuthPath] = useState('')
@@ -60,7 +61,8 @@ export default function DefaultRoute() {
         <Route exact path="/courses/:id" component={CourseDetailScreen}></Route>
         <Route exact path="/services/:id" component={ServiceDetailScreen}></Route>
         <Route exact path="/jobs" component={Jobs} />
-
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password/:token" component={ResetPassword} />
         <Route path="/contact" component={Contact} />
         <Route path="/privacy" component={Privacy} />
         <Route path="/" component={NotFound} />

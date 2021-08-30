@@ -13,6 +13,8 @@ body {
   font-size: 34px;
   font-weight: 600;
   font-family: Inter;
+  color: #2670cb;
+  word-spacing: -3px;
 }
 
 .navbar {
@@ -176,6 +178,39 @@ body {
   font-weight: 600;
   font-family: Inter;
   color: #4a4a4a !important;
+}
+
+.sub-title2 {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: Inter;
+  color: #2670cb;
+  word-spacing: -3px;
+}
+
+.sub-text2 {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Inter;
+  line-height: 20px;
+  white-space: pre-wrap;
+}
+
+.sub-text3 {
+  font-size: 15px;
+  font-weight: 400;
+  font-family: Inter;
+  line-height: 19px;
+  white-space: pre-wrap;
+  word-spacing: -2px;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .sub-text {
   font-size: 17px;
@@ -884,4 +919,169 @@ input:checked + .slider:before {
 
 .text-align-left {
   text-align: left;
+}
+
+/* STRICKY SIDE SECTION */
+.handle {
+  position: fixed;
+  width: 3rem;
+  right: 0;
+  height: 10rem;
+  border-radius: 5px 0 0 5px;
+  transition: left 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+}
+
+.handle1 {
+  background-color: #e82910;
+  top: 158px;
+}
+
+.handle2 {
+  background-color: #fad966;
+  top: 318px;
+}
+
+.handle3 {
+  background-color: #4cb0f0;
+  top: 478px;
+}
+
+.handle1:after {
+  content: 'Sign Up';
+  transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+}
+.handle2:after {
+  content: 'Book an Appointment';
+  transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+}
+
+.handle3:after {
+  content: 'Ask an Advisor';
+  transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+}
+
+/* .home-banner {
+  display: inline-block;
+  text-align: center;
+  height: 500px;
+  background: url(assets/images/background/home-banner.jpg) no-repeat center;
+  background-size: cover;
+  width: 100%;
+  position: relative;
+} */
+
+/* FAQ SECTION */
+
+.faq-row-wrapper .faq-body .faq-row .row-title {
+  padding: 10px;
+  font-weight: 400;
+}
+
+.faq-row-wrapper .faq-body .faq-row .row-title:hover {
+  background-color: #eb6c85;
+}
+
+/* HOME BANNER */
+
+.home-hero-banner {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
+    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
+    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
+    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+  position: relative;
+}
+
+.hero-banner {
+  position: absolute;
+  top: 15;
+  font-weight: 700;
+  text-align: center;
+  font-size: 60px;
+  font-family: Hack, sans-serif;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  letter-spacing: 5px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+/* BANNER QUOTE */
+
+.banner-quote {
+  position: absolute;
+  top: 0;
+  font-family: 'EB Garamond';
+  font-size: 32px;
+  line-height: 1.4rem;
+  height: 100%;
+  padding: 0.5rem;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  color: #fff;
+}
+
+.quote {
+  position: relative;
+  letter-spacing: 0.03em;
+}
+.quote:before {
+  content: '“';
+  position: absolute;
+  left: -0.7em;
+}
+.quote:after {
+  content: '”';
+  margin-right: -1rem;
+}
+
+.quote--container {
+  width: 17em;
+  border-bottom: 2px dotted #c6d1bf;
+  padding-bottom: 0.5rem;
+}
+
+.quote--highlight {
+  color: #d24335;
+}
+
+.quote--author {
+  font-family: 'Open Sans Condensed';
+  font-size: 0.8rem;
+  text-align: right;
+  font-weight: 300;
 }
