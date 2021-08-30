@@ -985,10 +985,14 @@ input:checked + .slider:before {
 
 .faq-row-wrapper .faq-body .faq-row .row-title {
   padding: 10px;
+  font-weight: 400;
+}
+
+.faq-row-wrapper .faq-body .faq-row .row-title:hover {
+  background-color: #eb6c85;
 }
 
 /* HOME BANNER */
-
 
 .home-hero-banner {
   margin: 0;
@@ -997,7 +1001,10 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   height: 500px;
-  background-color: #504b4c;
+  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
+    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
+    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
+    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
   position: relative;
 }
 
@@ -1029,13 +1036,12 @@ input:checked + .slider:before {
   }
 }
 
-
 /* BANNER QUOTE */
 
 .banner-quote {
   position: absolute;
   top: 0;
-  font-family: "EB Garamond";
+  font-family: 'EB Garamond';
   font-size: 32px;
   line-height: 1.4rem;
   height: 100%;
@@ -1045,7 +1051,7 @@ input:checked + .slider:before {
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
   -webkit-font-kerning: normal;
-          font-kerning: normal;
+  font-kerning: normal;
   color: #fff;
 }
 
@@ -1054,17 +1060,16 @@ input:checked + .slider:before {
   letter-spacing: 0.03em;
 }
 .quote:before {
-  content: "“";
+  content: '“';
   position: absolute;
   left: -0.7em;
 }
 .quote:after {
-  content: "”";
+  content: '”';
   margin-right: -1rem;
 }
 
 .quote--container {
- 
   width: 17em;
   border-bottom: 2px dotted #c6d1bf;
   padding-bottom: 0.5rem;
@@ -1075,9 +1080,8 @@ input:checked + .slider:before {
 }
 
 .quote--author {
-  font-family: "Open Sans Condensed";
+  font-family: 'Open Sans Condensed';
   font-size: 0.8rem;
   text-align: right;
   font-weight: 300;
 }
-

@@ -33,14 +33,13 @@ export default function HomeScreen({ match }) {
         <section className="home-hero-banner">
           <div class="quote--container banner-quote">
             <p class="quote">
-             Your future is created by what you do {' '} 
-              <span class="quote--highlight">TODAY</span> {' '}not tomorrow
+              Your future is created by what you do{' '}
+              <span class="quote--highlight">TODAY</span> not tomorrow
             </p>
             <p class="quote--author">&ndash; Robert Kiyosaki</p>
           </div>
-          
 
-          <div className="hero-banner pt-5">Brighten your future</div>
+          <div className="hero-banner pt-5"><div>Brighten your future</div><div>with codify College</div></div>
           <span style={{ width: '100%', height: '300px' }}>
             <Particles />
           </span>
@@ -72,10 +71,11 @@ export default function HomeScreen({ match }) {
         {/* End Education Section Two */}
 
         {/* top coruses */}
+
         <TopCourses></TopCourses>
+
         <CurriculamStepsBar />
 
-        {/* Pricing section */}
         <Pricing />
 
         <OnlineEducationProspect />

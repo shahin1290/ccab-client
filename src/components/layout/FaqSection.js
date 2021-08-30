@@ -46,9 +46,7 @@ const data = {
 const FaqSection = () => {
   const styles = {
     // bgColor: 'white',
-    rowTitleColor: '#2670cb',
     // rowContentColor: 'grey',
-    arrowColor: 'red',
     rowContentPaddingTop: '10px',
     rowContentPaddingRight: '10px',
     rowContentPaddingLeft: '30px',
