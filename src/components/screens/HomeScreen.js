@@ -30,7 +30,7 @@ export default function HomeScreen({ match }) {
       <div className="home">
         {/* <HomeCarousel /> */}
 
-        <section className="home-hero-banner">
+        <section className="home-hero-banner ">
           <div class="quote--container banner-quote">
             <p class="quote">
               Your future is created by what you do{' '}
@@ -39,7 +39,10 @@ export default function HomeScreen({ match }) {
             <p class="quote--author">&ndash; Robert Kiyosaki</p>
           </div>
 
-          <div className="hero-banner pt-5"><div>Brighten your future</div><div>with codify College</div></div>
+          <div className="hero-banner pt-5">
+            <div>Brighten your future</div>
+            <div>with codify College</div>
+          </div>
           <span style={{ width: '100%', height: '300px' }}>
             <Particles />
           </span>

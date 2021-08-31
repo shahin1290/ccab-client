@@ -42,6 +42,7 @@ body {
     width: 93vw !important;
     height: 625px !important;
   }
+
 }
 
 @media (max-width: 992px) {
@@ -133,6 +134,21 @@ body {
 
   .service-form {
     margin-top: 400px;
+  }
+
+  .banner-quote {
+    position: absolute !important;
+    font-size: 22px !important;
+    width : 100% !important;
+    text-align: center !important;
+  }
+
+  .hero-banner {
+    top: 15;
+    font-weight: 500 !important;
+    font-size: 1.8em !important;
+    letter-spacing: 3px !important;
+   
   }
 }
 
@@ -1013,7 +1029,7 @@ input:checked + .slider:before {
   top: 15;
   font-weight: 700;
   text-align: center;
-  font-size: 60px;
+  font-size: 3em;
   font-family: Hack, sans-serif;
   text-transform: uppercase;
   background: linear-gradient(90deg, #000, #fff, #000);

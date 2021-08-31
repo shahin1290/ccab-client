@@ -78,6 +78,7 @@ import ManageMediaCenterContent from './components/screens/AdminScreen/ManageMed
 import Compiler from './components/layout/Compiler'
 import PerformanceRating from './components/layout/PerformanceRating'
 import Sidebar from './components/layout/Sidebar'
+import IdleTimer from './components/layout/IdleTimer'
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin)
@@ -102,6 +103,7 @@ function App() {
 
   return (
     <div className="App">
+      {userDetail && userDetail.name && <IdleTimer />}
       <SideBarStateProvider>
         <Switch>
           {/* Private Route for Admin  */}
