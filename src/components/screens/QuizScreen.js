@@ -78,9 +78,34 @@ export default function QuizScreen({ match, location }) {
     }
   }, [dispatch, bootcampId, dayId, id, answer, history, updateSuccess])
 
+  const secondsToHms = (num) => {
+    const d = Number(num)
+    const h = Math.floor(d / 3600)
+    const m = Math.floor((d % 3600) / 60)
+    const s = Math.floor((d % 3600) % 60)
+
+    const hDisplay = h > 0 ? h + (h == 1 ? ' hour, ' : ' hours, ') : ''
+    const mDisplay = m > 0 ? m + (m == 1 ? ' minute, ' : ' minutes, ') : ''
+    const sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : ''
+    return hDisplay + mDisplay + sDisplay
+  }
+
+  const diff_minutes = (dt2, dt1) => {
+    const diff = (dt2.getTime() - dt1.getTime()) / 1000
+
+    console.log(dt2, dt1)
+    return secondsToHms(diff)
+  }
+
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(createQuizAnswer(inputFields, bootcampId, id))
+
+    const timeDiff = diff_minutes(
+      new Date(),
+      new Date(localStorage.getItem('quizStartTime'))
+    )
+    console.log(timeDiff)
+    dispatch(createQuizAnswer(inputFields, bootcampId, id, timeDiff))
     localStorage.removeItem('timestamp')
     if (userDetail.user_type === 'StudentUser') {
       dispatch(updatePerformance({ quizId: id }, bootcampId))
@@ -200,7 +225,10 @@ export default function QuizScreen({ match, location }) {
                                   }}
                                   id={a._id}
                                 />
-                                <label style={{ marginLeft: '10px' }} for={a._id}>
+                                <label
+                                  style={{ marginLeft: '10px' }}
+                                  for={a._id}
+                                >
                                   {a.content}{' '}
                                 </label>
                               </Card.Text>
@@ -263,6 +291,7 @@ export default function QuizScreen({ match, location }) {
                   style={{ zIndex: '0' }}
                   onClick={() => {
                     setShow(true)
+                    localStorage.setItem('quizStartTime', new Date())
                     if (!localStorage.getItem('timestamp')) {
                       JSON.stringify(
                         localStorage.setItem(

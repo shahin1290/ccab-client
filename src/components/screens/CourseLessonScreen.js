@@ -72,13 +72,21 @@ export default function CourseContentScreen({ match }) {
     if (ref.current) {
       ref.current.plyr.once('ended', () => {
         dispatch(updatePerformance({ dayId: day._id }, id))
-        dispatch(updateDailyActivity({ dayId: day._id, endTime: 200 }))
+        dispatch(updateDailyActivity({ dayId: day._id }, id))
         setShowModal(true)
       })
 
       ref.current.plyr.once('playing', () => {
-        dispatch(createDailyActivity({ dayId: day._id, bootcampId: id }))
-        console.log('dddd')
+        dispatch(
+          createDailyActivity(
+            {
+              dayId: day._id,
+              weekId: day.week,
+              duration: ref.current.plyr.duration
+            },
+            id
+          )
+        )
       })
     }
   }, [day._id])

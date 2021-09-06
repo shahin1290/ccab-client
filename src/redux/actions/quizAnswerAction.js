@@ -52,7 +52,7 @@ export const getQuizAnswerList =
   }
 
 export const createQuizAnswer =
-  (answer, bootcampId, quizId) => async (dispatch, getState) => {
+  (answer, bootcampId, quizId, quizTime) => async (dispatch, getState) => {
     try {
       dispatch({
         type: QUIZ_ANSWER_CREATE_REQUEST
@@ -69,7 +69,7 @@ export const createQuizAnswer =
       }
       const response = await axios.put(
         `http://localhost:5001/api/quizAnswer/${bootcampId}/${quizId}`,
-        answer,
+        { answer, quizTime },
         config
       )
 

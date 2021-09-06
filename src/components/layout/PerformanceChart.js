@@ -9,6 +9,7 @@ import Rodal from 'rodal'
 // include styles
 import 'rodal/lib/rodal.css'
 import PerformanceRating from './PerformanceRating'
+import PerformanceDetailsDaily from './PerformanceDetailsDaily'
 import PerformanceDetailsWeekly from './PerformanceDetailsWeekly'
 
 const PerformanceChart = ({ courses, student }) => {
@@ -17,6 +18,8 @@ const PerformanceChart = ({ courses, student }) => {
   const [performanceTypes, setPerformanceTypes] = useState('general')
 
   const [selectedDate, setSelectedDate] = useState('today')
+  const [activity, setActivity] = useState('daily')
+
   const [course, setCourse] = useState(courses[0]._id)
   const [chart, setChart] = useState('line')
 
@@ -87,26 +90,7 @@ const PerformanceChart = ({ courses, student }) => {
         </Button>
       </div>
 
-      <ButtonGroup aria-label="Basic example">
-        <Button
-          variant={performanceTypes === 'general' ? 'warning' : 'secondary'}
-          className="mr-2 mb-3"
-          onClick={() => setPerformanceTypes('general')}
-        >
-          General
-        </Button>
-        <Button
-          variant={performanceTypes === 'details' ? 'warning' : 'secondary'}
-          className="mr-2 mb-3"
-          onClick={() => setPerformanceTypes('details')}
-        >
-          Details
-        </Button>
-      </ButtonGroup>
-
-      {performanceTypes === 'details' && <PerformanceDetailsWeekly />}
-
-      <div className="py-2 sub-title mb-5">
+      <div className="py-2 sub-title mb-3">
         <Rodal
           animation="flip"
           visible={showPerformanceModal.visible}
@@ -128,78 +112,142 @@ const PerformanceChart = ({ courses, student }) => {
         </a>
       </div>
 
-      <div className="d-flex justify-content-between">
-        <div className="mb-1">
-          <a
-            onClick={() => setSelectedDate('today')}
-            style={
-              selectedDate === 'today'
-                ? { color: '#ea5573', fontWeight: 'bold' }
-                : {}
-            }
-            className="mr-5"
-          >
-            Today
-          </a>
+      <ButtonGroup aria-label="Basic example">
+        <Button
+          variant={performanceTypes === 'general' ? 'warning' : 'secondary'}
+          className="mr-2 mb-3"
+          onClick={() => setPerformanceTypes('general')}
+        >
+          General
+        </Button>
+        <Button
+          variant={performanceTypes === 'details' ? 'warning' : 'secondary'}
+          className="mr-2 mb-3"
+          onClick={() => setPerformanceTypes('details')}
+        >
+          Details
+        </Button>
+      </ButtonGroup>
 
-          <a
-            onClick={() => setSelectedDate('month')}
-            style={
-              selectedDate === 'month'
-                ? { color: '#ea5573', fontWeight: 'bold' }
-                : {}
-            }
-            className="mr-5"
-          >
-            Last Month
-          </a>
-
-          <a
-            onClick={() => setSelectedDate('all')}
-            style={
-              selectedDate === 'all'
-                ? { color: '#ea5573', fontWeight: 'bold' }
-                : {}
-            }
-          >
-            From Start
-          </a>
-        </div>
-
+      {performanceTypes === 'details' && (
         <div>
-          <a
-            onClick={() => setChart('line')}
-            style={
-              chart === 'line' ? { color: '#ea5573', fontWeight: 'bold' } : {}
-            }
-            className="mr-5"
-          >
-            Line Chart
-          </a>
+          <div className="d-flex justify-content-between">
+            <div className="ml-3 mt-2">
+              <a
+                onClick={() => setActivity('daily')}
+                style={
+                  activity === 'daily'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+                className="mr-5"
+              >
+                Today
+              </a>
 
-          <a
-            onClick={() => setChart('bar')}
-            style={
-              chart === 'bar' ? { color: '#ea5573', fontWeight: 'bold' } : {}
-            }
-          >
-            Bar Chart
-          </a>
+              <a
+                onClick={() => setActivity('weekly')}
+                style={
+                  activity === 'weekly'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+                className="mr-5"
+              >
+                Weekly
+              </a>
+            </div>
+          </div>
+          {activity === 'daily' && (
+            <PerformanceDetailsDaily bootcampId={course} />
+          )}
+
+          {activity === 'weekly' && (
+            <PerformanceDetailsWeekly bootcampId={course} />
+          )}
         </div>
-      </div>
-      <Row className="mt-5">
-        <Col md={9}>
-          {' '}
-          <LineChart performances={filterPerformances()} chart={chart} />
-        </Col>
-        <Col md={3} className="my-auto sub-title text-center">
-          Today Performance Ratio{' '}
-          <div>{todayPerformance(performances && performances)} %</div>
-        </Col>
-      </Row>
-      <div className="p-5">
-        <DoughnutChart performances={filterPerformances()} />
-      </div>
+      )}
+
+      {performanceTypes === 'general' && (
+        <>
+          <div className="d-flex justify-content-between">
+            <div className="mb-1">
+              <a
+                onClick={() => setSelectedDate('today')}
+                style={
+                  selectedDate === 'today'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+                className="mr-5"
+              >
+                Today
+              </a>
+
+              <a
+                onClick={() => setSelectedDate('month')}
+                style={
+                  selectedDate === 'month'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+                className="mr-5"
+              >
+                Last Month
+              </a>
+
+              <a
+                onClick={() => setSelectedDate('all')}
+                style={
+                  selectedDate === 'all'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                From Start
+              </a>
+            </div>
+
+            <div>
+              <a
+                onClick={() => setChart('line')}
+                style={
+                  chart === 'line'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+                className="mr-5"
+              >
+                Line Chart
+              </a>
+
+              <a
+                onClick={() => setChart('bar')}
+                style={
+                  chart === 'bar'
+                    ? { color: '#ea5573', fontWeight: 'bold' }
+                    : {}
+                }
+              >
+                Bar Chart
+              </a>
+            </div>
+          </div>
+          <Row className="mt-5">
+            <Col md={9}>
+              {' '}
+              <LineChart performances={filterPerformances()} chart={chart} />
+            </Col>
+            <Col md={3} className="my-auto sub-title text-center">
+              Today Performance Ratio{' '}
+              <div>{todayPerformance(performances && performances)} %</div>
+            </Col>
+          </Row>
+          <div className="p-5">
+            <DoughnutChart performances={filterPerformances()} />
+          </div>
+        </>
+      )}
     </div>
   )
 }

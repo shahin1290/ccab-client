@@ -19,7 +19,7 @@ import {
 import axios from 'axios'
 
 export const createDailyActivity =
-  (dailyActivity) => async (dispatch, getState) => {
+  (dailyActivity, bootcampId) => async (dispatch, getState) => {
     try {
       dispatch({
         type: DAILY_ACTIVITY_ADD_REQUEST
@@ -34,7 +34,7 @@ export const createDailyActivity =
       }
 
       const response = await axios.post(
-        'http://localhost:5001/api/dailyActivity',
+        'http://localhost:5001/api/dailyActivity/' + bootcampId,
         dailyActivity,
         config
       )
@@ -59,7 +59,7 @@ export const createDailyActivity =
     }
   }
 
-export const getDailyActivities = () => async (dispatch, getState) => {
+export const getDailyActivities = (bootcampId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: DAILY_ACTIVITY_LIST_REQUEST
@@ -75,7 +75,7 @@ export const getDailyActivities = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'http://localhost:5001/api/dailyActivity/',
+      'http://localhost:5001/api/dailyActivity/' + bootcampId,
       config
     )
     dispatch({
@@ -165,7 +165,7 @@ export const deleteDailyActivity = (id) => async (dispatch, getState) => {
 }
 
 // update Request
-export const updateDailyActivity = (req) => async (dispatch, getState) => {
+export const updateDailyActivity = (req, bootcampId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: DAILY_ACTIVITY_UPDATE_REQUEST
@@ -182,7 +182,7 @@ export const updateDailyActivity = (req) => async (dispatch, getState) => {
     }
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/dailyActivity`, req, config)
+    await axios.put(`http://localhost:5001/api/dailyActivity/${bootcampId}`, req, config)
 
     dispatch({
       type: DAILY_ACTIVITY_UPDATE_SUCCESS

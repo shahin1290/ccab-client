@@ -36,54 +36,36 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
     success: answerListSuccess
   } = answerMyList
 
-  /* functions */
-
-  function getWeekDates() {
-    let now = new Date()
-    let dayOfWeek = now.getDay() //0-6
-    let numDay = now.getDate()
-
-    let start = new Date(now) //copy
-    start.setDate(numDay - dayOfWeek)
-    start.setHours(0, 0, 0, 0)
-
-    let end = new Date(now) //copy
-    end.setDate(numDay + (7 - dayOfWeek))
-    end.setHours(0, 0, 0, 0)
-
-    return [start, end]
-  }
-
-  const filterWeeklyVideos = () => {
+  const filterDailyVideos = () => {
     if (dailyActivities.length > 0) {
-      let [start, end] = getWeekDates()
-      return dailyActivities.filter(
-        (d) =>
-          new Date(d.startDate).setHours(0, 0, 0, 0) > +start &&
-          new Date(d.startDate).setHours(0, 0, 0, 0) <= +end
-      )
+      return dailyActivities.filter((a) => {
+        const d1 = new Date().setHours(0, 0, 0, 0)
+        const d2 = new Date(a.startDate).setHours(0, 0, 0, 0)
+
+        return d1 === d2
+      })
     }
   }
 
-  const filterWeeklyQuizAnswer = () => {
+  const filterTodaysQuizAnswer = () => {
     if (myQuizAnswers.length > 0) {
-      let [start, end] = getWeekDates()
-      return myQuizAnswers.filter(
-        (d) =>
-          new Date(d.createdAt).setHours(0, 0, 0, 0) > +start &&
-          new Date(d.createdAt).setHours(0, 0, 0, 0) <= +end
-      )
+      return myQuizAnswers.filter((a) => {
+        const d1 = new Date().setHours(0, 0, 0, 0)
+        const d2 = new Date(a.createdAt).setHours(0, 0, 0, 0)
+
+        return d1 === d2
+      })
     }
   }
 
-  const filterWeeklyAnswer = () => {
+  const filterTodaysAnswer = () => {
     if (myanswers.length > 0) {
-      let [start, end] = getWeekDates()
-      return myanswers.filter(
-        (d) =>
-          new Date(d.createdAt).setHours(0, 0, 0, 0) > +start &&
-          new Date(d.createdAt).setHours(0, 0, 0, 0) <= +end
-      )
+      return myanswers.filter((a) => {
+        const d1 = new Date().setHours(0, 0, 0, 0)
+        const d2 = new Date(a.createdAt).setHours(0, 0, 0, 0)
+
+        return d1 === d2
+      })
     }
   }
 
@@ -104,12 +86,10 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
   }
 
   const diff_minutes = (dt2, dt1) => {
-    console.log(dt2, dt1)
     const diff = (dt2.getTime() - dt1.getTime()) / 1000
 
-    if (diff <= 0) {
-      return '-'
-    } else return secondsToHms(diff)
+    console.log(dt2, dt1);
+    return secondsToHms(diff)
   }
 
   return (
@@ -120,7 +100,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
           <div className="sub-title2 mb-4">
             <div className="clearfix">
               <div className="pull-left">
-                <div>Watched Videos This Week:</div>
+                <div>Watched Videos Today:</div>
               </div>
             </div>
           </div>
@@ -140,8 +120,8 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                     <Loader />
                   ) : error ? (
                     <Message>{error}</Message>
-                  ) : filterWeeklyVideos().length > 0 ? (
-                    filterWeeklyVideos().map((video) => (
+                  ) : filterDailyVideos() && filterDailyVideos().length ? (
+                    filterDailyVideos().map((video) => (
                       <tr className="sub-text">
                         <td>{video.lecture.name}</td>
                         <td>{video.week.name}</td>
@@ -156,8 +136,8 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                     ))
                   ) : (
                     <p className="pl-4 py-2 mt-4 text-dark bg-light ">
-                      no video is watched yet
-                    </p>
+                    no video is watched yet
+                  </p>
                   )}
                 </tbody>
               </table>
@@ -170,7 +150,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
           <div className="sub-title2 mb-4 mt-5">
             <div className="clearfix">
               <div className="pull-left">
-                <div> Finished Task and Quizzes This Week:</div>
+                <div> Finished Task and Quizzes Today:</div>
               </div>
             </div>
           </div>
@@ -186,8 +166,8 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {filterWeeklyQuizAnswer().length > 0 ? (
-                    filterWeeklyQuizAnswer().map((quiz) => (
+                  {filterTodaysQuizAnswer().length > 0 ? (
+                    filterTodaysQuizAnswer().map((quiz) => (
                       <tr className="sub-text">
                         <td>Quiz: {quiz.quiz.name}</td>
                         <td>week1</td>
@@ -197,27 +177,25 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                     ))
                   ) : (
                     <p className="pl-4 py-2 mt-4 text-dark bg-light ">
-                      no quiz answer is submitted
-                    </p>
+                    no quiz answer is submitted
+                  </p>
                   )}
-                  {filterWeeklyAnswer().length > 0 ? (
-                    filterWeeklyAnswer().map((task) => (
+                  {filterTodaysAnswer().length > 0 ? (
+                    filterTodaysAnswer().map((task) => (
                       <tr className="sub-text">
                         <td>Task: {task.task.projectName}</td>
                         <td>week1</td>
                         <td>{task.status}</td>
-                        <td>
-                          {diff_minutes(
+                        <td>  {diff_minutes(
                             new Date(task.createdAt),
                             new Date(task.downloadedAt)
-                          )}
-                        </td>
+                          )}</td>
                       </tr>
                     ))
                   ) : (
                     <p className="pl-4 py-2 mt-4 text-dark bg-light ">
-                      no task answer is submitted
-                    </p>
+                    no task answer is submitted
+                  </p>
                   )}
                 </tbody>
               </table>
