@@ -88,7 +88,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
   const diff_minutes = (dt2, dt1) => {
     const diff = (dt2.getTime() - dt1.getTime()) / 1000
 
-    console.log(dt2, dt1);
+    console.log(dt2, dt1)
     return secondsToHms(diff)
   }
 
@@ -136,8 +136,8 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                     ))
                   ) : (
                     <p className="pl-4 py-2 mt-4 text-dark bg-light ">
-                    no video is watched yet
-                  </p>
+                      no video is watched yet
+                    </p>
                   )}
                 </tbody>
               </table>
@@ -160,9 +160,9 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                 <thead>
                   <tr className="sub-text">
                     <th>Title</th>
-                    <th>Week No.</th>
-                    <th>Result</th>
+                    <th>Time Alloted</th>
                     <th>Finished in</th>
+                    <th>Result</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -170,15 +170,15 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                     filterTodaysQuizAnswer().map((quiz) => (
                       <tr className="sub-text">
                         <td>Quiz: {quiz.quiz.name}</td>
-                        <td>week1</td>
+                        <td>{quiz.quiz.time} minutes</td>
+                        <td>{quiz.quizTime}</td>
                         <td>{quiz.status}</td>
-                        <td></td>
                       </tr>
                     ))
                   ) : (
                     <p className="pl-4 py-2 mt-4 text-dark bg-light ">
-                    no quiz answer is submitted
-                  </p>
+                      no quiz answer is submitted
+                    </p>
                   )}
                   {filterTodaysAnswer().length > 0 ? (
                     filterTodaysAnswer().map((task) => (
@@ -186,16 +186,19 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                         <td>Task: {task.task.projectName}</td>
                         <td>week1</td>
                         <td>{task.status}</td>
-                        <td>  {diff_minutes(
+                        <td>
+                          {' '}
+                          {diff_minutes(
                             new Date(task.createdAt),
                             new Date(task.downloadedAt)
-                          )}</td>
+                          )}
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <p className="pl-4 py-2 mt-4 text-dark bg-light ">
-                    no task answer is submitted
-                  </p>
+                      no task answer is submitted
+                    </p>
                   )}
                 </tbody>
               </table>

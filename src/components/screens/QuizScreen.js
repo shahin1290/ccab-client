@@ -104,9 +104,9 @@ export default function QuizScreen({ match, location }) {
       new Date(),
       new Date(localStorage.getItem('quizStartTime'))
     )
-    console.log(timeDiff)
     dispatch(createQuizAnswer(inputFields, bootcampId, id, timeDiff))
     localStorage.removeItem('timestamp')
+    localStorage.removeItem('quizStartTime')
     if (userDetail.user_type === 'StudentUser') {
       dispatch(updatePerformance({ quizId: id }, bootcampId))
     }

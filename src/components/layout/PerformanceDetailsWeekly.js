@@ -180,9 +180,9 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                 <thead>
                   <tr className="sub-text">
                     <th>Title</th>
-                    <th>Week No.</th>
-                    <th>Result</th>
+                    <th>Time Alloted</th>
                     <th>Finished in</th>
+                    <th>Result</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -190,9 +190,9 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                     filterWeeklyQuizAnswer().map((quiz) => (
                       <tr className="sub-text">
                         <td>Quiz: {quiz.quiz.name}</td>
-                        <td>week1</td>
+                        <td>{quiz.quiz.time} minutes</td>
+                        <td>{quiz.quizTime}</td>
                         <td>{quiz.status}</td>
-                        <td></td>
                       </tr>
                     ))
                   ) : (
