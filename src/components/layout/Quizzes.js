@@ -62,7 +62,7 @@ export default function Quizzes() {
 
   const quizStatus = (quizId) => {
     if (myQuizAnswers && myQuizAnswers.length > 0) {
-      const foundAnswer = myQuizAnswers.find((ans) => ans.quiz === quizId)
+      const foundAnswer = myQuizAnswers.find((ans) => ans.quiz._id === quizId)
       return foundAnswer
     }
   }

@@ -33,7 +33,7 @@ export default function QuizAnswerScreen({ match, location }) {
 
   const quizStatus = (quizId) => {
     if (myQuizAnswers.length) {
-      const foundAnswer = myQuizAnswers.find((ans) => ans.quiz === quizId)
+      const foundAnswer = myQuizAnswers.find((ans) => ans.quiz._id === quizId)
       return foundAnswer
     }
   }

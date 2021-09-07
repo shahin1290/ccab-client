@@ -21,6 +21,10 @@ import {
 import { getDayVideoList } from '../../redux/actions/dayAction'
 import { todayPerformance, averagePerformance } from '../../util/performances'
 import Compiler from '../layout/Compiler'
+import {
+  createDailyActivity,
+  updateDailyActivity
+} from '../../redux/actions/dailyActivityAction'
 
 export default function CourseContentScreen({ match }) {
   const id = match.params.id
@@ -62,16 +66,30 @@ export default function CourseContentScreen({ match }) {
     if (userDetail.user_type === 'StudentUser') {
       dispatch(getPerformances(id, userDetail._id))
     }
-  }, [updateSuccess, userDetail, dispatch])
+  }, [updateSuccess, userDetail])
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.plyr.on('ended', () => {
+      ref.current.plyr.once('ended', () => {
         dispatch(updatePerformance({ dayId: day._id }, id))
+        dispatch(updateDailyActivity({ dayId: day._id }, id))
         setShowModal(true)
       })
+
+      ref.current.plyr.once('playing', () => {
+        dispatch(
+          createDailyActivity(
+            {
+              dayId: day._id,
+              weekId: day.week,
+              duration: ref.current.plyr.duration
+            },
+            id
+          )
+        )
+      })
     }
-  }, [ref.current, day])
+  }, [day._id])
 
   //functions
   const findElementText = (el, sectionName) => {

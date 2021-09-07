@@ -147,6 +147,14 @@ import {
   mediaCenterUpdateReducer
 } from './redux/reducers/mediaCenterReducer'
 
+import {
+  dailyActivityCreateReducer,
+  dailyActivityListReducer,
+  dailyActivityDetailsReducer,
+  dailyActivityDeleteReducer,
+  dailyActivityUpdateReducer
+} from './redux/reducers/dailyActivityReducer'
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -250,7 +258,12 @@ const reducer = combineReducers({
   mediaCenterDetails: mediaCenterDetailsReducer,
   mediaCenterCreate: mediaCenterCreateReducer,
   mediaCenterDelete: mediaCenterDeleteReducer,
-  mediaCenterUpdate: mediaCenterUpdateReducer
+  mediaCenterUpdate: mediaCenterUpdateReducer,
+  dailyActivityCreate: dailyActivityCreateReducer,
+  dailyActivityList: dailyActivityListReducer,
+  dailyActivityDetails: dailyActivityDetailsReducer,
+  dailyActivityUpdate: dailyActivityUpdateReducer,
+  dailyActivityDelete: dailyActivityDeleteReducer,
 })
 
 const userDetailsFromStorage = localStorage.getItem('userDetail')
