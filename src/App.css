@@ -42,7 +42,6 @@ body {
     width: 93vw !important;
     height: 625px !important;
   }
-
 }
 
 @media (max-width: 992px) {
@@ -139,7 +138,7 @@ body {
   .banner-quote {
     position: absolute !important;
     font-size: 22px !important;
-    width : 100% !important;
+    width: 100% !important;
     text-align: center !important;
   }
 
@@ -148,7 +147,6 @@ body {
     font-weight: 500 !important;
     font-size: 1.8em !important;
     letter-spacing: 3px !important;
-   
   }
 }
 
@@ -202,6 +200,13 @@ body {
   font-family: Inter;
   color: #2670cb;
   word-spacing: -3px;
+}
+
+.sub-title3 {
+  font-size: 1.8rem !important;
+  font-weight: 400 !important;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+  text-shadow: none !important;
 }
 
 .sub-text2 {
@@ -840,7 +845,15 @@ input:checked + .slider:before {
   width: 100%;
   border-radius: 5px 5px 0 0;
 }
-
+.service-circle:before {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 10px 20px 0 0;
+  border: 7px solid #fff;
+  border-radius: 100%;
+}
 .res-circle {
   width: 42px;
   height: 24px;
@@ -891,6 +904,25 @@ input:checked + .slider:before {
 .service-steps {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin: 300px;
+}
+
+.shape {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.shape1 {
+  border-radius: 53% 47% 41% 59% / 60% 68% 32% 40%;
+}
+
+.shape2 {
+  border-radius: 44% 56% 47% 53% / 74% 60% 40% 26%;
+}
+
+.shape3 {
+  border-radius: 70% 30% 51% 49% / 54% 66% 34% 46%;
 }
 
 /* service form */

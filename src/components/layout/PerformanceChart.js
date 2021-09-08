@@ -11,6 +11,8 @@ import 'rodal/lib/rodal.css'
 import PerformanceRating from './PerformanceRating'
 import PerformanceDetailsDaily from './PerformanceDetailsDaily'
 import PerformanceDetailsWeekly from './PerformanceDetailsWeekly'
+import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
+import { getMyAnswerList } from '../../redux/actions/answerAction'
 
 const PerformanceChart = ({ courses, student }) => {
   const dispatch = useDispatch()
@@ -68,10 +70,15 @@ const PerformanceChart = ({ courses, student }) => {
   useEffect(() => {
     if (userDetail.user_type === 'StudentUser') {
       dispatch(getPerformances(course, userDetail._id))
+      dispatch(getMyAnswerList(userDetail._id))
+      dispatch(getMyQuizAnswerList(userDetail._id))
     }
 
     if (userDetail.user_type === 'AdminUser') {
       dispatch(getPerformances(course, student))
+
+      dispatch(getMyAnswerList(student))
+      dispatch(getMyQuizAnswerList(student))
     }
   }, [course, dispatch, student])
 

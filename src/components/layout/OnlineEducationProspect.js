@@ -68,11 +68,14 @@ const OnlineEducationProspect = () => {
           {/* Setting The Standard In Online Education */}
 
           <div className="auto-container pt-5 mt-5">
-            <div className="title text-center ">Stands out from the crowd</div>
+            <div className="title text-center ">
+              We partner with the best in the industry
+            </div>
             <hr className="block-seperator mt-2 mb-4" />
             <div className="sub-text text-center">
-              Our course cocurricular meet what the industry required Our
-              partners
+              All our courses are developed in partnership with the world's most
+              innovative tech companies to meet the highest standards and taught
+              by industry leaders.
             </div>
             <div className="row clearfix d-flex ">
               <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">

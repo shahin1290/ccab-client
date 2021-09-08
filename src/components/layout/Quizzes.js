@@ -71,7 +71,7 @@ export default function Quizzes() {
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
       dispatch(getMyQuizList())
 
-      dispatch(getMyQuizAnswerList())
+      dispatch(getMyQuizAnswerList(userDetail._id))
     }
   }, [
     dispatch,

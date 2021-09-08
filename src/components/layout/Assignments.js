@@ -63,7 +63,7 @@ export default function Assignments() {
   useEffect(() => {
     if (userDetail.name && userDetail.user_type === 'StudentUser') {
       dispatch(getMyTaskList())
-      dispatch(getMyAnswerList())
+      dispatch(getMyAnswerList(userDetail._id))
     }
 
     if (
