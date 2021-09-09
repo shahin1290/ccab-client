@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useState  } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCourseList } from '../../redux/actions/courseAction'
 
@@ -6,15 +6,55 @@ import Message from '../layout/Message'
 import Loader from '../layout/Loader'
 import { Link } from 'react-router-dom'
 
+import Carousel from './Carousel';
+
 export default function TopCourses({ match }) {
   const dispatch = useDispatch()
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
   )
 
+      // shown courses in the carousel 
+      const [ shownSlide , setShownSlide ] = useState(4);
+
+      // Window Resize Handler 
+      const [dimensions, setDimensions] = React.useState({ 
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    useEffect(() => {
+        function handleResize() {
+          setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+          })
+ 
+    }
+
+        window.addEventListener('resize', handleResize)
+    })
+/************************ */
+
   useEffect(() => {
     dispatch(getCourseList())
   }, [dispatch])
+  
+  useEffect(()=>{
+    if(window.innerWidth > 1024 ){
+      setShownSlide(4)
+    }else
+    if( window.innerWidth <= 1024 ) {
+      setShownSlide(3)
+    }
+    if(window.innerWidth <= 767 ){
+      setShownSlide(2)
+
+    }
+    else if (window.innerWidth <= 400 ){
+      setShownSlide(1)
+    }
+    console.log(window.innerWidth);
+  },[window.innerWidth])
 
   const filterSubscriptionCourse = (courseList) => {
     return courseList.filter((course) => {
@@ -49,13 +89,17 @@ export default function TopCourses({ match }) {
             existing skill
           </div>
           {loading ? <Loader /> : error && <Message>{error}</Message>}
+          
+         
 
-          <div className="row clearfix">
+          <div className="row  clearfix ">
+            <div className="col-10 offset-1">
+          <Carousel variant="dark" show={shownSlide}>
             {/* Institution Block */}
             {courseList.length &&
               filterSubscriptionCourse(courseList).map((course) => (
                 <div
-                  className=" cource-block-two col-lg-3 col-md-6 col-sm-12"
+                  className=" cource-block-two "
                   key={course._id}
                 >
                   <div className="inner-box ">
@@ -63,7 +107,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            'http://localhost:5001/uploads/Bootcamp/' +
+                            'https://server.ccab.tech/uploads/Bootcamp/' +
                             course.img_path
                           }
                           alt=""
@@ -103,9 +147,10 @@ export default function TopCourses({ match }) {
                   </div>
                 </div>
               ))}
+          </Carousel>
 
             {/* Institution Block */}
-            {courseList.length > 0 ? (
+            {/* {courseList.length > 0 ? (
               <div className="institution-block empty-block col-lg-4 col-md-6 col-sm-12">
                 <div
                   className="inner-box wow fadeInRight"
@@ -119,7 +164,8 @@ export default function TopCourses({ match }) {
               </div>
             ) : (
               ''
-            )}
+            )} */}
+            </div>
           </div>
         </div>
       </section>

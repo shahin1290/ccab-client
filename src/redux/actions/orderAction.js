@@ -47,7 +47,7 @@ export const createOrder = (id, order) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      `http://localhost:5001/api/order/${id}`,
+      `https://server.ccab.tech/api/order/${id}`,
       order,
       config
     )
@@ -90,7 +90,7 @@ export const getOrderList = () => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/myorders`,
+      `https://server.ccab.tech/api/order/myorders`,
       config
     )
 
@@ -127,7 +127,7 @@ export const getAllOrders = () => async (dispatch, getState) => {
       }
     }
 
-    const response = await axios.get(`http://localhost:5001/api/order/`, config)
+    const response = await axios.get(`https://server.ccab.tech/api/order/`, config)
 
     //console.log("payload: ",response.data.data)
     dispatch({
@@ -162,7 +162,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/` + id,
+      `https://server.ccab.tech/api/order/` + id,
       config
     )
 
@@ -200,7 +200,7 @@ export const getStripeSubscriptionInvoice =
       }
 
       const response = await axios.post(
-        'http://localhost:5001/api/order/stripe/view-subscription',
+        'https://server.ccab.tech/api/order/stripe/view-subscription',
         { orderBy },
         config
       )
@@ -236,7 +236,7 @@ export const createKlarnaSession =
       }
 
       const response = await axios.post(
-        `http://localhost:5001/api/order/${id}/klarna/session`,
+        `https://server.ccab.tech/api/order/${id}/klarna/session`,
         order,
         config
       )
@@ -276,7 +276,7 @@ export const createKlarnaOrder = (id, data) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      `http://localhost:5001/api/order/${id}/klarna/order`,
+      `https://server.ccab.tech/api/order/${id}/klarna/order`,
       data,
       config
     )
@@ -318,7 +318,7 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/order/${id}/klarna/order`,
+      `https://server.ccab.tech/api/order/${id}/klarna/order`,
       config
     )
 
@@ -360,7 +360,7 @@ export const readKlarnaSession =
       }
 
       const response = await axios.post(
-        `http://localhost:5001/api/order/${id}/klarna/authorize`,
+        `https://server.ccab.tech/api/order/${id}/klarna/authorize`,
         session,
         config
       )
@@ -400,7 +400,7 @@ export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      `http://localhost:5001/api/order/capture/${id}`,
+      `https://server.ccab.tech/api/order/capture/${id}`,
       orderBy,
       config
     )

@@ -19,7 +19,7 @@ const CurriculamStepsBar = (props) => {
         <div className="title text-center pb-1">Comprehensive Curriculum</div>
         <hr className="block-seperator mb-3" />
         <div className="sub-text text-center mb-5">
-          Our Full Stack Developer Courses are made to give you and easy and
+          Our Full Stack Developer Courses are made to give you an easy and
           fast path in web development. By the end this course you will be able
           to build web applications from scratch.
         </div>

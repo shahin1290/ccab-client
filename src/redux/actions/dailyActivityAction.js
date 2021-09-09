@@ -34,7 +34,7 @@ export const createDailyActivity =
       }
 
       const response = await axios.post(
-        'http://localhost:5001/api/dailyActivity/' + bootcampId,
+        'https://server.ccab.tech/api/dailyActivity/' + bootcampId,
         dailyActivity,
         config
       )
@@ -75,7 +75,7 @@ export const getDailyActivities = (bootcampId) => async (dispatch, getState) => 
       }
     }
     const response = await axios.get(
-      'http://localhost:5001/api/dailyActivity/' + bootcampId,
+      'https://server.ccab.tech/api/dailyActivity/' + bootcampId,
       config
     )
     dispatch({
@@ -111,7 +111,7 @@ export const getDailyActivityDetails = (id) => async (dispatch, getState) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5001/api/dailyActivity/${id}`,
+      `https://server.ccab.tech/api/dailyActivity/${id}`,
       config
     )
 
@@ -148,7 +148,7 @@ export const deleteDailyActivity = (id) => async (dispatch, getState) => {
       }
     }
 
-    await axios.delete(`http://localhost:5001/api/dailyActivity/${id}`, config)
+    await axios.delete(`https://server.ccab.tech/api/dailyActivity/${id}`, config)
 
     dispatch({
       type: DAILY_ACTIVITY_DELETE_SUCCESS
@@ -182,7 +182,7 @@ export const updateDailyActivity = (req, bootcampId) => async (dispatch, getStat
     }
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/dailyActivity/${bootcampId}`, req, config)
+    await axios.put(`https://server.ccab.tech/api/dailyActivity/${bootcampId}`, req, config)
 
     dispatch({
       type: DAILY_ACTIVITY_UPDATE_SUCCESS

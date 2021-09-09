@@ -261,7 +261,7 @@ export default function ServiceDetailScreen({ match }) {
                                       <img
                                         src={
                                           instructor.avatar
-                                            ? `http://localhost:5001/uploads/Avatar/${instructor.avatar}`
+                                            ? `https://server.ccab.tech/uploads/Avatar/${instructor.avatar}`
                                             : '/images/resource/avatar.svg'
                                         }
                                         alt="avatar"
@@ -402,7 +402,7 @@ export default function ServiceDetailScreen({ match }) {
                           className="intro-video"
                           style={{
                             backgroundImage:
-                              'url(http://localhost:5001/uploads/Service/' +
+                              'url(https://server.ccab.tech/uploads/Service/' +
                               service.img_path +
                               ')'
                           }}

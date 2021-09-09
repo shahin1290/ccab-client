@@ -1000,7 +1000,7 @@ input:checked + .slider:before {
 }
 
 .handle1:after {
-  content: 'Sign Up';
+  content: 'Study Now';
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;

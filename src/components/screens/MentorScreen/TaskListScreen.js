@@ -97,7 +97,7 @@ export default function TaskListScreen({ match }) {
     // dispatch(DownloadAssignemnt(task.task._id)
     try {
       const res = await fetch(
-        'http://localhost:5001/api/tasks/' + task._id + '/download'
+        'https://server.ccab.tech/api/tasks/' + task._id + '/download'
       )
       const blob = await res.blob()
       download(blob, task.projectName + '-Assignment')

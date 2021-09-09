@@ -79,6 +79,8 @@ export default function HomeScreen({ match }) {
 
         <CurriculamStepsBar />
 
+        <StudentReview />
+        
         <Pricing />
 
         <OnlineEducationProspect />
@@ -115,7 +117,7 @@ export default function HomeScreen({ match }) {
           )} 
         </Container> */}
 
-        <StudentReview />
+     
         {/* Achievement Section Two */}
 
         {/* End Achievement Section */}
