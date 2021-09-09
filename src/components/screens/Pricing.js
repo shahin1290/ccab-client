@@ -29,8 +29,7 @@ export default function Pricing() {
             </div>
             <hr className="block-seperator mb-3" />
             <div className="text">
-              Register yourself now to get the success <span className="text-warning font-weight-bold">CODE</span> to your
-              life
+              Register yourself now and get real employabe skills that top companies want.
             </div>
           </div>
 

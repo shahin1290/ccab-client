@@ -97,7 +97,7 @@ export const createQuizAnswer =
   }
 
 //get user's answers
-export const getMyQuizAnswerList = () => async (dispatch, getState) => {
+export const getMyQuizAnswerList = (userId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: QUIZ_ANSWER_MY_LIST_REQUEST
@@ -115,7 +115,7 @@ export const getMyQuizAnswerList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'http://localhost:5001/api/quizAnswer/myQuizAnswers',
+      'http://localhost:5001/api/quizAnswer/myQuizAnswers/' + userId,
       config
     )
 

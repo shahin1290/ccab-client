@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import ServiceBanner from '../layout/ServiceBanner'
-import ServiceFocus from '../layout/ServiceFocus'
-import ServiceSteps from '../layout/ServiceSteps'
+import ServiceClasses from '../layout/ServiceClasses'
+import ServiceBenefits from '../layout/ServiceBenefits'
 import ServiceForm from '../layout/ServiceForm';
+import ServiceGoal from '../layout/ServiceGoal'
+
 
 const ServiceHome = () => {
   return (
     <>
       <div className="bg-white">
         <ServiceBanner />
-        <ServiceFocus />
-        <ServiceSteps />
+        <ServiceGoal />
+        <ServiceClasses />
+        <ServiceBenefits />
         <ServiceForm />
       </div>
     </>

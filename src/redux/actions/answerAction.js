@@ -67,7 +67,7 @@ export const createAnswer =
   }
 
 //get user's answers
-export const getMyAnswerList = () => async (dispatch, getState) => {
+export const getMyAnswerList = (userId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: ANSWER_MY_LIST_REQUEST
@@ -85,7 +85,7 @@ export const getMyAnswerList = () => async (dispatch, getState) => {
       }
     }
     const response = await axios.get(
-      'http://localhost:5001/api/answers/myanswers',
+      'http://localhost:5001/api/answers/myanswers/' + userId,
       config
     )
     dispatch({
