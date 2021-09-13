@@ -1,42 +1,52 @@
 import {
-  JOB_ADD_REQUEST,
-  JOB_ADD_SUCCESS,
-  JOB_ADD_FAIL,
-  JOB_LIST_REQUEST,
-  JOB_LIST_SUCCESS,
-  JOB_LIST_FAIL,
-  JOB_DETAILS_REQUEST,
-  JOB_DETAILS_SUCCESS,
-  JOB_DETAILS_FAIL,
-  JOB_UPDATE_REQUEST,
-  JOB_UPDATE_SUCCESS,
-  JOB_UPDATE_FAIL,
-  JOB_DELETE_REQUEST,
-  JOB_DELETE_SUCCESS,
-  JOB_DELETE_FAIL,
-} from "../constences/jobConst";
+  PROMO_ADD_REQUEST,
+  PROMO_ADD_SUCCESS,
+  PROMO_ADD_FAIL,
+  PROMO_LIST_REQUEST,
+  PROMO_LIST_SUCCESS,
+  PROMO_LIST_FAIL,
+  PROMO_DETAILS_REQUEST,
+  PROMO_DETAILS_SUCCESS,
+  PROMO_DETAILS_FAIL,
+  PROMO_UPDATE_REQUEST,
+  PROMO_UPDATE_SUCCESS,
+  PROMO_UPDATE_FAIL,
+  PROMO_DELETE_REQUEST,
+  PROMO_DELETE_SUCCESS,
+  PROMO_DELETE_FAIL,
+} from "../constences/promoConst";
 
 import axios from "axios";
 
-export const createJob = (job) => async (dispatch, getState) => {
+export const createPromo = (promo) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: JOB_ADD_REQUEST,
+      type: PROMO_ADD_REQUEST,
     });
 
-    const response = await axios.post("http://localhost:5001/api/job", job);
+    // Descruct from getState()
+    const {
+      userLogin: { userDetail },
+    } = getState();
+    const config = { headers: { Authorization: "Bearer " + userDetail.token } };
+
+    const response = await axios.post(
+      "http://localhost:5001/api/promo",
+      promo,
+      config
+    );
 
     // console.log("response:", response)
 
     dispatch({
-      type: JOB_ADD_SUCCESS,
+      type: PROMO_ADD_SUCCESS,
       //   payload: console.log("payload:", resconst response.data),
       payload: response.data,
     });
   } catch (error) {
     console.log("error:", error);
     dispatch({
-      type: JOB_ADD_FAIL,
+      type: PROMO_ADD_FAIL,
       //    payload: error.res
       payload:
         error.response && error.response.data.message
@@ -46,10 +56,10 @@ export const createJob = (job) => async (dispatch, getState) => {
   }
 };
 
-export const getJobs = () => async (dispatch, getState) => {
+export const getPromos = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: JOB_LIST_REQUEST,
+      type: PROMO_LIST_REQUEST,
     });
 
     // Descruct from getState()
@@ -61,15 +71,15 @@ export const getJobs = () => async (dispatch, getState) => {
         Authorization: "Bearer " + userDetail.token,
       },
     };
-    const response = await axios.get("http://localhost:5001/api/job/", config);
+    const response = await axios.get("http://localhost:5001/api/promo/");
     dispatch({
-      type: JOB_LIST_SUCCESS,
+      type: PROMO_LIST_SUCCESS,
       payload: response.data,
     });
   } catch (error) {
     // console.log("error:", error)
     dispatch({
-      type: JOB_LIST_FAIL,
+      type: PROMO_LIST_FAIL,
       //    payload: error.res
       payload:
         error.response && error.response.data.message
@@ -79,10 +89,10 @@ export const getJobs = () => async (dispatch, getState) => {
   }
 };
 
-export const getRequestDetails = (id) => async (dispatch, getState) => {
+export const getPromoDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: JOB_DETAILS_REQUEST,
+      type: PROMO_DETAILS_REQUEST,
     });
     const {
       userLogin: { userDetail },
@@ -95,19 +105,19 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `http://localhost:5001/api/request/${id}`,
+      `http://localhost:5001/api/promo/${id}`,
       config
     );
 
     dispatch({
-      type: JOB_DETAILS_SUCCESS,
+      type: PROMO_DETAILS_SUCCESS,
       payload: response.data.data,
       // payload: console.log("payload: ", response.data),
     });
   } catch (error) {
     console.log(error.response.data.message);
     dispatch({
-      type: JOB_DETAILS_FAIL,
+      type: PROMO_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -116,10 +126,10 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
   }
 };
 
-export const deleteRequest = (id) => async (dispatch, getState) => {
+export const deletePromo = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: JOB_DELETE_REQUEST,
+      type: PROMO_DELETE_REQUEST,
     });
 
     const {
@@ -132,14 +142,14 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:5001/api/request/${id}`, config);
+    await axios.delete(`http://localhost:5001/api/promo/${id}`, config);
 
     dispatch({
-      type: JOB_DELETE_SUCCESS,
+      type: PROMO_DELETE_SUCCESS,
     });
   } catch (error) {
     dispatch({
-      type: JOB_DELETE_FAIL,
+      type: PROMO_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -148,11 +158,10 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
   }
 };
 
-// update Request
-export const updateRequest = (req, id) => async (dispatch, getState) => {
+export const updatePromo = (req, id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: JOB_UPDATE_REQUEST,
+      type: PROMO_UPDATE_REQUEST,
     });
 
     const {
@@ -166,15 +175,15 @@ export const updateRequest = (req, id) => async (dispatch, getState) => {
     };
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/request/${id}`, req, config);
+    await axios.put(`http://localhost:5001/api/promo/${id}`, req, config);
 
     dispatch({
-      type: JOB_UPDATE_SUCCESS,
+      type: PROMO_UPDATE_SUCCESS,
     });
   } catch (error) {
     // console.log(error.response.data);
     dispatch({
-      type: JOB_UPDATE_FAIL,
+      type: PROMO_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

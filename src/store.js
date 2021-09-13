@@ -1,6 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
   userLoginReducer,
@@ -14,8 +14,8 @@ import {
   userNumbersReducer,
   userProfileReducer,
   forgotPasswordReducer,
-  resetPasswordReducer
-} from './redux/reducers/userReducer'
+  resetPasswordReducer,
+} from "./redux/reducers/userReducer";
 
 import {
   taskListReducer,
@@ -25,8 +25,8 @@ import {
   taskCheckedReducer,
   taskPassedReducer,
   taskNotPassedReducer,
-  taskMyListReducer
-} from './redux/reducers/taskReducer'
+  taskMyListReducer,
+} from "./redux/reducers/taskReducer";
 
 import {
   createAnswerReducer,
@@ -35,8 +35,8 @@ import {
   answersListReducer,
   answerListDeleteReducer,
   OneAnswerReducer,
-  UpdateAnswerStatusReducer
-} from './redux/reducers/answerReducer'
+  UpdateAnswerStatusReducer,
+} from "./redux/reducers/answerReducer";
 
 import {
   courseListReducer,
@@ -44,32 +44,32 @@ import {
   courseDeleteReducer,
   courseCreateReducer,
   AdmincourseListReducer,
-  courseUpdateReducer
-} from './redux/reducers/courseReducer'
+  courseUpdateReducer,
+} from "./redux/reducers/courseReducer";
 
 import {
   weekListReducer,
-  weekUpdateReducer
-} from './redux/reducers/weekReducer'
+  weekUpdateReducer,
+} from "./redux/reducers/weekReducer";
 import {
   dayListReducer,
   dayDetailsReducer,
   dayUpdateReducer,
-  dayVideoListReducer
-} from './redux/reducers/dayReducer'
+  dayVideoListReducer,
+} from "./redux/reducers/dayReducer";
 import {
   myQuizListReducer,
   quizDetailsReducer,
   quizCreateReducer,
   quizListReducer,
   quizDeleteReducer,
-  quizUpdateReducer
-} from './redux/reducers/quizReducer'
+  quizUpdateReducer,
+} from "./redux/reducers/quizReducer";
 import {
   createQuizAnswerReducer,
   quizAnswerMyListReducer,
-  quizAnswerListReducer
-} from './redux/reducers/quizAnswerReducer'
+  quizAnswerListReducer,
+} from "./redux/reducers/quizAnswerReducer";
 
 import {
   orderCreateReducer,
@@ -81,18 +81,18 @@ import {
   orderVeiwReducer,
   orderListAllReducer,
   orderKlarnaCaptureReducer,
-  stripeSubscriptionInvoiceReducer
-} from './redux/reducers/orderReducer'
-import { currencyCreateReducer } from './redux/reducers/currencyReducer'
+  stripeSubscriptionInvoiceReducer,
+} from "./redux/reducers/orderReducer";
+import { currencyCreateReducer } from "./redux/reducers/currencyReducer";
 import {
   requestCreateReducer,
   requestListReducer,
   requestDetailsReducer,
   requestDeleteReducer,
-  requestUpdateReducer
-} from './redux/reducers/requestReducer'
+  requestUpdateReducer,
+} from "./redux/reducers/requestReducer";
 
-import { jobCreateReducer, jobListReducer } from './redux/reducers/jobReducer'
+import { jobCreateReducer, jobListReducer } from "./redux/reducers/jobReducer";
 
 import {
   serviceListReducer,
@@ -101,32 +101,32 @@ import {
   serviceCreateReducer,
   adminServiceListReducer,
   serviceUpdateReducer,
-  serviceInstructorUpdateReducer
-} from './redux/reducers/serviceReducer'
+  serviceInstructorUpdateReducer,
+} from "./redux/reducers/serviceReducer";
 
 import {
   sessionCreateReducer,
   sessionListReducer,
   sessionDetailsReducer,
   sessionDeleteReducer,
-  sessionUpdateReducer
-} from './redux/reducers/sessionReducer'
+  sessionUpdateReducer,
+} from "./redux/reducers/sessionReducer";
 
 import {
   appointmentCreateReducer,
   appointmentListReducer,
   appointmentDetailsReducer,
   appointmentDeleteReducer,
-  appointmentUpdateReducer
-} from './redux/reducers/appointmentReducer'
+  appointmentUpdateReducer,
+} from "./redux/reducers/appointmentReducer";
 
 import {
   serviceCategoryCreateReducer,
   serviceCategoryListReducer,
   serviceCategoryDetailsReducer,
   serviceCategoryDeleteReducer,
-  serviceCategoryUpdateReducer
-} from './redux/reducers/serviceCategoryReducer'
+  serviceCategoryUpdateReducer,
+} from "./redux/reducers/serviceCategoryReducer";
 
 import {
   performanceCreateReducer,
@@ -135,8 +135,8 @@ import {
   performanceDetailsReducer,
   topPerformanceListReducer,
   performanceDeleteReducer,
-  performanceUpdateReducer
-} from './redux/reducers/performanceReducer'
+  performanceUpdateReducer,
+} from "./redux/reducers/performanceReducer";
 
 import {
   mediaCenterListReducer,
@@ -144,16 +144,24 @@ import {
   mediaCenterDeleteReducer,
   mediaCenterCreateReducer,
   adminMediaCenterListReducer,
-  mediaCenterUpdateReducer
-} from './redux/reducers/mediaCenterReducer'
+  mediaCenterUpdateReducer,
+} from "./redux/reducers/mediaCenterReducer";
 
 import {
   dailyActivityCreateReducer,
   dailyActivityListReducer,
   dailyActivityDetailsReducer,
   dailyActivityDeleteReducer,
-  dailyActivityUpdateReducer
-} from './redux/reducers/dailyActivityReducer'
+  dailyActivityUpdateReducer,
+} from "./redux/reducers/dailyActivityReducer";
+
+import {
+  promoCreateReducer,
+  promoListReducer,
+  promoDetailsReducer,
+  promoDeleteReducer,
+  promoUpdateReducer,
+} from "./redux/reducers/promoReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -264,20 +272,26 @@ const reducer = combineReducers({
   dailyActivityDetails: dailyActivityDetailsReducer,
   dailyActivityUpdate: dailyActivityUpdateReducer,
   dailyActivityDelete: dailyActivityDeleteReducer,
-})
+  //promo
+  promoCreate: promoCreateReducer,
+  promoList: promoListReducer,
+  promoDetails: promoDetailsReducer,
+  promoUpdate: promoUpdateReducer,
+  promoDelete: promoDeleteReducer,
+});
 
-const userDetailsFromStorage = localStorage.getItem('userDetail')
-  ? JSON.parse(localStorage.getItem('userDetail'))
-  : {}
+const userDetailsFromStorage = localStorage.getItem("userDetail")
+  ? JSON.parse(localStorage.getItem("userDetail"))
+  : {};
 
 const initialState = {
-  userLogin: { userDetail: userDetailsFromStorage }
-} // here we can get localStorage, token
-const middleware = [thunk]
+  userLogin: { userDetail: userDetailsFromStorage },
+}; // here we can get localStorage, token
+const middleware = [thunk];
 const store = createStore(
   reducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
-)
+);
 
-export default store
+export default store;

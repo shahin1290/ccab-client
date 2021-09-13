@@ -1,41 +1,39 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Message from '../layout/Message'
-import Loader from '../layout/Loader'
-import { getTopPerformances } from '../../redux/actions/performanceAction'
-import Rodal from 'rodal'
-// include styles
-import 'rodal/lib/rodal.css'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Message from "../layout/Message";
+import Loader from "../layout/Loader";
+import { getTopPerformances } from "../../redux/actions/performanceAction";
+
 
 export default function PerformanceRating({ bootcampId }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   //Get Student's Bootcamps
-  const { user } = useSelector((state) => state.userProfile)
+  const { user } = useSelector((state) => state.userProfile);
 
   const { topPerformances, loading, error } = useSelector(
     (state) => state.topPerformanceList
-  )
+  );
 
   useEffect(() => {
-    dispatch(getTopPerformances(bootcampId))
-  }, [dispatch, bootcampId])
+    dispatch(getTopPerformances(bootcampId));
+  }, [dispatch, bootcampId]);
 
   return (
     <>
-      <div className="pb-5 mt-5 mb-5">
-        <div className="auto-container">
+      <div className='pb-5 mt-5 mb-5'>
+        <div className='auto-container'>
           {/* Sec Title */}
-          <div className="title mb-4">
-            <div className="clearfix">
-              <div className="pull-left">
+          <div className='title mb-4'>
+            <div className='clearfix'>
+              <div className='pull-left'>
                 <div>Top 10 Rating</div>
               </div>
             </div>
           </div>
-          <div className="inner-container">
-            <div className="table-responsive">
-              <table className="table">
+          <div className='inner-container'>
+            <div className='table-responsive'>
+              <table className='table'>
                 <thead>
                   <tr>
                     <th>Rating</th>
@@ -47,27 +45,27 @@ export default function PerformanceRating({ bootcampId }) {
                   {loading ? (
                     <Loader />
                   ) : error ? (
-                    <Message variant="danger">{error}</Message>
+                    <Message variant='danger'>{error}</Message>
                   ) : (
                     topPerformances &&
                     topPerformances.length > 0 &&
                     topPerformances.map((performance, index) => (
                       <tr key={performance._id}>
-                        <td className="sub-title">{index + 1}</td>
+                        <td className='sub-title'>{index + 1}</td>
                         <td>
-                          <div class="circular--landscape">
+                          <div class='circular--landscape'>
                             <img
                               src={
                                 performance.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${performance.avatar}`
-                                  : '/images/resource/avatar.svg'
+                                  ? `http://localhost:5001/uploads/Avatar/${performance.avatar}`
+                                  : "/images/resource/avatar.svg"
                               }
-                              alt="avatar"
+                              alt='avatar'
                             />
                           </div>
-                          <div className="sub-text"> {performance.name}</div>
+                          <div className='sub-text'> {performance.name}</div>
                         </td>
-                        <td className="sub-title">{performance.score}</td>
+                        <td className='sub-title'>{performance.score}</td>
                       </tr>
                     ))
                   )}
@@ -78,5 +76,5 @@ export default function PerformanceRating({ bootcampId }) {
         </div>
       </div>
     </>
-  )
+  );
 }

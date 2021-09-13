@@ -17,82 +17,82 @@ import {
   ANSWER_ONE_FAIL,
   ANSWER_UPDATE_STATUS_REQUEST,
   ANSWER_UPDATE_STATUS_SUCCSESS,
-  ANSWER_UPDATE_STATUS_FAIL
-} from '../constences/answerConst'
-import axios from 'axios'
+  ANSWER_UPDATE_STATUS_FAIL,
+} from "../constences/answerConst";
+import axios from "axios";
 
 export const createAnswer =
   (answer, bootcampId, quizId) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ANSWER_CREATE_REQUEST
-      })
+        type: ANSWER_CREATE_REQUEST,
+      });
 
       // Descruct from getState()
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
       const response = await axios.put(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${quizId}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${quizId}`,
         answer,
         config
-      )
+      );
 
       dispatch({
         type: ANSWER_CREATE_SUCCSESS,
         //   payload: console.log("payload:", resconst response.data),
-        payload: response.data
-      })
+        payload: response.data,
+      });
 
       dispatch({
-        type: ANSWER_CREATE_REST
+        type: ANSWER_CREATE_REST,
         // this is turnng back to empty {}, not using the ACTION
-      })
+      });
     } catch (error) {
-      console.log('error:', error.response)
+      console.log("error:", error.response);
       dispatch({
         type: ANSWER_CREATE_FAIL,
         //    payload: error.res
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 //get user's answers
 export const getMyAnswerList = (userId) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: ANSWER_MY_LIST_REQUEST
-    })
+      type: ANSWER_MY_LIST_REQUEST,
+    });
 
     // Descruct from getState()
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
         // "Content-Type": "application/json", // we do not need this
         // becouse, we are sending GET requset!
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
     const response = await axios.get(
-      'https://server.ccab.tech/api/answers/myanswers/' + userId,
+      "http://localhost:5001/api/answers/myanswers/" + userId,
       config
-    )
+    );
     dispatch({
       type: ANSWER_MY_LIST_SUCCSESS,
       // payload: console.log("payload:", response),
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
     //console.log(error.response.data.message);
     dispatch({
@@ -100,125 +100,125 @@ export const getMyAnswerList = (userId) => async (dispatch, getState) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 //get answers list for specific task
 export const getTaskAnswerList =
   (bootcampId, taskId) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ANSWER_LIST_REQUEST
-      })
+        type: ANSWER_LIST_REQUEST,
+      });
 
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}`,
         config
-      )
+      );
 
       dispatch({
         type: ANSWER_LIST_SUCCSESS,
-        payload: response.data.data
+        payload: response.data.data,
         // payload: console.log("payload: ", response.data),
-      })
+      });
     } catch (error) {
       dispatch({
         type: ANSWER_LIST_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 //get specific answer for specific user
 export const getUserAnswer =
   (bootcampId, taskId) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ANSWER_ONE_REQUEST
-      })
+        type: ANSWER_ONE_REQUEST,
+      });
 
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}/myAnswer`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/myAnswer`,
         config
-      )
+      );
 
       dispatch({
         type: ANSWER_ONE_SUCCSESS,
-        payload: response.data
+        payload: response.data,
         // payload: console.log("payload: ", response.data),
-      })
+      });
     } catch (error) {
       dispatch({
         type: ANSWER_ONE_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 export const updateAnswerStatus =
   (bootcampId, taskId, answerId, status) => async (dispatch, getState) => {
     try {
       console.log(bootcampId, taskId, answerId, status);
       dispatch({
-        type: ANSWER_UPDATE_STATUS_REQUEST
-      })
+        type: ANSWER_UPDATE_STATUS_REQUEST,
+      });
 
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
 
       const response = await axios.put(
-        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}/${answerId}`,
+        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/${answerId}`,
         status,
         config
-      )
+      );
 
       dispatch({
         type: ANSWER_UPDATE_STATUS_SUCCSESS,
-        payload: response.data
+        payload: response.data,
         // payload: console.log("payload: ", response.data),
-      })
+      });
     } catch (error) {
       dispatch({
         type: ANSWER_UPDATE_STATUS_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };

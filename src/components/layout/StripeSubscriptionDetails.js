@@ -1,98 +1,98 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getOrderList } from '../../redux/actions/orderAction'
-import axios from 'axios'
-import Rodal from 'rodal'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrderList } from "../../redux/actions/orderAction";
+import axios from "axios";
+import Rodal from "rodal";
 // include styles
-import 'rodal/lib/rodal.css'
-import { Card, Button } from 'react-bootstrap'
-import Loader from './Loader'
-import Message from './Message'
+import "rodal/lib/rodal.css";
+import { Card, Button } from "react-bootstrap";
+import Loader from "./Loader";
+import Message from "./Message";
 
 export default function StripeSubscriptionDetails({
   order,
   showSubscriptionModal,
-  setShowSubscriptionModal
+  setShowSubscriptionModal,
 }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   //Get Student's Bootcamps
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const { userDetail } = useSelector((state) => state.userLogin);
 
   //Get Subscription invoice
   const { invoice, loading, error } = useSelector(
     (state) => state.stripeSubscriptionInvoice
-  )
+  );
 
   //cancel subscription function
   const cancelSubscription = async (subscriptionId, orderBy) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
-    if (window.confirm('Do you really want to cancel?')) {
+    if (window.confirm("Do you really want to cancel?")) {
       const res = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/cancel-subscription`,
+        `http://localhost:5001/api/order/stripe/cancel-subscription`,
         {
           subscriptionId,
-          orderBy
+          orderBy,
         },
         config
-      )
-      setShowSubscriptionModal({ visible: false })
-      dispatch(getOrderList())
+      );
+      setShowSubscriptionModal({ visible: false });
+      dispatch(getOrderList());
     }
-  }
+  };
 
   //functions next payment due
   const formatDate = (date) =>
     new Date(date).getMonth() +
     1 +
-    '/' +
+    "/" +
     new Date(date).getDate() +
-    '/' +
-    new Date(date).getFullYear()
+    "/" +
+    new Date(date).getFullYear();
 
   const nextPaymentAttempt = () =>
-    new Date(invoice.next_payment_attempt * 1000).toString()
+    new Date(invoice.next_payment_attempt * 1000).toString();
 
   return (
     <>
       <div>
         <Rodal
-          animation="zoom"
+          animation='zoom'
           visible={showSubscriptionModal.visible}
           onClose={() => setShowSubscriptionModal({ visible: false })}
           width={500}
         >
-          <Card style={{ width: '90%' }}>
+          <Card style={{ width: "90%" }}>
             {loading ? (
               <Loader />
             ) : error ? (
               <Message>{error}</Message>
             ) : (
-              <Card.Body className="pb-2">
-                <div className="title pb-2">Subscription Details</div>
+              <Card.Body className='pb-2'>
+                <div className='title pb-2'>Subscription Details</div>
 
                 <div>
-                  <span className="sub-title">Customer Id:</span>{' '}
+                  <span className='sub-title'>Customer Id:</span>{" "}
                   {invoice && invoice.customer}
                 </div>
                 <div>
-                  <span className="sub-title">Subscription Id:</span>{' '}
+                  <span className='sub-title'>Subscription Id:</span>{" "}
                   {invoice && invoice.subscription}
                 </div>
-                <div className="pb-5">
-                  <span className="sub-title"> Next Payment:</span>{' '}
+                <div className='pb-5'>
+                  <span className='sub-title'> Next Payment:</span>{" "}
                   {invoice &&
                     invoice.next_payment_attempt &&
                     formatDate(nextPaymentAttempt())}
                 </div>
                 <Button
-                  variant="danger"
+                  variant='danger'
                   onClick={() =>
                     cancelSubscription(order.charge, order.orderBy)
                   }
@@ -105,5 +105,5 @@ export default function StripeSubscriptionDetails({
         </Rodal>
       </div>
     </>
-  )
+  );
 }

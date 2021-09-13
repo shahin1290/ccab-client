@@ -16,216 +16,216 @@ import {
   COURSE_ADD_FAIL,
   ADMIN_COURSE_LIST_REQUEST,
   ADMIN_COURSE_LIST_SUCCESS,
-  ADMIN_COURSE_LIST_FAIL
-} from '../constences/courseConst'
+  ADMIN_COURSE_LIST_FAIL,
+} from "../constences/courseConst";
 
-import axios from 'axios'
+import axios from "axios";
 
 export const getCourseList =
-  (pageNumber = '') =>
+  (pageNumber = "") =>
   async (dispatch, getState) => {
     dispatch({
-      type: COURSE_LIST_REQUEST
-    })
+      type: COURSE_LIST_REQUEST,
+    });
 
     try {
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
       const response = await axios.get(
-        `https://server.ccab.tech/api/bootcamp?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/bootcamp?pageNumber=${pageNumber}`,
         config
-      )
+      );
 
       dispatch({
         type: COURSE_LIST_SUCCESS,
-        payload: response.data.data
+        payload: response.data.data,
         // payload: console.log("payload: ",response.data)
-      })
+      });
     } catch (error) {
       dispatch({
         type: COURSE_LIST_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 export const getCourseListForAdmin =
-  (pageNumber = '') =>
+  (pageNumber = "") =>
   async (dispatch, getState) => {
     try {
       dispatch({
-        type: ADMIN_COURSE_LIST_REQUEST
-      })
+        type: ADMIN_COURSE_LIST_REQUEST,
+      });
 
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
       const response = await axios.get(
-        `https://server.ccab.tech/api/bootcamp/mange?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/bootcamp/mange?pageNumber=${pageNumber}`,
         config
-      )
+      );
 
       dispatch({
         type: ADMIN_COURSE_LIST_SUCCESS,
-        payload: response.data.data
+        payload: response.data.data,
         // payload: console.log("payload: ",response.data)
-      })
+      });
     } catch (error) {
       dispatch({
         type: ADMIN_COURSE_LIST_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 export const getCourseDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: COURSE_DETAILS_REQUEST
-    })
+      type: COURSE_DETAILS_REQUEST,
+    });
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/bootcamp/' + id,
+      "http://localhost:5001/api/bootcamp/" + id,
       config
-    )
+    );
 
     dispatch({
       type: COURSE_DETAILS_SUCCESS,
-      payload: response.data.data
+      payload: response.data.data,
       // payload: console.log("payload: ", response.data),
-    })
+    });
   } catch (error) {
     dispatch({
       type: COURSE_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const createCourse = (course) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: COURSE_ADD_REQUEST
-    })
+      type: COURSE_ADD_REQUEST,
+    });
 
     // Descruct from getState()
     const {
-      userLogin: { userDetail }
-    } = getState()
-    const config = { headers: { Authorization: 'Bearer ' + userDetail.token } }
+      userLogin: { userDetail },
+    } = getState();
+    const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
     const response = await axios.post(
-      'https://server.ccab.tech/api/bootcamp',
+      "http://localhost:5001/api/bootcamp",
       course,
       config
-    )
+    );
 
     // console.log("response:", response)
 
     dispatch({
       type: COURSE_ADD_SUCCESS,
       //   payload: console.log("payload:", resconst response.data),
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
-    console.log('error:', error)
+    console.log("error:", error);
     dispatch({
       type: COURSE_ADD_FAIL,
       //    payload: error.res
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const deleteCourse = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: COURSE_DELETE_REQUEST
-    })
+      type: COURSE_DELETE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
-    await axios.delete('https://server.ccab.tech/api/bootcamp/' + id, config)
+    await axios.delete("http://localhost:5001/api/bootcamp/" + id, config);
 
     dispatch({
-      type: COURSE_DELETE_SUCCESS
-    })
+      type: COURSE_DELETE_SUCCESS,
+    });
   } catch (error) {
     dispatch({
       type: COURSE_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 // update course
 export const updateCourse = (course, id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: COURSE_UPDATE_REQUEST
-    })
+      type: COURSE_UPDATE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     //console.log(course);
-    await axios.put('https://server.ccab.tech/api/bootcamp/' + id, course, config)
+    await axios.put("http://localhost:5001/api/bootcamp/" + id, course, config);
 
     dispatch({
-      type: COURSE_UPDATE_SUCCESS
-    })
+      type: COURSE_UPDATE_SUCCESS,
+    });
   } catch (error) {
     // console.log(error.response.data);
     dispatch({
@@ -233,7 +233,7 @@ export const updateCourse = (course, id) => async (dispatch, getState) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
