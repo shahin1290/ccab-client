@@ -175,7 +175,7 @@ export const updatePromo = (req, id) => async (dispatch, getState) => {
     };
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/promo/${id}`, req, config);
+    await axios.put(`http://localhost:5001/api/promo/${id}`, req);
 
     dispatch({
       type: PROMO_UPDATE_SUCCESS,

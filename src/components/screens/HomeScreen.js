@@ -1,37 +1,39 @@
-import React, { useState } from 'react'
-import 'malihu-custom-scrollbar-plugin'
-import TopCourses from './../layout/TopCourses'
-import Pricing from './../../components/screens/Pricing'
-import { Row, Col, ProgressBar, Container } from 'react-bootstrap'
-import RegisterScreen from '../screens/RegisterScreen'
-import homeBanner from './../../assets/images/background/home-banner.jpg'
-import OnlineEducationProspect from '../layout/OnlineEducationProspect'
-import HomeCarousel from '../layout/HomeCarousel'
-import RatingSection from '../layout/RatingSection'
-import ContactSection from '../layout/ContactSection'
-import HomeVideoSection from '../layout/HomeVideoSection'
-import CurriculamStepsBar from '../layout/CurriculamStepsBar'
-import StudentReview from '../layout/StudentReview'
-import AchievementSection from '../layout/AchievementSection'
-import ProgramSection from '../layout/ProgramSection'
-import FaqSection from '../layout/FaqSection'
-import Particles from '../layout/Particles'
-import { Link } from 'react-router-dom'
-import Rodal from 'rodal'
+import React, { useState } from "react";
+import "malihu-custom-scrollbar-plugin";
+import TopCourses from "./../layout/TopCourses";
+import Pricing from "./../../components/screens/Pricing";
+import { Row, Col, ProgressBar, Container } from "react-bootstrap";
+import RegisterScreen from "../screens/RegisterScreen";
+import homeBanner from "./../../assets/images/background/home-banner.jpg";
+import OnlineEducationProspect from "../layout/OnlineEducationProspect";
+import HomeCarousel from "../layout/HomeCarousel";
+import RatingSection from "../layout/RatingSection";
+import ContactSection from "../layout/ContactSection";
+import HomeVideoSection from "../layout/HomeVideoSection";
+import CurriculamStepsBar from "../layout/CurriculamStepsBar";
+import StudentReview from "../layout/StudentReview";
+import AchievementSection from "../layout/AchievementSection";
+import ProgramSection from "../layout/ProgramSection";
+import FaqSection from "../layout/FaqSection";
+import Particles from "../layout/Particles";
+import { Link } from "react-router-dom";
+import Rodal from "rodal";
 // include styles
-import 'rodal/lib/rodal.css'
-import ContactForm from '../layout/ContactForm'
+import "rodal/lib/rodal.css";
+import ContactForm from "../layout/ContactForm";
+import Typewriter from "typewriter-effect";
+import Reviews from "../layout/Reviews";
 
 export default function HomeScreen({ match }) {
-  const [showModal, setShowModal] = useState({ visible: false })
+  const [showModal, setShowModal] = useState({ visible: false });
 
   return (
     <>
-      <div className="home">
+      <div className='home'>
         {/* <HomeCarousel /> */}
 
-        <section className="home-hero-banner ">
-          <div class="quote--container banner-quote">
+        <section className='home-hero-banner '>
+          {/* <div class="quote--container banner-quote">
             <p class="quote">
               Your future is created by what you do{' '}
               <span class="quote--highlight">TODAY</span> not tomorrow
@@ -42,30 +44,42 @@ export default function HomeScreen({ match }) {
           <div className="hero-banner pt-5">
             <div>Brighten your future</div>
             <div>with codify College</div>
+          </div> */}
+
+          <div className='typewriter'>
+            <Typewriter
+              options={{
+                strings: ["Brighten your future with codify college"],
+                autoStart: true,
+                loop: true,
+              }}
+              className='typewriter'
+            />
           </div>
-          <span style={{ width: '100%', height: '300px' }}>
+
+          {/* <span style={{ width: "100%", height: "300px" }}>
             <Particles />
-          </span>
+          </span> */}
         </section>
 
         {/* Education Section Two */}
 
-        <Link to="/get-start" className="handle handle1"></Link>
+        <Link to='/get-start' className='handle handle1'></Link>
         <a
-          href="https://meetings.hubspot.com/sl-melad"
-          className="handle handle2"
-          target="_blank"
+          href='https://meetings.hubspot.com/sl-melad'
+          className='handle handle2'
+          target='_blank'
         ></a>
         <Link
-          className="handle handle3"
+          className='handle handle3'
           onClick={() => setShowModal({ visible: true })}
         ></Link>
 
         <Rodal
-          animation="rotate"
+          animation='rotate'
           visible={showModal.visible}
           onClose={() => setShowModal({ visible: false })}
-          width="900"
+          width='900'
         >
           <ContactForm />
         </Rodal>
@@ -79,8 +93,12 @@ export default function HomeScreen({ match }) {
 
         <CurriculamStepsBar />
 
-        <StudentReview />
-        
+        <ContactSection />
+
+        <Reviews />
+
+        {/* <StudentReview /> */}
+
         <Pricing />
 
         <OnlineEducationProspect />
@@ -117,17 +135,9 @@ export default function HomeScreen({ match }) {
           )} 
         </Container> */}
 
-     
         {/* Achievement Section Two */}
 
         {/* End Achievement Section */}
-
-        {/* Reviews Section */}
-        {/* <div style={{width :"100% ;"}} className="overflow-hidden py-2">
-           <Reviews/>
-        </div> */}
-
-        {/* End of Reviews Section */}
 
         {/* How IT Works Section */}
         {/* <section
@@ -204,25 +214,24 @@ export default function HomeScreen({ match }) {
 
         {/* <AchievementSection />
 
-        <ContactSection /> */}
 
         <FaqSection />
 
         {/* Rating section */}
         <RatingSection />
 
-        <div className="auto-container text-center  mb-3 mt-5">
+        <div className='auto-container text-center  mb-3 mt-5'>
           <img
-            width="75"
-            className="pr-3"
-            src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+            width='75'
+            className='pr-3'
+            src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
           />
           <img
-            width="250"
-            src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+            width='250'
+            src='https://cdn.jotfor.ms/images/credit-card-logo.png'
           />
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -205,7 +205,7 @@ body {
 .sub-title3 {
   font-size: 1.8rem !important;
   font-weight: 400 !important;
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+  font-family: "Comic Sans MS", "Comic Sans", cursive !important;
   text-shadow: none !important;
 }
 
@@ -277,12 +277,70 @@ pre {
   margin-top: 20px;
   font-family: Inter;
 }
+
+/* contact section */
 .contact-text {
   color: #ffffff;
   transition: transform 1s;
 }
 .contact-text:hover {
   transform: scale(1.1);
+}
+.advisor-image {
+  height: 150px;
+  background: url(assets/images/background/advisor.jpg) center;
+  background-repeat: no-repeat;
+  background-size: 100% 250px;
+  width: 380px;
+}
+
+.advisor-text1 {
+  height: 150px;
+  background: black;
+  width: 550px;
+  border-radius: 30px;
+}
+
+.advisor-text2 {
+  height: 50px;
+  background: #bebebe;
+  width: 550px;
+  border-radius: 30px 30px 0 0;
+}
+
+.inner {
+  width: 780px;
+  margin: 0 auto;
+}
+
+.inner a {
+  float: left;
+}
+
+.button {
+  position: relative;
+  width: auto;
+  height: 40px;
+  color: #69686885;
+  border-radius: 20px;
+  border: 3px solid #2d9c6b;
+  background: black;
+  cursor: pointer;
+}
+
+.button:hover span {
+  color: #2d9c6b;
+}
+
+.button span {
+  font-size: 12px;
+  text-transform: none;
+  color: #aaa;
+}
+
+.advisor-icon {
+  color: #2d9c6b;
+  font-size: 33px;
 }
 
 .fa-online-education {
@@ -305,7 +363,7 @@ pre {
 }
 
 .star-ratings-sprite {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
     repeat-x;
   height: 21px;
   line-height: 0;
@@ -315,7 +373,7 @@ pre {
   margin: 0 auto;
 }
 .star-ratings-sprite-rating {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
     repeat-x;
   background-position: 0 100%;
   float: left;
@@ -451,7 +509,7 @@ pre {
 
 .slider:before {
   position: absolute;
-  content: '';
+  content: "";
   height: 26px;
   width: 26px;
   left: 4px;
@@ -487,7 +545,7 @@ input:checked + .slider:before {
 /*======================================
 =            NO GUTTER CODE            =
 ======================================*/
-.no-gutter > [class*='col-'] {
+.no-gutter > [class*="col-"] {
   padding-right: 0;
   padding-left: 0;
   margin-left: 0;
@@ -516,7 +574,7 @@ input:checked + .slider:before {
 }
 
 .curriculum-project ul li::before {
-  content: '\2022';
+  content: "\2022";
   color: #ea5573;
   font-weight: bold;
   display: inline-block;
@@ -846,7 +904,7 @@ input:checked + .slider:before {
   border-radius: 5px 5px 0 0;
 }
 .service-circle:before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -864,7 +922,7 @@ input:checked + .slider:before {
 }
 
 .res-circle::after {
-  content: '';
+  content: "";
   display: block;
   padding-bottom: 100%;
 }
@@ -930,7 +988,7 @@ input:checked + .slider:before {
   background: #fdf1cd;
 }
 .service-list li:before {
-  content: '✓';
+  content: "✓";
   color: #eb6c85;
   padding: 5px;
 }
@@ -1000,20 +1058,20 @@ input:checked + .slider:before {
 }
 
 .handle1:after {
-  content: 'Study Now';
+  content: "Study Now";
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
 .handle2:after {
-  content: 'Book an Appointment';
+  content: "Book an Appointment";
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
 
 .handle3:after {
-  content: 'Ask an Advisor';
+  content: "Ask an Advisor";
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
@@ -1089,7 +1147,7 @@ input:checked + .slider:before {
 .banner-quote {
   position: absolute;
   top: 0;
-  font-family: 'EB Garamond';
+  font-family: "EB Garamond";
   font-size: 32px;
   line-height: 1.4rem;
   height: 100%;
@@ -1108,12 +1166,12 @@ input:checked + .slider:before {
   letter-spacing: 0.03em;
 }
 .quote:before {
-  content: '“';
+  content: "“";
   position: absolute;
   left: -0.7em;
 }
 .quote:after {
-  content: '”';
+  content: "”";
   margin-right: -1rem;
 }
 
@@ -1128,8 +1186,16 @@ input:checked + .slider:before {
 }
 
 .quote--author {
-  font-family: 'Open Sans Condensed';
+  font-family: "Open Sans Condensed";
   font-size: 0.8rem;
   text-align: right;
   font-weight: 300;
+}
+
+.typewriter {
+  font-size: calc(10px + 2vw);
+  font-family: "VT323", monospace, sans-serif;
+  color: #3f3;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

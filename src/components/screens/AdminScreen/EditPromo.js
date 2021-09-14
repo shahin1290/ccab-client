@@ -52,7 +52,8 @@ export default function UpdatePromo({ match }) {
     setDays(promo && promo.days);
     setHours(promo && promo.hours);
     setMinutes(promo && promo.minutes);
-    setMinutes(promo && promo.percentages);
+    setPercentages(promo && promo.percentages);
+    setShow(promo && promo.show);
   };
 
   /********* State And Var ************/
@@ -62,6 +63,7 @@ export default function UpdatePromo({ match }) {
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [percentages, setPercentages] = useState();
+  const [show, setShow] = useState();
 
   /*******************/
 
@@ -96,6 +98,8 @@ export default function UpdatePromo({ match }) {
           days,
           hours,
           minutes,
+          percentages,
+          show,
         },
         ID
       )
