@@ -24,6 +24,7 @@
     "pushid": "^1.0.0",
     "rc-slider": "^9.7.2",
     "react": "^17.0.1",
+    "react-alice-carousel": "^2.5.1",
     "react-bootstrap": "^1.4.3",
     "react-chartjs-2": "^3.0.3",
     "react-codemirror2": "^7.2.1",

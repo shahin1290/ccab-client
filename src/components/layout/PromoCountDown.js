@@ -35,20 +35,17 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return (
-      <section
-        className='position-sticky'
-        style={{ height: "70px", background: "#eb6c85" }}
-      >
-        <div className='auto-container d-flex justify-content-between title text-white p-2'>
-          <div>Get 20% discount today</div>
+      <section style={{ height: "40px", background: "#eb6c85" }}>
+        <div className='auto-container d-flex justify-content-between sub-title text-black p-1'>
+          <div>Get more than 20% discount today</div>
           <span>
-            <span>{days}</span> <span className='text-danger ml-1'>D</span>{" "}
+            <span>{days}</span> <span className='text-white ml-1'>D</span>{" "}
             <span className='pl-4'>{hours}</span>{" "}
-            <span className='text-danger ml-1'>H</span>{" "}
+            <span className='text-white ml-1'>H</span>{" "}
             <span className='pl-4'>{minutes}</span>
-            <span className='text-danger ml-1'>M</span>
+            <span className='text-white ml-1'>M</span>
             <span className='pl-4'>{seconds}</span>{" "}
-            <span className='text-danger'>S</span>
+            <span className='text-white'>S</span>
           </span>
         </div>
       </section>

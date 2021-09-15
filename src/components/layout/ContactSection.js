@@ -16,9 +16,9 @@ const ContactSection = () => {
       }}
     >
       <div className='auto-container'>
-        <div className='d-flex'>
-          <div className='advisor-image'></div>
-          <div>
+        <Row className='d-flex justify-content-center'>
+          <Col md={4} className='advisor-image mb-3'></Col>
+          <Col md={6}>
             <div
               className='advisor-text1 pt-3 pl-3'
               style={{ fontWeight: "400" }}
@@ -47,8 +47,8 @@ const ContactSection = () => {
               </div>
             </div>
             <div className='advisor-text2'></div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
       <Rodal
         animation='rotate'

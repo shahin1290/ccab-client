@@ -50,6 +50,13 @@ const CheckoutForm = ({ match, history }) => {
   const { service } = useSelector((state) => state.serviceDetails);
 
   const {
+    promos,
+    success: promoSuccess,
+    loading: promoLoading,
+    error: promoError,
+  } = useSelector((state) => state.promoList);
+
+  const {
     loading,
     success: orderSuccess,
     error,
@@ -293,7 +300,8 @@ const CheckoutForm = ({ match, history }) => {
             createOrder(`subscription ${plan.stripeSubscriptionId}`, {
               token: subscriptionId,
               amount: (
-                plan.price *
+                (Number(plan.price) +
+                  (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
                 sekToEUR *
                 currency.data.amount *
                 100
@@ -307,7 +315,12 @@ const CheckoutForm = ({ match, history }) => {
 
         if (subscription) {
           amount = Math.round(
-            plan.price * sekToEUR * currency.data.amount * AmountOfWeeks * 100
+            (Number(plan.price) +
+              (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
+              sekToEUR *
+              currency.data.amount *
+              AmountOfWeeks *
+              100
           );
         }
 
@@ -449,7 +462,11 @@ const CheckoutForm = ({ match, history }) => {
       setWidgetLoaded(false);
     }
     if (subscription) {
-      const amount = plan.price * sekToEUR * AmountOfWeeks;
+      const amount =
+        (Number(plan.price) +
+          (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
+        sekToEUR *
+        AmountOfWeeks;
       dispatch(
         createKlarnaSession(
           {
@@ -657,7 +674,12 @@ const CheckoutForm = ({ match, history }) => {
                                         <strong>
                                           {currencySuccess &&
                                             `${Math.round(
-                                              plan.price *
+                                              (Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 0
+                                                  : 200)) *
                                                 sekToEUR *
                                                 currency.data.amount *
                                                 AmountOfWeeks
@@ -669,9 +691,14 @@ const CheckoutForm = ({ match, history }) => {
                                         <strong>
                                           {currencySuccess &&
                                             `${Math.round(
-                                              plan.price *
-                                                sekToEUR *
-                                                currency.data.amount
+                                              Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 0
+                                                  : 200) *
+                                                  sekToEUR *
+                                                  currency.data.amount
                                             )}  ${currency.data.currency} (${
                                               plan.period
                                             })`}

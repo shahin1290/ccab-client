@@ -46,20 +46,28 @@ export default function HomeScreen({ match }) {
             <div>with codify College</div>
           </div> */}
 
-          <div className='typewriter'>
-            <Typewriter
-              options={{
-                strings: ["Brighten your future with codify college"],
-                autoStart: true,
-                loop: true,
-              }}
-              className='typewriter'
-            />
+          <div class='quote--container banner-quote'>
+            <p class='quote'>
+              <div className='typewriter'>
+                <Typewriter
+                  options={{
+                    strings: [
+                      '<span style="color: #CC8C33;">apply</span> ( <span style="color: #C94F45;">"Codify College"</span > ) <span style="color: #CC8C33;">.then </span>(<span style="color: #C94F45;">"Brighten your future"</span>)',
+                    ],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                  className='typewriter'
+                />
+              </div>
+            </p>
           </div>
 
-          {/* <span style={{ width: "100%", height: "300px" }}>
+          {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}
+
+          <span style={{ width: "100%", height: "300px" }}>
             <Particles />
-          </span> */}
+          </span>
         </section>
 
         {/* Education Section Two */}

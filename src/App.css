@@ -290,26 +290,24 @@ pre {
   height: 150px;
   background: url(assets/images/background/advisor.jpg) center;
   background-repeat: no-repeat;
-  background-size: 100% 250px;
-  width: 380px;
+  background-size: 100% 26vh;
 }
 
 .advisor-text1 {
   height: 150px;
   background: black;
-  width: 550px;
+  width: 50vh;
   border-radius: 30px;
 }
 
 .advisor-text2 {
   height: 50px;
   background: #bebebe;
-  width: 550px;
+  width: 50vh;
   border-radius: 30px 30px 0 0;
 }
 
 .inner {
-  width: 780px;
   margin: 0 auto;
 }
 
@@ -339,8 +337,9 @@ pre {
 }
 
 .advisor-icon {
-  color: #2d9c6b;
+  color: rgb(45, 156, 107);
   font-size: 33px;
+  text-shadow: 0px -1px 7px rgba(0, 156, 107, 1);
 }
 
 .fa-online-education {
@@ -863,8 +862,8 @@ input:checked + .slider:before {
 .service-banner-container {
   display: inline-block;
   text-align: center;
-  height: 600px;
-  background: url(assets/images/services/serviceWallpaper.png) no-repeat 0 20%;
+  height: 100vh;
+  background: url(assets/images/services/red5.jpg) no-repeat 0 10%;
   background-size: cover;
   width: 100%;
   position: relative;
@@ -1107,10 +1106,7 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   height: 500px;
-  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
-    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
-    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
-    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+  background: #17182f;
   position: relative;
 }
 
@@ -1146,33 +1142,18 @@ input:checked + .slider:before {
 
 .banner-quote {
   position: absolute;
-  top: 0;
-  font-family: "EB Garamond";
-  font-size: 32px;
+  top: 20%;
+  font-size: 50px;
+  font-weight: 700;
   line-height: 1.4rem;
   height: 100%;
-  padding: 0.5rem;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: auto;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -webkit-font-kerning: normal;
-  font-kerning: normal;
   color: #fff;
+  text-align: center;
 }
 
 .quote {
   position: relative;
   letter-spacing: 0.03em;
-}
-.quote:before {
-  content: "“";
-  position: absolute;
-  left: -0.7em;
-}
-.quote:after {
-  content: "”";
-  margin-right: -1rem;
 }
 
 .quote--container {
@@ -1190,12 +1171,4 @@ input:checked + .slider:before {
   font-size: 0.8rem;
   text-align: right;
   font-weight: 300;
-}
-
-.typewriter {
-  font-size: calc(10px + 2vw);
-  font-family: "VT323", monospace, sans-serif;
-  color: #3f3;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
