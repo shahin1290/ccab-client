@@ -13,75 +13,75 @@ import {
   APPOINTMENT_UPDATE_FAIL,
   APPOINTMENT_DELETE_REQUEST,
   APPOINTMENT_DELETE_SUCCESS,
-  APPOINTMENT_DELETE_FAIL
-} from '../constences/appointmentConst'
+  APPOINTMENT_DELETE_FAIL,
+} from "../constences/appointmentConst";
 
-import axios from 'axios'
+import axios from "axios";
 
 export const createAppointment =
   (appointment) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: APPOINTMENT_ADD_REQUEST
-      })
+        type: APPOINTMENT_ADD_REQUEST,
+      });
 
       // Descruct from getState()
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
-        headers: { Authorization: 'Bearer ' + userDetail.token }
-      }
+        headers: { Authorization: "Bearer " + userDetail.token },
+      };
 
       const response = await axios.post(
-        'https://server.ccab.tech/api/appointment',
+        "http://localhost:5001/api/appointment",
         appointment,
         config
-      )
+      );
 
       // console.log("response:", response)
 
       dispatch({
         type: APPOINTMENT_ADD_SUCCESS,
         //   payload: console.log("payload:", resconst response.data),
-        payload: response.data
-      })
+        payload: response.data,
+      });
     } catch (error) {
-      console.log('error:', error)
+      console.log("error:", error);
       dispatch({
         type: APPOINTMENT_ADD_FAIL,
         //    payload: error.res
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 export const getAppointments = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_LIST_REQUEST
-    })
+      type: APPOINTMENT_LIST_REQUEST,
+    });
 
     // Descruct from getState()
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
     const response = await axios.get(
-      'https://server.ccab.tech/api/appointment/',
+      "http://localhost:5001/api/appointment/",
       config
-    )
+    );
     dispatch({
       type: APPOINTMENT_LIST_SUCCESS,
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
     // console.log("error:", error)
     dispatch({
@@ -90,103 +90,103 @@ export const getAppointments = () => async (dispatch, getState) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const getAppointmentDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_DETAILS_REQUEST
-    })
+      type: APPOINTMENT_DETAILS_REQUEST,
+    });
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/appointment/${id}`,
+      `http://localhost:5001/api/appointment/${id}`,
       config
-    )
+    );
 
     dispatch({
       type: APPOINTMENT_DETAILS_SUCCESS,
-      payload: response.data.data
+      payload: response.data.data,
       // payload: console.log("payload: ", response.data),
-    })
+    });
   } catch (error) {
-    console.log(error.response.data.message)
+    console.log(error.response.data.message);
     dispatch({
       type: APPOINTMENT_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const deleteAppointment = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_DELETE_REQUEST
-    })
+      type: APPOINTMENT_DELETE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
-    await axios.delete(`https://server.ccab.tech/api/appointment/${id}`, config)
+    await axios.delete(`http://localhost:5001/api/appointment/${id}`, config);
 
     dispatch({
-      type: APPOINTMENT_DELETE_SUCCESS
-    })
+      type: APPOINTMENT_DELETE_SUCCESS,
+    });
   } catch (error) {
     dispatch({
       type: APPOINTMENT_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 // update Request
 export const updateAppointment = (req, id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: APPOINTMENT_UPDATE_REQUEST
-    })
+      type: APPOINTMENT_UPDATE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     //console.log(REQUEST);
-    await axios.put(`https://server.ccab.tech/api/appointment/${id}`, req, config)
+    await axios.put(`http://localhost:5001/api/appointment/${id}`, req, config);
 
     dispatch({
-      type: APPOINTMENT_UPDATE_SUCCESS
-    })
+      type: APPOINTMENT_UPDATE_SUCCESS,
+    });
   } catch (error) {
     // console.log(error.response.data);
     dispatch({
@@ -194,7 +194,7 @@ export const updateAppointment = (req, id) => async (dispatch, getState) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};

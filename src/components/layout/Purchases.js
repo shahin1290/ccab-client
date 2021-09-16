@@ -1,98 +1,96 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Message from '../layout/Message'
-import Loader from '../layout/Loader'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Message from "../layout/Message";
+import Loader from "../layout/Loader";
 import {
   getOrderList,
-  getStripeSubscriptionInvoice
-} from '../../redux/actions/orderAction'
-import { getDate } from '../../util/getDate'
-import axios from 'axios'
-import { plans } from '../../util/plans'
-import StripeSubscriptionDetails from './StripeSubscriptionDetails'
+  getStripeSubscriptionInvoice,
+} from "../../redux/actions/orderAction";
+import { getDate } from "../../util/getDate";
+import axios from "axios";
+import { plans } from "../../util/plans";
+import StripeSubscriptionDetails from "./StripeSubscriptionDetails";
 
 export default function Purchases() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [showSubscriptionModal, setShowSubscriptionModal] = useState({
-    visible: false
-  })
+    visible: false,
+  });
 
   //Get Student's Bootcamps
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const { userDetail } = useSelector((state) => state.userLogin);
 
   //Get Subscription invoice
-  const { invoice } = useSelector((state) => state.stripeSubscriptionInvoice)
+  const { invoice } = useSelector((state) => state.stripeSubscriptionInvoice);
 
   //redux state
   const {
     orderList,
     loading: orderLoading,
-    error: orderError
-  } = useSelector((state) => state.orderList)
+    error: orderError,
+  } = useSelector((state) => state.orderList);
 
   //useEffect
   useEffect(() => {
-    dispatch(getOrderList())
-  }, [dispatch])
+    dispatch(getOrderList());
+  }, [dispatch]);
 
   //cancel subscription function
   const cancelSubscription = async (subscriptionId) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
-    if (window.confirm('Do you really want to cancel?')) {
+    if (window.confirm("Do you really want to cancel?")) {
       const res = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/cancel-subscription`,
+        `http://localhost:5001/api/order/stripe/cancel-subscription`,
         {
-          subscriptionId
+          subscriptionId,
         },
         config
-      )
-      dispatch(getOrderList())
+      );
+      dispatch(getOrderList());
     }
-  }
+  };
 
   //get the subscription details
   const subscriptionDetails = (subs) => {
-    const subscriptionId = subs.split(' ')[1]
+    const subscriptionId = subs.split(" ")[1];
 
     const plan = plans.find(
       (plan) => plan.stripeSubscriptionId === subscriptionId
-    )
+    );
 
     if (plan._id) {
-      const { name, period } = plan
-      return `${period} ${name}`
+      const { name, period } = plan;
+      return `${period} ${name}`;
     }
-  }
-
-
+  };
 
   return (
     <>
-      <div className="pb-5 pt-5 mb-5">
-        <div className="auto-container">
+      <div className='pb-5 pt-5 mb-5'>
+        <div className='auto-container'>
           {/* Sec Title */}
-          <div className="title mb-4">
-            <div className="clearfix">
-              <div className="pull-left">
+          <div className='title mb-4'>
+            <div className='clearfix'>
+              <div className='pull-left'>
                 <div>My Purchases</div>
               </div>
             </div>
           </div>
-          <div className="inner-container">
-            <div className="table-responsive">
+          <div className='inner-container'>
+            <div className='table-responsive'>
               {orderLoading ? (
                 <Loader />
               ) : orderError ? (
-                <Message variant="danger">{orderError}</Message>
+                <Message variant='danger'>{orderError}</Message>
               ) : (
-                <table className="table">
+                <table className='table'>
                   <thead>
                     <tr>
                       <th>#</th>
@@ -107,8 +105,8 @@ export default function Purchases() {
                       orderList.map((order, index) => (
                         <tr key={order._id}>
                           <td>{index + 1}</td>
-                          <td className="text-capitalize">
-                            {order.course.includes('subscription')
+                          <td className='text-capitalize'>
+                            {order.course.includes("subscription")
                               ? subscriptionDetails(order.course)
                               : order.course}
                           </td>
@@ -118,30 +116,30 @@ export default function Purchases() {
                             {order.amount} ({order.currency})
                           </td>
 
-                          <td className="d-flex">
-                            {order.orderStatus === 'Active' ? (
+                          <td className='d-flex'>
+                            {order.orderStatus === "Active" ? (
                               <>
-                                <div className="text-info font-weight-bold">
+                                <div className='text-info font-weight-bold'>
                                   {order.orderStatus}
                                 </div>
                                 <button
-                                  className="bg-info ml-4 text-white p-1"
+                                  className='bg-info ml-4 text-white p-1'
                                   onClick={() => {
                                     dispatch(
                                       getStripeSubscriptionInvoice(
                                         order.orderBy
                                       )
-                                    )
+                                    );
                                     setShowSubscriptionModal({
-                                      visible: true
-                                    })
+                                      visible: true,
+                                    });
                                   }}
                                 >
                                   view
                                 </button>
                               </>
-                            ) : order.orderStatus === 'Canceled' ? (
-                              <div className="text-danger font-weight-bold">
+                            ) : order.orderStatus === "Canceled" ? (
+                              <div className='text-danger font-weight-bold'>
                                 {order.orderStatus}
                               </div>
                             ) : (
@@ -160,7 +158,7 @@ export default function Purchases() {
                         </tr>
                       ))
                     ) : (
-                      <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
+                      <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
                         You Don't have Any Orders yet !
                       </p>
                     )}
@@ -172,5 +170,5 @@ export default function Purchases() {
         </div>
       </div>
     </>
-  )
+  );
 }

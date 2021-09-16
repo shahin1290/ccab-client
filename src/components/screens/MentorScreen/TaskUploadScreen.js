@@ -1,123 +1,123 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { toast, ToastContainer } from 'react-toastify'
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import Message from '../../layout/Message'
-import { TASK_ADD_REST } from '../../../redux/constences/taskConst'
-import { createTask, getTaskList } from '../../../redux/actions/taskAction'
-import Loader from '../../layout/Loader'
-import download from 'downloadjs'
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import Message from "../../layout/Message";
+import { TASK_ADD_REST } from "../../../redux/constences/taskConst";
+import { createTask, getTaskList } from "../../../redux/actions/taskAction";
+import Loader from "../../layout/Loader";
+import download from "downloadjs";
 
 export default function TaskUploadScreen({ match }) {
-  const { bootcampId, dayId } = match.params
-  const taskCreate = useSelector((state) => state.taskCreate)
-  const { success: createSuccess, task, error: CreateTaskError } = taskCreate
+  const { bootcampId, dayId } = match.params;
+  const taskCreate = useSelector((state) => state.taskCreate);
+  const { success: createSuccess, task, error: CreateTaskError } = taskCreate;
 
-  console.log(taskCreate)
+  console.log(taskCreate);
 
-  const [succ, setSucc] = useState(createSuccess)
+  const [succ, setSucc] = useState(createSuccess);
 
   // We need to verify the user is logged in
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userDetail } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userDetail } = userLogin;
 
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const taskList = useSelector((state) => state.taskList)
-  const { tasks, loading, error } = taskList
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const taskList = useSelector((state) => state.taskList);
+  const { tasks, loading, error } = taskList;
 
   useEffect(() => {
     if (!userDetail) {
-      history.push('/')
+      history.push("/");
     } else if (createSuccess) {
-      toast.success(task.data.projectName + ', successfully created', {
-        position: toast.POSITION.BOTTOM_RIGHT
-      })
+      toast.success(task.data.projectName + ", successfully created", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
 
-      setSucc(false)
+      setSucc(false);
     }
-    dispatch(getTaskList(bootcampId))
-  }, [dispatch, userDetail, createSuccess, history])
+    dispatch(getTaskList(bootcampId));
+  }, [dispatch, userDetail, createSuccess, history]);
 
   // Clear Error message
   useEffect(() => {
-    dispatch({ type: TASK_ADD_REST })
-  }, [dispatch])
+    dispatch({ type: TASK_ADD_REST });
+  }, [dispatch]);
 
-  const [AssignmentName, setAssignmentName] = useState('')
-  const [description, setDescription] = useState('')
-  const [err, setErr] = useState('')
+  const [AssignmentName, setAssignmentName] = useState("");
+  const [description, setDescription] = useState("");
+  const [err, setErr] = useState("");
   //form file lable state
-  const [DocumentLable, setDocumentLable] = useState('PDF file...')
+  const [DocumentLable, setDocumentLable] = useState("PDF file...");
   // file holder
-  const [File, setFile] = useState([])
+  const [File, setFile] = useState([]);
 
   // Functions......................>
   function clearFileInput(ctrl) {
     try {
-      ctrl.value = null
+      ctrl.value = null;
     } catch (ex) {}
     if (ctrl.value) {
-      ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl)
+      ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
     }
   }
 
   const _FileSubmitHandler = (e) => {
     if (e.target.files.length) {
-      setDocumentLable(e.target.files[0].name)
-      setFile(e.target.files[0])
-      setErr('')
+      setDocumentLable(e.target.files[0].name);
+      setFile(e.target.files[0]);
+      setErr("");
     }
-    clearFileInput(document.getElementById('pdf-file'))
-  }
+    clearFileInput(document.getElementById("pdf-file"));
+  };
 
   const submitHanlder = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (File.name && AssignmentName && description) {
-      var form_data = new FormData()
-      form_data.append('myfile', File)
-      form_data.append('AssignmentName', AssignmentName)
-      form_data.append('description', description)
+      var form_data = new FormData();
+      form_data.append("myfile", File);
+      form_data.append("AssignmentName", AssignmentName);
+      form_data.append("description", description);
 
-      dispatch(createTask(form_data, bootcampId, dayId))
+      dispatch(createTask(form_data, bootcampId, dayId));
 
       //clear the fields
-      setFile({})
-      setAssignmentName('')
-      setDescription('')
-      setErr('')
-      setDocumentLable('PDF file...')
-      clearFileInput(document.getElementById('pdf-file'))
+      setFile({});
+      setAssignmentName("");
+      setDescription("");
+      setErr("");
+      setDocumentLable("PDF file...");
+      clearFileInput(document.getElementById("pdf-file"));
     } else {
-      setErr('Please Fill In All The Fields')
+      setErr("Please Fill In All The Fields");
     }
 
     // setAssignmentLink("");
-  }
+  };
 
   //download task
   const config = {
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + userDetail.token
-    }
-  }
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + userDetail.token,
+    },
+  };
 
   const DownloadAssignmentHandler = async (task) => {
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      "http://localhost:5001/api/tasks/" + task._id + "/download",
       config
-    )
-    const blob = await res.blob()
-    download(blob, task.projectName + '-Assignment')
-  }
+    );
+    const blob = await res.blob();
+    download(blob, task.projectName + "-Assignment");
+  };
 
   return (
-    <div className="py-5">
-      <div div className="title mb-4">
+    <div className='py-5'>
+      <div div className='title mb-4'>
         Task uploading
       </div>
 
@@ -127,48 +127,48 @@ export default function TaskUploadScreen({ match }) {
             {err || CreateTaskError ? (
               <Message>{err || CreateTaskError}</Message>
             ) : null}
-            <Form.Group controlId="title">
+            <Form.Group controlId='title'>
               <Form.Label>Assignment Name</Form.Label>
               <Form.Control
-                type="text"
+                type='text'
                 value={AssignmentName}
                 onChange={(e) => {
-                  setAssignmentName(e.target.value)
+                  setAssignmentName(e.target.value);
                 }}
               />
             </Form.Group>
 
-            <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Group controlId='exampleForm.ControlTextarea1'>
               <Form.Label>Assignment Description</Form.Label>
               <Form.Control
-                as="textarea"
+                as='textarea'
                 rows={3}
                 value={description}
                 onChange={(e) => {
-                  setDescription(e.target.value)
+                  setDescription(e.target.value);
                 }}
               />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Assignment Document</Form.Label>
-              <Form.File id="custom-file" custom>
-                <Form.File.Input onChange={_FileSubmitHandler} id="pdf-file" />
-                <Form.File.Label data-browse="Upload File">
+              <Form.File id='custom-file' custom>
+                <Form.File.Input onChange={_FileSubmitHandler} id='pdf-file' />
+                <Form.File.Label data-browse='Upload File'>
                   {DocumentLable}
                 </Form.File.Label>
               </Form.File>
             </Form.Group>
 
-            <Button variant="dark" type="submit" block>
+            <Button variant='dark' type='submit' block>
               Submit
             </Button>
           </Form>
         </Col>
         <Col lg={8} md={6} sm={12}>
-          <div className="sub-title mb-2">Latest Task</div>
+          <div className='sub-title mb-2'>Latest Task</div>
 
-          <Table striped bordered hover responsive="sm">
+          <Table striped bordered hover responsive='sm'>
             <thead>
               <tr>
                 <th>#</th>
@@ -187,16 +187,16 @@ export default function TaskUploadScreen({ match }) {
                       <th>1</th>
                       <td>{task.projectName}</td>
                       <td>
-                        {task.createdAt.split('T')[0] +
-                          ' : ' +
-                          task.createdAt.split('T')[1].split('.')[0]}
+                        {task.createdAt.split("T")[0] +
+                          " : " +
+                          task.createdAt.split("T")[1].split(".")[0]}
                       </td>
 
                       <td>
                         <a
-                          href="#"
+                          href='#'
                           onClick={() => {
-                            DownloadAssignmentHandler(task)
+                            DownloadAssignmentHandler(task);
                           }}
                         >
                           Download
@@ -208,12 +208,12 @@ export default function TaskUploadScreen({ match }) {
             </tbody>
           </Table>
 
-          <div className="py-3">
+          <div className='py-3'>
             <Link
               to={`/mentor-task-list/${bootcampId}`}
-              style={{ color: 'green' }}
+              style={{ color: "green" }}
             >
-              {' '}
+              {" "}
               See your uploading history
             </Link>
           </div>
@@ -222,5 +222,5 @@ export default function TaskUploadScreen({ match }) {
 
       {<ToastContainer />}
     </div>
-  )
+  );
 }

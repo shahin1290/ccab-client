@@ -23,116 +23,116 @@ import {
   TASK_NO_PASSED_UPDATE_FAIL,
   TASK_MY_LIST_REQUEST,
   TASK_MY_LIST_SUCCSESS,
-  TASK_MY_LIST_FAIL
-} from '../constences/taskConst'
+  TASK_MY_LIST_FAIL,
+} from "../constences/taskConst";
 
-import axios from 'axios'
+import axios from "axios";
 
 export const getTaskList = (bootcampId) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TASK_LIST_REQUEST
-    })
+      type: TASK_LIST_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     const response = await axios.get(
-      'https://server.ccab.tech/api/tasks/' + bootcampId,
+      "http://localhost:5001/api/tasks/" + bootcampId,
       config
-    )
+    );
 
     dispatch({
       type: TASK_LIST_SUCCESS,
-      payload: response.data.data
+      payload: response.data.data,
       // payload: console.log("payload: ",response.data)
-    })
+    });
   } catch (error) {
     dispatch({
       type: TASK_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const getTaskDetails =
   (bootcampId, id) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: TASK_DETAILS_REQUEST
-      })
+        type: TASK_DETAILS_REQUEST,
+      });
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userDetail.token
-        }
-      }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userDetail.token,
+        },
+      };
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/tasks/${bootcampId}/${id}`,
+        `http://localhost:5001/api/tasks/${bootcampId}/${id}`,
         config
-      )
+      );
 
       dispatch({
         type: TASK_DETAILS_SUCCESS,
-        payload: response.data
+        payload: response.data,
         // payload: console.log("payload: ", response.data),
-      })
+      });
     } catch (error) {
       dispatch({
         type: TASK_DETAILS_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 export const createTask =
   (task, bootcampId, weekId) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: TASK_ADD_REQUEST
-      })
+        type: TASK_ADD_REQUEST,
+      });
 
       // Descruct from getState()
       const {
-        userLogin: { userDetail }
-      } = getState()
+        userLogin: { userDetail },
+      } = getState();
       const config = {
-        headers: { Authorization: 'Bearer ' + userDetail.token }
-      }
+        headers: { Authorization: "Bearer " + userDetail.token },
+      };
 
       const response = await axios.post(
-        `https://server.ccab.tech/api/tasks/${bootcampId}/${weekId}`,
+        `http://localhost:5001/api/tasks/${bootcampId}/${weekId}`,
         task,
         config
-      )
+      );
 
       dispatch({
         type: TASK_ADD_SUCCESS,
         //   payload: console.log("payload:", resconst response.data),
-        payload: response.data
-      })
+        payload: response.data,
+      });
 
       dispatch({
-        type: TASK_ADD_REST
+        type: TASK_ADD_REST,
         // this is turnng back to empty {}, not using the ACTION
-      })
+      });
     } catch (error) {
       dispatch({
         type: TASK_ADD_FAIL,
@@ -140,190 +140,190 @@ export const createTask =
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
-      })
+            : error.message,
+      });
     }
-  }
+  };
 
 export const taskDelete = (bootcampId, id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TASK_DELETE_REQUEST
-    })
+      type: TASK_DELETE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     await axios.delete(
-      `https://server.ccab.tech/api/tasks/${bootcampId}/${id}`,
+      `http://localhost:5001/api/tasks/${bootcampId}/${id}`,
       config
-    )
+    );
 
     dispatch({
-      type: TASK_DELETE_SUCCESS
-    })
+      type: TASK_DELETE_SUCCESS,
+    });
   } catch (error) {
     dispatch({
       type: TASK_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const taskChecked = (task) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TASK_CHECKED_UPDATE_REQUEST
-    })
+      type: TASK_CHECKED_UPDATE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json', // we do not need this
+        "Content-Type": "application/json", // we do not need this
         // becouse, we are sending GET requset!
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     const response = await axios.put(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/checked',
+      "http://localhost:5001/api/tasks/" + task._id + "/checked",
       {},
       config
-    )
+    );
 
     // console.log("res: ", res);
     dispatch({
       type: TASK_CHECKED_UPDATE_SUCCESS,
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
     dispatch({
       type: TASK_CHECKED_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const taskAsPassed = (task) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TASK_PASSED_UPDATE_REQUEST
-    })
+      type: TASK_PASSED_UPDATE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json', // we do not need this
+        "Content-Type": "application/json", // we do not need this
         // becouse, we are sending GET requset!
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     const response = await axios.put(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/passed',
+      "http://localhost:5001/api/tasks/" + task._id + "/passed",
       {},
       config
-    )
+    );
 
     // console.log("res: ", res);
     dispatch({
       type: TASK_PASSED_UPDATE_SUCCESS,
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
     dispatch({
       type: TASK_PASSED_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const taskAsNotPassed = (task) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TASK_NO_PASSED_UPDATE_REQUEST
-    })
+      type: TASK_NO_PASSED_UPDATE_REQUEST,
+    });
 
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
-        'Content-Type': 'application/json', // we do not need this
+        "Content-Type": "application/json", // we do not need this
         // becouse, we are sending GET requset!
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     const response = await axios.put(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/nopassed',
+      "http://localhost:5001/api/tasks/" + task._id + "/nopassed",
       {},
       config
-    )
+    );
 
     // console.log("res: ", res);
     dispatch({
       type: TASK_NO_PASSED_UPDATE_SUCCESS,
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
     dispatch({
       type: TASK_NO_PASSED_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};
 
 export const getMyTaskList = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TASK_MY_LIST_REQUEST
-    })
+      type: TASK_MY_LIST_REQUEST,
+    });
 
     // Descruct from getState()
     const {
-      userLogin: { userDetail }
-    } = getState()
+      userLogin: { userDetail },
+    } = getState();
     const config = {
       headers: {
         // "Content-Type": "application/json", // we do not need this
         // becouse, we are sending GET requset!
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
     const response = await axios.get(
-      'https://server.ccab.tech/api/tasks/mytasklist',
+      "http://localhost:5001/api/tasks/mytasklist",
       config
-    )
+    );
 
     dispatch({
       type: TASK_MY_LIST_SUCCSESS,
       // payload: console.log("payload:", res.data),
-      payload: response.data
-    })
+      payload: response.data,
+    });
   } catch (error) {
     dispatch({
       type: TASK_MY_LIST_FAIL,
@@ -331,7 +331,7 @@ export const getMyTaskList = () => async (dispatch, getState) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message
-    })
+          : error.message,
+    });
   }
-}
+};

@@ -53,6 +53,21 @@ body {
     text-align: center !important;
   }
 
+  .service-classes {
+    position: static !important;
+  }
+
+  .service-banner-container {
+    height: 50vh !important;
+    width: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .service-banner-box {
+    top: 50% !important;
+  }
+
   .display-center-small-screen {
     width: 300px;
     overflow: auto;
@@ -79,9 +94,6 @@ body {
   .service-banner-text {
     font-size: 2rem !important;
     display: inline-block !important;
-  }
-  .service-banner-container {
-    background-size: contain !important;
   }
 
   .select-box {
@@ -141,6 +153,15 @@ body {
     width: 100% !important;
     text-align: center !important;
   }
+
+  .typewriter {
+    position: absolute !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
 
   .hero-banner {
     top: 15;
@@ -205,7 +226,7 @@ body {
 .sub-title3 {
   font-size: 1.8rem !important;
   font-weight: 400 !important;
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+  font-family: "Comic Sans MS", "Comic Sans", cursive !important;
   text-shadow: none !important;
 }
 
@@ -277,12 +298,77 @@ pre {
   margin-top: 20px;
   font-family: Inter;
 }
+
+/* contact section */
 .contact-text {
   color: #ffffff;
   transition: transform 1s;
 }
 .contact-text:hover {
   transform: scale(1.1);
+}
+.advisor-image {
+  height: 150px;
+  background: url(assets/images/background/advisor2.jpg) center;
+  background-repeat: no-repeat;
+  background-size: 100% 20vh;
+}
+
+.advisor-text1 {
+  height: 150px;
+  background: black;
+  width: 50vh;
+  border-radius: 30px;
+}
+
+.advisor-text2 {
+  height: 50px;
+  background: #bebebe;
+  width: 50vh;
+  border-radius: 30px 30px 0 0;
+}
+
+.inner {
+  margin: 0 auto;
+}
+
+.inner a {
+  float: left;
+}
+
+.button {
+  position: relative;
+  width: 170px;
+  height: 40px;
+  color: #69686885;
+  border-radius: 20px;
+  border: 1px solid #2d9c6b;
+  background: black;
+  cursor: pointer;
+  box-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 1px #fff, 0 0 10px #49ff18,
+    0 0 1px #49ff18, 0 0 1px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18;
+  position: relative;
+}
+
+.button:hover span {
+  color: #2d9c6b;
+}
+
+.button span {
+  font-size: 12px;
+  text-transform: none;
+  color: #aaa;
+}
+
+.advisor-icon {
+  color: #49ff18;
+  text-shadow: 0 0 1px #222, 0 0 1px #222, 0 0 1px #222, 0 0 2px #49ff18,
+    0 0 3px #49ff18, 0 0 4px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18;
+  position: absolute;
+  top: -5px;
+  left: -3px;
+  width: 70px;
+  font-weight: 400;
 }
 
 .fa-online-education {
@@ -305,7 +391,7 @@ pre {
 }
 
 .star-ratings-sprite {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
     repeat-x;
   height: 21px;
   line-height: 0;
@@ -315,7 +401,7 @@ pre {
   margin: 0 auto;
 }
 .star-ratings-sprite-rating {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png')
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
     repeat-x;
   background-position: 0 100%;
   float: left;
@@ -451,7 +537,7 @@ pre {
 
 .slider:before {
   position: absolute;
-  content: '';
+  content: "";
   height: 26px;
   width: 26px;
   left: 4px;
@@ -487,7 +573,7 @@ input:checked + .slider:before {
 /*======================================
 =            NO GUTTER CODE            =
 ======================================*/
-.no-gutter > [class*='col-'] {
+.no-gutter > [class*="col-"] {
   padding-right: 0;
   padding-left: 0;
   margin-left: 0;
@@ -516,7 +602,7 @@ input:checked + .slider:before {
 }
 
 .curriculum-project ul li::before {
-  content: '\2022';
+  content: "\2022";
   color: #ea5573;
   font-weight: bold;
   display: inline-block;
@@ -805,8 +891,8 @@ input:checked + .slider:before {
 .service-banner-container {
   display: inline-block;
   text-align: center;
-  height: 600px;
-  background: url(assets/images/services/serviceWallpaper.png) no-repeat 0 20%;
+  height: 100vh;
+  background: url(assets/images/services/red8.jpeg) no-repeat 0 10%;
   background-size: cover;
   width: 100%;
   position: relative;
@@ -821,7 +907,7 @@ input:checked + .slider:before {
 }
 .service-banner-box {
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -840,13 +926,42 @@ input:checked + .slider:before {
   height: 50px;
 }
 
+.service-form {
+  height: 500px;
+  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
+    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
+    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
+    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+  position: relative;
+}
+.service-form .form-control::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff !important;
+  opacity: 1; /* Firefox */
+}
+
+.service-form .form-control:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff !important;
+}
+
+.service-form .form-control::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #fff !important;
+}
+.service-classes {
+  position: absolute;
+  top: 19.5%;
+  left: 17.3%;
+  width: 65.4%;
+}
+
 .service-focus img {
-  height: 170px;
+  height: 200px;
   width: 100%;
-  border-radius: 5px 5px 0 0;
 }
 .service-circle:before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -864,7 +979,7 @@ input:checked + .slider:before {
 }
 
 .res-circle::after {
-  content: '';
+  content: "";
   display: block;
   padding-bottom: 100%;
 }
@@ -930,7 +1045,7 @@ input:checked + .slider:before {
   background: #fdf1cd;
 }
 .service-list li:before {
-  content: '✓';
+  content: "✓";
   color: #eb6c85;
   padding: 5px;
 }
@@ -1000,20 +1115,20 @@ input:checked + .slider:before {
 }
 
 .handle1:after {
-  content: 'Study Now';
+  content: "Study Now";
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
 .handle2:after {
-  content: 'Book an Appointment';
+  content: "Book an Appointment";
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
 }
 
 .handle3:after {
-  content: 'Ask an Advisor';
+  content: "Ask an Advisor";
   transform: rotate(-90deg);
   font-weight: 500;
   color: white;
@@ -1049,10 +1164,7 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   height: 500px;
-  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
-    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
-    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
-    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+  background: #17182f;
   position: relative;
 }
 
@@ -1088,33 +1200,18 @@ input:checked + .slider:before {
 
 .banner-quote {
   position: absolute;
-  top: 0;
-  font-family: 'EB Garamond';
-  font-size: 32px;
+  top: 4%;
+  font-size: 30px;
+  font-weight: 300;
   line-height: 1.4rem;
   height: 100%;
-  padding: 0.5rem;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: auto;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -webkit-font-kerning: normal;
-  font-kerning: normal;
   color: #fff;
+  text-align: center;
 }
 
 .quote {
   position: relative;
   letter-spacing: 0.03em;
-}
-.quote:before {
-  content: '“';
-  position: absolute;
-  left: -0.7em;
-}
-.quote:after {
-  content: '”';
-  margin-right: -1rem;
 }
 
 .quote--container {
@@ -1128,8 +1225,19 @@ input:checked + .slider:before {
 }
 
 .quote--author {
-  font-family: 'Open Sans Condensed';
+  font-family: "Open Sans Condensed";
   font-size: 0.8rem;
   text-align: right;
   font-weight: 300;
+}
+
+.typewriter {
+  position: absolute;
+  top: 50%;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1.4rem;
+  height: 100%;
+  color: #fff;
+  text-align: center;
 }

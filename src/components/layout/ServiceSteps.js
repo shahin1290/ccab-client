@@ -4,7 +4,7 @@ import arrow from './../../assets/images/services/arrow.png'
 
 export default function ServiceSteps() {
   return (
-    <section className="mt-5" style={{ height: '370px' }}>
+    <section className="" style={{ height: '310px' }}>
       <div class="service-step-overlay">
         <div class="banner">
           <div className=" title mt-5 text-white">

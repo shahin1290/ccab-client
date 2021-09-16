@@ -1,233 +1,240 @@
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from 'react'
-import { loadStripe } from '@stripe/stripe-js'
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import {
   useStripe,
   useElements,
   Elements,
   CardNumberElement,
   CardExpiryElement,
-  CardCvcElement
-} from '@stripe/react-stripe-js'
-import { useSelector, useDispatch } from 'react-redux'
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
+import { useSelector, useDispatch } from "react-redux";
 import {
   createOrder,
-  createKlarnaSession
-} from '../../redux/actions/orderAction'
-import { getCourseDetails } from '../../redux/actions/courseAction'
-import { getRequestDetails } from '../../redux/actions/requestAction'
-import { getServiceDetails } from '../../redux/actions/serviceAction'
+  createKlarnaSession,
+} from "../../redux/actions/orderAction";
+import { getCourseDetails } from "../../redux/actions/courseAction";
+import { getRequestDetails } from "../../redux/actions/requestAction";
+import { getServiceDetails } from "../../redux/actions/serviceAction";
 
-import Loader from '../layout/Loader'
-import { Tabs, Tab } from 'react-bootstrap'
-import axios from 'axios'
-import Message from '../layout/Message'
-import KlarnaPayment from '../layout/KlarnaPayment'
-import { getKlarnaOrderLines } from '../../util/klarnaOrderLines'
-import { getPriceFormat } from '../../util/priceFormat'
-import { createCurrrency } from '../../redux/actions/currencyAction'
-import { createAppointment } from '../../redux/actions/appointmentAction'
+import Loader from "../layout/Loader";
+import { Tabs, Tab } from "react-bootstrap";
+import axios from "axios";
+import Message from "../layout/Message";
+import KlarnaPayment from "../layout/KlarnaPayment";
+import { getKlarnaOrderLines } from "../../util/klarnaOrderLines";
+import { getPriceFormat } from "../../util/priceFormat";
+import { createCurrrency } from "../../redux/actions/currencyAction";
+import { createAppointment } from "../../redux/actions/appointmentAction";
 
-import { plans } from '../../util/plans'
+import { plans } from "../../util/plans";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const CheckoutForm = ({ match, history }) => {
-  const stripe = useStripe()
-  const elements = useElements()
-  const [isProcessing, setProcessingTo] = useState(false)
-  const [checkoutError, setCheckoutError] = useState()
-  const [sekToEUR, setSekToEUR] = useState()
-  const dispatch = useDispatch()
-  const ID = match.params.bootcampId
-  const subscription = match.params.plan
-  const requestId = match.params.requestId
-  const serviceId = match.params.serviceId
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isProcessing, setProcessingTo] = useState(false);
+  const [checkoutError, setCheckoutError] = useState();
+  const [sekToEUR, setSekToEUR] = useState();
+  const dispatch = useDispatch();
+  const ID = match.params.bootcampId;
+  const subscription = match.params.plan;
+  const requestId = match.params.requestId;
+  const serviceId = match.params.serviceId;
 
-  const plan = plans.find((plan) => plan._id === subscription)
+  const plan = plans.find((plan) => plan._id === subscription);
 
-  const { course } = useSelector((state) => state.courseDetails)
-  const { service } = useSelector((state) => state.serviceDetails)
+  const { course } = useSelector((state) => state.courseDetails);
+  const { service } = useSelector((state) => state.serviceDetails);
+
+  const {
+    promos,
+    success: promoSuccess,
+    loading: promoLoading,
+    error: promoError,
+  } = useSelector((state) => state.promoList);
 
   const {
     loading,
     success: orderSuccess,
-    error
-  } = useSelector((state) => state.orderCreate)
+    error,
+  } = useSelector((state) => state.orderCreate);
 
   const {
     loading: currencyLoading,
     success: currencySuccess,
     error: currencyError,
-    currency
-  } = useSelector((state) => state.currencyCreate)
+    currency,
+  } = useSelector((state) => state.currencyCreate);
 
-  const appointment = useSelector((state) => state.appointmentCreate)
+  const appointment = useSelector((state) => state.appointmentCreate);
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userDetail } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userDetail } = userLogin;
 
   const {
     loading: requestLoading,
     success: requestSuccess,
-    request
-  } = useSelector((state) => state.requestDetails)
+    request,
+  } = useSelector((state) => state.requestDetails);
 
   const {
     order,
     loading: CreateOrderLoading,
-    error: CreateOrderError
-  } = useSelector((state) => state.KlarnaOrderCreate)
+    error: CreateOrderError,
+  } = useSelector((state) => state.KlarnaOrderCreate);
 
   //address details
-  const [name, setName] = useState('')
-  const [street, setStreet] = useState('')
-  const [city, setCity] = useState('')
-  const [country, setCountry] = useState('')
-  const [zip, setZip] = useState('')
+  const [name, setName] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
   const [AmountOfWeeks, setAmountOfWeeks] = useState(
-    plan && plan.period == 'weekly' ? 4 : 2
-  )
-  const [billingType, setBillingType] = useState('subscription')
-  const [widgetLoaded, setWidgetLoaded] = useState(false)
+    plan && plan.period == "weekly" ? 4 : 2
+  );
+  const [billingType, setBillingType] = useState("subscription");
+  const [widgetLoaded, setWidgetLoaded] = useState(false);
 
   const {
     session,
     success: sessionSuccess,
-    loading: sessionLoading
-  } = useSelector((state) => state.KlarnaSessionCreate)
+    loading: sessionLoading,
+  } = useSelector((state) => state.KlarnaSessionCreate);
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const apiKey = '6068a971e6754bdf9d3b0ddc706779b0'
+      const apiKey = "6068a971e6754bdf9d3b0ddc706779b0";
 
-      const fromCurrency = 'SEK'
-      const toCurrency = 'EUR'
-      const query = fromCurrency + '_' + toCurrency
+      const fromCurrency = "SEK";
+      const toCurrency = "EUR";
+      const query = fromCurrency + "_" + toCurrency;
 
       const url =
-        'https://api.currconv.com/api/v7/convert?q=' +
+        "https://api.currconv.com/api/v7/convert?q=" +
         query +
-        '&compact=ultra&apiKey=' +
-        apiKey
+        "&compact=ultra&apiKey=" +
+        apiKey;
 
-      const resp = await axios.get(url)
-      const amount = resp.data[query]
-      setSekToEUR(amount)
+      const resp = await axios.get(url);
+      const amount = resp.data[query];
+      setSekToEUR(amount);
     }
 
-    fetchMyAPI()
-  }, [])
+    fetchMyAPI();
+  }, []);
 
   useEffect(() => {
     if (sessionSuccess) {
-      const Klarna = window.Klarna
+      const Klarna = window.Klarna;
       Klarna.Payments.init({
-        client_token: session.client_token
-      })
+        client_token: session.client_token,
+      });
     }
-  }, [sessionSuccess])
+  }, [sessionSuccess]);
 
   useEffect(() => {
     if (ID) {
-      dispatch(getCourseDetails(ID))
-      dispatch(createCurrrency('USD'))
+      dispatch(getCourseDetails(ID));
+      dispatch(createCurrrency("USD"));
     }
 
     if (requestId) {
-      dispatch(getRequestDetails(requestId))
+      dispatch(getRequestDetails(requestId));
     }
 
     if (serviceId) {
-      dispatch(getServiceDetails(serviceId))
+      dispatch(getServiceDetails(serviceId));
     }
-  }, [dispatch, ID, subscription, serviceId, requestId])
+  }, [dispatch, ID, subscription, serviceId, requestId]);
 
   useEffect(() => {
     if (service) {
-      dispatch(createCurrrency('EUR'))
+      dispatch(createCurrrency("EUR"));
     }
-  }, [service])
+  }, [service]);
 
   useEffect(() => {
     if (request) {
-      dispatch(createCurrrency(request.currency))
+      dispatch(createCurrrency(request.currency));
     }
-  }, [request])
+  }, [request]);
 
   useEffect(() => {
     if (subscription) {
-      dispatch(createCurrrency('EUR'))
+      dispatch(createCurrrency("EUR"));
     }
-  }, [subscription])
+  }, [subscription]);
 
   useEffect(() => {
     if (orderSuccess) {
       if (ID) {
-        history.push(`/confirmation-card-purchase/${ID}`)
+        history.push(`/confirmation-card-purchase/${ID}`);
       }
 
       if (subscription) {
-        history.push(`/confirmation-card-purchase/${subscription}`)
+        history.push(`/confirmation-card-purchase/${subscription}`);
       }
 
       if (requestId) {
-        history.push(`/confirmation-card-purchase/${requestId}`)
+        history.push(`/confirmation-card-purchase/${requestId}`);
       }
 
       if (serviceId) {
         dispatch(
           createAppointment({
-            instructor: JSON.parse(localStorage.getItem('appointment'))
+            instructor: JSON.parse(localStorage.getItem("appointment"))
               .instructor,
             service: service._id,
-            sessionNumber: JSON.parse(localStorage.getItem('appointment'))
-              .sessionNumber
+            sessionNumber: JSON.parse(localStorage.getItem("appointment"))
+              .sessionNumber,
           })
-        )
-        history.push(`/confirmation-card-purchase/${serviceId}`)
+        );
+        history.push(`/confirmation-card-purchase/${serviceId}`);
       }
     }
-  }, [orderSuccess])
+  }, [orderSuccess]);
 
   const ELEMENT_OPTIONS = {
     style: {
       base: {
-        fontSize: '18px',
-        color: '#424770',
-        letterSpacing: '0.025em',
-        '::placeholder': {
-          color: '#aab7c4'
-        }
+        fontSize: "18px",
+        color: "#424770",
+        letterSpacing: "0.025em",
+        "::placeholder": {
+          color: "#aab7c4",
+        },
       },
       invalid: {
-        color: '#9e2146'
-      }
-    }
-  }
+        color: "#9e2146",
+      },
+    },
+  };
 
   const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!stripe || !elements) {
-      return
+      return;
     }
 
-    setProcessingTo(true)
+    setProcessingTo(true);
 
-    const cardElement = elements.getElement(CardNumberElement)
+    const cardElement = elements.getElement(CardNumberElement);
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userDetail.token
-      }
-    }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userDetail.token,
+      },
+    };
 
     try {
-      if (subscription && billingType === 'subscription') {
+      if (subscription && billingType === "subscription") {
         const { paymentMethod, error } = await stripe.createPaymentMethod({
-          type: 'card',
+          type: "card",
           card: cardElement,
           billing_details: {
             name,
@@ -235,36 +242,36 @@ const CheckoutForm = ({ match, history }) => {
               line1: street,
               state: country,
               city,
-              postal_code: zip
-            }
-          }
-        })
+              postal_code: zip,
+            },
+          },
+        });
 
         if (error) {
-          setCheckoutError(error.message)
-          setProcessingTo(false)
-          return
+          setCheckoutError(error.message);
+          setProcessingTo(false);
+          return;
         }
 
         const res = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-subscription`,
+          `http://localhost:5001/api/order/stripe/stripe-subscription`,
           {
             payment_method: paymentMethod.id,
-            planId: plan.stripeSubscriptionId
+            planId: plan.stripeSubscriptionId,
           },
           config
-        )
+        );
 
         // The subscription contains an invoice
         // If the invoice's payment succeeded then you're good,
         // otherwise, the payment intent must be confirmed
 
-        const { latest_invoice, id: subscriptionId } = res.data.data
+        const { latest_invoice, id: subscriptionId } = res.data.data;
 
         if (latest_invoice.payment_intent) {
-          const { client_secret, status } = latest_invoice.payment_intent
+          const { client_secret, status } = latest_invoice.payment_intent;
 
-          if (status === 'requires_action') {
+          if (status === "requires_action") {
             const { error: confirmationError } =
               await stripe.confirmCardPayment(client_secret, {
                 payment_method: {
@@ -275,71 +282,77 @@ const CheckoutForm = ({ match, history }) => {
                       line1: street,
                       state: country,
                       city,
-                      postal_code: zip
-                    }
-                  }
-                }
-              })
+                      postal_code: zip,
+                    },
+                  },
+                },
+              });
             if (confirmationError) {
-              setProcessingTo(false)
-              setCheckoutError(error.message)
-              return
+              setProcessingTo(false);
+              setCheckoutError(error.message);
+              return;
             }
           }
 
           // success
-          setProcessingTo(false)
+          setProcessingTo(false);
           dispatch(
             createOrder(`subscription ${plan.stripeSubscriptionId}`, {
               token: subscriptionId,
               amount: (
-                plan.price *
+                (Number(plan.price) +
+                  (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
                 sekToEUR *
                 currency.data.amount *
                 100
               ).toFixed(),
-              currency: currency.data.currency
+              currency: currency.data.currency,
             })
-          )
+          );
         }
       } else {
-        let amount
+        let amount;
 
         if (subscription) {
           amount = Math.round(
-            plan.price * sekToEUR * currency.data.amount * AmountOfWeeks * 100
-          )
+            (Number(plan.price) +
+              (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
+              sekToEUR *
+              currency.data.amount *
+              AmountOfWeeks *
+              100
+          );
         }
 
         if (ID) {
-          amount = Math.round(currency.data.amount * course.price * 100)
+          amount = Math.round(currency.data.amount * course.price * 100);
         }
 
         if (requestId) {
-          amount = Math.round(currency.data.amount * request.amount * 100)
+          amount = Math.round(currency.data.amount * request.amount * 100);
         }
 
         if (serviceId) {
           amount = Math.round(
             currency.data.amount *
               (service.price *
-                JSON.parse(localStorage.getItem('appointment')).sessionNumber) *
+                JSON.parse(localStorage.getItem("appointment")).sessionNumber) *
               100
-          )
+          );
         }
 
         const { data: clientSecret } = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+          `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
           {
-            paymentMethodType: 'card',
+            paymentMethodType: "card",
             currency: currency.data.currency,
-            amount
+            amount,
           },
           config
-        )
+        );
 
         const paymentMethodReq = await stripe.createPaymentMethod({
-          type: 'card',
+          type: "card",
           card: cardElement,
           billing_details: {
             name,
@@ -347,15 +360,15 @@ const CheckoutForm = ({ match, history }) => {
               line1: street,
               state: country,
               city,
-              postal_code: zip
-            }
-          }
-        })
+              postal_code: zip,
+            },
+          },
+        });
 
         if (paymentMethodReq.error) {
-          setCheckoutError(paymentMethodReq.error.message)
-          setProcessingTo(false)
-          return
+          setCheckoutError(paymentMethodReq.error.message);
+          setProcessingTo(false);
+          return;
         }
 
         const { error, paymentIntent } = await stripe.confirmCardPayment(
@@ -369,30 +382,30 @@ const CheckoutForm = ({ match, history }) => {
                   line1: street,
                   state: country,
                   city,
-                  postal_code: zip
-                }
-              }
-            }
+                  postal_code: zip,
+                },
+              },
+            },
           }
-        )
+        );
 
         if (error) {
-          setCheckoutError(error.message)
-          setProcessingTo(false)
-          return
+          setCheckoutError(error.message);
+          setProcessingTo(false);
+          return;
         }
 
-        if (paymentIntent.status === 'succeeded') {
-          setProcessingTo(false)
+        if (paymentIntent.status === "succeeded") {
+          setProcessingTo(false);
 
           if (ID) {
             dispatch(
               createOrder(ID, {
                 token: paymentIntent.id,
                 amount: paymentIntent.amount,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               })
-            )
+            );
           }
 
           if (subscription) {
@@ -400,39 +413,39 @@ const CheckoutForm = ({ match, history }) => {
               createOrder(plan.name, {
                 token: paymentIntent.id,
                 amount: paymentIntent.amount,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               })
-            )
+            );
           }
 
           if (requestId) {
             dispatch(
-              createOrder('bill', {
+              createOrder("bill", {
                 token: paymentIntent.id,
                 amount: paymentIntent.amount,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               })
-            )
+            );
           }
           if (serviceId) {
             dispatch(
               createOrder(serviceId, {
                 token: paymentIntent.id,
                 amount: paymentIntent.amount,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               })
-            )
+            );
           }
         }
       }
     } catch (err) {
-      setCheckoutError(err.message)
+      setCheckoutError(err.message);
     }
-  }
+  };
 
   //KLARNA PAYMENTS
   const _handelcreateKlarnaOrder = () => {
-    setWidgetLoaded(true)
+    setWidgetLoaded(true);
     if (ID) {
       dispatch(
         createKlarnaSession(
@@ -440,16 +453,20 @@ const CheckoutForm = ({ match, history }) => {
             data: getKlarnaOrderLines(course, {
               amount: currency.data.amount,
               country: currency.data.country,
-              currency: currency.data.currency
-            })
+              currency: currency.data.currency,
+            }),
           },
           ID
         )
-      )
-      setWidgetLoaded(false)
+      );
+      setWidgetLoaded(false);
     }
     if (subscription) {
-      const amount = plan.price * sekToEUR * AmountOfWeeks
+      const amount =
+        (Number(plan.price) +
+          (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
+        sekToEUR *
+        AmountOfWeeks;
       dispatch(
         createKlarnaSession(
           {
@@ -458,40 +475,40 @@ const CheckoutForm = ({ match, history }) => {
               {
                 amount: currency.data.amount,
                 country: currency.data.country,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               }
-            )
+            ),
           },
           plan.name
         )
-      )
-      setWidgetLoaded(false)
+      );
+      setWidgetLoaded(false);
     }
 
     if (requestId) {
-      const amount = request.amount
+      const amount = request.amount;
       dispatch(
         createKlarnaSession(
           {
             data: getKlarnaOrderLines(
-              { name: 'bill', price: amount },
+              { name: "bill", price: amount },
               {
                 amount: currency.data.amount,
                 country: currency.data.country,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               }
-            )
+            ),
           },
-          'bill'
+          "bill"
         )
-      )
-      setWidgetLoaded(false)
+      );
+      setWidgetLoaded(false);
     }
 
     if (serviceId) {
       const amount =
         service.price *
-        JSON.parse(localStorage.getItem('appointment')).sessionNumber
+        JSON.parse(localStorage.getItem("appointment")).sessionNumber;
       dispatch(
         createKlarnaSession(
           {
@@ -500,164 +517,169 @@ const CheckoutForm = ({ match, history }) => {
               {
                 amount: currency.data.amount,
                 country: currency.data.country,
-                currency: currency.data.currency
+                currency: currency.data.currency,
               }
-            )
+            ),
           },
           serviceId
         )
-      )
-      setWidgetLoaded(false)
+      );
+      setWidgetLoaded(false);
     }
-  }
+  };
 
-  const [klarnaMethod, setKlarnaMethod] = useState()
+  const [klarnaMethod, setKlarnaMethod] = useState();
 
   return (
-    <div className="sidebar-page-container">
-      <div className="auto-container">
+    <div className='sidebar-page-container'>
+      <div className='auto-container'>
         {currencyLoading ? (
           <Loader />
         ) : currencyError ? (
           <Message>{currencyError}</Message>
         ) : (
           currencySuccess && (
-            <div className="">
+            <div className=''>
               {/* Content Side */}
 
               <div
-                className="content-side col-lg-10 col-md-12 col-sm-12"
-                style={{ margin: '0 auto' }}
+                className='content-side col-lg-10 col-md-12 col-sm-12'
+                style={{ margin: "0 auto" }}
               >
                 {/* Sec Title */}
-                <div className="sec-title">
-                  <div className="title">Checkout</div>
-                  {checkoutError && <Message>{checkoutError}</Message>}{' '}
+                <div className='sec-title'>
+                  <div className='title'>Checkout</div>
+                  {checkoutError && <Message>{checkoutError}</Message>}{" "}
                 </div>
 
-                <div className="checkout-section">
+                <div className='checkout-section'>
                   {/* Checkout Form */}
 
                   {/* Sidebar Side */}
 
-                  <div className="sidebar-side col-lg-8 col-md-12 col-sm-12 mt-5">
-                    <aside className="sidebar sticky-top  mt-5">
+                  <div className='sidebar-side col-lg-8 col-md-12 col-sm-12 mt-5'>
+                    <aside className='sidebar sticky-top  mt-5'>
                       {/* Order Widget */}
-                      <div className="sidebar-widget order-widget">
-                        <div className="widget-content ">
-                          <div className="sidebar-title">
-                            <div className="sub-title">Order Summary</div>
+                      <div className='sidebar-widget order-widget'>
+                        <div className='widget-content '>
+                          <div className='sidebar-title'>
+                            <div className='sub-title'>Order Summary</div>
                           </div>
 
-                          <div className="order-box bg-white p-2">
+                          <div className='order-box bg-white p-2'>
                             {subscription && (
                               <>
-                                <div className="">
-                                  <div className="sub-title mr-2 mb-2">
-                                    Billing Type{' '}
+                                <div className=''>
+                                  <div className='sub-title mr-2 mb-2'>
+                                    Billing Type{" "}
                                   </div>
-                                  <div className="form-check m-3">
+                                  <div className='form-check m-3'>
                                     <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      name="price"
-                                      id="inlineRadio1"
-                                      value="subscription"
+                                      className='form-check-input'
+                                      type='radio'
+                                      name='price'
+                                      id='inlineRadio1'
+                                      value='subscription'
                                       onChange={(e) => {
-                                        setBillingType(e.target.value)
+                                        setBillingType(e.target.value);
                                       }}
-                                      checked={billingType === 'subscription'}
+                                      checked={billingType === "subscription"}
                                       required
                                     />
                                     <label
-                                      className="form-check-label font-weight-bold"
-                                      for="inlineRadio1"
+                                      className='form-check-label font-weight-bold'
+                                      for='inlineRadio1'
                                     >
                                       Subscription(cancel anytime)
                                     </label>
                                   </div>
-                                  <div className="form-check m-3">
+                                  <div className='form-check m-3'>
                                     <input
-                                      className="form-check-input"
-                                      type="radio"
-                                      name="price"
-                                      id="inlineRadio2"
-                                      value="oneTime"
+                                      className='form-check-input'
+                                      type='radio'
+                                      name='price'
+                                      id='inlineRadio2'
+                                      value='oneTime'
                                       onChange={(e) => {
-                                        setBillingType(e.target.value)
+                                        setBillingType(e.target.value);
                                       }}
-                                      checked={billingType === 'oneTime'}
+                                      checked={billingType === "oneTime"}
                                     />
                                     <label
-                                      className="form-check-label font-weight-bold"
-                                      for="inlineRadio2"
+                                      className='form-check-label font-weight-bold'
+                                      for='inlineRadio2'
                                     >
                                       Full payment
                                     </label>
                                   </div>
                                 </div>
-                                <div className="sub-title mt-5 mr-2 mb-2">
-                                  Order Details{' '}
+                                <div className='sub-title mt-5 mr-2 mb-2'>
+                                  Order Details{" "}
                                 </div>
-                                <ul className="pt-2">
-                                  {billingType === 'oneTime' && (
-                                    <li className="clearfix mb-3">
+                                <ul className='pt-2'>
+                                  {billingType === "oneTime" && (
+                                    <li className='clearfix mb-3'>
                                       Total Of Weeks:
                                       <select
-                                        className="custom-select-box px-2"
+                                        className='custom-select-box px-2'
                                         onChange={(e) => {
                                           setAmountOfWeeks(
                                             Number(e.target.value)
-                                          )
+                                          );
                                         }}
                                       >
-                                        {plan.period == 'weekly' ? (
+                                        {plan.period == "weekly" ? (
                                           <>
-                                            <option value="4" selected>
+                                            <option value='4' selected>
                                               4 weeks
                                             </option>
-                                            <option value="5">5 weeks</option>
-                                            <option value="6">6 weeks</option>
-                                            <option value="7">7 weeks</option>
-                                            <option value="8">8 weeks</option>
+                                            <option value='5'>5 weeks</option>
+                                            <option value='6'>6 weeks</option>
+                                            <option value='7'>7 weeks</option>
+                                            <option value='8'>8 weeks</option>
                                           </>
                                         ) : (
                                           <>
-                                            <option value="2" selected>
+                                            <option value='2' selected>
                                               2 Months
                                             </option>
-                                            <option value="3">3 Months</option>
-                                            <option value="4">4 Months</option>
-                                            <option value="5">5 Months</option>
-                                            <option value="6">6 Months</option>
+                                            <option value='3'>3 Months</option>
+                                            <option value='4'>4 Months</option>
+                                            <option value='5'>5 Months</option>
+                                            <option value='6'>6 Months</option>
                                           </>
                                         )}
                                       </select>
                                     </li>
                                   )}
-                                  <li className="clearfix mb-3">
+                                  <li className='clearfix mb-3'>
                                     Subscription Type:
-                                    <span className="pull-right">
+                                    <span className='pull-right'>
                                       {plan.name}
                                     </span>
                                   </li>
 
-                                  <li className="clearfix mb-3">
+                                  <li className='clearfix mb-3'>
                                     Subscription Period:
-                                    <span className="pull-right">
+                                    <span className='pull-right'>
                                       {plan.period}
                                     </span>
                                   </li>
                                   <hr />
 
-                                  <li className="clearfix">
-                                    <strong>Total</strong>{' '}
-                                    {billingType === 'oneTime' ? (
-                                      <span className="pull-right">
+                                  <li className='clearfix'>
+                                    <strong>Total</strong>{" "}
+                                    {billingType === "oneTime" ? (
+                                      <span className='pull-right'>
                                         <strong>
                                           {currencySuccess &&
                                             `${Math.round(
-                                              plan.price *
+                                              (Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 0
+                                                  : 200)) *
                                                 sekToEUR *
                                                 currency.data.amount *
                                                 AmountOfWeeks
@@ -665,13 +687,18 @@ const CheckoutForm = ({ match, history }) => {
                                         </strong>
                                       </span>
                                     ) : (
-                                      <span className="pull-right">
+                                      <span className='pull-right'>
                                         <strong>
                                           {currencySuccess &&
                                             `${Math.round(
-                                              plan.price *
-                                                sekToEUR *
-                                                currency.data.amount
+                                              Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 0
+                                                  : 200) *
+                                                  sekToEUR *
+                                                  currency.data.amount
                                             )}  ${currency.data.currency} (${
                                               plan.period
                                             })`}
@@ -684,9 +711,9 @@ const CheckoutForm = ({ match, history }) => {
                             )}
                             {ID && (
                               <ul>
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Original Price:
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
@@ -698,9 +725,9 @@ const CheckoutForm = ({ match, history }) => {
                                   </span>
                                 </li>
 
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Coupon discounts:
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {currencySuccess &&
                                       `-${getPriceFormat(
                                         Math.round(
@@ -713,9 +740,9 @@ const CheckoutForm = ({ match, history }) => {
                                 </li>
                                 <hr />
 
-                                <li className="clearfix">
-                                  <strong>Total</strong>{' '}
-                                  <span className="pull-right">
+                                <li className='clearfix'>
+                                  <strong>Total</strong>{" "}
+                                  <span className='pull-right'>
                                     <strong>
                                       {currencySuccess &&
                                         `${getPriceFormat(
@@ -731,15 +758,15 @@ const CheckoutForm = ({ match, history }) => {
 
                             {requestId && (
                               <ul>
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Service:
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {request.name}
                                   </span>
                                 </li>
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Bill:
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
@@ -751,9 +778,9 @@ const CheckoutForm = ({ match, history }) => {
 
                                 <hr />
 
-                                <li className="clearfix">
-                                  <strong>Total</strong>{' '}
-                                  <span className="pull-right">
+                                <li className='clearfix'>
+                                  <strong>Total</strong>{" "}
+                                  <span className='pull-right'>
                                     <strong>
                                       {currencySuccess &&
                                         `${getPriceFormat(
@@ -770,15 +797,15 @@ const CheckoutForm = ({ match, history }) => {
 
                             {serviceId && (
                               <ul>
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Service:
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {service && service.name}
                                   </span>
                                 </li>
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Price(per session):
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {console.log(currency.data.amount)}
                                     {currencySuccess &&
                                       `${getPriceFormat(
@@ -789,12 +816,12 @@ const CheckoutForm = ({ match, history }) => {
                                   </span>
                                 </li>
 
-                                <li className="clearfix mb-3">
+                                <li className='clearfix mb-3'>
                                   Sessions:
-                                  <span className="pull-right">
+                                  <span className='pull-right'>
                                     {
                                       JSON.parse(
-                                        localStorage.getItem('appointment')
+                                        localStorage.getItem("appointment")
                                       ).sessionNumber
                                     }
                                   </span>
@@ -802,9 +829,9 @@ const CheckoutForm = ({ match, history }) => {
 
                                 <hr />
 
-                                <li className="clearfix">
-                                  <strong>Total</strong>{' '}
-                                  <span className="pull-right">
+                                <li className='clearfix'>
+                                  <strong>Total</strong>{" "}
+                                  <span className='pull-right'>
                                     <strong>
                                       {currencySuccess &&
                                         `${getPriceFormat(
@@ -813,7 +840,7 @@ const CheckoutForm = ({ match, history }) => {
                                               (service.price *
                                                 JSON.parse(
                                                   localStorage.getItem(
-                                                    'appointment'
+                                                    "appointment"
                                                   )
                                                 ).sessionNumber)
                                           )
@@ -829,215 +856,215 @@ const CheckoutForm = ({ match, history }) => {
                     </aside>
                   </div>
 
-                  <div className="col-lg-12 col-md-12 col-sm-12 form-group">
-                    <div className="title2">Select Payment Method</div>
-                    <div className="auto-container mt-3 mb-5">
+                  <div className='col-lg-12 col-md-12 col-sm-12 form-group'>
+                    <div className='title2'>Select Payment Method</div>
+                    <div className='auto-container mt-3 mb-5'>
                       <img
-                        width="50"
-                        className="pr-2"
-                        src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
+                        width='50'
+                        className='pr-2'
+                        src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
                       />
                       <img
-                        width="160"
-                        src="https://cdn.jotfor.ms/images/credit-card-logo.png"
+                        width='160'
+                        src='https://cdn.jotfor.ms/images/credit-card-logo.png'
                       />
                     </div>
                   </div>
 
                   {/* Signup Info Tabs*/}
-                  <div className="checkout-info-tabs col-lg-9 col-md-12 col-sm-12">
+                  <div className='checkout-info-tabs col-lg-9 col-md-12 col-sm-12'>
                     <Tabs
-                      defaultActiveKey="card"
+                      defaultActiveKey='card'
                       transition={false}
                       onSelect={(e) => {
-                        if (e === 'klarna') _handelcreateKlarnaOrder()
+                        if (e === "klarna") _handelcreateKlarnaOrder();
                       }}
                     >
-                      <Tab eventKey="card" title="Credit/ Debit card">
+                      <Tab eventKey='card' title='Credit/ Debit card'>
                         <form onSubmit={submitHandler}>
-                          <div className="sub-title p-3">
+                          <div className='sub-title p-3'>
                             Payment Information
                           </div>
                           {isProcessing && <Loader />}
 
                           <div
-                            className="row clearfix p-3"
+                            className='row clearfix p-3'
                             style={{
-                              boxShadow: ' 0 2px 2px 0 rgba(0,0,0,0.2)',
-                              backgroundColor: 'white'
+                              boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
+                              backgroundColor: "white",
                             }}
                           >
-                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
                               <label>Holder Name</label>
 
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '0.3em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: "0.3em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <input
-                                  type="text"
+                                  type='text'
                                   value={name}
-                                  placeholder="Emily J Smith"
+                                  placeholder='Emily J Smith'
                                   required
                                   onChange={(e) => setName(e.target.value)}
                                 />
                               </div>
                             </div>
 
-                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
-                              <label htmlFor="cardNumber">Card Number</label>
+                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                              <label htmlFor='cardNumber'>Card Number</label>
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '0.5em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: "0.5em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <CardNumberElement
-                                  id="cardNumber"
+                                  id='cardNumber'
                                   options={ELEMENT_OPTIONS}
                                 />
                               </div>
                             </div>
 
-                            <div className="form-group col-lg-6 col-md-6 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-6 col-sm-12'>
                               <label>Expiration Date</label>
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '0.5em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: "0.5em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <CardExpiryElement />
                               </div>
                             </div>
 
-                            <div className="form-group col-lg-6 col-md-6 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-6 col-sm-12'>
                               <label>CVC Code</label>
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '0.5em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: "0.5em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <CardCvcElement />
                               </div>
                             </div>
                           </div>
-                          <div className="sub-title p-3">Billing Address</div>
+                          <div className='sub-title p-3'>Billing Address</div>
                           <div
-                            className="row clearfix"
+                            className='row clearfix'
                             style={{
-                              boxShadow: ' 0 2px 2px 0 rgba(0,0,0,0.2)',
-                              backgroundColor: 'white'
+                              boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
+                              backgroundColor: "white",
                             }}
                           >
-                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
                               <label>Street</label>
 
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '0.3em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: "0.3em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <input
-                                  type="text"
+                                  type='text'
                                   value={street}
-                                  placeholder="542 W. 15th Street"
+                                  placeholder='542 W. 15th Street'
                                   required
                                   onChange={(e) => setStreet(e.target.value)}
                                 />
                               </div>
                             </div>
 
-                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
                               <label>City</label>
 
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '0.3em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: "0.3em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <input
-                                  type="text"
+                                  type='text'
                                   value={city}
-                                  placeholder="New York"
+                                  placeholder='New York'
                                   required
                                   onChange={(e) => setCity(e.target.value)}
                                 />
                               </div>
                             </div>
 
-                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
                               <label>Country</label>
 
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '.3em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: ".3em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <input
-                                  type="text"
+                                  type='text'
                                   value={country}
-                                  placeholder="USA"
+                                  placeholder='USA'
                                   required
                                   onChange={(e) => setCountry(e.target.value)}
                                 />
                               </div>
                             </div>
-                            <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
                               <label>Zip</label>
 
                               <div
                                 style={{
-                                  boxShadow: '0px 0px 10px rgba(0,0,0,0.10)',
-                                  padding: '.3em',
-                                  backgroundColor: 'white'
+                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                  padding: ".3em",
+                                  backgroundColor: "white",
                                 }}
                               >
                                 <input
-                                  type="text"
+                                  type='text'
                                   value={zip}
-                                  placeholder="58648"
+                                  placeholder='58648'
                                   required
                                   onChange={(e) => setZip(e.target.value)}
                                 />
                               </div>
                             </div>
                           </div>
-                          <div style={{ padding: '20px 0' }}>
+                          <div style={{ padding: "20px 0" }}>
                             <button
                               className={`theme-btn btn-style-one ${
-                                isProcessing && 'isDisabled'
+                                isProcessing && "isDisabled"
                               }`}
-                              type="submit"
-                              name="submit-form"
+                              type='submit'
+                              name='submit-form'
                             >
                               {isProcessing ? (
                                 <Loader />
                               ) : (
-                                <span className="txt">Confirm Checkout</span>
+                                <span className='txt'>Confirm Checkout</span>
                               )}
                             </button>
                           </div>
                         </form>
                       </Tab>
-                      <Tab eventKey="klarna" title="Klarna">
+                      <Tab eventKey='klarna' title='Klarna'>
                         {widgetLoaded && <Loader />}
                         <div
                           onChange={(e) => setKlarnaMethod(e.target.value)}
-                          className="p-4"
+                          className='p-4'
                         >
                           {sessionLoading ? (
                             <Loader />
@@ -1046,23 +1073,23 @@ const CheckoutForm = ({ match, history }) => {
                             session.payment_method_categories.map((method) => (
                               <div
                                 key={method.identifier}
-                                className="m-2 p-2 border border-secondary bg-white text-dark "
+                                className='m-2 p-2 border border-secondary bg-white text-dark '
                               >
                                 <input
                                   value={method.identifier}
-                                  className="form-check-input ml-3"
-                                  type="radio"
-                                  name="flexRadioDefault"
+                                  className='form-check-input ml-3'
+                                  type='radio'
+                                  name='flexRadioDefault'
                                   id={method.identifier}
                                 />
-                                <div className="d-flex justify-content-between">
+                                <div className='d-flex justify-content-between'>
                                   <label
-                                    className="form-check-label ml-5"
+                                    className='form-check-label ml-5'
                                     for={method.identifier}
                                   >
                                     {method.name}
                                   </label>
-                                  <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" />
+                                  <img src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg' />
                                 </div>
                               </div>
                             ))
@@ -1084,9 +1111,9 @@ const CheckoutForm = ({ match, history }) => {
                               amount: Math.round(
                                 service.price *
                                   JSON.parse(
-                                    localStorage.getItem('appointment')
+                                    localStorage.getItem("appointment")
                                   ).sessionNumber
-                              )
+                              ),
                             }}
                             widgetLoaded={widgetLoaded}
                             method={klarnaMethod}
@@ -1097,7 +1124,7 @@ const CheckoutForm = ({ match, history }) => {
                           <KlarnaPayment
                             plan={{
                               subscription: plan.name,
-                              amount: plan.price * sekToEUR * AmountOfWeeks
+                              amount: plan.price * sekToEUR * AmountOfWeeks,
                             }}
                             widgetLoaded={widgetLoaded}
                             method={klarnaMethod}
@@ -1107,8 +1134,8 @@ const CheckoutForm = ({ match, history }) => {
                         {klarnaMethod && requestId && (
                           <KlarnaPayment
                             requestBill={{
-                              bill: 'bill',
-                              amount: request.amount
+                              bill: "bill",
+                              amount: request.amount,
                             }}
                             widgetLoaded={widgetLoaded}
                             method={klarnaMethod}
@@ -1124,13 +1151,13 @@ const CheckoutForm = ({ match, history }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Checkout = (props) => (
   <Elements stripe={stripePromise}>
     <CheckoutForm {...props} />
   </Elements>
-)
+);
 
-export default Checkout
+export default Checkout;

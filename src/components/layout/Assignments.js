@@ -1,77 +1,77 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import download from 'downloadjs'
-import Message from '../layout/Message'
-import { Link, useHistory } from 'react-router-dom'
-import Loader from '../layout/Loader'
-import { getMyAnswerList } from '../../redux/actions/answerAction'
-import { getCourseList } from '../../redux/actions/courseAction'
-import { getMyTaskList } from '../../redux/actions/taskAction'
-import { getTaskList } from '../../redux/actions/taskAction'
+import download from "downloadjs";
+import Message from "../layout/Message";
+import { Link, useHistory } from "react-router-dom";
+import Loader from "../layout/Loader";
+import { getMyAnswerList } from "../../redux/actions/answerAction";
+import { getCourseList } from "../../redux/actions/courseAction";
+import { getMyTaskList } from "../../redux/actions/taskAction";
+import { getTaskList } from "../../redux/actions/taskAction";
 
 export default function Assignments() {
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   //Get Student's Bootcamps
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const { userDetail } = useSelector((state) => state.userLogin);
 
   const {
     courseList,
     loading: bootcampLoading,
-    error: bootcampError
-  } = useSelector((state) => state.courseList)
+    error: bootcampError,
+  } = useSelector((state) => state.courseList);
 
   useEffect(() => {
-    dispatch(getCourseList())
-  }, [dispatch])
+    dispatch(getCourseList());
+  }, [dispatch]);
 
   // state from isValid reducer
-  const isTokenValid = useSelector((state) => state.isTokenValid)
+  const isTokenValid = useSelector((state) => state.isTokenValid);
   const {
     error: ValidError,
     loading: ValidLoading,
-    success: TokenSuccess
-  } = isTokenValid
+    success: TokenSuccess,
+  } = isTokenValid;
 
   // updating process
-  const userUpdate = useSelector((state) => state.userUpdate)
-  const { updateSuccess, error: UpdateError } = userUpdate
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { updateSuccess, error: UpdateError } = userUpdate;
 
   //get task list
-  const taskListMy = useSelector((state) => state.taskListMy)
-  const { myTasks, loading: myTasksLoading, error: myTasksError } = taskListMy
+  const taskListMy = useSelector((state) => state.taskListMy);
+  const { myTasks, loading: myTasksLoading, error: myTasksError } = taskListMy;
 
   // getting myAnswerList
 
-  const answerMyList = useSelector((state) => state.answerMyList)
+  const answerMyList = useSelector((state) => state.answerMyList);
   const {
     myanswers,
     loading: answerListLoading,
     error: answerListError,
-    success: answerListSuccess
-  } = answerMyList
+    success: answerListSuccess,
+  } = answerMyList;
 
   const taskStatus = (taskId) => {
     if (myanswers && myanswers.length > 0) {
-      const foundAnswer = myanswers.find((ans) => ans.task._id === taskId)
-      return foundAnswer
-    } else return null
-  }
+      const foundAnswer = myanswers.find((ans) => ans.task._id === taskId);
+      return foundAnswer;
+    } else return null;
+  };
 
   useEffect(() => {
-    if (userDetail.name && userDetail.user_type === 'StudentUser') {
-      dispatch(getMyTaskList())
-      dispatch(getMyAnswerList(userDetail._id))
+    if (userDetail.name && userDetail.user_type === "StudentUser") {
+      dispatch(getMyTaskList());
+      dispatch(getMyAnswerList(userDetail._id));
     }
 
     if (
       userDetail.name &&
-      (userDetail.user_type === 'MentorUser' ||
-        userDetail.user_type === 'AdminUser')
+      (userDetail.user_type === "MentorUser" ||
+        userDetail.user_type === "AdminUser")
     ) {
-      dispatch(getTaskList())
+      dispatch(getTaskList());
     }
   }, [
     dispatch,
@@ -79,46 +79,46 @@ export default function Assignments() {
     ValidLoading,
     updateSuccess,
     TokenSuccess,
-    answerListSuccess
-  ])
+    answerListSuccess,
+  ]);
 
   const config = {
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + userDetail.token
-    }
-  }
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + userDetail.token,
+    },
+  };
 
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task._id + '/download',
+      "http://localhost:5001/api/tasks/" + task._id + "/download",
       config
-    )
-    const blob = await res.blob()
-    download(blob, task.projectName + '-Assignment')
-  }
+    );
+    const blob = await res.blob();
+    download(blob, task.projectName + "-Assignment");
+  };
 
   const getDate = (date) => {
-    let d = new Date(date)
-    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
-  }
+    let d = new Date(date);
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  };
 
   return (
     <>
-      <div className="pb-5 mt-5 mb-5">
-        <div className="auto-container">
+      <div className='pb-5 mt-5 mb-5'>
+        <div className='auto-container'>
           {/* Sec Title */}
-          <div className="title mb-4">
-            <div className="clearfix">
-              <div className="pull-left">
+          <div className='title mb-4'>
+            <div className='clearfix'>
+              <div className='pull-left'>
                 <div>My Assignments</div>
               </div>
             </div>
           </div>
-          <div className="inner-container">
-            <div className="table-responsive">
-              <table className="table text-center">
+          <div className='inner-container'>
+            <div className='table-responsive'>
+              <table className='table text-center'>
                 <thead>
                   <tr>
                     <th>#</th>
@@ -126,8 +126,8 @@ export default function Assignments() {
                     <th>Bootcamp</th>
                     <th>Assignment</th>
                     <th>Created At</th>
-                    {userDetail.user_type !== 'MentorUser' &&
-                      userDetail.user_type !== 'AdminUser' && (
+                    {userDetail.user_type !== "MentorUser" &&
+                      userDetail.user_type !== "AdminUser" && (
                         <>
                           <th>Status</th>
                           <th>Submit</th>
@@ -139,7 +139,7 @@ export default function Assignments() {
                   {myTasksLoading ? (
                     <Loader />
                   ) : myTasksError ? (
-                    <Message variant="danger">{myTasksError}</Message>
+                    <Message variant='danger'>{myTasksError}</Message>
                   ) : (
                     myTasks.map((task, index) => (
                       <tr key={task._id}>
@@ -151,19 +151,19 @@ export default function Assignments() {
                         <td>{task.bootcamp.name}</td>
                         <td>
                           <Link onClick={() => DownloadAssignmentHandler(task)}>
-                            <i class="fas fa-file-download"></i> DOWNLOAD
+                            <i class='fas fa-file-download'></i> DOWNLOAD
                           </Link>
                         </td>
 
                         <td>{getDate(task.createdAt)}</td>
 
-                        {userDetail.user_type !== 'MentorUser' &&
-                          userDetail.user_type !== 'AdminUser' && (
+                        {userDetail.user_type !== "MentorUser" &&
+                          userDetail.user_type !== "AdminUser" && (
                             <>
                               {answerListLoading ? (
                                 <Loader />
                               ) : answerListError ? (
-                                <Message variant="danger">
+                                <Message variant='danger'>
                                   {answerListError}
                                 </Message>
                               ) : (
@@ -172,40 +172,40 @@ export default function Assignments() {
                                     <td>NA</td>
                                   ) : taskStatus(task._id) &&
                                     taskStatus(task._id).status ===
-                                      'Not Sent' ? (
-                                    <td style={{ color: 'red' }}>
+                                      "Not Sent" ? (
+                                    <td style={{ color: "red" }}>
                                       {taskStatus(task._id).status}
                                     </td>
                                   ) : taskStatus(task._id) &&
                                     taskStatus(task._id).status ===
-                                      'Pending' ? (
+                                      "Pending" ? (
                                     <td
                                       style={{
-                                        color: '#ffc40c'
+                                        color: "#ffc40c",
                                       }}
                                     >
                                       {taskStatus(task._id) &&
                                         taskStatus(task._id).status}
                                     </td>
                                   ) : taskStatus(task._id) &&
-                                    taskStatus(task._id).status === 'Failed' ? (
+                                    taskStatus(task._id).status === "Failed" ? (
                                     <td
                                       style={{
-                                        color: 'red'
+                                        color: "red",
                                       }}
                                     >
                                       {taskStatus(task._id) &&
                                         taskStatus(task._id).status}
                                     </td>
                                   ) : taskStatus(task._id) &&
-                                    taskStatus(task._id).status === 'Sent' ? (
-                                    <td style={{ color: '#171717' }}>
+                                    taskStatus(task._id).status === "Sent" ? (
+                                    <td style={{ color: "#171717" }}>
                                       {taskStatus(task._id).status}
                                     </td>
                                   ) : (
                                     <td
                                       style={{
-                                        color: '#1aff1a'
+                                        color: "#1aff1a",
                                       }}
                                     >
                                       {taskStatus(task._id) &&
@@ -217,14 +217,14 @@ export default function Assignments() {
 
                               <td>
                                 {taskStatus(task._id) &&
-                                taskStatus(task._id).status !== 'Not Sent' ? (
-                                  'Submitted'
+                                taskStatus(task._id).status !== "Not Sent" ? (
+                                  "Submitted"
                                 ) : !taskStatus(task._id) ? (
-                                  'NA'
+                                  "NA"
                                 ) : (
                                   <Link
                                     to={`/assignment-details/${task.bootcamp._id}/${task._id}`}
-                                    className=" text-info"
+                                    className=' text-info'
                                   >
                                     Submit Assignment
                                   </Link>
@@ -242,5 +242,5 @@ export default function Assignments() {
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -1,102 +1,105 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Table, Col, Row, Form } from 'react-bootstrap'
-import Message from '../../layout/Message'
-import { ToastContainer, toast } from 'react-toastify'
-import { useHistory } from 'react-router-dom'
-import download from 'downloadjs'
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Table, Col, Row, Form } from "react-bootstrap";
+import Message from "../../layout/Message";
+import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+import download from "downloadjs";
 //************* importing form action ************/
 import {
   getTaskAnswerList,
-  updateAnswerStatus
-} from '../../../redux/actions/answerAction'
-import { getTaskDetails } from '../../../redux/actions/taskAction'
+  updateAnswerStatus,
+} from "../../../redux/actions/answerAction";
+import { getTaskDetails } from "../../../redux/actions/taskAction";
 
-import Loader from '../../layout/Loader'
-import { ANSWER_UPDATE_STATUS_REST } from '../../../redux/constences/answerConst'
-import { updatePerformance } from '../../../redux/actions/performanceAction'
+import Loader from "../../layout/Loader";
+import { ANSWER_UPDATE_STATUS_REST } from "../../../redux/constences/answerConst";
+import { updatePerformance } from "../../../redux/actions/performanceAction";
 
 export default function TaskDetailsScreen({ match }) {
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const { id, bootcampId } = match.params
+  const { id, bootcampId } = match.params;
   // user must be logged in before!!!
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userDetail } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userDetail } = userLogin;
 
   // gettign answers list for specific task
-  const answerList = useSelector((state) => state.listAnswer)
-  const { answers, loading, error } = answerList
+  const answerList = useSelector((state) => state.listAnswer);
+  const { answers, loading, error } = answerList;
 
   //getting specific task
-  const taskDetails = useSelector((state) => state.taskDetails)
-  const { task, loading: taskLoading, error: TaskError } = taskDetails
+  const taskDetails = useSelector((state) => state.taskDetails);
+  const { task, loading: taskLoading, error: TaskError } = taskDetails;
 
   // Update Check mark
-  const taskCheck = useSelector((state) => state.taskCheck)
+  const taskCheck = useSelector((state) => state.taskCheck);
   const {
     loading: updateLoading,
     error: updateError,
-    updateSuccess
-  } = taskCheck
+    updateSuccess,
+  } = taskCheck;
 
   // Update Pass mark
-  const taskPassed = useSelector((state) => state.taskPassed)
+  const taskPassed = useSelector((state) => state.taskPassed);
   const {
     loading: passedLoading,
     error: passedError,
-    updateSuccess: passedSuccess
-  } = taskPassed
+    updateSuccess: passedSuccess,
+  } = taskPassed;
 
   // Update Not Passed  mark
 
-  const AnswerStatus = useSelector((state) => state.AnswerStatus)
+  const AnswerStatus = useSelector((state) => state.AnswerStatus);
   const {
     loading: StatusLoading,
     error: StatusError,
-    success: StatusSuccess
-  } = AnswerStatus
+    success: StatusSuccess,
+  } = AnswerStatus;
 
   useEffect(() => {
-    if (userDetail && !userDetail.user_type === 'StudentUser') {
-      history.push('/')
+    if (userDetail && !userDetail.user_type === "StudentUser") {
+      history.push("/");
     } else if (StatusSuccess) {
-      dispatch(getTaskAnswerList(bootcampId, id))
-      dispatch({ type: ANSWER_UPDATE_STATUS_REST })
+      dispatch(getTaskAnswerList(bootcampId, id));
+      dispatch({ type: ANSWER_UPDATE_STATUS_REST });
     } else {
-      dispatch(getTaskDetails(bootcampId, id))
-      dispatch(getTaskAnswerList(bootcampId, id))
+      dispatch(getTaskDetails(bootcampId, id));
+      dispatch(getTaskAnswerList(bootcampId, id));
     }
-  }, [dispatch, userDetail, history, StatusSuccess])
+  }, [dispatch, userDetail, history, StatusSuccess]);
 
   const config = {
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + userDetail.token
-    }
-  }
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + userDetail.token,
+    },
+  };
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      'https://server.ccab.tech/api/tasks/' + task.task._id + '/download',
+      "http://localhost:5001/api/tasks/" + task.task._id + "/download",
       config
-    )
-    const blob = await res.blob()
-    download(blob, task.task.projectName + '-Assignment')
-  }
+    );
+    const blob = await res.blob();
+    download(blob, task.task.projectName + "-Assignment");
+  };
 
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
     const res = await fetch(
-      'https://server.ccab.tech/api/answers/' + answer._id + '/download',
+      "http://localhost:5001/api/answers/" + answer._id + "/download",
       config
-    )
-    const blob = await res.blob()
-    console.log(answer.task)
-    download(blob, answer.task.projectName + '-' + answer.user.name + '-Answer')
-    dispatch(getTaskAnswerList(bootcampId, id))
-  }
+    );
+    const blob = await res.blob();
+    console.log(answer.task);
+    download(
+      blob,
+      answer.task.projectName + "-" + answer.user.name + "-Answer"
+    );
+    dispatch(getTaskAnswerList(bootcampId, id));
+  };
 
   // const deleteHandler = (id) => {
   //   dispatch(taskDelete(id));
@@ -132,91 +135,91 @@ Failed
   }
 
   const _handleStatusOptions = (e, answer) => {
-    let textMessage = ''
-    let value = ''
+    let textMessage = "";
+    let value = "";
     switch (e.target.value) {
-      case '1':
-        textMessage = 'Did Excellent'
-        value = 'Excellent'
-        break
-      case '2':
-        textMessage = 'Did Good'
-        value = 'Good'
-        break
-      case '3':
-        textMessage = 'Did Not Bad'
-        value = 'Not Bad'
-        break
-      case '4':
-        textMessage = 'Failed'
-        value = 'Failed'
-        break
+      case "1":
+        textMessage = "Did Excellent";
+        value = "Excellent";
+        break;
+      case "2":
+        textMessage = "Did Good";
+        value = "Good";
+        break;
+      case "3":
+        textMessage = "Did Not Bad";
+        value = "Not Bad";
+        break;
+      case "4":
+        textMessage = "Failed";
+        value = "Failed";
+        break;
       default:
-        break
+        break;
     }
     if (textMessage && value) {
       dispatch(
         updateAnswerStatus(bootcampId, id, answer._id, { status: value })
-      )
+      );
 
       dispatch(
         updatePerformance(
           { taskResult: value, student: answer.user._id },
           bootcampId
         )
-      )
+      );
 
-      toast.info(answer.user.name + ' ' + textMessage, {
-        position: toast.POSITION.BOTTOM_RIGHT
-      })
+      toast.info(answer.user.name + " " + textMessage, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
     }
-  }
+  };
 
   const getDates = (date) => {
-    const date1 = new Date(date)
+    const date1 = new Date(date);
     return (
-      date1.getFullYear() + '-' + (date1.getMonth() + 1) + '-' + date1.getDate()
-    )
-  }
+      date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-" + date1.getDate()
+    );
+  };
 
   return (
-    <div className="py-5">
-      <div className="title">Task Details</div>
+    <div className='py-5'>
+      <div className='title'>Task Details</div>
       {taskLoading ? (
         <Loader />
       ) : TaskError ? (
         <Message>{TaskError}</Message>
       ) : task.success ? (
-        <div className="p-3 container-fluid ">
-          <div className="row">
-            <div className="col-sm ">
-              <div className="sub-title mb-2">{task.task.projectName}</div>
-              <span className="mb-1 d-block">
+        <div className='p-3 container-fluid '>
+          <div className='row'>
+            <div className='col-sm '>
+              <div className='sub-title mb-2'>{task.task.projectName}</div>
+              <span className='mb-1 d-block'>
                 {getDates(task.task.createdAt)}
               </span>
               <p>{task.task.description}</p>
             </div>
           </div>
 
-          <div className="row d-flex justify-content-between">
-            <div className="col-sm-3 ">
+          <div className='row d-flex justify-content-between'>
+            <div className='col-sm-3 '>
               <cite>Assignment by {task.task.user.name}</cite>
             </div>
 
-            <div className="col-sm-4 mt-3 ">
+            <div className='col-sm-4 mt-3 '>
               <button
-                type="button"
-                className="float-right btn btn-outline-dark btn-sm"
+                type='button'
+                className='float-right btn btn-outline-dark btn-sm'
                 onClick={DownloadAssignmentHandler}
               >
-                <i className="">Download</i>
+                <i className=''>Download</i>
               </button>
             </div>
           </div>
         </div>
       ) : null}
 
-      <Table striped bordered hover size="sm" mt-2>
+      <Table striped bordered hover size='sm' mt-2>
         <thead>
           <tr>
             <th>Nr</th>
@@ -250,13 +253,13 @@ Failed
                       {/* created at  */}
                       <td>
                         {getDates(answer.createdAt) +
-                          ' : ' +
-                          answer.createdAt.split('T')[1].split('.')[0]}
+                          " : " +
+                          answer.createdAt.split("T")[1].split(".")[0]}
                       </td>
                     </>
                   ) : (
                     <>
-                      {' '}
+                      {" "}
                       <td>Not Available</td>
                     </>
                   )}
@@ -269,18 +272,18 @@ Failed
                         <Row>
                           <Col lg={10}>
                             <Form.Control
-                              as="select"
+                              as='select'
                               custom
                               onChange={(e) => {
                                 //dispatch(taskAsPassed(task));
-                                _handleStatusOptions(e, answer)
+                                _handleStatusOptions(e, answer);
                               }}
                             >
                               <option>Choose Option</option>
-                              <option value="1">Excellent</option>
-                              <option value="2">Good</option>
-                              <option value="3">Not Bad</option>
-                              <option value="4">Failed</option>
+                              <option value='1'>Excellent</option>
+                              <option value='2'>Good</option>
+                              <option value='3'>Not Bad</option>
+                              <option value='4'>Failed</option>
                             </Form.Control>
                           </Col>
                         </Row>
@@ -298,45 +301,45 @@ Failed
                       <Col>
                         {answer.isViewed ? (
                           <i
-                            className="fas fa-eye eyeIcon"
-                            style={{ color: 'green', pointer: 'auto' }}
+                            className='fas fa-eye eyeIcon'
+                            style={{ color: "green", pointer: "auto" }}
                           ></i>
                         ) : (
                           <i
-                            className="far fa-eye-slash eyeIcon"
-                            style={{ color: '#adb5bd' }}
+                            className='far fa-eye-slash eyeIcon'
+                            style={{ color: "#adb5bd" }}
                           ></i>
                         )}
                       </Col>
-                      <Col className="statusCol-Admin">
+                      <Col className='statusCol-Admin'>
                         {/* answer status */}
-                        {answer.status === 'Not Sent' ? (
-                          <td style={{ color: 'red' }}>{answer.status}</td>
-                        ) : answer.status === 'Pending' ? (
+                        {answer.status === "Not Sent" ? (
+                          <td style={{ color: "red" }}>{answer.status}</td>
+                        ) : answer.status === "Pending" ? (
                           <td
                             style={{
-                              backgroundColor: 'yellow',
-                              color: '#171717'
+                              backgroundColor: "yellow",
+                              color: "#171717",
                             }}
                           >
                             {answer.status}
                           </td>
-                        ) : answer.status === 'Failed' ? (
+                        ) : answer.status === "Failed" ? (
                           <td
                             style={{
-                              backgroundColor: 'red',
-                              color: '#171717'
+                              backgroundColor: "red",
+                              color: "#171717",
                             }}
                           >
                             {answer.status}
                           </td>
-                        ) : answer.status === 'Sent' ? (
-                          <td style={{ color: '#171717' }}>{answer.status}</td>
+                        ) : answer.status === "Sent" ? (
+                          <td style={{ color: "#171717" }}>{answer.status}</td>
                         ) : (
                           <td
                             style={{
-                              backgroundColor: '#1aff1a',
-                              color: '#171717'
+                              backgroundColor: "#1aff1a",
+                              color: "#171717",
                             }}
                           >
                             {answer.status}
@@ -357,16 +360,16 @@ Failed
                   </td> */}
 
                   <td>
-                    {answer.status !== 'Not Sent' ? (
+                    {answer.status !== "Not Sent" ? (
                       <button
                         onClick={() => {
-                          DownloadAnswerHandler(answer)
+                          DownloadAnswerHandler(answer);
                         }}
                       >
                         Download
                       </button>
                     ) : (
-                      'Not Available'
+                      "Not Available"
                     )}
                   </td>
                 </tr>
@@ -377,5 +380,5 @@ Failed
       </Table>
       <ToastContainer />
     </div>
-  )
+  );
 }
