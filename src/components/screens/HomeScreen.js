@@ -48,19 +48,22 @@ export default function HomeScreen({ match }) {
 
           <div class='quote--container banner-quote'>
             <p class='quote'>
-              <div className='typewriter'>
-                <Typewriter
-                  options={{
-                    strings: [
-                      '<span style="color: #CC8C33;">apply</span> ( <span style="color: #C94F45;">"Codify College"</span > ) <span style="color: #CC8C33;">.then </span>(<span style="color: #C94F45;">"Brighten your future"</span>)',
-                    ],
-                    autoStart: true,
-                    loop: true,
-                  }}
-                  className='typewriter'
-                />
-              </div>
+              Your future is created by what you do{" "}
+              <span class='quote--highlight'>TODAY</span> not tomorrow
             </p>
+            <p class='quote--author'>&ndash; Robert Kiyosaki</p>
+          </div>
+
+          <div className='typewriter'>
+            <Typewriter
+              options={{
+                strings: [
+                  '<span style="color: #CC8C33;">apply</span> ( <span style="color: #C94F45;">"Codify College"</span > ) <span style="color: #CC8C33;">.then </span>(<span style="color: #C94F45;">"Brighten your future"</span>)',
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
           </div>
 
           {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}

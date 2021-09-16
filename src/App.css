@@ -53,6 +53,21 @@ body {
     text-align: center !important;
   }
 
+  .service-classes {
+    position: static !important;
+  }
+
+  .service-banner-container {
+    height: 50vh !important;
+    width: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .service-banner-box {
+    top: 50% !important;
+  }
+
   .display-center-small-screen {
     width: 300px;
     overflow: auto;
@@ -79,9 +94,6 @@ body {
   .service-banner-text {
     font-size: 2rem !important;
     display: inline-block !important;
-  }
-  .service-banner-container {
-    background-size: contain !important;
   }
 
   .select-box {
@@ -141,6 +153,15 @@ body {
     width: 100% !important;
     text-align: center !important;
   }
+
+  .typewriter {
+    position: absolute !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
 
   .hero-banner {
     top: 15;
@@ -288,9 +309,9 @@ pre {
 }
 .advisor-image {
   height: 150px;
-  background: url(assets/images/background/advisor.jpg) center;
+  background: url(assets/images/background/advisor2.jpg) center;
   background-repeat: no-repeat;
-  background-size: 100% 26vh;
+  background-size: 100% 20vh;
 }
 
 .advisor-text1 {
@@ -317,13 +338,16 @@ pre {
 
 .button {
   position: relative;
-  width: auto;
+  width: 170px;
   height: 40px;
   color: #69686885;
   border-radius: 20px;
-  border: 3px solid #2d9c6b;
+  border: 1px solid #2d9c6b;
   background: black;
   cursor: pointer;
+  box-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 1px #fff, 0 0 10px #49ff18,
+    0 0 1px #49ff18, 0 0 1px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18;
+  position: relative;
 }
 
 .button:hover span {
@@ -337,9 +361,14 @@ pre {
 }
 
 .advisor-icon {
-  color: rgb(45, 156, 107);
-  font-size: 33px;
-  text-shadow: 0px -1px 7px rgba(0, 156, 107, 1);
+  color: #49ff18;
+  text-shadow: 0 0 1px #222, 0 0 1px #222, 0 0 1px #222, 0 0 2px #49ff18,
+    0 0 3px #49ff18, 0 0 4px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18;
+  position: absolute;
+  top: -5px;
+  left: -3px;
+  width: 70px;
+  font-weight: 400;
 }
 
 .fa-online-education {
@@ -863,7 +892,7 @@ input:checked + .slider:before {
   display: inline-block;
   text-align: center;
   height: 100vh;
-  background: url(assets/images/services/red5.jpg) no-repeat 0 10%;
+  background: url(assets/images/services/red8.jpeg) no-repeat 0 10%;
   background-size: cover;
   width: 100%;
   position: relative;
@@ -878,7 +907,7 @@ input:checked + .slider:before {
 }
 .service-banner-box {
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -897,10 +926,39 @@ input:checked + .slider:before {
   height: 50px;
 }
 
+.service-form {
+  height: 500px;
+  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
+    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
+    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
+    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+  position: relative;
+}
+.service-form .form-control::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff !important;
+  opacity: 1; /* Firefox */
+}
+
+.service-form .form-control:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff !important;
+}
+
+.service-form .form-control::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #fff !important;
+}
+.service-classes {
+  position: absolute;
+  top: 19.5%;
+  left: 17.3%;
+  width: 65.4%;
+}
+
 .service-focus img {
-  height: 170px;
+  height: 200px;
   width: 100%;
-  border-radius: 5px 5px 0 0;
 }
 .service-circle:before {
   content: "";
@@ -1142,9 +1200,9 @@ input:checked + .slider:before {
 
 .banner-quote {
   position: absolute;
-  top: 20%;
-  font-size: 50px;
-  font-weight: 700;
+  top: 4%;
+  font-size: 30px;
+  font-weight: 300;
   line-height: 1.4rem;
   height: 100%;
   color: #fff;
@@ -1171,4 +1229,15 @@ input:checked + .slider:before {
   font-size: 0.8rem;
   text-align: right;
   font-weight: 300;
+}
+
+.typewriter {
+  position: absolute;
+  top: 50%;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1.4rem;
+  height: 100%;
+  color: #fff;
+  text-align: center;
 }

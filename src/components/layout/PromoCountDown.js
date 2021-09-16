@@ -35,8 +35,8 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return (
-      <section style={{ height: "40px", background: "#eb6c85" }}>
-        <div className='auto-container d-flex justify-content-between sub-title text-black p-1'>
+      <section style={{ height: "48px", background: "#CC8C33" }}>
+        <div className='auto-container d-flex justify-content-between title text-danger pb-1'>
           <div>Get more than 20% discount today</div>
           <span>
             <span>{days}</span> <span className='text-white ml-1'>D</span>{" "}

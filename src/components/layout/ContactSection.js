@@ -27,20 +27,20 @@ const ContactSection = () => {
                 &#123; <span className='p-2'>Unsure which course fits you</span>{" "}
                 &#125;{" "}
               </div>
-              <div className=''>
+              <div className='pt-2'>
                 <span style={{ color: "red" }}>&#9552;&#62;</span>
                 <span style={{ color: "#F5B600" }}>
                   Talk to our advisor to craft the ideal course plan
                 </span>
 
-                <div class='inner mt-2 ml-4'>
+                <div class='inner mt-3 ml-4'>
                   <a
                     class='button fb'
                     onClick={() => setShowModal({ visible: true })}
                   >
                     <span className='d-flex'>
-                      <i class='far fa-user-circle advisor-icon'></i>
-                      <span className='px-1 pt-2'>Ask an advisor</span>
+                      <i class='far fa-user-circle fa-4x advisor-icon'></i>
+                      <span className='px-1 pt-2 pl-5'>Ask an advisor</span>
                     </span>
                   </a>
                 </div>

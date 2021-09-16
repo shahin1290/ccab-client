@@ -44,7 +44,6 @@ const ServiceBanner = () => {
   }, [dispatch])
 
   return (
-    <div>
       <div class="service-banner-container ">
         <div className="service-banner-box ">
           <div className="service-banner-text">
@@ -92,7 +91,6 @@ const ServiceBanner = () => {
         </div>
         
       </div>
-    </div>
   )
 }
 
