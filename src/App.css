@@ -144,7 +144,12 @@ body {
   }
 
   .service-form {
-    margin-top: 400px;
+    height: 60% !important;
+    margin-top: 490px !important;
+  }
+
+  .service-form-content {
+    position: static !important;
   }
 
   .banner-quote {
@@ -161,7 +166,6 @@ body {
     width: 100% !important;
     text-align: center !important;
   }
-  
 
   .hero-banner {
     top: 15;
@@ -892,7 +896,7 @@ input:checked + .slider:before {
   display: inline-block;
   text-align: center;
   height: 100vh;
-  background: url(assets/images/services/red8.jpeg) no-repeat 0 10%;
+  background: url(assets/images/services/red.jpeg) no-repeat 0 10%;
   background-size: cover;
   width: 100%;
   position: relative;
@@ -927,13 +931,14 @@ input:checked + .slider:before {
 }
 
 .service-form {
-  height: 500px;
+  height: 700px;
   background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
     linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
     linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
     linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
   position: relative;
 }
+
 .service-form .form-control::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #fff !important;
@@ -949,11 +954,12 @@ input:checked + .slider:before {
   /* Microsoft Edge */
   color: #fff !important;
 }
+
 .service-classes {
   position: absolute;
-  top: 19.5%;
-  left: 17.3%;
-  width: 65.4%;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .service-focus img {

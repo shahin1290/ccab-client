@@ -11,21 +11,23 @@ import ServiceAssistance from "../layout/ServiceAssistance";
 const ServiceHome = () => {
   return (
     <>
-      <div className='bg-white'>
+      <div className='bg-white' style={{ position: "relative" }}>
         <ServiceBanner />
-        <div style={{ background: "#F8F9FD"}}>
+        <div style={{ background: "#F8F9FD" }}>
           <div className='service-classes'>
             <ServiceClasses />
           </div>
-          <ServiceVideoChat />
-
-          <ServiceAssistance />
         </div>
-        {/* <ServiceGoal />
-        <ServiceBenefits /> */}
-        <ServiceSteps />
-        <ServiceContact />
       </div>
+
+      <ServiceVideoChat />
+
+      <ServiceAssistance />
+
+      {/* <ServiceGoal />
+        <ServiceBenefits /> */}
+      <ServiceSteps />
+      <ServiceContact />
     </>
   );
 };

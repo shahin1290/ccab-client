@@ -3,16 +3,15 @@ import { Row, Col, Card } from "react-bootstrap";
 
 const ServiceClasses = () => {
   return (
-    <section className='pb-3 pt-3' style={{ background: "#fff" }}>
-      <div className='auto-container display-center-small-screen'>
-        <Row className='mx-auto'>
-          <Col md={4}>
+    <section style={{ background: "transparent" }}>
+      <div className='auto-container' style={{ background: "#fff" }}>
+        <Row className="px-5 py-2">
+          <Col md={4} xs={8} className="text-center-small-screen">
             <Card
               style={{
                 height: "380px",
                 width: "100%",
                 borderRadius: "10px",
-                boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034)",
               }}
             >
               <Card.Body className='p-3'>
@@ -68,10 +67,11 @@ const ServiceClasses = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col lg={4}>
+          <Col md={4} xs={8} className="text-center-small-screen">
             <Card
               style={{
                 height: "380px",
+                width: "100%",
                 borderRadius: "10px",
                 boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034)",
               }}
@@ -152,10 +152,11 @@ const ServiceClasses = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col lg={4}>
+          <Col md={4} xs={8} className="text-center-small-screen">
             <Card
               style={{
                 height: "380px",
+                width: "100%",
                 borderRadius: "10px",
                 boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034)",
               }}
