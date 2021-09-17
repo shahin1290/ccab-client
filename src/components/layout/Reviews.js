@@ -208,7 +208,7 @@ const items = [
 
 const ReviewsSection = function (props) {
   return (
-    <section className='py-5' style={{ background: "#fff" }}>
+    <section className='py-5' style={{ background: ' rgb(234, 246, 255)'}}>
       <div className='auto-container'>
         <div className='title text-center'>Reviews By Students</div>
         <hr className='block-seperator mt-4 mb-4' />
