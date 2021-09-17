@@ -309,22 +309,27 @@ pre {
 }
 .advisor-image {
   height: 150px;
-  background: url(assets/images/background/advisor2.jpg) center;
+  background: url(assets/images/background/advisor2-new.jpg) center;
   background-repeat: no-repeat;
-  background-size: 100% 20vh;
+  background-size: cover !important;
+  max-width: 100% !important;
+  background-position: left left;
 }
 
 .advisor-text1 {
-  height: 150px;
-  background: black;
-  width: 50vh;
-  border-radius: 30px;
+  /* height: 150px; */
+  overflow: auto !important;
+  background: rgb(17, 25, 32);
+  
+  width: 100% !important;
+  border-radius: 20px;
 }
 
 .advisor-text2 {
-  height: 50px;
-  background: #bebebe;
-  width: 50vh;
+  height: 45px;
+  background: rgb(36,44,55);
+  background: linear-gradient(0deg, rgba(36,44,55,0.1881127450980392) 0%, rgba(98,101,121,0.7903536414565826) 100%);
+  width: 100% !important ; 
   border-radius: 30px 30px 0 0;
 }
 
@@ -338,15 +343,15 @@ pre {
 
 .button {
   position: relative;
-  width: 170px;
+  width: 190px;
   height: 40px;
   color: #69686885;
   border-radius: 20px;
-  border: 1px solid #2d9c6b;
+  border: 2px solid #b2fba0;
   background: black;
   cursor: pointer;
-  box-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 1px #fff, 0 0 10px #49ff18,
-    0 0 1px #49ff18, 0 0 1px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18;
+  -webkit-box-shadow: 0px -1px 5px 2px  rgba(151,255,153,0.918);
+  box-shadow: 0px 0px 5px 0px rgba(151, 255, 153, 0.918);
   position: relative;
 }
 
@@ -355,20 +360,24 @@ pre {
 }
 
 .button span {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: none;
-  color: #aaa;
+  color: #68eb44;
+  margin:0 !important;
+  padding : 0px !important;
+ 
 }
 
 .advisor-icon {
   color: #49ff18;
-  text-shadow: 0 0 1px #222, 0 0 1px #222, 0 0 1px #222, 0 0 2px #49ff18,
-    0 0 3px #49ff18, 0 0 4px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18;
+  /* text-shadow: 0 0 1px #222, 0 0 1px #222, 0 0 1px #222, 0 0 2px #49ff18,
+    0 0 3px #49ff18, 0 0 4px #49ff18, 0 0 5px #49ff18, 0 0 5px #49ff18; */
   position: absolute;
-  top: -5px;
+  top: -4px;
   left: -3px;
-  width: 70px;
-  font-weight: 400;
+  font-size:280% !important; 
+
+  font-weight: 300;
 }
 
 .fa-online-education {
@@ -1163,7 +1172,7 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 400px;
   background: #17182f;
   position: relative;
 }
@@ -1234,9 +1243,10 @@ input:checked + .slider:before {
 .typewriter {
   position: absolute;
   top: 50%;
+
   font-size: 50px;
   font-weight: 300;
-  line-height: 1.4rem;
+  line-height: 4rem;
   height: 100%;
   color: #fff;
   text-align: center;

@@ -12,10 +12,46 @@ const ContactSection = () => {
     <section
       style={{
         backgroundColor: "#fff",
-        padding: "80px 0",
+        padding: " 0",
       }}
     >
       <div className='auto-container'>
+        <Row className='d-flex justify-content-center'>
+          <Col md={4} className='advisor-image mt-3 px-0' ></Col>
+          <Col md={6} className="px-0">
+            <div
+              className='advisor-text1 p-4 w-100'
+              style={{ fontWeight: "400" }}
+            >
+              <div className='ml-1' style={{ color: "#2d9c6b" }}>
+                &#123; <span className='p-2'>Unsure which course fits you</span>{" "}
+                &#125;{" "}
+              </div>
+              <div className='pt-2'>
+                <span style={{ color: "red" }}>&#9552;&#62;</span>
+                <span style={{ color: "#F5B600" }}>
+                  Talk to our advisor to craft the ideal course plan
+                </span>
+
+                <div class='inner mt-3 ml-4'>
+                  <a
+                    class='button fb'
+                    onClick={() => setShowModal({ visible: true })}
+                  >
+                    <div className='d-flex align-items-center w-100 justify-content-center pb-1 pl-3 overflow-auto' style={{height:'40px'}}>
+                      <i class='far fa-user-circle fa-4x advisor-icon'></i>
+                      <span className='fs-2  '>Ask an advisor</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className='advisor-text2'></div>
+          </Col>
+        </Row>
+      </div>
+
+      {/* <div className='auto-container'>
         <Row className='d-flex justify-content-center'>
           <Col md={4} className='advisor-image mb-3'></Col>
           <Col md={6}>
@@ -49,7 +85,7 @@ const ContactSection = () => {
             <div className='advisor-text2'></div>
           </Col>
         </Row>
-      </div>
+      </div> */}
       <Rodal
         animation='rotate'
         visible={showModal.visible}

@@ -35,7 +35,7 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5001/contact", {
+      const res = await axios.post("https://server.ccab.tech/contact", {
         name,
         email,
         phoneNumber,

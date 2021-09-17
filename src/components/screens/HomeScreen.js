@@ -46,7 +46,7 @@ export default function HomeScreen({ match }) {
             <div>with codify College</div>
           </div> */}
 
-          <div class='quote--container banner-quote'>
+          <div class='quote--container banner-quote w-75'>
             <p class='quote'>
               Your future is created by what you do{" "}
               <span class='quote--highlight'>TODAY</span> not tomorrow
@@ -58,7 +58,7 @@ export default function HomeScreen({ match }) {
             <Typewriter
               options={{
                 strings: [
-                  '<span style="color: #CC8C33;">apply</span> ( <span style="color: #C94F45;">"Codify College"</span > ) <span style="color: #CC8C33;">.then </span>(<span style="color: #C94F45;">"Brighten your future"</span>)',
+                  '<span style="color: #CC8C33;">apply</span> ( <span style="color: #C94F45;">"Codify College"</span > ) <br> <span style="color: #CC8C33;top:70%;  ">.then </span>(<span style="color: #C94F45;">"Brighten your future"</span>)',
                 ],
                 autoStart: true,
                 loop: true,
