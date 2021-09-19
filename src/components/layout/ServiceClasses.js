@@ -4,7 +4,7 @@ import { Row, Col, Card } from "react-bootstrap";
 const ServiceClasses = () => {
   return (
     <section style={{ background: "transparent" }}>
-      <div className='auto-container' style={{ background: "#fff" }}>
+      <div className='auto-container' style={{ background: "#fff" ,zIndex:'-3' }}>
         <Row className="px-5 py-2">
           <Col md={4} xs={8} className="text-center-small-screen">
             <Card
@@ -12,6 +12,7 @@ const ServiceClasses = () => {
                 height: "380px",
                 width: "100%",
                 borderRadius: "10px",
+                zIndex:1
               }}
             >
               <Card.Body className='p-3'>

@@ -60,7 +60,7 @@ const ServiceBanner = () => {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    boxShadow: 'none',
+                    boxShadow: 'none',  zIndex:5000,
                     border: colorError ? '1px solid red' : '0'
                   }),
                   option: (provided, state) => ({
@@ -69,6 +69,7 @@ const ServiceBanner = () => {
                     backgroundColor: state.isFocused ? "#EB6C85" : '',
                     color: state.isFocused ? "#fff" : '#222',
                     padding: 10,
+                  
                     textAlign: 'left'
                   })
                 }}
