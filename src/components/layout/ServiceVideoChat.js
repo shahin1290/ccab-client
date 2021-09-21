@@ -6,8 +6,8 @@ const ServiceVideoChat = () => {
   return (
     <section className=''>
       <div className='auto-container bg-white'>
-        <Row className='py-4'>
-          <Col md={6} xs={12} className='pl-5 text-center-small-screen'>
+        <Row className='py-4 d-flex justify-content-between'>
+          <Col md={5} xs={12} className='text-center-small-screen'>
             <div className='sub-title pl-3 py-2 '>High-Quality Video Chat</div>
             <div className='pl-3 py-2 sub-text'>
               Speak face-to-face in a Zoom-like environment, easily accessible
@@ -17,7 +17,7 @@ const ServiceVideoChat = () => {
               Save the travelling time and invest them into your learning
             </div>
           </Col>
-          <Col md={5} xs={10} className='ml-5'>
+          <Col md={5} xs={12}>
             <img src={image1} class='img-fluid' alt='Responsive image' />
           </Col>
         </Row>

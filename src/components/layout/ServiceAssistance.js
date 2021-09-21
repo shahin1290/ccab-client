@@ -7,9 +7,9 @@ import image3 from "../../assets/images/services/fun.jpg";
 const ServiceAssistance = () => {
   return (
     <section className=''>
-      <div className='auto-container bg-white pl-5 pr-5'>
+      <div className='auto-container bg-white '>
         <Row className='service-focus pr-3'>
-          <Col md={4} xs={10} className="text-center-small-screen">
+          <Col md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
@@ -30,7 +30,7 @@ const ServiceAssistance = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} xs={10} className="text-center-small-screen">
+          <Col md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
@@ -52,7 +52,7 @@ const ServiceAssistance = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} xs={10} className="text-center-small-screen">
+          <Col md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
