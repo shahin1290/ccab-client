@@ -7,7 +7,7 @@ export default function ServiceSteps() {
     <section className="" style={{ height: '310px' }}>
       <div class="service-step-overlay">
         <div class="banner">
-          <div className=" title mt-5 text-white">
+          <div className=" title mt-3 text-white">
             How does homework help work? Easy to get started!
           </div>
           <div className="auto-container">

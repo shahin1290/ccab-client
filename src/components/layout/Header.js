@@ -79,7 +79,7 @@ export default function Header() {
             </Nav.Link>
 
             <Nav.Link
-              className='text-dark hide-on-small-screen'
+              className='text-dark'
               href='/services'
             >
               Services

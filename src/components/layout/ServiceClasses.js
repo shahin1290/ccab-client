@@ -5,8 +5,8 @@ const ServiceClasses = () => {
   return (
     <section style={{ background: "transparent" }}>
       <div className='auto-container' style={{ background: "#fff" }}>
-        <Row className="px-5 py-2">
-          <Col md={4} xs={8} className="text-center-small-screen">
+        <Row className="pt-1">
+          <Col md={4} xs={12} >
             <Card
               style={{
                 height: "380px",
@@ -67,7 +67,7 @@ const ServiceClasses = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} xs={8} className="text-center-small-screen">
+          <Col md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "380px",
@@ -152,7 +152,7 @@ const ServiceClasses = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} xs={8} className="text-center-small-screen">
+          <Col md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "380px",
