@@ -1,6 +1,6 @@
  export const getPriceFormat = (price) => {
     //console.log(`price in : ${price.toString().length}`);
-    if (price.toString().length >2 ){
+    if (price.toString().length >3 ){
       console.log('price length : ',price.length);
    
     let priceFormat = Math.floor(price / 1000)
