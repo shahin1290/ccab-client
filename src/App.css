@@ -99,8 +99,11 @@ body {
   .select-box {
     width: 100vw !important;
     margin: 0 !important;
+    z-index: 3000 !important;
   }
-
+.css-26l3qy-menu {
+  z-index: 4000 !important;
+}
   .select-box-content {
     width: 100vw !important;
     margin: 0 !important;
@@ -932,6 +935,7 @@ input:checked + .slider:before {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index:3;
 }
 
 .select-box {
