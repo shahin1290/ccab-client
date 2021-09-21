@@ -79,54 +79,66 @@ export default function Pricing() {
                   <Col className='no-gutter' key={plan._id}>
                     {/* Price Block */}
                     <div className='price-block col  col-sm-12'>
-                      <div className='inner-box'>
-                        <div className='icon-box'>
-                          <span className='icon'>
-                            {/* <img src="images/icons/price-1.png" alt /> */}
-                            <i className='fas fa-gem planicon'></i>
-                          </span>
-                        </div>
-                        <h3>{plan.name}</h3>
+                      <div className='inner-box d-flex flex-column justify-content-between mb-5' style={{ height: "1090px" }}>
+                        <div>
+                          <div className='icon-box'>
+                            <span className='icon'>
+                              {/* <img src="images/icons/price-1.png" alt /> */}
+                              <i className='fas fa-gem planicon'></i>
+                            </span>
+                          </div>
+                          <h3>{plan.name}</h3>
 
-                        {promos && promos.length > 0 && promos[0].show && (
-                          <p>
-                            <del className='price' style={{ fontSize: "120%" }}>
-                              {sekToUsd &&
-                                Math.round(
-                                  sekToUsd[0] * (Number(plan.price) + 200)
-                                )}{" "}
-                              {sekToUsd && sekToUsd[1] + " "}
-                            </del>
-                          </p>
-                        )}
-                        <div className='price'>
-                          {sekToUsd &&
-                            Math.round(
-                              sekToUsd[0] * plan.price +
-                                (promos && promos.length > 0 && promos[0].show
-                                  ? 0
-                                  : 200)
-                            )}{" "}
-                          {sekToUsd && sekToUsd[1] + " "}
-                          <span>
-                            {period === "monthly" ? "Per month" : "Per week"}
-                          </span>
+                          {promos && promos.length > 0 && promos[0].show && (
+                            <p>
+                              <del
+                                className='price'
+                                style={{ fontSize: "120%" }}
+                              >
+                                {sekToUsd &&
+                                  Math.round(
+                                    sekToUsd[0] * (Number(plan.price) + 200)
+                                  )}{" "}
+                                {sekToUsd && sekToUsd[1] + " "}
+                              </del>
+                            </p>
+                          )}
+                          <div className='price'>
+                            {sekToUsd &&
+                              Math.round(
+                                sekToUsd[0] * plan.price +
+                                  (promos && promos.length > 0 && promos[0].show
+                                    ? 0
+                                    : 200)
+                              )}{" "}
+                            {sekToUsd && sekToUsd[1] + " "}
+                            <span>
+                              {period === "monthly" ? "Per month" : "Per week"}
+                            </span>
+                          </div>
+
+                          <ul className='list'>
+                            {plan.basic.map((offer) => (
+                              <li className='check'>{offer}</li>
+                            ))}
+                            {plan.star.map((notOffer) => (
+                              <li className='yellow-star'>{notOffer}</li>
+                            ))}
+
+                            {plan.superStar.map((notOffer) => (
+                              <li className='red-star'>{notOffer}</li>
+                            ))}
+                          </ul>
                         </div>
 
-                        <ul className='list'>
-                          {plan.offers.map((offer) => (
-                            <li className='check'>{offer}</li>
-                          ))}
-                          {plan.notOffers.map((notOffer) => (
-                            <li className='cross'>{notOffer}</li>
-                          ))}
-                        </ul>
-                        <Link
-                          to={`/checkout/subscription/${plan._id}`}
-                          className='theme-btn btn-style-two'
-                        >
-                          <span className='txt'>Select</span>
-                        </Link>
+                        <div>
+                          <Link
+                            to={`/checkout/subscription/${plan._id}`}
+                            className='theme-btn btn-style-two'
+                          >
+                            <span className='txt'>Select</span>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </Col>

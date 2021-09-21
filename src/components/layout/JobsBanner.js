@@ -1,22 +1,31 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import ServiceParticles from "./ServiceParticles";
 
 const JobsBanner = () => {
   return (
     <section>
-      <div className="auto-container">
-        <div class="banner-container row align-items-center">
-          <span className="banner-text  mx-auto col-xs-12">Working with us</span>
+      <div class='job-banner '>
+        <div className=' '>
+          {" "}
+          <span className='banner-text'>
+            Working with us
+          </span>
         </div>
-        <Row className="mt-5 mb-5 pr-5">
-          <Col md={4} xs={12} className="sub-title p-5">We offer Internships:</Col>
-          <Col md={8}  xs={12} className="sub-text">
+        <ServiceParticles />
+      </div>
+      <div className='auto-container'>
+        <Row className='mt-5 mb-5 pr-5'>
+          <Col md={4} xs={12} className='sub-title p-5'>
+            We offer Internships:
+          </Col>
+          <Col md={8} xs={12} className='sub-text'>
             <p>
               Do you already have a background in development? Are you just
               starting out as a developer but feel like you need more
               experience? As a developer just starting out you too are eligible
               to enroll in our Career Development plan. Submit your application
-              below!{' '}
+              below!{" "}
             </p>
             <p>
               We offer our graduate students Career development plans: a 3
@@ -30,7 +39,7 @@ const JobsBanner = () => {
         </Row>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default JobsBanner
+export default JobsBanner;

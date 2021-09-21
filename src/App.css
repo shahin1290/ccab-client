@@ -650,6 +650,11 @@ input:checked + .slider:before {
   color: #fff;
   font-weight: 700;
   letter-spacing: 5px;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .web-market {
@@ -954,6 +959,15 @@ input:checked + .slider:before {
 
 .service-form {
   height: 700px;
+  background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
+    linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
+    linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
+    linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+  position: relative;
+}
+
+.job-banner {
+  height: 500px;
   background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
     linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
     linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),
