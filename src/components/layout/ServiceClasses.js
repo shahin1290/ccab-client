@@ -7,6 +7,9 @@ const ServiceClasses = () => {
       <div className='auto-container' style={{ background: "#fff" }}>
         <Row className="pt-1">
           <Col md={4} xs={12} >
+      {/* <div className='auto-container' style={{ background: "#fff" ,zIndex:'-3' }}>
+        <Row className="px-5 py-2">
+          <Col md={4} xs={8} className="text-center-small-screen"> */}
             <Card
               style={{
                 height: "380px",
@@ -75,6 +78,7 @@ const ServiceClasses = () => {
                 width: "100%",
                 borderRadius: "10px",
                 boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034)",
+                zIndex:1
               }}
             >
               <Card.Body className='p-3'>
@@ -160,6 +164,7 @@ const ServiceClasses = () => {
                 width: "100%",
                 borderRadius: "10px",
                 boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034)",
+                zIndex:1
               }}
             >
               <Card.Body className='p-3'>
