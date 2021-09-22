@@ -38,7 +38,7 @@ const ServiceContact = () => {
     try {
       const phoneNumber = "00-" + code + "-" + phone;
 
-      const res = await axios.post("https://server.ccab.tech/contact", {
+      const res = await axios.post("http://localhost:5001/contact", {
         message,
         category: service,
         phoneNumber,
@@ -54,14 +54,14 @@ const ServiceContact = () => {
   return (
     <div className='service-form'>
       <div className='auto-container pt-1'>
-        <div className="service-form-content">
+        <div className='service-form-content'>
           <div className='text-center'>
             <div className='title text-white pt-4'>
               We are happy to tell you more about our services!
             </div>
           </div>
           <Row className='mx-auto pt-4'>
-            <Col md={6} className="no-gutter">
+            <Col md={6} className='no-gutter'>
               <form onSubmit={handleSubmit(submitHandler)}>
                 <div
                   className='p-3 bg-white'

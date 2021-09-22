@@ -78,14 +78,11 @@ export default function Header() {
               Home
             </Nav.Link>
 
-            <Nav.Link
-              className='text-dark'
-              href='/services'
-            >
+            <Nav.Link className='text-dark' href='/services'>
               Services
             </Nav.Link>
             {/* Items  hide-on-big-screen */}
-           {/*  <div className='text-dark hide-on-big-screen pt-4'>
+            {/*  <div className='text-dark hide-on-big-screen pt-4'>
               Courses
               <Dropdown.Menu show className='border-0'>
                 <NavDropdown.Item href='/course-grid'>
@@ -121,7 +118,7 @@ export default function Header() {
             </div> */}
             <div className='collapse navbar-collapse mr-3'>
               <ul className='navbar-nav '>
-               {/*  <li className='nav-item dropdown dropdown-slide dropdown-hover '>
+                {/*  <li className='nav-item dropdown dropdown-slide dropdown-hover '>
                   <Link
                     to='pricing'
                     spy={true}
@@ -270,7 +267,7 @@ export default function Header() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'

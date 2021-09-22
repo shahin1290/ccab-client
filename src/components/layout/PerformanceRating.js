@@ -4,7 +4,6 @@ import Message from "../layout/Message";
 import Loader from "../layout/Loader";
 import { getTopPerformances } from "../../redux/actions/performanceAction";
 
-
 export default function PerformanceRating({ bootcampId }) {
   const dispatch = useDispatch();
 
@@ -57,7 +56,7 @@ export default function PerformanceRating({ bootcampId }) {
                             <img
                               src={
                                 performance.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${performance.avatar}`
+                                  ? `http://localhost:5001/uploads/Avatar/${performance.avatar}`
                                   : "/images/resource/avatar.svg"
                               }
                               alt='avatar'

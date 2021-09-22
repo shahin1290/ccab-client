@@ -163,7 +163,7 @@ export default function ProfileScreen() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -312,7 +312,7 @@ export default function ProfileScreen() {
                                           <div className='image'>
                                             <img
                                               src={
-                                                "https://server.ccab.tech/uploads/Bootcamp/" +
+                                                "http://localhost:5001/uploads/Bootcamp/" +
                                                 course.img_path
                                               }
                                               alt='bootcamp'
@@ -388,7 +388,7 @@ export default function ProfileScreen() {
                                         <div className='image'>
                                           <img
                                             src={
-                                              "https://server.ccab.tech/uploads/Service/" +
+                                              "http://localhost:5001/uploads/Service/" +
                                               service.img_path
                                             }
                                             alt='service'

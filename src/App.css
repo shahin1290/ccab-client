@@ -759,6 +759,7 @@ input:checked + .slider:before {
 }
 
 .job-contact input,
+.job-contact select,
 .job-contact textarea,
 .job-contact button {
   background: #c22b34;
