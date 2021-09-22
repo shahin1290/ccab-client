@@ -4,7 +4,7 @@ import { getServiceCategories } from '../../redux/actions/serviceCategoryAction'
 import { Row, Col, Button } from 'react-bootstrap'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
-
+import JobsContact from '../layout/JobsContact'
 const labelWithIcon = (
   <span className="fas fa-book-open">
     <span className="sub-title pl-2">choose subject</span>
@@ -49,11 +49,11 @@ const ServiceBanner = () => {
           <div className="service-banner-text">
             Tutoring That Gives Best Result
           </div>
-
-          <div className="select-box mt-5 mx-auto">
+            {/* <JobsContact />  */}
+          {/* <div className="select-box mt-5 mx-auto">
             <form
               onSubmit={submitHandler}
-              className=" select-box-content d-flex justify-content-center mt-3"
+            className=" select-box-content d-flex justify-content-center mt-3"
             >
               <Select
                 options={options}
@@ -83,12 +83,13 @@ const ServiceBanner = () => {
                 style={{ backgroundColor: '#EB6C85' }}
                 className="ml-5 pl-3"
                 type="submit"
-                /* href={`/service-grid/${selectedOption && selectedOption.value}`} */
+                
               >
                 Show the result &gt;
               </Button>
             </form>
-          </div>
+          </div> */}
+          
         </div>
         
       </div>

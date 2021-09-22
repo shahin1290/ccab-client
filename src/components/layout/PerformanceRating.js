@@ -56,7 +56,7 @@ export default function PerformanceRating({ bootcampId }) {
                             <img
                               src={
                                 performance.avatar
-                                  ? `http://localhost:5001/uploads/Avatar/${performance.avatar}`
+                                  ? `https://server.ccab.tech/uploads/Avatar/${performance.avatar}`
                                   : "/images/resource/avatar.svg"
                               }
                               alt='avatar'

@@ -37,7 +37,7 @@ const Jobs = () => {
       return (
         <button
           onClick={completeFormStep}
-          className=' pt-3 pb-3 form-group col-lg-12 col-md-12 col-sm-12 btn btn-info btn-lg'
+          className=' pt-3 pb-3 form-group col-lg-12 col-md-12 col-sm-12 btn  btn-lg'
           type='button'
           disabled={!isValid}
         >
@@ -304,7 +304,7 @@ const Jobs = () => {
               {formStep < 2 && (
                 <button
                   onClick={completeFormStep}
-                  className='ml-4 form-group col-lg-11 col-md-11 col-sm-11 btn btn-info'
+                  className='ml-4 form-group col-lg-11 col-md-11 col-sm-11 btn '
                   type='button'
                   disabled={!isValid}
                 >
@@ -314,7 +314,8 @@ const Jobs = () => {
 
               {formStep === 2 && (
                 <button
-                  className='ml-4 form-group col-lg-11 col-md-11 col-sm-11 btn btn-info'
+                  className='ml-4 form-group col-lg-11 col-md-11 col-sm-11 btn '
+                  
                   type='submit'
                   disabled={!isValid}
                 >
