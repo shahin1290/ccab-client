@@ -9,7 +9,10 @@ import { createCurrrency } from "../../redux/actions/currencyAction";
 import { getPriceFormat } from "../../util/priceFormat";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import Scheduler from "../layout/Scheduler";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { v4 as uuidv4 } from "uuid";
+import { Card, Accordion } from "react-bootstrap";
 
 export default function ServiceDetailScreen({ match }) {
   const ID = match.params.id;
@@ -49,6 +52,55 @@ export default function ServiceDetailScreen({ match }) {
   const [instructor, setInstructor] = useState({});
   const [selectedInsructor, setSelectedInstructor] = useState("");
   const [showModal, setShowModal] = useState({ visible: false });
+
+  /********************* ************/
+  /* Field Section */
+
+  const [title, setTitle] = useState("");
+  const [inputFields, setInputFields] = useState([
+    { id: uuidv4(), content: new Date() },
+  ]);
+
+
+  const [titleWithAnswer, setTitleWithAnswer] = useState([]);
+
+  const addtitleWithAnswer = () => {
+    setTitleWithAnswer([
+      ...titleWithAnswer,
+      {
+        title: title,
+        items: [...inputFields],
+      },
+    ]);
+    setTitle("");
+    setInputFields([{ id: uuidv4(), content: new Date() }]);
+  };
+
+  const handleChangeInput = (id, event) => {
+    const newInputFields = inputFields.map((i) => {
+      if (id === i.id) {
+        i.content = new Date(event);
+      }
+      return i;
+    });
+
+    setInputFields(newInputFields);
+  };
+
+  const handleAddFields = () => {
+    setInputFields([...inputFields, { id: uuidv4(), content: new Date() }]);
+  };
+
+  const handleRemoveFields = (id) => {
+    const values = [...inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    setInputFields(values);
+  };
+
+  const [startDate, setStartDate] = useState([{}]);
 
   // select mentor
   const _handleSelectInstructor = (arr) => {
@@ -506,7 +558,7 @@ export default function ServiceDetailScreen({ match }) {
                                     {/* ******************* */}
                                     <div className='form-group'>
                                       <div className='sub-title mb-2'>
-                                        Set Session Numbers :
+                                        Number of Sessions :
                                       </div>
 
                                       <div className='item-quantity'>
@@ -523,6 +575,63 @@ export default function ServiceDetailScreen({ match }) {
                                       </div>
                                     </div>
 
+                                    {inputFields.map((inputField, index) => (
+                                      <Card key={inputField.id}>
+                                        <div style={{ display: "flex" }}>
+                                          <div className='form-group form-group col-lg-7 col-md-12 col-sm-12'>
+                                            <label>
+                                              {`Session ${1 + index}`}{" "}
+                                            </label>
+
+                                            <DatePicker
+                                              selected={inputField.content}
+                                              onChange={(event) =>
+                                                handleChangeInput(
+                                                  inputField.id,
+                                                  event
+                                                )
+                                              }
+                                              name='content'
+                                              showTimeSelect
+                                              dateFormat='MMMM d, yyyy h:mm aa'
+                                            />
+                                          </div>
+                                        </div>
+                                        <div
+                                          style={{
+                                            fontSize: "30px",
+                                            display: "flex",
+                                            width: "70px",
+                                            justifyContent: "space-between",
+                                            margin: "0 auto",
+                                          }}
+                                        >
+                                          <button
+                                            type='button'
+                                            onClick={handleAddFields}
+                                          >
+                                            <i className='fas fa-plus-square'></i>
+                                          </button>
+                                          <button
+                                            type='button'
+                                            disabled={inputFields.length === 1}
+                                            onClick={() =>
+                                              handleRemoveFields(inputField.id)
+                                            }
+                                          >
+                                            <i className='fas fa-minus-square'></i>
+                                          </button>
+                                        </div>
+                                      </Card>
+                                    ))}
+
+                                    {/*  <DatePicker
+                                      selected={startDate}
+                                      onChange={(date) => setStartDate(date)}
+                                      showTimeSelect
+                                      dateFormat='MMMM d, yyyy h:mm aa'
+                                    />
+ */}
                                     {/* Divider */}
                                     <div className='border my-1'></div>
                                     {/* ******************* */}
@@ -587,15 +696,6 @@ export default function ServiceDetailScreen({ match }) {
             </div>
           ) : null}
         </div>
-
-        <Rodal
-          animation='rotate'
-          visible={showModal.visible}
-          onClose={() => setShowModal({ visible: false })}
-          width='900'
-        >
-          <Scheduler />
-        </Rodal>
       </section>
       {/* End intro services */}
 
