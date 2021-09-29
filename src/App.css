@@ -764,6 +764,7 @@ input:checked + .slider:before {
 .job-contact button {
   background: #c22b34;
   border-radius: 5px !important;
+  color : #fff !important; 
 }
 
 .job-contact textarea {
@@ -968,7 +969,7 @@ input:checked + .slider:before {
 }
 
 .job-banner {
-  height: 500px;
+  height: 250px;
   background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%),
     linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%),
     linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%),

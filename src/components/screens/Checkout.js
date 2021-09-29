@@ -256,7 +256,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const res = await axios.post(
-          `http://localhost:5001/api/order/stripe/stripe-subscription`,
+          `https://server.ccab.tech/api/order/stripe/stripe-subscription`,
           {
             payment_method: paymentMethod.id,
             planId: plan.stripeSubscriptionId,
@@ -345,7 +345,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const { data: clientSecret } = await axios.post(
-          `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
+          `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
           {
             paymentMethodType: "card",
             currency: currency.data.currency,

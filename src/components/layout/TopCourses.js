@@ -72,31 +72,38 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            "http://localhost:5001/uploads/Bootcamp/" +
+                            "https://server.ccab.tech/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt=''
                         />
                       </Link>
                     </div>
-                    <div className='lower-content'>
+                    <div className='lower-content '>
                       <div>
                         <Link
-                          className='sub-title2'
+                          className='sub-title2 my-5'
                           to={`/courses/${course._id}`}
                         >
                           {course.name}
                         </Link>
                       </div>
-                      <div className='pt-3 pb-5'>
+                      <div className='pt-4 '>
                         <span
-                          className='sub-text2 line-clamp'
-                          style={{ maxWidth: "240px" }}
+                          className='sub-text2 d-inline-block text-truncate'
+                          style={{ maxWidth: "250px" }}
                         >
-                          {course.description}
+                        {course.description}  
+
                         </span>
+                        <Link
+                        className="btn p-0 m-0 text-danger"
+                        to={`/courses/${course._id}`}
+                      >
+                       Read More
+                      </Link>
                       </div>
-                      <div className='clearfix'>
+                      <div className='clearfix my-3'>
                         <div className='pull-left'>
                           <div className='students'>
                             {course.weeks * 5} Lectures
