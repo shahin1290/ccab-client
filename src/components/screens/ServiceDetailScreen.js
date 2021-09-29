@@ -9,7 +9,10 @@ import { createCurrrency } from "../../redux/actions/currencyAction";
 import { getPriceFormat } from "../../util/priceFormat";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import Scheduler from "../layout/Scheduler";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { v4 as uuidv4 } from "uuid";
+import { Card, Accordion } from "react-bootstrap";
 
 export default function ServiceDetailScreen({ match }) {
   const ID = match.params.id;
@@ -50,12 +53,58 @@ export default function ServiceDetailScreen({ match }) {
   const [selectedInsructor, setSelectedInstructor] = useState("");
   const [showModal, setShowModal] = useState({ visible: false });
 
+  /********************* ************/
+  /* Field Section */
+
+  const [title, setTitle] = useState("");
+  const [inputFields, setInputFields] = useState([
+    { id: uuidv4(), content: new Date() },
+  ]);
+
+  const [titleWithAnswer, setTitleWithAnswer] = useState([]);
+
+  const addtitleWithAnswer = () => {
+    setTitleWithAnswer([
+      ...titleWithAnswer,
+      {
+        title: title,
+        items: [...inputFields],
+      },
+    ]);
+    setTitle("");
+    setInputFields([{ id: uuidv4(), content: new Date() }]);
+  };
+
+  const handleChangeInput = (id, event) => {
+    const newInputFields = inputFields.map((i) => {
+      if (id === i.id) {
+        i.content = new Date(event);
+      }
+      return i;
+    });
+
+    setInputFields(newInputFields);
+  };
+
+  const handleAddFields = () => {
+    setInputFields([...inputFields, { id: uuidv4(), content: new Date() }]);
+  };
+
+  const handleRemoveFields = (id) => {
+    const values = [...inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    setInputFields(values);
+  };
+
+  const [startDate, setStartDate] = useState([{}]);
+
   // select mentor
   const _handleSelectInstructor = (arr) => {
     setInstructor({ _id: arr[0], name: arr[1] });
   };
-
-  const [sessionNumber, setSessionNumber] = useState(0);
 
   //get the bio of selected Instructor
   const selectedInstructorBio = () => {
@@ -81,12 +130,14 @@ export default function ServiceDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/json/");
+      let response = await axios.get("https://ipapi.co/8.8.8.8/json/");
+
+      console.log("response", response);
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
 
-    fetchMyAPI();
+    //fetchMyAPI();
 
     dispatch(createCurrrency("EUR"));
   }, []);
@@ -175,72 +226,9 @@ export default function ServiceDetailScreen({ match }) {
                 <div className='row clearfix'>
                   {/* Content Column */}
                   <div className='content-column col-lg-8 col-md-12 col-sm-12'>
-                    <div className='inner-column'>
-                      {/* Intro Info Tabs*/}
-                      <div className='intro-info-tabs'>
-                        {/* Intro Tabs*/}
-                        <div className='intro-tabs tabs-box'>
-                          {/*Tab Btns*/}
-                          <ul className='tab-btns tab-buttons clearfix'>
-                            <li
-                              data-tab='#prod-overview'
-                              className='tab-btn active-btn'
-                            >
-                              Overview
-                            </li>
-                          </ul>
 
-                          {/*Tabs Container*/}
-                          <div className='tabs-content'>
-                            {/*Tab / Active Tab*/}
-                            <div className='tab active-tab' id='prod-overview'>
-                              <div className='content'>
-                                {/* Cource Overview */}
-                                <div className='course-overview'>
-                                  <div className='inner-box'>
-                                    <h4>About the service</h4>
-                                    <p className='sub-text'>
-                                      {service.description}
-                                    </p>
-
-                                    <ul className='student-list'>
-                                      <li className='text-dark bg-warning p-2 rounded '>
-                                        {service.instructors.length} Instructors
-                                      </li>
-                                    </ul>
-                                    {service.info_list.length ? (
-                                      service.info_list.map((item) => {
-                                        return (
-                                          <div key={item.title}>
-                                            <h3>{item.title}</h3>
-                                            <ul className='review-list'>
-                                              {item.items.map((itemList) => {
-                                                return (
-                                                  <li
-                                                    className='sub-text'
-                                                    key={itemList.content}
-                                                  >
-                                                    {itemList.content}
-                                                  </li>
-                                                );
-                                              })}
-                                            </ul>
-                                          </div>
-                                        );
-                                      })
-                                    ) : (
-                                      <p className='p-2 text-warning'>
-                                        There is no Requirements
-                                      </p>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        {/* Intro Tabs*/}
-                        <div className='sub-title p-4'>Instructors</div>
+                          {/* Intro Tabs*/}
+                          <div className='sub-title '>Instructors</div>
                         <div className='intro-tabs tabs-box mt-3'>
                           {/*Tab Btns*/}
                           <ul className='tab-btns tab-buttons clearfix'>
@@ -390,6 +378,71 @@ export default function ServiceDetailScreen({ match }) {
                             </div>
                           </div>
                         </div>
+                    <div className='inner-column'>
+                      {/* Intro Info Tabs*/}
+                      <div className='intro-info-tabs'>
+                        {/* Intro Tabs*/}
+                        <div className='intro-tabs tabs-box'>
+                          {/*Tab Btns*/}
+                          <ul className='tab-btns tab-buttons clearfix mt-5'>
+                            <li
+                              data-tab='#prod-overview'
+                              className='tab-btn active-btn'
+                            >
+                              Overview
+                            </li>
+                          </ul>
+
+                          {/*Tabs Container*/}
+                          <div className='tabs-content'>
+                            {/*Tab / Active Tab*/}
+                            <div className='tab active-tab' id='prod-overview'>
+                              <div className='content'>
+                                {/* Cource Overview */}
+                                <div className='course-overview'>
+                                  <div className='inner-box'>
+                                    <h4>About the service</h4>
+                                    <p className='sub-text'>
+                                      {service.description}
+                                    </p>
+
+                                    <ul className='student-list'>
+                                      <li className='text-dark bg-warning p-2 rounded '>
+                                        {service.instructors.length} Instructors
+                                      </li>
+                                    </ul>
+                                    {service.info_list.length ? (
+                                      service.info_list.map((item) => {
+                                        return (
+                                          <div key={item.title}>
+                                            <h3>{item.title}</h3>
+                                            <ul className='review-list'>
+                                              {item.items.map((itemList) => {
+                                                return (
+                                                  <li
+                                                    className='sub-text'
+                                                    key={itemList.content}
+                                                  >
+                                                    {itemList.content}
+                                                  </li>
+                                                );
+                                              })}
+                                            </ul>
+                                          </div>
+                                        );
+                                      })
+                                    ) : (
+                                      <p className='p-2 text-warning'>
+                                        There is no Requirements
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  
                       </div>
                     </div>
                   </div>
@@ -502,39 +555,64 @@ export default function ServiceDetailScreen({ match }) {
                                     </div>
 
                                     {/* Divider */}
-                                    <div className='border my-1'></div>
-                                    {/* ******************* */}
-                                    <div className='form-group'>
-                                      <div className='sub-title mb-2'>
-                                        Set Session Numbers :
-                                      </div>
 
-                                      <div className='item-quantity'>
-                                        <input
-                                          className='quantity-spinner'
-                                          type='number'
-                                          min='0'
-                                          name='quantity'
-                                          value={sessionNumber}
-                                          onChange={(e) =>
-                                            setSessionNumber(e.target.value)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
+                                    {inputFields.map((inputField, index) => (
+                                      <Card key={inputField.id}>
+                                        <div style={{ display: "flex" }}>
+                                          <div className='form-group form-group col-lg-7 col-md-12 col-sm-12'>
+                                            <label>
+                                              {`Session ${1 + index}`}{" "}
+                                            </label>
 
-                                    {/* Divider */}
-                                    <div className='border my-1'></div>
-                                    {/* ******************* */}
-                                    <div className='form-group'>
-                                      <button
-                                        onClick={() =>
-                                          setShowModal({ visible: true })
-                                        }
-                                      >
-                                        book appointments
-                                      </button>
-                                    </div>
+                                            <DatePicker
+                                              selected={inputField.content}
+                                              onChange={(event) =>
+                                                handleChangeInput(
+                                                  inputField.id,
+                                                  event
+                                                )
+                                              }
+                                              name='content'
+                                              showTimeSelect
+                                              dateFormat='MMMM d, yyyy h:mm aa'
+                                            />
+                                          </div>
+                                        </div>
+                                        <div
+                                          style={{
+                                            fontSize: "30px",
+                                            display: "flex",
+                                            width: "70px",
+                                            justifyContent: "space-between",
+                                            margin: "0 auto",
+                                          }}
+                                        >
+                                          <button
+                                            type='button'
+                                            onClick={handleAddFields}
+                                          >
+                                            <i className='fas fa-plus-square'></i>
+                                          </button>
+                                          <button
+                                            type='button'
+                                            disabled={inputFields.length === 1}
+                                            onClick={() =>
+                                              handleRemoveFields(inputField.id)
+                                            }
+                                          >
+                                            <i className='fas fa-minus-square'></i>
+                                          </button>
+                                        </div>
+                                      </Card>
+                                    ))}
+
+                                    {/*  <DatePicker
+                                      selected={startDate}
+                                      onChange={(date) => setStartDate(date)}
+                                      showTimeSelect
+                                      dateFormat='MMMM d, yyyy h:mm aa'
+                                    />
+ */}
                                   </div>
                                 </div>
                               </div>
@@ -543,7 +621,7 @@ export default function ServiceDetailScreen({ match }) {
                               onClick={() =>
                                 localStorage.setItem(
                                   "appointment",
-                                  JSON.stringify({ instructor, sessionNumber })
+                                  JSON.stringify({ instructor, inputFields })
                                 )
                               }
                               href={
@@ -552,7 +630,7 @@ export default function ServiceDetailScreen({ match }) {
                                   : "/checkout/service/" + service._id
                               }
                               className={`theme-btn btn-style-three mt-2 ${
-                                sessionNumber === 0 || !instructor.name
+                                inputFields.length === 0 || !instructor.name
                                   ? "isDisabled"
                                   : ""
                               }`}
@@ -587,15 +665,6 @@ export default function ServiceDetailScreen({ match }) {
             </div>
           ) : null}
         </div>
-
-        <Rodal
-          animation='rotate'
-          visible={showModal.visible}
-          onClose={() => setShowModal({ visible: false })}
-          width='900'
-        >
-          <Scheduler />
-        </Rodal>
       </section>
       {/* End intro services */}
 
