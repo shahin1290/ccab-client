@@ -21,6 +21,7 @@ import Purchases from "../layout/Purchases";
 import PaymentRequest from "../layout/StudentPaymentRequests";
 import { getServiceList } from "../../redux/actions/serviceAction";
 import PerformanceChart from "../layout/PerformanceChart";
+import ServiceSessions from "../layout/ServiceSessions";
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
@@ -448,6 +449,12 @@ export default function ProfileScreen() {
                     {userDetail && userDetail.user_type === "StudentUser" ? (
                       <Tab eventKey='Quizzes' title='Quizzes'>
                         <Quizzes />
+                      </Tab>
+                    ) : null}
+
+                    {userDetail && userDetail.user_type === "StudentUser" ? (
+                      <Tab eventKey='Sessions' title='Sessions'>
+                        <ServiceSessions />
                       </Tab>
                     ) : null}
                     <Tab eventKey='Personal Info' title='Personal Info'>

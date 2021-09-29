@@ -61,7 +61,6 @@ export default function ServiceDetailScreen({ match }) {
     { id: uuidv4(), content: new Date() },
   ]);
 
-
   const [titleWithAnswer, setTitleWithAnswer] = useState([]);
 
   const addtitleWithAnswer = () => {
@@ -107,8 +106,6 @@ export default function ServiceDetailScreen({ match }) {
     setInstructor({ _id: arr[0], name: arr[1] });
   };
 
-  const [sessionNumber, setSessionNumber] = useState(0);
-
   //get the bio of selected Instructor
   const selectedInstructorBio = () => {
     if (service) {
@@ -133,12 +130,14 @@ export default function ServiceDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/json/");
+      let response = await axios.get("https://ipapi.co/8.8.8.8/json/");
+
+      console.log("response", response);
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
 
-    fetchMyAPI();
+    //fetchMyAPI();
 
     dispatch(createCurrrency("EUR"));
   }, []);
@@ -227,72 +226,9 @@ export default function ServiceDetailScreen({ match }) {
                 <div className='row clearfix'>
                   {/* Content Column */}
                   <div className='content-column col-lg-8 col-md-12 col-sm-12'>
-                    <div className='inner-column'>
-                      {/* Intro Info Tabs*/}
-                      <div className='intro-info-tabs'>
-                        {/* Intro Tabs*/}
-                        <div className='intro-tabs tabs-box'>
-                          {/*Tab Btns*/}
-                          <ul className='tab-btns tab-buttons clearfix'>
-                            <li
-                              data-tab='#prod-overview'
-                              className='tab-btn active-btn'
-                            >
-                              Overview
-                            </li>
-                          </ul>
 
-                          {/*Tabs Container*/}
-                          <div className='tabs-content'>
-                            {/*Tab / Active Tab*/}
-                            <div className='tab active-tab' id='prod-overview'>
-                              <div className='content'>
-                                {/* Cource Overview */}
-                                <div className='course-overview'>
-                                  <div className='inner-box'>
-                                    <h4>About the service</h4>
-                                    <p className='sub-text'>
-                                      {service.description}
-                                    </p>
-
-                                    <ul className='student-list'>
-                                      <li className='text-dark bg-warning p-2 rounded '>
-                                        {service.instructors.length} Instructors
-                                      </li>
-                                    </ul>
-                                    {service.info_list.length ? (
-                                      service.info_list.map((item) => {
-                                        return (
-                                          <div key={item.title}>
-                                            <h3>{item.title}</h3>
-                                            <ul className='review-list'>
-                                              {item.items.map((itemList) => {
-                                                return (
-                                                  <li
-                                                    className='sub-text'
-                                                    key={itemList.content}
-                                                  >
-                                                    {itemList.content}
-                                                  </li>
-                                                );
-                                              })}
-                                            </ul>
-                                          </div>
-                                        );
-                                      })
-                                    ) : (
-                                      <p className='p-2 text-warning'>
-                                        There is no Requirements
-                                      </p>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        {/* Intro Tabs*/}
-                        <div className='sub-title p-4'>Instructors</div>
+                          {/* Intro Tabs*/}
+                          <div className='sub-title '>Instructors</div>
                         <div className='intro-tabs tabs-box mt-3'>
                           {/*Tab Btns*/}
                           <ul className='tab-btns tab-buttons clearfix'>
@@ -442,6 +378,71 @@ export default function ServiceDetailScreen({ match }) {
                             </div>
                           </div>
                         </div>
+                    <div className='inner-column'>
+                      {/* Intro Info Tabs*/}
+                      <div className='intro-info-tabs'>
+                        {/* Intro Tabs*/}
+                        <div className='intro-tabs tabs-box'>
+                          {/*Tab Btns*/}
+                          <ul className='tab-btns tab-buttons clearfix mt-5'>
+                            <li
+                              data-tab='#prod-overview'
+                              className='tab-btn active-btn'
+                            >
+                              Overview
+                            </li>
+                          </ul>
+
+                          {/*Tabs Container*/}
+                          <div className='tabs-content'>
+                            {/*Tab / Active Tab*/}
+                            <div className='tab active-tab' id='prod-overview'>
+                              <div className='content'>
+                                {/* Cource Overview */}
+                                <div className='course-overview'>
+                                  <div className='inner-box'>
+                                    <h4>About the service</h4>
+                                    <p className='sub-text'>
+                                      {service.description}
+                                    </p>
+
+                                    <ul className='student-list'>
+                                      <li className='text-dark bg-warning p-2 rounded '>
+                                        {service.instructors.length} Instructors
+                                      </li>
+                                    </ul>
+                                    {service.info_list.length ? (
+                                      service.info_list.map((item) => {
+                                        return (
+                                          <div key={item.title}>
+                                            <h3>{item.title}</h3>
+                                            <ul className='review-list'>
+                                              {item.items.map((itemList) => {
+                                                return (
+                                                  <li
+                                                    className='sub-text'
+                                                    key={itemList.content}
+                                                  >
+                                                    {itemList.content}
+                                                  </li>
+                                                );
+                                              })}
+                                            </ul>
+                                          </div>
+                                        );
+                                      })
+                                    ) : (
+                                      <p className='p-2 text-warning'>
+                                        There is no Requirements
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  
                       </div>
                     </div>
                   </div>
@@ -554,26 +555,6 @@ export default function ServiceDetailScreen({ match }) {
                                     </div>
 
                                     {/* Divider */}
-                                    <div className='border my-1'></div>
-                                    {/* ******************* */}
-                                    <div className='form-group'>
-                                      <div className='sub-title mb-2'>
-                                        Number of Sessions :
-                                      </div>
-
-                                      <div className='item-quantity'>
-                                        <input
-                                          className='quantity-spinner'
-                                          type='number'
-                                          min='0'
-                                          name='quantity'
-                                          value={sessionNumber}
-                                          onChange={(e) =>
-                                            setSessionNumber(e.target.value)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
 
                                     {inputFields.map((inputField, index) => (
                                       <Card key={inputField.id}>
@@ -632,18 +613,6 @@ export default function ServiceDetailScreen({ match }) {
                                       dateFormat='MMMM d, yyyy h:mm aa'
                                     />
  */}
-                                    {/* Divider */}
-                                    <div className='border my-1'></div>
-                                    {/* ******************* */}
-                                    <div className='form-group'>
-                                      <button
-                                        onClick={() =>
-                                          setShowModal({ visible: true })
-                                        }
-                                      >
-                                        book appointments
-                                      </button>
-                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -652,7 +621,7 @@ export default function ServiceDetailScreen({ match }) {
                               onClick={() =>
                                 localStorage.setItem(
                                   "appointment",
-                                  JSON.stringify({ instructor, sessionNumber })
+                                  JSON.stringify({ instructor, inputFields })
                                 )
                               }
                               href={
@@ -661,7 +630,7 @@ export default function ServiceDetailScreen({ match }) {
                                   : "/checkout/service/" + service._id
                               }
                               className={`theme-btn btn-style-three mt-2 ${
-                                sessionNumber === 0 || !instructor.name
+                                inputFields.length === 0 || !instructor.name
                                   ? "isDisabled"
                                   : ""
                               }`}

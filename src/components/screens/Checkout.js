@@ -148,7 +148,7 @@ const CheckoutForm = ({ match, history }) => {
     if (serviceId) {
       dispatch(getServiceDetails(serviceId));
     }
-  }, [dispatch, ID, subscription, serviceId, requestId]);
+  }, [ID, subscription, serviceId, requestId]);
 
   useEffect(() => {
     if (service) {
@@ -188,10 +188,12 @@ const CheckoutForm = ({ match, history }) => {
             instructor: JSON.parse(localStorage.getItem("appointment"))
               .instructor,
             service: service._id,
-            sessionNumber: JSON.parse(localStorage.getItem("appointment"))
-              .sessionNumber,
+            sessions: JSON.parse(localStorage.getItem("appointment"))
+              .inputFields,
           })
         );
+
+        localStorage.removeItem("appointment");
         history.push(`/confirmation-card-purchase/${serviceId}`);
       }
     }
@@ -336,7 +338,8 @@ const CheckoutForm = ({ match, history }) => {
           amount = Math.round(
             currency.data.amount *
               (service.price *
-                JSON.parse(localStorage.getItem("appointment")).sessionNumber) *
+                JSON.parse(localStorage.getItem("appointment")).inputFields
+                  .length) *
               100
           );
         }
@@ -508,7 +511,8 @@ const CheckoutForm = ({ match, history }) => {
     if (serviceId) {
       const amount =
         service.price *
-        JSON.parse(localStorage.getItem("appointment")).sessionNumber;
+        JSON.parse(localStorage.getItem("appointment")).inputFields.content
+          .length;
       dispatch(
         createKlarnaSession(
           {
@@ -822,7 +826,7 @@ const CheckoutForm = ({ match, history }) => {
                                     {
                                       JSON.parse(
                                         localStorage.getItem("appointment")
-                                      ).sessionNumber
+                                      ).inputFields.length
                                     }
                                   </span>
                                 </li>
@@ -842,7 +846,7 @@ const CheckoutForm = ({ match, history }) => {
                                                   localStorage.getItem(
                                                     "appointment"
                                                   )
-                                                ).sessionNumber)
+                                                ).inputFields.length)
                                           )
                                         )}  ${currency.data.currency}`}
                                     </strong>
@@ -1112,7 +1116,7 @@ const CheckoutForm = ({ match, history }) => {
                                 service.price *
                                   JSON.parse(
                                     localStorage.getItem("appointment")
-                                  ).sessionNumber
+                                  ).inputFields.length
                               ),
                             }}
                             widgetLoaded={widgetLoaded}

@@ -226,10 +226,11 @@ export default function HomeScreen({ match }) {
         {/* <AchievementSection />
 
 
-        <FaqSection />
 
         {/* Rating section */}
         <RatingSection />
+
+        <FaqSection />
 
         <div className='auto-container text-center  mb-3 mt-5'>
           <img
