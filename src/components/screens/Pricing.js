@@ -34,7 +34,7 @@ export default function Pricing() {
           {/* Sec Title */}
           <div className='sec-title style-two centered'>
             <div className='title'>
-              Different course plans tailored to your needs
+              Different Course Plans Tailored To Your Needs
             </div>
             <hr className='block-seperator mb-3' />
             <div className='text'>

@@ -52,9 +52,17 @@ export default function HomeScreen({ match }) {
               <span class='quote--highlight'>TODAY</span> not tomorrow
             </p>
             <p class='quote--author'>&ndash; Robert Kiyosaki</p>
+  
           </div>
 
-          <div className='typewriter'>
+
+
+          <div className=" d-flex justify-content-center titleBanner  " 
+        >
+                <h1 className="text-danger title text-right">CODIFY COLLEGE</h1>
+           </div>
+
+          {/* <div className='typewriter'>
             <Typewriter
               options={{
                 strings: [
@@ -64,7 +72,7 @@ export default function HomeScreen({ match }) {
                 loop: true,
               }}
             />
-          </div>
+          </div> */}
 
           {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}
 

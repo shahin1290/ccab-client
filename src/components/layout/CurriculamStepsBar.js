@@ -20,7 +20,7 @@ const CurriculamStepsBar = (props) => {
         <hr className="block-seperator mb-3" />
         <div className="sub-text text-center mb-5">
           Our Full Stack Developer Courses are made to give you an easy and
-          fast path in web development. By the end this course you will be able
+          fast path in web development. By the end these courses you will be able
           to build web applications from scratch.
         </div>
 
