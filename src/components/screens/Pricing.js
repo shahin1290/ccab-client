@@ -76,7 +76,7 @@ export default function Pricing() {
             <Row>
               {getPlans().length &&
                 getPlans().map((plan) => (
-                  <Col className='no-gutter' sm={12} lg={4} md={9}  key={plan._id}
+                  <Col className='no-gutter offset-md-2 offset-lg-0' sm={12} lg={4} md={9}  key={plan._id}
                   style={{
                     overflow:'auto'
                   }}>
