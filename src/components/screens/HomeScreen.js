@@ -23,6 +23,9 @@ import "rodal/lib/rodal.css";
 import ContactForm from "../layout/ContactForm";
 import Typewriter from "typewriter-effect";
 import Reviews from "../layout/Reviews";
+import ServiceVideoChat from './../layout/ServiceVideoChat';
+
+import ServiceAssistance from './../layout/ServiceAssistance';
 
 export default function HomeScreen({ match }) {
   const [showModal, setShowModal] = useState({ visible: false });
@@ -85,7 +88,7 @@ export default function HomeScreen({ match }) {
 
         <Link to='/get-start' className='handle handle1'></Link>
         <a
-          href='https://meetings.hubspot.com/sl-melad'
+          href='https://meetings.hubspot.com/munzer1'
           className='handle handle2'
           target='_blank'
         ></a>
@@ -111,6 +114,13 @@ export default function HomeScreen({ match }) {
         <TopCourses></TopCourses>
 
         <CurriculamStepsBar />
+       
+        <div className="container-fluid bg-light py-5">
+              <ServiceVideoChat/>
+
+                <ServiceAssistance/>
+        </div>
+       
 
         <ContactSection />
 

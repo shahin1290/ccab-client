@@ -76,10 +76,15 @@ export default function Pricing() {
             <Row>
               {getPlans().length &&
                 getPlans().map((plan) => (
-                  <Col className='no-gutter' key={plan._id}>
+                  <Col className='no-gutter' key={plan._id}
+                  style={{
+                    overflow:'auto'
+                  }}>
                     {/* Price Block */}
                     <div className='price-block col  col-sm-12'>
-                      <div className='inner-box d-flex flex-column justify-content-between mb-5' style={{ height: "1090px" }}>
+                      <div className='inner-box d-flex flex-column justify-content-between mb-5'
+                       style={{ overflow:'auto' }}>
+
                         <div>
                           <div className='icon-box'>
                             <span className='icon'>
@@ -116,18 +121,26 @@ export default function Pricing() {
                               {period === "monthly" ? "Per month" : "Per week"}
                             </span>
                           </div>
-
+                            <h5 className="pricing-sub-title">What You Will Get :</h5>        
                           <ul className='list'>
-                            {plan.basic.map((offer) => (
+                            {plan.service.basic.map((offer) => (
                               <li className='check'>{offer}</li>
                             ))}
-                            {plan.star.map((notOffer) => (
+                            {plan.service.star.map((notOffer) => (
                               <li className='yellow-star'>{notOffer}</li>
                             ))}
 
-                            {plan.superStar.map((notOffer) => (
+                            {plan.service.superStar.map((notOffer) => (
                               <li className='red-star'>{notOffer}</li>
                             ))}
+                          </ul>
+
+                          <h5 className="pricing-sub-title">Requierment</h5>  
+                          <ul className='list'>
+                            {plan.requirement.map((offer) => (
+                              <li className='key'>{offer}</li>
+                            ))}
+
                           </ul>
                         </div>
 

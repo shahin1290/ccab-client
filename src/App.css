@@ -16,7 +16,16 @@ body {
   color: #1d1d1d;
   word-spacing: -3px;
 }
-
+.pricing-sub-title{
+  font-family: Inter !important;
+  color: #1d1d1d;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  text-align: left !important;
+  margin-bottom: 15px !important;
+  margin-left: 10px !important;
+  text-transform: unset !important;
+}
 .navbar {
   text-transform: capitalize !important;
   font-size: 16px !important;
@@ -608,12 +617,29 @@ input:checked + .slider:before {
 .svg {
   filter: invert(0.5) sepia(1) saturate(5);
 }
+.progress{
+  height:7px !important;
+  border-radius: 50px !important;
+}
+.curriculum{
+  width:75% !important;
+  margin: 0 auto !important;
+  overflow-x: hidden;
+}
+.curriculmTitle{
+  overflow-x: auto;
+}
 
 .curriculum a {
-  font-size: 16px;
+  font-size:80% !important;
+  display: block;
+  width:180px !important;
   font-weight: 600;
   font-family: Inter;
   color: #4a4a4a;
+  text-align: center;
+  margin-right: 15px !important;
+
 }
 
 .curriculum a:hover {
@@ -1311,6 +1337,7 @@ input:checked + .slider:before {
 
 
 @media (max-width: 768px) {
+
   .home-hero-banner {
    background-image: url(assets/images/background/768.png) !important;
    height: 400px !important;
@@ -1337,6 +1364,7 @@ input:checked + .slider:before {
   }
 }
 @media (max-width: 464px) {
+
   .home-hero-banner {
     
    background-image: url(assets/images/background/425.png) !important;
@@ -1348,6 +1376,44 @@ input:checked + .slider:before {
   .titleBanner  h1{
     font-size: 185% !important;
   }
+
+
+  .handle {
+    position: fixed;
+    width:35% !important;
+   top:65px !important; 
+    height: 3rem;
+    border-radius: 5px 0 0 5px;
+    transition: left 0.2s ease;
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+    justify-content: center;
+    z-index: 2;
+    text-align: center;
+    font-size: 90% !important;
+  }
+  
+
+  
+  .handle2{
+    left :0px !important;
+   
+  }
+  .handle3{
+    left :35% !important;
+  }
+  .handle1{
+    left :70%  !important;
+  }
+
+  .handle1:after , .handle2:after ,  .handle3:after{
+   
+    transform: rotate(0deg);
+   
+   
+  }
+  
 }
 
 
