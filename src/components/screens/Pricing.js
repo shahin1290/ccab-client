@@ -76,12 +76,12 @@ export default function Pricing() {
             <Row>
               {getPlans().length &&
                 getPlans().map((plan) => (
-                  <Col className='no-gutter' key={plan._id}
+                  <Col className='no-gutter' sm={12} lg={4} md={9}  key={plan._id}
                   style={{
                     overflow:'auto'
                   }}>
                     {/* Price Block */}
-                    <div className='price-block col  col-sm-12'>
+                    <div className='price-block col  col-sm-12 mx-auto'>
                       <div className='inner-box d-flex flex-column justify-content-between mb-5'
                        style={{ overflow:'auto' }}>
 
