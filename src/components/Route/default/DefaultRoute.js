@@ -21,6 +21,8 @@ import Privacy from "./../../screens/privacy";
 import Jobs from "../../screens/Jobs";
 import ResetPassword from "../../screens/ResetPassword";
 import PromoCountDown from "../../layout/PromoCountDown";
+import Pricing from "./../../screens/Pricing";
+
 import {
   getPromos,
   deletePromo,
@@ -86,6 +88,13 @@ export default function DefaultRoute() {
           path='/services/:id'
           component={ServiceDetailScreen}
         ></Route>
+
+          <Route
+            exact
+            path='/pricing-plans'
+            component={Pricing}></Route>
+
+
         <Route exact path='/jobs' component={Jobs} />
         <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/reset-password/:token' component={ResetPassword} />

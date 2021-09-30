@@ -581,6 +581,13 @@ pre {
   transition: 0.4s;
 }
 
+/*  curiculum title icon*/
+.curriculmTitle div a:before {
+ content: '\00BB' !important;
+ display: block !important;
+ color :#f2334c !important;
+ font-size: 18px !important;
+}
 input:checked + .slider {
   background-color: #2196f3;
 }

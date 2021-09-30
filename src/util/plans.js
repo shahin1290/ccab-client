@@ -22,7 +22,7 @@ export const plans = [
     superStar: []
   },
   requirement:[
-    "4 hours of study per day", 
+    "4 hours of study per week", 
     "Minimum purchase - 4 weeks",
   ],
     _id: "d8cc4ea7-80a-a8ce-dc839bce88b1",
@@ -48,7 +48,7 @@ export const plans = [
     superStar: []
     },
     requirement:[
-      "4 hours of study per day", 
+      "4 hours of study per week", 
       "Minimum purchase - 4 weeks",
       ],
     _id: "d8cc4ea7-8092-480a-a8839bce88b1",
@@ -80,7 +80,7 @@ export const plans = [
     ],
   },
   requirement:[
-    "8 hours of study per day", 
+    "8 hours of study per week", 
     "Minimum purchase - 4 weeks",],
    
  
@@ -113,7 +113,7 @@ export const plans = [
     ],
   },
   requirement:[ 
-    "8 hours of study per day", 
+    "8 hours of study per week", 
     "Minimum purchase - 4 weeks",],
 
     _id: "d8cc4e92-480a-a8ce-dc839bce88b1",
@@ -147,7 +147,7 @@ export const plans = [
     ],
       },
     requirement : [
-      "12 hours of study per day", 
+      "12 hours of study per week", 
       "Minimum purchase - 4 weeks",
     ],
     _id: "4ea7-8092-480a-a8ce-dc839bce88b1",
@@ -181,7 +181,7 @@ export const plans = [
     ],
       },
     requirement : [
-      "12 hours of study per day", 
+      "12 hours of study per week", 
       "Minimum purchase - 4 weeks",
     ],
     _id: "d8cc4ea7-8092-480a-a8ce-dc888b1",

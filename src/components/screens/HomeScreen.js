@@ -86,16 +86,17 @@ export default function HomeScreen({ match }) {
 
         {/* Education Section Two */}
 
-        <Link to='/get-start' className='handle handle1'></Link>
+        <Link  className='handle handle1'
+         to="/pricing-plans" spy={true} smooth={true} duration={500}></Link>
         <a
           href='https://meetings.hubspot.com/munzer1'
           className='handle handle2'
           target='_blank'
         ></a>
-        <Link
+        <a
           className='handle handle3'
           onClick={() => setShowModal({ visible: true })}
-        ></Link>
+        ></a>
 
         <Rodal
           animation='rotate'
@@ -116,6 +117,17 @@ export default function HomeScreen({ match }) {
         <CurriculamStepsBar />
        
         <div className="container-fluid bg-light py-5">
+                    {/* Sec Title */}
+                    <div className='sec-title style-two centered'>
+            <div className='title'>
+              Different Course Plans Tailored To Your Needs
+            </div>
+            <hr className='block-seperator mb-3' />
+            <div className='text'>
+              Register yourself now and get real employabe skills that top
+              companies want.
+            </div>
+          </div>
               <ServiceVideoChat/>
 
                 <ServiceAssistance/>

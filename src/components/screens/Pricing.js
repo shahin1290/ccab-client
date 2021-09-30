@@ -145,12 +145,12 @@ export default function Pricing() {
                         </div>
 
                         <div>
-                          <Link
-                            to={`/checkout/subscription/${plan._id}`}
+                          <a
+                            href={`/checkout/subscription/${plan._id}`}
                             className='theme-btn btn-style-two'
                           >
                             <span className='txt'>Select</span>
-                          </Link>
+                          </a>
                         </div>
                       </div>
                     </div>
