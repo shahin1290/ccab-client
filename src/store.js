@@ -115,6 +115,7 @@ import {
 import {
   appointmentCreateReducer,
   appointmentListReducer,
+  instructorAppointmentListReducer,
   appointmentDetailsReducer,
   appointmentDeleteReducer,
   appointmentUpdateReducer,
@@ -249,6 +250,7 @@ const reducer = combineReducers({
   appointmentDetails: appointmentDetailsReducer,
   appointmentUpdate: appointmentUpdateReducer,
   appointmentDelete: appointmentDeleteReducer,
+  instructorAppointmentList: instructorAppointmentListReducer,
   serviceCategoryCreate: serviceCategoryCreateReducer,
   serviceCategoryList: serviceCategoryListReducer,
   serviceCategoryDetails: serviceCategoryDetailsReducer,

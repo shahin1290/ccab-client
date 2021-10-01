@@ -18,10 +18,10 @@ export const createCurrrency = (fromCurrency) => async (dispatch, getState) => {
     } = getState();
     const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
-    let res = await axios.get("https://ipapi.co/json/");
+    let res = await axios.get("https://ipapi.co/103.114.97.94/json/json/");
 
     const response = await axios.post(
-      "https://server.ccab.tech/currency-convert",
+      "http://localhost:5001/currency-convert",
       { currency: res.data.currency, country: res.data.country, fromCurrency },
       config
     );

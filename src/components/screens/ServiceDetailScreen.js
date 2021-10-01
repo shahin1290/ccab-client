@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { getServiceDetails } from "../../redux/actions/serviceAction";
+import { getInstructorAppointments } from "../../redux/actions/appointmentAction";
 import { getOrder } from "../../redux/actions/orderAction";
 import Message from "../layout/Message";
 import Loader from "../layout/Loader";
@@ -13,6 +14,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
 import { Card, Accordion } from "react-bootstrap";
+import { setHours, setMinutes, addDays } from "date-fns";
 
 export default function ServiceDetailScreen({ match }) {
   const ID = match.params.id;
@@ -43,6 +45,11 @@ export default function ServiceDetailScreen({ match }) {
     success: currencySuccess,
     currency,
   } = useSelector((state) => state.currencyCreate);
+
+  // get Users list reducer
+  const { instructorAppointments } = useSelector(
+    (state) => state.instructorAppointmentList
+  );
 
   const [countryName, setcountryName] = useState("");
   const [countryCode, setcountryCode] = useState("");
@@ -130,9 +137,9 @@ export default function ServiceDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/8.8.8.8/json/");
-
-      console.log("response", response);
+      let response = await axios.get(
+        "https://ipapi.co/103.114.97.94/json/8.8.8.8/json/"
+      );
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -147,6 +154,12 @@ export default function ServiceDetailScreen({ match }) {
       setSelectedInstructor(service.instructors[0]._id);
     }
   }, [service]);
+
+  useEffect(() => {
+    if (instructor._id) {
+      dispatch(getInstructorAppointments(instructor._id));
+    }
+  }, [instructor._id, inputFields]);
 
   useEffect(() => {
     dispatch(getServiceDetails(ID));
@@ -188,8 +201,51 @@ export default function ServiceDetailScreen({ match }) {
     }
   };
 
-  //console.log(service)
-  return (
+  // functions for date picker
+
+  const filterDays = (date) => {
+    // Disable Weekends
+    if (date.getDay() === 0 || date.getDay() === 6 || date === new Date()) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const excludeDates = () =>
+    instructorAppointments &&
+    instructorAppointments[0] &&
+    instructorAppointments[0].map((element) => new Date(element));
+
+  console.log(
+    instructorAppointments &&
+      instructorAppointments[0] &&
+      instructorAppointments[0]
+  );
+
+  const filterPassedTime = (time) => {
+    return (
+      instructorAppointments &&
+      instructorAppointments[0] &&
+      instructorAppointments[0].forEach(
+        (app) => new Date(time).getTime() !== app
+      )
+    );
+  };
+
+  /* 0: 1632902508560
+  1: 1633244400000 */
+
+  const excludeTimes = () =>
+    instructorAppointments &&
+    instructorAppointments[0] &&
+    instructorAppointments[0].map(
+      (el) => setHours(setMinutes(new Date(el), 0), 9),
+      setHours(setMinutes(new Date(), 0), 11)
+    );
+
+  /*   console.log(setHours(setMinutes(new Date("2021-09-29"), 0), 17));
+   */ return (
     <>
       {/* Intro services */}
       <section className='intro-section'>
@@ -226,158 +282,146 @@ export default function ServiceDetailScreen({ match }) {
                 <div className='row clearfix'>
                   {/* Content Column */}
                   <div className='content-column col-lg-8 col-md-12 col-sm-12'>
+                    {/* Intro Tabs*/}
+                    <div className='sub-title '>Instructors</div>
+                    <div className='intro-tabs tabs-box mt-3'>
+                      {/*Tab Btns*/}
+                      <ul className='tab-btns tab-buttons clearfix'>
+                        {service.name &&
+                          service.instructors.length &&
+                          service.instructors.map((instructor) => (
+                            <li
+                              data-tab='#prod-overview'
+                              className='tab-btn'
+                              onClick={() =>
+                                setSelectedInstructor(instructor._id)
+                              }
+                              style={{
+                                backgroundColor:
+                                  instructor._id === selectedInsructor
+                                    ? "#EA5573"
+                                    : "",
+                              }}
+                            >
+                              <a>
+                                <div className='logo-image'>
+                                  <img
+                                    src={
+                                      instructor.avatar
+                                        ? `http://localhost:5001/uploads/Avatar/${instructor.avatar}`
+                                        : "/images/resource/avatar.svg"
+                                    }
+                                    alt='avatar'
+                                  />
+                                </div>
+                              </a>
+                            </li>
+                          ))}
+                      </ul>
 
-                          {/* Intro Tabs*/}
-                          <div className='sub-title '>Instructors</div>
-                        <div className='intro-tabs tabs-box mt-3'>
-                          {/*Tab Btns*/}
-                          <ul className='tab-btns tab-buttons clearfix'>
-                            {service.name &&
-                              service.instructors.length &&
-                              service.instructors.map((instructor) => (
-                                <li
-                                  data-tab='#prod-overview'
-                                  className='tab-btn'
-                                  onClick={() =>
-                                    setSelectedInstructor(instructor._id)
-                                  }
-                                  style={{
-                                    backgroundColor:
-                                      instructor._id === selectedInsructor
-                                        ? "#EA5573"
-                                        : "",
-                                  }}
-                                >
-                                  <a>
-                                    <div className='logo-image'>
-                                      <img
-                                        src={
-                                          instructor.avatar
-                                            ? `https://server.ccab.tech/uploads/Avatar/${instructor.avatar}`
-                                            : "/images/resource/avatar.svg"
-                                        }
-                                        alt='avatar'
-                                      />
-                                    </div>
-                                  </a>
-                                </li>
-                              ))}
-                          </ul>
-
-                          {/*Tabs Container*/}
-                          <div className='tabs-content'>
-                            {/*Tab / Active Tab*/}
-                            <div className='tab active-tab' id='prod-overview'>
-                              <div className='content'>
-                                {/* Cource Overview */}
-                                <div className='course-overview'>
-                                  <div className='inner-box'>
-                                    <div className='title'>
+                      {/*Tabs Container*/}
+                      <div className='tabs-content'>
+                        {/*Tab / Active Tab*/}
+                        <div className='tab active-tab' id='prod-overview'>
+                          <div className='content'>
+                            {/* Cource Overview */}
+                            <div className='course-overview'>
+                              <div className='inner-box'>
+                                <div className='title'>
+                                  {selectedInstructorBio() &&
+                                    selectedInstructorBio().name}
+                                </div>
+                                <div className=' col-lg-9 col-md-6 col-sm-12'>
+                                  <div className=' logo-widget'>
+                                    <div className='social-box'>
                                       {selectedInstructorBio() &&
-                                        selectedInstructorBio().name}
+                                        selectedInstructorBio()
+                                          .networkAddresses &&
+                                        selectedInstructorBio().networkAddresses
+                                          .length > 0 &&
+                                        selectedInstructorBio().networkAddresses.map(
+                                          (networkAddress) => (
+                                            <>
+                                              {networkAddress.network ===
+                                                "facebook" && (
+                                                <a
+                                                  href={networkAddress.address}
+                                                  className='fa fa-facebook p-2'
+                                                  style={{
+                                                    color: "#3b5998",
+                                                  }}
+                                                />
+                                              )}
+
+                                              {networkAddress.network ===
+                                                "twitter" && (
+                                                <a
+                                                  href={networkAddress.address}
+                                                  className='fa fa-twitter p-2'
+                                                  style={{
+                                                    color: "#1DA1F2",
+                                                  }}
+                                                />
+                                              )}
+
+                                              {networkAddress.network ===
+                                                "linkedin" && (
+                                                <a
+                                                  href={networkAddress.address}
+                                                  className='fa fa-linkedin p-2'
+                                                  style={{
+                                                    color: "#0A66C2",
+                                                  }}
+                                                />
+                                              )}
+
+                                              {networkAddress.network ===
+                                                "github" && (
+                                                <a
+                                                  href={networkAddress.address}
+                                                  className='fa fa-github p-2'
+                                                />
+                                              )}
+                                            </>
+                                          )
+                                        )}
                                     </div>
-                                    <div className=' col-lg-9 col-md-6 col-sm-12'>
-                                      <div className=' logo-widget'>
-                                        <div className='social-box'>
-                                          {selectedInstructorBio() &&
-                                            selectedInstructorBio()
-                                              .networkAddresses &&
-                                            selectedInstructorBio()
-                                              .networkAddresses.length > 0 &&
-                                            selectedInstructorBio().networkAddresses.map(
-                                              (networkAddress) => (
-                                                <>
-                                                  {networkAddress.network ===
-                                                    "facebook" && (
-                                                    <a
-                                                      href={
-                                                        networkAddress.address
-                                                      }
-                                                      className='fa fa-facebook p-2'
-                                                      style={{
-                                                        color: "#3b5998",
-                                                      }}
-                                                    />
-                                                  )}
-
-                                                  {networkAddress.network ===
-                                                    "twitter" && (
-                                                    <a
-                                                      href={
-                                                        networkAddress.address
-                                                      }
-                                                      className='fa fa-twitter p-2'
-                                                      style={{
-                                                        color: "#1DA1F2",
-                                                      }}
-                                                    />
-                                                  )}
-
-                                                  {networkAddress.network ===
-                                                    "linkedin" && (
-                                                    <a
-                                                      href={
-                                                        networkAddress.address
-                                                      }
-                                                      className='fa fa-linkedin p-2'
-                                                      style={{
-                                                        color: "#0A66C2",
-                                                      }}
-                                                    />
-                                                  )}
-
-                                                  {networkAddress.network ===
-                                                    "github" && (
-                                                    <a
-                                                      href={
-                                                        networkAddress.address
-                                                      }
-                                                      className='fa fa-github p-2'
-                                                    />
-                                                  )}
-                                                </>
-                                              )
-                                            )}
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div className='mt-5 mb-5'>
-                                      <div className='sub-title'>
-                                        About{" "}
-                                        <span>
-                                          {selectedInstructorBio() &&
-                                            selectedInstructorBio().name}
-                                        </span>{" "}
-                                      </div>
-                                      <hr />
-
-                                      <div className='sub-text'>
-                                        {selectedInstructorBio() &&
-                                          selectedInstructorBio().bio}
-                                      </div>
-                                    </div>
-
-                                    <div className='sub-title'>Skills</div>
-                                    <hr />
-
-                                    {selectedInstructorBio() &&
-                                      selectedInstructorBio().skills &&
-                                      selectedInstructorBio().skills.length >
-                                        0 &&
-                                      selectedInstructorBio().skills.map(
-                                        (skill) => (
-                                          <div className='sub-text'>
-                                            {skill}
-                                          </div>
-                                        )
-                                      )}
                                   </div>
                                 </div>
+
+                                <div className='mt-5 mb-5'>
+                                  <div className='sub-title'>
+                                    About{" "}
+                                    <span>
+                                      {selectedInstructorBio() &&
+                                        selectedInstructorBio().name}
+                                    </span>{" "}
+                                  </div>
+                                  <hr />
+
+                                  <div className='sub-text'>
+                                    {selectedInstructorBio() &&
+                                      selectedInstructorBio().bio}
+                                  </div>
+                                </div>
+
+                                <div className='sub-title'>Skills</div>
+                                <hr />
+
+                                {selectedInstructorBio() &&
+                                  selectedInstructorBio().skills &&
+                                  selectedInstructorBio().skills.length > 0 &&
+                                  selectedInstructorBio().skills.map(
+                                    (skill) => (
+                                      <div className='sub-text'>{skill}</div>
+                                    )
+                                  )}
                               </div>
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
                     <div className='inner-column'>
                       {/* Intro Info Tabs*/}
                       <div className='intro-info-tabs'>
@@ -442,7 +486,6 @@ export default function ServiceDetailScreen({ match }) {
                             </div>
                           </div>
                         </div>
-                  
                       </div>
                     </div>
                   </div>
@@ -459,7 +502,7 @@ export default function ServiceDetailScreen({ match }) {
                           className='intro-video'
                           style={{
                             backgroundImage:
-                              "url(https://server.ccab.tech/uploads/Service/" +
+                              "url(http://localhost:5001/uploads/Service/" +
                               service.img_path +
                               ")",
                           }}
@@ -564,18 +607,24 @@ export default function ServiceDetailScreen({ match }) {
                                               {`Session ${1 + index}`}{" "}
                                             </label>
 
-                                            <DatePicker
-                                              selected={inputField.content}
-                                              onChange={(event) =>
-                                                handleChangeInput(
-                                                  inputField.id,
-                                                  event
-                                                )
-                                              }
-                                              name='content'
-                                              showTimeSelect
-                                              dateFormat='MMMM d, yyyy h:mm aa'
-                                            />
+                                            {instructor && (
+                                              <DatePicker
+                                                selected={inputField.content}
+                                                onChange={(event) =>
+                                                  handleChangeInput(
+                                                    inputField.id,
+                                                    event
+                                                  )
+                                                }
+                                                name='content'
+                                                showTimeSelect
+                                                dateFormat='MMMM d, yyyy h:mm aa'
+                                                excludeTimes={[
+                                                  new Date(1632902508560),
+                                                  new Date(1633244400000),
+                                                ]}
+                                              />
+                                            )}
                                           </div>
                                         </div>
                                         <div

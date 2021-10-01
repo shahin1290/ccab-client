@@ -24,13 +24,10 @@ export default function ServiceSessions() {
 
   const [selectedAppointment, setSelectedAppointment] = useState();
 
-
   // get Users list reducer
   const { appointments, loading, error } = useSelector(
     (state) => state.appointmentList
   );
-
-  useEffect(() => {}, [dispatch, history]);
 
   useEffect(() => {
     if (
@@ -97,11 +94,6 @@ export default function ServiceSessions() {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}{" "}
-                      -{" "}
-                      {new Date(req.content).toLocaleTimeString(undefined, {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
                     </Col>
                     <Col md={3} className='my-auto sub-text'>
                       {appointment.service.name}
