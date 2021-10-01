@@ -35,16 +35,17 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return (
-      <section style={{ height: "48px", background: "#CC8C33" }}>
-        <div className='auto-container d-flex justify-content-between title text-danger pb-1'>
-          <div>Get more than 20% discount today</div>
+      <section style={{  background: "#f2334c" }}>
+        <div className='auto-container d-flex justify-content-between promoFlex  p-1'
+        style={{fontSize :'90%' , fontWeight:'bold' }}>
+          <div className="w-50 text-center">Get more than <span style ={{color:'yellow'}}>30% discount </span>today  </div>
           <span>
             <span>{days}</span> <span className='text-white ml-1'>D</span>{" "}
-            <span className='pl-4'>{hours}</span>{" "}
+            <span className='pl-2'>{hours}</span>{" "}
             <span className='text-white ml-1'>H</span>{" "}
-            <span className='pl-4'>{minutes}</span>
+            <span className='pl-2'>{minutes}</span>
             <span className='text-white ml-1'>M</span>
-            <span className='pl-4'>{seconds}</span>{" "}
+            <span className='pl-2'>{seconds}</span>{" "}
             <span className='text-white'>S</span>
           </span>
         </div>

@@ -86,8 +86,8 @@ export default function HomeScreen({ match }) {
 
         {/* Education Section Two */}
 
-        <Link  className='handle handle1'
-         to="/pricing-plans" spy={true} smooth={true} duration={500}></Link>
+        <a  className='handle handle1'
+         href="/pricing-plans"></a>
         <a
           href='https://meetings.hubspot.com/munzer1'
           className='handle handle2'
