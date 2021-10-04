@@ -2,6 +2,7 @@ import React from "react";
 import Countdown from "react-countdown";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePromo } from "../../redux/actions/promoAction";
+import { Link } from 'react-scroll';
 
 // Random component
 const Completionist = () => {
@@ -35,9 +36,11 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return (
-      <section style={{  background: "#f2334c" }}>
+      <section className="prompSection" style={{  background: "#e82910" }}>
+        <Link to="pricing" spy={true } smooth={true} offset={-25} duration={500}>
+    
         <div className='auto-container d-flex justify-content-between promoFlex  p-1'
-        style={{fontSize :'90%' , fontWeight:'bold' }}>
+        style={{fontSize :'90%' , fontWeight:'800' }}>
           <div className="w-50 text-center">Get more than <span style ={{color:'yellow'}}>30% discount </span>today  </div>
           <span>
             <span>{days}</span> <span className='text-white ml-1'>D</span>{" "}
@@ -49,6 +52,7 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
             <span className='text-white'>S</span>
           </span>
         </div>
+        </Link>
       </section>
     );
   }

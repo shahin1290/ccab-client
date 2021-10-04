@@ -251,7 +251,7 @@ export default function HomeScreen({ match }) {
         </section> */}
         {/*End How IT Works Section */}
 
-        {/* <ProgramSection /> */}
+        <ProgramSection />
 
         {/* <AchievementSection />
 

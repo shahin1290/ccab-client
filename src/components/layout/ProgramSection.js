@@ -23,13 +23,13 @@ const ProgramSection = () => {
                     </div>
                   </div>
 
-                  <a
+                  {/* <a
                     activeclassName="active"
                     className="theme-btn btn-style-three"
                     href="https://meetings.hubspot.com/sl-melad"
                   >
                     <span className="txt">Book an Interview</span>
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {/* Image Column */}
