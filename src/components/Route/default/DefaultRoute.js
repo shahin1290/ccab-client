@@ -55,11 +55,12 @@ export default function DefaultRoute() {
     <main className='page-wrapper'>
       {/* Preloader */}
       {/* <div className="preloader" /> */}
+
+      <Header />
       {promos && promos.length > 0 && promos[0].show && (
 
-        <PromoCountDown promo={promos[0]} />
+       <PromoCountDown promo={promos[0]} />
       )}
-      <Header />
       <Switch>
         <Route exact path='/' component={HomeScreen}></Route>
         <Route exact path='/Services' component={ServiceHomeScreen}></Route>
