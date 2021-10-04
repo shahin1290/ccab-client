@@ -14,7 +14,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
 import { Card, Accordion } from "react-bootstrap";
-import { setHours, setMinutes, addDays } from "date-fns";
+import { getDay, setHours, setMinutes } from "date-fns";
 
 export default function ServiceDetailScreen({ match }) {
   const ID = match.params.id;
@@ -137,9 +137,7 @@ export default function ServiceDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get(
-        "https://ipapi.co/103.114.97.94/json/8.8.8.8/json/"
-      );
+      let response = await axios.get("https://ipapi.co/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -203,49 +201,28 @@ export default function ServiceDetailScreen({ match }) {
 
   // functions for date picker
 
-  const filterDays = (date) => {
-    // Disable Weekends
-    if (date.getDay() === 0 || date.getDay() === 6 || date === new Date()) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const excludeDates = () =>
-    instructorAppointments &&
-    instructorAppointments[0] &&
-    instructorAppointments[0].map((element) => new Date(element));
-
-  console.log(
-    instructorAppointments &&
-      instructorAppointments[0] &&
-      instructorAppointments[0]
-  );
-
   const filterPassedTime = (time) => {
-    return (
+    const bookedDate =
       instructorAppointments &&
       instructorAppointments[0] &&
-      instructorAppointments[0].forEach(
-        (app) => new Date(time).getTime() !== app
-      )
-    );
+      instructorAppointments[0];
+
+    const currentDate = new Date();
+
+    const selectedDate = new Date(time);
+
+    return bookedDate && bookedDate.length
+      ? bookedDate.indexOf(selectedDate.getTime()) === -1 &&
+          currentDate.getTime() < selectedDate.getTime()
+      : true && currentDate.getTime() < selectedDate.getTime();
   };
 
-  /* 0: 1632902508560
-  1: 1633244400000 */
+  const isWeekday = (date) => {
+    const day = getDay(date);
+    return day !== 0 && day !== 6;
+  };
 
-  const excludeTimes = () =>
-    instructorAppointments &&
-    instructorAppointments[0] &&
-    instructorAppointments[0].map(
-      (el) => setHours(setMinutes(new Date(el), 0), 9),
-      setHours(setMinutes(new Date(), 0), 11)
-    );
-
-  /*   console.log(setHours(setMinutes(new Date("2021-09-29"), 0), 17));
-   */ return (
+  return (
     <>
       {/* Intro services */}
       <section className='intro-section'>
@@ -599,16 +576,17 @@ export default function ServiceDetailScreen({ match }) {
 
                                     {/* Divider */}
 
-                                    {inputFields.map((inputField, index) => (
-                                      <Card key={inputField.id}>
-                                        <div style={{ display: "flex" }}>
-                                          <div className='form-group form-group col-lg-7 col-md-12 col-sm-12'>
-                                            <label>
-                                              {`Session ${1 + index}`}{" "}
-                                            </label>
+                                    {instructor.name &&
+                                      inputFields.map((inputField, index) => (
+                                        <Card key={inputField.id}>
+                                          <div style={{ display: "flex" }}>
+                                            <div className='form-group col-lg-7 col-md-12 col-sm-12'>
+                                              <label>
+                                                {`Session ${1 + index}`}{" "}
+                                              </label>
 
-                                            {instructor && (
                                               <DatePicker
+                                                fixedHeight
                                                 selected={inputField.content}
                                                 onChange={(event) =>
                                                   handleChangeInput(
@@ -616,44 +594,55 @@ export default function ServiceDetailScreen({ match }) {
                                                     event
                                                   )
                                                 }
+                                                placeholderText='Click to select a date'
+                                                timeIntervals={60}
                                                 name='content'
                                                 showTimeSelect
                                                 dateFormat='MMMM d, yyyy h:mm aa'
-                                                excludeTimes={[
-                                                  new Date(1632902508560),
-                                                  new Date(1633244400000),
-                                                ]}
+                                                filterTime={filterPassedTime}
+                                                filterDate={isWeekday}
+                                                minTime={setHours(
+                                                  setMinutes(new Date(), 0),
+                                                  8
+                                                )}
+                                                maxTime={setHours(
+                                                  setMinutes(new Date(), 30),
+                                                  20
+                                                )}
                                               />
-                                            )}
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div
-                                          style={{
-                                            fontSize: "30px",
-                                            display: "flex",
-                                            width: "70px",
-                                            justifyContent: "space-between",
-                                            margin: "0 auto",
-                                          }}
-                                        >
-                                          <button
-                                            type='button'
-                                            onClick={handleAddFields}
+                                          <div
+                                            style={{
+                                              fontSize: "30px",
+                                              display: "flex",
+                                              width: "70px",
+                                              justifyContent: "space-between",
+                                              margin: "0 auto",
+                                            }}
                                           >
-                                            <i className='fas fa-plus-square'></i>
-                                          </button>
-                                          <button
-                                            type='button'
-                                            disabled={inputFields.length === 1}
-                                            onClick={() =>
-                                              handleRemoveFields(inputField.id)
-                                            }
-                                          >
-                                            <i className='fas fa-minus-square'></i>
-                                          </button>
-                                        </div>
-                                      </Card>
-                                    ))}
+                                            <button
+                                              type='button'
+                                              onClick={handleAddFields}
+                                            >
+                                              <i className='fas fa-plus-square'></i>
+                                            </button>
+                                            <button
+                                              type='button'
+                                              disabled={
+                                                inputFields.length === 1
+                                              }
+                                              onClick={() =>
+                                                handleRemoveFields(
+                                                  inputField.id
+                                                )
+                                              }
+                                            >
+                                              <i className='fas fa-minus-square'></i>
+                                            </button>
+                                          </div>
+                                        </Card>
+                                      ))}
 
                                     {/*  <DatePicker
                                       selected={startDate}
