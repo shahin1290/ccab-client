@@ -55,7 +55,7 @@ const CheckoutKlarna = ({ match }) => {
   // get the user ip info
   const getGeoInfo = () => {
     axios
-      .get("https://ipapi.co/json/")
+      .get("https://ipapi.co/103.114.97.94/json")
       .then((response) => {
         let data = response.data;
         console.log(data);

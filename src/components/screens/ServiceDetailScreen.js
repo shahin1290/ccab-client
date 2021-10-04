@@ -10,7 +10,7 @@ import { createCurrrency } from "../../redux/actions/currencyAction";
 import { getPriceFormat } from "../../util/priceFormat";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import DatePicker from "react-datepicker";
+import DatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
 import { Card, Accordion } from "react-bootstrap";
@@ -137,7 +137,7 @@ export default function ServiceDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/json/");
+      let response = await axios.get("https://ipapi.co/103.114.97.94/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -220,6 +220,17 @@ export default function ServiceDetailScreen({ match }) {
   const isWeekday = (date) => {
     const day = getDay(date);
     return day !== 0 && day !== 6;
+  };
+
+  const MyContainer = ({ className, children }) => {
+    return (
+      <div style={{ padding: "16px", background: "#216ba5", color: "#fff" }}>
+        <CalendarContainer className={className}>
+          <div style={{ background: "#f0f0f0" }}>Choose your best time</div>
+          <div style={{ position: "relative" }}>{children}</div>
+        </CalendarContainer>
+      </div>
+    );
   };
 
   return (
@@ -586,6 +597,8 @@ export default function ServiceDetailScreen({ match }) {
                                               </label>
 
                                               <DatePicker
+                                                withPortal
+                                                calendarContainer={MyContainer}
                                                 fixedHeight
                                                 selected={inputField.content}
                                                 onChange={(event) =>
@@ -594,7 +607,6 @@ export default function ServiceDetailScreen({ match }) {
                                                     event
                                                   )
                                                 }
-                                                placeholderText='Click to select a date'
                                                 timeIntervals={60}
                                                 name='content'
                                                 showTimeSelect
