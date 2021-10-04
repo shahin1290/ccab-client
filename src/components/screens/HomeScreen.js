@@ -23,6 +23,9 @@ import "rodal/lib/rodal.css";
 import ContactForm from "../layout/ContactForm";
 import Typewriter from "typewriter-effect";
 import Reviews from "../layout/Reviews";
+import ServiceVideoChat from './../layout/ServiceVideoChat';
+
+import ServiceAssistance from './../layout/ServiceAssistance';
 
 export default function HomeScreen({ match }) {
   const [showModal, setShowModal] = useState({ visible: false });
@@ -52,9 +55,17 @@ export default function HomeScreen({ match }) {
               <span class='quote--highlight'>TODAY</span> not tomorrow
             </p>
             <p class='quote--author'>&ndash; Robert Kiyosaki</p>
+  
           </div>
 
-          <div className='typewriter'>
+
+
+          <div className=" d-flex justify-content-center titleBanner  " 
+        >
+                <h1 className="text-danger title text-right">CODIFY COLLEGE</h1>
+           </div>
+
+          {/* <div className='typewriter'>
             <Typewriter
               options={{
                 strings: [
@@ -64,7 +75,7 @@ export default function HomeScreen({ match }) {
                 loop: true,
               }}
             />
-          </div>
+          </div> */}
 
           {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}
 
@@ -75,16 +86,17 @@ export default function HomeScreen({ match }) {
 
         {/* Education Section Two */}
 
-        <Link to='/get-start' className='handle handle1'></Link>
+        <a  className='handle handle1'
+         href="/pricing-plans"></a>
         <a
-          href='https://meetings.hubspot.com/sl-melad'
+          href='https://meetings.hubspot.com/munzer1'
           className='handle handle2'
           target='_blank'
         ></a>
-        <Link
+        <a
           className='handle handle3'
           onClick={() => setShowModal({ visible: true })}
-        ></Link>
+        ></a>
 
         <Rodal
           animation='rotate'
@@ -103,6 +115,24 @@ export default function HomeScreen({ match }) {
         <TopCourses></TopCourses>
 
         <CurriculamStepsBar />
+       
+        <div className="container-fluid bg-light py-5">
+                    {/* Sec Title */}
+                    <div className='sec-title style-two centered'>
+            <div className='title'>
+              Different Course Plans Tailored To Your Needs
+            </div>
+            <hr className='block-seperator mb-3' />
+            <div className='text'>
+              Register yourself now and get real employabe skills that top
+              companies want.
+            </div>
+          </div>
+              <ServiceVideoChat/>
+
+                <ServiceAssistance/>
+        </div>
+       
 
         <ContactSection />
 

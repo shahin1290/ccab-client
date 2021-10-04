@@ -69,7 +69,7 @@ const OnlineEducationProspect = () => {
 
           <div className="auto-container pt-5 mt-5">
             <div className="title text-center ">
-              We partner with the best in the industry
+              We Partner With The Best In The Industry
             </div>
             <hr className="block-seperator mt-2 mb-4" />
             <div className="sub-text text-center">

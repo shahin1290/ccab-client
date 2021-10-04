@@ -48,7 +48,7 @@ export default function TopCourses({ match }) {
         <div className='auto-container'>
           {/* Sec Title */}
           <div className='title text-center p-2 '>
-            Change your life with Coding
+            Change Your Life With Coding
           </div>
           <hr className='block-seperator mb-3' />
 

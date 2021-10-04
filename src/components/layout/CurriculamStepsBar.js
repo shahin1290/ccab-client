@@ -15,21 +15,22 @@ const CurriculamStepsBar = (props) => {
         padding: '50px 0'
       }}
     >
-      <div className="curriculum no-gutter auto-container">
-        <div className="title text-center pb-1">Comprehensive Curriculum</div>
+      <div className="curriculum no-gutter ">
+        <div className="title text-center pb-1 w-100">Comprehensive Curriculum</div>
         <hr className="block-seperator mb-3" />
-        <div className="sub-text text-center mb-5">
+        <div className="sub-text text-center mb-5 w-100">
           Our Full Stack Developer Courses are made to give you an easy and
-          fast path in web development. By the end this course you will be able
+          fast path in web development. By the end these courses you will be able
           to build web applications from scratch.
         </div>
 
-        <div className=" row d-flex justify-content-between col-lg-12 col-md-10 col-sm-10 mb-2 p-3">
+        <div className="curriculmTitle   d-flex justify-content-between w-100 mb-2 p-3"
+       >
           <div>
             <a
               onClick={() => setValue(3)}
               className="curriculum"
-              style={value === 3 ? { color: '#ea5573' } : {}}
+              style={value === 3 ? { color: '#ea5573',fontWeight:'800' } : {}}
             >
               Foundation
               <div className="text-center">1 week</div>
@@ -40,7 +41,7 @@ const CurriculamStepsBar = (props) => {
             <a
               onClick={() => setValue(25)}
               className="curriculum"
-              style={value === 32 ? { color: '#ea5573' } : {}}
+              style={value === 25 ? { color: '#ea5573',fontWeight:'800'  } : {}}
             >
               Basic Frontend
               <div className="text-center">9 weeks</div>
@@ -51,7 +52,7 @@ const CurriculamStepsBar = (props) => {
             <a
               onClick={() => setValue(50)}
               className="curriculum "
-              style={value === 61 ? { color: '#ea5573' } : {}}
+              style={value === 50 ? { color: '#ea5573',fontWeight:'800'  } : {}}
             >
               Advanced Frontend
               <div className="text-center">9 weeks</div>
@@ -62,7 +63,7 @@ const CurriculamStepsBar = (props) => {
             <a
               onClick={() => setValue(75)}
               className="curriculum "
-              style={value === 90 ? { color: '#ea5573' } : {}}
+              style={value ===75 ? { color: '#ea5573' ,fontWeight:'800' } : {}}
             >
               Advanced Backend & Database
               <div className="text-center">9 weeks</div>
@@ -73,7 +74,7 @@ const CurriculamStepsBar = (props) => {
             <a
               onClick={() => setValue(100)}
               className="curriculum "
-              style={value === 100 ? { color: '#ea5573' } : {}}
+              style={value === 100 ? { color: '#ea5573',fontWeight:'800'  } : {}}
             >
               Projects
               <div className="text-center">2 weeks</div>
@@ -81,7 +82,8 @@ const CurriculamStepsBar = (props) => {
           </div>
         </div>
         <div className="row no-gutter">
-          <ProgressBar className="col-lg-12 col-md-12 col-sm-12  mt-3 mb-2">
+          <ProgressBar className="col-lg-12 col-md-12 col-sm-12  mt-3 mb-2"
+          style={{borderRadius:'40px'}}>
             <ProgressBar variant="warning" now={value} />
           </ProgressBar>
         </div>
