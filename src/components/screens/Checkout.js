@@ -27,6 +27,7 @@ import { getKlarnaOrderLines } from "../../util/klarnaOrderLines";
 import { getPriceFormat } from "../../util/priceFormat";
 import { createCurrrency } from "../../redux/actions/currencyAction";
 import { createAppointment } from "../../redux/actions/appointmentAction";
+import { ButtonGroup, Button } from "react-bootstrap";
 
 import { plans } from "../../util/plans";
 
@@ -43,6 +44,7 @@ const CheckoutForm = ({ match, history }) => {
   const subscription = match.params.plan;
   const requestId = match.params.requestId;
   const serviceId = match.params.serviceId;
+  const [method, setMethod] = useState("card");
 
   const plan = plans.find((plan) => plan._id === subscription);
 
@@ -148,7 +150,7 @@ const CheckoutForm = ({ match, history }) => {
     if (serviceId) {
       dispatch(getServiceDetails(serviceId));
     }
-  }, [ID, subscription, serviceId, requestId]);
+  }, [ID, serviceId, requestId]);
 
   useEffect(() => {
     if (service) {
@@ -256,7 +258,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const res = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-subscription`,
+          `http://localhost:5001/api/order/stripe/stripe-subscription`,
           {
             payment_method: paymentMethod.id,
             planId: plan.stripeSubscriptionId,
@@ -345,7 +347,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const { data: clientSecret } = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+          `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
           {
             paymentMethodType: "card",
             currency: currency.data.currency,
@@ -877,194 +879,205 @@ const CheckoutForm = ({ match, history }) => {
 
                   {/* Signup Info Tabs*/}
                   <div className='checkout-info-tabs col-lg-9 col-md-12 col-sm-12'>
-                    <Tabs
-                      defaultActiveKey='card'
-                      transition={false}
-                      onSelect={(e) => {
-                        if (e === "klarna") _handelcreateKlarnaOrder();
-                      }}
-                    >
-                      <Tab eventKey='card' title='Credit/ Debit card'>
-                        <form onSubmit={submitHandler}>
-                          <div className='sub-title p-3'>
-                            Payment Information
-                          </div>
-                          {isProcessing && <Loader />}
+                    <ButtonGroup aria-label='Basic example'>
+                      <Button
+                        variant={method === "card" ? "info" : "secondary"}
+                        className='mr-2 mb-3 border border-info'
+                        onClick={() => setMethod("card")}
+                      >
+                        Credit/Debit card
+                      </Button>
+                      <Button
+                        variant={method === "klarna" ? "info" : "secondary"}
+                        className='mr-2 mb-3 border border-info'
+                        onClick={() => {
+                          setMethod("klarna");
+                          _handelcreateKlarnaOrder();
+                        }}
+                      >
+                        Klarna
+                      </Button>
+                    </ButtonGroup>
+                    {method === "card" && (
+                      <form onSubmit={submitHandler}>
+                        <div className='sub-title p-3'>Payment Information</div>
+                        {isProcessing && <Loader />}
 
-                          <div
-                            className='row clearfix p-3'
-                            style={{
-                              boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
-                              backgroundColor: "white",
-                            }}
-                          >
-                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                              <label>Holder Name</label>
+                        <div
+                          className='row clearfix p-3'
+                          style={{
+                            boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
+                            backgroundColor: "white",
+                          }}
+                        >
+                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                            <label>Holder Name</label>
 
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: "0.3em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <input
-                                  type='text'
-                                  value={name}
-                                  placeholder='Emily J Smith'
-                                  required
-                                  onChange={(e) => setName(e.target.value)}
-                                />
-                              </div>
-                            </div>
-
-                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                              <label htmlFor='cardNumber'>Card Number</label>
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: "0.5em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <CardNumberElement
-                                  id='cardNumber'
-                                  options={ELEMENT_OPTIONS}
-                                />
-                              </div>
-                            </div>
-
-                            <div className='form-group col-lg-6 col-md-6 col-sm-12'>
-                              <label>Expiration Date</label>
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: "0.5em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <CardExpiryElement />
-                              </div>
-                            </div>
-
-                            <div className='form-group col-lg-6 col-md-6 col-sm-12'>
-                              <label>CVC Code</label>
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: "0.5em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <CardCvcElement />
-                              </div>
-                            </div>
-                          </div>
-                          <div className='sub-title p-3'>Billing Address</div>
-                          <div
-                            className='row clearfix'
-                            style={{
-                              boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
-                              backgroundColor: "white",
-                            }}
-                          >
-                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                              <label>Street</label>
-
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: "0.3em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <input
-                                  type='text'
-                                  value={street}
-                                  placeholder='542 W. 15th Street'
-                                  required
-                                  onChange={(e) => setStreet(e.target.value)}
-                                />
-                              </div>
-                            </div>
-
-                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                              <label>City</label>
-
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: "0.3em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <input
-                                  type='text'
-                                  value={city}
-                                  placeholder='New York'
-                                  required
-                                  onChange={(e) => setCity(e.target.value)}
-                                />
-                              </div>
-                            </div>
-
-                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                              <label>Country</label>
-
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: ".3em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <input
-                                  type='text'
-                                  value={country}
-                                  placeholder='USA'
-                                  required
-                                  onChange={(e) => setCountry(e.target.value)}
-                                />
-                              </div>
-                            </div>
-                            <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                              <label>Zip</label>
-
-                              <div
-                                style={{
-                                  boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
-                                  padding: ".3em",
-                                  backgroundColor: "white",
-                                }}
-                              >
-                                <input
-                                  type='text'
-                                  value={zip}
-                                  placeholder='58648'
-                                  required
-                                  onChange={(e) => setZip(e.target.value)}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div style={{ padding: "20px 0" }}>
-                            <button
-                              className={`theme-btn btn-style-one ${
-                                isProcessing && "isDisabled"
-                              }`}
-                              type='submit'
-                              name='submit-form'
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: "0.3em",
+                                backgroundColor: "white",
+                              }}
                             >
-                              {isProcessing ? (
-                                <Loader />
-                              ) : (
-                                <span className='txt'>Confirm Checkout</span>
-                              )}
-                            </button>
+                              <input
+                                type='text'
+                                value={name}
+                                placeholder='Emily J Smith'
+                                required
+                                onChange={(e) => setName(e.target.value)}
+                              />
+                            </div>
                           </div>
-                        </form>
-                      </Tab>
-                      <Tab eventKey='klarna' title='Klarna'>
+
+                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                            <label htmlFor='cardNumber'>Card Number</label>
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: "0.5em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <CardNumberElement
+                                id='cardNumber'
+                                options={ELEMENT_OPTIONS}
+                              />
+                            </div>
+                          </div>
+
+                          <div className='form-group col-lg-6 col-md-6 col-sm-12'>
+                            <label>Expiration Date</label>
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: "0.5em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <CardExpiryElement />
+                            </div>
+                          </div>
+
+                          <div className='form-group col-lg-6 col-md-6 col-sm-12'>
+                            <label>CVC Code</label>
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: "0.5em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <CardCvcElement />
+                            </div>
+                          </div>
+                        </div>
+                        <div className='sub-title p-3'>Billing Address</div>
+                        <div
+                          className='row clearfix'
+                          style={{
+                            boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
+                            backgroundColor: "white",
+                          }}
+                        >
+                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                            <label>Street</label>
+
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: "0.3em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <input
+                                type='text'
+                                value={street}
+                                placeholder='542 W. 15th Street'
+                                required
+                                onChange={(e) => setStreet(e.target.value)}
+                              />
+                            </div>
+                          </div>
+
+                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                            <label>City</label>
+
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: "0.3em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <input
+                                type='text'
+                                value={city}
+                                placeholder='New York'
+                                required
+                                onChange={(e) => setCity(e.target.value)}
+                              />
+                            </div>
+                          </div>
+
+                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                            <label>Country</label>
+
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: ".3em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <input
+                                type='text'
+                                value={country}
+                                placeholder='USA'
+                                required
+                                onChange={(e) => setCountry(e.target.value)}
+                              />
+                            </div>
+                          </div>
+                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                            <label>Zip</label>
+
+                            <div
+                              style={{
+                                boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
+                                padding: ".3em",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <input
+                                type='text'
+                                value={zip}
+                                placeholder='58648'
+                                required
+                                onChange={(e) => setZip(e.target.value)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{ padding: "20px 0" }}>
+                          <button
+                            className={`theme-btn btn-style-one ${
+                              isProcessing && "isDisabled"
+                            }`}
+                            type='submit'
+                            name='submit-form'
+                          >
+                            {isProcessing ? (
+                              <Loader />
+                            ) : (
+                              <span className='txt'>Confirm Checkout</span>
+                            )}
+                          </button>
+                        </div>
+                      </form>
+                    )}
+                    {method === "klarna" && (
+                      <div>
                         {widgetLoaded && <Loader />}
                         <div
                           onChange={(e) => setKlarnaMethod(e.target.value)}
@@ -1145,8 +1158,8 @@ const CheckoutForm = ({ match, history }) => {
                             method={klarnaMethod}
                           />
                         )}
-                      </Tab>
-                    </Tabs>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

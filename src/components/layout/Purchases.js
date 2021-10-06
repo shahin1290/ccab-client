@@ -47,7 +47,7 @@ export default function Purchases() {
 
     if (window.confirm("Do you really want to cancel?")) {
       const res = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/cancel-subscription`,
+        `http://localhost:5001/api/order/stripe/cancel-subscription`,
         {
           subscriptionId,
         },

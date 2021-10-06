@@ -72,7 +72,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            "https://server.ccab.tech/uploads/Bootcamp/" +
+                            "http://localhost:5001/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt=''
@@ -93,15 +93,14 @@ export default function TopCourses({ match }) {
                           className='sub-text2 d-inline-block text-truncate'
                           style={{ maxWidth: "250px" }}
                         >
-                        {course.description}  
-
+                          {course.description}
                         </span>
                         <Link
-                        className="btn p-0 m-0 text-danger"
-                        to={`/courses/${course._id}`}
-                      >
-                       Read More
-                      </Link>
+                          className='btn p-0 m-0 text-danger'
+                          to={`/courses/${course._id}`}
+                        >
+                          Read More
+                        </Link>
                       </div>
                       <div className='clearfix my-3'>
                         <div className='pull-left'>

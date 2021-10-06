@@ -54,7 +54,6 @@ export default function UpdateMediaCenter({ match }) {
   /********* State And Var ************/
   const ID = match.params.id;
 
-  const [students, setStudents] = useState([]); // done
   const [Mentor, setMentor] = useState({}); // done
   const [price, setPrice] = useState(mediaCenter.price);
   const [name, setName] = useState(mediaCenter.name);
@@ -67,9 +66,6 @@ export default function UpdateMediaCenter({ match }) {
   const [ImageLable, setImageLable] = useState("jpg,png file...");
   const [weeks, setWeeks] = useState(mediaCenter.weeks);
   const [MentorsList, setMentorsList] = useState([]);
-  const [StudentsList, setStudentsList] = useState([]);
-  const [selectedStudent, setSelectedStudent] = useState("");
-  const [selectStudentErr, setSelectStudentErr] = useState("");
 
   //video
   const [showVideo, setShowVideo] = useState(false);
@@ -95,7 +91,6 @@ export default function UpdateMediaCenter({ match }) {
     setCategory(mediaCenter.category);
     setPrice(mediaCenter.price);
     setSeats(mediaCenter.seats);
-    setStudents(mediaCenter.students);
     SetPublished(mediaCenter.published);
     setVideoUrl(mediaCenter.video_path);
     setImageLable(mediaCenter.img_path);
@@ -110,40 +105,6 @@ export default function UpdateMediaCenter({ match }) {
       );
     }
     return users.filter((user) => user.user_type == role);
-  };
-
-  // select student
-  const _handleSelectStudent = () => {
-    let item;
-    let exist = false;
-    // find the user id
-    let student = StudentsList.filter((item) => item.name === selectedStudent);
-    // console.log('after filtering : ', students.length&&students[0]._id);
-    for (item of students) {
-      if (item._id === student[0]._id) {
-        //console.log('existing item ' , item.name);
-        exist = true;
-      }
-    }
-    if (exist) setSelectStudentErr("Student Already Selected");
-    else {
-      if (students.length < Number(seats))
-        setStudents([
-          ...students,
-          { name: student[0].name, _id: student[0]._id },
-        ]);
-      else {
-        setSelectStudentErr("Seats available are only " + seats);
-      }
-    }
-
-    //console.log(selectStudentErr,student);
-  };
-
-  const _handleUnselectStudent = (id) => {
-    let NewStudents = students.filter((item) => item._id !== id);
-    setStudents(NewStudents);
-    //console.log('student removed ');
   };
 
   // select mentor
@@ -229,19 +190,11 @@ export default function UpdateMediaCenter({ match }) {
     }
 
     if (users && users.length) {
-      setStudentsList(_FilterUsers(users, "StudentUser"));
       setMentorsList(_FilterUsers(users, "MentorUser"));
     }
   }, [mediaCenter, users]);
 
   const _handleUpdateMediaCenter = () => {
-    // set array for students ids
-    let StudentsIds = [];
-    if (students.length) {
-      students.forEach((item) => {
-        StudentsIds.push(item._id);
-      });
-    }
     //const infoData = { infoList:  }
 
     //console.log('StudentsIds',StudentsIds);
@@ -254,7 +207,6 @@ export default function UpdateMediaCenter({ match }) {
     form_data.append("seats", seats);
     form_data.append("weeks", weeks);
     form_data.append("mentor", Mentor._id);
-    form_data.append("students", JSON.stringify(StudentsIds));
     form_data.append("price", price);
     form_data.append("published", mediaCenter.published);
     //form_data.append('des_List',infoData)
@@ -565,12 +517,12 @@ export default function UpdateMediaCenter({ match }) {
 
                     {/* Divider */}
                     <div className='border my-3'></div>
-                    {/* ***https://server.ccab.tech** */}
+                    {/* ***http://localhost:5001** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          "https://server.ccab.tech/uploads/Bootcamp/" + ImageLable
+                          "http://localhost:5001/uploads/Bootcamp/" + ImageLable
                         }
                       />
                     ) : (
@@ -642,81 +594,6 @@ export default function UpdateMediaCenter({ match }) {
                             </p>
                           )}
                         </div>
-                      </div>
-
-                      {/* Divider */}
-                      <div className='border my-3'></div>
-                      {/* ******************* */}
-                      <div className='form-group '>
-                        <label htmlFor='exampleDataList' className='form-label'>
-                          Students
-                        </label>
-                        {/* error message */}
-                        {selectStudentErr && (
-                          <p className='text-danger bg-light p-1'>
-                            {selectStudentErr}
-                          </p>
-                        )}
-                        <input
-                          className='form-control bg-light'
-                          list='datalistOptions'
-                          id='exampleDataList'
-                          placeholder='search student...'
-                          onChange={(e) => {
-                            setSelectStudentErr("");
-                            setSelectedStudent(e.target.value);
-                          }}
-                          value={selectedStudent}
-                        />
-
-                        <button
-                          type='button'
-                          className='btn btn-success py-2 px-4 mt-2'
-                          onClick={_handleSelectStudent}
-                        >
-                          add
-                        </button>
-
-                        <datalist id='datalistOptions'>
-                          {StudentsList.length > 0 &&
-                            StudentsList.map((student) => {
-                              return (
-                                <option
-                                  data={student._id}
-                                  value={student.name}
-                                  key={student._id}
-                                >
-                                  {student.email}
-                                </option>
-                              );
-                            })}
-                        </datalist>
-                      </div>
-                      <label className='mt-2'>
-                        Selected Students : {students.length}/
-                        {StudentsList.length}
-                      </label>
-                      <div className='my-3'>
-                        {students.length ? (
-                          students.map((student) => {
-                            return (
-                              <span className='rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light'>
-                                <a
-                                  onClick={() => {
-                                    _handleUnselectStudent(student._id);
-                                  }}
-                                >
-                                  <i className='fas fa-minus-circle text-danger  cursor- pointer'></i>
-                                </a>{" "}
-                                {student.name}
-                              </span>
-                            );
-                          })
-                        ) : (
-                          <p className='text-warning bg-light p-1'>
-                            * Nothing Selected
-                          </p>
-                        )}
                       </div>
 
                       {/* Divider */}

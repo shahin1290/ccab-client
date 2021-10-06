@@ -47,7 +47,7 @@ export default function CourseDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/json/");
+      let response = await axios.get("https://ipapi.co/103.114.97.94/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -220,7 +220,7 @@ export default function CourseDetailScreen({ match }) {
                           className='intro-video'
                           style={{
                             backgroundImage:
-                              "url(https://server.ccab.tech/uploads/Bootcamp/" +
+                              "url(http://localhost:5001/uploads/Bootcamp/" +
                               course.img_path +
                               ")",
                           }}
