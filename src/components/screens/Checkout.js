@@ -157,7 +157,7 @@ const CheckoutForm = ({ match, history }) => {
       const amount = resp.data[query];
       setSekToEUR(amount);
 
-      let response = await axios.get("https://ipapi.co/son/");
+      let response = await axios.get("https://ipapi.co/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
