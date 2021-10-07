@@ -717,7 +717,8 @@ const CheckoutForm = ({ match, history }) => {
                                                   ? 0
                                                   : 200)) *
                                                 sekToEUR *
-                                                currency.data.amount
+                                                currency.data.amount*
+                                                Number(AmountOfWeeks)
                                             )}  ${currency.data.currency} (${
                                               plan.period
                                             })`}
