@@ -157,7 +157,7 @@ const CheckoutForm = ({ match, history }) => {
       const amount = resp.data[query];
       setSekToEUR(amount);
 
-      let response = await axios.get("https://ipapi.co/json/");
+      let response = await axios.get("https://ipapi.co/json//");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -633,7 +633,11 @@ const CheckoutForm = ({ match, history }) => {
                                       Subscription
                                     </label>
                                     <div className='clearfix mb-3'>
-                                      Total Of Weeks:
+                                      Total Of
+                                      {plan.period === "weekly"
+                                        ? " Weeks"
+                                        : " Months"}
+                                      :
                                       <select
                                         className='custom-select-box px-2 mt-3'
                                         onChange={(e) => {
@@ -684,30 +688,13 @@ const CheckoutForm = ({ match, history }) => {
                                       {plan.period}
                                     </span>
                                   </li>
-                                  <hr />
 
-                                  <li className='clearfix'>
-                                    <strong>Total</strong>{" "}
-                                    {method === "klarna" ? (
-                                      <span className='pull-right'>
-                                        <strong>
-                                          {currencySuccess &&
-                                            `${Math.round(
-                                              (Number(plan.price) +
-                                                (promos &&
-                                                promos.length > 0 &&
-                                                promos[0].show
-                                                  ? 0
-                                                  : 200)) *
-                                                sekToEUR *
-                                                currency.data.amount *
-                                                AmountOfWeeks
-                                            )}  ${currency.data.currency}`}
-                                        </strong>
-                                      </span>
-                                    ) : (
-                                      <span className='pull-right'>
-                                        <strong>
+                                  {method === "card" && (
+                                    <>
+                                      {" "}
+                                      <li className='clearfix mb-3'>
+                                        Original Price:
+                                        <span className='pull-right'>
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -718,12 +705,37 @@ const CheckoutForm = ({ match, history }) => {
                                                   : 200)) *
                                                 sekToEUR *
                                                 currency.data.amount
-                                            )}  ${currency.data.currency} (${
-                                              plan.period
-                                            })`}
-                                        </strong>
-                                      </span>
-                                    )}
+                                            )}  ${currency.data.currency} /
+                                              ${
+                                                plan.period === "weekly"
+                                                  ? "week"
+                                                  : "month"
+                                              }`}
+                                        </span>
+                                      </li>
+                                    </>
+                                  )}
+
+                                  <hr />
+
+                                  <li className='clearfix'>
+                                    <strong>Total</strong>{" "}
+                                    <span className='pull-right'>
+                                      <strong>
+                                        {currencySuccess &&
+                                          `${Math.round(
+                                            (Number(plan.price) +
+                                              (promos &&
+                                              promos.length > 0 &&
+                                              promos[0].show
+                                                ? 0
+                                                : 200)) *
+                                              sekToEUR *
+                                              currency.data.amount *
+                                              AmountOfWeeks
+                                          )}  ${currency.data.currency}`}
+                                      </strong>
+                                    </span>
                                   </li>
                                 </ul>
                               </>
@@ -899,7 +911,7 @@ const CheckoutForm = ({ match, history }) => {
                       >
                         Credit/Debit card
                       </Button>
-                      {showKlarnaImg && (
+                      {!showKlarnaImg && (
                         <Button
                           variant={method === "klarna" ? "info" : "secondary"}
                           className='mr-2 mb-3 border border-info'
