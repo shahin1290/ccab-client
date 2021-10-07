@@ -778,9 +778,13 @@ input:checked + .slider:before {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-
+.whoSection{
+  /* background-image: url('./assets/images/image-4.png');
+  background-size: 100%;
+  background-repeat: no-repeat; */
+}
 .prompSection{
- 
+  color :yellow !important;  
   position: sticky !important;
   top:60px !important;
   z-index: 10000;

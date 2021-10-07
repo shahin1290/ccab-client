@@ -41,7 +41,7 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
     
         <div className='auto-container d-flex justify-content-between promoFlex  p-1'
         style={{fontSize :'90%' , fontWeight:'800' }}>
-          <div className="w-50 text-center">Get more than <span style ={{color:'yellow'}}>30% discount </span>today  </div>
+          <div className="w-50 text-center">Get more than <span style ={{color:'white'}}>30% discount </span>today  </div>
           <span>
             <span>{days}</span> <span className='text-white ml-1'>D</span>{" "}
             <span className='pl-2'>{hours}</span>{" "}

@@ -118,7 +118,7 @@ export default function HomeScreen({ match }) {
        
         <div className="container-fluid bg-light py-5">
                     {/* Sec Title */}
-                    <div className='sec-title style-two centered'>
+          <div className='sec-title style-two centered'>
             <div className='title'>
               Different Course Plans Tailored To Your Needs
             </div>
