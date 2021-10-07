@@ -76,15 +76,22 @@ export default function Pricing() {
             <Row>
               {getPlans().length &&
                 getPlans().map((plan) => (
-                  <Col className='no-gutter offset-md-2 offset-lg-0' sm={12} lg={4} md={9}  key={plan._id}
-                  style={{
-                    overflow:'auto'
-                  }}>
+                  <Col
+                    className='no-gutter offset-md-2 offset-lg-0'
+                    sm={12}
+                    lg={4}
+                    md={9}
+                    key={plan._id}
+                    style={{
+                      overflow: "auto",
+                    }}
+                  >
                     {/* Price Block */}
                     <div className='price-block col  col-sm-12 mx-auto'>
-                      <div className='inner-box d-flex flex-column justify-content-between mb-5'
-                       style={{ overflow:'auto' }}>
-
+                      <div
+                        className='inner-box d-flex flex-column justify-content-between mb-5'
+                        style={{ overflow: "auto" }}
+                      >
                         <div>
                           <div className='icon-box'>
                             <span className='icon'>
@@ -111,17 +118,22 @@ export default function Pricing() {
                           <div className='price'>
                             {sekToUsd &&
                               Math.round(
-                                sekToUsd[0] * plan.price +
-                                  (promos && promos.length > 0 && promos[0].show
-                                    ? 0
-                                    : 200)
+                                sekToUsd[0] *
+                                  (Number(plan.price) +
+                                    (promos &&
+                                    promos.length > 0 &&
+                                    promos[0].show
+                                      ? 0
+                                      : 200))
                               )}{" "}
                             {sekToUsd && sekToUsd[1] + " "}
                             <span>
                               {period === "monthly" ? "Per month" : "Per week"}
                             </span>
                           </div>
-                            <h5 className="pricing-sub-title">What You Will Get :</h5>        
+                          <h5 className='pricing-sub-title'>
+                            What You Will Get :
+                          </h5>
                           <ul className='list'>
                             {plan.service.basic.map((offer) => (
                               <li className='check'>{offer}</li>
@@ -135,12 +147,11 @@ export default function Pricing() {
                             ))}
                           </ul>
 
-                          <h5 className="pricing-sub-title">Requierment</h5>  
+                          <h5 className='pricing-sub-title'>Requierment</h5>
                           <ul className='list'>
                             {plan.requirement.map((offer) => (
                               <li className='key'>{offer}</li>
                             ))}
-
                           </ul>
                         </div>
 

@@ -301,11 +301,13 @@ export default function CourseDetailScreen({ match }) {
                                 width: "60%",
                               }}
                             >
-                              <img
-                                width='23%'
-                                className='pr-2'
-                                src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
-                              />
+                              {showKlarnaImg && (
+                                <img
+                                  width='23%'
+                                  className='pr-2'
+                                  src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
+                                />
+                              )}
                               <img
                                 width='75%'
                                 src='https://cdn.jotfor.ms/images/credit-card-logo.png'
