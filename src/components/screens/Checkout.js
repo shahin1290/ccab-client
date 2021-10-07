@@ -46,6 +46,8 @@ const CheckoutForm = ({ match, history }) => {
   const serviceId = match.params.serviceId;
   const [method, setMethod] = useState("card");
 
+  const [showKlarnaImg, setShowKlarmaImg] = useState(false);
+
   const plan = plans.find((plan) => plan._id === subscription);
 
   const { course } = useSelector((state) => state.courseDetails);
@@ -106,6 +108,37 @@ const CheckoutForm = ({ match, history }) => {
     loading: sessionLoading,
   } = useSelector((state) => state.KlarnaSessionCreate);
 
+  // validate the user country
+  const validateCounrty = (countryName, countryLang) => {
+    let KlaranCountry = [
+      { name: "Austria", code: "de_at", lang: "de" },
+      { name: "Belgium", code: "fr_be", lang: "fr" },
+      { name: "Belgium", code: "nl_be", lang: "nl" },
+      { name: "Denmark", code: "da_dk", lang: "da" },
+      { name: "Finland", code: "fi_fi", lang: "fi" },
+      { name: "France", code: "fr_fr", lang: "fr" },
+      { name: "Germany", code: "de_de", lang: "de" },
+      { name: "Italy", code: "it_it", lang: "it" },
+      { name: "Netherlands", code: "nl_nl", lang: "nl" },
+      { name: "Norway", code: "nb_no", lang: "nb" },
+      { name: "Poland", code: "pl_pl", lang: "pl" },
+      { name: "Spain", code: "es_es", lang: "es" },
+      { name: "Sweden", code: "sv_se", lang: "sv" },
+      { name: "Switzerland", code: "fr_ch", lang: "fr" },
+      { name: "Switzerland ", code: "de_ch", lang: "de" },
+      { name: "Switzerland ", code: "it_ch", lang: "it" },
+      { name: "United Kingdom	", code: "en_gb", lang: "en" },
+      { name: "United States", code: "en_us", lang: "en" },
+      //{name:'Lithuania',code:'lt_ru',lang:'ru'},
+    ];
+
+    for (let i of KlaranCountry) {
+      if (i.name == countryName && countryLang.indexOf(i.lang) !== -1) {
+        setShowKlarmaImg(true);
+      }
+    }
+  };
+
   useEffect(() => {
     async function fetchMyAPI() {
       const apiKey = "6068a971e6754bdf9d3b0ddc706779b0";
@@ -123,6 +156,10 @@ const CheckoutForm = ({ match, history }) => {
       const resp = await axios.get(url);
       const amount = resp.data[query];
       setSekToEUR(amount);
+
+      let response = await axios.get("https://ipapi.co/son/");
+
+      validateCounrty(response.data.country_name, response.data.languages);
     }
 
     fetchMyAPI();
@@ -317,7 +354,7 @@ const CheckoutForm = ({ match, history }) => {
       } else {
         let amount;
 
-        if (subscription) {
+        /*  if (subscription) {
           amount = Math.round(
             (Number(plan.price) +
               (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
@@ -326,7 +363,7 @@ const CheckoutForm = ({ match, history }) => {
               AmountOfWeeks *
               100
           );
-        }
+        } */
 
         if (ID) {
           amount = Math.round(currency.data.amount * course.price * 100);
@@ -651,7 +688,7 @@ const CheckoutForm = ({ match, history }) => {
 
                                   <li className='clearfix'>
                                     <strong>Total</strong>{" "}
-                                    {billingType === "oneTime" ? (
+                                    {method === "klarna" ? (
                                       <span className='pull-right'>
                                         <strong>
                                           {currencySuccess &&
@@ -673,14 +710,14 @@ const CheckoutForm = ({ match, history }) => {
                                         <strong>
                                           {currencySuccess &&
                                             `${Math.round(
-                                              Number(plan.price) +
+                                              (Number(plan.price) +
                                                 (promos &&
                                                 promos.length > 0 &&
                                                 promos[0].show
                                                   ? 0
-                                                  : 200) *
-                                                  sekToEUR *
-                                                  currency.data.amount
+                                                  : 200)) *
+                                                sekToEUR *
+                                                currency.data.amount
                                             )}  ${currency.data.currency} (${
                                               plan.period
                                             })`}
@@ -788,7 +825,6 @@ const CheckoutForm = ({ match, history }) => {
                                 <li className='clearfix mb-3'>
                                   Price(per session):
                                   <span className='pull-right'>
-                                    {console.log(currency.data.amount)}
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
@@ -863,16 +899,18 @@ const CheckoutForm = ({ match, history }) => {
                       >
                         Credit/Debit card
                       </Button>
-                      <Button
-                        variant={method === "klarna" ? "info" : "secondary"}
-                        className='mr-2 mb-3 border border-info'
-                        onClick={() => {
-                          setMethod("klarna");
-                          _handelcreateKlarnaOrder();
-                        }}
-                      >
-                        Klarna
-                      </Button>
+                      {showKlarnaImg && (
+                        <Button
+                          variant={method === "klarna" ? "info" : "secondary"}
+                          className='mr-2 mb-3 border border-info'
+                          onClick={() => {
+                            setMethod("klarna");
+                            _handelcreateKlarnaOrder();
+                          }}
+                        >
+                          Klarna
+                        </Button>
+                      )}
                     </ButtonGroup>
                     {method === "card" && (
                       <form onSubmit={submitHandler}>
@@ -1117,7 +1155,8 @@ const CheckoutForm = ({ match, history }) => {
                           <KlarnaPayment
                             plan={{
                               subscription: plan.name,
-                              amount: plan.price * sekToEUR * AmountOfWeeks,
+                              amount:
+                                Number(plan.price) * sekToEUR * AmountOfWeeks,
                             }}
                             widgetLoaded={widgetLoaded}
                             method={klarnaMethod}

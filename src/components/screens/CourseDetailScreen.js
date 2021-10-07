@@ -47,7 +47,7 @@ export default function CourseDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/json/");
+      let response = await axios.get("https://ipapi.co/son/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -301,11 +301,13 @@ export default function CourseDetailScreen({ match }) {
                                 width: "60%",
                               }}
                             >
-                              <img
-                                width='23%'
-                                className='pr-2'
-                                src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
-                              />
+                              {showKlarnaImg && (
+                                <img
+                                  width='23%'
+                                  className='pr-2'
+                                  src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
+                                />
+                              )}
                               <img
                                 width='75%'
                                 src='https://cdn.jotfor.ms/images/credit-card-logo.png'
