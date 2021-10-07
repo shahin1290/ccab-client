@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getPriceConversion = async (course) => {
-  const response = await axios.get("https://ipapi.co/json/");
+  const response = await axios.get("https://ipapi.co/json//");
 
   console.log(course);
 
@@ -22,7 +22,7 @@ export const getPriceConversion = async (course) => {
 };
 
 export const getPriceConversionFromSEK = async (course) => {
-  const response = await axios.get("https://ipapi.co/json/");
+  const response = await axios.get("https://ipapi.co/json//");
 
   //console.log(course);
   const fromCurrency = "SEK";
