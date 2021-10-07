@@ -586,48 +586,19 @@ const CheckoutForm = ({ match, history }) => {
                                       name='price'
                                       id='inlineRadio1'
                                       value='subscription'
-                                      onChange={(e) => {
-                                        setBillingType(e.target.value);
-                                      }}
-                                      checked={billingType === "subscription"}
+                                      checked
                                       required
                                     />
                                     <label
                                       className='form-check-label font-weight-bold'
                                       for='inlineRadio1'
                                     >
-                                      Subscription(cancel anytime)
+                                      Subscription
                                     </label>
-                                  </div>
-                                  <div className='form-check m-3'>
-                                    <input
-                                      className='form-check-input'
-                                      type='radio'
-                                      name='price'
-                                      id='inlineRadio2'
-                                      value='oneTime'
-                                      onChange={(e) => {
-                                        setBillingType(e.target.value);
-                                      }}
-                                      checked={billingType === "oneTime"}
-                                    />
-                                    <label
-                                      className='form-check-label font-weight-bold'
-                                      for='inlineRadio2'
-                                    >
-                                      Full payment
-                                    </label>
-                                  </div>
-                                </div>
-                                <div className='sub-title mt-5 mr-2 mb-2'>
-                                  Order Details{" "}
-                                </div>
-                                <ul className='pt-2'>
-                                  {billingType === "oneTime" && (
-                                    <li className='clearfix mb-3'>
+                                    <div className='clearfix mb-3'>
                                       Total Of Weeks:
                                       <select
-                                        className='custom-select-box px-2'
+                                        className='custom-select-box px-2 mt-3'
                                         onChange={(e) => {
                                           setAmountOfWeeks(
                                             Number(e.target.value)
@@ -656,8 +627,13 @@ const CheckoutForm = ({ match, history }) => {
                                           </>
                                         )}
                                       </select>
-                                    </li>
-                                  )}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='sub-title mt-5 mr-2 mb-2'>
+                                  Order Details{" "}
+                                </div>
+                                <ul className='pt-2'>
                                   <li className='clearfix mb-3'>
                                     Subscription Type:
                                     <span className='pull-right'>
