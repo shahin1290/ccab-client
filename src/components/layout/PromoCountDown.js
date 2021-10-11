@@ -37,11 +37,12 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
     // Render a countdown
     return (
       <section className="prompSection" style={{  background: "#e82910" }}>
-        <Link to="pricing" spy={true } smooth={true} offset={-25} duration={500}>
+        <Link to="pricing" spy={true } smooth={true} offset={-25} duration={500}
+        style={{color:'yellow'}}>
     
         <div className='auto-container d-flex justify-content-between promoFlex  p-1'
         style={{fontSize :'90%' , fontWeight:'800' }}>
-          <div className="w-50 text-center">Get more than <span style ={{color:'white'}}>30% discount </span>today  </div>
+          <div className=" promoText text-center">Get more than <span style ={{color:'white'}}>30% discount </span>today  </div>
           <span>
             <span>{days}</span> <span className='text-white ml-1'>D</span>{" "}
             <span className='pl-2'>{hours}</span>{" "}

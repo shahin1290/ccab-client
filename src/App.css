@@ -209,9 +209,14 @@ body {
   display: block;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   left: -80px;
+  top:37px ;
 }
 .dropdown:hover .dropdown-menu {
   transform: scale(1);
+}
+.dropdown-item{
+  margin: 0px !important;
+
 }
 
 .logo-image {
@@ -783,11 +788,14 @@ input:checked + .slider:before {
   background-size: 100%;
   background-repeat: no-repeat; */
 }
+.promoText{
+  width: 50% !important;
+}
 .prompSection{
   color :yellow !important;  
   position: sticky !important;
-  top:60px !important;
-  z-index: 10000;
+  top:67px !important;
+  z-index: 800 !important;
 }
 .address .job-icon:hover {
   background-color: #fe4a55;
@@ -1177,7 +1185,7 @@ input:checked + .slider:before {
 }
 
 /* STRICKY SIDE SECTION */
-.handle {
+.handle,.handle-mobile {
   position: fixed;
   width: 3rem;
   right: 0;
@@ -1190,9 +1198,14 @@ input:checked + .slider:before {
   z-index: 2;
   text-align: center;
 }
-
+.handle-mobile{
+  display: none ;
+}
+.prompSection.active{
+  color :yellow !important;
+}
 .handle1 {
-  background-color: #e82910;
+  background-color: #e81710;
   top: 158px;
 }
 
@@ -1394,19 +1407,22 @@ input:checked + .slider:before {
     font-size: 185% !important;
   }
 
-
-  .handle {
+  .handle{
+    display: none !important;
+  }
+  .handle-mobile {
     position: fixed;
     width:35% !important;
-   top:65px !important; 
+  
+   /* top:113px !important; */
     height: 3rem;
-    border-radius: 5px 0 0 5px;
+    border-radius: 0px;
     transition: left 0.2s ease;
     display: flex;
     align-items: center;
     flex-direction: row !important;
     justify-content: center;
-    z-index: 2;
+    z-index:1000;
     text-align: center;
     font-size: 90% !important;
   }
@@ -1440,6 +1456,14 @@ input:checked + .slider:before {
     width: 93vw !important;
     height: 625px !important;
   }
+  .promoText{
+    width: 100% !important;
+  }
+  .prompSection{
+
+    top:65px !important; 
+ 
+}
   .promoFlex{
     flex-direction: column !important;
     justify-content: center !important;

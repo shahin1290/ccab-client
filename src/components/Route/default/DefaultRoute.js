@@ -32,7 +32,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function DefaultRoute() {
   const dispatch = useDispatch();
-
+  const [showModal, setShowModal] = useState({ visible: false });
   const {
     promos,
     success: promoSuccess,
@@ -57,10 +57,64 @@ export default function DefaultRoute() {
       {/* <div className="preloader" /> */}
 
       <Header />
-      {promos && promos.length > 0 && promos[0].show && (
-
+      {(promos && promos.length > 0 && promos[0].show && (
+        <>
        <PromoCountDown promo={promos[0]} />
-      )}
+
+        {/* Education Section Two */}
+        
+
+        <a  className='handle-mobile handle1'
+        style={{top:'116px'}}
+         href="/pricing-plans"></a>
+        <a
+          href='https://meetings.hubspot.com/munzer1'
+          style={{top:'116px'}}
+          className='handle2 handle-mobile'
+          target='_blank'
+        ></a>
+        <a
+          className='handle3 handle-mobile'
+          style={{top:'116px'}}
+          onClick={() => setShowModal({ visible: true })}
+        ></a>
+        </>
+      )||(<> {/* Education Section Two for mobile only */}
+        
+
+        <a  className='handle1 handle-mobile'
+         style={{top:'65px'}}
+         href="/pricing-plans"></a>
+        <a
+          href='https://meetings.hubspot.com/munzer1'
+          style={{top:'65px'}}
+          className='handle2 handle-mobile'
+          target='_blank'
+        ></a>
+        <a
+          className='handle3 handle-mobile'
+          style={{top:'65px'}}
+          onClick={() => setShowModal({ visible: true })}
+        ></a>
+        </>
+        ))}
+
+
+        {/* Education Section Two for big screen  only */}
+      <a  className='handle handle1'
+         
+         href="/pricing-plans"></a>
+        <a
+          href='https://meetings.hubspot.com/munzer1'
+          
+          className='handle handle2'
+          target='_blank'
+        ></a>
+        <a
+          className='handle handle3'
+          
+          onClick={() => setShowModal({ visible: true })}
+        ></a>
       <Switch>
         <Route exact path='/' component={HomeScreen}></Route>
         <Route exact path='/Services' component={ServiceHomeScreen}></Route>

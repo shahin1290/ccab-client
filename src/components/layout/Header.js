@@ -267,7 +267,7 @@ export default function Header() {
                           <img
                             src={
                               user.avatar
-                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -275,15 +275,15 @@ export default function Header() {
                         </div>
                       </a>
                       <div
-                        className='dropdown-menu  mt-3'
+                        className='dropdown-menu  mt-3 p-0'
                         aria-labelledby='navbarDropdownMenuLink'
                       >
-                        <a className='dropdown-item' href='/profile'>
+                        <a className='dropdown-item py-3' href='/profile'>
                           My Profile
                         </a>
-                        <div className='dropdown-divider'></div>
+                        <div className='dropdown-divider m-0'></div>
 
-                        <a className='dropdown-item' onClick={logoutHandler}>
+                        <a className='dropdown-item py-3' onClick={logoutHandler}>
                           Logout
                         </a>
                       </div>
