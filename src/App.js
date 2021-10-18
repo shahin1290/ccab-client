@@ -90,7 +90,7 @@ function App() {
     live: false,
   }).init();
 
-  const socket = socketIOClient("https://server.ccab.tech");
+  const socket = socketIOClient("http://localhost:5001");
 
   useEffect(() => {
     if (userDetail.user_type === "StudentUser") {
@@ -105,7 +105,7 @@ function App() {
 
   return (
     <div className='App'>
-      {userDetail && userDetail.name && <IdleTimer />}
+      {userDetail && userDetail.user_type === "StudentUser" && <IdleTimer />}
       <SideBarStateProvider>
         <Switch>
           {/* Private Route for Admin  */}
@@ -443,8 +443,6 @@ function App() {
             path='/confirmation-card-purchase/:bootcampId'
             component={ConfirmationCardPurchase}
           ></StudentRoute>
-
-         
 
           <StudentRoute
             exact
