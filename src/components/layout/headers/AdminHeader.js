@@ -77,6 +77,7 @@ export default function AdminHeader() {
                         <div
                           className='dropdown-menu  mt-3'
                           aria-labelledby='navbarDropdownMenuLink'
+                          style={{ top:'37px'}}
                         >
                           <a className='dropdown-item' href='/profile'>
                             My Profile

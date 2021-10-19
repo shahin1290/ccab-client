@@ -224,6 +224,7 @@ export default function Header() {
                 <Nav.Link
                   href='/profile'
                   className='text-dark hide-on-big-screen'
+                  style={{ top:'37px'}}
                 >
                   My Profile
                 </Nav.Link>
@@ -277,6 +278,7 @@ export default function Header() {
                       <div
                         className='dropdown-menu  mt-3 p-0'
                         aria-labelledby='navbarDropdownMenuLink'
+                        style={{ top:'37px'}}
                       >
                         <a className='dropdown-item py-3' href='/profile'>
                           My Profile
