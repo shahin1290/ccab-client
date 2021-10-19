@@ -22,7 +22,9 @@ import Jobs from "../../screens/Jobs";
 import ResetPassword from "../../screens/ResetPassword";
 import PromoCountDown from "../../layout/PromoCountDown";
 import Pricing from "./../../screens/Pricing";
-
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
+import ContactForm from "../../layout/ContactForm";
 import {
   getPromos,
   deletePromo,
@@ -99,6 +101,14 @@ export default function DefaultRoute() {
         </>
         ))}
 
+<Rodal
+          animation='rotate'
+          visible={showModal.visible}
+          onClose={() => setShowModal({ visible: false })}
+          width='900'
+        >
+          <ContactForm />
+        </Rodal>
 
         {/* Education Section Two for big screen  only */}
       <a  className='handle handle1'
