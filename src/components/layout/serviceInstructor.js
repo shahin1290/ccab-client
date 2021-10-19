@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Button } from "react-bootstrap";
-import { createJob } from "../../redux/actions/jobAction";
 import Loader from "./Loader";
 import Message from "./Message";
 import { useForm } from "react-hook-form";
@@ -16,6 +15,8 @@ const ServiceInstructor = () => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
   const [formStep, setFormStep] = useState(0);
+
+  const [res, setRes] = useState(null);
 
   const completeFormStep = () => {
     setFormStep((cur) => cur + 1);
@@ -48,40 +49,31 @@ const ServiceInstructor = () => {
     }
   };
 
-  const { success, loading, error } = useSelector((state) => state.jobCreate);
+  const { success, loading, error } = useSelector(
+    (state) => state.userRegister
+  );
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (success) {
       setRes("Request sent Successfully");
     }
-  }, [success]); */
-  /* 
+
+    if (error) {
+      setRes("Request not sent");
+    }
+  }, [success, error]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setRes("");
-      setName("");
-      setEmail("");
-      setMessage("");
-      setPhone("");
-      setSubject("");
-      setDoc("");
-      setCv("");
     }, 5000);
     return () => clearTimeout(timer);
-  }, [res]); */
+  }, [res]);
 
   const submitHandler = (values) => {
-    const { name, email, phone, position, message } = values;
-    const data = new FormData();
-    data.append("name", name);
-    data.append("email", email);
-    data.append("phone", phone);
-    data.append("position", position);
-    data.append("message", message);
-    data.append("cv_path", values.cv[0]);
-    data.append("doc_path", values.doc[0]);
+    const { name, email, password, phone, gender } = values;
 
-    dispatch(registerUser(name, email, phone));
+    dispatch(registerUser(name, email, password, phone, gender));
 
     completeFormStep();
   };
@@ -162,6 +154,11 @@ const ServiceInstructor = () => {
               marked *
             </div>
 
+            {loading && <Loader />}
+            {success && <Message>Message sent successfully</Message>}
+
+            {error && <Message>{error}</Message>}
+
             {/* Login Form */}
 
             <form
@@ -189,23 +186,7 @@ const ServiceInstructor = () => {
                       <p className='text-warning'>{errors.name.message}</p>
                     )}
                   </div>
-                  {/* Form Group */}
-                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <label className='text text-white'>Your Email *</label>
-                    <input
-                      type='email'
-                      {...register("email", {
-                        required: {
-                          value: true,
-                          message: "Please type your email",
-                        },
-                      })}
-                    />
 
-                    {errors.email && (
-                      <p className='text-warning'>{errors.email.message}</p>
-                    )}
-                  </div>
                   {/* Form Group */}
                   <div className='form-group col-lg-12 col-md-12 col-sm-12'>
                     <label className='text text-white'>
@@ -231,13 +212,53 @@ const ServiceInstructor = () => {
                 <section className={formStep === 1 ? "d-block" : "d-none"}>
                   {/* Form Group */}
                   <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <label className='text text-white'>Position *</label>
-                    <select
-                      type='text'
-                      {...register("position", {
+                    <label className='text text-white'>Your Email *</label>
+                    <input
+                      type='email'
+                      {...register("email", {
                         required: {
                           value: true,
-                          message: "Please select one position",
+                          message: "Please type your email",
+                        },
+                      })}
+                    />
+
+                    {errors.email && (
+                      <p className='text-warning'>{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  {/* Form Group */}
+                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
+                    <label className='text text-white'>Your Password *</label>
+                    <input
+                      type='password'
+                      {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Please type your password",
+                        },
+                      })}
+                    />
+
+                    {errors.password && (
+                      <p className='text-warning'>{errors.password.message}</p>
+                    )}
+                  </div>
+                </section>
+              )}
+
+              {formStep >= 2 && (
+                <section className={formStep === 2 ? "d-block" : "d-none"}>
+                  {/* Form Group */}
+                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
+                    <label className='text text-white'>Gender *</label>
+                    <select
+                      type='text'
+                      {...register("gender", {
+                        required: {
+                          value: true,
+                          message: "Please select one gender",
                         },
                       })}
                       className=' custom-select  text-white'
@@ -245,56 +266,17 @@ const ServiceInstructor = () => {
                       <option value='' selected>
                         Select an option
                       </option>
-                      <option value='developer'>Developer</option>
-                      <option value='designer'>Designer</option>
-                      <option value='instructor'>Instructor</option>
+                      <option value='male'>Male</option>
+                      <option value='female'>Female</option>
+                      <option value='others'>Others</option>
                     </select>
 
-                    {errors.phone && (
-                      <p className='text-warning'>{errors.position.message}</p>
+                    {errors.gender && (
+                      <p className='text-warning'>{errors.gender.message}</p>
                     )}
-                  </div>
-
-                  {/* Form Group */}
-                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <label className='text text-white'>Upload your CV *</label>
-                    <input
-                      type='file'
-                      {...register("cv", {
-                        required: {
-                          value: true,
-                          message: "Please upload the cv",
-                        },
-                      })}
-                    />
-                    {errors.cv && (
-                      <p className='text-warning'>{errors.cv.message}</p>
-                    )}
-                  </div>
-
-                  {/* Form Group */}
-                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <label className='text text-white'>Other Documents</label>
-                    <input type='file' {...register("doc")} />
                   </div>
                 </section>
               )}
-
-              {formStep >= 2 && (
-                <section className={formStep === 2 ? "d-block" : "d-none"}>
-                  {" "}
-                  {/* Form Group */}
-                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <label className='text text-white'>Message</label>
-                    <textarea type='text' {...register("message")} />
-                  </div>
-                </section>
-              )}
-
-              {loading && <Loader />}
-              {error && <Message>{error}</Message>}
-
-              {success && <Message>Request sent Successfully</Message>}
 
               {formStep < 2 && (
                 <button
