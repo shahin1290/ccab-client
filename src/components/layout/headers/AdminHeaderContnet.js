@@ -35,6 +35,7 @@ export default function AdminHeaderContnet({ logoutHandler }) {
         <Nav.Link
           href="/admin-sidebar"
           className="text-dark hide-on-big-screen"
+          style={{ top:'37px'}}
         >
           Manage
         </Nav.Link>
