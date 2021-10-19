@@ -7,15 +7,15 @@ import ServiceGoal from "../layout/ServiceGoal";
 import ServiceSteps from "../layout/ServiceSteps";
 import ServiceVideoChat from "../layout/ServiceVideoChat";
 import ServiceAssistance from "../layout/ServiceAssistance";
-
+import ServiceInstructor from "../layout/serviceInstructor";
 
 const ServiceHome = () => {
   return (
     <>
       <div className='bg-white' style={{ position: "relative" }}>
-       {/* Hide the services Banner only for this campaign */}
+        {/* Hide the services Banner only for this campaign */}
         <ServiceBanner />
-   
+
         <div style={{ background: "#F8F9FD" }}>
           <div className='service-classes'>
             <ServiceClasses />
@@ -31,6 +31,7 @@ const ServiceHome = () => {
         <ServiceBenefits /> */}
       <ServiceSteps />
       <ServiceContact />
+      <ServiceInstructor />
     </>
   );
 };

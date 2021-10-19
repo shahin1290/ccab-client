@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import LineChart from './LineChart'
-import DoughnutChart from './DoughnutChart'
-import { Row, Col, Button, ButtonGroup } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import { getPerformances } from '../../redux/actions/performanceAction'
-import { todayPerformance } from '../../util/performances'
-import Rodal from 'rodal'
+import React, { useEffect, useState } from "react";
+import LineChart from "./LineChart";
+import DoughnutChart from "./DoughnutChart";
+import { Row, Col, Button, ButtonGroup } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { getPerformances } from "../../redux/actions/performanceAction";
+import { todayPerformance } from "../../util/performances";
+import Rodal from "rodal";
 // include styles
-import 'rodal/lib/rodal.css'
-import PerformanceRating from './PerformanceRating'
-import PerformanceDetailsDaily from './PerformanceDetailsDaily'
-import PerformanceDetailsWeekly from './PerformanceDetailsWeekly'
-import { getMyQuizAnswerList } from '../../redux/actions/quizAnswerAction'
-import { getMyAnswerList } from '../../redux/actions/answerAction'
+import "rodal/lib/rodal.css";
+import PerformanceRating from "./PerformanceRating";
+import PerformanceDetailsDaily from "./PerformanceDetailsDaily";
+import PerformanceDetailsWeekly from "./PerformanceDetailsWeekly";
+import PerformanceDetailsAll from "./PerformanceDetailsAll";
+import { getMyQuizAnswerList } from "../../redux/actions/quizAnswerAction";
+import { getMyAnswerList } from "../../redux/actions/answerAction";
 
 const PerformanceChart = ({ courses, student }) => {
-  const dispatch = useDispatch()
-  const [showPerformanceModal, setShowPerformanceModal] = useState('')
-  const [performanceTypes, setPerformanceTypes] = useState('general')
+  const dispatch = useDispatch();
+  const [showPerformanceModal, setShowPerformanceModal] = useState("");
+  const [performanceTypes, setPerformanceTypes] = useState("general");
 
-  const [selectedDate, setSelectedDate] = useState('today')
-  const [activity, setActivity] = useState('daily')
+  const [selectedDate, setSelectedDate] = useState("today");
+  const [activity, setActivity] = useState("daily");
 
-  const [course, setCourse] = useState(courses[0]._id)
-  const [chart, setChart] = useState('line')
+  const [course, setCourse] = useState(courses[0]._id);
+  const [chart, setChart] = useState("line");
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, userDetail, error, loginSuccess } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, userDetail, error, loginSuccess } = userLogin;
 
   const { loading: performanceLoading, performances } = useSelector(
     (state) => state.performanceList
-  )
+  );
 
   /* 
   const filterMonthlyPerformance = new Array(12).fill(0).map((el, index) => {
@@ -44,7 +45,7 @@ const PerformanceChart = ({ courses, student }) => {
  */
 
   const filterPerformances = () => {
-    if (selectedDate === 'today') {
+    if (selectedDate === "today") {
       return (
         performances &&
         performances.filter(
@@ -52,54 +53,54 @@ const PerformanceChart = ({ courses, student }) => {
             new Date(performance.createdAt).setHours(0, 0, 0, 0) ===
             new Date().setHours(0, 0, 0, 0)
         )
-      )
-    } else if (selectedDate === 'month') {
+      );
+    } else if (selectedDate === "month") {
       return (
         performances &&
         performances.filter((performance) => {
           return (
             new Date(performance.createdAt).getMonth() === new Date().getMonth()
-          )
+          );
         })
-      )
+      );
     } else {
-      return performances
+      return performances;
     }
-  }
+  };
 
   useEffect(() => {
-    if (userDetail.user_type === 'StudentUser') {
-      dispatch(getPerformances(course, userDetail._id))
-      dispatch(getMyAnswerList(userDetail._id))
-      dispatch(getMyQuizAnswerList(userDetail._id))
+    if (userDetail.user_type === "StudentUser") {
+      dispatch(getPerformances(course, userDetail._id));
+      dispatch(getMyAnswerList(userDetail._id));
+      dispatch(getMyQuizAnswerList(userDetail._id));
     }
 
-    if (userDetail.user_type === 'AdminUser') {
-      dispatch(getPerformances(course, student))
+    if (userDetail.user_type === "AdminUser") {
+      dispatch(getPerformances(course, student));
 
-      dispatch(getMyAnswerList(student))
-      dispatch(getMyQuizAnswerList(student))
+      dispatch(getMyAnswerList(student));
+      dispatch(getMyQuizAnswerList(student));
     }
-  }, [course, dispatch, student])
+  }, [course, dispatch, student]);
 
   return (
-    <div className="">
-      <div className="d-flex justify-content-between">
-        <div className="title pb-3">Performance Ratio</div>
+    <div className=''>
+      <div className='d-flex justify-content-between'>
+        <div className='title pb-3'>Performance Ratio</div>
 
         <Button
-          variant="info"
+          variant='info'
           onClick={() => {
-            setShowPerformanceModal({ visible: true })
+            setShowPerformanceModal({ visible: true });
           }}
         >
           Top 10 Rating
         </Button>
       </div>
 
-      <div className="py-2 sub-title mb-3">
+      <div className='py-2 sub-title mb-3'>
         <Rodal
-          animation="flip"
+          animation='flip'
           visible={showPerformanceModal.visible}
           onClose={() => setShowPerformanceModal({ visible: false })}
           width={900}
@@ -108,106 +109,122 @@ const PerformanceChart = ({ courses, student }) => {
         </Rodal>
       </div>
 
-      <div className="d-flex mb-4 sub-title">
+      <div className='d-flex mb-4 sub-title'>
         <select onChange={(e) => setCourse(e.target.value)}>
           {courses.map((course) => (
             <option value={course._id}>{course.name}</option>
           ))}
         </select>
         <a onClick={() => dispatch(getPerformances(course, userDetail._id))}>
-          <i className="fas fa-sync-alt ml-5"></i>
+          <i className='fas fa-sync-alt ml-5'></i>
         </a>
       </div>
 
-      <ButtonGroup aria-label="Basic example">
+      <ButtonGroup aria-label='Basic example'>
         <Button
-          variant={performanceTypes === 'general' ? 'warning' : 'secondary'}
-          className="mr-2 mb-3"
-          onClick={() => setPerformanceTypes('general')}
+          variant={performanceTypes === "general" ? "warning" : "secondary"}
+          className='mr-2 mb-3'
+          onClick={() => setPerformanceTypes("general")}
         >
           General
         </Button>
         <Button
-          variant={performanceTypes === 'details' ? 'warning' : 'secondary'}
-          className="mr-2 mb-3"
-          onClick={() => setPerformanceTypes('details')}
+          variant={performanceTypes === "details" ? "warning" : "secondary"}
+          className='mr-2 mb-3'
+          onClick={() => setPerformanceTypes("details")}
         >
           Details
         </Button>
       </ButtonGroup>
 
-      {performanceTypes === 'details' && (
+      {performanceTypes === "details" && (
         <div>
-          <div className="d-flex justify-content-between">
-            <div className="ml-3 mt-2">
+          <div className='d-flex justify-content-between'>
+            <div className='ml-3 mt-2'>
               <a
-                onClick={() => setActivity('daily')}
+                onClick={() => setActivity("daily")}
                 style={
-                  activity === 'daily'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  activity === "daily"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
-                className="mr-5"
+                className='mr-5'
               >
                 Today
               </a>
 
               <a
-                onClick={() => setActivity('weekly')}
+                onClick={() => setActivity("weekly")}
                 style={
-                  activity === 'weekly'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  activity === "weekly"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
-                className="mr-5"
+                className='mr-5'
               >
                 Weekly
               </a>
+
+              <a
+                onClick={() => setActivity("all")}
+                style={
+                  activity === "all"
+                    ? { color: "#ea5573", fontWeight: "bold" }
+                    : {}
+                }
+                className='mr-5'
+              >
+                From Start
+              </a>
             </div>
           </div>
-          {activity === 'daily' && (
+          {activity === "daily" && (
             <PerformanceDetailsDaily bootcampId={course} />
           )}
 
-          {activity === 'weekly' && (
+          {activity === "weekly" && (
             <PerformanceDetailsWeekly bootcampId={course} />
+          )}
+
+          {activity === "all" && (
+            <PerformanceDetailsAll bootcampId={course} />
           )}
         </div>
       )}
 
-      {performanceTypes === 'general' && (
+      {performanceTypes === "general" && (
         <>
-          <div className="d-flex justify-content-between">
-            <div className="mb-1">
+          <div className='d-flex justify-content-between'>
+            <div className='mb-1'>
               <a
-                onClick={() => setSelectedDate('today')}
+                onClick={() => setSelectedDate("today")}
                 style={
-                  selectedDate === 'today'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  selectedDate === "today"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
-                className="mr-5"
+                className='mr-5'
               >
                 Today
               </a>
 
               <a
-                onClick={() => setSelectedDate('month')}
+                onClick={() => setSelectedDate("month")}
                 style={
-                  selectedDate === 'month'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  selectedDate === "month"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
-                className="mr-5"
+                className='mr-5'
               >
                 Last Month
               </a>
 
               <a
-                onClick={() => setSelectedDate('all')}
+                onClick={() => setSelectedDate("all")}
                 style={
-                  selectedDate === 'all'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  selectedDate === "all"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
               >
@@ -217,22 +234,22 @@ const PerformanceChart = ({ courses, student }) => {
 
             <div>
               <a
-                onClick={() => setChart('line')}
+                onClick={() => setChart("line")}
                 style={
-                  chart === 'line'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  chart === "line"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
-                className="mr-5"
+                className='mr-5'
               >
                 Line Chart
               </a>
 
               <a
-                onClick={() => setChart('bar')}
+                onClick={() => setChart("bar")}
                 style={
-                  chart === 'bar'
-                    ? { color: '#ea5573', fontWeight: 'bold' }
+                  chart === "bar"
+                    ? { color: "#ea5573", fontWeight: "bold" }
                     : {}
                 }
               >
@@ -240,23 +257,23 @@ const PerformanceChart = ({ courses, student }) => {
               </a>
             </div>
           </div>
-          <Row className="mt-5">
+          <Row className='mt-5'>
             <Col md={9}>
-              {' '}
+              {" "}
               <LineChart performances={filterPerformances()} chart={chart} />
             </Col>
-            <Col md={3} className="my-auto sub-title text-center">
-              Today Performance Ratio{' '}
+            <Col md={3} className='my-auto sub-title text-center'>
+              Today Performance Ratio{" "}
               <div>{todayPerformance(performances && performances)} %</div>
             </Col>
           </Row>
-          <div className="p-5">
+          <div className='p-5'>
             <DoughnutChart performances={filterPerformances()} />
           </div>
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default PerformanceChart
+export default PerformanceChart;

@@ -6,7 +6,7 @@ import Loader from "./Loader";
 import { getDailyActivities } from "../../redux/actions/dailyActivityAction";
 import { getDate } from "../../util/getDate";
 
-export default function PerformanceDetailsWeekly({ bootcampId }) {
+export default function PerformanceDetailsAll({ bootcampId }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -142,8 +142,8 @@ export default function PerformanceDetailsWeekly({ bootcampId }) {
                     <Loader />
                   ) : error ? (
                     <Message>{error}</Message>
-                  ) : filterWeeklyVideos().length > 0 ? (
-                    filterWeeklyVideos().map((video) => (
+                  ) : dailyActivities.length > 0 ? (
+                    dailyActivities.map((video) => (
                       <tr className='sub-text'>
                         <td>{video.lecture.name}</td>
                         <td>{video.week.name}</td>
@@ -190,8 +190,8 @@ export default function PerformanceDetailsWeekly({ bootcampId }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {filterWeeklyQuizAnswer().length > 0 ? (
-                    filterWeeklyQuizAnswer().map((quiz) => (
+                  {myQuizAnswers.length > 0 ? (
+                    myQuizAnswers.map((quiz) => (
                       <tr className='sub-text'>
                         <td>Quiz: {quiz.quiz.name}</td>
                         <td>{quiz.quiz.time} minutes</td>
@@ -205,11 +205,11 @@ export default function PerformanceDetailsWeekly({ bootcampId }) {
                       no quiz answer is submitted
                     </p>
                   )}
-                  {filterWeeklyAnswer().length > 0 ? (
-                    filterWeeklyAnswer().map((task) => (
+                  {myanswers.length > 0 ? (
+                    myanswers.map((task) => (
                       <tr className='sub-text'>
                         <td>Task: {task.task.projectName}</td>
-                        <td>week1</td>
+                        <td>-</td>
                         <td>{task.status}</td>
                         <td>{getDate(task.createdAt)}</td>
                         <td>

@@ -1,46 +1,45 @@
-import React, { useRef, useState } from 'react'
-import IdleTimer from 'react-idle-timer'
-import { useSelector, useDispatch } from 'react-redux'
-import { Modal, Button } from 'react-bootstrap'
-import { logout } from '../../redux/actions/userAction'
-import { Link, useHistory } from 'react-router-dom'
+import React, { useRef, useState } from "react";
+import IdleTimer from "react-idle-timer";
+import { useSelector, useDispatch } from "react-redux";
+import { Modal, Button } from "react-bootstrap";
+import { logout } from "../../redux/actions/userAction";
+import { Link, useHistory } from "react-router-dom";
 
 const IdleTimerContainer = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const { userDetail } = useSelector((state) => state.userLogin);
 
-  const [show, setShow] = useState(false)
-  const [timeout, setTimeOut] = useState(1000 * 60 * 15 )
-  const [isTimedOut, setIsTimedOut] = useState(false)
+  const [show, setShow] = useState(false);
+  const [timeout, setTimeOut] = useState(1000 * 60 * 15);
+  const [isTimedOut, setIsTimedOut] = useState(false);
 
-
-  const idleTimerRef = useRef(null)
+  const idleTimerRef = useRef(null);
 
   const logoutHandler = () => {
-    dispatch(logout())
-    setShow(false)
+    dispatch(logout());
+    setShow(false);
     clearTimeout(idleTimerRef.current);
-  }
+  };
 
   const handleOnAction = (event) => {
-    setIsTimedOut(false)
-  }
+    setIsTimedOut(false);
+  };
 
   const handleOnActive = (event) => {
-    setIsTimedOut(false)
-  }
+    setIsTimedOut(false);
+  };
 
   const handleOnIdle = (event) => {
     if (isTimedOut) {
-      history.push('/')
+      history.push("/");
     } else {
-      setShow(true)
-      setIsTimedOut(true)
-      idleTimerRef.current = setTimeout(logoutHandler, 5000 * 60 * 5);
+      setShow(true);
+      setIsTimedOut(true);
+      idleTimerRef.current = setTimeout(logoutHandler, 1000 * 60 * 1);
     }
-  }
+  };
 
   return (
     <>
@@ -58,23 +57,23 @@ const IdleTimerContainer = () => {
         <Modal.Header closeButton>
           <Modal.Title>Idle Time</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ color: 'red' }}>
+        <Modal.Body style={{ color: "red" }}>
           <div>Hello {userDetail.name}, Yove've been idle for a while!</div>
           <p>You will be logged out soon</p>
         </Modal.Body>
         <Modal.Footer>
           <Button
-            variant="secondary"
+            variant='secondary'
             onClick={() => {
-              logoutHandler()
+              logoutHandler();
             }}
           >
             Log me out
           </Button>
           <Button
-            variant="success"
+            variant='success'
             onClick={() => {
-              setShow(false)
+              setShow(false);
               clearTimeout(idleTimerRef.current);
             }}
           >
@@ -83,7 +82,7 @@ const IdleTimerContainer = () => {
         </Modal.Footer>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default IdleTimerContainer
+export default IdleTimerContainer;
