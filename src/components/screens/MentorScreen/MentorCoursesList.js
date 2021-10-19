@@ -1,72 +1,81 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { getCourseList } from '../../../redux/actions/courseAction'
-import Message from '../../layout/Message'
-import Loader from '../../layout/Loader'
-import { Table, Nav } from 'react-bootstrap'
-import { getDate } from '../../../util/getDate'
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getCourseList } from "../../../redux/actions/courseAction";
+import Message from "../../layout/Message";
+import Loader from "../../layout/Loader";
+import { Table, Nav } from "react-bootstrap";
+import { getDate } from "../../../util/getDate";
 
 export default function MentorCoursesList() {
-  const dispatch = useDispatch()
-  const { userDetail } = useSelector((state) => state.userLogin)
+  const dispatch = useDispatch();
+  const { userDetail } = useSelector((state) => state.userLogin);
 
   const { courseList, loading, error } = useSelector(
     (state) => state.courseList
-  )
+  );
 
   // count the current week for each course
   const getWeeksLeft = (StartDate) => {
-    let d = new Date(StartDate)
-    let timePassed = new Date().getTime() - d.getTime()
-    return Math.ceil(timePassed / 1000 / 60 / 60 / 24 / 7)
-  }
+    let d = new Date(StartDate);
+    let timePassed = new Date().getTime() - d.getTime();
+    return Math.ceil(timePassed / 1000 / 60 / 60 / 24 / 7);
+  };
 
   useEffect(() => {
-    dispatch(getCourseList())
-  }, [dispatch])
+    dispatch(getCourseList());
+  }, [dispatch]);
 
-  const filterMentorCourses = () =>
-    courseList.filter((course) => course.mentor._id === userDetail._id)
+  const filterMentorCourses = () => {
+    if (userDetail.user_type === "AdminUser") {
+      return courseList;
+    }
+
+    if (userDetail.user_type === "MentorUser") {
+      return courseList.filter(
+        (course) => course.mentor._id === userDetail._id
+      );
+    }
+  };
   //console.log(filterMentorCourses());
   return (
     <>
       {/* Manage Cource Section */}
-      <div className="manage-cource-section">
-        <div className="auto-container">
+      <div className='manage-cource-section'>
+        <div className='auto-container'>
           {/* Sec Title */}
-          <div className="sec-title">
-            <div className="clearfix">
-              <div className="pull-left">
-                <div className="title ">Manage Course Content</div>
+          <div className='sec-title'>
+            <div className='clearfix'>
+              <div className='pull-left'>
+                <div className='title '>Manage Course Content</div>
               </div>
             </div>
           </div>
-          <div className="inner-container">
-            <div className="table-responsive">
-              <Table responsive="sm">
+          <div className='inner-container'>
+            <div className='table-responsive'>
+              <Table responsive='sm'>
                 <thead>
                   <tr>
                     <th>
-                      <div className="text">Title</div>
+                      <div className='text'>Title</div>
                     </th>
                     <th>
-                      <div className="text">Start Date</div>
+                      <div className='text'>Start Date</div>
                     </th>
                     <th>
-                      <div className="text">Weeks</div>
+                      <div className='text'>Weeks</div>
                     </th>
                     <th>
-                      <div className="text">Status</div>
+                      <div className='text'>Status</div>
                     </th>
                     <th>
-                      <div className="text">Content</div>
+                      <div className='text'>Content</div>
                     </th>
                     <th>
-                      <div className="text">Tasks</div>
+                      <div className='text'>Tasks</div>
                     </th>
                     <th>
-                      <div className="text">Quizzes</div>
+                      <div className='text'>Quizzes</div>
                     </th>
                   </tr>
                 </thead>
@@ -81,45 +90,45 @@ export default function MentorCoursesList() {
                         //console.log(item);
                         return (
                           <tr key={item._id}>
-                            <th className="text" scope="col">
+                            <th className='text' scope='col'>
                               {item.name}
                             </th>
-                            <th className="post-date" scope="col">
+                            <th className='post-date' scope='col'>
                               {getDate(item.start_date)}
                             </th>
-                            <th className="sales" scope="col">
+                            <th className='sales' scope='col'>
                               {getWeeksLeft(item.start_date)}/{item.weeks}
                             </th>
 
-                            <th className="category" scope="col">
+                            <th className='category' scope='col'>
                               {item.published ? (
-                                <span className="text-success">Published</span>
+                                <span className='text-success'>Published</span>
                               ) : (
-                                <span className="text-danger">
+                                <span className='text-danger'>
                                   Not Published
                                 </span>
                               )}
                             </th>
                             <th>
-                              {' '}
+                              {" "}
                               <Nav.Link
                                 href={`/manage-mentor-course/${item._id}`}
                               >
-                                <i className="fas fa-edit">Edit content</i>
+                                <i className='fas fa-edit'>Edit content</i>
                               </Nav.Link>
                             </th>
                             <th>
                               <Nav.Link href={`/mentor-task-list/${item._id}`}>
-                                <i className="fas fa-edit">Edit Task</i>
+                                <i className='fas fa-edit'>Edit Task</i>
                               </Nav.Link>
                             </th>
                             <th>
                               <Nav.Link href={`/mentor-quiz-list/${item._id}`}>
-                                <i className="fas fa-edit">Edit Quiz</i>
+                                <i className='fas fa-edit'>Edit Quiz</i>
                               </Nav.Link>
                             </th>
                           </tr>
-                        )
+                        );
                       })
                     ) : null}
                   </>
@@ -131,5 +140,5 @@ export default function MentorCoursesList() {
       </div>
       {/* End Manage Cource Section */}
     </>
-  )
+  );
 }
