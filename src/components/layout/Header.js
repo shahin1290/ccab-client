@@ -78,9 +78,9 @@ export default function Header() {
               Home
             </Nav.Link>
 
-            <Nav.Link className='text-dark' href='/services'>
+            {/* <Nav.Link className='text-dark' href='/services'>
               Services
-            </Nav.Link>
+            </Nav.Link> */}
             {/* Items  hide-on-big-screen */}
             {/*  <div className='text-dark hide-on-big-screen pt-4'>
               Courses
