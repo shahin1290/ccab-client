@@ -268,7 +268,7 @@ export default function Header() {
                           <img
                             src={
                               user.avatar
-                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
