@@ -72,7 +72,7 @@ export default function DayContent({ bootcampId, setOpen }) {
 
   const quizStatus = (quizId) => {
     if (answerListSuccess && myQuizAnswers.length) {
-      const foundAnswer = myQuizAnswers.find((ans) => ans.quiz === quizId);
+      const foundAnswer = myQuizAnswers.find((ans) => ans.quiz._id === quizId);
       return foundAnswer;
     }
   };
@@ -183,7 +183,7 @@ export default function DayContent({ bootcampId, setOpen }) {
     if (userDetail.name && userDetail.user_type === "StudentUser") {
       dispatch(getMyTaskList());
       dispatch(getMyQuizList());
-      dispatch(getMyQuizAnswerList());
+      dispatch(getMyQuizAnswerList(userDetail._id));
       dispatch(getWatchingLectures(bootcampId));
     }
 
@@ -252,7 +252,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                       </div>
                     </div>
 
-                    {filterWeeklyQuiz(day._id).length &&
+                    {filterWeeklyQuiz(day._id).length > 0 &&
                       filterWeeklyQuiz(day._id).map((quiz) => (
                         <div className=' d-flex m-2'>
                           <div
@@ -295,7 +295,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                         </div>
                       ))}
 
-                    {filterWeeklyTask(day._id).length &&
+                    {filterWeeklyTask(day._id).length > 0 &&
                       filterWeeklyTask(day._id).map((task) => (
                         <div className=' d-flex m-2'>
                           <div

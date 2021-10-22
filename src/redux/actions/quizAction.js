@@ -40,7 +40,7 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "https://server.ccab.tech/api/quizzes/" + bootcampId,
+      "http://localhost:5001/api/quizzes/" + bootcampId,
       config
     );
 
@@ -76,7 +76,7 @@ export const getMyQuizList = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      `https://server.ccab.tech/api/quizzes/myquizlist`,
+      `http://localhost:5001/api/quizzes/myquizlist`,
       config
     );
 
@@ -113,7 +113,7 @@ export const getQuizDetails =
       };
 
       const response = await axios.get(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       );
 
@@ -151,7 +151,7 @@ export const createQuiz =
         },
       };
       const response = await axios.post(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${dayId}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}`,
         quizData,
         config
       );
@@ -198,7 +198,7 @@ export const quizDelete =
       };
 
       const response = await axios.delete(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       );
 
@@ -234,7 +234,7 @@ export const updateQuiz =
       };
 
       const response = await axios.put(
-        `https://server.ccab.tech/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `http://localhost:5001/api/quizzes/${bootcampId}/${dayId}/${id}`,
         quiz,
         config
       );

@@ -224,7 +224,7 @@ export default function Header() {
                 <Nav.Link
                   href='/profile'
                   className='text-dark hide-on-big-screen'
-                  style={{ top:'37px'}}
+                  style={{ top: "37px" }}
                 >
                   My Profile
                 </Nav.Link>
@@ -268,7 +268,7 @@ export default function Header() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -278,7 +278,7 @@ export default function Header() {
                       <div
                         className='dropdown-menu  mt-3 p-0'
                         aria-labelledby='navbarDropdownMenuLink'
-                        style={{ top:'37px'}}
+                        style={{ top: "37px" }}
                       >
                         <a className='dropdown-item py-3' href='/profile'>
                           My Profile
