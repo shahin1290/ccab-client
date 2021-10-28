@@ -165,6 +165,8 @@ export default function DayContent({ bootcampId, setOpen }) {
       } else if (course.name.toLowerCase().includes("diamond")) {
         const daysBasedOnShow = days.filter((day) => day.show);
         return daysBasedOnShow;
+      } else {
+        return days.filter((day) => day.show);
       }
     }
   };
