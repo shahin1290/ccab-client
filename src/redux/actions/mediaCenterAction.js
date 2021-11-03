@@ -39,7 +39,7 @@ export const getMediaCenterList =
         },
       };
       const response = await axios.get(
-        `http://localhost:5001/api/mediaCenter?pageNumber=${pageNumber}`,
+        `https://server.ccab.tech/api/mediaCenter?pageNumber=${pageNumber}`,
         config
       );
 
@@ -77,7 +77,7 @@ export const getMediaCenterListForAdmin =
         },
       };
       const response = await axios.get(
-        `http://localhost:5001/api/mediaCenter/mange?pageNumber=${pageNumber}`,
+        `https://server.ccab.tech/api/mediaCenter/mange?pageNumber=${pageNumber}`,
         config
       );
 
@@ -113,7 +113,7 @@ export const getMediaCenterDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "http://localhost:5001/api/mediaCenter/" + id,
+      "https://server.ccab.tech/api/mediaCenter/" + id,
       config
     );
 
@@ -149,7 +149,7 @@ export const createMediaCenter =
       };
 
       const response = await axios.post(
-        "http://localhost:5001/api/mediaCenter",
+        "https://server.ccab.tech/api/mediaCenter",
         mediaCenter,
         config
       );
@@ -190,7 +190,7 @@ export const deleteMediaCenter = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete("http://localhost:5001/api/mediaCenter/" + id, config);
+    await axios.delete("https://server.ccab.tech/api/mediaCenter/" + id, config);
 
     dispatch({
       type: MEDIA_CENTER_DELETE_SUCCESS,
@@ -226,7 +226,7 @@ export const updateMediaCenter =
 
       //console.log(mediaCenter);
       await axios.put(
-        "http://localhost:5001/api/mediaCenter/" + id,
+        "https://server.ccab.tech/api/mediaCenter/" + id,
         mediaCenter,
         config
       );

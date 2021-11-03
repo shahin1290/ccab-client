@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import { Row, Col, ProgressBar } from 'react-bootstrap'
 import RegisterScreen from '../screens/RegisterScreen'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+
 
 const CurriculamStepsBar = (props) => {
   const [value, setValue] = useState(3)
   const weeks = 30
+
+  useEffect(()=>{
+    AOS.init();
+  },[])
 
   return (
     <section
@@ -16,15 +23,15 @@ const CurriculamStepsBar = (props) => {
       }}
     >
       <div className="curriculum no-gutter ">
-        <div className="title text-center pb-1 w-100">Comprehensive Curriculum</div>
+        <div  data-aos="fade-right" data-aos-delay="200" className="title text-center pb-1 w-100">Comprehensive Curriculum</div>
         <hr className="block-seperator mb-3" />
-        <div className="sub-text text-center mb-5 w-100">
+        <div data-aos="fade-left" data-aos-delay="400" className="sub-text text-center mb-5 w-100">
           Our Full Stack Developer Courses are made to give you an easy and
           fast path in web development. By the end these courses you will be able
           to build web applications from scratch.
         </div>
 
-        <div className="curriculmTitle   d-flex justify-content-between w-100 mb-2 p-3"
+        <div  data-aos="flip-right" className="curriculmTitle   d-flex justify-content-between w-100 mb-2 p-3"
        >
           <div>
             <a
@@ -137,7 +144,7 @@ const CurriculamStepsBar = (props) => {
 
         {value === 3 && (
           <>
-            <Row className="mb-5">
+            <Row data-aos="fade-up" className="mb-5">
               <Col md={6}>
                 <div className="d-flex">
                   <span
@@ -170,7 +177,7 @@ const CurriculamStepsBar = (props) => {
               </Col>
             </Row>
 
-            <Row>
+            <Row data-aos="fade-up">
               <Col md={6}>
                 <div className="d-flex">
                   <img width="45" src="/images/js.png" />
@@ -201,7 +208,7 @@ const CurriculamStepsBar = (props) => {
 
         {value === 25 && (
           <>
-            <Row className="mb-5">
+            <Row data-aos="fade-up" className="mb-5">
               <Col md={6}>
                 <div className="d-flex">
                   <div>
@@ -231,7 +238,7 @@ const CurriculamStepsBar = (props) => {
               </Col>
             </Row>
 
-            <Row>
+            <Row data-aos="fade-up">
               <Col md={6}>
                 <div className="d-flex">
                   <img width="50" src="/images/bootstrap.png" />
@@ -270,7 +277,7 @@ const CurriculamStepsBar = (props) => {
 
         {value === 50 && (
           <>
-            <Row className="mb-5">
+            <Row data-aos="fade-up" className="mb-5">
               <Col md={6}>
                 <div className="d-flex">
                   <img width="50" src="/images/react.png" />
@@ -300,7 +307,7 @@ const CurriculamStepsBar = (props) => {
               </Col>
             </Row>
 
-            <Row>
+            <Row data-aos="fade-up">
               <Col md={6}>
                 <div className="d-flex">
                   <img width="50" src="/images/redux.png" />
@@ -338,7 +345,7 @@ const CurriculamStepsBar = (props) => {
 
         {value === 75 && (
           <>
-            <Row className="mb-5">
+            <Row data-aos="fade-up" className="mb-5">
               <Col md={6}>
                 <div className="d-flex">
                   <div>
@@ -369,7 +376,7 @@ const CurriculamStepsBar = (props) => {
               </Col>
             </Row>
 
-            <Row>
+            <Row data-aos="fade-up">
               <Col md={6}>
                 <div className="d-flex">
                   <img width="60" src="/images/mongo.png" />
@@ -400,7 +407,7 @@ const CurriculamStepsBar = (props) => {
         )}
 
         {value === 100 && (
-          <Row className="curriculum-project p-3">
+          <Row data-aos="fade-up" className="curriculum-project p-3">
             <div className="sub-title">
               <img width="55" src="/images/rocket.png" />
               <span className="pl-3">

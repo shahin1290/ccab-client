@@ -636,7 +636,7 @@ input:checked + .slider:before {
 .curriculum{
   width:75% !important;
   margin: 0 auto !important;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .curriculmTitle{
   overflow-x: auto;
@@ -1282,7 +1282,7 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   height: 600px;
-  background: #222222;
+  background: #1A8CBC;
   position: relative;
   background-image: url('./assets/images/background/Codify-College.png');
   background-size: cover;

@@ -1,15 +1,20 @@
-import React from "react";
+import React ,{useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import image1 from "../../assets/images/services/whiteboard1.png";
 import image2 from "../../assets/images/services/file.jpeg";
 import image3 from "../../assets/images/services/fun.jpg";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 const ServiceAssistance = () => {
+  useEffect(()=>{
+    AOS.init();
+  },[])
   return (
     <section className=''>
       <div className='auto-container bg-white '>
         <Row className='service-focus pr-3'>
-          <Col md={4} xs={12} className="text-center-small-screen">
+          <Col data-aos="flip-left" data-aos-delay="1000" md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
@@ -30,7 +35,7 @@ const ServiceAssistance = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} xs={12} className="text-center-small-screen">
+          <Col  data-aos="flip-left" data-aos-delay="1500" md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
@@ -52,7 +57,7 @@ const ServiceAssistance = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} xs={12} className="text-center-small-screen">
+          <Col data-aos="flip-left" data-aos-delay="2000" md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",

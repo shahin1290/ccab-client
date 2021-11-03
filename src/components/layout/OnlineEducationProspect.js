@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+
 
 const OnlineEducationProspect = () => {
+  useEffect(()=>{
+    AOS.init();
+  },[])
   return (
     <>
       <section
@@ -11,9 +17,10 @@ const OnlineEducationProspect = () => {
         }}
       >
         <div className="auto-container">
-          <div className="title text-center p-4 ">What Stands Us Out</div>
+          <div data-aos="zoom-out-right" className="title text-center p-4 ">What Stands Us Out</div>
           <hr className="block-seperator mb-5" />
-          <Row className="pt-3 pb-1">
+          <Row data-aos="fade-down"
+                className="pt-3 pb-1">
             <Col md={1} className="mt-3 text-center">
               <i className="fa-online-education fas fa-code "></i>
             </Col>
@@ -40,7 +47,7 @@ const OnlineEducationProspect = () => {
             </Col>
           </Row>
 
-          <Row>
+          <Row data-aos="fade-down">
             <Col md={1} className="mt-3 text-center">
               <i className="fa-online-education fas fa-chalkboard-teacher"></i>
             </Col>
@@ -68,16 +75,16 @@ const OnlineEducationProspect = () => {
           {/* Setting The Standard In Online Education */}
 
           <div className="auto-container pt-5 mt-5">
-            <div className="title text-center ">
+            <div data-aos="flip-down" className="title text-center ">
               We Partner With The Best In The Industry
             </div>
             <hr className="block-seperator mt-2 mb-4" />
-            <div className="sub-text text-center">
+            <div data-aos="flip-down" data-aos-delay="300" className="sub-text text-center">
               All our courses are developed in partnership with the world's most
               innovative tech companies to meet the highest standards and taught
               by industry leaders.
             </div>
-            <div className="row clearfix d-flex ">
+            <div data-aos="flip-up" className="row clearfix d-flex ">
               <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">
                 <img src="images/paypal-f.png" className=" " />
               </div>

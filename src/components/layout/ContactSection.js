@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import Rodal from "rodal";
 // include styles
 import "rodal/lib/rodal.css";
 import ContactForm from "./ContactForm";
 import { Row, Col } from "react-bootstrap";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 const ContactSection = () => {
+  useEffect(()=>{
+    AOS.init();
+  },[])
+
   const [showModal, setShowModal] = useState({ visible: false });
 
   return (
@@ -17,8 +23,8 @@ const ContactSection = () => {
     >
       <div className='auto-container'>
         <Row className='d-flex justify-content-center'>
-          <Col md={4} className='advisor-image mt-3 px-0' ></Col>
-          <Col md={6} className="px-0">
+          <Col data-aos="fade-down" data-aos-delay="200" md={4} className='advisor-image mt-3 px-0' ></Col>
+          <Col data-aos="zoom-in-up" md={6} className="px-0">
             <div
               className='advisor-text1 p-4 w-100'
               style={{ fontWeight: "400" }}
