@@ -21,6 +21,10 @@ import AccountantHeaderContent from "./../layout/headers/AccountantHeaderContent
 import { getProfile } from "../../redux/actions/userAction";
 import Loader from "./Loader";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+ 
+
 export default function Header() {
   const { userDetail } = useSelector((state) => state.userLogin);
 
@@ -53,6 +57,10 @@ export default function Header() {
     history.push("/");
   };
 
+  useEffect(()=>{
+    AOS.init();
+  },[])
+
   return (
     <>
       <Navbar
@@ -66,9 +74,9 @@ export default function Header() {
           boxShadow: "0px 0px 5px rgba(0,0,0,.6)",
         }}
       >
-        <Navbar.Brand href='/'>
-          <img className='ml-5' src={Logo} title='Bootcamp' width='40px' />
-          <span className='ml-2 text-dark '>CF College </span>
+        <Navbar.Brand  href='/'>
+          <img data-aos="fade-down" data-aos-delay="400" className='ml-5' src={Logo} title='Bootcamp' width='40px' />
+          <span data-aos="fade-left" className='ml-2 text-dark '>CF College </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
 
@@ -268,7 +276,7 @@ export default function Header() {
                           <img
                             src={
                               user.avatar
-                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'

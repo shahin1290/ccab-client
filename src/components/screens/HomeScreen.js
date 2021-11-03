@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "malihu-custom-scrollbar-plugin";
 import TopCourses from "./../layout/TopCourses";
 import Pricing from "./../../components/screens/Pricing";
@@ -27,7 +27,15 @@ import ServiceVideoChat from './../layout/ServiceVideoChat';
 
 import ServiceAssistance from './../layout/ServiceAssistance';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+//AOS.init();
+
 export default function HomeScreen({ match }) {
+  useEffect(()=>{
+    AOS.init();
+  },[])
   const [showModal, setShowModal] = useState({ visible: false });
 
   return (
@@ -50,7 +58,10 @@ export default function HomeScreen({ match }) {
           </div> */}
 
           <div class='quote--container banner-quote w-75'>
-            <p class='quote'>
+            <p data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="1500" 
+                class='quote'>
               Your future is created by what you do{" "}
               <span class='quote--highlight'>TODAY</span> not tomorrow
             </p>
@@ -60,10 +71,10 @@ export default function HomeScreen({ match }) {
 
 
 
-          <div className=" d-flex justify-content-center titleBanner  " 
+          <div   className=" d-flex justify-content-center titleBanner  " 
         >
-                <h1 className="text-danger title text-right">CODIFY COLLEGE</h1>
-           </div>
+                <h1 data-aos="fade-up-left"  className="text-danger title text-right"><span style={{color: '#DBD02D'}}>CODIFY</span> COLLEGE</h1>
+           </div> 
 
           {/* <div className='typewriter'>
             <Typewriter
@@ -110,12 +121,12 @@ export default function HomeScreen({ match }) {
        
         <div className="container-fluid bg-light py-5">
                     {/* Sec Title */}
-          <div className='sec-title style-two centered'>
+          <div data-aos="fade-down" className='sec-title style-two centered'>
             <div className='title'>
               Different Course Plans Tailored To Your Needs
             </div>
             <hr className='block-seperator mb-3' />
-            <div className='text'>
+            <div data-aos="fade-down-right" data-aos-delay="100" className='text'>
               Register yourself now and get real employabe skills that top
               companies want.
             </div>

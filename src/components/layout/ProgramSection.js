@@ -1,7 +1,13 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import image4 from './../../assets/images/image-4.png'
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+ 
 const ProgramSection = () => {
+  useEffect(()=>{
+    AOS.init();
+  },[])
+  
   return (
     <section className="program-section mt-5 ">
           <div className="auto-container">
@@ -44,7 +50,7 @@ const ProgramSection = () => {
               </div>
 
               {/* Image Column */}
-              <div className="image-column col-lg-6 col-md-12 col-sm-12 whoSection">
+              <div data-aos="zoom-out-down" className="image-column col-lg-6 col-md-12 col-sm-12 whoSection">
                 <div className="inner-column">
                   <div className="image titlt" data-tilt data-tilt-max={4}>
                     <img src={image4} />

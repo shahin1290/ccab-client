@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect  } from 'react'
 import { Link } from 'react-router-dom'
 import VideoImage from './../../assets/images/videoBg.jpg'
 import ModalVideo from 'react-modal-video'
 import { Row, Col } from 'react-bootstrap'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+
 
 const HomeVideoSection = () => {
   const [isOpen, setOpen] = useState(false)
+
+  useEffect(()=>{
+    AOS.init();
+  },[])
 
   return (
     <section
@@ -18,7 +25,7 @@ const HomeVideoSection = () => {
           <div className="text-center col-lg-6 col-md-6 col-sm-12">
             {' '}
             {/* Video Section Two */}
-            <div className="video-section-two mb-5">
+            <div data-aos="zoom-in-up" data-aos-delay="300" className="video-section-two mb-5">
               {/*Video Box*/}
               <div
                 className="video-boxed "
