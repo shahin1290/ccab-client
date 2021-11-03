@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
 
 const responsive = {
   0: { items: 1 },
@@ -27,18 +27,27 @@ export default function TopCourses({ match }) {
     dispatch(getCourseList());
   }, [dispatch]);
 
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init();
-  },[])
+  }, []);
   const filterSubscriptionCourse = (courseList) => {
-    return courseList.filter((course) => {
-      const titleFirstWord = course.name
-        .toLowerCase()
-        .split(" ")[0]
-        .toLowerCase();
+    const filteredThreeCourses = courseList.filter(
+      (course) =>
+        course.name.toLowerCase().includes("basic frontend") ||
+        course.name.toLowerCase().includes("foundation course") ||
+        course.name.toLowerCase().includes("mern full stack")
+    );
 
-      return !["silver", "diamond", "golden"].includes(titleFirstWord);
-    });
+    return filteredThreeCourses
+      .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+      .filter((course) => {
+        const titleFirstWord = course.name
+          .toLowerCase()
+          .split(" ")[0]
+          .toLowerCase();
+
+        return !["silver", "diamond", "golden"].includes(titleFirstWord);
+      });
   };
 
   return (
@@ -53,15 +62,20 @@ export default function TopCourses({ match }) {
       >
         <div className='auto-container'>
           {/* Sec Title */}
-          <div data-aos="zoom-in" data-aos-delay="400" className='title text-center p-2 '>
+          <div
+            data-aos='zoom-in'
+            data-aos-delay='400'
+            className='title text-center p-2 '
+          >
             Change Your Life With Coding
           </div>
           <hr className='block-seperator mb-3' />
 
-          <div  data-aos="fade-up"
-              
-               data-aos-delay="600"
-               className='sub-text text-center mb-3'>
+          <div
+            data-aos='fade-up'
+            data-aos-delay='600'
+            className='sub-text text-center mb-3'
+          >
             We help you with career transition or add a tech stak to your
             existing skill
           </div>
@@ -75,8 +89,11 @@ export default function TopCourses({ match }) {
             {/* Institution Block */}
             {courseList.length &&
               filterSubscriptionCourse(courseList).map((course) => (
-                <div data-aos="zoom-in-left"
-                className=' cource-block-two ' key={course._id}>
+                <div
+                  data-aos='zoom-in-left'
+                  className=' cource-block-two '
+                  key={course._id}
+                >
                   <div className='inner-box '>
                     <div className='image '>
                       <Link to={`/courses/${course._id}`}>
@@ -89,6 +106,7 @@ export default function TopCourses({ match }) {
                         />
                       </Link>
                     </div>
+
                     <div className='lower-content '>
                       <div>
                         <Link
