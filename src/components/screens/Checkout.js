@@ -158,7 +158,7 @@ const CheckoutForm = ({ match, history }) => {
       const amount = resp.data[query];
       setSekToEUR(amount);
 
-      let response = await axios.get("https://ipapi.co/27.147.202.132/json/");
+      let response = await axios.get("https://ipapi.co/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -355,7 +355,7 @@ const CheckoutForm = ({ match, history }) => {
       } else {
         let amount;
 
-        /*  if (subscription) {
+        if (subscription) {
           amount = Math.round(
             (Number(plan.price) +
               (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
@@ -364,7 +364,7 @@ const CheckoutForm = ({ match, history }) => {
               AmountOfWeeks *
               100
           );
-        } */
+        }
 
         if (ID) {
           amount = Math.round(currency.data.amount * course.price * 100);
@@ -697,9 +697,9 @@ const CheckoutForm = ({ match, history }) => {
                                     </select>
                                   </li>
                                   <li className='clearfix mb-3'>
-                                    Subscription Type:
+                                    Plan Type:
                                     <span className='pull-right'>
-                                      {plan.course} {plan.name}
+                                      {plan.name}
                                     </span>
                                   </li>
 
@@ -707,7 +707,7 @@ const CheckoutForm = ({ match, history }) => {
                                     <>
                                       {" "}
                                       <li className='clearfix mb-3'>
-                                        Price:
+                                        Original Price:
                                         <span className='pull-right'>
                                           {currencySuccess &&
                                             `${Math.round(
@@ -715,8 +715,8 @@ const CheckoutForm = ({ match, history }) => {
                                                 (promos &&
                                                 promos.length > 0 &&
                                                 promos[0].show
-                                                  ? 0
-                                                  : 200)) *
+                                                  ? 200
+                                                  : 0)) *
                                                 sekToEUR *
                                                 currency.data.amount
                                             )}  ${currency.data.currency} /

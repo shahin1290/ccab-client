@@ -91,75 +91,21 @@ const SpecialCourseForm = () => {
         <Row className=''>
           <Col md={6} className='pr-5'>
             <div className='sub-title text-danger text-center-small-screen pb-3'>
-              CONTACT DETAILS
+              SPECIAL COURSES
             </div>
             <div className='title text-center-small-screen pb-3'>
-              Apply For An Internship
+              Apply For Free Courses
             </div>
             <p className='sub-text text-center-small-screen mb-5'>
               We know that anyone can learn to Code, all you need to do is to
-              take the First Step. Contact us!
+              take the First Step. We offer free courses for our students so
+              that our students can start their journey and take the next step
+              towards their dream goals.
             </p>
-            <Row className='address'>
-              <Col md={2} className='job-icon'>
-                <i className='fas fa-map-marker-alt'></i>
-              </Col>
-
-              <Col>
-                <div className='sub-title'>Address</div>
-                <div className='sub-text'>
-                  Röntgenvägen 1 141 52, Huddinge, Stockholm, Sweden
-                </div>
-              </Col>
-            </Row>
-            <Row className='address mb-3'>
-              <Col md={2} className='job-icon'>
-                <i class='far fa-envelope'></i>
-              </Col>
-
-              <Col>
-                <div className='sub-title'>E-mail</div>
-                <div className='sub-text'>
-                  Mail:{" "}
-                  <span style={{ color: "#fe4a55", fontWeight: "bold" }}>
-                    info@codifycollege.se
-                  </span>
-                </div>
-              </Col>
-            </Row>
-
-            <Row className='address mb-3'>
-              <Col md={2} className='job-icon'>
-                <i class='fas fa-phone-volume'></i>
-              </Col>
-
-              <Col>
-                <div className='sub-title'>Contact</div>
-                <div className='sub-text'>
-                  Mobile:{" "}
-                  <span style={{ color: "#fe4a55", fontWeight: "bold" }}>
-                    +46-72 33 33 8 99
-                  </span>
-                </div>
-              </Col>
-            </Row>
-            <Row className='address'>
-              <Col md={2} className='job-icon'>
-                <i class='far fa-clock'></i>
-              </Col>
-
-              <Col>
-                <div className='sub-title'>Hours of Operation</div>
-                <div className='sub-text'>
-                  Mon - Fri: 09:00am - 05:00pm Sunday: 09:00am - 05:00pm
-                  Saturday: Closed
-                </div>
-              </Col>
-            </Row>
           </Col>
           <Col
             md={6}
-            className='job-contact mt-3 text-center-small-screen p-3 mb-2'
+            className='bg-warning mt-3 text-center-small-screen p-3 mb-2'
           >
             <div className='title pb-1 '>Ready to Get Started?</div>
             <div className='sub-text'>
@@ -191,7 +137,7 @@ const SpecialCourseForm = () => {
                       })}
                     />
                     {errors.name && (
-                      <p className='text-warning'>{errors.name.message}</p>
+                      <p className='text-danger'>{errors.name.message}</p>
                     )}
                   </div>
                   {/* Form Group */}
@@ -208,7 +154,7 @@ const SpecialCourseForm = () => {
                     />
 
                     {errors.email && (
-                      <p className='text-warning'>{errors.email.message}</p>
+                      <p className='text-danger'>{errors.email.message}</p>
                     )}
                   </div>
                   {/* Form Group */}
@@ -226,7 +172,7 @@ const SpecialCourseForm = () => {
                       })}
                     />
                     {errors.phone && (
-                      <p className='text-warning'>{errors.phone.message}</p>
+                      <p className='text-danger'>{errors.phone.message}</p>
                     )}
                   </div>
                 </section>
@@ -236,8 +182,9 @@ const SpecialCourseForm = () => {
                 <section className={formStep === 1 ? "d-block" : "d-none"}>
                   {/* Form Group */}
                   <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <label className='text text-white'>Position *</label>
+                    <label className='text text-white'>Education *</label>
                     <input
+                    placeholder="Ex. bachelor degree in engineering "
                       type='text'
                       {...register("position", {
                         required: {
@@ -247,12 +194,12 @@ const SpecialCourseForm = () => {
                       })}
                     />
                     {errors.position && (
-                      <p className='text-warning'>{errors.position.message}</p>
+                      <p className='text-danger'>{errors.position.message}</p>
                     )}
                   </div>
 
                   {/* Form Group */}
-                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
+                  <div className='form-group col-lg-12 col-md-12 col-sm-12 '>
                     <label className='text text-white'>Upload your CV *</label>
                     <input
                       type='file'
@@ -262,16 +209,21 @@ const SpecialCourseForm = () => {
                           message: "Please upload the cv",
                         },
                       })}
+                      className='bg-white'
                     />
                     {errors.cv && (
-                      <p className='text-warning'>{errors.cv.message}</p>
+                      <p className='text-danger'>{errors.cv.message}</p>
                     )}
                   </div>
 
                   {/* Form Group */}
                   <div className='form-group col-lg-12 col-md-12 col-sm-12'>
                     <label className='text text-white'>Other Documents</label>
-                    <input type='file' {...register("doc")} />
+                    <input
+                      type='file'
+                      {...register("doc")}
+                      className='bg-white'
+                    />
                   </div>
                 </section>
               )}
@@ -295,9 +247,12 @@ const SpecialCourseForm = () => {
               {formStep < 2 && (
                 <button
                   onClick={completeFormStep}
-                  className='ml-4 form-group col-lg-11 col-md-11 col-sm-11 btn '
+                  className={`form-group  btn bg-danger text-white ${
+                    !isValid && "isDisabled"
+                  }`}
                   type='button'
                   disabled={!isValid}
+                  style={{ marginLeft: "190px" }}
                 >
                   Next Step
                 </button>
@@ -305,9 +260,12 @@ const SpecialCourseForm = () => {
 
               {formStep === 2 && (
                 <button
-                  className='ml-4 form-group col-lg-11 col-md-11 col-sm-11 btn '
+                  className={`form-group  btn bg-danger text-white ${
+                    !isValid && "isDisabled"
+                  }`}
                   type='submit'
                   disabled={!isValid}
+                  style={{ marginLeft: "190px" }}
                 >
                   Send
                 </button>

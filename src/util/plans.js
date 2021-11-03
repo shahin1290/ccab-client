@@ -53,7 +53,7 @@ export const plans = [
       ],
     _id: "d8cc4ea7-8092-480a-a8839bce88b1",
   }, */
-  {
+  /* {
     name: "Golden Plan",
     period: "weekly",
     course: "frontend",
@@ -106,40 +106,62 @@ export const plans = [
     requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
 
     _id: "d8cc4ea7-809a-a8ce-dc839bce88b1",
-  },
-  /*  {
-    name: "Golden Plan",
+  }, */
+  {
+    name: "Front End Half Time Plan",
     period: "monthly",
     price: "2699",
+    course: "frontend",
     stripeSubscriptionId: "price_1JQUF8BDalVdaGO2CeL53NQp",
-    service : { basic: [
-      "Free foundation course",
-      "2 live session per week",
-      "2 recorded revision session per week",
-      "4 hours live support / day",
-      "Industry Curriculun (IC)",
-      "In-trend online learning platform",
-      "Remote learning - no compromise on your job",
-      "Hands on experience on real-world problems",
-     
-     
-    ],
-    star: [
-      "1 : 1 career support (CV & portfolio guidance) (Github account review & support)(LinkedIn account review & support)",
-      "Flexible payment plans",
-    ],
-    superStar: [
-      "One to one live lecture with tutor",
-      
-    ],
+    service: {
+      basic: [
+        "Free foundation course",
+        "2 live session per week",
+        "2 recorded revision session per week",
+        "4 hours live support / day",
+        "Industry Curriculun (IC)",
+        "In-trend online learning platform",
+        "Remote learning - no compromise on your job",
+        "Hands on experience on real-world problems",
+      ],
+      star: [
+        "1 : 1 career support (CV & portfolio guidance) (Github account review & support)(LinkedIn account review & support)",
+        "Flexible payment plans",
+      ],
+      superStar: ["One to one live lecture with tutor"],
+    },
+    requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
+
+    _id: "d8cc4ea7-8092-480a-a8839bce88b1",
   },
-  requirement:[ 
-    "8 hours of study per week", 
-    "Minimum purchase - 4 weeks",],
+  {
+    name: "Full Stack Half Time Plan",
+    period: "monthly",
+    price: "2699",
+    course: "fullstack",
+    stripeSubscriptionId: "price_1JQUF8BDalVdaGO2CeL53NQp",
+    service: {
+      basic: [
+        "Free foundation course",
+        "2 live session per week",
+        "2 recorded revision session per week",
+        "4 hours live support / day",
+        "Industry Curriculun (IC)",
+        "In-trend online learning platform",
+        "Remote learning - no compromise on your job",
+        "Hands on experience on real-world problems",
+      ],
+      star: [
+        "1 : 1 career support (CV & portfolio guidance) (Github account review & support)(LinkedIn account review & support)",
+        "Flexible payment plans",
+      ],
+      superStar: ["One to one live lecture with tutor"],
+    },
+    requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
 
     _id: "d8cc4e92-480a-a8ce-dc839bce88b1",
-  }, */
-  {
+  },
+  /* {
     name: "Diamond Plan",
     period: "weekly",
     course: "frontend",
@@ -198,39 +220,66 @@ export const plans = [
     },
     requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
     _id: "4ea7-8092-480a-a8ce-dc839bce88b1",
-  },
-  /*  {
-    name: "Diamond Plan",
+  }, */
+  {
+    name: "Front End Full Time Plan",
     period: "monthly",
     price: "3499",
+    course: "frontend",
     stripeSubscriptionId: "price_1JQUF8BDalVdaGO2vI1gRfC3",
-    service : {
+    service: {
       basic: [
-      "Free foundation course",
-      "3 live session per week",
-      "2 recorded revision session per week",
-      "6 hours live support / day",
-      "One to one live lecture with tutor",
-      "Industry Curriculun (IC)",
-      "In-trend online learning platform",
-      "Remote learning - no compromise on your job",
-      "Hands on experience on real-world problems",
-      "Flexible payment plans",
-      
-    ],
-    star: [
-      
-      "1 : 1 career support (CV & portfolio guidance) (Github account review & support)(LinkedIn account review & support)",
-    ],
-    superStar: [
-      "Hiring interview simulation",
-      "Access to global hiring partner network",
-    ],
-      },
-    requirement : [
-      "12 hours of study per week", 
-      "Minimum purchase - 4 weeks",
-    ],
+        "Free foundation course",
+        "3 live session per week",
+        "2 recorded revision session per week",
+        "6 hours live support / day",
+        "One to one live lecture with tutor",
+        "Industry Curriculun (IC)",
+        "In-trend online learning platform",
+        "Remote learning - no compromise on your job",
+        "Hands on experience on real-world problems",
+        "Flexible payment plans",
+      ],
+      star: [
+        "1 : 1 career support (CV & portfolio guidance) (Github account review & support)(LinkedIn account review & support)",
+      ],
+      superStar: [
+        "Hiring interview simulation",
+        "Access to global hiring partner network",
+      ],
+    },
+    requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
     _id: "d8cc4ea7-8092-480a-a8ce-dc888b1",
-  }, */
+  },
+
+  {
+    name: "Full Stack Full Time plan",
+    period: "monthly",
+    price: "3499",
+    course: "fullstack",
+    stripeSubscriptionId: "price_1JQUF8BDalVdaGO2vI1gRfC3",
+    service: {
+      basic: [
+        "Free foundation course",
+        "3 live session per week",
+        "2 recorded revision session per week",
+        "6 hours live support / day",
+        "One to one live lecture with tutor",
+        "Industry Curriculun (IC)",
+        "In-trend online learning platform",
+        "Remote learning - no compromise on your job",
+        "Hands on experience on real-world problems",
+        "Flexible payment plans",
+      ],
+      star: [
+        "1 : 1 career support (CV & portfolio guidance) (Github account review & support)(LinkedIn account review & support)",
+      ],
+      superStar: [
+        "Hiring interview simulation",
+        "Access to global hiring partner network",
+      ],
+    },
+    requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
+    _id: "d8cc4ea7-8092-480a-a8ce-dc888b3",
+  },
 ];

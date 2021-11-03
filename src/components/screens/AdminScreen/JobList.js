@@ -63,7 +63,7 @@ export default function JobList() {
               <th>Name</th>
               <th>Email</th>
               <th>Phone Number</th>
-              <th>Subject</th>
+              <th>Position</th>
               <th>Message</th>
               <th>Created At</th>
               <th>CV</th>
@@ -78,7 +78,7 @@ export default function JobList() {
                   <td>{job.name}</td>
                   <td>{job.email}</td>
                   <td>{job.phone}</td>
-                  <td>{job.subject}</td>
+                  <td>{job.position}</td>
                   <td>
                     <div style={{ maxHeight: "120px", overflowY: "scroll" }}>
                       {job.message}

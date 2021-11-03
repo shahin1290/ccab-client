@@ -45,7 +45,7 @@ export default function Pricing() {
 
           <Container>
             <div className='curriculum-project'>
-              <ul className='d-flex justify-content-center curriculum-project'>
+              <ul className='d-flex justify-content-center curriculum-project pb-5'>
                 <li className='pl-5 '>
                   <a
                     onClick={() => setCourse("frontend")}
@@ -90,9 +90,9 @@ export default function Pricing() {
                 {getPlans().length &&
                   getPlans().map((plan) => (
                     <Col
-                      className='no-gutter offset-md-2 offset-lg-0'
+                      className='no-gutter offset-md-2 offset-lg-1'
                       sm={12}
-                      lg={6}
+                      lg={5}
                       md={9}
                       key={plan._id}
                       style={{
@@ -112,7 +112,13 @@ export default function Pricing() {
                                 <i className='fas fa-gem planicon'></i>
                               </span>
                             </div>
-                            <h3>{plan.name}</h3>
+                            <h3>
+                              {plan.name
+                                .toLocaleLowerCase()
+                                .includes("full time")
+                                ? "Full Time"
+                                : "Half time"}
+                            </h3>
 
                             {promos && promos.length > 0 && promos[0].show && (
                               <p>
@@ -140,7 +146,7 @@ export default function Pricing() {
                                         : 200))
                                 )}{" "}
                               {sekToUsd && sekToUsd[1] + " "}
-                              <span>Per week</span>
+                              <span>Per month</span>
                             </div>
                             <h5 className='pricing-sub-title'>
                               What You Will Get :
