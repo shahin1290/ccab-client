@@ -25,14 +25,23 @@ export default function TopCourses({ match }) {
   }, [dispatch]);
 
   const filterSubscriptionCourse = (courseList) => {
-    return courseList.filter((course) => {
-      const titleFirstWord = course.name
-        .toLowerCase()
-        .split(" ")[0]
-        .toLowerCase();
+    const filteredThreeCourses = courseList.filter(
+      (course) =>
+        course.name.toLowerCase().includes("basic frontend") ||
+        course.name.toLowerCase().includes("foundation course") ||
+        course.name.toLowerCase().includes("mern full stack")
+    );
 
-      return !["silver", "diamond", "golden"].includes(titleFirstWord);
-    });
+    return filteredThreeCourses
+      .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+      .filter((course) => {
+        const titleFirstWord = course.name
+          .toLowerCase()
+          .split(" ")[0]
+          .toLowerCase();
+
+        return !["silver", "diamond", "golden"].includes(titleFirstWord);
+      });
   };
 
   return (
@@ -65,59 +74,61 @@ export default function TopCourses({ match }) {
           >
             {/* Institution Block */}
             {courseList.length &&
-              filterSubscriptionCourse(courseList).map((course) => (
-                <div className=' cource-block-two ' key={course._id}>
-                  <div className='inner-box '>
-                    <div className='image '>
-                      <Link to={`/courses/${course._id}`}>
-                        <img
-                          src={
-                            "http://localhost:5001/uploads/Bootcamp/" +
-                            course.img_path
-                          }
-                          alt=''
-                        />
-                      </Link>
-                    </div>
-                    <div className='lower-content '>
-                      <div>
-                        <Link
-                          className='sub-title2 my-5'
-                          to={`/courses/${course._id}`}
-                        >
-                          {course.name}
+              filterSubscriptionCourse(courseList)
+                .sort()
+                .map((course) => (
+                  <div className=' cource-block-two ' key={course._id}>
+                    <div className='inner-box '>
+                      <div className='image '>
+                        <Link to={`/courses/${course._id}`}>
+                          <img
+                            src={
+                              "http://localhost:5001/uploads/Bootcamp/" +
+                              course.img_path
+                            }
+                            alt=''
+                          />
                         </Link>
                       </div>
-                      <div className='pt-4 '>
-                        <span
-                          className='sub-text2 d-inline-block text-truncate'
-                          style={{ maxWidth: "250px" }}
-                        >
-                          {course.description}
-                        </span>
-                        <Link
-                          className='btn p-0 m-0 text-danger'
-                          to={`/courses/${course._id}`}
-                        >
-                          Read More
-                        </Link>
-                      </div>
-                      <div className='clearfix my-3'>
-                        <div className='pull-left'>
-                          <div className='students'>
-                            {course.weeks * 5} Lectures
-                          </div>
+                      <div className='lower-content '>
+                        <div>
+                          <Link
+                            className='sub-title2 my-5'
+                            to={`/courses/${course._id}`}
+                          >
+                            {course.name}
+                          </Link>
                         </div>
-                        <div className='pull-right'>
-                          <div className='hours'>
-                            {course.weeks * 5 * 2} Hours
+                        <div className='pt-4 '>
+                          <span
+                            className='sub-text2 d-inline-block text-truncate'
+                            style={{ maxWidth: "250px" }}
+                          >
+                            {course.description}
+                          </span>
+                          <Link
+                            className='btn p-0 m-0 text-danger'
+                            to={`/courses/${course._id}`}
+                          >
+                            Read More
+                          </Link>
+                        </div>
+                        <div className='clearfix my-3'>
+                          <div className='pull-left'>
+                            <div className='students'>
+                              {course.weeks * 5} Lectures
+                            </div>
+                          </div>
+                          <div className='pull-right'>
+                            <div className='hours'>
+                              {course.weeks * 5 * 2} Hours
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
           </AliceCarousel>
 
           {/* Institution Block */}

@@ -47,7 +47,7 @@ export default function CourseDetailScreen({ match }) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("https://ipapi.co/json//");
+      let response = await axios.get("https://ipapi.co/27.147.202.132/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }

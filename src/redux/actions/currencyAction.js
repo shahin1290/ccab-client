@@ -18,7 +18,7 @@ export const createCurrrency = (fromCurrency) => async (dispatch, getState) => {
     } = getState();
     const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
-    let res = await axios.get("https://ipapi.co/json//");
+    let res = await axios.get("https://ipapi.co/27.147.202.132/json/");
 
     const response = await axios.post(
       "http://localhost:5001/currency-convert",

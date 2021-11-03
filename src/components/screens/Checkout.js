@@ -17,7 +17,7 @@ import {
 import { getCourseDetails } from "../../redux/actions/courseAction";
 import { getRequestDetails } from "../../redux/actions/requestAction";
 import { getServiceDetails } from "../../redux/actions/serviceAction";
-
+import { getPromos } from "../../redux/actions/promoAction";
 import Loader from "../layout/Loader";
 import { Tabs, Tab } from "react-bootstrap";
 import axios from "axios";
@@ -140,6 +140,7 @@ const CheckoutForm = ({ match, history }) => {
   };
 
   useEffect(() => {
+    dispatch(getPromos());
     async function fetchMyAPI() {
       const apiKey = "6068a971e6754bdf9d3b0ddc706779b0";
 
@@ -157,7 +158,7 @@ const CheckoutForm = ({ match, history }) => {
       const amount = resp.data[query];
       setSekToEUR(amount);
 
-      let response = await axios.get("https://ipapi.co/json//");
+      let response = await axios.get("https://ipapi.co/27.147.202.132/json/");
 
       validateCounrty(response.data.country_name, response.data.languages);
     }
@@ -623,7 +624,10 @@ const CheckoutForm = ({ match, history }) => {
                                       name='price'
                                       id='inlineRadio1'
                                       value='subscription'
-                                      checked
+                                      onChange={(e) => {
+                                        setBillingType(e.target.value);
+                                      }}
+                                      checked={billingType === "subscription"}
                                       required
                                     />
                                     <label
@@ -632,60 +636,70 @@ const CheckoutForm = ({ match, history }) => {
                                     >
                                       Subscription
                                     </label>
-                                    <div className='clearfix mb-3'>
-                                      Total Of
-                                      {plan.period === "weekly"
-                                        ? " Weeks"
-                                        : " Months"}
-                                      :
-                                      <select
-                                        className='custom-select-box px-2 mt-3'
-                                        onChange={(e) => {
-                                          setAmountOfWeeks(
-                                            Number(e.target.value)
-                                          );
-                                        }}
-                                      >
-                                        {plan.period == "weekly" ? (
-                                          <>
-                                            <option value='4' selected>
-                                              4 weeks
-                                            </option>
-                                            <option value='5'>5 weeks</option>
-                                            <option value='6'>6 weeks</option>
-                                            <option value='7'>7 weeks</option>
-                                            <option value='8'>8 weeks</option>
-                                          </>
-                                        ) : (
-                                          <>
-                                            <option value='2' selected>
-                                              2 Months
-                                            </option>
-                                            <option value='3'>3 Months</option>
-                                            <option value='4'>4 Months</option>
-                                            <option value='5'>5 Months</option>
-                                            <option value='6'>6 Months</option>
-                                          </>
-                                        )}
-                                      </select>
-                                    </div>
+                                  </div>
+
+                                  <div className='form-check m-3'>
+                                    <input
+                                      className='form-check-input'
+                                      type='radio'
+                                      name='price'
+                                      id='inlineRadio2'
+                                      value='oneTime'
+                                      onChange={(e) => {
+                                        setBillingType(e.target.value);
+                                      }}
+                                      checked={billingType === "oneTime"}
+                                    />
+                                    <label
+                                      className='form-check-label font-weight-bold'
+                                      for='inlineRadio2'
+                                    >
+                                      Full payment
+                                    </label>
                                   </div>
                                 </div>
+
                                 <div className='sub-title mt-5 mr-2 mb-2'>
                                   Order Details{" "}
                                 </div>
                                 <ul className='pt-2'>
                                   <li className='clearfix mb-3'>
+                                    Total Of Weeks:
+                                    <select
+                                      className='custom-select-box px-2'
+                                      onChange={(e) => {
+                                        setAmountOfWeeks(
+                                          Number(e.target.value)
+                                        );
+                                      }}
+                                    >
+                                      {plan.period == "weekly" ? (
+                                        <>
+                                          <option value='4' selected>
+                                            4 weeks
+                                          </option>
+                                          <option value='5'>5 weeks</option>
+                                          <option value='6'>6 weeks</option>
+                                          <option value='7'>7 weeks</option>
+                                          <option value='8'>8 weeks</option>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <option value='2' selected>
+                                            2 Months
+                                          </option>
+                                          <option value='3'>3 Months</option>
+                                          <option value='4'>4 Months</option>
+                                          <option value='5'>5 Months</option>
+                                          <option value='6'>6 Months</option>
+                                        </>
+                                      )}
+                                    </select>
+                                  </li>
+                                  <li className='clearfix mb-3'>
                                     Subscription Type:
                                     <span className='pull-right'>
-                                      {plan.name}
-                                    </span>
-                                  </li>
-
-                                  <li className='clearfix mb-3'>
-                                    Subscription Period:
-                                    <span className='pull-right'>
-                                      {plan.period}
+                                      {plan.course} {plan.name}
                                     </span>
                                   </li>
 
@@ -693,7 +707,7 @@ const CheckoutForm = ({ match, history }) => {
                                     <>
                                       {" "}
                                       <li className='clearfix mb-3'>
-                                        Original Price:
+                                        Price:
                                         <span className='pull-right'>
                                           {currencySuccess &&
                                             `${Math.round(
@@ -715,6 +729,23 @@ const CheckoutForm = ({ match, history }) => {
                                       </li>
                                     </>
                                   )}
+
+                                  <li className='clearfix mb-3'>
+                                    Disscount:
+                                    <span className='pull-right'>
+                                      {currencySuccess &&
+                                        `${Math.round(
+                                          (promos &&
+                                          promos.length > 0 &&
+                                          promos[0].show
+                                            ? 200
+                                            : 0) *
+                                            sekToEUR *
+                                            currency.data.amount *
+                                            AmountOfWeeks
+                                        )}  ${currency.data.currency}`}
+                                    </span>
+                                  </li>
 
                                   <hr />
 
