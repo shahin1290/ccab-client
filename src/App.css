@@ -239,7 +239,7 @@ body {
   font-size: 20px;
   font-weight: 600;
   font-family: Inter;
-  color: #4a4a4a !important;
+  color: #4a4a4a ;
 }
 
 .sub-title2 {
@@ -368,7 +368,7 @@ pre {
   margin: 0 auto;
 }
 
-.inner a {
+.inner a,.inner button {
   float: left;
 }
 
@@ -787,6 +787,7 @@ input:checked + .slider:before {
   /* background-image: url('./assets/images/image-4.png');
   background-size: 100%;
   background-repeat: no-repeat; */
+  overflow: hidden !important;
 }
 .promoText{
   width: 50% !important;

@@ -5,8 +5,14 @@ import { createJob } from "../../redux/actions/jobAction";
 import Loader from "./Loader";
 import Message from "./Message";
 import { useForm } from "react-hook-form";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+ 
 const SpecialCourseForm = () => {
+  useEffect(()=>{
+    AOS.init();
+  },[])
+
   const dispatch = useDispatch();
   const {
     watch,
@@ -89,7 +95,7 @@ const SpecialCourseForm = () => {
     <section className='  mb-5'>
       <div className='auto-container'>
         <Row className=''>
-          <Col md={6} className='pr-5'>
+          <Col data-aos="fade-right" md={6} className='pr-5'>
             <div className='sub-title text-danger text-center-small-screen pb-3'>
               SPECIAL COURSES
             </div>
@@ -104,11 +110,14 @@ const SpecialCourseForm = () => {
             </p>
           </Col>
           <Col
+          data-aos="flip-left"
+          data-aos-delay="300"
             md={6}
-            className='bg-warning mt-3 text-center-small-screen p-3 mb-2'
+            style={{borderRadius:'10px' , backgroundColor:'rgb(17, 25, 32)'}}
+            className=' mt-3 text-center-small-screen p-3 mb-2'
           >
-            <div className='title pb-1 '>Ready to Get Started?</div>
-            <div className='sub-text'>
+            <div className='title pb-1 ' style={{color:'rgb(45, 156, 107)'}}>Ready to Get Started?</div>
+            <div className='sub-text' style={{color:'rgb(245, 182, 0)'}}>
               Your email address will not be published. Required fields are
               marked *
             </div>
@@ -120,7 +129,7 @@ const SpecialCourseForm = () => {
               className='styled-form col-lg-12 col-md-12 col-sm-12'
             >
               {formStep < 3 && (
-                <div className='sub-title m-3'>Step {formStep + 1} of 3</div>
+                <div className='sub-title m-3' style={{color :'red'}}>Step {formStep + 1} of 3</div>
               )}
               {formStep >= 0 && (
                 <section className={formStep === 0 ? "d-block" : "d-none"}>
@@ -245,31 +254,58 @@ const SpecialCourseForm = () => {
               {success && <Message>Request sent Successfully</Message>}
 
               {formStep < 2 && (
-                <button
+                // <button
+                  // onClick={completeFormStep}
+                  // className={`form-group  btn bg-danger text-white ${
+                  //   !isValid && "isDisabled"
+                  // }`}
+                //   type='button'
+                //   disabled={!isValid}
+                //   style={{ marginLeft: "190px" }}
+                // >
+                //   Next Step
+                // </button>
+
+             <div class='inner mt-3 ml-4 '>
+             <button  
+             type='button'
+             disabled={!isValid}
                   onClick={completeFormStep}
-                  className={`form-group  btn bg-danger text-white ${
-                    !isValid && "isDisabled"
-                  }`}
-                  type='button'
-                  disabled={!isValid}
-                  style={{ marginLeft: "190px" }}
-                >
-                  Next Step
-                </button>
+                   className={`button fb mx-auto d-block  ${
+                     !isValid && "isDisabled"
+                   }`}>
+               <div className='d-flex align-items-center w-100 justify-content-center pb-1  overflow-auto' style={{height:'40px'}}>
+               
+                 <span className='fs-2  '>  Next Step</span>
+               </div>
+             </button>
+           </div>
               )}
 
               {formStep === 2 && (
-                <button
-                  className={`form-group  btn bg-danger text-white ${
-                    !isValid && "isDisabled"
-                  }`}
-                  type='submit'
-                  disabled={!isValid}
-                  style={{ marginLeft: "190px" }}
-                >
-                  Send
-                </button>
+                // <button
+            
+                //   type='submit'
+                 
+                //   style={{ marginLeft: "190px" }}
+                // >
+                 
+                // </button>
+              <div class='inner mt-3 ml-4 '>
+              <button  
+              type="submit"
+              disabled={!isValid}
+                    className={`button fb mx-auto d-block  ${
+                      !isValid && "isDisabled"
+                    }`}>
+                <div className='d-flex align-items-center w-100 justify-content-center pb-1  overflow-auto' style={{height:'40px'}}>
+                
+                  <span className='fs-2  '> Send</span>
+                </div>
+              </button>
+            </div>
               )}
+
             </form>
           </Col>
         </Row>

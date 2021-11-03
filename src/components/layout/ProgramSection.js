@@ -12,7 +12,7 @@ const ProgramSection = () => {
     <section className="program-section mt-5 ">
           <div className="auto-container">
      
-            <div className="row clearfix" style={{paddingBottom:0, marginBottom:0}}>
+            <div className="row clearfix" style={{paddingBottom:0, marginBottom:0 , overflow:'hidden'}}>
 
                             {/* Content Column */}
               <div className="content-column col-lg-6 col-md-12 col-sm-12">
