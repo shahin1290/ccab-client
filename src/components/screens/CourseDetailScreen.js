@@ -286,7 +286,7 @@ export default function CourseDetailScreen({ match }) {
                                 !userDetail.token
                                   ? "/login"
                                   : course.price > 0
-                                  ? "/pricing-plans"
+                                  ? "/pricing-plans/" + course.name
                                   : "/course-content/" + course._id
                               }
                               className='theme-btn btn-style-three'
