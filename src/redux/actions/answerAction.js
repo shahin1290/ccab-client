@@ -38,7 +38,7 @@ export const createAnswer =
         },
       };
       const response = await axios.put(
-        `http://localhost:5001/api/answers/${bootcampId}/${quizId}`,
+        `https://server.ccab.tech/api/answers/${bootcampId}/${quizId}`,
         answer,
         config
       );
@@ -85,7 +85,7 @@ export const getMyAnswerList = (userId) => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "http://localhost:5001/api/answers/myanswers/" + userId,
+      "https://server.ccab.tech/api/answers/myanswers/" + userId,
       config
     );
     dispatch({
@@ -124,7 +124,7 @@ export const getTaskAnswerList =
       };
 
       const response = await axios.get(
-        `http://localhost:5001/api/answers/${bootcampId}/${taskId}`,
+        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}`,
         config
       );
 
@@ -163,7 +163,7 @@ export const getUserAnswer =
       };
 
       const response = await axios.get(
-        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/myAnswer`,
+        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}/myAnswer`,
         config
       );
 
@@ -202,7 +202,7 @@ export const updateAnswerStatus =
       };
 
       const response = await axios.put(
-        `http://localhost:5001/api/answers/${bootcampId}/${taskId}/${answerId}`,
+        `https://server.ccab.tech/api/answers/${bootcampId}/${taskId}/${answerId}`,
         status,
         config
       );

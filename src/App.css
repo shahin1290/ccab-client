@@ -307,9 +307,68 @@ pre {
   word-wrap: break-word;
 }
 
-.course-content a:hover {
+.course-content:hover {
   background-color: #ffbfbe;
 }
+
+.course-content {
+  position: relative;
+}
+.lock-layer{
+  position: absolute;
+  width: 100% !important;
+  background-color: #eeeeee;
+  height: 100% !important;
+  display: flex;
+  justify-content: end;
+  align-items: center ;
+  padding-right: 10px !important;
+}
+.CircularProgressbar{
+  width:40px!important;
+  margin-top: 20px ;
+}
+.lock-layer i{
+ cursor: pointer;
+}
+.lock-layer p{
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+ font-size: 80% !important;
+ 
+ margin-bottom: 0px !important;
+}
+/*      animation styling */
+div.at-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.at-item {
+  color: #3079ed;
+  animation-name: fade-in-right;
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+}
+@keyframes fade-in-right {
+  0%{
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100%{
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/*************************************/
+
 
 .sub-text-bold {
   font-size: 15px;
@@ -1369,6 +1428,11 @@ input:checked + .slider:before {
 
 @media (max-width: 768px) {
 
+  .CircularProgressbar{
+    margin-top: 0px ;
+    width:22px!important;
+  }
+
   .home-hero-banner {
    background-image: url(assets/images/background/768.png) !important;
    height: 400px !important;
@@ -1395,6 +1459,7 @@ input:checked + .slider:before {
   }
 }
 @media (max-width: 464px) {
+
 
   .home-hero-banner {
     
