@@ -90,7 +90,7 @@ function App() {
     live: false,
   }).init();
 
-  const socket = socketIOClient("https://server.ccab.tech");
+  const socket = socketIOClient("http://localhost:5001");
 
   useEffect(() => {
     if (userDetail.user_type === "StudentUser") {
