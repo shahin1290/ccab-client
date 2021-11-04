@@ -307,9 +307,9 @@ pre {
   word-wrap: break-word;
 }
 
-.course-content:hover {
+/* .course-content:hover {
   background-color: #ffbfbe;
-}
+} */
 
 .course-content {
   position: relative;

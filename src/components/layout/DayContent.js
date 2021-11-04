@@ -270,7 +270,8 @@ export default function DayContent({ bootcampId, setOpen }) {
                   
                      <div className="lock-layer" style={{backgroundColor:'#eeeeee'}}>
                         <div className='at-container'>
-                            <p  className=" fs-1 p-2 at-item">completing the privouse lecture and assignment to unlock</p>
+                            <p  className=" fs-1 p-2 at-item">
+                            complete the previous lecture and assignment to unlock</p>
                         </div>  
                         
 
@@ -278,7 +279,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                         {value => <CircularProgressbar value={value}
                         styles={ { width:'50px'},buildStyles({
                            // How long animation takes to go from one percentage to another, in seconds
-                          pathTransitionDuration: 3,
+                          pathTransitionDuration:4.5,
                         
                         })} /> }
                       </ProgressProvider>
@@ -294,7 +295,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                                 setLockedMessage(true)
                                 setTimeout(()=>{
                                     setLockedMessage(false)
-                                },2500 )
+                                },3500 )
                             }}></i>
                      </div>
                     }
@@ -322,9 +323,9 @@ export default function DayContent({ bootcampId, setOpen }) {
                     >
                       <Link
                         to={`/course-content/${bootcampId}`}
-                        style={{
-                          backgroundColor: show === day._id ? "#ffbfbe" : "",
-                        }}
+                        // style={{
+                        //   backgroundColor: show === day._id ? "#ffbfbe" : "",
+                        // }}
                         className='sub-text text-left'
                         id={day._id}
                       >
