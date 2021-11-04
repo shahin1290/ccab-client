@@ -118,9 +118,9 @@ export default function HomeScreen({ match }) {
         <TopCourses></TopCourses>
 
         <CurriculamStepsBar />
-       
+         {/* Sec Title */}
         <div className="container-fluid bg-light py-5">
-                    {/* Sec Title */}
+                  
           <div data-aos="fade-down" className='sec-title style-two centered'>
             <div className='title'>
               Different Course Plans Tailored To Your Needs

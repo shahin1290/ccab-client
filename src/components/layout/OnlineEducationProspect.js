@@ -84,28 +84,28 @@ const OnlineEducationProspect = () => {
               innovative tech companies to meet the highest standards and taught
               by industry leaders.
             </div>
-            <div data-aos="flip-up" className="row clearfix d-flex ">
-              <div className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">
+            <div data-aos="fade-up" className="row clearfix d-flex ">
+              <div   data-aos="fade-up" className=" partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center ">
                 <img src="images/paypal-f.png" className=" " />
               </div>
 
-              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+              <div   data-aos="fade-up" className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
                 <img src="images/facebook-f.png" className="" />
               </div>
 
-              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+              <div   data-aos="fade-up" className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
                 <img src="images/hubspot-f.png" className="" />
               </div>
 
-              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+              <div   data-aos="fade-up" className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
                 <img src="images/google-f.png" className="" />
               </div>
 
-              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+              <div   data-aos="fade-up" className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
                 <img src="images/apple-f.png" className=" " />
               </div>
 
-              <div className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
+              <div   data-aos="fade-up" className="  partnerImage   col-12 col-md-6 col-lg-2 d-flex justify-content-center">
                 <img src="images/klarna-f.png" className=" h-75 " />
               </div>
             </div>
