@@ -296,7 +296,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const res = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-subscription`,
+          `http://localhost:5001/api/order/stripe/stripe-subscription`,
           {
             payment_method: paymentMethod.id,
             planId: plan.stripeSubscriptionId,
@@ -361,7 +361,7 @@ const CheckoutForm = ({ match, history }) => {
               (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
               sekToEUR *
               currency.data.amount *
-              AmountOfWeeks *
+              6 *
               100
           );
         }
@@ -385,7 +385,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const { data: clientSecret } = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+          `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
           {
             paymentMethodType: "card",
             currency: currency.data.currency,
@@ -509,7 +509,7 @@ const CheckoutForm = ({ match, history }) => {
         (Number(plan.price) +
           (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
         sekToEUR *
-        AmountOfWeeks;
+        6;
       dispatch(
         createKlarnaSession(
           {
@@ -636,6 +636,44 @@ const CheckoutForm = ({ match, history }) => {
                                     >
                                       Subscription
                                     </label>
+
+                                    <div className='clearfix mb-3'>
+                                      Total Of
+                                      {plan.period === "weekly"
+                                        ? " Weeks"
+                                        : " Months"}
+                                      :
+                                      <select
+                                        className='custom-select-box px-2 mt-3'
+                                        onChange={(e) => {
+                                          setAmountOfWeeks(
+                                            Number(e.target.value)
+                                          );
+                                        }}
+                                      >
+                                        {plan.period == "weekly" ? (
+                                          <>
+                                            <option value='4' selected>
+                                              4 weeks
+                                            </option>
+                                            <option value='5'>5 weeks</option>
+                                            <option value='6'>6 weeks</option>
+                                            <option value='7'>7 weeks</option>
+                                            <option value='8'>8 weeks</option>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <option value='2' selected>
+                                              2 Months
+                                            </option>
+                                            <option value='3'>3 Months</option>
+                                            <option value='4'>4 Months</option>
+                                            <option value='5'>5 Months</option>
+                                            <option value='6'>6 Months</option>
+                                          </>
+                                        )}
+                                      </select>
+                                    </div>
                                   </div>
 
                                   <div className='form-check m-3'>
@@ -664,46 +702,34 @@ const CheckoutForm = ({ match, history }) => {
                                 </div>
                                 <ul className='pt-2'>
                                   <li className='clearfix mb-3'>
-                                    Total Of Weeks:
-                                    <select
-                                      className='custom-select-box px-2'
-                                      onChange={(e) => {
-                                        setAmountOfWeeks(
-                                          Number(e.target.value)
-                                        );
-                                      }}
-                                    >
-                                      {plan.period == "weekly" ? (
-                                        <>
-                                          <option value='4' selected>
-                                            4 weeks
-                                          </option>
-                                          <option value='5'>5 weeks</option>
-                                          <option value='6'>6 weeks</option>
-                                          <option value='7'>7 weeks</option>
-                                          <option value='8'>8 weeks</option>
-                                        </>
-                                      ) : (
-                                        <>
-                                          <option value='2' selected>
-                                            2 Months
-                                          </option>
-                                          <option value='3'>3 Months</option>
-                                          <option value='4'>4 Months</option>
-                                          <option value='5'>5 Months</option>
-                                          <option value='6'>6 Months</option>
-                                        </>
-                                      )}
-                                    </select>
-                                  </li>
-                                  <li className='clearfix mb-3'>
                                     Plan Type:
                                     <span className='pull-right'>
                                       {plan.name}
                                     </span>
                                   </li>
 
-                                  {method === "card" && (
+                                  {billingType === "oneTime" ? (
+                                    <>
+                                      {" "}
+                                      <li className='clearfix mb-3'>
+                                        Original Price:
+                                        <span className='pull-right'>
+                                          {currencySuccess &&
+                                            `${Math.round(
+                                              (Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 200
+                                                  : 0)) *
+                                                6 *
+                                                sekToEUR *
+                                                currency.data.amount
+                                            )}  ${currency.data.currency}`}
+                                        </span>
+                                      </li>
+                                    </>
+                                  ) : (
                                     <>
                                       {" "}
                                       <li className='clearfix mb-3'>
@@ -720,11 +746,11 @@ const CheckoutForm = ({ match, history }) => {
                                                 sekToEUR *
                                                 currency.data.amount
                                             )}  ${currency.data.currency} /
-                                              ${
-                                                plan.period === "weekly"
-                                                  ? "week"
-                                                  : "month"
-                                              }`}
+                                          ${
+                                            plan.period === "weekly"
+                                              ? "week"
+                                              : "month"
+                                          }`}
                                         </span>
                                       </li>
                                     </>
@@ -732,19 +758,35 @@ const CheckoutForm = ({ match, history }) => {
 
                                   <li className='clearfix mb-3'>
                                     Disscount:
-                                    <span className='pull-right'>
-                                      {currencySuccess &&
-                                        `${Math.round(
-                                          (promos &&
-                                          promos.length > 0 &&
-                                          promos[0].show
-                                            ? 200
-                                            : 0) *
-                                            sekToEUR *
-                                            currency.data.amount *
-                                            AmountOfWeeks
-                                        )}  ${currency.data.currency}`}
-                                    </span>
+                                    {billingType === "oneTime" ? (
+                                      <span className='pull-right'>
+                                        {currencySuccess &&
+                                          `${Math.round(
+                                            (promos &&
+                                            promos.length > 0 &&
+                                            promos[0].show
+                                              ? 200
+                                              : 0) *
+                                              sekToEUR *
+                                              currency.data.amount *
+                                              6
+                                          )}  ${currency.data.currency}`}
+                                      </span>
+                                    ) : (
+                                      <span className='pull-right'>
+                                        {currencySuccess &&
+                                          `${Math.round(
+                                            (promos &&
+                                            promos.length > 0 &&
+                                            promos[0].show
+                                              ? 200
+                                              : 0) *
+                                              sekToEUR *
+                                              currency.data.amount *
+                                              AmountOfWeeks
+                                          )}  ${currency.data.currency}`}
+                                      </span>
+                                    )}
                                   </li>
 
                                   <hr />
@@ -752,20 +794,37 @@ const CheckoutForm = ({ match, history }) => {
                                   <li className='clearfix'>
                                     <strong>Total</strong>{" "}
                                     <span className='pull-right'>
-                                      <strong>
-                                        {currencySuccess &&
-                                          `${Math.round(
-                                            (Number(plan.price) +
-                                              (promos &&
-                                              promos.length > 0 &&
-                                              promos[0].show
-                                                ? 0
-                                                : 200)) *
-                                              sekToEUR *
-                                              currency.data.amount *
-                                              AmountOfWeeks
-                                          )}  ${currency.data.currency}`}
-                                      </strong>
+                                      {billingType === "oneTime" ? (
+                                        <strong>
+                                          {currencySuccess &&
+                                            `${Math.round(
+                                              (Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 0
+                                                  : 200)) *
+                                                sekToEUR *
+                                                currency.data.amount *
+                                                6
+                                            )}  ${currency.data.currency}`}
+                                        </strong>
+                                      ) : (
+                                        <strong>
+                                          {currencySuccess &&
+                                            `${Math.round(
+                                              (Number(plan.price) +
+                                                (promos &&
+                                                promos.length > 0 &&
+                                                promos[0].show
+                                                  ? 0
+                                                  : 200)) *
+                                                sekToEUR *
+                                                currency.data.amount *
+                                                AmountOfWeeks
+                                            )}  ${currency.data.currency}`}
+                                        </strong>
+                                      )}
                                     </span>
                                   </li>
                                 </ul>
