@@ -17,16 +17,7 @@ export default function CourseSideBar({setSelctedCourse , selectedCourse}) {
 
   //Get Student's Bootcamps
   const { userDetail } = useSelector((state) => state.userLogin);
-    //stlye object
-    const [ activeStlye , setActiveSyle ] = useState({
-            acitve:{
-                bakcgroundColor:'yellow'
-            },
-            nonActive:{
-                bakcgroundColor:'#fff'
-            }
 
-    })
   const {
     courseList,
     loading: bootcampLoading,
@@ -75,7 +66,7 @@ export default function CourseSideBar({setSelctedCourse , selectedCourse}) {
                 {filterCourseList().length?filterCourseList().map(course=>{
                      return(
                 
-                    <Link to="Tasks" spy={true } smooth={true} offset={-80} duration={500}
+                    <Link to="Tasks" spy={true } smooth={true} offset={-150} duration={500}
                          key={course._id} 
                        
                       >
@@ -108,7 +99,10 @@ export default function CourseSideBar({setSelctedCourse , selectedCourse}) {
                 
                     </div>
                 </Link>)
-                }) : "there are no courses"}
+                }) : <div>
+                        <h4>there are no courses</h4>
+                      
+                    </div>}
       </div>
     </div>
     </>

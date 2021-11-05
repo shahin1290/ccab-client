@@ -1473,9 +1473,22 @@ input:checked + .slider:before {
   -webkit-box-shadow: 2px 2px 10px 6px rgba(76,74,2,0.45); 
   box-shadow: 2px 2px 10px 6px rgba(76,74,2,0.45);
 }
+.notFound div{
+  background-image: url('assets/images/background/not-found.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 40vh !important;
+  background-size:20% !important;
+}
 /*******************************/
 
 @media (max-width: 768px) {
+
+
+  .notFound div{
+  
+    background-size:40% !important;
+  }
 
   .CircularProgressbar{
     margin-top: 0px ;
@@ -1499,6 +1512,10 @@ input:checked + .slider:before {
   }
 }
 @media (max-width: 615px ) {
+  .notFound div{
+  
+    background-size:50% !important;
+  }
   .titleBanner {
    transform: translate(0%, 150%) !important;
     max-width:100% !important

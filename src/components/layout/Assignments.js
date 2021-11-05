@@ -264,7 +264,11 @@ export default function Assignments() {
                                 )}
                               </tbody>
                             </table> 
-                             :'You Don\'t have ant task '}
+                             :
+                             <div className="notFound">
+                                <h4 className="text-center">You Don't have any task </h4>
+                                <div></div>
+                            </div>}
                           </div>
                         </div>
 
