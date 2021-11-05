@@ -266,7 +266,7 @@ export default function DayContent({ bootcampId, setOpen }) {
               {week.map((day, index) => (
                 <div key={day._id} className='course-content'>
                     
-                {lockedMessage ?  
+                {/* {lockedMessage ?  
                   
                      <div className="lock-layer" style={{backgroundColor:'#eeeeee'}}>
                         <div className='at-container'>
@@ -298,7 +298,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                                 },3500 )
                             }}></i>
                      </div>
-                    }
+                    } */}
                    
 
                    

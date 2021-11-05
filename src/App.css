@@ -1480,6 +1480,9 @@ input:checked + .slider:before {
   height: 40vh !important;
   background-size:20% !important;
 }
+.planButton{
+  background-color: hsl(241, 56%, 35%) !important;
+}
 /*******************************/
 
 @media (max-width: 768px) {
