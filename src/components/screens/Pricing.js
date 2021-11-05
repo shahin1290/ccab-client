@@ -52,8 +52,8 @@ export default function Pricing() {
 
           <Container>
             <div className='curriculum-project'>
-              <ul className='d-flex justify-content-center curriculum-project pb-5'>
-                <li className='pl-5 btn btn-info rounded mx-2'
+              <ul className='d-flex justify-content-center curriculum-project pb-3'>
+                <li className=' btn btn-info rounded mx-2'
                  onClick={() => setCourse("frontend")}
                               
                  style={
@@ -66,7 +66,7 @@ export default function Pricing() {
                     Front end
                 
                 </li>
-                <li className='pl-5 btn btn-info rounded mx-2'
+                <li className=' btn btn-info rounded mx-2'
                  onClick={() => setCourse("fullstack")}
                  style={
                   course === "fullstack"
@@ -82,7 +82,7 @@ export default function Pricing() {
                   </a>
                 </li>
 
-                <li className='pl-5 btn btn-info rounded mx-2'
+                <li className='btn btn-info rounded mx-2 pt-3 d-flex align-content-center '
                  onClick={() => setCourse("special")}
                  style={
                   course === "special"
@@ -90,12 +90,9 @@ export default function Pricing() {
                     : {}
                 }
                 >
-                  <a
-     
-                  
-                  >
-                    Special
-                  </a>
+            Special
+                    
+                 
                 </li>
               </ul>
             </div>

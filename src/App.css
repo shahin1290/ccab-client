@@ -723,14 +723,14 @@ input:checked + .slider:before {
   box-shadow: none;
 }
 
-.curriculum-project ul li::before {
+/* .curriculum-project ul li::before {
   content: "\2022";
   color: #ea5573;
   font-weight: bold;
   display: inline-block;
   width: 1em;
   margin-left: -1em;
-}
+} */
 
 /* JOBS SECTION */
 .banner-container {
@@ -1479,6 +1479,7 @@ input:checked + .slider:before {
   background-repeat: no-repeat;
   height: 40vh !important;
   background-size:20% !important;
+
 }
 .planButton{
   background-color: hsl(241, 56%, 35%) !important;
