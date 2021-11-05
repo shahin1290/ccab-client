@@ -11,11 +11,20 @@ import { getWeekList } from "../../redux/actions/weekAction";
 import { getOrderList } from "../../redux/actions/orderAction";
 import { getCourseDetails } from "../../redux/actions/courseAction";
 import { getWatchingLectures } from "../../redux/actions/performanceAction";
+import { TransitionGroup } from 'react-transition-group'
+
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+ // animation lib 
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function DayContent({ bootcampId, setOpen }) {
   const dispatch = useDispatch();
   const { userDetail } = useSelector((state) => state.userLogin);
   const [show, setShow] = useState("");
+  // state for lock layout 
+  const [lockedMessage , setLockedMessage ] = useState(false);
 
   /****************redux store***************** */
   const {
@@ -39,6 +48,11 @@ export default function DayContent({ bootcampId, setOpen }) {
     dispatch(getOrderList());
     dispatch(getWeekList(bootcampId));
   }, [dispatch, bootcampId]);
+
+
+  useEffect(()=>{
+    AOS.init();
+  },[])
 
   //get task list for students
   const taskListMy = useSelector((state) => state.taskListMy);
@@ -84,6 +98,9 @@ export default function DayContent({ bootcampId, setOpen }) {
   const { quizzes } = useSelector((state) => state.quizList);
 
   const { lectures } = useSelector((state) => state.performanceLectureList);
+
+
+
 
   /****************function***************** */
 
@@ -245,8 +262,46 @@ export default function DayContent({ bootcampId, setOpen }) {
               Week {index + 1}
             </div>
             <div eventKey={`${index}`}>
+         
               {week.map((day, index) => (
                 <div key={day._id} className='course-content'>
+                    
+                {lockedMessage ?  
+                  
+                     <div className="lock-layer" style={{backgroundColor:'#eeeeee'}}>
+                        <div className='at-container'>
+                            <p  className=" fs-1 p-2 at-item">
+                            complete the previous lecture and assignment to unlock</p>
+                        </div>  
+                        
+
+                        <ProgressProvider valueStart={10} valueEnd={100}>
+                        {value => <CircularProgressbar value={value}
+                        styles={ { width:'50px'},buildStyles({
+                           // How long animation takes to go from one percentage to another, in seconds
+                          pathTransitionDuration:4.5,
+                        
+                        })} /> }
+                      </ProgressProvider>
+                       
+                     
+                       
+                      </div >
+                  
+                     : 
+                     <div className="lock-layer" style={{backgroundColor:'#eeeeee88'}}>
+                        <i className="fas fa-lock" style={{marginTop:'20px'}}
+                              onClick={()=>{
+                                setLockedMessage(true)
+                                setTimeout(()=>{
+                                    setLockedMessage(false)
+                                },3500 )
+                            }}></i>
+                     </div>
+                    }
+                   
+
+                   
                   <div className=' d-flex p-2 mt-2 mb-2'>
                     <div
                       className='pr-4 text-warning '
@@ -268,9 +323,9 @@ export default function DayContent({ bootcampId, setOpen }) {
                     >
                       <Link
                         to={`/course-content/${bootcampId}`}
-                        style={{
-                          backgroundColor: show === day._id ? "#ffbfbe" : "",
-                        }}
+                        // style={{
+                        //   backgroundColor: show === day._id ? "#ffbfbe" : "",
+                        // }}
                         className='sub-text text-left'
                         id={day._id}
                       >
@@ -282,43 +337,45 @@ export default function DayContent({ bootcampId, setOpen }) {
                   {filterWeeklyQuiz(day._id).length > 0 &&
                     filterWeeklyQuiz(day._id).map((quiz) => (
                       <div className=' d-flex m-2'>
-                        <div
-                          className='pr-4 text-warning '
-                          style={{ fontSize: "25px" }}
-                        >
-                          {quizStatus(quiz._id) &&
-                          quizStatus(quiz._id).status === "Not Sent" ? (
-                            <i class='far fa-circle'></i>
-                          ) : (
-                            <i class='fas fa-check-circle'></i>
-                          )}
-                        </div>
-                        <div key={quiz._id}>
-                          <img width='30' src='/images/resource/quiz.png' />
+                      
+                          <div
+                            className='pr-4 text-warning '
+                            style={{ fontSize: "25px" }}
+                          >
+                            {quizStatus(quiz._id) &&
+                            quizStatus(quiz._id).status === "Not Sent" ? (
+                              <i class='far fa-circle'></i>
+                            ) : (
+                              <i class='fas fa-check-circle'></i>
+                            )}
+                          </div>
+                          <div key={quiz._id}>
+                            <img width='30' src='/images/resource/quiz.png' />
 
-                          {userDetail.user_type === "StudentUser" && (
-                            <Link
-                              to={
-                                quizStatus(quiz._id) &&
-                                quizStatus(quiz._id).status === "Not Sent"
-                                  ? `/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
-                                  : `/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
-                              }
-                              className='sub-text  ml-2'
-                            >
-                              Quiz: {quiz.name}
-                            </Link>
-                          )}
+                            {userDetail.user_type === "StudentUser" && (
+                              <Link
+                                to={
+                                  quizStatus(quiz._id) &&
+                                  quizStatus(quiz._id).status === "Not Sent"
+                                    ? `/quiz/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
+                                    : `/quiz-answer/${quiz.bootcamp._id}/${quiz.day}/${quiz._id}`
+                                }
+                                className='sub-text  ml-2'
+                              >
+                                Quiz: {quiz.name}
+                              </Link>
+                            )}
 
-                          {userDetail.user_type !== "StudentUser" && (
-                            <Link
-                              to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
-                              className='sub-text  ml-2'
-                            >
-                              Quiz: {quiz.name}
-                            </Link>
-                          )}
-                        </div>
+                            {userDetail.user_type !== "StudentUser" && (
+                              <Link
+                                to={`/mentor-show-quiz/${quiz.bootcamp}/${quiz.day}/${quiz._id}`}
+                                className='sub-text  ml-2'
+                              >
+                                Quiz: {quiz.name}
+                              </Link>
+                            )}
+                          </div>
+                      
                       </div>
                     ))}
 
@@ -356,8 +413,11 @@ export default function DayContent({ bootcampId, setOpen }) {
                       </div>
                     ))}
                   <hr />
-                </div>
+             
+              </div>
               ))}
+         
+         
             </div>
           </div>
         ))
@@ -365,3 +425,17 @@ export default function DayContent({ bootcampId, setOpen }) {
     </div>
   );
 }
+
+
+
+// If you don't have a version of React that supports
+// hooks, you can use a class-based version of this
+// component in ProgressProviderUsingClass.js
+const ProgressProvider = ({ valueStart, valueEnd, children }) => {
+  const [value, setValue] = React.useState(valueStart);
+  React.useEffect(() => {
+    setValue(valueEnd);
+  }, [valueEnd]);
+
+  return children(value);
+};

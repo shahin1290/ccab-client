@@ -37,7 +37,7 @@ const ServiceForm = () => {
     try {
       const phoneNumber = "00-" + code + "-" + phone;
 
-      const res = await axios.post("http://localhost:5001/contact", {
+      const res = await axios.post("https://server.ccab.tech/contact", {
         message,
         category: service,
         phoneNumber,

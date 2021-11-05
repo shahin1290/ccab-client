@@ -99,7 +99,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            "http://localhost:5001/uploads/Bootcamp/" +
+                            "https://server.ccab.tech/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt=''
