@@ -1,0 +1,45 @@
+/* Landing page css */
+
+
+/* nav links  */
+
+.pointer{
+    cursor: pointer !important;
+}
+.nav-link:hover{
+    color: #ec6d80 !important;
+}
+.nav-sticky .call-no a:hover{
+    color: #3b1e22 !important;
+}
+
+.nav-item .nav-link {
+	display: inline-block;
+	color: #d1d1d1 !important;
+	text-decoration: none
+}
+
+.nav-sticky.navbar-custom .navbar-nav li a:hover,
+.nav-link:hover{
+    color:#cab2b6 !important;
+}
+.nav-sticky.navbar-custom .navbar-nav li a:active{
+    color:#ec6d80 !important;
+}
+
+.nav-sticky.navbar-custom .navbar-nav li .activeItem{
+    color:#ec6d80 !important;
+}
+/* form */
+
+.selectBox{
+    overflow: auto;
+    
+    position: relative;
+}
+.myDropDown
+{
+    
+    max-height:100px !important;
+   background-color: aliceblue !important;
+}

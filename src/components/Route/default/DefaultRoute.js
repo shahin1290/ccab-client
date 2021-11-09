@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { script } from "./../../../assets/js/script";
 import { Switch, Route } from "react-router-dom";
 import RedirectToAuthRoutes from "../auth/RedirectToAuthRoutes";
-
+import LandingScreen from './../../screens/LandingScreen'
 import HomeScreen from "../../screens/HomeScreen";
 import ServiceHomeScreen from "../../screens/ServiceHomeScreen";
 import Footer from "../../layout/Footer";
@@ -126,7 +126,9 @@ export default function DefaultRoute() {
           onClick={() => setShowModal({ visible: true })}
         ></a>
       <Switch>
-        <Route exact path='/' component={HomeScreen}></Route>
+
+     
+        <Route exact path='/dev' component={HomeScreen}></Route>
         <Route exact path='/Services' component={ServiceHomeScreen}></Route>
         {/* <Route  path={`/auth`} component={()=><RedirectToAuthRoutes authPath={AuthPath}/>} ></Route> */}
         <Route exact path='/login' component={LoginScreen}></Route>
@@ -163,11 +165,10 @@ export default function DefaultRoute() {
         <Route exact path='/jobs' component={Jobs} />
         <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/reset-password/:token' component={ResetPassword} />
-        <Route path='/contact' component={Contact} />
-        <Route path='/privacy' component={Privacy} />
-        <Route path='/' component={NotFound} />
+
+      
       </Switch>
-      <Footer />
+   
     </main>
   );
 }

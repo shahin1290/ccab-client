@@ -13,7 +13,8 @@ import Checkout from "./components/screens/Checkout";
 import CheckoutKlarna from "./components/screens/CheckoutKlarna";
 import ConfirmationKlarna from "./components/screens/ConfirmationKlarna";
 import ConfirmationCardPurchase from "./components/screens/ConfirmationCardPurchase";
-
+/* LAnding page */
+import Landings from './components/Route/landing/LandingRoute'
 import ErrorScreen from "./components/screens/ErrorScreen";
 import { SideBarStateProvider } from "./util/sidebarState";
 import Assignments from "./components/layout/Assignments";
@@ -57,7 +58,7 @@ import ReportList from "./components/screens/InstructorScreen/ReportList";
 import NewSession from "./components/screens/InstructorScreen/NewSession";
 
 /* Private Routes  */
-import DefaultRoutes from "./components/Route/default/DefaultRoute";
+
 import StudentRoute from "./components/Route/student/StudentRoute";
 import MentorRoute from "./components/Route/mentor/MentorRoute";
 import InstructorRoute from "./components/Route/instructor/InstructorRoute";
@@ -455,8 +456,16 @@ function App() {
             component={PerformanceRating}
           ></StudentRoute>
 
-          {/* default Routes for guests  */}
-          <Route component={DefaultRoutes}></Route>
+
+
+
+       
+          
+    
+
+        {/* Landing Routes for guests  */}
+        <Route component={Landings}></Route>
+       
         </Switch>
       </SideBarStateProvider>
     </div>
