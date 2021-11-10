@@ -64,43 +64,47 @@ export default function Pricing({ match }) {
 
           <Container>
             <div className='curriculum-project'>
-              <ul className='d-flex justify-content-center curriculum-project pb-5'>
-                <li className='pl-5 '>
-                  <a
-                    onClick={() => setCourse("frontend")}
-                    style={
-                      course === "frontend"
-                        ? { color: "#ea5573", fontWeight: "bold" }
-                        : {}
-                    }
-                  >
+              <ul className='d-flex justify-content-center curriculum-project pb-3'>
+                <li className=' btn btn-info rounded mx-2'
+                 onClick={() => setCourse("frontend")}
+                              
+                 style={
+                  course === "frontend"
+                    ? { backgroundColor: "#ea5573",color:"black", fontWeight: "bold" }
+                    : {color:'#fff'}
+                }
+                >
+        
                     Front end
-                  </a>
+                
                 </li>
-                <li className='pl-5 '>
+                <li className=' btn btn-info rounded mx-2'
+                 onClick={() => setCourse("fullstack")}
+                 style={
+                  course === "fullstack"
+                    ? { backgroundColor: "#ea5573",color:"black", fontWeight: "bold" }
+                    : {}
+                }
+                >
                   <a
-                    style={
-                      course === "fullstack"
-                        ? { color: "#ea5573", fontWeight: "bold" }
-                        : {}
-                    }
-                    onClick={() => setCourse("fullstack")}
+            
+                 
                   >
                     Full stack
                   </a>
                 </li>
 
-                <li className='pl-5 '>
-                  <a
-                    style={
-                      course === "special"
-                        ? { color: "#ea5573", fontWeight: "bold" }
-                        : {}
-                    }
-                    onClick={() => setCourse("special")}
-                  >
-                    Special
-                  </a>
+                <li className='btn btn-info rounded mx-2 pt-3 d-flex align-content-center '
+                 onClick={() => setCourse("special")}
+                 style={
+                  course === "special"
+                    ? { backgroundColor: "#ea5573",color:"black", fontWeight: "bold" }
+                    : {}
+                }
+                >
+            Special
+                    
+                 
                 </li>
               </ul>
             </div>
