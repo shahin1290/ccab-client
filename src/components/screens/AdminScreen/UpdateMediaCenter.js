@@ -522,7 +522,7 @@ export default function UpdateMediaCenter({ match }) {
                     {ImageLable ? (
                       <img
                         src={
-                          "http://localhost:5001/uploads/Bootcamp/" + ImageLable
+                          "https://server.ccab.tech/uploads/Bootcamp/" + ImageLable
                         }
                       />
                     ) : (

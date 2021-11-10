@@ -33,7 +33,7 @@ export default function TopCourses({ match }) {
   const filterSubscriptionCourse = (courseList) => {
     const filteredThreeCourses = courseList.filter(
       (course) =>
-        course.name.toLowerCase().includes("basic frontend") ||
+        course.name.toLowerCase().includes("frontend  course") ||
         course.name.toLowerCase().includes("foundation course") ||
         course.name.toLowerCase().includes("mern full stack")
     );
@@ -99,7 +99,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            "http://localhost:5001/uploads/Bootcamp/" +
+                            "https://server.ccab.tech/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt=''
