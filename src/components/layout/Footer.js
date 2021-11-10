@@ -6,95 +6,59 @@ export default function Footer() {
   return (
     <>
       {/*Main Footer*/}
-      <footer className='main-footer style-two'>
-        {/* Upper Box */}
-
-        {/* Pattern Layer Three */}
-        <div
-          className='pattern-layer-three'
-          style={{ backgroundImage: "url(images/background/pattern-2.png)" }}
-        />
-        <div className='auto-container'>
-          {/* Widgets Section */}
-          <div className='widgets-section'>
-            <div className='row clearfix'>
-              {/* Big Column */}
-              <div className='big-column col-lg-4 col-md-12 col-sm-12'>
-                <div className='row clearfix'>
-                  {/*Footer Column*/}
-                  <div className='footer-column col-lg-9 col-md-6 col-sm-12'>
-                    <div className='footer-widget logo-widget'>
-                      <div className='logo'>
-                        <a href='/l'>
-                          <img src={logo} width='30%' />
-                        </a>
-                      </div>
-
-                      <div className='social-box'>
-                        <a
-                          href='https://www.facebook.com/CfCollegezz'
-                          className='fa fa-facebook'
-                        />
-                        <a
-                          href='https://www.instagram.com/cf.college/'
-                          className='fa fa-instagram'
-                        />
-                        <a
-                          href='https://www.twitter.com/CodifyCollege/'
-                          className='fa fa-twitter'
-                        />
-
-                        <a
-                          href='https://www.linkedin.com/company/cf-college/'
-                          className='fa fa-linkedin'
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  {/*Footer Column*/}
-                </div>
-              </div>
-              {/* Big Column */}
-              <div className='big-column col-lg-6 col-md-12 col-sm-12'>
-                <div className='row clearfix'>
-                  {/*Footer Column*/}
-                  <div className='footer-column col-lg-6 col-md-6 col-sm-12'>
-                    <div className='footer-widget links-widget'>
-                      <h4>Resource</h4>
-                      <ul className='links-widget'>
-                        <li>
-                          <a href='/privacy'>Privacy Policy</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  {/*Footer Column*/}
-                  <div className='footer-column col-lg-6 col-md-6 col-sm-12'>
-                    <div className='footer-widget links-widget'>
-                      <h4>Quick Links</h4>
-                      <ul className='links-widget'>
-                        <li>
-                          <a href='/'>Home</a>
-                        </li>
-                        <li>
-                          <a href='/course-grid'>Courses</a>
-                        </li>
-                        <li>
-                          <a href='/contact'>Contact</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Footer Bottom */}
-          <div className='footer-bottom text-center'>
-            <div className='copyright'>Copyright © 2021 cc CF College AB</div>
+      <section className="footer  bg-light">
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-4">
+          <div className="mb-4">
+            <a href="layout-one-1.html"><img src="images/CF-footer.gif" alt='photo' className="logo-dark" height={26} /></a>
+            <p className="text-muted mt-4 mb-2">Yourcompanyemailid@gmail.com</p>
+            <h6 className="text-muted font-weight-normal">+00 1234-5678-90</h6>
           </div>
         </div>
-      </footer>
+        <div className="col-lg-8">
+          <div className="row">
+            <div className="col-md-4">
+              <h6 className="footer-list-title text-dark mb-3">Services</h6>
+              <ul className="list-unstyled company-sub-menu">
+                <li><a href="#">Digital Marketing</a></li>
+                <li><a href="#">Business Analysis</a></li>
+                <li><a href="#">How It Work</a></li>
+                <li><a href="#">Fix &amp; Flip</a></li>
+                <li><a href="#">Social Activation</a></li>
+              </ul>
+            </div>
+            <div className="col-md-4">
+              <h6 className="footer-list-title text-dark mb-3">About Us</h6>
+              <ul className="list-unstyled company-sub-menu">
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div className="col-md-4">
+              <h6 className="footer-list-title text-dark mb-3">Our Address</h6>
+              <p className="text-muted f-14">4806 Spring Haven Trail South Orange, NJ 07079</p>
+              <h6 className="text-muted pb-2">Email: Support@gamil.com</h6>
+              <ul className="list-unstyled footer-social-list mt-4">
+                <li className="list-inline-item"><a href="#"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="#"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="#"><i className="mdi mdi-linkedin" /></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-5">
+        <div className="col-md-12">
+          <div className="text-center text-muted">
+            <p className="mb-0 f-15">2020 © Deoxa. Design by Themesdesign</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
     </>
   );
 }
