@@ -6,21 +6,33 @@ import { getPriceConversionFromSEK } from "./../../util/getPriceConversion";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SpecialCourseForm from "../layout/SpecialCourseForm";
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
- 
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
 
-export default function Pricing() {
-  const [course, setCourse] = useState("frontend");
+export default function Pricing({ match }) {
+  const subscription = match && match.params.plan;
+
+  const [course, setCourse] = useState(
+    (subscription &&
+      subscription.toLocaleLowerCase().includes("full stack") &&
+      "fullstack") ||
+      (subscription &&
+        subscription.toLocaleLowerCase().includes("front end") &&
+        "frontend") ||
+      (subscription &&
+        subscription.toLocaleLowerCase().includes("foundation") &&
+        "special") ||
+      "frontend"
+  );
   const [sekToUsd, setSekToUsd] = useState();
 
   const getPlans = () => {
     return plans.filter((plan) => plan.course === course);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init();
-  },[])
+  }, []);
 
   const {
     promos,
@@ -99,9 +111,8 @@ export default function Pricing() {
             {course !== "special" ? (
               <Row>
                 {getPlans().length &&
-                  getPlans().map((plan ,index) => (
-                    <Col 
-                   
+                  getPlans().map((plan, index) => (
+                    <Col
                       className='no-gutter offset-md-2 offset-lg-1'
                       sm={12}
                       lg={5}
@@ -112,7 +123,11 @@ export default function Pricing() {
                       }}
                     >
                       {/* Price Block */}
-                      <div  data-aos="flip-right" data-aos-delay={(index+2)*100 } className='price-block col  col-sm-12 mx-auto'>
+                      <div
+                        data-aos='flip-right'
+                        data-aos-delay={(index + 2) * 100}
+                        className='price-block col  col-sm-12 mx-auto'
+                      >
                         <div
                           className='inner-box d-flex flex-column justify-content-between mb-5'
                           style={{ overflow: "auto" }}

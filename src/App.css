@@ -320,7 +320,7 @@ pre {
   background-color: #eeeeee;
   height: 100% !important;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center ;
   padding-right: 10px !important;
 }
