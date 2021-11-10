@@ -158,7 +158,7 @@ export default function DefaultRoute() {
 
           <Route
             exact
-            path='/pricing-plans'
+            path='/pricing-plans/:plan'
             component={Pricing}></Route>
 
 
