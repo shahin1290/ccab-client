@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import { Row, Col, ProgressBar } from 'react-bootstrap'
-import RegisterScreen from '../screens/RegisterScreen'
+import RegisterScreen from '../screens/authScreen/RegisterScreen'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 

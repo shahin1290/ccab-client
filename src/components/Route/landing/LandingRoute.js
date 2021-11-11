@@ -25,31 +25,9 @@ export default function DefaultRoute() {
       {/* Preloader */}
       {/* <div className="preloader" /> */}
 
-      <a  className='handle1 handle-mobile'
-         style={{top:'65px'}}
-         href="/pricing-plans"></a>
-        <a
-          href='https://meetings.hubspot.com/munzer1'
-          style={{top:'65px'}}
-          className='handle2 handle-mobile'
-          target='_blank'
-        ></a>
-        <a
-          className='handle3 handle-mobile'
-          style={{top:'65px'}}
-          onClick={() => setShowModal({ visible: true })}
-        ></a>
   
 
-      <Rodal
-          animation='rotate'
-          visible={showModal.visible}
-          onClose={() => setShowModal({ visible: false })}
-          width='900'
-        >
-          <ContactForm />
-        </Rodal>
-
+    
         {/* Education Section Two for big screen  only */}
       <a  className='handle handle1'
          

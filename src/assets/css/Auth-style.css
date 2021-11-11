@@ -1,0 +1,78 @@
+
+/*  Teacher Login */
+
+.teacher-login-section{
+    background-image: url('../images/background/teacher-login.png');
+    background-position: right;
+    background-size: cover;
+    height: 100vh;
+}
+.teacher-login-section h2 {
+    line-height: 1.2 !important;
+    font-weight: 700;
+    text-transform: uppercase !important;
+}
+
+.teacher-login-section p {
+    font-family: "Rubik", sans-serif !important;
+    font-weight: 400;
+}
+
+/*****************************/
+
+
+/* hero for dev home page */
+.education-section-two h1{
+	font-size: 250% !important;
+}
+
+
+/* hero dev home animation */
+.hero-image {
+	-webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes slide-left {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(-100px);
+              transform: translateX(-100px);
+    }
+  }
+  @keyframes slide-left {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(-100px);
+              transform: translateX(-100px);
+    }
+  }
+  
+/******************************/
+.carousel-indicators {
+    background-color: blue !important;
+}
+.carousel {
+    position: static !important;
+}
+.carousel-indicators{
+    color: aqua !important;
+   
+    z-index: 30000 !important;
+ 
+    position: absolute !important;
+ 
+}
+
+
+/* Media Query*/
+@media (max-width: 615px ) {
+
+  
+}

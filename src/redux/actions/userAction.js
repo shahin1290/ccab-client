@@ -68,9 +68,11 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userDetail", JSON.stringify(response.data));
   } catch (error) {
-    // console.log("error:", error)
+     console.log("error:", error)
+    
     dispatch({
       type: USER_LOGIN_FAIL,
+      
       //    payload: error.res
       payload:
         error.response && error.response.data.message
@@ -84,7 +86,7 @@ export const logout = () => (dispatch, getState) => {
     userLogin: { userDetail },
   } = getState();
 
-  const socket = socketIOClient("http://localhost:5001");
+  const socket = socketIOClient("https://server.ccab.tech");
 
   socket.emit("logout", { userId: userDetail._id });
 

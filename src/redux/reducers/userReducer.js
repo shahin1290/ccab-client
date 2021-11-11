@@ -47,6 +47,7 @@ export const userLoginReducer = (state = { userDetail: {} }, action) => {
     case USER_LOGIN_REQUEST:
       return {
         ...state,
+        error :'',
         loading: true // the raison for loading here if for data is being currently fetching. thats why loaing will be happen
       }
 
@@ -62,7 +63,7 @@ export const userLoginReducer = (state = { userDetail: {} }, action) => {
         ...state,
         loading: false, // loading is done laoding!
         error: action.payload,
-        user: {}
+        userDetail: {}
       }
     case USER_LOGOUT:
       return { userDetail: {} } // returning empty object

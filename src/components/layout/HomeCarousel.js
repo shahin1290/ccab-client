@@ -10,13 +10,18 @@ import {
 } from 'react-scroll'
 
 // images
-import image0 from './../../assets/images/header/image-1.jpg'
-import image1 from './../../assets/images/header/image-2.jpg'
-import image2 from './../../assets/images/header/image-3.jpg'
+import image0 from './../../assets/images/header/image-1-rec.png'
+import image1 from './../../assets/images/header/image-2-rec.png'
+import image2 from './../../assets/images/header/image-3-rec.png'
+import image3 from './../../assets/images/header/image-4-rec.png'
+import image4 from './../../assets/images/header/image-5-rec.png'
+import image5 from './../../assets/images/header/image-6-rec.png'
+import image6 from './../../assets/images/header/image-7-rec.png'
+import image7 from './../../assets/images/header/image-8-rec.png'
 
 const HomeCaousel = () => {
   return (
-    <div>
+    <div className="container">
       <section
           className="education-section-two"
           style={{
@@ -26,21 +31,25 @@ const HomeCaousel = () => {
           <div className="auto-container">
             <div className="row clearfix">
               {/* Image Column */}
-              <div className="image-column  col-lg-6 col-md-12 col-sm-12">
+              <div className="image-column  offset-1 d-lg-block d-sm-none col-lg-5 col-md-10 col-sm-10">
                 <div className="inner-column ">
                   <div className="image titlt " data-tilt data-tilt-max={4}>
                     {/* Slider Section */}
                     <div
                       className="container carouselContainer overflow-hidden"
-                      style={{ marginTop: '110px' }}
+                      style={{ marginTop: '60px' }}
                     >
-                      <Carousel>
+                      <Carousel indicators={true}>
                         <Carousel.Item>
-                          <img
-                            className="d-block m-auto w-100"
-                            src={image0}
-                            alt="First slide"
-                          />
+                          <div className="hero-image-box ">
+                              <img
+                                    className="d-block m-auto w-100 rounded"
+                                    src={image0}
+                                    alt="First slide"
+                                  />
+
+                          </div>
+    
                         </Carousel.Item>
                         <Carousel.Item>
                           <img
@@ -56,6 +65,41 @@ const HomeCaousel = () => {
                             alt="Third slide"
                           />
                         </Carousel.Item>
+                        <Carousel.Item>
+                          <img
+                            className="d-block  w-60  mx-auto w-100"
+                            src={image3}
+                            alt="Third slide"
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                          <img
+                            className="d-block  w-60  mx-auto w-100"
+                            src={image4}
+                            alt="Third slide"
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                          <img
+                            className="d-block  w-60  mx-auto w-100"
+                            src={image5}
+                            alt="Third slide"
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                          <img
+                            className="d-block  w-60  mx-auto w-100"
+                            src={image6}
+                            alt="Third slide"
+                          />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                          <img
+                            className="d-block  w-60  mx-auto w-100"
+                            src={image7}
+                            alt="Third slide"
+                          />
+                        </Carousel.Item>
                       </Carousel>
                     </div>
                     {/* <img src={image3} className="w-100" /> */}
@@ -63,32 +107,29 @@ const HomeCaousel = () => {
                 </div>
               </div>
               {/* Content Column */}
-              <div className="content-column mt-2 col-lg-6 col-md-12 col-sm-12">
-                <div className="inner-column">
-                  <h2 className="text-center-small-screen">
+              <div className="content-column mt-5 col-lg-6 col-md-12 col-sm-12">
+               
+                  <h1 className="">
                     learn to code, <br />
                     With a New digital life
-                  </h2>
-                  <div className="text header-text text-center-small-screen">
+                  </h1>
+                  <div className="text header-text ">
                     Start your new Work with our weekly remotely
                     <br /> Tech programs in Web Development.
                     <br />
                     We have a new course every month.
                   </div>
                   <div className="d-flex jutify-content-center ">
-                    <a
-                      activeclassName="active"
-                      className="theme-btn btn-style-three mx-auto mb-5"
-                      href="https://meetings.hubspot.com/sl-melad"
-                      target="_blank"
-                      smooth={true}
-                      offset={-100}
-                      duration={500}
-                    >
-                      <span className="txt">Video Call</span>
-                    </a>
+    
+                    <a  className="btn btn-warning mt-4 pointer text-white"  
+                    activeClass="active"  
+                    href="https://meetings.hubspot.com/sl-melad"
+                    target="_blank"
+                    spy={true} smooth={true} offset={-70} duration={1000}>
+                      Learn More<span className="ml-2 right-icon">→</span>
+                      </a>
                   </div>
-                </div>
+            
               </div>
             </div>
           </div>

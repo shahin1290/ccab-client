@@ -3,7 +3,7 @@ import "malihu-custom-scrollbar-plugin";
 import TopCourses from "./../layout/TopCourses";
 import Pricing from "./../../components/screens/Pricing";
 import { Row, Col, ProgressBar, Container } from "react-bootstrap";
-import RegisterScreen from "../screens/RegisterScreen";
+import RegisterScreen from "../screens/authScreen/RegisterScreen";
 import homeBanner from "./../../assets/images/background/home-banner.jpg";
 import OnlineEducationProspect from "../layout/OnlineEducationProspect";
 import HomeCarousel from "../layout/HomeCarousel";
@@ -42,8 +42,8 @@ export default function HomeScreen({ match }) {
     <>
       <div className='home'>
         {/* <HomeCarousel /> */}
-
-        <section className='home-hero-banner '>
+        <HomeCarousel/>
+        {/* <section className='home-hero-banner '> */}
           {/* <div class="quote--container banner-quote">
             <p class="quote">
               Your future is created by what you do{' '}
@@ -56,7 +56,7 @@ export default function HomeScreen({ match }) {
             <div>Brighten your future</div>
             <div>with codify College</div>
           </div> */}
-
+{/* 
           <div class='quote--container banner-quote w-75'>
             <p data-aos="fade-down"
                 data-aos-easing="linear"
@@ -74,7 +74,7 @@ export default function HomeScreen({ match }) {
           <div   className=" d-flex justify-content-center titleBanner  " 
         >
                 <h1 data-aos="fade-up-left"  className="text-danger title text-right"><span style={{color: '#DBD02D'}}>CODIFY</span> COLLEGE</h1>
-           </div> 
+           </div>  */}
 
           {/* <div className='typewriter'>
             <Typewriter
@@ -89,11 +89,11 @@ export default function HomeScreen({ match }) {
           </div> */}
 
           {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}
-
+{/* 
           <span style={{ width: "100%", height: "300px" }}>
             <Particles />
           </span>
-        </section>
+        </section> */}
 
        
 
