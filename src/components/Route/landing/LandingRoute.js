@@ -28,21 +28,7 @@ export default function DefaultRoute() {
   
 
     
-        {/* Education Section Two for big screen  only */}
-      <a  className='handle handle1'
-         
-         href="/pricing-plans"></a>
-        <a
-          href='https://meetings.hubspot.com/munzer1'
-          
-          className='handle handle2'
-          target='_blank'
-        ></a>
-        <a
-          className='handle handle3'
-          
-          onClick={() => setShowModal({ visible: true })}
-        ></a>
+
 
 
       <Switch>

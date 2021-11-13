@@ -147,7 +147,7 @@ export default function HomeScreen({ match }) {
 
         <OnlineEducationProspect />
 
-        <HomeVideoSection />
+        {/* <HomeVideoSection /> */}
 
         {/* Program Section */}
 

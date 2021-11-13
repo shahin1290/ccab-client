@@ -83,7 +83,7 @@ export default function DefaultRoute() {
       )||(<> {/* Education Section Two for mobile only */}
         
 
-        <a  className='handle1 handle-mobile'
+        {/* <a  className='handle1 handle-mobile'
          style={{top:'65px'}}
          href="/pricing-plans"></a>
         <a
@@ -96,7 +96,7 @@ export default function DefaultRoute() {
           className='handle3 handle-mobile'
           style={{top:'65px'}}
           onClick={() => setShowModal({ visible: true })}
-        ></a>
+        ></a> */}
         </>
         ))}
 
@@ -110,7 +110,7 @@ export default function DefaultRoute() {
         </Rodal>
 
         {/* Education Section Two for big screen  only */}
-      <a  className='handle handle1'
+      {/* <a  className='handle handle1'
          
          href="/pricing-plans"></a>
         <a
@@ -123,7 +123,7 @@ export default function DefaultRoute() {
           className='handle handle3'
           
           onClick={() => setShowModal({ visible: true })}
-        ></a>
+        ></a> */}
       <Switch>
 
      

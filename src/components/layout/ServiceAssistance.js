@@ -14,7 +14,7 @@ const ServiceAssistance = () => {
     <section className=''>
       <div className='auto-container bg-white '>
         <Row className='service-focus pr-3'>
-          <Col data-aos="flip-left" data-aos-delay="1000" md={4} xs={12} className="text-center-small-screen">
+          <Col data-aos="flip-left" data-aos-delay="200" md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
@@ -35,7 +35,7 @@ const ServiceAssistance = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col  data-aos="flip-left" data-aos-delay="1500" md={4} xs={12} className="text-center-small-screen">
+          <Col  data-aos="flip-left" data-aos-delay="500" md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",
@@ -57,7 +57,7 @@ const ServiceAssistance = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col data-aos="flip-left" data-aos-delay="2000" md={4} xs={12} className="text-center-small-screen">
+          <Col data-aos="flip-left" data-aos-delay="600" md={4} xs={12} className="text-center-small-screen">
             <Card
               style={{
                 height: "420px",

@@ -59,9 +59,33 @@
         border-radius: 5px !important;
         background-color: rgb(245, 245, 245) !important;
 }
+.student-signup-form input[type='tel'  ]{
+  background-color: #F8F9FD !important;
+}
 
+.student-signup-form input[type='text'  ],
+.student-signup-form input[type='password'  ],
+.student-signup-form input[type='email'  ],
+ .student-signup-form select ,
+ .PhoneInput,
+  .student-signup-form textarea{
+        border-radius: 5px !important;
+      border: 1px solid rgb(19, 19, 19) ;
+}
+.student-signup-form select{
+  width: 100% !important;
+  background-color: rgb(245, 245, 245) !important;
+  padding:12px 24px !important;
+}
+.PhoneInputInput{
+  padding: 10px 20px !important;
+}
+.PhoneInputCountry{
+  padding-left: 7px !important;
+}
 .PhoneInputInput{
    padding:12px 24px !important;
+   width:100% !important;
 }
 /* Thank you text ... */
 .landing-thnaks-box {

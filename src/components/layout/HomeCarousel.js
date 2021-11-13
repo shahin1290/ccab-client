@@ -29,7 +29,7 @@ const HomeCaousel = () => {
           }}
         >
           <div className="auto-container">
-            <div className="row clearfix">
+            <div className="row clearfix ">
               {/* Image Column */}
               <div className="image-column  offset-1 d-lg-block d-sm-none col-lg-5 col-md-10 col-sm-10">
                 <div className="inner-column ">
@@ -107,7 +107,7 @@ const HomeCaousel = () => {
                 </div>
               </div>
               {/* Content Column */}
-              <div className="content-column mt-5 col-lg-6 col-md-12 col-sm-12">
+              <div className="content-column mt-5 col-lg-6 col-md-12 col-sm-12 hero-text-box ">
                
                   <h1 className="">
                     learn to code, <br />

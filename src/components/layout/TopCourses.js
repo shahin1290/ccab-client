@@ -55,9 +55,9 @@ export default function TopCourses({ match }) {
       {/* Institution Section */}
 
       <section
-        className='pt-3'
+        className='pt-3 w-75 mx-auto bg-light '
         style={{
-          backgroundColor: "#F8F9FD",
+          border: "none",
         }}
       >
         <div className='auto-container'>
@@ -67,7 +67,7 @@ export default function TopCourses({ match }) {
             data-aos-delay='400'
             className='title text-center p-2 '
           >
-            Change Your Life With Coding
+            Learn to Build Web Apps
           </div>
           <hr className='block-seperator mb-3' />
 
@@ -76,8 +76,9 @@ export default function TopCourses({ match }) {
             data-aos-delay='600'
             className='sub-text text-center mb-3'
           >
-            We help you with career transition or add a tech stak to your
-            existing skill
+
+            As a graduate, you’ll leave with a solid base of fundamental programming and computer science knowledge, as well as experience with languages, frameworks, and libraries that employers demand.
+
           </div>
           {loading ? <Loader /> : error && <Message>{error}</Message>}
 
