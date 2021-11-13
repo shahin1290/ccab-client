@@ -22,6 +22,7 @@ import PaymentRequest from "../layout/StudentPaymentRequests";
 import { getServiceList } from "../../redux/actions/serviceAction";
 import PerformanceChart from "../layout/PerformanceChart";
 import ServiceSessions from "../layout/ServiceSessions";
+import MainLoader from './../layout/LandingMainLoader'
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
@@ -148,9 +149,10 @@ export default function ProfileScreen() {
         className='instructor-page-section'
         style={{ backgroundColor: "#fff" }}
       >
+
         <div className='auto-container'>
           {loading ? (
-            <Loader />
+              <MainLoader/>
           ) : error ? (
             <Message>{error}</Message>
           ) : (

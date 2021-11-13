@@ -8,6 +8,7 @@ import LoginScreen from "../../screens/authScreen/LoginScreen";
 import RegisterScreen from "../../screens/authScreen/RegisterScreen";
 import TeacherLogin from './../../screens/authScreen/TeacherLogin'
 import StudentRegisterScreen from './../../screens/authScreen/StudentRegisterScreen'
+import StudentLogin from './../../screens/authScreen/StudentLogin'
 
 import 'malihu-custom-scrollbar-plugin';
 import  './../../../assets/css/Auth-style.css'
@@ -26,10 +27,10 @@ export default function AuthRoute({match}) {
                
                     <Switch>    
                         
-                        <Route exact path='/login' component={LoginScreen}></Route>
+                        <Route exact path='/login' component={StudentLogin}></Route>
                         <Route exact path='/teacher-login' component={TeacherLogin}></Route>
-                        <Route exact path='/get-start' component={RegisterScreen}></Route>
-                        <Route exact path='/signup' component={StudentRegisterScreen}></Route>
+                        {/* <Route exact path='/get-start' component={RegisterScreen}></Route> */}
+                        <Route exact path='/get-start' component={StudentRegisterScreen}></Route>
                         
                         {/* Landing Routes for guests  */}
                         <Route component={Landings}></Route>

@@ -120,14 +120,14 @@ const HomeCaousel = () => {
                     We have a new course every month.
                   </div>
                   <div className="d-flex jutify-content-center ">
-    
-                    <a  className="btn btn-warning mt-4 pointer text-white"  
+        
+                    <Link  className="btn btn-warning mt-4 pointer text-white"  
                     activeClass="active"  
-                    href="https://meetings.hubspot.com/sl-melad"
+                    to="pricing"
                     target="_blank"
-                    spy={true} smooth={true} offset={-70} duration={1000}>
+                    spy={true} smooth={true} offset={-25} duration={600}>
                       Learn More<span className="ml-2 right-icon">→</span>
-                      </a>
+                      </Link>
                   </div>
             
               </div>

@@ -127,7 +127,7 @@ export default function DefaultRoute() {
       <Switch>
 
      
-        <Route exact path='/dev' component={HomeScreen}></Route>
+        <Route exact path='/' component={HomeScreen}></Route>
         <Route exact path='/Services' component={ServiceHomeScreen}></Route>
         {/* <Route  path={`/auth`} component={()=><RedirectToAuthRoutes authPath={AuthPath}/>} ></Route> */}
 
@@ -164,7 +164,7 @@ export default function DefaultRoute() {
         <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/reset-password/:token' component={ResetPassword} />
 
-      
+       <Route  component={NotFound} />
       </Switch>
    
     </main>

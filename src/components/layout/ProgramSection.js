@@ -9,7 +9,7 @@ const ProgramSection = () => {
   },[])
   
   return (
-    <section className="program-section mt-5 ">
+    <section className="program-section mt-5 " id="Career-support">
           <div className="auto-container">
      
             <div className="row clearfix" style={{paddingBottom:0, marginBottom:0 , overflow:'hidden'}}>

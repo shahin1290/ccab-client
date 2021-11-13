@@ -13,6 +13,7 @@ import ContactForm from "../../layout/ContactForm";
 import Contact from "./../../screens/Contact";
 import Privacy from "./../../screens/privacy";
 import DefaultRoutes from "./../default/DefaultRoute";
+import HomeScreen from "../../screens/HomeScreen";
 
 export default function DefaultRoute() {
   
@@ -32,7 +33,8 @@ export default function DefaultRoute() {
 
 
       <Switch>
-      <Route exact path='/' component={LandingScreen}></Route>
+      {/* <Route exact path='/' component={LandingScreen}></Route> */}
+      
         {/* <Route  path={`/auth`} component={()=><RedirectToAuthRoutes authPath={AuthPath}/>} ></Route> */}
         {/* <Route exact path='/login' component={LoginScreen}></Route>
         <Route exact path='/get-start' component={RegisterScreen}></Route> */}

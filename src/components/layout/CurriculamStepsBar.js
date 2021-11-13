@@ -21,6 +21,7 @@ const CurriculamStepsBar = (props) => {
         backgroundColor: '#fff',
         padding: '50px 0'
       }}
+      id="Curriculum"
     >
       <div className="curriculum no-gutter ">
         <div  data-aos="fade-right" data-aos-delay="200" className="title text-center pb-1 w-100">Comprehensive Curriculum</div>

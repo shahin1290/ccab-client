@@ -58,7 +58,7 @@ const FaqSection = () => {
     tabFocus: true
   }
   return (
-    <div className="mt-5 mb-5">
+    <div className="mt-5 mb-5" id="afq">
       <div className="auto-container">
         <div className="sub-title text-center mb-5">
           Frequenly asked questions

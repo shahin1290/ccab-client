@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
+import axios from 'axios'
 import logo from './../../../assets/images/CF.png'
-import { login } from '../../../redux/actions/userAction'
+import {  registerUser} from '../../../redux/actions/userAction'
 import { createBrowserHistory } from 'history'
 import { Link } from 'react-router-dom';
 import EmailValidator from 'email-validator'
 import Loader from './../../layout/Loader'
 import PhoneInput,{ isValidPhoneNumber }  from 'react-phone-number-input'
+import MainLoader from './../../layout/LandingMainLoader'
 
 export default function StudentRegisterScreen({ location }) {
   const dispatch = useDispatch()
   const history = createBrowserHistory({ forceRefresh: true })
 
 
-
+  
   const userLogin = useSelector((state) => state.userLogin)
-  const { loading, userDetail, error, loginSuccess } = userLogin
+  const { userDetail } = userLogin
+  const userRegister = useSelector((state) => state.userRegister)
+  const { loading, error, registerSuccess } = userRegister
+
 
     //current stage > 
     const [currentStage , setCurrentStage ]=useState(0);
@@ -154,17 +158,33 @@ export default function StudentRegisterScreen({ location }) {
   const _handelSubmit =async (e)=>{
       e.preventDefault(); 
 
+    console.log('formData' , FormData );
+    let name = FormData.FirstName + ' '+FormData.LastName 
+      dispatch(registerUser(
+        name ,
+        FormData.Email,
+        FormData.Password,
+        FormData.Phone,
+        FormData.Gender,
+        FormData.Lang
+         ))
 
-      dispatch(login(FormData.Email, FormData.Password))
        _clearFrom();
-     
+     //dispatch(registerUser(name, email, password, phoneNumber, gender, language))
       
   }
 
       const _clearFrom = ()=>{
       setFormData({
-          Password : '', 
-          Email:'',
+        FirstName :'',
+        LastName:'',
+        Phone:'',
+        Password : '', 
+        RePassword:'',
+        Email:'',
+        Gender:'',
+        Lang:'',
+        Terms:false , 
          
       
       })
@@ -175,14 +195,25 @@ export default function StudentRegisterScreen({ location }) {
       console.log(userDetail);
 
 
-        // initializing componet level state
-        useEffect(() => {
-          if (loginSuccess) {
-            history.go('/login')
-          }
-        }, [history, loginSuccess])
+      useEffect(() => {
+        // console.log(`redirect ${redirect}`);
+         if (userDetail && userDetail.name ) {
+           
+           history.push('/profile')
+         }
+         if (registerSuccess) {
+           history.push({
+             pathname: '/login',
+             state: {
+               message: 'User Registration Successful, Please Login !'
+             }
+           })
 
+
+         }
+       }, [registerSuccess, history])
  
+
         // show buttons 
       useEffect(() => {
     
@@ -229,6 +260,28 @@ export default function StudentRegisterScreen({ location }) {
       }, [ValidationError, FormData ]);
     
 
+
+        // request client Country
+        useEffect(()=>{
+
+          // getting the client country 
+          async function fetchMyAPI() {
+              if (!Country){
+                
+                  let response = await axios.get("https://ipapi.co/json/");
+              
+                  
+                  console.log(btoa(response.data.country_code));
+                  localStorage.setItem('C_code',btoa(response.data.country_code))
+                  setCountry(response.data.country_code);
+              }
+              
+            }
+            
+            fetchMyAPI();
+      },[])
+
+
         console.log('formData ',FormData);
         console.log('showButton ',showButton);
       // active color : #ec4c16 
@@ -236,6 +289,11 @@ export default function StudentRegisterScreen({ location }) {
   return (
     <>
           <section className="student-signup-section">
+
+          {userDetail && userDetail.name ?
+              
+              <MainLoader/>
+          :<>
          {/*Navbar Start*/}
             <nav className="navbar navbar-expand-lg p-1 bg-light navbar-custom ">
                 <div className="container">
@@ -280,10 +338,15 @@ export default function StudentRegisterScreen({ location }) {
             </div>
        <form className="student-signup-form  w-100 needs-validation p-3" onSubmit={_handelSubmit}>
                 <>
+         
                 <div className="form-row">
                         
+
+           
+
+
                     <div className="form-group  col-12" style={{position:'relative'}}>
-                        {error ? <p className="text-danger mb-0 error-attention">{error} </p> : null}
+                        {error ? <p className="text-danger mb-0 error-attention">{error}   </p> : null}
                     </div>
 
 
@@ -341,6 +404,8 @@ export default function StudentRegisterScreen({ location }) {
                     </>
                     :
                     null}
+
+
                     {/* input Stage 2 */}
                     {currentStage==1?
                             <>
@@ -369,9 +434,9 @@ export default function StudentRegisterScreen({ location }) {
                             <select className="form-select" id="Gender" onChange={_handelFieldChange}
                              aria-label="Default select example">
                                 <option selected disabled>Select your gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Other</option>
                             </select>
 
 
@@ -381,13 +446,48 @@ export default function StudentRegisterScreen({ location }) {
                             </>
                     :null}
 
+
+                    {/* input Stage 3 */}
+                    {currentStage==2?
+                            <>
+
+                        <div className="form-group  col-12  "  style={{position:'relative'}}>
+
+                            <select className="form-select" id="Lang" onChange={_handelFieldChange}
+                             aria-label="Default select example">
+                                <option selected disabled>Select Language </option>
+                                <option value="en">English</option>
+                                <option value="ar">Arabic</option>
+                                
+                            </select>
+
+
+                            {ValidationError.GenderErr ? <p className="text-danger error-attention">
+                            Select your gender please </p> : null}
+                        </div>
+
+
+                        <div className="form-check mb-3">
+                          <input className="form-check-input" type="checkbox"  id="Terms" 
+                            onChange={()=>{ setFormData({ ...FormData , Terms:true })}} />
+
+                          <label className="form-check-label" htmlFor="Terms">
+                            I agree the user agreement and{' '}
+                              <a href="/privacy" target="_blank" className="text-danger">Terms &amp; Conditions</a>
+                          </label>
+                        </div>
+
+                            </>
+                    :null}
     
                 </div>
+            
+
             
             {/* button stage number 1 */}
              {currentStage == 0 ?
              
-             <div className="form-row">
+             <div className="form-row ">
                 <div className="form-group   col-sm-6">
 
                     <button type="button" disabled={!showButton.btnStage1} 
@@ -438,7 +538,7 @@ export default function StudentRegisterScreen({ location }) {
                     <button type="button" 
                         onClick={()=>{setCurrentStage(1)}}
                         className="btn btn-outline-warning btn-block btn-sm formButton py-1">
-                            {loading?<Loader/>:<>Previous </>} 
+                            Previous
                         </button>
                 </div>
                 <div className="form-group   col-sm-6">
@@ -455,12 +555,20 @@ export default function StudentRegisterScreen({ location }) {
             :null}
         
             
+                  <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                        <div className="users">
+                          Already have an account! <a href="/login" className="link-info text-danger" ><u>Sign In</u></a>
+                        </div>
+                    </div>
  
             </>
 
         </form>
         </div>
+        </>
+      }
       </section>
+      
     </>
   )
 }

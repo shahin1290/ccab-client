@@ -1,10 +1,58 @@
 import React from 'react'
-
+import { Link } from 'react-scroll'
+import logo from './../../assets/images/CF.png'
 export default function Privacy() {
     return (
         <>
         {/* Privacy Section */}
-        <section className="privacy-section">
+        <section className="privacy-section " style={{paddingTop:'80px'}}>
+             {/*Navbar Start*/}
+                <nav className="navbar navbar-expand-lg p-1 fixed-top navbar-custom sticky sticky-dark">
+                    <div className="container">
+                    {/* LOGO */}
+
+                    <a className="navbar-brand logo" href="/">
+                        <img src={logo} alt='photo' className height={10} />   
+                    </a>
+                
+                    <button className="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <i className="mdi mdi-menu" />
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarCollapse">
+                        <ul className="navbar-nav ml-auto navbar-center" id="mySidenav">
+                        
+                        
+                        <li className="nav-item">
+                        <Link  className="nav-link pointer"  activeClass="activeItem" to="services" spy={true} smooth={true} offset={-70} duration={1000}>
+                            Services
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link  className="nav-link pointer"  activeClass="activeItem" to="about" spy={true} smooth={true} offset={-70} duration={1000}>
+                        About
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link  className="nav-link pointer"  activeClass="activeItem" to="features" spy={true} smooth={true} offset={-70} duration={1000}>
+                        Features
+                            </Link>
+                            
+                        </li>
+                        <li className="nav-item">
+                        <Link  className="nav-link pointer"  activeClass="activeItem" to="clients" spy={true} smooth={true} offset={-70} duration={1000}>
+                        Clients
+                            </Link>
+                        
+                        </li>
+                        </ul>
+                        <div className="call-no">
+                        <a href="#" className="nav-link pointer " style={{color :'#E55369', fontSize:'small'}}>
+                            <i className="mdi mdi-phone mr-1" /> +00 1234 5678 90</a>
+                        </div>
+                    </div>
+                    </div>
+                </nav>
+                {/* Navbar End */}
                 <div className="auto-container">
                     {/* Privacy Content */}
                     <div className="privacy-content">

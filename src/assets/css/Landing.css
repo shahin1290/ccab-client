@@ -62,7 +62,8 @@
 .student-signup-form input[type='tel'  ]{
   background-color: #F8F9FD !important;
 }
-
+.student-login-form input[type='password'  ],
+.student-login-form input[type='email'  ],
 .student-signup-form input[type='text'  ],
 .student-signup-form input[type='password'  ],
 .student-signup-form input[type='email'  ],
