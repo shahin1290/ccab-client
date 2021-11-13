@@ -119,8 +119,7 @@ export default function ProfileScreen() {
   } = isTokenValid;
 
   useEffect(() => {
-    dispatch(getCourseList());
-    dispatch(getProfile());
+
 
     if (userDetail.name && userDetail.user_type === "StudentUser") {
       dispatch(getMyQuizAnswerList());
@@ -134,15 +133,25 @@ export default function ProfileScreen() {
     }
   }, [
     dispatch,
-    userDetail,
     ValidLoading,
     updateSuccess,
     TokenSuccess,
     answerListSuccess,
   ]);
 
+
+  useEffect(() => {
+    dispatch(getCourseList());
+    dispatch(getProfile());
+
+  }, [
+ 
+    userDetail,
+  ]);
+
+
   // Getting user Details
-  const { loading, user, error } = useSelector((state) => state.userProfile);
+  const { loading:userLoading , user, error } = useSelector((state) => state.userProfile);
   return (
     <>
       <div
@@ -151,7 +160,7 @@ export default function ProfileScreen() {
       >
 
         <div className='auto-container'>
-          {loading ? (
+          {userLoading ? (
               <MainLoader/>
           ) : error ? (
             <Message>{error}</Message>

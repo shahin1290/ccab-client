@@ -118,15 +118,22 @@ export default function StudentLogin({ location }) {
         // initializing componet level state
 
         useEffect(() => {
-            if (userDetail && userDetail.name ) {
-      
-                history.push('/profile')
-              }
+       
           if (loginSuccess) {
-            history.goBack()
+            history.push('/profile')
           }
         }, [history, loginSuccess])
 
+          useEffect(() => {
+       
+            if (userDetail && userDetail.name ) {
+      
+              history.push('/profile')
+            }
+        }, [history, loginSuccess])
+
+
+        
         useEffect(()=>{
           if (error) setErr(error)
         },[error,userDetail])
