@@ -66,13 +66,15 @@ export default function Header() {
         collapseOnSelect
         expand='lg'
         className='p-2 '
-        sticky='top'
+      
         style={{
+         
           zIndex: "1030",
           backgroundColor: "#fff",
-          boxShadow: "0px 0px 5px rgba(0,0,0,.6)",
+         
         }}
       >
+        <div className="container">
         <Navbar.Brand href='/'>
           <img
             data-aos='fade-down'
@@ -284,7 +286,7 @@ export default function Header() {
                           <img
                             src={
                               user.avatar
-                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -313,8 +315,10 @@ export default function Header() {
                 </div>
               )
             )}
+            
           </Nav>
         </Navbar.Collapse>
+        </div>
       </Navbar>
     </>
   );

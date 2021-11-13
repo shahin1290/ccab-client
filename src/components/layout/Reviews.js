@@ -211,8 +211,10 @@ const ReviewsSection = function (props) {
     <section className='py-5' style={{ background: ' rgb(234, 246, 255)'}}>
       <div className='auto-container'>
         <div className='title text-center'>Reviews By Students</div>
-        <hr className='block-seperator mt-4 mb-4' />
-
+        <hr className='block-seperator mt-4 mb-1' />
+      <div className="text text-center mb-3">
+      Most of our graduates were employed after 6 months upon graduation
+      </div>
         <AliceCarousel
           mouseTracking
           responsive={responsive}

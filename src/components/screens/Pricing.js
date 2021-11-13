@@ -57,8 +57,7 @@ export default function Pricing({ match }) {
             </div>
             <hr className='block-seperator mb-3' />
             <div className='text'>
-              Register yourself now and get real employabe skills that top
-              companies want.
+            You will learn coding and build an active portfolio to showcase your skill to the recruiters.From 15 weeks, you will learn both Frontend as well as Backend web development to become a Full-stack developer who is industry-ready
             </div>
           </div>
 
@@ -176,7 +175,7 @@ export default function Pricing({ match }) {
                               <span>Per month</span>
                             </div>
                             <h5 className='pricing-sub-title'>
-                              What You Will Get :
+                            How will you learn :
                             </h5>
                             <ul className='list'>
                               {plan.service.basic.map((offer) => (

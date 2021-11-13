@@ -23,7 +23,7 @@ export const plans = [
   },
   requirement:[
     "4 hours of study per week", 
-    "Minimum purchase - 4 weeks",
+    "Minimum purchase - 2 Months",
   ],
     _id: "d8cc4ea7-80a-a8ce-dc839bce88b1",
   }, */
@@ -49,7 +49,7 @@ export const plans = [
     },
     requirement:[
       "4 hours of study per week", 
-      "Minimum purchase - 4 weeks",
+      "Minimum purchase - 2 Months",
       ],
     _id: "d8cc4ea7-8092-480a-a8839bce88b1",
   }, */
@@ -64,7 +64,7 @@ export const plans = [
         "Free foundation course",
         "2 live session per week",
         "2 recorded revision session per week",
-        "4 hours live support / day",
+        "4 hours live support / week",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
         "Remote learning - no compromise on your job",
@@ -76,7 +76,7 @@ export const plans = [
       ],
       superStar: ["One to one live lecture with tutor"],
     },
-    requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["8 hours of study per week", "Minimum purchase - 2 Months"],
 
     _id: "d8cc4ea7-809a-a8ce-dc839bce88b1",
   },
@@ -91,7 +91,7 @@ export const plans = [
         "Free foundation course",
         "2 live session per week",
         "2 recorded revision session per week",
-        "4 hours live support / day",
+        "4 hours live support / week",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
         "Remote learning - no compromise on your job",
@@ -103,7 +103,7 @@ export const plans = [
       ],
       superStar: ["One to one live lecture with tutor"],
     },
-    requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["8 hours of study per week", "Minimum purchase - 2 Months"],
 
     _id: "d8cc4ea7-809a-a8ce-dc839bce88b1",
   }, */
@@ -118,7 +118,7 @@ export const plans = [
         "Free foundation course",
         "2 live session per week",
         "2 recorded revision session per week",
-        "4 hours live support / day",
+        "4 hours live support / week",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
         "Remote learning - no compromise on your job",
@@ -130,7 +130,7 @@ export const plans = [
       ],
       superStar: ["One to one live lecture with tutor"],
     },
-    requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["8 hours of study per week", "Minimum purchase - 2 Months"],
 
     _id: "d8cc4ea7-8092-480a-a8839bce88b1",
   },
@@ -145,7 +145,7 @@ export const plans = [
         "Free foundation course",
         "2 live session per week",
         "2 recorded revision session per week",
-        "4 hours live support / day",
+        "4 hours live support / week",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
         "Remote learning - no compromise on your job",
@@ -157,7 +157,7 @@ export const plans = [
       ],
       superStar: ["One to one live lecture with tutor"],
     },
-    requirement: ["8 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["8 hours of study per week", "Minimum purchase - 2 Months"],
 
     _id: "d8cc4e92-480a-a8ce-dc839bce88b1",
   },
@@ -172,7 +172,7 @@ export const plans = [
         "Free foundation course",
         "3 live session per week",
         "2 recorded revision session per week",
-        "6 hours live support / day",
+        "6 hours live support / week",
         "One to one live lecture with tutor",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
@@ -188,7 +188,7 @@ export const plans = [
         "Access to global hiring partner network",
       ],
     },
-    requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["12 hours of study per week", "Minimum purchase - 2 Months"],
     _id: "4ea7-8092-480a-a8ce-dc839bce88b1",
   },
   {
@@ -202,7 +202,7 @@ export const plans = [
         "Free foundation course",
         "3 live session per week",
         "2 recorded revision session per week",
-        "6 hours live support / day",
+        "6 hours live support / week",
         "One to one live lecture with tutor",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
@@ -218,7 +218,7 @@ export const plans = [
         "Access to global hiring partner network",
       ],
     },
-    requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["12 hours of study per week", "Minimum purchase - 2 Months"],
     _id: "4ea7-8092-480a-a8ce-dc839bce88b1",
   }, */
   {
@@ -232,7 +232,7 @@ export const plans = [
         "Free foundation course",
         "3 live session per week",
         "2 recorded revision session per week",
-        "6 hours live support / day",
+        "6 hours live support / week",
         "One to one live lecture with tutor",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
@@ -248,7 +248,7 @@ export const plans = [
         "Access to global hiring partner network",
       ],
     },
-    requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["12 hours of study per week", "Minimum purchase - 2 Months"],
     _id: "d8cc4ea7-8092-480a-a8ce-dc888b1",
   },
 
@@ -263,7 +263,7 @@ export const plans = [
         "Free foundation course",
         "3 live session per week",
         "2 recorded revision session per week",
-        "6 hours live support / day",
+        "6 hours live support / week",
         "One to one live lecture with tutor",
         "Industry Curriculun (IC)",
         "In-trend online learning platform",
@@ -279,7 +279,7 @@ export const plans = [
         "Access to global hiring partner network",
       ],
     },
-    requirement: ["12 hours of study per week", "Minimum purchase - 4 weeks"],
+    requirement: ["12 hours of study per week", "Minimum purchase - 2 Months"],
     _id: "d8cc4ea7-8092-480a-a8ce-dc888b3",
   },
 ];

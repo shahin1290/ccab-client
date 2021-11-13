@@ -54,7 +54,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const response = await axios.post(
-      "http://localhost:5001/api/users/login",
+      "https://server.ccab.tech/api/users/login",
       { email, password },
       config
     );
@@ -68,9 +68,11 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userDetail", JSON.stringify(response.data));
   } catch (error) {
-    // console.log("error:", error)
+     console.log("error:", error)
+    
     dispatch({
       type: USER_LOGIN_FAIL,
+      
       //    payload: error.res
       payload:
         error.response && error.response.data.message
@@ -84,7 +86,7 @@ export const logout = () => (dispatch, getState) => {
     userLogin: { userDetail },
   } = getState();
 
-  const socket = socketIOClient("http://localhost:5001");
+  const socket = socketIOClient("https://server.ccab.tech");
 
   socket.emit("logout", { userId: userDetail._id });
 
@@ -112,7 +114,7 @@ export const registerUser =
         },
       };
       const response = await axios.post(
-        "http://localhost:5001/api/users/register",
+        "https://server.ccab.tech/api/users/register",
         { name, email, password, phoneNumber, gender, language },
         config
       );
@@ -156,7 +158,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     };
     //console.log('config : ',config);
     const response = await axios.get(
-      "http://localhost:5001/api/users/" + id,
+      "https://server.ccab.tech/api/users/" + id,
       config
     );
     // console.log("response:", response);
@@ -198,7 +200,7 @@ export const getProfile = () => async (dispatch, getState) => {
     };
     //console.log('config : ',config);
     const response = await axios.get(
-      "http://localhost:5001/api/users/profile",
+      "https://server.ccab.tech/api/users/profile",
       config
     );
     // console.log("response:", response);
@@ -237,7 +239,7 @@ export const getUsers = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "http://localhost:5001/api/users/",
+      "https://server.ccab.tech/api/users/",
       config
     );
     // console.log("response:", response);
@@ -275,7 +277,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         Authorization: "Bearer " + userDetail.token,
       },
     };
-    await axios.delete("http://localhost:5001/api/users/" + id, config);
+    await axios.delete("https://server.ccab.tech/api/users/" + id, config);
     // console.log("res:", res)
 
     dispatch({
@@ -311,7 +313,7 @@ export const userProfileUpdate = (user) => async (dispatch, getState) => {
       },
     };
     const response = await axios.put(
-      "http://localhost:5001/api/users/profile",
+      "https://server.ccab.tech/api/users/profile",
       user,
       config
     );
@@ -358,7 +360,7 @@ export const UpdateUserRole = (user, id) => async (dispatch, getState) => {
       },
     };
     const response = await axios.put(
-      "http://localhost:5001/api/users/" + id,
+      "https://server.ccab.tech/api/users/" + id,
       user,
       config
     );
@@ -396,7 +398,7 @@ export const getUesrsNumbers = () => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "http://localhost:5001/api/users/numbers",
+      "https://server.ccab.tech/api/users/numbers",
       config
     );
 
@@ -434,7 +436,7 @@ export const isValid = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-      "http://localhost:5001/api/users/valid",
+      "https://server.ccab.tech/api/users/valid",
       {},
       config
     );
@@ -478,7 +480,7 @@ export const getForgotPassword = (email) => async (dispatch, getState) => {
     });
 
     const response = await axios.post(
-      "http://localhost:5001/api/users/forgot-password",
+      "https://server.ccab.tech/api/users/forgot-password",
       { email },
       config
     );
@@ -521,7 +523,7 @@ export const resetPassword =
       });
 
       const response = await axios.put(
-        "http://localhost:5001/api/users/reset-password/" + token,
+        "https://server.ccab.tech/api/users/reset-password/" + token,
         { password },
         config
       );
