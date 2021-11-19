@@ -34,7 +34,7 @@ export default function TopCourses({ match }) {
     const filteredThreeCourses = courseList.filter(
       (course) =>
         course.name.toLowerCase().includes("frontend  course") ||
-        course.name.toLowerCase().includes("foundation course") ||
+        // course.name.toLowerCase().includes("foundation course") ||
         course.name.toLowerCase().includes("mern full stack")
     );
 

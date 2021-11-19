@@ -149,30 +149,32 @@ export default function DayContent({ bootcampId, setOpen }) {
       orderList.find(
         (order) =>
           (order.orderStatus === "Delivered" &&
-            order.course === "Silver Plan") ||
+            order.course === "Silver Plan") 
           (order.orderStatus === "Delivered" &&
-            order.course === "Golden Plan") ||
+            order.course === "Golden Plan") 
           (order.orderStatus === "Delivered" && order.course === "Diamond Plan")
       );
 
+    const daysBasedOnShow = days.filter((day) => day.show);
+
     if (foundOrder && foundOrder.course === "Silver Plan") {
       const size = 20;
-      return days.slice(0, size);
+      return daysBasedOnShow.slice(0, size);
     } else if (foundOrder && foundOrder.course === "Golden Plan") {
       const size = 40;
-      return days.slice(0, size);
+      return daysBasedOnShow.slice(0, size);
     } else if (foundOrder && foundOrder.course === "Diamond Plan") {
-      return days;
+      return daysBasedOnShow;
     } else if (course.name.toLowerCase().includes("silver")) {
       const size = 20;
-      return days.slice(0, size);
+      return daysBasedOnShow.slice(0, size);
     } else if (course.name.toLowerCase().includes("golden")) {
       const size = 40;
-      return days.slice(0, size);
+      return daysBasedOnShow.slice(0, size);
     } else if (course.name.toLowerCase().includes("diamond")) {
-      return days;
+      return daysBasedOnShow;
     } else {
-      return days;
+      return daysBasedOnShow;
     }
   };
 
@@ -304,7 +306,7 @@ export default function DayContent({ bootcampId, setOpen }) {
             <div eventKey={`${index}`}>
               {week.map((day, index) => (
                 <div key={day._id} className='course-content'>
-                  {!showDay(day._id) ? (
+                  {/* {!showDay(day._id) ? (
                     <>
                       {lockedMessage ? (
                         <div
@@ -351,7 +353,7 @@ export default function DayContent({ bootcampId, setOpen }) {
                         </div>
                       )}
                     </>
-                  ) : null}
+                  ) : null} */}
 
                   <div className=' d-flex p-2 mt-2 mb-2'>
                     <div

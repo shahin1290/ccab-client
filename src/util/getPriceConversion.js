@@ -27,8 +27,12 @@ export const getPriceConversionFromSEK = async (course) => {
   //console.log(course);
   const fromCurrency = "SEK";
   const toCurrency = response.data.currency;
+
   const query = fromCurrency + "_" + toCurrency;
+  console.log('query', query);
   const apiKey = "6068a971e6754bdf9d3b0ddc706779b0";
+  if ( toCurrency == fromCurrency ) return [query , toCurrency ]
+
 
   const url =
     "https://api.currconv.com/api/v7/convert?q=" +

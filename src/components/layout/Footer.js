@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import logo from "./../../assets/images/logoBody.png";
+import logo from "./../../assets/images/CF-footer.gif";
 import {Link } from 'react-scroll'
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="row">
         <div className="col-lg-4">
           <div className="mb-4">
-            <a href="layout-one-1.html"><img src="images/CF-footer.gif" alt='photo' className="logo-dark" height={26} /></a>
+            <a href="layout-one-1.html"><img src={logo} alt='photo' className="logo-dark" height={26} /></a>
             <p className="text-muted mt-4 mb-2">info@codifycollege.se</p>
             <h6 className="text-muted font-weight-normal">+46-72 33 38 723</h6>
           </div>
@@ -43,9 +43,9 @@ export default function Footer() {
               <p className="text-muted f-14">Röntgenvägen 1,141 52, Huddinge, Stockholm, Sweden</p>
               <h6 className="text-muted pb-2">Email: info@codifycollege.se</h6>
               <ul className="list-unstyled footer-social-list mt-4">
-                <li className="list-inline-item"><a target="_blank" href="https://www.facebook.com/CfCollegezz"><i className="mdi mdi-facebook" /></a></li>
-                <li className="list-inline-item"><a target="_blank" href="https://twitter.com/CodifyCollege"><i className="mdi mdi-twitter" /></a></li>
-                <li className="list-inline-item"><a target="_blank" href="https://www.linkedin.com/company/codifycollege/about/"><i className="mdi mdi-linkedin" /></a></li>
+                <li className="list-inline-item"><a target="_blank" href="https://www.facebook.com/CfCollegezz"><i className="fab fa-facebook-f"></i></a></li>
+                <li className="list-inline-item"><a target="_blank" href="https://twitter.com/CodifyCollege"><i className="fab fa-twitter"></i></a></li>
+                <li className="list-inline-item"><a target="_blank" href="https://www.linkedin.com/company/codifycollege/about/"><i className="fab fa-linkedin-in"></i></a></li>
               </ul>
             </div>
           </div>

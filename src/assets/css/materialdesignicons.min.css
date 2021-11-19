@@ -1,0 +1,25 @@
+.mdi-18px.mdi-set,.mdi-18px.mdi:before{font-size:18px}.mdi-24px.mdi-set,.mdi-24px.mdi:before{font-size:24px}.mdi-36px.mdi-set,.mdi-36px.mdi:before{font-size:36px}.mdi-48px.mdi-set,.mdi-48px.mdi:before{font-size:48px}
+.mdi-twitter::before {
+    content: "\F544" !important;
+}
+.mdi:before, .mdi-set {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.footer .footer-social-list a {
+    border: 1px solid rgb(217, 222, 229);
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 38px;
+    text-align: center;
+    color: rgb(187, 195, 208);
+    font-size: 18px;
+    transition: all 0.3s ease 0s;
+}

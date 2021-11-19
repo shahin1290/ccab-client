@@ -272,14 +272,14 @@ export default function CourseDetailScreen({ match }) {
                               >
                                 Start From{" "}
                               </p>
-                              {currencySuccess &&
+                              {(currencySuccess &&
                                 (course.price > 0
                                   ? `${getPriceFormat(
                                       Math.round(
                                         currency.data.amount * course.price
                                       )
                                     )}  ${currency.data.currency}`
-                                  : "Free Course ")}
+                                  : "Free Course "))||getPriceFormat(course.price)+' $'} 
                             </div>
                             <a
                               href={

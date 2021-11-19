@@ -41,10 +41,12 @@ export default function Pricing({ match }) {
     error: promoError,
   } = useSelector((state) => state.promoList);
 
-  useEffect(() => {
+  useEffect( () => {
+    
     getPriceConversionFromSEK().then((data) => setSekToUsd(data));
   }, []);
-
+  console.log('started.....',promos);
+console.log('sekToUsd' , sekToUsd);
   return (
     <div id='pricing'>
       {/* Pricing Section */}
@@ -152,16 +154,16 @@ export default function Pricing({ match }) {
                                   className='price'
                                   style={{ fontSize: "120%" }}
                                 >
-                                  {sekToUsd &&
+                                  {(sekToUsd &&
                                     Math.round(
                                       sekToUsd[0] * (Number(plan.price) + 200)
-                                    )}{" "}
-                                  {sekToUsd && sekToUsd[1] + " "}
+                                    ))|| Math.floor(plan.price /8) + ' USD'}{" "}
+                                  {(sekToUsd && sekToUsd[1] + " ")}
                                 </del>
                               </p>
                             )}
                             <div className='price'>
-                              {sekToUsd &&
+                              {(sekToUsd &&
                                 Math.round(
                                   sekToUsd[0] *
                                     (Number(plan.price) +
@@ -170,7 +172,10 @@ export default function Pricing({ match }) {
                                       promos[0].show
                                         ? 0
                                         : 200))
-                                )}{" "}
+                                ))|| (Math.floor(Math.floor(plan.price /8) * ((promos &&
+                                  promos.length > 0 &&promos[0].show
+                                    ? (100-promos[0].percentages)/100
+                                    :1)) ))+ ' USD'}{" "}
                               {sekToUsd && sekToUsd[1] + " "}
                               <span>Per month</span>
                             </div>

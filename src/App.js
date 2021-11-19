@@ -75,6 +75,7 @@ import WOW from "wowjs";
 import "./App.css";
 import "./assets/css/main.css";
 import "./assets/css/responsive.css";
+import "./assets/css/materialdesignicons.min.css"; 
 import Quizzes from "./components/layout/Quizzes";
 import { updatePerformance } from "./redux/actions/performanceAction";
 import UpdateMediaCenter from "./components/screens/AdminScreen/UpdateMediaCenter";
