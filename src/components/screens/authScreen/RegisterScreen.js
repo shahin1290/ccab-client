@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { registerUser, login } from '../../redux/actions/userAction'
-import Message from '../layout/Message'
+import { registerUser, login } from '../../../redux/actions/userAction'
+import Message from '../../layout/Message'
 import { createBrowserHistory } from 'history'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { registerSchema } from '../../util/registerSchema'
+import { registerSchema } from '../../../util/registerSchema'
 
 export default function RegisterScreen() {
   const history = createBrowserHistory({ forceRefresh: true })

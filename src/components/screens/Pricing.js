@@ -41,10 +41,12 @@ export default function Pricing({ match }) {
     error: promoError,
   } = useSelector((state) => state.promoList);
 
-  useEffect(() => {
+  useEffect( () => {
+    
     getPriceConversionFromSEK().then((data) => setSekToUsd(data));
   }, []);
-
+  console.log('started.....',promos);
+console.log('sekToUsd' , sekToUsd);
   return (
     <div id='pricing'>
       {/* Pricing Section */}
@@ -57,8 +59,7 @@ export default function Pricing({ match }) {
             </div>
             <hr className='block-seperator mb-3' />
             <div className='text'>
-              Register yourself now and get real employabe skills that top
-              companies want.
+            You will learn coding and build an active portfolio to showcase your skill to the recruiters.From 15 weeks, you will learn both Frontend as well as Backend web development to become a Full-stack developer who is industry-ready
             </div>
           </div>
 
@@ -153,16 +154,16 @@ export default function Pricing({ match }) {
                                   className='price'
                                   style={{ fontSize: "120%" }}
                                 >
-                                  {sekToUsd &&
+                                  {(sekToUsd &&
                                     Math.round(
                                       sekToUsd[0] * (Number(plan.price) + 200)
-                                    )}{" "}
-                                  {sekToUsd && sekToUsd[1] + " "}
+                                    ))|| Math.floor(plan.price /8) + ' USD'}{" "}
+                                  {(sekToUsd && sekToUsd[1] + " ")}
                                 </del>
                               </p>
                             )}
                             <div className='price'>
-                              {sekToUsd &&
+                              {(sekToUsd &&
                                 Math.round(
                                   sekToUsd[0] *
                                     (Number(plan.price) +
@@ -171,12 +172,15 @@ export default function Pricing({ match }) {
                                       promos[0].show
                                         ? 0
                                         : 200))
-                                )}{" "}
+                                ))|| (Math.floor(Math.floor(plan.price /8) * ((promos &&
+                                  promos.length > 0 &&promos[0].show
+                                    ? (100-promos[0].percentages)/100
+                                    :1)) ))+ ' USD'}{" "}
                               {sekToUsd && sekToUsd[1] + " "}
                               <span>Per month</span>
                             </div>
                             <h5 className='pricing-sub-title'>
-                              What You Will Get :
+                            How will you learn :
                             </h5>
                             <ul className='list'>
                               {plan.service.basic.map((offer) => (

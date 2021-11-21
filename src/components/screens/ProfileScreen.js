@@ -22,6 +22,7 @@ import PaymentRequest from "../layout/StudentPaymentRequests";
 import { getServiceList } from "../../redux/actions/serviceAction";
 import PerformanceChart from "../layout/PerformanceChart";
 import ServiceSessions from "../layout/ServiceSessions";
+import MainLoader from './../layout/LandingMainLoader'
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ export default function ProfileScreen() {
           )
       );
     }
-
+    
     if (
       userDetail.user_type === "MentorUser" ||
       userDetail.user_type === "AdminUser"
@@ -81,6 +82,9 @@ export default function ProfileScreen() {
     }
   };
 
+
+  console.log(filterCourseList());
+  
   // updating process
   const userUpdate = useSelector((state) => state.userUpdate);
   const { updateSuccess, error: UpdateError } = userUpdate;
@@ -115,8 +119,7 @@ export default function ProfileScreen() {
   } = isTokenValid;
 
   useEffect(() => {
-    dispatch(getCourseList());
-    dispatch(getProfile());
+
 
     if (userDetail.name && userDetail.user_type === "StudentUser") {
       dispatch(getMyQuizAnswerList());
@@ -130,24 +133,35 @@ export default function ProfileScreen() {
     }
   }, [
     dispatch,
-    userDetail,
     ValidLoading,
     updateSuccess,
     TokenSuccess,
     answerListSuccess,
   ]);
 
+
+  useEffect(() => {
+    dispatch(getCourseList());
+    dispatch(getProfile());
+
+  }, [
+ 
+    userDetail,
+  ]);
+
+
   // Getting user Details
-  const { loading, user, error } = useSelector((state) => state.userProfile);
+  const { loading:userLoading , user, error } = useSelector((state) => state.userProfile);
   return (
     <>
       <div
         className='instructor-page-section'
         style={{ backgroundColor: "#fff" }}
       >
+
         <div className='auto-container'>
-          {loading ? (
-            <Loader />
+          {userLoading ? (
+              <MainLoader/>
           ) : error ? (
             <Message>{error}</Message>
           ) : (
@@ -164,7 +178,7 @@ export default function ProfileScreen() {
                           <img
                             src={
                               user.avatar
-                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -293,7 +307,7 @@ export default function ProfileScreen() {
                         <Tab eventKey='Courses' title='Courses'>
                           <div className='title pt-5 pb-3'>My Courses</div>
 
-                          <div className='single-item-carousel owl-carousel owl-theme'>
+                          <div className='single-item-carousel owl-theme'>
                             <div className='slide'>
                               <div className='row clearfix'>
                                 {/* Course Block */}
@@ -313,7 +327,7 @@ export default function ProfileScreen() {
                                           <div className='image'>
                                             <img
                                               src={
-                                                "http://localhost:5001/uploads/Bootcamp/" +
+                                                "https://server.ccab.tech/uploads/Bootcamp/" +
                                                 course.img_path
                                               }
                                               alt='bootcamp'
@@ -389,7 +403,7 @@ export default function ProfileScreen() {
                                         <div className='image'>
                                           <img
                                             src={
-                                              "http://localhost:5001/uploads/Service/" +
+                                              "https://server.ccab.tech/uploads/Service/" +
                                               service.img_path
                                             }
                                             alt='service'

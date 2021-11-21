@@ -7,8 +7,7 @@ import HomeScreen from "../../screens/HomeScreen";
 import ServiceHomeScreen from "../../screens/ServiceHomeScreen";
 import Footer from "../../layout/Footer";
 import Header from "./../../layout/Header";
-import LoginScreen from "../../screens/LoginScreen";
-import RegisterScreen from "../../screens/RegisterScreen";
+
 import CoueseListScreen from "../../screens/CourseListScreen";
 import CourseDetailScreen from "../../screens/CourseDetailScreen";
 import ServiceDetailScreen from "../../screens/ServiceDetailScreen";
@@ -65,7 +64,7 @@ export default function DefaultRoute() {
 
         {/* Education Section Two */}
         
-
+{/* 
         <a  className='handle-mobile handle1'
         style={{top:'116px'}}
          href="/pricing-plans"></a>
@@ -79,12 +78,12 @@ export default function DefaultRoute() {
           className='handle3 handle-mobile'
           style={{top:'116px'}}
           onClick={() => setShowModal({ visible: true })}
-        ></a>
+        ></a> */}
         </>
       )||(<> {/* Education Section Two for mobile only */}
         
 
-        <a  className='handle1 handle-mobile'
+        {/* <a  className='handle1 handle-mobile'
          style={{top:'65px'}}
          href="/pricing-plans"></a>
         <a
@@ -97,7 +96,7 @@ export default function DefaultRoute() {
           className='handle3 handle-mobile'
           style={{top:'65px'}}
           onClick={() => setShowModal({ visible: true })}
-        ></a>
+        ></a> */}
         </>
         ))}
 
@@ -111,7 +110,7 @@ export default function DefaultRoute() {
         </Rodal>
 
         {/* Education Section Two for big screen  only */}
-      <a  className='handle handle1'
+      {/* <a  className='handle handle1'
          
          href="/pricing-plans"></a>
         <a
@@ -124,15 +123,14 @@ export default function DefaultRoute() {
           className='handle handle3'
           
           onClick={() => setShowModal({ visible: true })}
-        ></a>
+        ></a> */}
       <Switch>
 
      
-        <Route exact path='/dev' component={HomeScreen}></Route>
+        <Route exact path='/' component={HomeScreen}></Route>
         <Route exact path='/Services' component={ServiceHomeScreen}></Route>
         {/* <Route  path={`/auth`} component={()=><RedirectToAuthRoutes authPath={AuthPath}/>} ></Route> */}
-        <Route exact path='/login' component={LoginScreen}></Route>
-        <Route exact path='/get-start' component={RegisterScreen}></Route>
+
         <Route exact path='/course-list' component={CoueseListScreen}></Route>
         <Route
           exact
@@ -166,7 +164,7 @@ export default function DefaultRoute() {
         <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/reset-password/:token' component={ResetPassword} />
 
-      
+       <Route  component={NotFound} />
       </Switch>
    
     </main>

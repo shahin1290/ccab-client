@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import { Row, Col, ProgressBar } from 'react-bootstrap'
-import RegisterScreen from '../screens/RegisterScreen'
+import RegisterScreen from '../screens/authScreen/RegisterScreen'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 
@@ -21,6 +21,7 @@ const CurriculamStepsBar = (props) => {
         backgroundColor: '#fff',
         padding: '50px 0'
       }}
+      id="Curriculum"
     >
       <div className="curriculum no-gutter ">
         <div  data-aos="fade-right" data-aos-delay="200" className="title text-center pb-1 w-100">Comprehensive Curriculum</div>

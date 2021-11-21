@@ -13,8 +13,9 @@ import Checkout from "./components/screens/Checkout";
 import CheckoutKlarna from "./components/screens/CheckoutKlarna";
 import ConfirmationKlarna from "./components/screens/ConfirmationKlarna";
 import ConfirmationCardPurchase from "./components/screens/ConfirmationCardPurchase";
-/* LAnding page */
-import Landings from './components/Route/landing/LandingRoute'
+/* Auth Route */
+import AuthRoute from './components/Route/auth/AuthRoute'
+
 import ErrorScreen from "./components/screens/ErrorScreen";
 import { SideBarStateProvider } from "./util/sidebarState";
 import Assignments from "./components/layout/Assignments";
@@ -74,6 +75,7 @@ import WOW from "wowjs";
 import "./App.css";
 import "./assets/css/main.css";
 import "./assets/css/responsive.css";
+import "./assets/css/materialdesignicons.min.css"; 
 import Quizzes from "./components/layout/Quizzes";
 import { updatePerformance } from "./redux/actions/performanceAction";
 import UpdateMediaCenter from "./components/screens/AdminScreen/UpdateMediaCenter";
@@ -91,7 +93,7 @@ function App() {
     live: false,
   }).init();
 
-  const socket = socketIOClient("http://localhost:5001");
+  const socket = socketIOClient("https://server.ccab.tech");
 
   useEffect(() => {
     if (userDetail.user_type === "StudentUser") {
@@ -461,10 +463,9 @@ function App() {
 
        
           
-    
+          <Route component={AuthRoute} />
 
-        {/* Landing Routes for guests  */}
-        <Route component={Landings}></Route>
+     
        
         </Switch>
       </SideBarStateProvider>

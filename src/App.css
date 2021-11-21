@@ -555,7 +555,7 @@ div.at-container {
 }
 .carousel-indicators li {
   z-index: 2000 !important;
-  background-color: #131313 !important;
+  background-color: #ff8057  !important;
 }
 
 .rodal-dialog {
@@ -856,7 +856,7 @@ input:checked + .slider:before {
 .prompSection{
   color :yellow !important;  
   position: sticky !important;
-  top:67px !important;
+  top:0px !important;
   z-index: 800 !important;
 }
 .address .job-icon:hover {
@@ -1605,7 +1605,7 @@ input:checked + .slider:before {
   }
   .prompSection{
 
-    top:65px !important; 
+    top:0px !important; 
  
 }
   .promoFlex{

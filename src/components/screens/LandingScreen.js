@@ -12,7 +12,7 @@ import './../../assets/css/animate.min.css'
 import { useEffect } from 'react';
  import Loader from './../layout/LandingMainLoader'
 import 'animate.css/animate.css' 
-import  './../../assets/css/Landing.css'
+
 import CountUp from "react-countup";
 
 function App() {
@@ -226,9 +226,9 @@ useEffect(()=>{
             <div className="features-icon my-4">
               <i className="mdi mdi-laptop-mac" />
             </div>
-            <h5 className="text-dark font-weight-normal mb-3 pt-3">Activity Reporting</h5>
+            <h5 className="text-dark font-weight-normal mb-3 pt-3">Theacher Portal</h5>
             <p className="text-muted mb-3 f-15">Et harum quidem rerum facilise expedita distinctio nam libero tempore cum soluta nobis as eligendi optio cumque nihil quis nostrum exercitationem impedit minus omnis repellendus.</p>
-            <a href="#" className="f-16 text-warning">Read More <span className="right-icon ml-2">→</span></a>
+            <a href="#" className="f-16 text-warning">Join<span className="right-icon ml-2">→</span></a>
           </div>
         </div>
       </div>

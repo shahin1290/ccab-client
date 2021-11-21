@@ -11,8 +11,8 @@ export default function NotFound() {
             <div className="auto-container">
                 <div className="content">
                 <div className="content-inner">
-                    <div className="logo">
-                    <a href="/"><img src={logo} alt width="20%" className="mb-4"/></a>
+                    <div className="pt-4">
+                    <a href="/"><img src={logo} alt width="150px" style={{ height:'auto'}} className="mb-4"/></a>
                     </div>
                     <div className="image">
                     <img src={image} alt />
