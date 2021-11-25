@@ -111,7 +111,7 @@ const HomeCaousel = () => {
                
                   <h1 className="">
                     learn to code, <br />
-                    With a New digital life
+                    With a New Digital Life
                   </h1>
                   <div className="text header-text ">
                     Start your new Work with our weekly remotely
