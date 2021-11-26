@@ -31,7 +31,7 @@ export const createSession = (session) => async (dispatch, getState) => {
     const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
     const response = await axios.post(
-      "http://localhost:5001/api/session",
+      "https://server.ccab.tech/api/session",
       session,
       config
     );
@@ -72,7 +72,7 @@ export const getSessions = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "http://localhost:5001/api/session/",
+      "https://server.ccab.tech/api/session/",
       config
     );
     dispatch({
@@ -108,7 +108,7 @@ export const getSessionDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `http://localhost:5001/api/session/${id}`,
+      `https://server.ccab.tech/api/session/${id}`,
       config
     );
 
@@ -145,7 +145,7 @@ export const deleteSession = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:5001/api/session/${id}`, config);
+    await axios.delete(`https://server.ccab.tech/api/session/${id}`, config);
 
     dispatch({
       type: SESSION_DELETE_SUCCESS,
@@ -179,7 +179,7 @@ export const updateSession = (req, id) => async (dispatch, getState) => {
     };
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/session/${id}`, req, config);
+    await axios.put(`https://server.ccab.tech/api/session/${id}`, req, config);
 
     dispatch({
       type: SESSION_UPDATE_SUCCESS,
