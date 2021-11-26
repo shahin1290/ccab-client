@@ -119,8 +119,8 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     if (userDetail.name && userDetail.user_type === "StudentUser") {
-      dispatch(getMyQuizAnswerList(userDetail._id));
-      dispatch(getMyAnswerList(userDetail._id));
+      dispatch(getMyQuizAnswerList(userDetail.name && userDetail._id));
+      dispatch(getMyAnswerList(userDetail.name && userDetail._id));
       dispatch(getMyTaskList());
       dispatch(getMyQuizList());
     }
