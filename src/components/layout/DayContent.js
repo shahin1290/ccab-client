@@ -165,13 +165,13 @@ export default function DayContent({ bootcampId, setOpen }) {
       return daysBasedOnShow.slice(0, size);
     } else if (foundOrder && foundOrder.course === "Diamond Plan") {
       return daysBasedOnShow;
-    } else if (course.name.toLowerCase().includes("silver")) {
+    } else if (course.name && course.name.toLowerCase().includes("silver")) {
       const size = 20;
       return daysBasedOnShow.slice(0, size);
-    } else if (course.name.toLowerCase().includes("golden")) {
+    } else if (course.name && course.name.toLowerCase().includes("golden")) {
       const size = 40;
       return daysBasedOnShow.slice(0, size);
-    } else if (course.name.toLowerCase().includes("diamond")) {
+    } else if (course.name && course.name.toLowerCase().includes("diamond")) {
       return daysBasedOnShow;
     } else {
       return daysBasedOnShow;
@@ -185,9 +185,9 @@ export default function DayContent({ bootcampId, setOpen }) {
 
     const filteredDays = daysBasedOnUser(merged);
 
-    const chunk_size = course.name.toLowerCase().includes("silver")
+    const chunk_size = course.name && course.name.toLowerCase().includes("silver")
       ? 2
-      : course.name.toLowerCase().includes("golden")
+      : course.name && course.name.toLowerCase().includes("golden")
       ? 4
       : 5;
 
