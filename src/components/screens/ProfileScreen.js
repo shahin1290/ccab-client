@@ -62,13 +62,20 @@ export default function ProfileScreen() {
   //Get Student's Bootcamps
 
   const filterCourseList = () => {
-    if (userDetail.user_type === "StudentUser") {
-      return courseList.filter(
-        (course) =>
-          course.price === 0 ||
-          course.students.some(
-            (student) => student._id === userDetail._id || course.price === 0
-          )
+    if (
+      courseList &&
+      courseList.length &&
+      userDetail.user_type === "StudentUser"
+    ) {
+      return (
+        courseList &&
+        courseList.filter(
+          (course) =>
+            course.price === 0 ||
+            course.students.some(
+              (student) => student._id === userDetail._id || course.price === 0
+            )
+        )
       );
     }
 
@@ -76,13 +83,9 @@ export default function ProfileScreen() {
       userDetail.user_type === "MentorUser" ||
       userDetail.user_type === "AdminUser"
     ) {
-      return courseList.filter(
-        (course) => course.mentor._id === userDetail._id
-      );
+      return courseList && courseList;
     }
   };
-
-  console.log(filterCourseList());
 
   // updating process
   const userUpdate = useSelector((state) => state.userUpdate);
@@ -166,7 +169,7 @@ export default function ProfileScreen() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -315,7 +318,7 @@ export default function ProfileScreen() {
                                           <div className='image'>
                                             <img
                                               src={
-                                                "https://server.ccab.tech/uploads/Bootcamp/" +
+                                                "http://localhost:5001/uploads/Bootcamp/" +
                                                 course.img_path
                                               }
                                               alt='bootcamp'
@@ -337,14 +340,14 @@ export default function ProfileScreen() {
                                               </span>
                                             </div>
                                             <div className='clearfix'>
-                                              <div className='pull-left'>
+                                             {/*  <div className='pull-left'>
                                                 <div className='author'>
                                                   By:{" "}
                                                   <span>
                                                     {course.mentor.name}
                                                   </span>
                                                 </div>
-                                              </div>
+                                              </div> */}
                                               <div className='pull-right'>
                                                 <div className='price'>
                                                   ${course.price}
@@ -391,7 +394,7 @@ export default function ProfileScreen() {
                                         <div className='image'>
                                           <img
                                             src={
-                                              "https://server.ccab.tech/uploads/Service/" +
+                                              "http://localhost:5001/uploads/Service/" +
                                               service.img_path
                                             }
                                             alt='service'
