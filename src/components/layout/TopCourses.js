@@ -76,9 +76,9 @@ export default function TopCourses({ match }) {
             data-aos-delay='600'
             className='sub-text text-center mb-3'
           >
-
-            As a graduate, you’ll leave with a solid base of fundamental programming and computer science knowledge, as well as experience with languages, frameworks, and libraries that employers demand.
-
+            As a graduate, you’ll leave with a solid base of fundamental
+            programming and computer science knowledge, as well as experience
+            with languages, frameworks, and libraries that employers demand.
           </div>
           {loading ? <Loader /> : error && <Message>{error}</Message>}
 
@@ -100,7 +100,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            "https://server.ccab.tech/uploads/Bootcamp/" +
+                            "http://localhost:5001/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt=''
