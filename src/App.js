@@ -14,7 +14,7 @@ import CheckoutKlarna from "./components/screens/CheckoutKlarna";
 import ConfirmationKlarna from "./components/screens/ConfirmationKlarna";
 import ConfirmationCardPurchase from "./components/screens/ConfirmationCardPurchase";
 /* Auth Route */
-import AuthRoute from './components/Route/auth/AuthRoute'
+import AuthRoute from "./components/Route/auth/AuthRoute";
 
 import ErrorScreen from "./components/screens/ErrorScreen";
 import { SideBarStateProvider } from "./util/sidebarState";
@@ -75,7 +75,7 @@ import WOW from "wowjs";
 import "./App.css";
 import "./assets/css/main.css";
 import "./assets/css/responsive.css";
-import "./assets/css/materialdesignicons.min.css"; 
+import "./assets/css/materialdesignicons.min.css";
 import Quizzes from "./components/layout/Quizzes";
 import { updatePerformance } from "./redux/actions/performanceAction";
 import UpdateMediaCenter from "./components/screens/AdminScreen/UpdateMediaCenter";
@@ -93,7 +93,7 @@ function App() {
     live: false,
   }).init();
 
-  const socket = socketIOClient("https://server.ccab.tech");
+  const socket = socketIOClient("http://localhost:5001");
 
   useEffect(() => {
     if (userDetail.user_type === "StudentUser") {
@@ -458,15 +458,7 @@ function App() {
             component={PerformanceRating}
           ></StudentRoute>
 
-
-
-
-       
-          
           <Route component={AuthRoute} />
-
-     
-       
         </Switch>
       </SideBarStateProvider>
     </div>

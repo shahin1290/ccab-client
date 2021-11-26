@@ -24,7 +24,7 @@ export default function Pricing({ match }) {
         "special") ||
       "frontend"
   );
-  const [sekToUsd, setSekToUsd] = useState();
+  const [currencyFromSek, setCurrencyFromSek] = useState();
 
   const getPlans = () => {
     return plans.filter((plan) => plan.course === course);
@@ -41,12 +41,11 @@ export default function Pricing({ match }) {
     error: promoError,
   } = useSelector((state) => state.promoList);
 
-  useEffect( () => {
-    
-    getPriceConversionFromSEK().then((data) => setSekToUsd(data));
+  useEffect(() => {
+    getPriceConversionFromSEK().then((data) => setCurrencyFromSek(data));
   }, []);
-  console.log('started.....',promos);
-console.log('sekToUsd' , sekToUsd);
+  console.log("started.....", promos);
+  console.log("currencyFromSek", currencyFromSek);
   return (
     <div id='pricing'>
       {/* Pricing Section */}
@@ -59,53 +58,61 @@ console.log('sekToUsd' , sekToUsd);
             </div>
             <hr className='block-seperator mb-3' />
             <div className='text'>
-            You will learn coding and build an active portfolio to showcase your skill to the recruiters.From 15 weeks, you will learn both Frontend as well as Backend web development to become a Full-stack developer who is industry-ready
+              You will learn coding and build an active portfolio to showcase
+              your skill to the recruiters.From 15 weeks, you will learn both
+              Frontend as well as Backend web development to become a Full-stack
+              developer who is industry-ready
             </div>
           </div>
 
           <Container>
             <div className='curriculum-project'>
               <ul className='d-flex justify-content-center curriculum-project pb-3'>
-                <li className=' btn btn-info rounded mx-2'
-                 onClick={() => setCourse("frontend")}
-                              
-                 style={
-                  course === "frontend"
-                    ? { backgroundColor: "#ea5573",color:"black", fontWeight: "bold" }
-                    : {color:'#fff'}
-                }
+                <li
+                  className=' btn btn-info rounded mx-2'
+                  onClick={() => setCourse("frontend")}
+                  style={
+                    course === "frontend"
+                      ? {
+                          backgroundColor: "#ea5573",
+                          color: "black",
+                          fontWeight: "bold",
+                        }
+                      : { color: "#fff" }
+                  }
                 >
-        
-                    Front end
-                
+                  Front end
                 </li>
-                <li className=' btn btn-info rounded mx-2'
-                 onClick={() => setCourse("fullstack")}
-                 style={
-                  course === "fullstack"
-                    ? { backgroundColor: "#ea5573",color:"black", fontWeight: "bold" }
-                    : {}
-                }
+                <li
+                  className=' btn btn-info rounded mx-2'
+                  onClick={() => setCourse("fullstack")}
+                  style={
+                    course === "fullstack"
+                      ? {
+                          backgroundColor: "#ea5573",
+                          color: "black",
+                          fontWeight: "bold",
+                        }
+                      : {}
+                  }
                 >
-                  <a
-            
-                 
-                  >
-                    Full stack
-                  </a>
+                  <a>Full stack</a>
                 </li>
 
-                <li className='btn btn-info rounded mx-2 pt-3 d-flex align-content-center '
-                 onClick={() => setCourse("special")}
-                 style={
-                  course === "special"
-                    ? { backgroundColor: "#ea5573",color:"black", fontWeight: "bold" }
-                    : {}
-                }
+                <li
+                  className='btn btn-info rounded mx-2 pt-3 d-flex align-content-center '
+                  onClick={() => setCourse("special")}
+                  style={
+                    course === "special"
+                      ? {
+                          backgroundColor: "#ea5573",
+                          color: "black",
+                          fontWeight: "bold",
+                        }
+                      : {}
+                  }
                 >
-            Special
-                    
-                 
+                  Special
                 </li>
               </ul>
             </div>
@@ -154,33 +161,32 @@ console.log('sekToUsd' , sekToUsd);
                                   className='price'
                                   style={{ fontSize: "120%" }}
                                 >
-                                  {(sekToUsd &&
+                                  {(currencyFromSek &&
                                     Math.round(
-                                      sekToUsd[0] * (Number(plan.price) + 200)
-                                    ))|| Math.floor(plan.price /8) + ' USD'}{" "}
-                                  {(sekToUsd && sekToUsd[1] + " ")}
+                                      currencyFromSek[0] *
+                                        (Number(plan.price) + 200)
+                                    )) ||
+                                    Math.floor(plan.price / 8) + " USD"}{" "}
+                                  {currencyFromSek && currencyFromSek[1] + " "}
                                 </del>
                               </p>
                             )}
                             <div className='price'>
-                              {(sekToUsd &&
+                              {currencyFromSek &&
                                 Math.round(
-                                  sekToUsd[0] *
+                                  currencyFromSek[0] *
                                     (Number(plan.price) +
                                       (promos &&
                                       promos.length > 0 &&
                                       promos[0].show
                                         ? 0
                                         : 200))
-                                ))|| (Math.floor(Math.floor(plan.price /8) * ((promos &&
-                                  promos.length > 0 &&promos[0].show
-                                    ? (100-promos[0].percentages)/100
-                                    :1)) ))+ ' USD'}{" "}
-                              {sekToUsd && sekToUsd[1] + " "}
+                                )}
+                              {currencyFromSek && currencyFromSek[1] + " "}
                               <span>Per month</span>
                             </div>
                             <h5 className='pricing-sub-title'>
-                            How will you learn :
+                              How will you learn :
                             </h5>
                             <ul className='list'>
                               {plan.service.basic.map((offer) => (

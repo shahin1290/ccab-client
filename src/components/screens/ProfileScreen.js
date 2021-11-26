@@ -22,7 +22,7 @@ import PaymentRequest from "../layout/StudentPaymentRequests";
 import { getServiceList } from "../../redux/actions/serviceAction";
 import PerformanceChart from "../layout/PerformanceChart";
 import ServiceSessions from "../layout/ServiceSessions";
-import MainLoader from './../layout/LandingMainLoader'
+import MainLoader from "./../layout/LandingMainLoader";
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ export default function ProfileScreen() {
           )
       );
     }
-    
+
     if (
       userDetail.user_type === "MentorUser" ||
       userDetail.user_type === "AdminUser"
@@ -82,9 +82,8 @@ export default function ProfileScreen() {
     }
   };
 
-
   console.log(filterCourseList());
-  
+
   // updating process
   const userUpdate = useSelector((state) => state.userUpdate);
   const { updateSuccess, error: UpdateError } = userUpdate;
@@ -119,11 +118,9 @@ export default function ProfileScreen() {
   } = isTokenValid;
 
   useEffect(() => {
-
-
     if (userDetail.name && userDetail.user_type === "StudentUser") {
-      dispatch(getMyQuizAnswerList());
-      dispatch(getMyAnswerList());
+      dispatch(getMyQuizAnswerList(userDetail._id));
+      dispatch(getMyAnswerList(userDetail._id));
       dispatch(getMyTaskList());
       dispatch(getMyQuizList());
     }
@@ -131,37 +128,28 @@ export default function ProfileScreen() {
     if (userDetail.name && userDetail.user_type === "InstructorUser") {
       dispatch(getServiceList());
     }
-  }, [
-    dispatch,
-    ValidLoading,
-    updateSuccess,
-    TokenSuccess,
-    answerListSuccess,
-  ]);
-
+  }, [dispatch, ValidLoading, updateSuccess, TokenSuccess, answerListSuccess]);
 
   useEffect(() => {
     dispatch(getCourseList());
     dispatch(getProfile());
-
-  }, [
- 
-    userDetail,
-  ]);
-
+  }, [userDetail]);
 
   // Getting user Details
-  const { loading:userLoading , user, error } = useSelector((state) => state.userProfile);
+  const {
+    loading: userLoading,
+    user,
+    error,
+  } = useSelector((state) => state.userProfile);
   return (
     <>
       <div
         className='instructor-page-section'
         style={{ backgroundColor: "#fff" }}
       >
-
         <div className='auto-container'>
           {userLoading ? (
-              <MainLoader/>
+            <MainLoader />
           ) : error ? (
             <Message>{error}</Message>
           ) : (
@@ -178,7 +166,7 @@ export default function ProfileScreen() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt='avatar'
@@ -327,7 +315,7 @@ export default function ProfileScreen() {
                                           <div className='image'>
                                             <img
                                               src={
-                                                "https://server.ccab.tech/uploads/Bootcamp/" +
+                                                "http://localhost:5001/uploads/Bootcamp/" +
                                                 course.img_path
                                               }
                                               alt='bootcamp'
@@ -403,7 +391,7 @@ export default function ProfileScreen() {
                                         <div className='image'>
                                           <img
                                             src={
-                                              "https://server.ccab.tech/uploads/Service/" +
+                                              "http://localhost:5001/uploads/Service/" +
                                               service.img_path
                                             }
                                             alt='service'

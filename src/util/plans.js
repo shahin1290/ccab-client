@@ -1,5 +1,3 @@
-import { getPriceConversion } from "./getPriceConversion";
-
 export const plans = [
   /* {
     name: "Silver Plan",
