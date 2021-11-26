@@ -76,7 +76,7 @@ const Form = () => {
     showThanksMessage();
     // const config={headers:{'Content-Type' : 'application/json'}}
     // try {
-    //   const res = await axios.post("http://localhost:5001/contact", {
+    //   const res = await axios.post("https://server.ccab.tech/contact", {
     //       ...FormData
     //   },config);
 

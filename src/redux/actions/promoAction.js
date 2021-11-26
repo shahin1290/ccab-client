@@ -31,7 +31,7 @@ export const createPromo = (promo) => async (dispatch, getState) => {
     const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
     const response = await axios.post(
-      "http://localhost:5001/api/promo",
+      "https://server.ccab.tech/api/promo",
       promo,
       config
     );
@@ -71,7 +71,7 @@ export const getPromos = () => async (dispatch, getState) => {
         Authorization: "Bearer " + userDetail.token,
       },
     };
-    const response = await axios.get("http://localhost:5001/api/promo/");
+    const response = await axios.get("https://server.ccab.tech/api/promo/");
     dispatch({
       type: PROMO_LIST_SUCCESS,
       payload: response.data,
@@ -105,7 +105,7 @@ export const getPromoDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `http://localhost:5001/api/promo/${id}`,
+      `https://server.ccab.tech/api/promo/${id}`,
       config
     );
 
@@ -142,7 +142,7 @@ export const deletePromo = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:5001/api/promo/${id}`, config);
+    await axios.delete(`https://server.ccab.tech/api/promo/${id}`, config);
 
     dispatch({
       type: PROMO_DELETE_SUCCESS,
@@ -175,7 +175,7 @@ export const updatePromo = (req, id) => async (dispatch, getState) => {
     };
 
     //console.log(REQUEST);
-    await axios.put(`http://localhost:5001/api/promo/${id}`, req);
+    await axios.put(`https://server.ccab.tech/api/promo/${id}`, req);
 
     dispatch({
       type: PROMO_UPDATE_SUCCESS,
