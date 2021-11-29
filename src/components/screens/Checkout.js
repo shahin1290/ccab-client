@@ -44,7 +44,7 @@ const CheckoutForm = ({ match, history }) => {
   const subscription = match.params.plan;
   const requestId = match.params.requestId;
   const serviceId = match.params.serviceId;
-  const [method, setMethod] = useState("card");
+  const [method, setMethod] = useState();
 
   const [showKlarnaImg, setShowKlarmaImg] = useState(false);
 
@@ -390,6 +390,7 @@ const CheckoutForm = ({ match, history }) => {
             paymentMethodType: "card",
             currency: currency.data.currency,
             amount,
+            receipt_email: userDetail.email,
           },
           config
         );
@@ -593,7 +594,6 @@ const CheckoutForm = ({ match, history }) => {
                 {/* Sec Title */}
                 <div className='sec-title'>
                   <div className='title'>Checkout</div>
-                  {checkoutError && <Message>{checkoutError}</Message>}{" "}
                 </div>
 
                 <div className='checkout-section'>
@@ -601,13 +601,15 @@ const CheckoutForm = ({ match, history }) => {
 
                   {/* Sidebar Side */}
 
-                  <div className='sidebar-side col-lg-8 col-md-12 col-sm-12 mt-5'>
+                  <div className='sidebar-side col-lg-9 col-md-12 col-sm-12 mt-5'>
                     <aside className='sidebar sticky-top  mt-5'>
                       {/* Order Widget */}
-                      <div className='sidebar-widget order-widget'>
+                      <div className='border border-secondary rounded'>
                         <div className='widget-content '>
                           <div className='sidebar-title'>
-                            <div className='sub-title'>Order Summary</div>
+                            <div className='sub-title text-info pl-2 pt-2'>
+                              Order Summary
+                            </div>
                           </div>
 
                           <div className='order-box bg-white p-2'>
@@ -634,7 +636,7 @@ const CheckoutForm = ({ match, history }) => {
                                       className='form-check-label font-weight-bold'
                                       for='inlineRadio1'
                                     >
-                                      Subscription
+                                      Subscription (pay every month)
                                     </label>
 
                                     <div className='clearfix mb-3'>
@@ -692,7 +694,7 @@ const CheckoutForm = ({ match, history }) => {
                                       className='form-check-label font-weight-bold'
                                       for='inlineRadio2'
                                     >
-                                      Full payment
+                                      Full payment (pay once)
                                     </label>
                                   </div>
                                 </div>
@@ -792,10 +794,12 @@ const CheckoutForm = ({ match, history }) => {
                                   <hr />
 
                                   <li className='clearfix'>
-                                    <strong>Total</strong>{" "}
+                                    <span className='text-info font-weight-bold'>
+                                      Total
+                                    </span>{" "}
                                     <span className='pull-right'>
                                       {billingType === "oneTime" ? (
-                                        <strong>
+                                        <span className='text-info font-weight-bold'>
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -808,9 +812,9 @@ const CheckoutForm = ({ match, history }) => {
                                                 currency.data.amount *
                                                 6
                                             )}  ${currency.data.currency}`}
-                                        </strong>
+                                        </span>
                                       ) : (
-                                        <strong>
+                                        <span className='text-info font-weight-bold'>
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -823,7 +827,7 @@ const CheckoutForm = ({ match, history }) => {
                                                 currency.data.amount *
                                                 AmountOfWeeks
                                             )}  ${currency.data.currency}`}
-                                        </strong>
+                                        </span>
                                       )}
                                     </span>
                                   </li>
@@ -862,16 +866,18 @@ const CheckoutForm = ({ match, history }) => {
                                 <hr />
 
                                 <li className='clearfix'>
-                                  <strong>Total</strong>{" "}
+                                  <span className='text-info text-bold'>
+                                    Total
+                                  </span>{" "}
                                   <span className='pull-right'>
-                                    <strong>
+                                    <span className='text-info font-weight-bold'>
                                       {currencySuccess &&
                                         `${getPriceFormat(
                                           Math.round(
                                             currency.data.amount * course.price
                                           )
                                         )}  ${currency.data.currency}`}
-                                    </strong>
+                                    </span>
                                   </span>
                                 </li>
                               </ul>
@@ -900,9 +906,11 @@ const CheckoutForm = ({ match, history }) => {
                                 <hr />
 
                                 <li className='clearfix'>
-                                  <strong>Total</strong>{" "}
+                                  <span className='text-info text-bold'>
+                                    Total
+                                  </span>{" "}
                                   <span className='pull-right'>
-                                    <strong>
+                                    <span className='text-info font-weight-bold'>
                                       {currencySuccess &&
                                         `${getPriceFormat(
                                           Math.round(
@@ -910,7 +918,7 @@ const CheckoutForm = ({ match, history }) => {
                                               request.amount
                                           )
                                         )}  ${currency.data.currency}`}
-                                    </strong>
+                                    </span>
                                   </span>
                                 </li>
                               </ul>
@@ -950,9 +958,11 @@ const CheckoutForm = ({ match, history }) => {
                                 <hr />
 
                                 <li className='clearfix'>
-                                  <strong>Total</strong>{" "}
+                                  <span className='text-info text-bold'>
+                                    Total
+                                  </span>{" "}
                                   <span className='pull-right'>
-                                    <strong>
+                                    <span className='text-info font-weight-bold'>
                                       {currencySuccess &&
                                         `${getPriceFormat(
                                           Math.round(
@@ -965,7 +975,7 @@ const CheckoutForm = ({ match, history }) => {
                                                 ).inputFields.length)
                                           )
                                         )}  ${currency.data.currency}`}
-                                    </strong>
+                                    </span>
                                   </span>
                                 </li>
                               </ul>
@@ -976,24 +986,52 @@ const CheckoutForm = ({ match, history }) => {
                     </aside>
                   </div>
 
-                  <div className='col-lg-12 col-md-12 col-sm-12 form-group'>
-                    <div className='title2'>Select Payment Method</div>
-                    <div className='auto-container mt-3 mb-5'>
-                      <img
-                        width='50'
-                        className='pr-2'
-                        src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
-                      />
-                      <img
-                        width='160'
-                        src='https://cdn.jotfor.ms/images/credit-card-logo.png'
-                      />
-                    </div>
-                  </div>
-
                   {/* Signup Info Tabs*/}
-                  <div className='checkout-info-tabs col-lg-9 col-md-12 col-sm-12'>
-                    <ButtonGroup aria-label='Basic example'>
+                  <div className=' col-lg-9 col-md-12 col-sm-12 mb-5'>
+                    <div className='wrapper'>
+                      <div className='title'>Select Payment Method</div>
+                      <div className='box'>
+                        <input
+                          type='radio'
+                          name='select'
+                          id='option-1'
+                          onClick={() => setMethod("card")}
+                        />
+                        <input
+                          type='radio'
+                          name='select'
+                          id='option-2'
+                          onClick={() => {
+                            setMethod("klarna");
+                            _handelcreateKlarnaOrder();
+                          }}
+                        />
+
+                        <label for='option-1' className='option-1'>
+                          <div className='dot'></div>
+
+                          <div className='text'>Credit card</div>
+                          <div className='pl-5 ml-2'>
+                            <img
+                              width='160'
+                              src='https://cdn.jotfor.ms/images/credit-card-logo.png'
+                            />
+                          </div>
+                        </label>
+                        <label for='option-2' className='option-2'>
+                          <div className='dot'></div>
+                          <div className='text'>Klarna</div>
+                          <div className='pl-5 ml-5'>
+                            <img
+                              width='50'
+                              className='pr-2'
+                              src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
+                            />
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    {/*  <ButtonGroup aria-label='Basic example'>
                       <Button
                         variant={method === "card" ? "info" : "secondary"}
                         className='mr-2 mb-3 border border-info'
@@ -1013,12 +1051,14 @@ const CheckoutForm = ({ match, history }) => {
                           Klarna
                         </Button>
                       )}
-                    </ButtonGroup>
+                    </ButtonGroup> */}
                     {method === "card" && (
                       <form onSubmit={submitHandler}>
                         <div className='sub-title p-3'>Payment Information</div>
+                        {checkoutError && (
+                          <Message>{checkoutError}</Message>
+                        )}{" "}
                         {isProcessing && <Loader />}
-
                         <div
                           className='row clearfix p-3'
                           style={{
@@ -1027,7 +1067,7 @@ const CheckoutForm = ({ match, history }) => {
                           }}
                         >
                           <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                            <label>Holder Name</label>
+                            <label>Name on card</label>
 
                             <div
                               style={{

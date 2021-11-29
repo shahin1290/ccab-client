@@ -106,7 +106,7 @@ export const plans = [
     _id: "d8cc4ea7-809a-a8ce-dc839bce88b1",
   }, */
   {
-    name: "Front End Part Time Plan",
+    name: "Front End Half Time Plan",
     period: "monthly",
     price: "2699",
     course: "frontend",
@@ -133,7 +133,7 @@ export const plans = [
     _id: "d8cc4ea7-8092-480a-a8839bce88b1",
   },
   {
-    name: "Full Stack Part Time Plan",
+    name: "Full Stack Half Time Plan",
     period: "monthly",
     price: "2699",
     course: "fullstack",
