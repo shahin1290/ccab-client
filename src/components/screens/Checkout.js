@@ -506,11 +506,21 @@ const CheckoutForm = ({ match, history }) => {
       setWidgetLoaded(false);
     }
     if (subscription) {
-      const amount =
-        (Number(plan.price) +
-          (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
-        sekToEUR *
-        6;
+      let amount;
+
+      if (billingType === "subscription") {
+        amount =
+          (Number(plan.price) +
+            (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
+          sekToEUR *
+          AmountOfWeeks;
+      } else {
+        amount =
+          (Number(plan.price) +
+            (promos && promos.length > 0 && promos[0].show ? 0 : 200)) *
+          sekToEUR *
+          6;
+      }
       dispatch(
         createKlarnaSession(
           {
