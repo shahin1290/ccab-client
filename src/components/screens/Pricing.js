@@ -53,15 +53,30 @@ export default function Pricing({ match }) {
         <div className='auto-container'>
           {/* Sec Title */}
           <div className='sec-title style-two centered'>
-            <div className='title'>
-              Different Course Plans Tailored To Your Needs
+            <div>
+              <span className='title'>Different Course Plans & </span>
+
+              <span className='title text-info'>Why JavaScript?</span>
             </div>
             <hr className='block-seperator mb-3' />
-            <div className='text'>
-              You will learn coding and build an active portfolio to showcase
-              your skill to the recruiters.From 15 weeks, you will learn both
-              Frontend as well as Backend web development to become a Full-stack
-              developer who is industry-ready
+          </div>
+
+          <div style={{ height: "auto" }}>
+            <div className='sub-title auto-container pb-5'>
+              <div className='service-circle'>
+                JavaScript has been the most popular language in the world for 9
+                years in a row, according to StackOverflow.com, the largest
+                community website for professional and enthusiast programmers.
+              </div>
+              <div className='service-circle'>
+                Knowing JavaScript allows you to design Web and mobile apps
+                without any restrictions. JavaScript can be used to create
+                back-end, front-end, full-stack, iOS, and Android apps.
+              </div>
+              <div className='service-circle'>
+                The most in-demand position on the job market is full-stack
+                developer.
+              </div>
             </div>
           </div>
 
@@ -81,22 +96,7 @@ export default function Pricing({ match }) {
                       : { color: "#fff" }
                   }
                 >
-                  Front end
-                </li>
-                <li
-                  className=' btn btn-info rounded mx-2'
-                  onClick={() => setCourse("fullstack")}
-                  style={
-                    course === "fullstack"
-                      ? {
-                          backgroundColor: "#ea5573",
-                          color: "black",
-                          fontWeight: "bold",
-                        }
-                      : {}
-                  }
-                >
-                  <a>Full stack</a>
+                  Web Development
                 </li>
 
                 <li
@@ -151,8 +151,8 @@ export default function Pricing({ match }) {
                               {plan.name
                                 .toLocaleLowerCase()
                                 .includes("full time")
-                                ? "Full Time"
-                                : "Part time"}
+                                ? "Full Stack Web and Mobile Development"
+                                : "Frontend Development"}
                             </h3>
 
                             {promos && promos.length > 0 && promos[0].show && (
@@ -192,21 +192,8 @@ export default function Pricing({ match }) {
                               {plan.service.basic.map((offer) => (
                                 <li className='check'>{offer}</li>
                               ))}
-                              {plan.service.star.map((notOffer) => (
-                                <li className='yellow-star'>{notOffer}</li>
-                              ))}
-
-                              {plan.service.superStar.map((notOffer) => (
-                                <li className='red-star'>{notOffer}</li>
-                              ))}
                             </ul>
-
-                            <h5 className='pricing-sub-title'>Requierment</h5>
-                            <ul className='list'>
-                              {plan.requirement.map((offer) => (
-                                <li className='key'>{offer}</li>
-                              ))}
-                            </ul>
+                            <div className='list'>{plan.requirement}</div>
                           </div>
 
                           <div>

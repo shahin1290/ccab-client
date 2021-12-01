@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "malihu-custom-scrollbar-plugin";
 import TopCourses from "./../layout/TopCourses";
 import Pricing from "./../../components/screens/Pricing";
@@ -23,28 +23,28 @@ import "rodal/lib/rodal.css";
 import ContactForm from "../layout/ContactForm";
 import Typewriter from "typewriter-effect";
 import Reviews from "../layout/Reviews";
-import ServiceVideoChat from './../layout/ServiceVideoChat';
+import ServiceVideoChat from "./../layout/ServiceVideoChat";
 
-import ServiceAssistance from './../layout/ServiceAssistance';
+import ServiceAssistance from "./../layout/ServiceAssistance";
 
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
 // ..
 //AOS.init();
 
 export default function HomeScreen({ match }) {
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init();
-  },[])
+  }, []);
   const [showModal, setShowModal] = useState({ visible: false });
 
   return (
     <>
       <div className='home'>
         {/* <HomeCarousel /> */}
-        <HomeCarousel/>
+        <HomeCarousel />
         {/* <section className='home-hero-banner '> */}
-          {/* <div class="quote--container banner-quote">
+        {/* <div class="quote--container banner-quote">
             <p class="quote">
               Your future is created by what you do{' '}
               <span class="quote--highlight">TODAY</span> not tomorrow
@@ -56,7 +56,7 @@ export default function HomeScreen({ match }) {
             <div>Brighten your future</div>
             <div>with codify College</div>
           </div> */}
-{/* 
+        {/* 
           <div class='quote--container banner-quote w-75'>
             <p data-aos="fade-down"
                 data-aos-easing="linear"
@@ -76,7 +76,7 @@ export default function HomeScreen({ match }) {
                 <h1 data-aos="fade-up-left"  className="text-danger title text-right"><span style={{color: '#DBD02D'}}>CODIFY</span> COLLEGE</h1>
            </div>  */}
 
-          {/* <div className='typewriter'>
+        {/* <div className='typewriter'>
             <Typewriter
               options={{
                 strings: [
@@ -88,18 +88,12 @@ export default function HomeScreen({ match }) {
             />
           </div> */}
 
-          {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}
-{/* 
+        {/* {apply('Codify College').then(future=> alert(` Brighten your${future}`  )} */}
+        {/* 
           <span style={{ width: "100%", height: "300px" }}>
             <Particles />
           </span>
         </section> */}
-
-       
-
-
-     
-     
 
         <Rodal
           animation='rotate'
@@ -118,24 +112,26 @@ export default function HomeScreen({ match }) {
         <TopCourses></TopCourses>
 
         <CurriculamStepsBar />
-         {/* Sec Title */}
-        <div className="container-fluid bg-light py-5">
-                  
-          <div data-aos="fade-down" className='sec-title style-two centered'>
+        {/* Sec Title */}
+        <div className='container-fluid bg-light py-5'>
+          <div data-aos='fade-down' className='sec-title style-two centered'>
             <div className='title'>
               Different Course Plans Tailored To Your Needs
             </div>
             <hr className='block-seperator mb-3' />
-            <div data-aos="fade-down-right" data-aos-delay="100" className='text'>
+            <div
+              data-aos='fade-down-right'
+              data-aos-delay='100'
+              className='text'
+            >
               Register yourself now and get real employabe skills that top
               companies want.
             </div>
           </div>
-              <ServiceVideoChat/>
+          <ServiceVideoChat />
 
-                <ServiceAssistance/>
+          <ServiceAssistance />
         </div>
-       
 
         <ContactSection />
 

@@ -33,9 +33,9 @@ export default function TopCourses({ match }) {
   const filterSubscriptionCourse = (courseList) => {
     const filteredThreeCourses = courseList.filter(
       (course) =>
-        course.name.toLowerCase().includes("frontend  course") ||
+        course.name === "Frontend  Course" ||
         // course.name.toLowerCase().includes("foundation course") ||
-        course.name.toLowerCase().includes("mern full stack")
+        course.name === "Javascript Full Stack Web and  Mobile Development"
     );
 
     return filteredThreeCourses
@@ -68,7 +68,7 @@ export default function TopCourses({ match }) {
             className='title text-center p-2 '
           >
             Learn how to become a full-stack developer and build web and mobile
-            apps powered by JavaScript
+            apps using JavaScript
           </div>
           <hr className='block-seperator mb-3' />
 
@@ -120,10 +120,17 @@ export default function TopCourses({ match }) {
                       </div>
                       <div className='pt-4 '>
                         <span
-                          className='sub-text2 d-inline-block text-truncate'
-                          style={{ maxWidth: "250px" }}
+                          className='sub-text2 d-inline-block'
+                          style={{ maxWidth: "450px" }}
                         >
-                          {course.description}
+                          {console.log(course.name)}
+                          {course &&
+                          course.name &&
+                          course.name ===
+                            "Javascript Full Stack Web and  Mobile Development"
+                            ? "HTML, CSS, JavaScript, Node, Express, MongoDB, React.js, React Native, Git, UX basics ..."
+                            : course.name === "Frontend  Course" &&
+                              "Frontend-programming skills with HTML5, Css3, Bootstrap4, Es6, React JS ..."}
                         </span>
                         <Link
                           className='btn p-0 m-0 text-danger'

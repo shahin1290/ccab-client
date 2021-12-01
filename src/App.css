@@ -1,11 +1,9 @@
 body {
   font-size: 16px !important;
   font-weight: 200 !important;
- 
+
   color: #4a4a4a !important;
 }
-
-
 
 .login-nav-section {
   height: 10vh;
@@ -14,11 +12,11 @@ body {
 .title {
   font-size: 34px;
   font-weight: 800;
-  
+
   color: #1d1d1d;
   word-spacing: -3px;
 }
-.pricing-sub-title{
+.pricing-sub-title {
   font-family: Inter !important;
   color: #1d1d1d;
   word-spacing: 1px;
@@ -112,9 +110,9 @@ body {
     margin: 0 !important;
     z-index: 3000 !important;
   }
-.css-26l3qy-menu {
-  z-index: 4000 !important;
-}
+  .css-26l3qy-menu {
+    z-index: 4000 !important;
+  }
   .select-box-content {
     width: 100vw !important;
     margin: 0 !important;
@@ -211,14 +209,13 @@ body {
   display: block;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   left: -80px;
-  top:20px ;
+  top: 20px;
 }
 .dropdown:hover .dropdown-menu {
   transform: scale(1);
 }
-.dropdown-item{
+.dropdown-item {
   margin: 0px !important;
-
 }
 
 .logo-image {
@@ -233,21 +230,21 @@ body {
 }
 .title2 {
   font-weight: 200;
-  
+
   margin-top: 20px;
   color: #4a4a4a !important;
 }
 .sub-title {
   font-size: 20px;
   font-weight: 600;
-  
-  color: #4a4a4a ;
+
+  color: #4a4a4a;
 }
 
 .sub-title2 {
   font-size: 1rem;
   font-weight: 600;
-  
+
   color: #2670cb;
   word-spacing: -3px;
 }
@@ -262,7 +259,7 @@ body {
 .sub-text2 {
   font-size: 16px;
   font-weight: 500;
-  
+
   line-height: 20px;
   white-space: pre-wrap;
 }
@@ -270,7 +267,7 @@ body {
 .sub-text3 {
   font-size: 15px;
   font-weight: 400;
-  
+
   line-height: 19px;
   white-space: pre-wrap;
   word-spacing: -2px;
@@ -287,7 +284,7 @@ body {
   font-size: 17px;
   font-weight: 300;
   padding: 10px 0;
-  
+
   line-height: 25px;
   white-space: pre-wrap;
 }
@@ -316,28 +313,28 @@ pre {
 .course-content {
   position: relative;
 }
-.lock-layer{
+.lock-layer {
   position: absolute;
   width: 100% !important;
   background-color: #eeeeee;
   height: 100% !important;
   display: flex;
   justify-content: flex-end;
-  align-items: center ;
+  align-items: center;
   padding-right: 10px !important;
 }
-.CircularProgressbar{
-  width:40px!important;
-  margin-top: 20px ;
+.CircularProgressbar {
+  width: 40px !important;
+  margin-top: 20px;
 }
-.lock-layer i{
- cursor: pointer;
+.lock-layer i {
+  cursor: pointer;
 }
-.lock-layer p{
+.lock-layer p {
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
- font-size: 80% !important;
- 
- margin-bottom: 0px !important;
+  font-size: 80% !important;
+
+  margin-bottom: 0px !important;
 }
 /*      animation styling */
 div.at-container {
@@ -357,12 +354,12 @@ div.at-container {
   animation-fill-mode: none;
 }
 @keyframes fade-in-right {
-  0%{
+  0% {
     -webkit-transform: translateX(50px);
     transform: translateX(50px);
     opacity: 0;
   }
-  100%{
+  100% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
@@ -371,12 +368,10 @@ div.at-container {
 
 /*************************************/
 
-
 .sub-text-bold {
   font-size: 15px;
   font-weight: 700;
   margin-top: 20px;
-  
 }
 
 .phone-text {
@@ -384,7 +379,6 @@ div.at-container {
   font-size: 16px;
   font-weight: 500;
   margin-top: 20px;
-  
 }
 
 /* contact section */
@@ -429,7 +423,8 @@ div.at-container {
   margin: 0 auto;
 }
 
-.inner a,.inner button {
+.inner a,
+.inner button {
   float: left;
 }
 
@@ -555,7 +550,7 @@ div.at-container {
 }
 .carousel-indicators li {
   z-index: 2000 !important;
-  background-color: #ff8057  !important;
+  background-color: #ff8057 !important;
 }
 
 .rodal-dialog {
@@ -649,10 +644,10 @@ div.at-container {
 
 /*  curiculum title icon*/
 .curriculmTitle div a:before {
- content: '\00BB' !important;
- display: block !important;
- color :#f2334c !important;
- font-size: 18px !important;
+  content: "\00BB" !important;
+  display: block !important;
+  color: #f2334c !important;
+  font-size: 18px !important;
 }
 input:checked + .slider {
   background-color: #2196f3;
@@ -690,29 +685,28 @@ input:checked + .slider:before {
 .svg {
   filter: invert(0.5) sepia(1) saturate(5);
 }
-.progress{
-  height:7px !important;
+.progress {
+  height: 7px !important;
   border-radius: 50px !important;
 }
-.curriculum{
-  width:75% !important;
+.curriculum {
+  width: 75% !important;
   margin: 0 auto !important;
   overflow: hidden;
 }
-.curriculmTitle{
+.curriculmTitle {
   overflow-x: auto;
 }
 
 .curriculum a {
-  font-size:80% !important;
+  font-size: 80% !important;
   display: block;
-  width:180px !important;
+  width: 180px !important;
   font-weight: 600;
-  
+
   color: #4a4a4a;
   text-align: center;
   margin-right: 15px !important;
-
 }
 
 .curriculum a:hover {
@@ -844,19 +838,19 @@ input:checked + .slider:before {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.whoSection{
+.whoSection {
   /* background-image: url('./assets/images/image-4.png');
   background-size: 100%;
   background-repeat: no-repeat; */
   overflow: hidden !important;
 }
-.promoText{
+.promoText {
   width: 50% !important;
 }
-.prompSection{
-  color :yellow !important;  
+.prompSection {
+  color: yellow !important;
   position: sticky !important;
-  top:0px !important;
+  top: 0px !important;
   z-index: 800 !important;
 }
 .address .job-icon:hover {
@@ -877,7 +871,7 @@ input:checked + .slider:before {
 .job-contact button {
   background: #c22b34;
   border-radius: 5px !important;
-  color : #fff !important; 
+  color: #fff !important;
 }
 
 .job-contact textarea {
@@ -1055,7 +1049,7 @@ input:checked + .slider:before {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:3;
+  z-index: 3;
 }
 
 .select-box {
@@ -1128,7 +1122,7 @@ input:checked + .slider:before {
   width: 30px;
   height: 30px;
   margin: 10px 20px 0 0;
-  border: 7px solid #fff;
+  border: 7px solid rgb(160, 124, 124);
   border-radius: 100%;
 }
 .res-circle {
@@ -1247,7 +1241,8 @@ input:checked + .slider:before {
 }
 
 /* STRICKY SIDE SECTION */
-.handle,.handle-mobile {
+.handle,
+.handle-mobile {
   position: fixed;
   width: 3rem;
   right: 0;
@@ -1260,11 +1255,11 @@ input:checked + .slider:before {
   z-index: 2;
   text-align: center;
 }
-.handle-mobile{
-  display: none ;
+.handle-mobile {
+  display: none;
 }
-.prompSection.active{
-  color :yellow !important;
+.prompSection.active {
+  color: yellow !important;
 }
 .handle1 {
   background-color: #e81710;
@@ -1323,18 +1318,16 @@ input:checked + .slider:before {
 }
 
 /* HOME BANNER */
-.titleBanner{
+.titleBanner {
   position: absolute;
   transform: translate(15%, 200%);
-  
- 
 }
-.titleBanner h1{
+.titleBanner h1 {
   font-size: 320% !important;
   font-family: Inter !important;
   padding: 0 !important;
   margin: 0px !important;
-  color:#fff !important;
+  color: #fff !important;
 }
 
 .home-hero-banner {
@@ -1344,11 +1337,11 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   height: 600px;
-  background: #1A8CBC;
+  background: #1a8cbc;
   position: relative;
-  background-image: url('./assets/images/background/Codify-College.png');
+  background-image: url("./assets/images/background/Codify-College.png");
   background-size: cover;
-  background-position: top ;
+  background-position: top;
 }
 
 .hero-banner {
@@ -1427,132 +1420,116 @@ input:checked + .slider:before {
 }
 
 /* Course SIDE Bar in side the assignemnt compoennt */
-.courses-side-bar{
+.courses-side-bar {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  display: flex !important; 
+  display: flex !important;
   justify-content: space-evenly;
   align-content: center;
   flex-wrap: wrap;
-  width:100%; 
- 
+  width: 100%;
 }
-.courses-side-bar-container{
+.courses-side-bar-container {
   overflow: hidden;
-  width:100% !important;
+  width: 100% !important;
 }
-.course-item{
-  display: flex !important; 
+.course-item {
+  display: flex !important;
   justify-content: center;
   align-content: center;
   margin-top: 5px !important;
-  border:1px solid #2e77a8;
+  border: 1px solid #2e77a8;
   border-radius: 30px !important;
- 
-  
-
-
 }
-.activeCourse{
+.activeCourse {
   background-color: #446275 !important;
-  color:#fff;
+  color: #fff;
 }
-.activeCourse a{
+.activeCourse a {
   color: #fff !important;
 }
-.course-item .image-box{
-  width:100px !important; 
-  overflow:auto !important;
+.course-item .image-box {
+  width: 100px !important;
+  overflow: auto !important;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
-.course-item:hover{
-  -webkit-box-shadow: 2px 2px 10px 6px rgba(76,74,2,0.45); 
-  box-shadow: 2px 2px 10px 6px rgba(76,74,2,0.45);
+.course-item:hover {
+  -webkit-box-shadow: 2px 2px 10px 6px rgba(76, 74, 2, 0.45);
+  box-shadow: 2px 2px 10px 6px rgba(76, 74, 2, 0.45);
   transition: box-shadow 0.4s ease !important;
 }
 .shadow-pop-tr {
-  -webkit-box-shadow: 2px 2px 10px 6px rgba(76,74,2,0.45); 
-  box-shadow: 2px 2px 10px 6px rgba(76,74,2,0.45);
+  -webkit-box-shadow: 2px 2px 10px 6px rgba(76, 74, 2, 0.45);
+  box-shadow: 2px 2px 10px 6px rgba(76, 74, 2, 0.45);
 }
-.notFound div{
-  background-image: url('assets/images/background/not-found.png');
+.notFound div {
+  background-image: url("assets/images/background/not-found.png");
   background-position: top;
   background-repeat: no-repeat;
   height: 40vh !important;
-  background-size:20% !important;
-
+  background-size: 20% !important;
 }
-.planButton{
+.planButton {
   background-color: hsl(241, 56%, 35%) !important;
 }
 /*******************************/
 
 @media (max-width: 768px) {
-
-
-  .notFound div{
-  
-    background-size:40% !important;
+  .notFound div {
+    background-size: 40% !important;
   }
 
-  .CircularProgressbar{
-    margin-top: 0px ;
-    width:22px!important;
+  .CircularProgressbar {
+    margin-top: 0px;
+    width: 22px !important;
   }
 
   .home-hero-banner {
-   background-image: url(assets/images/background/768.png) !important;
-   height: 400px !important;
-
+    background-image: url(assets/images/background/768.png) !important;
+    height: 400px !important;
   }
   .titleBanner {
-   
     transform: translate(5%, 170%) !important;
   }
-  .titleBanner h1{
-    font-size: 300% !important; 
+  .titleBanner h1 {
+    font-size: 300% !important;
   }
-  .quote--container{
+  .quote--container {
     display: none !important;
   }
 }
-@media (max-width: 615px ) {
-  .notFound div{
-  
-    background-size:50% !important;
+@media (max-width: 615px) {
+  .notFound div {
+    background-size: 50% !important;
   }
   .titleBanner {
-   transform: translate(0%, 150%) !important;
-    max-width:100% !important
+    transform: translate(0%, 150%) !important;
+    max-width: 100% !important;
   }
-  .titleBanner  h1{
+  .titleBanner h1 {
     font-size: 220% !important;
   }
 }
 @media (max-width: 464px) {
-
-
   .home-hero-banner {
-    
-   background-image: url(assets/images/background/425.png) !important;
+    background-image: url(assets/images/background/425.png) !important;
   }
   .titleBanner {
     transform: translate(0%, 40%) !important;
-   
-   }
-  .titleBanner  h1{
+  }
+  .titleBanner h1 {
     font-size: 185% !important;
   }
 
-  .handle{
+  .handle {
     display: none !important;
   }
   .handle-mobile {
     position: fixed;
-    width:35% !important;
-  
-   /* top:113px !important; */
+    width: 35% !important;
+
+    /* top:113px !important; */
     height: 3rem;
     border-radius: 0px;
     transition: left 0.2s ease;
@@ -1560,39 +1537,34 @@ input:checked + .slider:before {
     align-items: center;
     flex-direction: row !important;
     justify-content: center;
-    z-index:1000;
+    z-index: 1000;
     text-align: center;
     font-size: 90% !important;
   }
-  
-  .activeCourse a{
-  
-   margin: 0px !important;
+
+  .activeCourse a {
+    margin: 0px !important;
   }
-  .course-item .image-box{
-  display: none !important;
-  }
-  
-  .handle2{
-    left :0px !important;
-   
-  }
-  .handle3{
-    left :35% !important;
-  }
-  .handle1{
-    left :70%  !important;
+  .course-item .image-box {
+    display: none !important;
   }
 
-  .handle1:after , .handle2:after ,  .handle3:after{
-   
+  .handle2 {
+    left: 0px !important;
+  }
+  .handle3 {
+    left: 35% !important;
+  }
+  .handle1 {
+    left: 70% !important;
+  }
+
+  .handle1:after,
+  .handle2:after,
+  .handle3:after {
     transform: rotate(0deg);
-   
-   
   }
-  
 }
-
 
 @media screen and (max-width: 600px) {
   #backdrop {
@@ -1600,15 +1572,13 @@ input:checked + .slider:before {
     width: 93vw !important;
     height: 625px !important;
   }
-  .promoText{
+  .promoText {
     width: 100% !important;
   }
-  .prompSection{
-
-    top:0px !important; 
- 
-}
-  .promoFlex{
+  .prompSection {
+    top: 0px !important;
+  }
+  .promoFlex {
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
@@ -1653,10 +1623,10 @@ input:checked + .slider:before {
   transition: all 0.3s ease;
 }
 
-#option-1:checked~.option-1,
-#option-2:checked~.option-2,
-#option-3:checked~.option-3,
-#option-4:checked~.option-4 {
+#option-1:checked ~ .option-1,
+#option-2:checked ~ .option-2,
+#option-3:checked ~ .option-3,
+#option-4:checked ~ .option-4 {
   background: #333;
   border-color: #333;
 }
@@ -1670,10 +1640,10 @@ input:checked + .slider:before {
   transition: all 0.3s ease;
 }
 
-#option-1:checked~.option-1 .dot,
-#option-2:checked~.option-2 .dot,
-#option-3:checked~.option-3 .dot,
-#option-4:checked~.option-4 .dot {
+#option-1:checked ~ .option-1 .dot,
+#option-2:checked ~ .option-2 .dot,
+#option-3:checked ~ .option-3 .dot,
+#option-4:checked ~ .option-4 .dot {
   background: #fff;
 }
 
@@ -1689,10 +1659,10 @@ input:checked + .slider:before {
   transition: all 0.3s ease;
 }
 
-#option-1:checked~.option-1 .dot::before,
-#option-2:checked~.option-2 .dot::before,
-#option-3:checked~.option-3 .dot::before,
-#option-4:checked~.option-4 .dot::before {
+#option-1:checked ~ .option-1 .dot::before,
+#option-2:checked ~ .option-2 .dot::before,
+#option-3:checked ~ .option-3 .dot::before,
+#option-4:checked ~ .option-4 .dot::before {
   background: #333;
   transform: translate(-50%, -50%) scale(1);
 }
@@ -1705,10 +1675,10 @@ input:checked + .slider:before {
   transition: color 0.3s ease;
 }
 
-#option-1:checked~.option-1 .text,
-#option-2:checked~.option-2 .text,
-#option-3:checked~.option-3 .text,
-#option-4:checked~.option-4 .text {
+#option-1:checked ~ .option-1 .text,
+#option-2:checked ~ .option-2 .text,
+#option-3:checked ~ .option-3 .text,
+#option-4:checked ~ .option-4 .text {
   color: #fff;
 }
 
