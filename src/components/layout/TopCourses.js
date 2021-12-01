@@ -67,7 +67,8 @@ export default function TopCourses({ match }) {
             data-aos-delay='400'
             className='title text-center p-2 '
           >
-            Learn to Build Web Apps
+            Learn how to become a full-stack developer and build web and mobile
+            apps powered by JavaScript
           </div>
           <hr className='block-seperator mb-3' />
 
