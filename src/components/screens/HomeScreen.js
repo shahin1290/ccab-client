@@ -24,6 +24,7 @@ import ContactForm from "../layout/ContactForm";
 import Typewriter from "typewriter-effect";
 import Reviews from "../layout/Reviews";
 import ServiceVideoChat from "./../layout/ServiceVideoChat";
+import Tution from "../layout/Tuition";
 
 import ServiceAssistance from "./../layout/ServiceAssistance";
 
@@ -112,6 +113,8 @@ export default function HomeScreen({ match }) {
         <TopCourses></TopCourses>
 
         <CurriculamStepsBar />
+
+        <Tution />
         {/* Sec Title */}
         <div className='container-fluid bg-light py-5'>
           <div data-aos='fade-down' className='sec-title style-two centered'>

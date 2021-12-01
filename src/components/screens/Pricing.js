@@ -49,7 +49,7 @@ export default function Pricing({ match }) {
   return (
     <div id='pricing'>
       {/* Pricing Section */}
-      <section className='pricing-section'>
+      <section className='pricing-section' style={{ background: "#fafafa" }}>
         <div className='auto-container'>
           {/* Sec Title */}
           <div className='sec-title style-two centered'>
@@ -60,25 +60,24 @@ export default function Pricing({ match }) {
             </div>
             <hr className='block-seperator mb-3' />
           </div>
-
-          <div style={{ height: "auto" }}>
-            <div className='sub-title auto-container pb-5'>
-              <div className='service-circle'>
+          <main>
+            <ol class='gradient-list'>
+              <li>
                 JavaScript has been the most popular language in the world for 9
                 years in a row, according to StackOverflow.com, the largest
                 community website for professional and enthusiast programmers.
-              </div>
-              <div className='service-circle'>
+              </li>
+              <li>
                 Knowing JavaScript allows you to design Web and mobile apps
                 without any restrictions. JavaScript can be used to create
                 back-end, front-end, full-stack, iOS, and Android apps.
-              </div>
-              <div className='service-circle'>
+              </li>
+              <li>
                 The most in-demand position on the job market is full-stack
                 developer.
-              </div>
-            </div>
-          </div>
+              </li>
+            </ol>
+          </main>
 
           <Container>
             <div className='curriculum-project'>
@@ -193,7 +192,7 @@ export default function Pricing({ match }) {
                                 <li className='check'>{offer}</li>
                               ))}
                             </ul>
-                            <div className='list'>{plan.requirement}</div>
+                            <div className='list text-muted'>{plan.requirement}</div>
                           </div>
 
                           <div>
