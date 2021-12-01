@@ -97,7 +97,7 @@ export const logout = () => (dispatch, getState) => {
 };
 
 export const registerUser =
-  (name, email, password, phoneNumber, gender, language) =>
+  (name, email, password, phoneNumber, gender, language, education) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -115,7 +115,7 @@ export const registerUser =
       };
       const response = await axios.post(
         "https://server.ccab.tech/api/users/register",
-        { name, email, password, phoneNumber, gender, language },
+        { name, email, password, phoneNumber, gender, language, education },
         config
       );
 
