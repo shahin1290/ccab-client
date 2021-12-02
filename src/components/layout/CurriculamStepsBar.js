@@ -1,191 +1,247 @@
-import React, { useState , useEffect } from 'react'
-import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
-import { Row, Col, ProgressBar } from 'react-bootstrap'
-import RegisterScreen from '../screens/authScreen/RegisterScreen'
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
-
+import React, { useState, useEffect } from "react";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import { Row, Col, ProgressBar } from "react-bootstrap";
+import RegisterScreen from "../screens/authScreen/RegisterScreen";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
 
 const CurriculamStepsBar = (props) => {
-  const [value, setValue] = useState(3)
-  const weeks = 30
+  const [value, setValue] = useState(3);
+  const weeks = 30;
 
-  useEffect(()=>{
+  useEffect(() => {
     AOS.init();
-  },[])
+  }, []);
 
   return (
     <section
       style={{
-        backgroundColor: '#fff',
-        padding: '50px 0'
+        backgroundColor: "#fff",
+        padding: "50px 0",
       }}
-      id="Curriculum"
+      id='Curriculum'
     >
-      <div className="curriculum no-gutter ">
-        <div  data-aos="fade-right" data-aos-delay="200" className="title text-center pb-1 w-100">Comprehensive Curriculum</div>
-        <hr className="block-seperator mb-3" />
-        <div data-aos="fade-left" data-aos-delay="400" className="sub-text text-center mb-5 w-100">
-          Our Full Stack Developer Courses are made to give you an easy and
-          fast path in web development. By the end these courses you will be able
-          to build web applications from scratch.
+      <div className='curriculum no-gutter '>
+        <div
+          data-aos='fade-right'
+          data-aos-delay='200'
+          className='title text-center pb-1 w-100'
+        >
+          Comprehensive Curriculum
+        </div>
+        <hr className='block-seperator mb-3' />
+        <div
+          data-aos='fade-left'
+          data-aos-delay='400'
+          className='sub-text text-center mb-5 w-100'
+        >
+          Our Full Stack Developer Courses are made to give you an easy and fast
+          path in web development. By the end these courses you will be able to
+          build web applications from scratch.
         </div>
 
-        <div  data-aos="flip-right" className="curriculmTitle   d-flex justify-content-between w-100 mb-2 p-3"
-       >
+        <div
+          data-aos='flip-right'
+          className='curriculmTitle   d-flex justify-content-between w-100 mb-2  pl-5'
+        >
           <div>
             <a
-              onClick={() => setValue(3)}
-              className="curriculum"
-              style={value === 3 ? { color: '#ea5573',fontWeight:'800' } : {}}
+              onClick={() => setValue(7)}
+              className='curriculum'
+              style={value === 3 ? { color: "#ea5573", fontWeight: "800" } : {}}
             >
-              Foundation
-              <div className="text-center">1 week</div>
+              Fundamentals of Web apps
+              <div className='text-center'>2 weeks</div>
             </a>
           </div>
 
           <div>
             <a
-              onClick={() => setValue(25)}
-              className="curriculum"
-              style={value === 25 ? { color: '#ea5573',fontWeight:'800'  } : {}}
+              onClick={() => setValue(23)}
+              className='curriculum'
+              style={
+                value === 25 ? { color: "#ea5573", fontWeight: "800" } : {}
+              }
             >
               Basic Frontend
-              <div className="text-center">9 weeks</div>
+              <div className='text-center'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
-              onClick={() => setValue(50)}
-              className="curriculum "
-              style={value === 50 ? { color: '#ea5573',fontWeight:'800'  } : {}}
+              onClick={() => setValue(40)}
+              className='curriculum pl-2'
+              style={
+                value === 50 ? { color: "#ea5573", fontWeight: "800" } : {}
+              }
             >
               Advanced Frontend
-              <div className="text-center">9 weeks</div>
+              <div className='text-center'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
-              onClick={() => setValue(75)}
-              className="curriculum "
-              style={value ===75 ? { color: '#ea5573' ,fontWeight:'800' } : {}}
+              onClick={() => setValue(57)}
+              className='curriculum pl-3'
+              style={
+                value === 25 ? { color: "#ea5573", fontWeight: "800" } : {}
+              }
+            >
+              Basic Backend & Database
+              <div className='text-center'>5 weeks</div>
+            </a>
+          </div>
+
+          <div>
+            <a
+              onClick={() => setValue(73)}
+              className='curriculum pl-5'
+              style={
+                value === 75 ? { color: "#ea5573", fontWeight: "800" } : {}
+              }
             >
               Advanced Backend & Database
-              <div className="text-center">9 weeks</div>
+              <div className='text-center'>5 weeks</div>
+            </a>
+          </div>
+
+          <div>
+            <a
+              onClick={() => setValue(90)}
+              className='curriculum ml-5 pl-5'
+              style={
+                value === 75 ? { color: "#ea5573", fontWeight: "800" } : {}
+              }
+            >
+              Native mobile app
+              <div className='text-center'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
               onClick={() => setValue(100)}
-              className="curriculum "
-              style={value === 100 ? { color: '#ea5573',fontWeight:'800'  } : {}}
+              className='curriculum pl-5 ml-2'
+              style={
+                value === 100 ? { color: "#ea5573", fontWeight: "800" } : {}
+              }
             >
               Projects
-              <div className="text-center">2 weeks</div>
+              <div className='text-center'>3 weeks</div>
             </a>
           </div>
         </div>
-        <div className="row no-gutter">
-          <ProgressBar className="col-lg-12 col-md-12 col-sm-12  mt-3 mb-2"
-          style={{borderRadius:'40px'}}>
-            <ProgressBar variant="warning" now={value} />
+        <div className='row no-gutter'>
+          <ProgressBar
+            className='col-lg-12 col-md-12 col-sm-12  mt-3 mb-2'
+            style={{ borderRadius: "40px" }}
+          >
+            <ProgressBar variant='warning' now={value} />
           </ProgressBar>
         </div>
-        <div className="row  mb-5">
-          <div className=" col-lg-12 col-md-8 col-sm-12 mt-2 pl-2 d-flex justify-content-around">
+        <div className='row  mb-5'>
+          <div className=' col-lg-12 col-md-8 col-sm-12 mt-2 ml-2 d-flex justify-content-around'>
             <a
               onClick={() => setValue(3)}
-              className="curriculum "
-              style={value === 3 ? { color: '#ea5573' } : {}}
+              className='curriculum '
+              style={value === 3 ? { color: "#ea5573" } : {}}
             >
-              <span onClick={() => setValue(3)}>1</span>
+              <span onClick={() => setValue(3)}>5</span>
             </a>
             {/* {[...Array(10).keys()].map((week, index) => (
               <span>{(index + 1) * 3}</span>
             ))} */}
             <a
               onClick={() => setValue(25)}
-              className="curriculum "
-              style={value === 25 ? { color: '#ea5573' } : {}}
+              className='curriculum '
+              style={value === 25 ? { color: "#ea5573" } : {}}
             >
-              <span onClick={() => setValue(25)}>9</span>
+              <span onClick={() => setValue(25)}>10</span>
             </a>
 
             <a
               onClick={() => setValue(50)}
-              className="curriculum "
-              style={value === 50 ? { color: '#ea5573' } : {}}
+              className='curriculum '
+              style={value === 50 ? { color: "#ea5573" } : {}}
             >
-              <span onClick={() => setValue(50)}>18</span>
+              <span onClick={() => setValue(50)}>15</span>
             </a>
 
             <a
               onClick={() => setValue(75)}
-              className="curriculum "
-              style={value === 75 ? { color: '#ea5573' } : {}}
+              className='curriculum '
+              style={value === 75 ? { color: "#ea5573" } : {}}
             >
-              {' '}
-              <span onClick={() => setValue(75)}>27</span>
+              {" "}
+              <span onClick={() => setValue(75)}>20</span>
             </a>
 
             <a
               onClick={() => setValue(100)}
-              className="curriculum "
-              style={value === 100 ? { color: '#ea5573' } : {}}
+              className='curriculum '
+              style={value === 100 ? { color: "#ea5573" } : {}}
             >
-              {' '}
+              {" "}
+              <span onClick={() => setValue(100)}>25</span>
+            </a>
+
+            <a
+              onClick={() => setValue(100)}
+              className='curriculum '
+              style={value === 100 ? { color: "#ea5573" } : {}}
+            >
+              {" "}
               <span onClick={() => setValue(100)}>30</span>
             </a>
           </div>
         </div>
 
-        {value === 3 && (
+        {value === 7 && (
           <>
-            <Row data-aos="fade-up" className="mb-5">
+            <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
-                <div className="d-flex">
+                <div className='d-flex'>
                   <span
                     style={{
-                      backgroundColor: '#F09300',
-                      borderRadius: '3px 3px 3px 3px'
+                      backgroundColor: "#F09300",
+                      borderRadius: "3px 3px 3px 3px",
                     }}
                   >
-                    <img width="50" src="/images/developer.png" />
+                    <img width='50' src='/images/developer.png' />
                   </span>
-                  <span className="sub-title pl-3 pt-1">
+                  <span className='sub-title pl-3 pt-1'>
                     Developer Tools & workflow
                   </span>
                 </div>
 
-                <div className="sub-text mt-3">
+                <div className='sub-text mt-3'>
                   Work with the right developer tools and workflow.
                 </div>
               </Col>
 
-              <Col md={6} className="p-3">
-                <div className="d-flex">
-                  <img width="45" src="/images/html.png" />{' '}
-                  <div className="sub-title pl-3 pt-3">HTML5 Basics </div>
+              <Col md={6} className='p-3'>
+                <div className='d-flex'>
+                  <img width='45' src='/images/html.png' />{" "}
+                  <div className='sub-title pl-3 pt-3'>HTML5 Basics </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Design your first web page from scratch. Learn the principles
                   of web design and how to write HTML code.
                 </div>
               </Col>
             </Row>
 
-            <Row data-aos="fade-up">
+            <Row data-aos='fade-up'>
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="45" src="/images/js.png" />
+                <div className='d-flex'>
+                  <img width='45' src='/images/js.png' />
 
-                  <div className="sub-title pl-3 pt-3">JavaScript Basics </div>
+                  <div className='sub-title pl-3 pt-3'>JavaScript Basics </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Write programs manipulating variables,Math operation and
                   logical conditions. Change the HTML Doucment and make your
                   first project with JavaScript , HTML5 and CSS3
@@ -193,12 +249,12 @@ const CurriculamStepsBar = (props) => {
               </Col>
 
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="45" src="/images/css.png" />
+                <div className='d-flex'>
+                  <img width='45' src='/images/css.png' />
 
-                  <div className="sub-title pl-3 pt-3">Css3 Basics </div>
+                  <div className='sub-title pl-3 pt-3'>Css3 Basics </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Be Creative with new Css3 styling. CSS will give you the
                   flexibility to make modern and responsive web page
                 </div>
@@ -207,18 +263,18 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 25 && (
+        {value === 23 && (
           <>
-            <Row data-aos="fade-up" className="mb-5">
+            <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
-                <div className="d-flex">
+                <div className='d-flex'>
                   <div>
-                    <img width="50" src="/images/internet.png" />
+                    <img width='50' src='/images/internet.png' />
                   </div>
-                  <div className="sub-title pl-3 pt-2">Internet theory</div>
+                  <div className='sub-title pl-3 pt-2'>Internet theory</div>
                 </div>
 
-                <div className="sub-text ">
+                <div className='sub-text '>
                   At begning you will learn Web Basics, How the Internet Works.
                   HTTP Request and Response Cycle, Client and Server
                   Architecture and Terminologies
@@ -226,11 +282,11 @@ const CurriculamStepsBar = (props) => {
               </Col>
 
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="45" src="/images/js.png" />{' '}
-                  <div className="sub-title pl-3 pt-3">JavaScript </div>
+                <div className='d-flex'>
+                  <img width='45' src='/images/js.png' />{" "}
+                  <div className='sub-title pl-3 pt-3'>JavaScript </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Create responsive web pages for modern browsers using HTML,
                   CSS, and JavaScript. JavaScript, ECMAScript 6, DOM
                   Manipulation, Regular Expressions, Object Oriented
@@ -239,16 +295,16 @@ const CurriculamStepsBar = (props) => {
               </Col>
             </Row>
 
-            <Row data-aos="fade-up">
+            <Row data-aos='fade-up'>
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="50" src="/images/bootstrap.png" />
+                <div className='d-flex'>
+                  <img width='50' src='/images/bootstrap.png' />
 
-                  <div className="sub-title pl-3 pt-3">
+                  <div className='sub-title pl-3 pt-3'>
                     Advanced Style Technology
                   </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Build fast, responsive sites with Bootstrap4, Learn how to use
                   Bootstrap, and build websites in couple of hours,Advanced Css3
                   using flexbox and Grid System technology, animation and
@@ -258,14 +314,14 @@ const CurriculamStepsBar = (props) => {
               </Col>
 
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="45" src="/images/screen.png" />
+                <div className='d-flex'>
+                  <img width='45' src='/images/screen.png' />
 
-                  <div className="sub-title pl-3 pt-3">
-                    Building Modren Website{' '}
+                  <div className='sub-title pl-3 pt-3'>
+                    Building Modren Website{" "}
                   </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Build a richly interactive, a modern front end application
                   using advanced Css3,Bootstrap4 and HTML5. Collaborate as a
                   team using Git and GitHub, widely accepted collaboration
@@ -276,16 +332,16 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 50 && (
+        {value === 40 && (
           <>
-            <Row data-aos="fade-up" className="mb-5">
+            <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="50" src="/images/react.png" />
+                <div className='d-flex'>
+                  <img width='50' src='/images/react.png' />
 
-                  <div className="sub-title pl-3 pt-3">React JS </div>
+                  <div className='sub-title pl-3 pt-3'>React JS </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Optimize the functionality of apps using React Router. Learn
                   up to date advanced React programming with React Hooks, Custom
                   API, and NextJS.
@@ -293,11 +349,11 @@ const CurriculamStepsBar = (props) => {
               </Col>
 
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="45" src="/images/es6.svg" />{' '}
-                  <div className="sub-title pl-3 pt-3">Event-Driven APIs </div>
+                <div className='d-flex'>
+                  <img width='45' src='/images/es6.svg' />{" "}
+                  <div className='sub-title pl-3 pt-3'>Event-Driven APIs </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Implementing asynchronous APIs to send multiple responses to a
                   single request. API security that is categorized into
                   authentication and authorization. Using event-driven APIs has
@@ -308,14 +364,14 @@ const CurriculamStepsBar = (props) => {
               </Col>
             </Row>
 
-            <Row data-aos="fade-up">
+            <Row data-aos='fade-up'>
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="50" src="/images/redux.png" />
+                <div className='d-flex'>
+                  <img width='50' src='/images/redux.png' />
 
-                  <div className="sub-title pl-3 pt-3">Redux </div>
+                  <div className='sub-title pl-3 pt-3'>Redux </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Master an open-source JavaScript library for managing
                   application state. Redux is most commonly used with libraries
                   such as React or Angular for building user interfaces.
@@ -326,14 +382,14 @@ const CurriculamStepsBar = (props) => {
               </Col>
 
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="45" src="/images/building.png" />
+                <div className='d-flex'>
+                  <img width='45' src='/images/building.png' />
 
-                  <div className="sub-title pl-3 pt-3">
-                    Building Web products{' '}
+                  <div className='sub-title pl-3 pt-3'>
+                    Building Web products{" "}
                   </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Build a richly interactive, front end single page application
                   using a modern framework library like React. Collaborate as a
                   team using Git and GitHub, widely accepted collaboration
@@ -344,30 +400,48 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
-        {value === 75 && (
+        {value === 57 && (
           <>
-            <Row data-aos="fade-up" className="mb-5">
+            <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
-                <div className="d-flex">
+                <div className='d-flex'>
+                  <span className='sub-title pl-3 pt-3 pr-3'>
+                    Communicating with server{" "}
+                  </span>
+                </div>
+                <div className='sub-text'>
+                  How JavaScript code in the browser can fetch and handle data
+                  stored in a remote backend server.
+                </div>
+              </Col>
+
+              <Col md={6}>
+                <div className='d-flex'>
                   <div>
-                    <img width="50" src="/images/node.png" />
+                    <img width='50' src='/images/node.png' />
                   </div>
-                  <div className="sub-title pl-3 pt-3">Node JS</div>
+                  <div className='sub-title pl-3 pt-3'>Node JS</div>
                 </div>
 
-                <div className="sub-text ">
+                <div className='sub-text '>
                   Introduction Nodejs, Node File System (FS), Node Package
                   Manager (NPM), Asynchronous Programming, Network requests
                   using Fetch/Axios API.
                 </div>
               </Col>
+            </Row>
+          </>
+        )}
 
+        {value === 73 && (
+          <>
+            <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
-                <div className="d-flex">
-                  <span className="sub-title pl-3 pt-3 pr-3">Express </span>
-                  <img width="45" src="/images/js.png" />{' '}
+                <div className='d-flex'>
+                  <span className='sub-title pl-3 pt-3 pr-3'>Express </span>
+                  <img width='45' src='/images/js.png' />{" "}
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Introduction ExpressJS, Routes with Express, Static server
                   with ExpressJS, next() & Multer middleware, Templates Engines,
                   Data Structures & Algorithms. Advanced NodeJS & ExpressJS,
@@ -375,30 +449,30 @@ const CurriculamStepsBar = (props) => {
                   (JWT).
                 </div>
               </Col>
-            </Row>
 
-            <Row data-aos="fade-up">
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="60" src="/images/mongo.png" />
+                <div className='d-flex'>
+                  <img width='60' src='/images/mongo.png' />
 
-                  <div className="sub-title pl-2 pt-3">Mongo DB </div>
+                  <div className='sub-title pl-2 pt-3'>Mongo DB </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Introduction to Database Management, MongoDB, Mongoose CURD
                   operations, and Mongo Atlas.
                 </div>
               </Col>
+            </Row>
 
+            <Row data-aos='fade-up'>
               <Col md={6}>
-                <div className="d-flex">
-                  <img width="55" src="/images/heroku.png" />
+                <div className='d-flex'>
+                  <img width='55' src='/images/heroku.png' />
 
-                  <div className="sub-title pl-3 pt-3">
+                  <div className='sub-title pl-3 pt-3'>
                     Production with Heroku
                   </div>
                 </div>
-                <div className="sub-text">
+                <div className='sub-text'>
                   Deploying applications on Heroku. introduction to Cloud
                   Computing.
                 </div>
@@ -407,20 +481,72 @@ const CurriculamStepsBar = (props) => {
           </>
         )}
 
+        {value === 90 && (
+          <>
+            <Row data-aos='fade-up' className='mb-5'>
+              <Col md={6}>
+                <div className='d-flex'>
+                  <div className='sub-title pl-3 pt-3'>
+                    Introduction to React Native
+                  </div>
+                </div>
+
+                <div className='sub-text '>
+                  During this part, we will learn how to build an actual React
+                  Native application from bottom up. We will learn concepts such
+                  what are React Native's core components, how to create
+                  beautiful user interfaces, how to communicate with a server
+                  and how to test a React Native application.
+                </div>
+              </Col>
+
+              <Col md={6}>
+                <div className='d-flex'>
+                  <span className='sub-title pl-3 pt-3 pr-3'>
+                    React Native basics{" "}
+                  </span>
+                </div>
+                <div className='sub-text'>
+                  In this section, we will learn how to build user interfaces
+                  with React Native's core components, how to add style
+                  properties to these core components, how to transition between
+                  views, and how to manage form's state efficiently.
+                </div>
+              </Col>
+            </Row>
+
+            <Row data-aos='fade-up'>
+              <Col md={6}>
+                <div className='d-flex'>
+                  <div className='sub-title pl-2 pt-3'>
+                    Communicating with server{" "}
+                  </div>
+                </div>
+                <div className='sub-text'>
+                  In this section, we will learn how to communicate with a
+                  server using HTTP requests, how to use Apollo Client in a
+                  React Native application, and how to store data in the user's
+                  device.
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
+
         {value === 100 && (
-          <Row data-aos="fade-up" className="curriculum-project p-3">
-            <div className="sub-title">
-              <img width="55" src="/images/rocket.png" />
-              <span className="pl-3">
+          <Row data-aos='fade-up' className='curriculum-project p-3'>
+            <div className='sub-title'>
+              <img width='55' src='/images/rocket.png' />
+              <span className='pl-3'>
                 Turn an idea into a product in 2 weeks
               </span>
             </div>
-            <div className="sub-text p-2">
+            <div className='sub-text p-2'>
               Projects Stage is the ultimate experience of the course: produce,
               cast, design, code and deploy a full project in teams during the
               two final weeks you going to work on 2 final project.
             </div>
-            <ul className="sub-text p-4">
+            <ul className='sub-text p-4'>
               <li>Build a creative prototype with Figma to validate the UX</li>
               <li>
                 Code the Project from scratch: from the back end to the user
@@ -433,7 +559,7 @@ const CurriculamStepsBar = (props) => {
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default CurriculamStepsBar
+export default CurriculamStepsBar;

@@ -54,9 +54,7 @@ export default function Pricing({ match }) {
           {/* Sec Title */}
           <div className='sec-title style-two centered'>
             <div>
-              <span className='title'>Different Course Plans & </span>
-
-              <span className='title text-info'>Why JavaScript?</span>
+              <span className='title'>Why JavaScript?</span>
             </div>
             <hr className='block-seperator mb-3' />
           </div>
@@ -81,6 +79,12 @@ export default function Pricing({ match }) {
 
           <Container>
             <div className='curriculum-project'>
+              <div className='sec-title style-two centered'>
+                <div>
+                  <span className='title'> Different Course Plans</span>
+                </div>
+                <hr className='block-seperator mb-3' />
+              </div>
               <ul className='d-flex justify-content-center curriculum-project pb-3'>
                 <li
                   className=' btn btn-info rounded mx-2'
@@ -192,7 +196,9 @@ export default function Pricing({ match }) {
                                 <li className='check'>{offer}</li>
                               ))}
                             </ul>
-                            <div className='list text-muted'>{plan.requirement}</div>
+                            <div className='list text-muted'>
+                              {plan.requirement}
+                            </div>
                           </div>
 
                           <div>

@@ -690,7 +690,7 @@ input:checked + .slider:before {
   border-radius: 50px !important;
 }
 .curriculum {
-  width: 75% !important;
+  width: 85% !important;
   margin: 0 auto !important;
   overflow: hidden;
 }

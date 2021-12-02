@@ -119,7 +119,7 @@ export default function HomeScreen({ match }) {
         <div className='container-fluid bg-light py-5'>
           <div data-aos='fade-down' className='sec-title style-two centered'>
             <div className='title'>
-              Different Course Plans Tailored To Your Needs
+              How can you start?
             </div>
             <hr className='block-seperator mb-3' />
             <div
