@@ -14,24 +14,14 @@ const TuitionSection = function (props) {
         <Row>
           <Col md={12} className='text-center pt-4'>
             <h3 style={{ color: "#F09300" }}>Course Fees</h3>
-            <div>3 000€ / 4-6 months*</div>
-            <div>2 000€ / 3-5 months*</div>
+            <div>2 000€ / 3-5 months**</div>
+            <div>3 000€ / 4-6 months**</div>
             <div>optional weekly extensions after that</div>
             
           </Col>
         </Row>
 
-        <Row>
-          <Col md={{ span: 6, offset: 3 }} className='text-center pt-4'>
-            <div className="text-muted">
-              * If you prefer to study full-time and are well-prepared, you may
-              complete the course in 3 months. If you take it at a slower pace,
-              you should be able to finish it in around 4 months. 4 or 5 months
-              is more reasonable for students who are combining the bootcamp
-              with a part-time or full-time work.
-            </div>
-          </Col>
-        </Row>
+        
 
         <h3 className='text-center pt-4' style={{ color: "#F09300" }}>
           Fully flexible self-paced online learning
@@ -58,7 +48,7 @@ const TuitionSection = function (props) {
           </Col>
         </Row>
 
-        <Row className='mx-auto mt-4'>
+        <Row className='mx-auto mt-4 text-muted'>
           <Col md={{ span: 6, offset: 3 }}>
             <div>
               As a result, you may finish the bootcamp according to your

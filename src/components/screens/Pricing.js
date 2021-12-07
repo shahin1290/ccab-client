@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SpecialCourseForm from "../layout/SpecialCourseForm";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import Tuition from "../layout/Tuition";
 
 export default function Pricing({ match }) {
   const subscription = match && match.params.plan;
@@ -76,6 +77,10 @@ export default function Pricing({ match }) {
               </li>
             </ol>
           </main>
+
+          <div className='mb-5'>
+            <Tuition />
+          </div>
 
           <Container>
             <div className='curriculum-project'>

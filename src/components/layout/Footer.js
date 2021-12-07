@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import logo from "./../../assets/images/CF-footer.gif";
+import { Navbar } from "react-bootstrap";
+import Logo from "./../../assets/images/whiteLogo.png";
 import {Link } from 'react-scroll'
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -12,7 +12,18 @@ export default function Footer() {
       <div className="row">
         <div className="col-lg-4">
           <div className="mb-4">
-            <a href="layout-one-1.html"><img src={logo} alt='photo' className="logo-dark" height={26} /></a>
+          <Navbar.Brand href='/'>
+            <img
+              data-aos='fade-down'
+              data-aos-delay='400'
+              src={Logo}
+              title='Bootcamp'
+              width='40px'
+            />
+            <span data-aos='fade-left' className='ml-2 text-dark '>
+              CF College{" "}
+            </span>
+          </Navbar.Brand>
             <p className="text-muted mt-4 mb-2">info@codifycollege.se</p>
             <h6 className="text-muted font-weight-normal">+46-72 33 38 723</h6>
           </div>

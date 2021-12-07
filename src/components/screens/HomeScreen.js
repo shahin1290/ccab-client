@@ -42,9 +42,24 @@ export default function HomeScreen({ match }) {
   return (
     <>
       <div className='home'>
-        <div className="home-banner"></div>
+        <div className='home-banner'>
+          <div className=' col-lg-6 col-md-12 col-sm-12 mx-auto pt-5'>
+            <div
+              className='text-white mt-5 pt-5'
+              style={{ fontSize: "4em", fontWeight: "bold" }}
+            >
+              <div> learn to code,</div>
+              <div className="digital">With a New Digital Life</div>
+            </div>
+            <div className='text-white' style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+              Start your new Work with our weekly remotely Tech programs in
+              full-stack developer and build web and mobile apps powered by
+              JavaScript Start your new Work with our weekly remotely
+            </div>
+          </div>
+        </div>
         {/* <HomeCarousel /> */}
-        
+
         {/* <section className='home-hero-banner '> */}
         {/* <div class="quote--container banner-quote">
             <p class="quote">
@@ -115,13 +130,10 @@ export default function HomeScreen({ match }) {
 
         <CurriculamStepsBar />
 
-        {/* <Tution /> */}
         {/* Sec Title */}
         <div className='container-fluid bg-light py-5'>
           <div data-aos='fade-down' className='sec-title style-two centered'>
-            <div className='title'>
-              How can you start?
-            </div>
+            <div className='title'>How can you start?</div>
             <hr className='block-seperator mb-3' />
             <div
               data-aos='fade-down-right'
@@ -138,8 +150,6 @@ export default function HomeScreen({ match }) {
         </div>
 
         <ContactSection />
-
-        <Reviews />
 
         {/* <StudentReview /> */}
 
@@ -255,6 +265,8 @@ export default function HomeScreen({ match }) {
         {/*End How IT Works Section */}
 
         <ProgramSection />
+
+        <Reviews />
 
         {/* <AchievementSection />
 

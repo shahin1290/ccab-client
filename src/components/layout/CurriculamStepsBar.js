@@ -135,35 +135,68 @@ const CurriculamStepsBar = (props) => {
             </a>
           </div>
         </div>
-        <div className='meter orange nostripes'>
+        <div className='meter'>
           <span style={{ width: `${value}%` }}></span>
         </div>
         <div className='row no-gutter'></div>
         <div className='row  mb-5'>
-          <div className=' col-lg-12 col-md-8 col-sm-12 mt-2 ml-2 d-flex justify-content-around'>
-            <a className='curriculum'>
-              <span style={{marginLeft: '30px'}}>5</span>
+          <div className=' col-lg-12 col-md-8 col-sm-12 mt-2  d-flex justify-content-around '>
+            <a
+              onClick={() => setValue(6)}
+              className='curriculum'
+              style={value === 6 ? { color: "#ea5573" } : {}}
+            >
+              <span style={{ paddingRight: "20px" }}>1</span>
             </a>
+
             {/* {[...Array(10).keys()].map((week, index) => (
               <span>{(index + 1) * 3}</span>
             ))} */}
-            <a className='curriculum '>
+            <a
+              onClick={() => setValue(23)}
+              className='curriculum '
+              style={value === 23 ? { color: "#ea5573" } : {}}
+            >
+              <span>5</span>
+            </a>
+
+            <a
+              onClick={() => setValue(40)}
+              className='curriculum '
+              style={value === 40 ? { color: "#ea5573" } : {}}
+            >
               <span>10</span>
             </a>
 
-            <a className='curriculum '>
+            <a
+              onClick={() => setValue(57)}
+              className='curriculum '
+              style={value === 57 ? { color: "#ea5573" } : {}}
+            >
               <span>15</span>
             </a>
 
-            <a className='curriculum '>
+            <a
+              onClick={() => setValue(73)}
+              className='curriculum '
+              style={value === 73 ? { color: "#ea5573" } : {}}
+            >
               <span>20</span>
             </a>
 
-            <a className='curriculum '>
+            <a
+              onClick={() => setValue(90)}
+              className='curriculum '
+              style={value === 90 ? { color: "#ea5573" } : {}}
+            >
               <span>25</span>
             </a>
 
-            <a className='curriculum '>
+            <a
+              onClick={() => setValue(100)}
+              className='curriculum '
+              style={value === 100 ? { color: "#ea5573" } : {}}
+            >
               <span>30</span>
             </a>
           </div>
@@ -375,6 +408,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
                 <div className='d-flex'>
+                  <img width='50' src='/images/internet.png' />
                   <span className='sub-title pl-3 pt-3 pr-3'>
                     Communicating with server{" "}
                   </span>
@@ -456,6 +490,8 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
                 <div className='d-flex'>
+                  <img width='50' src='/images/react.png' />
+
                   <div className='sub-title pl-3 pt-3'>
                     Introduction to React Native
                   </div>
@@ -472,6 +508,8 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
+                  <img width='50' src='/images/react.png' />
+
                   <span className='sub-title pl-3 pt-3 pr-3'>
                     React Native basics{" "}
                   </span>
@@ -488,6 +526,8 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up'>
               <Col md={6}>
                 <div className='d-flex'>
+                  <img width='50' src='/images/internet.png' />
+
                   <div className='sub-title pl-2 pt-3'>
                     Communicating with server{" "}
                   </div>
