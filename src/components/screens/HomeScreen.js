@@ -42,8 +42,9 @@ export default function HomeScreen({ match }) {
   return (
     <>
       <div className='home'>
+        <div className="home-banner"></div>
         {/* <HomeCarousel /> */}
-        <HomeCarousel />
+        
         {/* <section className='home-hero-banner '> */}
         {/* <div class="quote--container banner-quote">
             <p class="quote">
@@ -114,7 +115,7 @@ export default function HomeScreen({ match }) {
 
         <CurriculamStepsBar />
 
-        <Tution />
+        {/* <Tution /> */}
         {/* Sec Title */}
         <div className='container-fluid bg-light py-5'>
           <div data-aos='fade-down' className='sec-title style-two centered'>

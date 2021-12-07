@@ -9,6 +9,7 @@ import EmailValidator from "email-validator";
 import Loader from "./../../layout/Loader";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import MainLoader from "./../../layout/LandingMainLoader";
+import Select from "react-select";
 
 export default function StudentRegisterScreen({ location }) {
   const dispatch = useDispatch();
@@ -22,6 +23,28 @@ export default function StudentRegisterScreen({ location }) {
   //current stage >
   const [currentStage, setCurrentStage] = useState(0);
 
+  const labelWithIcon = (
+    <span className='fas fa-book-open'>
+      <span className='sub-title pl-2'>choose subject</span>
+    </span>
+  );
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const options = [
+    { value: "HTML & CSS", label: "HTML & CSS" },
+    { value: "JavaScript", label: "JavaScript" },
+    { value: " Python", label: " Python" },
+    { value: " PHP", label: " PHP" },
+    { value: " C", label: " C" },
+    { value: " C++", label: " C++" },
+    { value: " NodeJs", label: " NodeJs" },
+    { value: " React", label: " React" },
+    { value: " Angular", label: " Angular" },
+    { value: " Vue", label: " Vue" },
+    { value: " Ruby", label: " Ruby" },
+    { value: " Java", label: " Java" },
+  ];
   // landing form
 
   const [Country, setCountry] = useState(localStorage.getItem("C_code"));
@@ -568,6 +591,47 @@ export default function StudentRegisterScreen({ location }) {
                               Select your education status{" "}
                             </p>
                           ) : null}
+                        </div>
+
+                        <div
+                          className='form-group  col-12'
+                          style={{ position: "relative" }}
+                        >
+                          <Select
+                            options={options}
+                            placeholder={
+                              "Select your previous coding experiences"
+                            }
+                            styles={{
+                              control: (base) => ({
+                                ...base,
+                                boxShadow: "none",
+                                zIndex: 5000,
+                                padding: "7px",
+                                border: "1px solid #222",
+                                backgroundColor: "#F5F5F5",
+                              }),
+                              placeholder: (base) => ({
+                                ...base,
+                                fontSize: "1em",
+                                color: "#222",
+                                fontWeight: 400,
+                                paddingLeft: "7px",
+                              }),
+                              option: (provided, state) => ({
+                                ...provided,
+                                backgroundColor: state.isFocused
+                                  ? "#1E90FF"
+                                  : "",
+                                color: state.isFocused ? "#fff" : "#222",
+                                paddingLeft: 25,
+                                textAlign: "left",
+                              }),
+                            }}
+                            onChange={setSelectedOption}
+                            isSearchable={true}
+                            isMulti
+                          />
                         </div>
                       </>
                     ) : null}

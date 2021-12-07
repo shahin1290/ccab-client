@@ -7,7 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 
 const CurriculamStepsBar = (props) => {
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(6);
   const weeks = 30;
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const CurriculamStepsBar = (props) => {
       }}
       id='Curriculum'
     >
-      <div className='curriculum no-gutter '>
+      <div className='curriculum no-gutter auto-container'>
         <div
           data-aos='fade-right'
           data-aos-delay='200'
@@ -31,6 +31,7 @@ const CurriculamStepsBar = (props) => {
           Comprehensive Curriculum
         </div>
         <hr className='block-seperator mb-3' />
+
         <div
           data-aos='fade-left'
           data-aos-delay='400'
@@ -43,16 +44,16 @@ const CurriculamStepsBar = (props) => {
 
         <div
           data-aos='flip-right'
-          className='curriculmTitle   d-flex justify-content-between w-100 mb-2  pl-5'
+          className='curriculmTitle   d-flex justify-content-between w-100 '
         >
           <div>
             <a
-              onClick={() => setValue(7)}
+              onClick={() => setValue(6)}
               className='curriculum'
-              style={value === 3 ? { color: "#ea5573", fontWeight: "800" } : {}}
+              style={value === 6 ? { color: "#ea5573", fontWeight: "800" } : {}}
             >
               Fundamentals of Web apps
-              <div className='text-center'>2 weeks</div>
+              <div className='text-center text-muted'>2 weeks</div>
             </a>
           </div>
 
@@ -61,145 +62,114 @@ const CurriculamStepsBar = (props) => {
               onClick={() => setValue(23)}
               className='curriculum'
               style={
-                value === 25 ? { color: "#ea5573", fontWeight: "800" } : {}
+                value === 23 ? { color: "#ea5573", fontWeight: "800" } : {}
               }
             >
               Basic Frontend
-              <div className='text-center'>5 weeks</div>
+              <div className='text-center text-muted'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
               onClick={() => setValue(40)}
-              className='curriculum pl-2'
+              className='curriculum'
               style={
-                value === 50 ? { color: "#ea5573", fontWeight: "800" } : {}
+                value === 40 ? { color: "#ea5573", fontWeight: "800" } : {}
               }
             >
               Advanced Frontend
-              <div className='text-center'>5 weeks</div>
+              <div className='text-center text-muted'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
               onClick={() => setValue(57)}
-              className='curriculum pl-3'
+              className='curriculum'
               style={
-                value === 25 ? { color: "#ea5573", fontWeight: "800" } : {}
+                value === 57 ? { color: "#ea5573", fontWeight: "800" } : {}
               }
             >
               Basic Backend & Database
-              <div className='text-center'>5 weeks</div>
+              <div className='text-center text-muted'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
               onClick={() => setValue(73)}
-              className='curriculum pl-5'
+              className='curriculum'
               style={
-                value === 75 ? { color: "#ea5573", fontWeight: "800" } : {}
+                value === 73 ? { color: "#ea5573", fontWeight: "800" } : {}
               }
             >
               Advanced Backend & Database
-              <div className='text-center'>5 weeks</div>
+              <div className='text-center text-muted'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
               onClick={() => setValue(90)}
-              className='curriculum ml-5 pl-5'
+              className='curriculum'
               style={
-                value === 75 ? { color: "#ea5573", fontWeight: "800" } : {}
+                value === 90 ? { color: "#ea5573", fontWeight: "800" } : {}
               }
             >
               Native mobile app
-              <div className='text-center'>5 weeks</div>
+              <div className='text-center text-muted'>5 weeks</div>
             </a>
           </div>
 
           <div>
             <a
               onClick={() => setValue(100)}
-              className='curriculum pl-5 ml-2'
+              className='curriculum'
               style={
                 value === 100 ? { color: "#ea5573", fontWeight: "800" } : {}
               }
             >
               Projects
-              <div className='text-center'>3 weeks</div>
+              <div className='text-center text-muted'>3 weeks</div>
             </a>
           </div>
         </div>
-        <div className='row no-gutter'>
-          <ProgressBar
-            className='col-lg-12 col-md-12 col-sm-12  mt-3 mb-2'
-            style={{ borderRadius: "40px" }}
-          >
-            <ProgressBar variant='warning' now={value} />
-          </ProgressBar>
+        <div className='meter orange nostripes'>
+          <span style={{ width: `${value}%` }}></span>
         </div>
+        <div className='row no-gutter'></div>
         <div className='row  mb-5'>
           <div className=' col-lg-12 col-md-8 col-sm-12 mt-2 ml-2 d-flex justify-content-around'>
-            <a
-              onClick={() => setValue(3)}
-              className='curriculum '
-              style={value === 3 ? { color: "#ea5573" } : {}}
-            >
-              <span onClick={() => setValue(3)}>5</span>
+            <a className='curriculum'>
+              <span style={{marginLeft: '30px'}}>5</span>
             </a>
             {/* {[...Array(10).keys()].map((week, index) => (
               <span>{(index + 1) * 3}</span>
             ))} */}
-            <a
-              onClick={() => setValue(25)}
-              className='curriculum '
-              style={value === 25 ? { color: "#ea5573" } : {}}
-            >
-              <span onClick={() => setValue(25)}>10</span>
+            <a className='curriculum '>
+              <span>10</span>
             </a>
 
-            <a
-              onClick={() => setValue(50)}
-              className='curriculum '
-              style={value === 50 ? { color: "#ea5573" } : {}}
-            >
-              <span onClick={() => setValue(50)}>15</span>
+            <a className='curriculum '>
+              <span>15</span>
             </a>
 
-            <a
-              onClick={() => setValue(75)}
-              className='curriculum '
-              style={value === 75 ? { color: "#ea5573" } : {}}
-            >
-              {" "}
-              <span onClick={() => setValue(75)}>20</span>
+            <a className='curriculum '>
+              <span>20</span>
             </a>
 
-            <a
-              onClick={() => setValue(100)}
-              className='curriculum '
-              style={value === 100 ? { color: "#ea5573" } : {}}
-            >
-              {" "}
-              <span onClick={() => setValue(100)}>25</span>
+            <a className='curriculum '>
+              <span>25</span>
             </a>
 
-            <a
-              onClick={() => setValue(100)}
-              className='curriculum '
-              style={value === 100 ? { color: "#ea5573" } : {}}
-            >
-              {" "}
-              <span onClick={() => setValue(100)}>30</span>
+            <a className='curriculum '>
+              <span>30</span>
             </a>
           </div>
         </div>
 
-        {value === 7 && (
+        {value === 6 && (
           <>
             <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>

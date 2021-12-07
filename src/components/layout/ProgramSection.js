@@ -27,7 +27,7 @@ const ProgramSection = () => {
               </div> */}
           <div className='text-center col-lg-6 col-md-6 col-sm-12'>
             <div className='inner-column'>
-              <div className='image titlt pt-4' data-tilt data-tilt-max={4}>
+              <div className='image titlt ' data-tilt data-tilt-max={4}>
                 <img src={image4} />
               </div>
             </div>
@@ -35,14 +35,14 @@ const ProgramSection = () => {
           </div>
 
           <div className='col-lg-6 col-md-6 col-sm-12'>
-            <div className='title text-center '>How can you start?</div>
+            <div className='title text-center '>Carrier Support?</div>
             <hr className='block-seperator mb-3' />
             <div className='sub-title pb-3 pt-3 '>
               Register yourself now and get real employabe skills that top
               companies want.
             </div>
 
-            <div className='sub-text pb-5 '>
+            <div className='sub-text pb-2 '>
               CV writing.  Technical Interviews / Mock Interviews. Personal
               Development Program Portfolioing. Networking Events.
             </div>
