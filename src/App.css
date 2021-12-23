@@ -5,7 +5,6 @@ body {
   color: #4a4a4a !important;
 }
 
-
 .login-nav-section {
   height: 10vh;
 } /* LOGIN PAGE */
@@ -1834,4 +1833,122 @@ ol.gradient-list > li + li {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+/* Student List */
+
+.student-list .container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e6ebe0;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+
+.student-list .font {
+  height: 375px;
+  width: 250px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.student-list .top {
+  height: 30%;
+  width: 100%;
+  background-color: #8338ec;
+  position: relative;
+  z-index: 5;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.student-list .bottom {
+  height: 70%;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.student-list .top img {
+  height: 100px;
+  width: 100px;
+  background-color: #e6ebe0;
+  border-radius: 10px;
+  position: absolute;
+  top: 60px;
+  left: 75px;
+}
+.student-list .bottom p {
+  position: relative;
+  top: 60px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 20px;
+  text-emphasis: spacing;
+}
+.student-list .bottom .desi {
+  font-size: 12px;
+  color: grey;
+  font-weight: normal;
+}
+.student-list .bottom .no {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+
+.student-list .Details {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.student-list .details-info {
+  color: white;
+  text-align: left;
+  padding: 5px;
+  line-height: 20px;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+  line-height: 22px;
+}
+
+.student-list .logo {
+  height: 40px;
+  width: 150px;
+  padding: 40px;
+}
+
+.student-list .logo img {
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+.student-list .padding {
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 400px) {
+  .student-list .container {
+    height: 130vh;
+  }
+  .student-list .container .front {
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .student-list .container {
+    height: 130vh;
+  }
+  .student-list .container .front {
+    margin-top: 50px;
+  }
 }

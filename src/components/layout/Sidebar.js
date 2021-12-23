@@ -12,6 +12,7 @@ import ManageServices from "../screens/AdminScreen/ManageServices";
 import UserListScreen from "../screens/AdminScreen/UserList";
 import ReportList from "../screens/InstructorScreen/ReportList";
 import PromoList from "../screens/AdminScreen/PromoList";
+import StudenList from "../screens/AdminScreen/StudentList";
 
 const StyledMenu = styled.nav`
   background: #34495e;
@@ -44,6 +45,17 @@ const Menu = ({ open, setBarSelected, barSelected }) => {
         </div>
 
         <hr style={{ height: "1px", background: "grey", border: "0" }} />
+
+        <li>
+          {" "}
+          <a
+            onClick={() => setBarSelected("student")}
+            style={{ background: barSelected === "student" ? "#d9534f" : "" }}
+          >
+            Student List
+          </a>
+        </li>
+
         <li>
           {" "}
           <a
@@ -133,10 +145,11 @@ const Menu = ({ open, setBarSelected, barSelected }) => {
 
 const Sidebar = () => {
   const { sideBarOpen, openSideBar } = useSideBar();
-  const [barSelected, setBarSelected] = useState("course");
+  const [barSelected, setBarSelected] = useState("student");
 
   return (
     <div>
+      {barSelected === "student" && <StudenList />}
       {barSelected === "course" && <MangeCoures />}
       {barSelected === "content" && <MentorCoursesList />}
       {barSelected === "media" && <ManageMediaCenters />}
