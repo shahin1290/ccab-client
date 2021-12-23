@@ -17,7 +17,7 @@ const OnlineEducationProspect = () => {
         }}
       >
         <div className="auto-container">
-          <div data-aos="zoom-out-right" className="title text-center p-4 ">What Stands Us Out</div>
+          <div data-aos="zoom-out-right" className="title text-center  ">What Stands Us Out</div>
           <hr className="block-seperator mb-5" />
           <Row data-aos="fade-down"
                 className="pt-3 pb-1">

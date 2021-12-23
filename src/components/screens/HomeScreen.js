@@ -24,12 +24,13 @@ import ContactForm from "../layout/ContactForm";
 import Typewriter from "typewriter-effect";
 import Reviews from "../layout/Reviews";
 import ServiceVideoChat from "./../layout/ServiceVideoChat";
-import Tution from "../layout/Tuition";
+import Tuition from "../layout/Tuition";
 
 import ServiceAssistance from "./../layout/ServiceAssistance";
 
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import WhyJavascript from "../layout/WhyJavascript";
 // ..
 //AOS.init();
 
@@ -152,6 +153,10 @@ export default function HomeScreen({ match }) {
         <ContactSection />
 
         {/* <StudentReview /> */}
+
+        <WhyJavascript />
+
+        <Tuition />
 
         <Pricing />
 

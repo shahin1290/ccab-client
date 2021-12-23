@@ -3,7 +3,10 @@ import { Col, Row } from "react-bootstrap";
 
 const TuitionSection = function (props) {
   return (
-    <section className='py-5' style={{ background: " rgb(234, 246, 255)" }}>
+    <section
+      className='py-5 gradient-background'
+      style={{ background: " rgb(234, 246, 255)" }}
+    >
       <div className='auto-container'>
         <div className='title text-center'>Tuition</div>
         <hr className='block-seperator mt-1 mb-3' />
@@ -17,11 +20,8 @@ const TuitionSection = function (props) {
             <div>2 000€ / 3-5 months**</div>
             <div>3 000€ / 4-6 months**</div>
             <div>optional weekly extensions after that</div>
-            
           </Col>
         </Row>
-
-        
 
         <h3 className='text-center pt-4' style={{ color: "#F09300" }}>
           Fully flexible self-paced online learning

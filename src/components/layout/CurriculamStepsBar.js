@@ -17,8 +17,8 @@ const CurriculamStepsBar = (props) => {
   return (
     <section
       style={{
-        backgroundColor: "#fff",
         padding: "50px 0",
+        background: " rgb(234, 246, 255)",
       }}
       id='Curriculum'
     >
