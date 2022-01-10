@@ -108,7 +108,7 @@ function App() {
 
   return (
     <div className='App'>
-      {userDetail && userDetail.user_type === "StudentUser" && <IdleTimer />}
+      {userDetail && userDetail.name && <IdleTimer />}
       <SideBarStateProvider>
         <Switch>
           {/* Private Route for Admin  */}

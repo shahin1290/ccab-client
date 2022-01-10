@@ -24,7 +24,7 @@ export default function TopCourses({ match }) {
   );
 
   useEffect(() => {
-    dispatch(getCourseList());
+    if (!courseList.length) dispatch(getCourseList());
   }, [dispatch]);
 
   useEffect(() => {
