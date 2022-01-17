@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import logo from "./../../../assets/images/CF.png";
+import Logo from "../../../assets/images/whiteLogo.png";
 import { registerUser } from "../../../redux/actions/userAction";
 import { createBrowserHistory } from "history";
 import { Link } from "react-router-dom";
@@ -325,12 +325,8 @@ export default function StudentRegisterScreen({ location }) {
                 {/* LOGO */}
 
                 <a className='navbar-brand logo' href='/'>
-                  <img
-                    src='images/CF-College.png'
-                    alt='photo'
-                    className
-                    height={10}
-                  />
+                  <img src={Logo} alt='photo' />
+                  <span className='ml-2 text-dark '>CF College </span>
                 </a>
               </div>
             </nav>
