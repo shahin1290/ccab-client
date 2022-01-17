@@ -37,7 +37,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
   } = answerMyList
 
   const filterDailyVideos = () => {
-    if (dailyActivities.length > 0) {
+    if (dailyActivities.length) {
       return dailyActivities.filter((a) => {
         const d1 = new Date().setHours(0, 0, 0, 0)
         const d2 = new Date(a.startDate).setHours(0, 0, 0, 0)
@@ -48,7 +48,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
   }
 
   const filterTodaysQuizAnswer = () => {
-    if (myQuizAnswers.length > 0) {
+    if (myQuizAnswers.length) {
       return myQuizAnswers.filter((a) => {
         const d1 = new Date().setHours(0, 0, 0, 0)
         const d2 = new Date(a.createdAt).setHours(0, 0, 0, 0)
@@ -59,7 +59,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
   }
 
   const filterTodaysAnswer = () => {
-    if (myanswers.length > 0) {
+    if (myanswers.length) {
       return myanswers.filter((a) => {
         const d1 = new Date().setHours(0, 0, 0, 0)
         const d2 = new Date(a.createdAt).setHours(0, 0, 0, 0)
@@ -166,7 +166,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {filterTodaysQuizAnswer().length > 0 ? (
+                  {filterTodaysQuizAnswer() && filterTodaysQuizAnswer().length ? (
                     filterTodaysQuizAnswer().map((quiz) => (
                       <tr className="sub-text">
                         <td>Quiz: {quiz.quiz.name}</td>
@@ -180,7 +180,7 @@ export default function PerformanceDetailsDaily({ bootcampId }) {
                       no quiz answer is submitted
                     </p>
                   )}
-                  {filterTodaysAnswer().length > 0 ? (
+                  {filterTodaysAnswer() && filterTodaysAnswer().length ? (
                     filterTodaysAnswer().map((task) => (
                       <tr className="sub-text">
                         <td>Task: {task.task.projectName}</td>

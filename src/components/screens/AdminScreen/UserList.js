@@ -24,6 +24,8 @@ import { ToastContainer, toast } from "react-toastify";
 import Loader from "../../layout/Loader";
 import { getDate } from "../../../util/getDate";
 import PerformanceChart from "../../layout/PerformanceChart";
+import { getMyAnswerList } from "../../../redux/actions/answerAction";
+import { getMyQuizAnswerList } from "../../../redux/actions/quizAnswerAction";
 
 export default function UserlistScreen() {
   const dispatch = useDispatch();
@@ -283,6 +285,8 @@ export default function UserlistScreen() {
                               onClick={() => {
                                 setStudentId(user._id);
                                 setShowPerformanceModal({ visible: true });
+                                dispatch(getMyAnswerList(user._id));
+                                dispatch(getMyQuizAnswerList(user._id));
                               }}
                               className='text-info'
                             >
