@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Message from "../../layout/Message";
+import { Link } from "react-router-dom";
 
 import { login } from "../../../redux/actions/userAction";
 import { createBrowserHistory } from "history";
@@ -137,7 +137,7 @@ export default function StudentLogin({ location }) {
                 {/* LOGO */}
 
                 <a className='navbar-brand logo' href='/'>
-                  <img src={Logo} alt='photo'  />
+                  <img src={Logo} alt='photo' />
                   <span className='ml-2 text-dark '>CF College </span>
                 </a>
               </div>
@@ -226,11 +226,23 @@ export default function StudentLogin({ location }) {
                     </div>
 
                     <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                      <div className='users'>
-                        New User !{" "}
-                        <a href='/get-start' className='link-info text-danger'>
-                          <u>Sign up</u>
-                        </a>
+                      <div className='users d-flex justify-content-between'>
+                        <div>
+                          New User !{" "}
+                          <a
+                            href='/get-start'
+                            className='link-info text-danger'
+                          >
+                            <u>Sign up</u>
+                          </a>
+                        </div>
+
+                        <Link
+                          to='/forgot-password'
+                          className='link-info text-danger'
+                        >
+                          <u>Forget Password?</u>
+                        </Link>
                       </div>
                     </div>
                   </div>
