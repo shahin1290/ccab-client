@@ -241,7 +241,7 @@ export default function StudentLogin({ location }) {
                           to='/forgot-password'
                           className='link-info text-danger'
                         >
-                          <u>Forget Password?</u>
+                          <u>Forgot Password?</u>
                         </Link>
                       </div>
                     </div>
