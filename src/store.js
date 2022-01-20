@@ -290,10 +290,12 @@ const initialState = {
   userLogin: { userDetail: userDetailsFromStorage },
 }; // here we can get localStorage, token
 const middleware = [thunk];
-const store = createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+
+const devTools =
+  process.env.REACT_APP_NODE_ENV === "production"
+    ? applyMiddleware(...middleware)
+    : composeWithDevTools(applyMiddleware(...middleware));
+
+const store = createStore(reducer, initialState, devTools);
 
 export default store;
