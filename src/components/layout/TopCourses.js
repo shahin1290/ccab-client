@@ -104,7 +104,7 @@ export default function TopCourses({ match }) {
                             "http://localhost:5001/uploads/Bootcamp/" +
                             course.img_path
                           }
-                          alt=""
+                          alt="ccab"
                         />
                       </Link>
                     </div>

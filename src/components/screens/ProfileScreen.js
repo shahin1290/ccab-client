@@ -18,9 +18,6 @@ import { getCourseList } from "../../redux/actions/courseAction";
 import { getMyQuizList } from "../../redux/actions/quizAction";
 import CountUp from "react-countup";
 import Purchases from "../layout/Purchases";
-import PaymentRequest from "../layout/StudentPaymentRequests";
-import { getServiceList } from "../../redux/actions/serviceAction";
-import ServiceSessions from "../layout/ServiceSessions";
 import MainLoader from "./../layout/LandingMainLoader";
 
 export default function ProfileScreen() {
@@ -127,9 +124,7 @@ export default function ProfileScreen() {
       dispatch(getMyQuizList());
     }
 
-    if (userDetail.name && userDetail.user_type === "InstructorUser") {
-      dispatch(getServiceList());
-    }
+   
   }, [dispatch, ValidLoading, updateSuccess, TokenSuccess, answerListSuccess]);
 
   useEffect(() => {
@@ -451,11 +446,7 @@ export default function ProfileScreen() {
                       </Tab>
                     ) : null}
 
-                    {userDetail && userDetail.user_type === "StudentUser" ? (
-                      <Tab eventKey='Sessions' title='Sessions'>
-                        <ServiceSessions />
-                      </Tab>
-                    ) : null}
+                
                     <Tab eventKey='Personal Info' title='Personal Info'>
                       <div className='content mt-4'>
                         <div className='card p-5 '>

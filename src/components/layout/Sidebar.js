@@ -5,13 +5,9 @@ import { useSideBar } from "../../util/sidebarState";
 import { Button } from "react-bootstrap";
 import MentorCoursesList from "../screens/MentorScreen/MentorCoursesList";
 import ManageMediaCenters from "../screens/AdminScreen/ManageMediaCenters";
-import RequestList from "../screens/AdminScreen/RequestList";
 import JobList from "../screens/AdminScreen/JobList";
 import MangeOrder from "../screens/AdminScreen/MangeOrder";
-import ManageServices from "../screens/AdminScreen/ManageServices";
 import UserListScreen from "../screens/AdminScreen/UserList";
-import ReportList from "../screens/InstructorScreen/ReportList";
-import PromoList from "../screens/AdminScreen/PromoList";
 import StudenList from "../screens/AdminScreen/StudentList";
 
 const StyledMenu = styled.nav`
@@ -153,13 +149,9 @@ const Sidebar = () => {
       {barSelected === "course" && <MangeCoures />}
       {barSelected === "content" && <MentorCoursesList />}
       {barSelected === "media" && <ManageMediaCenters />}
-      {barSelected === "request" && <RequestList />}
       {barSelected === "job" && <JobList />}
       {barSelected === "order" && <MangeOrder />}
-      {barSelected === "service" && <ManageServices />}
       {barSelected === "user" && <UserListScreen />}
-      {barSelected === "report" && <ReportList />}
-      {barSelected === "promo" && <PromoList />}
 
       <div>
         <a

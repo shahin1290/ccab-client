@@ -12,7 +12,7 @@ export default function Privacy() {
                     {/* LOGO */}
 
                     <a className="navbar-brand logo" href="/">
-                        <img src={logo} alt='photo' className height={10} />   
+                        <img src={logo} alt='logo' className height={10} />   
                     </a>
                 
                     <button className="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

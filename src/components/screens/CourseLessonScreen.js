@@ -36,7 +36,6 @@ export default function CourseContentScreen({ match }) {
 
   const { userDetail } = useSelector((state) => state.userLogin);
 
-
   const { course } = useSelector((state) => state.courseDetails);
 
   const { dayVideoList } = useSelector((state) => state.dayVideoList);
@@ -50,17 +49,11 @@ export default function CourseContentScreen({ match }) {
 
   useEffect(() => {
     dispatch(getDayVideoList(id));
-    if (updateSuccess) {
-      dispatch(getWatchingLectures(id));
-    }
-
-   
-  }, [updateSuccess, userDetail]);
+  }, [userDetail]);
 
   useEffect(() => {
     if (ref.current) {
       ref.current.plyr.once("ended", () => {
-
         dispatch(updateDailyActivity({ dayId: day._id }, id));
         setShowModal(true);
       });
@@ -157,7 +150,6 @@ export default function CourseContentScreen({ match }) {
                         {course && course.name}
                         <hr />
                       </div>
-                    
                     </div>
                     <a
                       onClick={() => setOpen(!open)}
@@ -165,7 +157,7 @@ export default function CourseContentScreen({ match }) {
                       aria-expanded={open}
                       className="hide-on-big-screen "
                     >
-                      <i class="fas fa-bars"></i>
+                      <i className="fas fa-bars"></i>
                     </a>
                   </div>
 
@@ -299,7 +291,7 @@ export default function CourseContentScreen({ match }) {
                                           "image",
                                           section.name
                                         )}`}
-                                        alt="img"
+                                        alt="ccab"
                                         className="img-fluid row"
                                         style={{
                                           filter:

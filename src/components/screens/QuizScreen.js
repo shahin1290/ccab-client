@@ -174,15 +174,15 @@ export default function QuizScreen({ match, location }) {
             <div className="sub-title pt-5 pb-3"> Instructions</div>
             <ul className="list-group ">
               <li className="list-group-item">
-                <i class="fas fa-crosshairs"></i> Only one attempt to finish the
+                <i className="fas fa-crosshairs"></i> Only one attempt to finish the
                 quiz{' '}
               </li>
               <li className="list-group-item">
-                <i class="fas fa-stopwatch"></i> Complete the quiz with allotted
+                <i className="fas fa-stopwatch"></i> Complete the quiz with allotted
                 times
               </li>
               <li className="list-group-item">
-                <i class="fas fa-dice-one"></i> Only one choice for each
+                <i className="fas fa-dice-one"></i> Only one choice for each
                 question{' '}
               </li>
             </ul>

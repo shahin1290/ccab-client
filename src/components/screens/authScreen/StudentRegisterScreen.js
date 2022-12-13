@@ -24,8 +24,8 @@ export default function StudentRegisterScreen({ location }) {
   const [currentStage, setCurrentStage] = useState(0);
 
   const labelWithIcon = (
-    <span className='fas fa-book-open'>
-      <span className='sub-title pl-2'>choose subject</span>
+    <span className="fas fa-book-open">
+      <span className="sub-title pl-2">choose subject</span>
     </span>
   );
 
@@ -314,66 +314,66 @@ export default function StudentRegisterScreen({ location }) {
 
   return (
     <>
-      <section className='student-signup-section'>
+      <section className="student-signup-section">
         {userDetail && userDetail.name ? (
           <MainLoader />
         ) : (
           <>
             {/*Navbar Start*/}
-            <nav className='navbar navbar-expand-lg p-1 bg-light navbar-custom '>
-              <div className='container'>
+            <nav className="navbar navbar-expand-lg p-1 bg-light navbar-custom ">
+              <div className="container">
                 {/* LOGO */}
 
-                <a className='navbar-brand logo' href='/'>
-                  <img src={Logo} alt='photo' />
-                  <span className='ml-2 text-dark '>CF College </span>
+                <a className="navbar-brand logo" href="/">
+                  <img src={Logo} alt="ccab" />
+                  <span className="ml-2 text-dark ">CF College </span>
                 </a>
               </div>
             </nav>
             {/* Navbar End */}
-            <div className='student-signup-box py-3 col-sm-10 col-md-6 col-lg-4 offset-md-3'>
+            <div className="student-signup-box py-3 col-sm-10 col-md-6 col-lg-4 offset-md-3">
               {/* Title Box */}
-              <div className='title-box pl-3 pt-1 text-start'>
-                <h2 className=' mb-5'>Signup Form</h2>
+              <div className="title-box pl-3 pt-1 text-start">
+                <h2 className=" mb-5">Signup Form</h2>
 
-                <ul className='signup-setps'>
+                <ul className="signup-setps">
                   <div className={currentStage == 0 ? "active" : ""}>
                     <li>1 </li>
-                    <span className='w-50 d-block mt-2'>
+                    <span className="w-50 d-block mt-2">
                       Personal Information
                     </span>
                   </div>
 
                   <div className={currentStage == 1 ? "active" : ""}>
                     <li>2 </li>
-                    <span className='w-50 d-block mt-2'>
+                    <span className="w-50 d-block mt-2">
                       Account Information
                     </span>
                   </div>
 
                   <div className={currentStage == 2 ? "active" : ""}>
                     <li>3 </li>
-                    <span className='w-50 d-block mt-2'>Eduction History</span>
+                    <span className="w-50 d-block mt-2">Eduction History</span>
                   </div>
 
                   <div className={currentStage == 3 ? "active" : ""}>
-                    <li className='no-after'>4 </li>
-                    <span className='w-100 d-block mt-2'>Terms & policy</span>
+                    <li className="no-after">4 </li>
+                    <span className="w-100 d-block mt-2">Terms & policy</span>
                   </div>
                 </ul>
               </div>
               <form
-                className='student-signup-form  w-100 needs-validation p-3'
+                className="student-signup-form  w-100 needs-validation p-3"
                 onSubmit={_handelSubmit}
               >
                 <>
-                  <div className='form-row'>
+                  <div className="form-row">
                     <div
-                      className='form-group  col-12'
+                      className="form-group  col-12"
                       style={{ position: "relative" }}
                     >
                       {error ? (
-                        <p className='text-danger mb-0 error-attention'>
+                        <p className="text-danger mb-0 error-attention">
                           {error}{" "}
                         </p>
                       ) : null}
@@ -383,45 +383,45 @@ export default function StudentRegisterScreen({ location }) {
                     {currentStage == 0 ? (
                       <>
                         {/* First Name */}
-                        <div className='form-group  col-12 '>
+                        <div className="form-group  col-12 ">
                           <input
-                            type='text'
-                            className='form-control'
-                            id='FirstName'
-                            placeholder='Your First Name*'
+                            type="text"
+                            className="form-control"
+                            id="FirstName"
+                            placeholder="Your First Name*"
                             required
                             value={FormData.FirstName}
                             onChange={_handelFieldChange}
                           />
 
                           {ValidationError.FirstNameErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               Enter First Name Please!
                             </p>
                           ) : null}
                         </div>
 
                         {/* Last Name */}
-                        <div className='form-group  col-12 '>
+                        <div className="form-group  col-12 ">
                           <input
-                            type='text'
-                            className='form-control'
-                            id='LastName'
-                            placeholder='Your Last Name*'
+                            type="text"
+                            className="form-control"
+                            id="LastName"
+                            placeholder="Your Last Name*"
                             required
                             value={FormData.LastName}
                             onChange={_handelFieldChange}
                           />
 
                           {ValidationError.LastNameErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               Enter Last Name Please!
                             </p>
                           ) : null}
                         </div>
 
                         {/* phone */}
-                        <div className='form-group mb-4 col-12 sm-12'>
+                        <div className="form-group mb-4 col-12 sm-12">
                           <PhoneInput
                             international
                             countryCallingCodeEditable={false}
@@ -430,32 +430,32 @@ export default function StudentRegisterScreen({ location }) {
                             onChange={_handelPhoneChange}
                           />
                           {ValidationError.PhoneErr ? (
-                            <p className='text-danger'>
+                            <p className="text-danger">
                               Enter A Valid Phone Number Please!
                             </p>
                           ) : null}
                         </div>
 
                         <div
-                          className='form-group  col-12'
+                          className="form-group  col-12"
                           style={{ position: "relative" }}
                         >
                           <select
-                            className='form-select'
-                            id='Gender'
+                            className="form-select"
+                            id="Gender"
                             onChange={_handelFieldChange}
-                            aria-label='Default select example'
+                            aria-label="Default select example"
                           >
                             <option selected disabled>
                               Select your gender
                             </option>
-                            <option value='male'>Male</option>
-                            <option value='female'>Female</option>
-                            <option value='others'>Other</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Other</option>
                           </select>
 
                           {ValidationError.GenderErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               Select your gender please{" "}
                             </p>
                           ) : null}
@@ -467,60 +467,60 @@ export default function StudentRegisterScreen({ location }) {
                     {currentStage == 1 ? (
                       <>
                         {/* Email */}
-                        <div className='form-group  col-12 '>
+                        <div className="form-group  col-12 ">
                           <input
-                            type='email'
-                            className='form-control'
-                            id='exampleFormControlInput2'
-                            placeholder='Your Email*'
+                            type="email"
+                            className="form-control"
+                            id="exampleFormControlInput2"
+                            placeholder="Your Email*"
                             required
                             value={FormData.Email}
                             onChange={_handelEmailChange}
                           />
 
                           {ValidationError.EmailErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               Enter A Valid Email Please!
                             </p>
                           ) : null}
                         </div>
                         <div
-                          className='form-group  col-12'
+                          className="form-group  col-12"
                           style={{ position: "relative" }}
                         >
                           <input
-                            type='password'
-                            className='form-control'
-                            id='Password'
-                            placeholder='Your Password*'
+                            type="password"
+                            className="form-control"
+                            id="Password"
+                            placeholder="Your Password*"
                             required
                             value={FormData.Password}
                             onChange={_handelPasswordChange}
                           />
 
                           {ValidationError.PasswordErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               {ValidationError.PasswordErr}
                             </p>
                           ) : null}
                         </div>
 
                         <div
-                          className='form-group  col-12'
+                          className="form-group  col-12"
                           style={{ position: "relative" }}
                         >
                           <input
-                            type='password'
-                            className='form-control'
-                            id='RePassword'
-                            placeholder='Confirm Password*'
+                            type="password"
+                            className="form-control"
+                            id="RePassword"
+                            placeholder="Confirm Password*"
                             required
                             value={FormData.RePassword}
                             onChange={_handelRePasswordChange}
                           />
 
                           {ValidationError.RePasswordErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               {ValidationError.RePasswordErr}{" "}
                             </p>
                           ) : null}
@@ -532,65 +532,65 @@ export default function StudentRegisterScreen({ location }) {
                     {currentStage == 2 ? (
                       <>
                         <div
-                          className='form-group  col-12  '
+                          className="form-group  col-12  "
                           style={{ position: "relative" }}
                         >
                           <select
-                            className='form-select'
-                            id='Lang'
+                            className="form-select"
+                            id="Lang"
                             onChange={_handelFieldChange}
-                            aria-label='Default select example'
+                            aria-label="Default select example"
                           >
                             <option selected disabled>
                               Select Language{" "}
                             </option>
-                            <option value='en'>English</option>
-                            <option value='ar'>Arabic</option>
+                            <option value="en">English</option>
+                            <option value="ar">Arabic</option>
                           </select>
 
                           {ValidationError.LangErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               Select your language please{" "}
                             </p>
                           ) : null}
                         </div>
 
                         <div
-                          className='form-group  col-12'
+                          className="form-group  col-12"
                           style={{ position: "relative" }}
                         >
                           <select
-                            className='form-select'
-                            id='Education'
+                            className="form-select"
+                            id="Education"
                             onChange={_handelFieldChange}
-                            aria-label='Default select example'
+                            aria-label="Default select example"
                           >
                             <option selected disabled>
                               Select your education status
                             </option>
-                            <option value='9-11'>Completed Year 9-11</option>
-                            <option value='12'>
+                            <option value="9-11">Completed Year 9-11</option>
+                            <option value="12">
                               Completed High School(Year 12)
                             </option>
-                            <option value='diploma'>Diploma</option>
-                            <option value='undergraduate'>Undergraduate</option>
-                            <option value='postgraduate'>
+                            <option value="diploma">Diploma</option>
+                            <option value="undergraduate">Undergraduate</option>
+                            <option value="postgraduate">
                               Post Graduate Degree
                             </option>
-                            <option value='masters'>Masters</option>
-                            <option value='phd'>PhD</option>
-                            <option value='other'>Other</option>
+                            <option value="masters">Masters</option>
+                            <option value="phd">PhD</option>
+                            <option value="other">Other</option>
                           </select>
 
                           {ValidationError.EducationErr ? (
-                            <p className='text-danger error-attention'>
+                            <p className="text-danger error-attention">
                               Select your education status{" "}
                             </p>
                           ) : null}
                         </div>
 
                         <div
-                          className='form-group  col-12'
+                          className="form-group  col-12"
                           style={{ position: "relative" }}
                         >
                           <Select
@@ -635,22 +635,22 @@ export default function StudentRegisterScreen({ location }) {
                     {/* input Stage 4 */}
                     {currentStage == 3 ? (
                       <>
-                        <div className='form-check mb-3'>
+                        <div className="form-check mb-3">
                           <input
-                            className='form-check-input'
-                            type='checkbox'
-                            id='Terms'
+                            className="form-check-input"
+                            type="checkbox"
+                            id="Terms"
                             onChange={() => {
                               setFormData({ ...FormData, Terms: true });
                             }}
                           />
 
-                          <label className='form-check-label' htmlFor='Terms'>
+                          <label className="form-check-label" htmlFor="Terms">
                             I agree the user agreement and{" "}
                             <a
-                              href='/privacy'
-                              target='_blank'
-                              className='text-danger'
+                              href="/privacy"
+                              target="_blank"
+                              className="text-danger"
                             >
                               Terms &amp; Conditions
                             </a>
@@ -662,15 +662,15 @@ export default function StudentRegisterScreen({ location }) {
 
                   {/* button stage number 1 */}
                   {currentStage == 0 ? (
-                    <div className='form-row '>
-                      <div className='form-group   col-sm-6'>
+                    <div className="form-row ">
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='button'
+                          type="button"
                           disabled={!showButton.btnStage1}
                           onClick={() => {
                             setCurrentStage(1);
                           }}
-                          className='btn btn-warning btn-block btn-sm formButton py-1'
+                          className="btn btn-warning btn-block btn-sm formButton py-1"
                         >
                           {loading ? <Loader /> : <>Next </>}
                         </button>
@@ -680,26 +680,26 @@ export default function StudentRegisterScreen({ location }) {
 
                   {/* stage number 2 */}
                   {currentStage == 1 ? (
-                    <div className='form-row'>
-                      <div className='form-group   col-sm-6'>
+                    <div className="form-row">
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='button'
+                          type="button"
                           onClick={() => {
                             setCurrentStage(0);
                           }}
-                          className='btn btn-outline-warning btn-block  btn-sm formButton py-1'
+                          className="btn btn-outline-warning btn-block  btn-sm formButton py-1"
                         >
                           {loading ? <Loader /> : <>Previous </>}
                         </button>
                       </div>
-                      <div className='form-group   col-sm-6'>
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='button'
+                          type="button"
                           disabled={!showButton.btnStage2}
                           onClick={() => {
                             setCurrentStage(2);
                           }}
-                          className='btn btn-warning btn-block btn-sm formButton py-1'
+                          className="btn btn-warning btn-block btn-sm formButton py-1"
                         >
                           {loading ? <Loader /> : <>Next </>}
                         </button>
@@ -709,26 +709,26 @@ export default function StudentRegisterScreen({ location }) {
 
                   {/* stage number 3 */}
                   {currentStage == 2 ? (
-                    <div className='form-row'>
-                      <div className='form-group   col-sm-6'>
+                    <div className="form-row">
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='button'
+                          type="button"
                           onClick={() => {
                             setCurrentStage(1);
                           }}
-                          className='btn btn-outline-warning btn-block  btn-sm formButton py-1'
+                          className="btn btn-outline-warning btn-block  btn-sm formButton py-1"
                         >
                           {loading ? <Loader /> : <>Previous </>}
                         </button>
                       </div>
-                      <div className='form-group   col-sm-6'>
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='button'
+                          type="button"
                           disabled={!showButton.btnStage3}
                           onClick={() => {
                             setCurrentStage(3);
                           }}
-                          className='btn btn-warning btn-block btn-sm formButton py-1'
+                          className="btn btn-warning btn-block btn-sm formButton py-1"
                         >
                           {loading ? <Loader /> : <>Next </>}
                         </button>
@@ -738,23 +738,23 @@ export default function StudentRegisterScreen({ location }) {
 
                   {/* stage number 4 */}
                   {currentStage == 3 ? (
-                    <div className='form-row'>
-                      <div className='form-group   col-sm-6'>
+                    <div className="form-row">
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='button'
+                          type="button"
                           onClick={() => {
                             setCurrentStage(2);
                           }}
-                          className='btn btn-outline-warning btn-block btn-sm formButton py-1'
+                          className="btn btn-outline-warning btn-block btn-sm formButton py-1"
                         >
                           Previous
                         </button>
                       </div>
-                      <div className='form-group   col-sm-6'>
+                      <div className="form-group   col-sm-6">
                         <button
-                          type='submit'
+                          type="submit"
                           disabled={!showButton.btnStage4}
-                          className='btn btn-warning btn-block btn-sm formButton py-1'
+                          className="btn btn-warning btn-block btn-sm formButton py-1"
                         >
                           {loading ? <Loader /> : <>Signup </>}
                         </button>
@@ -762,10 +762,10 @@ export default function StudentRegisterScreen({ location }) {
                     </div>
                   ) : null}
 
-                  <div className='form-group col-lg-12 col-md-12 col-sm-12'>
-                    <div className='users'>
+                  <div className="form-group col-lg-12 col-md-12 col-sm-12">
+                    <div className="users">
                       Already have an account!{" "}
-                      <a href='/login' className='link-info text-danger'>
+                      <a href="/login" className="link-info text-danger">
                         <u>Sign In</u>
                       </a>
                     </div>

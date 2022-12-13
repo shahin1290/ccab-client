@@ -183,7 +183,7 @@ export default function Assignments() {
                               <Link
                                 onClick={() => DownloadAssignmentHandler(task)}
                               >
-                                <i class="fas fa-file-download"></i> DOWNLOAD
+                                <i className="fas fa-file-download"></i> DOWNLOAD
                               </Link>
                             </td>
 

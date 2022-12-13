@@ -2,26 +2,16 @@ import React, { useState, useEffect } from "react";
 import "malihu-custom-scrollbar-plugin";
 import TopCourses from "./../layout/TopCourses";
 import Pricing from "./../../components/screens/Pricing";
-import { Row, Col, ProgressBar, Container } from "react-bootstrap";
-import RegisterScreen from "../screens/authScreen/RegisterScreen";
-import homeBanner from "./../../assets/images/background/home-banner.jpg";
 import OnlineEducationProspect from "../layout/OnlineEducationProspect";
-import HomeCarousel from "../layout/HomeCarousel";
 import RatingSection from "../layout/RatingSection";
 import ContactSection from "../layout/ContactSection";
-import HomeVideoSection from "../layout/HomeVideoSection";
 import CurriculamStepsBar from "../layout/CurriculamStepsBar";
-import StudentReview from "../layout/StudentReview";
-import AchievementSection from "../layout/AchievementSection";
 import ProgramSection from "../layout/ProgramSection";
 import FaqSection from "../layout/FaqSection";
-import Particles from "../layout/Particles";
-import { Link } from "react-router-dom";
 import Rodal from "rodal";
 // include styles
 import "rodal/lib/rodal.css";
 import ContactForm from "../layout/ContactForm";
-import Typewriter from "typewriter-effect";
 import Reviews from "../layout/Reviews";
 import ServiceVideoChat from "./../layout/ServiceVideoChat";
 import Tuition from "../layout/Tuition";
@@ -62,12 +52,12 @@ export default function HomeScreen({ match }) {
         {/* <HomeCarousel /> */}
 
         {/* <section className='home-hero-banner '> */}
-        {/* <div class="quote--container banner-quote">
-            <p class="quote">
+        {/* <div className="quote--container banner-quote">
+            <p className="quote">
               Your future is created by what you do{' '}
-              <span class="quote--highlight">TODAY</span> not tomorrow
+              <span className="quote--highlight">TODAY</span> not tomorrow
             </p>
-            <p class="quote--author">&ndash; Robert Kiyosaki</p>
+            <p className="quote--author">&ndash; Robert Kiyosaki</p>
           </div>
 
           <div className="hero-banner pt-5">

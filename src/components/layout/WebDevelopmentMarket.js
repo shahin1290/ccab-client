@@ -41,7 +41,7 @@ const WebDevelopmentMarket = () => {
                 <span className="pl-3">Codify College</span>
               </div>
               <div className="quote mr-5 pr-5">
-                <i class="fas fa-quote-right"></i>
+                <i className="fas fa-quote-right"></i>
               </div>
             </div>
           </div>

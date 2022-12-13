@@ -53,9 +53,9 @@ export default function ResetPassword({ match }) {
           <div className="login-box">
             {loading && (
               <div id="backdrop">
-                <div class="spinner-center ">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+                <div className="spinner-center ">
+                  <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
                   </div>
                 </div>
               </div>

@@ -168,7 +168,7 @@ export default function UpdateMediaCenterDayContent({ match }) {
                           to={`/mentor-add-quiz/${mediaCenterId}/${day._id}`}
                           className="sub-title "
                         >
-                          <i class="fas fa-plus-square text-white pl-5 ">
+                          <i classNa="fas fa-plus-square text-white pl-5 ">
                             Quiz
                           </i>
                         </Link>
@@ -176,7 +176,7 @@ export default function UpdateMediaCenterDayContent({ match }) {
                           to={`/mentor-upload-assignment/${mediaCenterId}/${day._id}`}
                           className="sub-title "
                         >
-                          <i class="fas fa-file-upload text-white pl-5">
+                          <i classNa="fas fa-file-upload text-white pl-5">
                             Assignment
                           </i>
                         </Link>
@@ -196,7 +196,7 @@ export default function UpdateMediaCenterDayContent({ match }) {
                           to={`/edit-media-center-day/${week._id}/${day._id}`}
                           className="pl-5"
                         >
-                          <i class="fas fa-edit"></i>
+                          <i classNa="fas fa-edit"></i>
                         </Link>
                       </span>
                     </div>
@@ -222,7 +222,7 @@ export default function UpdateMediaCenterDayContent({ match }) {
                                 }
                                 className="pl-3"
                               >
-                                <i class="fas fa-edit"></i>
+                                <i classNa="fas fa-edit"></i>
                               </Link>
                               <a
                                 onClick={() => {
@@ -235,7 +235,7 @@ export default function UpdateMediaCenterDayContent({ match }) {
                                 }}
                                 className="pl-3"
                               >
-                                <i class="fas fa-trash-alt text-danger"></i>
+                                <i classNa="fas fa-trash-alt text-danger"></i>
                               </a>
                             </span>
                           )}
@@ -271,6 +271,7 @@ export default function UpdateMediaCenterDayContent({ match }) {
                             <img
                               width="30"
                               src="/images/resource/assignment.png"
+                              alt="ccab"
                             />
                           </span>
 

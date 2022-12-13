@@ -117,10 +117,10 @@ const ContactForm = () => {
                         setCode(e.target.value);
                       }}
                     >
-                      <option value="" selected>
+                      <option value="" >
                         select Country Code
                       </option>
-                      <option data-countrycode="GB" value="44" selected>
+                      <option data-countrycode="GB" value="44" >
                         UK (+44)
                       </option>
                       <option data-countrycode="US" value="1">
@@ -790,7 +790,7 @@ const ContactForm = () => {
                         setCategory(e.target.value);
                       }}
                     >
-                      <option value="" selected>
+                      <option value="" >
                         select a categogy
                       </option>
                       <option value="Course Fees/Finance Options">
@@ -820,7 +820,7 @@ const ContactForm = () => {
                         setIndustry(e.target.value);
                       }}
                     >
-                      <option value="" selected>
+                      <option value="" >
                         select an industry
                       </option>
                       <option value="Accounting">Accounting</option>

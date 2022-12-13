@@ -15,19 +15,13 @@ import {
   createKlarnaSession,
 } from "../../redux/actions/orderAction";
 import { getCourseDetails } from "../../redux/actions/courseAction";
-import { getRequestDetails } from "../../redux/actions/requestAction";
-import { getServiceDetails } from "../../redux/actions/serviceAction";
-import { getPromos } from "../../redux/actions/promoAction";
 import Loader from "../layout/Loader";
-import { Tabs, Tab } from "react-bootstrap";
 import axios from "axios";
 import Message from "../layout/Message";
 import KlarnaPayment from "../layout/KlarnaPayment";
 import { getKlarnaOrderLines } from "../../util/klarnaOrderLines";
 import { getPriceFormat } from "../../util/priceFormat";
 import { createCurrrency } from "../../redux/actions/currencyAction";
-import { createAppointment } from "../../redux/actions/appointmentAction";
-import { ButtonGroup, Button } from "react-bootstrap";
 
 import { plans } from "../../util/plans";
 
@@ -46,19 +40,10 @@ const CheckoutForm = ({ match, history }) => {
   const serviceId = match.params.serviceId;
   const [method, setMethod] = useState();
 
-  const [showKlarnaImg, setShowKlarmaImg] = useState(false);
-
   const plan = plans.find((plan) => plan._id === subscription);
 
   const { course } = useSelector((state) => state.courseDetails);
   const { service } = useSelector((state) => state.serviceDetails);
-
-  const {
-    promos,
-    success: promoSuccess,
-    loading: promoLoading,
-    error: promoError,
-  } = useSelector((state) => state.promoList);
 
   const {
     loading,
@@ -72,8 +57,6 @@ const CheckoutForm = ({ match, history }) => {
     error: currencyError,
     currency,
   } = useSelector((state) => state.currencyCreate);
-
-  const appointment = useSelector((state) => state.appointmentCreate);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userDetail } = userLogin;
@@ -108,39 +91,7 @@ const CheckoutForm = ({ match, history }) => {
     loading: sessionLoading,
   } = useSelector((state) => state.KlarnaSessionCreate);
 
-  // validate the user country
-  const validateCounrty = (countryName, countryLang) => {
-    let KlaranCountry = [
-      { name: "Austria", code: "de_at", lang: "de" },
-      { name: "Belgium", code: "fr_be", lang: "fr" },
-      { name: "Belgium", code: "nl_be", lang: "nl" },
-      { name: "Denmark", code: "da_dk", lang: "da" },
-      { name: "Finland", code: "fi_fi", lang: "fi" },
-      { name: "France", code: "fr_fr", lang: "fr" },
-      { name: "Germany", code: "de_de", lang: "de" },
-      { name: "Italy", code: "it_it", lang: "it" },
-      { name: "Netherlands", code: "nl_nl", lang: "nl" },
-      { name: "Norway", code: "nb_no", lang: "nb" },
-      { name: "Poland", code: "pl_pl", lang: "pl" },
-      { name: "Spain", code: "es_es", lang: "es" },
-      { name: "Sweden", code: "sv_se", lang: "sv" },
-      { name: "Switzerland", code: "fr_ch", lang: "fr" },
-      { name: "Switzerland ", code: "de_ch", lang: "de" },
-      { name: "Switzerland ", code: "it_ch", lang: "it" },
-      { name: "United Kingdom	", code: "en_gb", lang: "en" },
-      { name: "United States", code: "en_us", lang: "en" },
-      //{name:'Lithuania',code:'lt_ru',lang:'ru'},
-    ];
-
-    for (let i of KlaranCountry) {
-      if (i.name == countryName && countryLang.indexOf(i.lang) !== -1) {
-        setShowKlarmaImg(true);
-      }
-    }
-  };
-
   useEffect(() => {
-    dispatch(getPromos());
     async function fetchMyAPI() {
       const apiKey = "6068a971e6754bdf9d3b0ddc706779b0";
 
@@ -220,21 +171,6 @@ const CheckoutForm = ({ match, history }) => {
 
       if (requestId) {
         history.push(`/confirmation-card-purchase/${requestId}`);
-      }
-
-      if (serviceId) {
-        dispatch(
-          createAppointment({
-            instructor: JSON.parse(localStorage.getItem("appointment"))
-              .instructor,
-            service: service._id,
-            sessions: JSON.parse(localStorage.getItem("appointment"))
-              .inputFields,
-          })
-        );
-
-        localStorage.removeItem("appointment");
-        history.push(`/confirmation-card-purchase/${serviceId}`);
       }
     }
   }, [orderSuccess]);
@@ -374,15 +310,7 @@ const CheckoutForm = ({ match, history }) => {
           amount = Math.round(currency.data.amount * request.amount * 100);
         }
 
-        if (serviceId) {
-          amount = Math.round(
-            currency.data.amount *
-              (service.price *
-                JSON.parse(localStorage.getItem("appointment")).inputFields
-                  .length) *
-              100
-          );
-        }
+      
 
         const { data: clientSecret } = await axios.post(
           `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
@@ -559,28 +487,7 @@ const CheckoutForm = ({ match, history }) => {
       setWidgetLoaded(false);
     }
 
-    if (serviceId) {
-      const amount =
-        service.price *
-        JSON.parse(localStorage.getItem("appointment")).inputFields.content
-          .length;
-      dispatch(
-        createKlarnaSession(
-          {
-            data: getKlarnaOrderLines(
-              { name: service.name, price: amount },
-              {
-                amount: currency.data.amount,
-                country: currency.data.country,
-                currency: currency.data.currency,
-              }
-            ),
-          },
-          serviceId
-        )
-      );
-      setWidgetLoaded(false);
-    }
+   
   };
 
   const [klarnaMethod, setKlarnaMethod] = useState();
@@ -954,17 +861,7 @@ const CheckoutForm = ({ match, history }) => {
                                   </span>
                                 </li>
 
-                                <li className="clearfix mb-3">
-                                  Sessions:
-                                  <span className="pull-right">
-                                    {
-                                      JSON.parse(
-                                        localStorage.getItem("appointment")
-                                      ).inputFields.length
-                                    }
-                                  </span>
-                                </li>
-
+                              
                                 <hr />
 
                                 <li className="clearfix">

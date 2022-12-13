@@ -168,7 +168,7 @@ export default function DayContent({ bootcampId }) {
                           to={`/mentor-add-quiz/${bootcampId}/${day._id}`}
                           className="sub-title "
                         >
-                          <i class="fas fa-plus-square text-white pl-5 ">
+                          <i className="fas fa-plus-square text-white pl-5 ">
                             Quiz
                           </i>
                         </Link>
@@ -176,7 +176,7 @@ export default function DayContent({ bootcampId }) {
                           to={`/mentor-upload-assignment/${bootcampId}/${day._id}`}
                           className="sub-title "
                         >
-                          <i class="fas fa-file-upload text-white pl-5">
+                          <i className="fas fa-file-upload text-white pl-5">
                             Assignment
                           </i>
                         </Link>
@@ -207,7 +207,7 @@ export default function DayContent({ bootcampId }) {
                           to={`/mentor-course-update/${week._id}/${day._id}`}
                           className="pl-5"
                         >
-                          <i class="fas fa-edit"></i>
+                          <i className="fas fa-edit"></i>
                         </Link>
                       </Link>
                     </button>
@@ -233,7 +233,7 @@ export default function DayContent({ bootcampId }) {
                                 }
                                 className="pl-3"
                               >
-                                <i class="fas fa-edit"></i>
+                                <i className="fas fa-edit"></i>
                               </Link>
                               <a
                                 onClick={() => {
@@ -246,7 +246,7 @@ export default function DayContent({ bootcampId }) {
                                 }}
                                 className="pl-3"
                               >
-                                <i class="fas fa-trash-alt text-danger"></i>
+                                <i className="fas fa-trash-alt text-danger"></i>
                               </a>
                             </span>
                           )}
@@ -260,7 +260,7 @@ export default function DayContent({ bootcampId }) {
                       filterWeeklyQuiz(day._id).map((quiz) => (
                         <div className="pt-3">
                           <span className="mr-3">
-                            <img width="30" src="/images/resource/quiz.png" />
+                            <img alt="ccab" width="30" src="/images/resource/quiz.png" />
                           </span>
 
                           {userDetail.user_type !== 'StudentUser' && (
@@ -280,6 +280,7 @@ export default function DayContent({ bootcampId }) {
                         <div className="pt-3">
                           <span className="mr-3">
                             <img
+                            alt="ccab"
                               width="30"
                               src="/images/resource/assignment.png"
                             />

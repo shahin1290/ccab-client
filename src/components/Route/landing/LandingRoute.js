@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 
 import LandingScreen from '../../screens/LandingScreen'
 
-import ServiceHomeScreen from "../../screens/ServiceHomeScreen";
 import Footer from "../../layout/Footer";
 import Header from "../../layout/Header";
 import Rodal from "rodal";

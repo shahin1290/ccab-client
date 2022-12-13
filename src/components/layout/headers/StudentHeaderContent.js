@@ -35,20 +35,7 @@ export default function StudentHeaderContnet({ logoutHandler }) {
             </div>
           </li>
 
-          <li className="nav-item dropdown dropdown-slide dropdown-hover ">
-            <a href="#" className="text-dark pb-5 pt-5">
-              Schedule
-            </a>
-            <div
-              className="dropdown-menu  mt-4 ml-5"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a className="dropdown-item" href="/reports">
-                Reports
-              </a>
-              
-            </div>
-          </li>
+          
 
           <li className="nav-item dropdown dropdown-slide dropdown-hover ">
             <a href="/compile" className="text-dark pb-5 pt-5">

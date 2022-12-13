@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userProfileUpdate, getProfile } from "../../redux/actions/userAction";
-import { getServiceCategories } from "../../redux/actions/serviceCategoryAction";
-import { updateServiceInstructor } from "../../redux/actions/serviceAction";
 
 import { createBrowserHistory } from "history";
 import { useDropzone } from "react-dropzone";
@@ -128,10 +126,6 @@ export default function EditProfile() {
     if (user && user.name) {
       setUserData();
     }
-
-    if (user && user.user_type === "InstructorUser") {
-      dispatch(getServiceCategories());
-    }
   }, [user]);
 
   useEffect(() => {
@@ -200,8 +194,6 @@ export default function EditProfile() {
         categoriesName.push(item.name);
       });
     }
-
-    dispatch(updateServiceInstructor({ categories: categoriesName }));
   };
 
   return (
@@ -468,7 +460,6 @@ export default function EditProfile() {
                                           onChange={(e) => {
                                             setSkill(e.target.value);
                                           }}
-                                          value={skill}
                                         />
 
                                         <button

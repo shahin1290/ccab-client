@@ -186,7 +186,7 @@ export default function CourseGridScreen({ match }) {
                                             "http://localhost:5001/uploads/Bootcamp/" +
                                             course.img_path
                                           }
-                                          alt=""
+                                          alt="ccab"
                                           style={{
                                             "max-height": "150px",
                                           }}
@@ -337,7 +337,7 @@ export default function CourseGridScreen({ match }) {
                               "http://localhost:5001/uploads/Bootcamp/" +
                               filterSubscriptionCourse(courseList)[0].img_path
                             }
-                            alt=""
+                            alt="ccab"
                           />
                         </Link>
                       </div>

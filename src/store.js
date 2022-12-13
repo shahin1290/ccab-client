@@ -84,52 +84,9 @@ import {
   stripeSubscriptionInvoiceReducer,
 } from "./redux/reducers/orderReducer";
 import { currencyCreateReducer } from "./redux/reducers/currencyReducer";
-import {
-  requestCreateReducer,
-  requestListReducer,
-  requestDetailsReducer,
-  requestDeleteReducer,
-  requestUpdateReducer,
-} from "./redux/reducers/requestReducer";
+
 
 import { jobCreateReducer, jobListReducer } from "./redux/reducers/jobReducer";
-
-import {
-  serviceListReducer,
-  serviceDetailsReducer,
-  serviceDeleteReducer,
-  serviceCreateReducer,
-  adminServiceListReducer,
-  serviceUpdateReducer,
-  serviceInstructorUpdateReducer,
-} from "./redux/reducers/serviceReducer";
-
-import {
-  sessionCreateReducer,
-  sessionListReducer,
-  sessionDetailsReducer,
-  sessionDeleteReducer,
-  sessionUpdateReducer,
-} from "./redux/reducers/sessionReducer";
-
-import {
-  appointmentCreateReducer,
-  appointmentListReducer,
-  instructorAppointmentListReducer,
-  appointmentDetailsReducer,
-  appointmentDeleteReducer,
-  appointmentUpdateReducer,
-} from "./redux/reducers/appointmentReducer";
-
-import {
-  serviceCategoryCreateReducer,
-  serviceCategoryListReducer,
-  serviceCategoryDetailsReducer,
-  serviceCategoryDeleteReducer,
-  serviceCategoryUpdateReducer,
-} from "./redux/reducers/serviceCategoryReducer";
-
-
 
 import {
   mediaCenterListReducer,
@@ -139,22 +96,6 @@ import {
   adminMediaCenterListReducer,
   mediaCenterUpdateReducer,
 } from "./redux/reducers/mediaCenterReducer";
-
-import {
-  dailyActivityCreateReducer,
-  dailyActivityListReducer,
-  dailyActivityDetailsReducer,
-  dailyActivityDeleteReducer,
-  dailyActivityUpdateReducer,
-} from "./redux/reducers/dailyActivityReducer";
-
-import {
-  promoCreateReducer,
-  promoListReducer,
-  promoDetailsReducer,
-  promoDeleteReducer,
-  promoUpdateReducer,
-} from "./redux/reducers/promoReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -218,36 +159,8 @@ const reducer = combineReducers({
   getOrderView: orderVeiwReducer,
   getAllOrders: orderListAllReducer,
   currencyCreate: currencyCreateReducer,
-  requestCreate: requestCreateReducer,
-  requestList: requestListReducer,
-  requestDetails: requestDetailsReducer,
-  requestUpdate: requestUpdateReducer,
-  requestDelete: requestDeleteReducer,
   jobCreate: jobCreateReducer,
   jobList: jobListReducer,
-  serviceList: serviceListReducer,
-  adminServiceList: adminServiceListReducer,
-  serviceDetails: serviceDetailsReducer,
-  serviceCreate: serviceCreateReducer,
-  serviceDelete: serviceDeleteReducer,
-  serviceUpdate: serviceUpdateReducer,
-  serviceInstructorUpdate: serviceInstructorUpdateReducer,
-  sessionCreate: sessionCreateReducer,
-  sessionList: sessionListReducer,
-  sessionDetails: sessionDetailsReducer,
-  sessionUpdate: sessionUpdateReducer,
-  sessionDelete: sessionDeleteReducer,
-  appointmentCreate: appointmentCreateReducer,
-  appointmentList: appointmentListReducer,
-  appointmentDetails: appointmentDetailsReducer,
-  appointmentUpdate: appointmentUpdateReducer,
-  appointmentDelete: appointmentDeleteReducer,
-  instructorAppointmentList: instructorAppointmentListReducer,
-  serviceCategoryCreate: serviceCategoryCreateReducer,
-  serviceCategoryList: serviceCategoryListReducer,
-  serviceCategoryDetails: serviceCategoryDetailsReducer,
-  serviceCategoryUpdate: serviceCategoryUpdateReducer,
-  serviceCategoryDelete: serviceCategoryDeleteReducer,
 
   mediaCenterList: mediaCenterListReducer,
 
@@ -256,17 +169,6 @@ const reducer = combineReducers({
   mediaCenterCreate: mediaCenterCreateReducer,
   mediaCenterDelete: mediaCenterDeleteReducer,
   mediaCenterUpdate: mediaCenterUpdateReducer,
-  dailyActivityCreate: dailyActivityCreateReducer,
-  dailyActivityList: dailyActivityListReducer,
-  dailyActivityDetails: dailyActivityDetailsReducer,
-  dailyActivityUpdate: dailyActivityUpdateReducer,
-  dailyActivityDelete: dailyActivityDeleteReducer,
-  //promo
-  promoCreate: promoCreateReducer,
-  promoList: promoListReducer,
-  promoDetails: promoDetailsReducer,
-  promoUpdate: promoUpdateReducer,
-  promoDelete: promoDeleteReducer,
 });
 
 const userDetailsFromStorage = localStorage.getItem("userDetail")

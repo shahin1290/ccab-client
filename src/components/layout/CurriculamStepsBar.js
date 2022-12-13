@@ -213,7 +213,7 @@ const CurriculamStepsBar = (props) => {
                       borderRadius: "3px 3px 3px 3px",
                     }}
                   >
-                    <img width='50' src='/images/developer.png' />
+                    <img alt="ccab" width='50' src='/images/developer.png' />
                   </span>
                   <span className='sub-title pl-3 pt-1'>
                     Developer Tools & workflow
@@ -227,7 +227,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6} className='p-3'>
                 <div className='d-flex'>
-                  <img width='45' src='/images/html.png' />{" "}
+                  <img alt="ccab" width='45' src='/images/html.png' />{" "}
                   <div className='sub-title pl-3 pt-3'>HTML5 Basics </div>
                 </div>
                 <div className='sub-text'>
@@ -240,7 +240,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='45' src='/images/js.png' />
+                  <img alt="ccab" width='45' src='/images/js.png' />
 
                   <div className='sub-title pl-3 pt-3'>JavaScript Basics </div>
                 </div>
@@ -253,7 +253,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='45' src='/images/css.png' />
+                  <img alt="ccab" width='45' src='/images/css.png' />
 
                   <div className='sub-title pl-3 pt-3'>Css3 Basics </div>
                 </div>
@@ -272,7 +272,7 @@ const CurriculamStepsBar = (props) => {
               <Col md={6}>
                 <div className='d-flex'>
                   <div>
-                    <img width='50' src='/images/internet.png' />
+                    <img alt="ccab" width='50' src='/images/internet.png' />
                   </div>
                   <div className='sub-title pl-3 pt-2'>Internet theory</div>
                 </div>
@@ -286,7 +286,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='45' src='/images/js.png' />{" "}
+                  <img alt="ccab" width='45' src='/images/js.png' />{" "}
                   <div className='sub-title pl-3 pt-3'>JavaScript </div>
                 </div>
                 <div className='sub-text'>
@@ -301,7 +301,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/bootstrap.png' />
+                  <img alt="ccab" width='50' src='/images/bootstrap.png' />
 
                   <div className='sub-title pl-3 pt-3'>
                     Advanced Style Technology
@@ -318,7 +318,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='45' src='/images/screen.png' />
+                  <img alt="ccab" width='45' src='/images/screen.png' />
 
                   <div className='sub-title pl-3 pt-3'>
                     Building Modren Website{" "}
@@ -340,7 +340,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/react.png' />
+                  <img alt="ccab" width='50' src='/images/react.png' />
 
                   <div className='sub-title pl-3 pt-3'>React JS </div>
                 </div>
@@ -353,7 +353,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='45' src='/images/es6.svg' />{" "}
+                  <img alt="ccab" width='45' src='/images/es6.svg' />{" "}
                   <div className='sub-title pl-3 pt-3'>Event-Driven APIs </div>
                 </div>
                 <div className='sub-text'>
@@ -370,7 +370,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/redux.png' />
+                  <img alt="ccab" width='50' src='/images/redux.png' />
 
                   <div className='sub-title pl-3 pt-3'>Redux </div>
                 </div>
@@ -386,7 +386,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='45' src='/images/building.png' />
+                  <img alt="ccab" width='45' src='/images/building.png' />
 
                   <div className='sub-title pl-3 pt-3'>
                     Building Web products{" "}
@@ -408,7 +408,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/internet.png' />
+                  <img alt="ccab" width='50' src='/images/internet.png' />
                   <span className='sub-title pl-3 pt-3 pr-3'>
                     Communicating with server{" "}
                   </span>
@@ -422,7 +422,7 @@ const CurriculamStepsBar = (props) => {
               <Col md={6}>
                 <div className='d-flex'>
                   <div>
-                    <img width='50' src='/images/node.png' />
+                    <img alt="ccab" width='50' src='/images/node.png' />
                   </div>
                   <div className='sub-title pl-3 pt-3'>Node JS</div>
                 </div>
@@ -443,7 +443,7 @@ const CurriculamStepsBar = (props) => {
               <Col md={6}>
                 <div className='d-flex'>
                   <span className='sub-title pl-3 pt-3 pr-3'>Express </span>
-                  <img width='45' src='/images/js.png' />{" "}
+                  <img alt="ccab" width='45' src='/images/js.png' />{" "}
                 </div>
                 <div className='sub-text'>
                   Introduction ExpressJS, Routes with Express, Static server
@@ -456,7 +456,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='60' src='/images/mongo.png' />
+                  <img alt="ccab" width='60' src='/images/mongo.png' />
 
                   <div className='sub-title pl-2 pt-3'>Mongo DB </div>
                 </div>
@@ -470,7 +470,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='55' src='/images/heroku.png' />
+                  <img alt="ccab" width='55' src='/images/heroku.png' />
 
                   <div className='sub-title pl-3 pt-3'>
                     Production with Heroku
@@ -490,7 +490,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up' className='mb-5'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/react.png' />
+                  <img alt="ccab" width='50' src='/images/react.png' />
 
                   <div className='sub-title pl-3 pt-3'>
                     Introduction to React Native
@@ -508,7 +508,7 @@ const CurriculamStepsBar = (props) => {
 
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/react.png' />
+                  <img alt="ccab" width='50' src='/images/react.png' />
 
                   <span className='sub-title pl-3 pt-3 pr-3'>
                     React Native basics{" "}
@@ -526,7 +526,7 @@ const CurriculamStepsBar = (props) => {
             <Row data-aos='fade-up'>
               <Col md={6}>
                 <div className='d-flex'>
-                  <img width='50' src='/images/internet.png' />
+                  <img alt="ccab" width='50' src='/images/internet.png' />
 
                   <div className='sub-title pl-2 pt-3'>
                     Communicating with server{" "}
@@ -546,7 +546,7 @@ const CurriculamStepsBar = (props) => {
         {value === 100 && (
           <Row data-aos='fade-up' className='curriculum-project p-3'>
             <div className='sub-title'>
-              <img width='55' src='/images/rocket.png' />
+              <img alt="ccab" width='55' src='/images/rocket.png' />
               <span className='pl-3'>
                 Turn an idea into a product in 2 weeks
               </span>

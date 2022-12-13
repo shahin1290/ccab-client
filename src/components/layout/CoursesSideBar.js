@@ -92,7 +92,7 @@ export default function CourseSideBar({ setSelctedCourse, selectedCourse }) {
                             "http://localhost:5001/uploads/Bootcamp/" +
                             course.img_path
                           }
-                          alt=""
+                          alt="ccab"
                         />
                       </div>
                     </div>

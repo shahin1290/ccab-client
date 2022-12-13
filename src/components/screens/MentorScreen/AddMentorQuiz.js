@@ -112,7 +112,7 @@ export default function UpdateMentorCourse({ location, match }) {
             <div className="clearfix">
               <div className="pull-left">
                 <div className="title">Add Quiz</div>
-                <div class="p-3 mb-2 text-info">
+                <div classN="p-3 mb-2 text-info">
                   *Submit all questions first and then push the Submit Quiz
                   button
                 </div>

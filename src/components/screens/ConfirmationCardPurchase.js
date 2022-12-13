@@ -22,9 +22,9 @@ const ConfirmationKlarna = ({ match }) => {
       {loading ? (
         <Loader />
       ) : (
-        <div class="jumbotron text-center">
-          <h1 class="display-3">Thank You!</h1>
-          <p class="lead">
+        <div className="jumbotron text-center">
+          <h1 className="display-3">Thank You!</h1>
+          <p className="lead">
             {course && course._id ? (
               <>
                 <strong>Your purchase is being verified.</strong> You can now

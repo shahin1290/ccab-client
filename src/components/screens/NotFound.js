@@ -12,10 +12,10 @@ export default function NotFound() {
                 <div className="content">
                 <div className="content-inner">
                     <div className="pt-4">
-                    <a href="/"><img src={logo} alt width="150px" style={{ height:'auto'}} className="mb-4"/></a>
+                    <a href="/"><img src={logo} alt="ccab" width="150px" style={{ height:'auto'}} className="mb-4"/></a>
                     </div>
                     <div className="image">
-                    <img src={image} alt />
+                    <img src={image} alt="ccab" />
                     </div>
                     <div className="text display-4 mb-4">Something went wrong</div>
                     <a href="/" className="theme-btn btn-style-one"><span className="txt">Back To Homepage</span></a>

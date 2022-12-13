@@ -53,9 +53,9 @@ export default function LoginScreen({ location }) {
           <div className="login-box">
             {loading && (
               <div id="backdrop">
-                <div class="spinner-center ">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+                <div classNa="spinner-center ">
+                  <div classNa="spinner-border" role="status">
+                    <span classNa="sr-only">Loading...</span>
                   </div>
                 </div>
               </div>

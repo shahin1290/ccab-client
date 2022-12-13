@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getCourseList } from "../../redux/actions/courseAction";
-import { getServiceList } from "../../redux/actions/serviceAction";
 
 // include styles
 import "rodal/lib/rodal.css";
 import { Nav, Dropdown, NavDropdown, Navbar } from "react-bootstrap";
-import { Link } from "react-scroll";
 // imgaes
 import Logo from "./../../assets/images/whiteLogo.png";
 
 import { useSelector, useDispatch } from "react-redux";
-import { logout, isValid } from "../../redux/actions/userAction";
+import { logout } from "../../redux/actions/userAction";
 
 import AdminHeader from "./../layout/headers/AdminHeaderContnet";
 import StudentHeaderContent from "./../layout/headers/StudentHeaderContent";
@@ -19,7 +17,6 @@ import InstructorHeaderContent from "./../layout/headers/InstructorHeaderContent
 import AccountantHeaderContent from "./../layout/headers/AccountantHeaderContent";
 
 import { getProfile } from "../../redux/actions/userAction";
-import Loader from "./Loader";
 
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
@@ -31,14 +28,11 @@ export default function Header() {
   const { loading, user, error } = useSelector((state) => state.userProfile);
 
   const { courseList } = useSelector((state) => state.courseList);
-  const { serviceList } = useSelector((state) => state.serviceList);
 
   /*******************Functions *************/
   const categoryArray = [...new Set(courseList.map((item) => item.category))];
 
-  const serviceCategoryArray = [
-    ...new Set(serviceList.map((item) => item.category)),
-  ];
+ 
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -48,7 +42,6 @@ export default function Header() {
       dispatch(getProfile());
     }
     dispatch(getCourseList());
-    dispatch(getServiceList());
   }, [dispatch]);
 
   const logoutHandler = () => {

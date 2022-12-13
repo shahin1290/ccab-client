@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function CourseLessonScreen() {
   return (
@@ -11,7 +11,7 @@ export default function CourseLessonScreen() {
           data-paroller-factor-lg="0.20"
           data-paroller-type="foreground"
           data-paroller-direction="vertical"
-          style={{ backgroundImage: 'url(images/icons/icon-1.png)' }}
+          style={{ backgroundImage: "url(images/icons/icon-1.png)" }}
         ></div>
         <div
           className="patern-layer-two paroller"
@@ -19,7 +19,7 @@ export default function CourseLessonScreen() {
           data-paroller-factor-lg="-0.20"
           data-paroller-type="foreground"
           data-paroller-direction="vertical"
-          style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
+          style={{ backgroundImage: "url(images/icons/icon-2.png)" }}
         ></div>
         <div className="circle-one"></div>
         <div className="auto-container">
@@ -30,16 +30,16 @@ export default function CourseLessonScreen() {
                 <div className="inner-column">
                   <div className="course-video-box">
                     <div
-                      style={{ padding: '56.25% 0 0 0', position: 'relative' }}
+                      style={{ padding: "56.25% 0 0 0", position: "relative" }}
                     >
                       <iframe
                         src="https://player.vimeo.com/video/243885948?color=ffffff&title=0&byline=0&portrait=0"
                         style={{
-                          position: 'absolute',
+                          position: "absolute",
                           top: 0,
                           left: 0,
-                          width: '100%',
-                          height: '100%'
+                          width: "100%",
+                          height: "100%",
                         }}
                         frameborder="0"
                         allow="autoplay; fullscreen"
@@ -101,7 +101,7 @@ export default function CourseLessonScreen() {
                                 <ul className="student-list">
                                   <li>23,564 Total Students</li>
                                   <li>
-                                    <span className="theme_color">4.5</span>{' '}
+                                    <span className="theme_color">4.5</span>{" "}
                                     <span className="fa fa-star"></span>
                                     <span className="fa fa-star"></span>
                                     <span className="fa fa-star"></span>
@@ -174,7 +174,7 @@ export default function CourseLessonScreen() {
                                       <div className="image">
                                         <img
                                           src="https://via.placeholder.com/278x319"
-                                          alt=""
+                                          alt="ccab"
                                         />
                                       </div>
                                       <h2>Stephane Smith</h2>
@@ -201,7 +201,7 @@ export default function CourseLessonScreen() {
                                         ></a>
                                       </div>
                                       <a href="#" className="more">
-                                        Know More{' '}
+                                        Know More{" "}
                                         <span className="fa fa-angle-right"></span>
                                       </a>
                                     </div>
@@ -213,7 +213,7 @@ export default function CourseLessonScreen() {
                                       <div className="image">
                                         <img
                                           src="https://via.placeholder.com/278x319"
-                                          alt=""
+                                          alt="ccab"
                                         />
                                       </div>
                                       <h2>Marvin Zona</h2>
@@ -240,7 +240,7 @@ export default function CourseLessonScreen() {
                                         ></a>
                                       </div>
                                       <a href="#" className="more">
-                                        Know More{' '}
+                                        Know More{" "}
                                         <span className="fa fa-angle-right"></span>
                                       </a>
                                     </div>
@@ -261,7 +261,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn active">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   UI/ UX Introduction
                                 </div>
                                 <div className="acc-content current">
@@ -329,7 +329,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Color Theory
                                 </div>
                                 <div className="acc-content">
@@ -397,7 +397,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Basic Typography
                                 </div>
                                 <div className="acc-content">
@@ -465,7 +465,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Wireframing & Prototyping
                                 </div>
                                 <div className="acc-content">
@@ -541,7 +541,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn active">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   UI/ UX Introduction
                                 </div>
                                 <div className="acc-content current">
@@ -609,7 +609,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Color Theory
                                 </div>
                                 <div className="acc-content">
@@ -677,7 +677,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Basic Typography
                                 </div>
                                 <div className="acc-content">
@@ -745,7 +745,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Wireframing & Prototyping
                                 </div>
                                 <div className="acc-content">
@@ -821,7 +821,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn active">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   UI/ UX Introduction
                                 </div>
                                 <div className="acc-content current">
@@ -889,7 +889,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Color Theory
                                 </div>
                                 <div className="acc-content">
@@ -957,7 +957,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Basic Typography
                                 </div>
                                 <div className="acc-content">
@@ -1025,7 +1025,7 @@ export default function CourseLessonScreen() {
                                 <div className="acc-btn">
                                   <div className="icon-outer">
                                     <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                                  </div>{' '}
+                                  </div>{" "}
                                   Wireframing & Prototyping
                                 </div>
                                 <div className="acc-content">
@@ -1097,7 +1097,7 @@ export default function CourseLessonScreen() {
                             <div className="cource-review-box">
                               <h4>Stephane Smith</h4>
                               <div className="rating">
-                                <span className="total-rating">4.5</span>{' '}
+                                <span className="total-rating">4.5</span>{" "}
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
@@ -1129,7 +1129,7 @@ export default function CourseLessonScreen() {
                             <div className="cource-review-box">
                               <h4>Anna Sthesia</h4>
                               <div className="rating">
-                                <span className="total-rating">4.5</span>{' '}
+                                <span className="total-rating">4.5</span>{" "}
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
@@ -1161,7 +1161,7 @@ export default function CourseLessonScreen() {
                             <div className="cource-review-box">
                               <h4>Petey Cruiser</h4>
                               <div className="rating">
-                                <span className="total-rating">4.5</span>{' '}
+                                <span className="total-rating">4.5</span>{" "}
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
@@ -1193,7 +1193,7 @@ export default function CourseLessonScreen() {
                             <div className="cource-review-box">
                               <h4>Rick O'Shea</h4>
                               <div className="rating">
-                                <span className="total-rating">4.5</span>{' '}
+                                <span className="total-rating">4.5</span>{" "}
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
                                 <span className="fa fa-star"></span>
@@ -1244,7 +1244,7 @@ export default function CourseLessonScreen() {
                       <div className="acc-btn active">
                         <div className="icon-outer">
                           <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                        </div>{' '}
+                        </div>{" "}
                         UI/ UX Introduction
                       </div>
                       <div className="acc-content current">
@@ -1306,7 +1306,7 @@ export default function CourseLessonScreen() {
                       <div className="acc-btn">
                         <div className="icon-outer">
                           <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                        </div>{' '}
+                        </div>{" "}
                         Color Theory
                       </div>
                       <div className="acc-content">
@@ -1368,7 +1368,7 @@ export default function CourseLessonScreen() {
                       <div className="acc-btn">
                         <div className="icon-outer">
                           <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                        </div>{' '}
+                        </div>{" "}
                         Basic Typography
                       </div>
                       <div className="acc-content">
@@ -1430,7 +1430,7 @@ export default function CourseLessonScreen() {
                       <div className="acc-btn">
                         <div className="icon-outer">
                           <span className="icon icon-plus flaticon-angle-arrow-down"></span>
-                        </div>{' '}
+                        </div>{" "}
                         Wireframing & Prototyping
                       </div>
                       <div className="acc-content">
@@ -1498,7 +1498,7 @@ export default function CourseLessonScreen() {
       {/* Call To Action Section Two */}
       <section
         className="call-to-action-section-two"
-        style={{ backgroundImage: 'url(images/background/3.png)' }}
+        style={{ backgroundImage: "url(images/background/3.png)" }}
       >
         <div className="auto-container">
           <div className="content">
@@ -1525,5 +1525,5 @@ export default function CourseLessonScreen() {
       </section>
       {/* End Call To Action Section Two */}
     </>
-  )
+  );
 }

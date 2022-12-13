@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { getCourseList } from '../../redux/actions/courseAction'
-import Message from '../layout/Message'
-import Loader from '../layout/Loader'
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getCourseList } from "../../redux/actions/courseAction";
+import Message from "../layout/Message";
+import Loader from "../layout/Loader";
 
 export default function CourseListScreen({ match }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const pageNumber = match.params.pageNumber || 1
+  const pageNumber = match.params.pageNumber || 1;
 
   const { courseList, page, pages, loading, error } = useSelector(
     (state) => state.courseList
-  )
+  );
 
   useEffect(() => {
-    dispatch(getCourseList(pageNumber))
-  }, [dispatch, pageNumber])
+    dispatch(getCourseList(pageNumber));
+  }, [dispatch, pageNumber]);
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function CourseListScreen({ match }) {
           data-paroller-factor-lg="0.20"
           data-paroller-type="foreground"
           data-paroller-direction="vertical"
-          style={{ backgroundImage: 'url(images/icons/icon-1.png)' }}
+          style={{ backgroundImage: "url(images/icons/icon-1.png)" }}
         ></div>
         <div
           className="patern-layer-two paroller"
@@ -41,7 +41,7 @@ export default function CourseListScreen({ match }) {
           data-paroller-factor-lg="-0.20"
           data-paroller-type="foreground"
           data-paroller-direction="vertical"
-          style={{ backgroundImage: 'url(images/icons/icon-2.png)' }}
+          style={{ backgroundImage: "url(images/icons/icon-2.png)" }}
         ></div>
         <div className="circle-one"></div>
         <div className="circle-two"></div>
@@ -99,7 +99,7 @@ export default function CourseListScreen({ match }) {
                           <Link to={`/courses/${course._id}`}>
                             <img
                               src="https://via.placeholder.com/270x250"
-                              alt=""
+                              alt="ccab"
                             />
                           </Link>
                         </div>
@@ -131,7 +131,7 @@ export default function CourseListScreen({ match }) {
                     </div>
                   ))
                 ) : (
-                  ''
+                  ""
                 )}
               </div>
             </div>
@@ -264,11 +264,11 @@ export default function CourseListScreen({ match }) {
             <ul className="clearfix">
               <li className="prev">
                 <Link to={`/page/${page > 1 ? page - 1 : 1}`}>
-                  <span className="fa fa-angle-left"></span>{' '}
+                  <span className="fa fa-angle-left"></span>{" "}
                 </Link>
               </li>
               {[...Array(pages).keys()].map((x) => (
-                <li className={x + 1 === page && 'active'}>
+                <li className={x + 1 === page && "active"}>
                   <Link key={x + 1} to={`/page/${x + 1}`}>
                     {x + 1}
                   </Link>
@@ -277,7 +277,7 @@ export default function CourseListScreen({ match }) {
 
               <li className="next">
                 <Link to={`/page/${page === pages ? page : page + 1}`}>
-                  <span className="fa fa-angle-right"></span>{' '}
+                  <span className="fa fa-angle-right"></span>{" "}
                 </Link>
               </li>
             </ul>
@@ -302,7 +302,10 @@ export default function CourseListScreen({ match }) {
                 <div className="inner-box">
                   <div className="image">
                     <Link to="/course/1/details">
-                      <img src="https://via.placeholder.com/270x250" alt="" />
+                      <img
+                        src="https://via.placeholder.com/270x250"
+                        alt="ccab"
+                      />
                     </Link>
                   </div>
                   <div className="content-box">
@@ -331,7 +334,7 @@ export default function CourseListScreen({ match }) {
               </div>
             ))
           ) : (
-            ''
+            ""
           )}
         </div>
       </section>
@@ -340,7 +343,7 @@ export default function CourseListScreen({ match }) {
       {/* Call To Action Section Two */}
       <section
         className="call-to-action-section-two"
-        style={{ backgroundImage: 'url(images/background/3.png)' }}
+        style={{ backgroundImage: "url(images/background/3.png)" }}
       >
         <div className="auto-container">
           <div className="content">
@@ -367,5 +370,5 @@ export default function CourseListScreen({ match }) {
       </section>
       {/* End Call To Action Section Two */}
     </>
-  )
+  );
 }
