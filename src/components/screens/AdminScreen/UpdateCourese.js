@@ -567,13 +567,14 @@ export default function UpdateCourese({ match }) {
 
                     {/* Divider */}
                     <div className="border my-3"></div>
-                    {/* ***http://localhost:5001** */}
+                    {/* ***https://ccab-api.onrender.com** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
-                      alt="ccab"
+                        alt="ccab"
                         src={
-                          "http://localhost:5001/uploads/Bootcamp/" + ImageLable
+                          "https://ccab-api.onrender.com/uploads/Bootcamp/" +
+                          ImageLable
                         }
                       />
                     ) : (

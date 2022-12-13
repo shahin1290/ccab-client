@@ -108,7 +108,7 @@ export default function TaskUploadScreen({ match }) {
 
   const DownloadAssignmentHandler = async (task) => {
     const res = await fetch(
-      "http://localhost:5001/api/tasks/" + task._id + "/download",
+      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/download",
       config
     );
     const blob = await res.blob();

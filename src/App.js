@@ -64,6 +64,7 @@ import UpdateMediaCenter from "./components/screens/AdminScreen/UpdateMediaCente
 import ManageMediaCenterContent from "./components/screens/AdminScreen/ManageMediaCenterContent";
 import Compiler from "./components/layout/Compiler";
 import Sidebar from "./components/layout/Sidebar";
+import StripeCheckout from "./components/screens/StripeCheckout";
 
 function App() {
   const { userDetail } = useSelector((state) => state.userLogin);
@@ -72,11 +73,8 @@ function App() {
     live: false,
   }).init();
 
-  
-
   return (
     <div className="App">
-     
       <SideBarStateProvider>
         <Switch>
           {/* Private Route for Admin  */}
@@ -102,7 +100,6 @@ function App() {
             path="/manage-media-center-content"
             component={ManageMediaCenterContent}
           />
-          
 
           <AdminRoute
             exact
@@ -116,8 +113,6 @@ function App() {
             path="/admin-order/:pageNumber"
             component={MangeOrder}
           ></AdminRoute>
-
-          
 
           <AdminRoute
             exact
@@ -143,18 +138,11 @@ function App() {
             component={UpdateCourese}
           ></AdminRoute>
 
-          
-
           <AdminRoute
             exact
             path="/admin-job-list"
             component={JobList}
           ></AdminRoute>
-
-         
-       
-          
-        
 
           {/* Private Route for Mentor  */}
           <MentorRoute
@@ -241,8 +229,6 @@ function App() {
             component={TaskDetailsScreen}
           ></MentorRoute>
 
-          
-
           {/* Private Route for Students  */}
           <StudentRoute
             exact
@@ -307,25 +293,7 @@ function App() {
           <StudentRoute
             exact
             path="/checkout/:bootcampId"
-            component={Checkout}
-          ></StudentRoute>
-
-          <StudentRoute
-            exact
-            path="/checkout/subscription/:plan"
-            component={Checkout}
-          ></StudentRoute>
-
-          <StudentRoute
-            exact
-            path="/checkout/service/:serviceId"
-            component={Checkout}
-          ></StudentRoute>
-
-          <StudentRoute
-            exact
-            path="/checkout/bill/:requestId"
-            component={Checkout}
+            component={StripeCheckout}
           ></StudentRoute>
 
           <StudentRoute
@@ -351,7 +319,6 @@ function App() {
             path="/compile"
             component={Compiler}
           ></StudentRoute>
-         
 
           <Route component={AuthRoute} />
         </Switch>

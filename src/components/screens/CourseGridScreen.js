@@ -183,7 +183,7 @@ export default function CourseGridScreen({ match }) {
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            "http://localhost:5001/uploads/Bootcamp/" +
+                                            "https://ccab-api.onrender.com/uploads/Bootcamp/" +
                                             course.img_path
                                           }
                                           alt="ccab"
@@ -334,7 +334,7 @@ export default function CourseGridScreen({ match }) {
                         <Link to="/course/1/details">
                           <img
                             src={
-                              "http://localhost:5001/uploads/Bootcamp/" +
+                              "https://ccab-api.onrender.com/uploads/Bootcamp/" +
                               filterSubscriptionCourse(courseList)[0].img_path
                             }
                             alt="ccab"

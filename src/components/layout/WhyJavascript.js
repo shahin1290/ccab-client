@@ -13,7 +13,7 @@ export default function WhyJavascript({ match }) {
             <hr className='block-seperator mb-3' />
           </div>
           <main>
-            <ol class='gradient-list'>
+            <ol className='gradient-list'>
               <li>
                 JavaScript has been the most popular language in the world for 9
                 years in a row, according to StackOverflow.com, the largest

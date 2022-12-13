@@ -61,7 +61,7 @@ const UserName = styled.span`
 
 const items = [
   <div
-    class='card  bg-white rounded d-flex flex-column justify-content-between'
+    className='card  bg-white rounded d-flex flex-column justify-content-between'
     style={{ height: "360px" }}
   >
     <CardContainer>
@@ -84,7 +84,7 @@ const items = [
   </div>,
 
   <div
-    class='card  bg-white rounded flex-column justify-content-between'
+    className='card  bg-white rounded flex-column justify-content-between'
     style={{ height: "360px" }}
   >
     <CardContainer>
@@ -109,7 +109,7 @@ const items = [
   </div>,
 
   <div
-    class='card  bg-white rounded flex-column justify-content-between'
+    className='card  bg-white rounded flex-column justify-content-between'
     style={{ height: "360px" }}
   >
     <CardContainer>
@@ -132,7 +132,7 @@ const items = [
   </div>,
 
   <div
-    class='card  bg-white rounded flex-column justify-content-between'
+    className='card  bg-white rounded flex-column justify-content-between'
     style={{ height: "360px" }}
   >
     <CardContainer>
@@ -157,7 +157,7 @@ const items = [
   </div>,
 
   <div
-    class='card  bg-white rounded flex-column justify-content-between'
+    className='card  bg-white rounded flex-column justify-content-between'
     style={{ height: "360px" }}
   >
     <CardContainer>
@@ -182,7 +182,7 @@ const items = [
   </div>,
 
   <div
-    class='card  bg-white rounded flex-column justify-content-between'
+    className='card  bg-white rounded flex-column justify-content-between'
     style={{ height: "360px" }}
   >
     <CardContainer>

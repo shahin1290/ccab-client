@@ -1902,7 +1902,6 @@ ol.gradient-list > li + li {
   font-weight: normal;
 }
 
-
 .student-list .Details {
   color: white;
   text-align: center;
@@ -1951,4 +1950,45 @@ ol.gradient-list > li + li {
   .student-list .container .front {
     margin-top: 50px;
   }
+}
+
+/*  stripe */
+.checkout {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+.checkout h4 {
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.checkout button {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.checkout .stripe-card {
+  margin: 1rem 0;
+}
+
+.checkout .card-number {
+  margin-top: 2rem;
+}
+
+.checkout .card-element {
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 10px;
+  width: 55%;
+  margin: 0 auto;
+}
+
+.checkout .error {
+  border: 1px solid red;
+}
+
+.checkout .error-message {
+  color: red;
+  font-size: 1.5rem;
 }

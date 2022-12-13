@@ -107,7 +107,7 @@ export default function HomeScreen({ match }) {
           animation='rotate'
           visible={showModal.visible}
           onClose={() => setShowModal({ visible: false })}
-          width='900'
+          width={900}
         >
           <ContactForm />
         </Rodal>

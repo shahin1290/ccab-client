@@ -34,7 +34,7 @@ export default function JobList() {
   const DownloadCVHandler = async (job) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "http://localhost:5001/api/job/" + job._id + "/download",
+      "https://ccab-api.onrender.com/api/job/" + job._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -44,7 +44,7 @@ export default function JobList() {
   const DownloadDocHandler = async (job) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "http://localhost:5001/api/job/" + job._id + "/download/others",
+      "https://ccab-api.onrender.com/api/job/" + job._id + "/download/others",
       config
     );
     const blob = await res.blob();

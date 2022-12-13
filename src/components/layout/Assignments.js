@@ -95,7 +95,7 @@ export default function Assignments() {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "http://localhost:5001/api/tasks/" + task._id + "/download",
+      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -183,7 +183,8 @@ export default function Assignments() {
                               <Link
                                 onClick={() => DownloadAssignmentHandler(task)}
                               >
-                                <i className="fas fa-file-download"></i> DOWNLOAD
+                                <i className="fas fa-file-download"></i>{" "}
+                                DOWNLOAD
                               </Link>
                             </td>
 

@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Tabs, Tab, Table, Card } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Tabs, Tab } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyTaskList } from "../../redux/actions/taskAction";
-import {
-  userProfileUpdate,
-  getProfile,
-  getUserDetails,
-} from "../../redux/actions/userAction";
+import { getProfile } from "../../redux/actions/userAction";
 import Message from "../layout/Message";
 import Assignments from "../layout/Assignments";
 import Quizzes from "../layout/Quizzes";
@@ -31,29 +27,6 @@ export default function ProfileScreen() {
     loading: bootcampLoading,
     error: bootcampError,
   } = useSelector((state) => state.courseList);
-
-  const {
-    serviceList,
-    loading: serviceLoading,
-    error: serviceError,
-  } = useSelector((state) => state.serviceList);
-
-  //Get Acc's Bootcamps
-
-  const filterServiceList = () => {
-    if (userDetail.user_type === "InstructorUser") {
-      const filteredServices = serviceList.filter(
-        (service) =>
-          service.price === 0 ||
-          service.instructors.some(
-            (instructor) =>
-              instructor._id === userDetail._id || service.price === 0
-          )
-      );
-
-      return filteredServices.length > 0 ? filteredServices : [];
-    }
-  };
 
   //Get Student's Bootcamps
 
@@ -123,8 +96,6 @@ export default function ProfileScreen() {
       dispatch(getMyTaskList());
       dispatch(getMyQuizList());
     }
-
-   
   }, [dispatch, ValidLoading, updateSuccess, TokenSuccess, answerListSuccess]);
 
   useEffect(() => {
@@ -141,10 +112,10 @@ export default function ProfileScreen() {
   return (
     <>
       <div
-        className='instructor-page-section'
+        className="instructor-page-section"
         style={{ backgroundColor: "#fff" }}
       >
-        <div className='auto-container'>
+        <div className="auto-container">
           {userLoading ? (
             <MainLoader />
           ) : error ? (
@@ -152,119 +123,121 @@ export default function ProfileScreen() {
           ) : (
             user.name && (
               <div>
-                <div className='upper-content mb-5'>
-                  <div className='row clearfix'>
+                <div className="upper-content mb-5">
+                  <div className="row clearfix">
                     {/* Left Column */}
-                    <div className='left-column col-lg-9 col-md-12 col-sm-12'>
+                    <div className="left-column col-lg-9 col-md-12 col-sm-12">
                       {/* Content */}
-                      <div className='content'>
+                      <div className="content">
                         {/* Author Image */}
-                        <div className='author-image'>
+                        <div className="author-image">
                           <img
                             src={
                               user.avatar
                                 ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
-                            alt='avatar'
+                            alt="avatar"
                           />
                         </div>
-                        <div className='sub-title pt-3 pl-3'>
+                        <div className="sub-title pt-3 pl-3">
                           {userDetail.name}
                         </div>
-                        <div className='designation pl-3'>
+                        <div className="designation pl-3">
                           {userDetail.user_type}
                         </div>
 
                         {/* Fact Counter */}
-                        {userDetail && userDetail.user_type === "StudentUser" && (
-                          <div className='fact-counter2'>
-                            <div className='row clearfix'>
-                              {/* Column */}
-                              <div className='column counter-column col-lg-3 col-md-6 col-sm-12 '>
-                                <div className='inner'>
-                                  <div className='sub-title'>Courses</div>
-                                  <div className='sub-title'>
-                                    <CountUp
-                                      start={-2}
-                                      end={
-                                        courseList &&
-                                        courseList.length &&
-                                        filterCourseList() &&
-                                        filterCourseList().length
-                                      }
-                                      duration={2.75}
-                                      separator=' '
-                                      decimal=','
-                                      suffix=''
-                                    />
+                        {userDetail &&
+                          userDetail.user_type === "StudentUser" && (
+                            <div className="fact-counter2">
+                              <div className="row clearfix">
+                                {/* Column */}
+                                <div className="column counter-column col-lg-3 col-md-6 col-sm-12 ">
+                                  <div className="inner">
+                                    <div className="sub-title">Courses</div>
+                                    <div className="sub-title">
+                                      <CountUp
+                                        start={-2}
+                                        end={
+                                          courseList &&
+                                          courseList.length &&
+                                          filterCourseList() &&
+                                          filterCourseList().length
+                                        }
+                                        duration={2.75}
+                                        separator=" "
+                                        decimal=","
+                                        suffix=""
+                                      />
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              {/* Column */}
-                              <div className='column counter-column col-lg-3 col-md-6 col-sm-12'>
-                                <div className='inner'>
-                                  <div className='sub-title'>Assignments</div>
-                                  <div className='sub-title'>
-                                    <CountUp
-                                      start={-2}
-                                      end={myTasks.length}
-                                      duration={2.75}
-                                      separator=' '
-                                      decimal=','
-                                      suffix=''
-                                    />
+                                {/* Column */}
+                                <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
+                                  <div className="inner">
+                                    <div className="sub-title">Assignments</div>
+                                    <div className="sub-title">
+                                      <CountUp
+                                        start={-2}
+                                        end={myTasks.length}
+                                        duration={2.75}
+                                        separator=" "
+                                        decimal=","
+                                        suffix=""
+                                      />
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              {/* Column */}
-                              <div className='column counter-column col-lg-3 col-md-6 col-sm-12'>
-                                <div className='inner'>
-                                  <div className='sub-title'>Quizzes</div>
-                                  <div className='sub-title'>
-                                    <CountUp
-                                      start={-2}
-                                      end={myQuizList.length}
-                                      duration={2.75}
-                                      separator=' '
-                                      decimal=','
-                                      suffix=''
-                                    />
+                                {/* Column */}
+                                <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
+                                  <div className="inner">
+                                    <div className="sub-title">Quizzes</div>
+                                    <div className="sub-title">
+                                      <CountUp
+                                        start={-2}
+                                        end={myQuizList.length}
+                                        duration={2.75}
+                                        separator=" "
+                                        decimal=","
+                                        suffix=""
+                                      />
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              {/* Column */}
-                              <div className='column counter-column col-lg-3 col-md-6 col-sm-12'>
-                                <div className='inner'>
-                                  <div className='sub-title'>Answers</div>
-                                  <div className='sub-title'>
-                                    <CountUp
-                                      start={-2}
-                                      end={
-                                        myanswers.length + myQuizAnswers.length
-                                      }
-                                      duration={2.75}
-                                      separator=' '
-                                      decimal=','
-                                      suffix=''
-                                    />
+                                {/* Column */}
+                                <div className="column counter-column col-lg-3 col-md-6 col-sm-12">
+                                  <div className="inner">
+                                    <div className="sub-title">Answers</div>
+                                    <div className="sub-title">
+                                      <CountUp
+                                        start={-2}
+                                        end={
+                                          myanswers.length +
+                                          myQuizAnswers.length
+                                        }
+                                        duration={2.75}
+                                        separator=" "
+                                        decimal=","
+                                        suffix=""
+                                      />
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          )}
                       </div>
                     </div>
                     {/* Right Column */}
-                    <div className='right-column col-lg-3 col-md-12 col-sm-12'>
-                      <div className='buttons-box'>
+                    <div className="right-column col-lg-3 col-md-12 col-sm-12">
+                      <div className="buttons-box">
                         <Link
-                          to='/edit-profile-student'
-                          className='theme-btn btn-style-one'
+                          to="/edit-profile-student"
+                          className="theme-btn btn-style-one"
                         >
-                          <span className='txt'>
-                            <i className='flaticon-edit' />
+                          <span className="txt">
+                            <i className="flaticon-edit" />
                             Edit{" "}
                           </span>
                         </Link>
@@ -274,7 +247,7 @@ export default function ProfileScreen() {
                 </div>
 
                 {/* Lower Content */}
-                <div className='lower-content'>
+                <div className="lower-content">
                   {/* Instructor Info Tabs*/}
                   <Tabs
                     defaultActiveKey={
@@ -284,19 +257,19 @@ export default function ProfileScreen() {
                         ? "Personal Info"
                         : "Courses"
                     }
-                    id='uncontrolled-tab-example'
-                    className='bill'
+                    id="uncontrolled-tab-example"
+                    className="bill"
                   >
                     {userDetail &&
                       userDetail.user_type !== "InstructorUser" &&
                       userDetail &&
                       userDetail.user_type !== "AccountantUser" && (
-                        <Tab eventKey='Courses' title='Courses'>
-                          <div className='title pt-5 pb-3'>My Courses</div>
+                        <Tab eventKey="Courses" title="Courses">
+                          <div className="title pt-5 pb-3">My Courses</div>
 
-                          <div className='single-item-carousel owl-theme'>
-                            <div className='slide'>
-                              <div className='row clearfix'>
+                          <div className="single-item-carousel owl-theme">
+                            <div className="slide">
+                              <div className="row clearfix">
                                 {/* Course Block */}
                                 {bootcampLoading ? (
                                   <Loader />
@@ -307,36 +280,36 @@ export default function ProfileScreen() {
                                   filterCourseList().map((course) => {
                                     console.log("course", course);
                                     return (
-                                      <div className='shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4'>
+                                      <div className="shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4">
                                         <Link
-                                          className='inner-box'
+                                          className="inner-box"
                                           to={`/course-content/${course._id}`}
                                         >
-                                          <div className='image'>
+                                          <div className="image">
                                             <img
                                               src={
                                                 "https://server.ccab.tech/uploads/Bootcamp/" +
                                                 course.img_path
                                               }
-                                              alt='bootcamp'
+                                              alt="bootcamp"
                                             />
-                                            <div className='time text-light pl-1 py-1'>
+                                            <div className="time text-light pl-1 py-1">
                                               {course.weeks * 5 * 2} hours
                                             </div>
                                           </div>
-                                          <div className='lower-content'>
-                                            <div className='my-2 sub-title'>
+                                          <div className="lower-content">
+                                            <div className="my-2 sub-title">
                                               {course.name}
                                             </div>
-                                            <div className='sub-text'>
+                                            <div className="sub-text">
                                               <span
-                                                className='d-inline-block text-truncate'
+                                                className="d-inline-block text-truncate"
                                                 style={{ maxWidth: "240px" }}
                                               >
                                                 {course.description}
                                               </span>
                                             </div>
-                                            <div className='clearfix'>
+                                            <div className="clearfix">
                                               {/*  <div className='pull-left'>
                                                 <div className='author'>
                                                   By:{" "}
@@ -345,8 +318,8 @@ export default function ProfileScreen() {
                                                   </span>
                                                 </div>
                                               </div> */}
-                                              <div className='pull-right'>
-                                                <div className='price'>
+                                              <div className="pull-right">
+                                                <div className="price">
                                                   ${course.price}
                                                 </div>
                                               </div>
@@ -357,7 +330,7 @@ export default function ProfileScreen() {
                                     );
                                   })
                                 ) : (
-                                  <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
+                                  <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                                     You Don't have Any Courses yet !
                                   </p>
                                 )}
@@ -367,105 +340,36 @@ export default function ProfileScreen() {
                         </Tab>
                       )}
 
-                    {userDetail && userDetail.user_type === "InstructorUser" && (
-                      <Tab eventKey='Services' title='Services'>
-                        <div className='title pt-5 pb-3'>My Services</div>
-
-                        <div className='single-item-carousel owl-carousel owl-theme'>
-                          <div className='slide'>
-                            <div className='row clearfix'>
-                              {/* Course Block */}
-                              {serviceLoading ? (
-                                <Loader />
-                              ) : serviceError ? (
-                                <Message>{serviceError}</Message>
-                              ) : filterServiceList() &&
-                                filterServiceList().length ? (
-                                filterServiceList().map((service) => {
-                                  return (
-                                    <div className='shadow-sm p-3 mb-5 bg-white rounded course-block col-lg-3 col-md-4 col-sm-12 mr-4'>
-                                      <Link
-                                        className='inner-box'
-                                        to={`/reports`}
-                                      >
-                                        <div className='image'>
-                                          <img
-                                            src={
-                                              "https://server.ccab.tech/uploads/Service/" +
-                                              service.img_path
-                                            }
-                                            alt='service'
-                                          />
-                                        </div>
-                                        <div className='lower-content'>
-                                          <div className='my-2 sub-title'>
-                                            {service.name}
-                                          </div>
-                                          <div className='sub-text'>
-                                            <span
-                                              className='d-inline-block text-truncate'
-                                              style={{ maxWidth: "240px" }}
-                                            >
-                                              {service.description}
-                                            </span>
-                                          </div>
-                                          <div className='clearfix'>
-                                            <div className='pull-left'>
-                                              <div className='students'>
-                                                {service.instructors.length}{" "}
-                                                Instructor(s)
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </Link>
-                                    </div>
-                                  );
-                                })
-                              ) : (
-                                <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
-                                  You Don't have Any Services yet !
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </Tab>
-                    )}
-
-                 
-
                     {userDetail && userDetail.user_type === "StudentUser" ? (
-                      <Tab eventKey='Assignments' title='Assignments'>
+                      <Tab eventKey="Assignments" title="Assignments">
                         <Assignments />
                       </Tab>
                     ) : null}
                     {userDetail && userDetail.user_type === "StudentUser" ? (
-                      <Tab eventKey='Quizzes' title='Quizzes'>
+                      <Tab eventKey="Quizzes" title="Quizzes">
                         <Quizzes />
                       </Tab>
                     ) : null}
 
-                
-                    <Tab eventKey='Personal Info' title='Personal Info'>
-                      <div className='content mt-4'>
-                        <div className='card p-5 '>
-                          <div className='sub-title mb-3'>
+                    <Tab eventKey="Personal Info" title="Personal Info">
+                      <div className="content mt-4">
+                        <div className="card p-5 ">
+                          <div className="sub-title mb-3">
                             {" "}
-                            <i className='fas fa-user-tie text-danger personalinfoIcon'></i>{" "}
-                            <span className='  px-2 py-1 ml-2'>
+                            <i className="fas fa-user-tie text-danger personalinfoIcon"></i>{" "}
+                            <span className="  px-2 py-1 ml-2">
                               {user.name}
                             </span>{" "}
                           </div>
-                          <div className='sub-title mb-3'>
-                            <i className='fas fa-at text-danger personalinfoIcon'></i>{" "}
-                            <span className='   px-2 py-1 ml-2'>
+                          <div className="sub-title mb-3">
+                            <i className="fas fa-at text-danger personalinfoIcon"></i>{" "}
+                            <span className="   px-2 py-1 ml-2">
                               {user.email}
                             </span>
                           </div>
-                          <div className='sub-title mb-3'>
-                            <i className='fas fa-mobile-alt text-danger personalinfoIcon'></i>{" "}
-                            <span className='   px-2 py-1 ml-2'>
+                          <div className="sub-title mb-3">
+                            <i className="fas fa-mobile-alt text-danger personalinfoIcon"></i>{" "}
+                            <span className="   px-2 py-1 ml-2">
                               {user.phone}
                             </span>
                           </div>
@@ -473,12 +377,10 @@ export default function ProfileScreen() {
                       </div>
                     </Tab>
                     {userDetail && userDetail.user_type === "StudentUser" ? (
-                      <Tab eventKey='Purchases' title='Purchases'>
+                      <Tab eventKey="Purchases" title="Purchases">
                         <Purchases />
                       </Tab>
                     ) : null}
-
-                    
                   </Tabs>
                 </div>
               </div>

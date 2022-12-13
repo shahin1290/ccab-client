@@ -32,8 +32,6 @@ export default function Header() {
   /*******************Functions *************/
   const categoryArray = [...new Set(courseList.map((item) => item.category))];
 
- 
-
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -279,7 +277,7 @@ export default function Header() {
                             <img
                               src={
                                 user.avatar
-                                  ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
+                                  ? `https://ccab-api.onrender.com/uploads/Avatar/${user.avatar}`
                                   : "/images/resource/avatar.svg"
                               }
                               alt="avatar"

@@ -104,7 +104,6 @@ export default function AssignmentDetail({ match }) {
 
       dispatch(createAnswer(form_data, bootcampId, taskDetail.task._id));
 
-     
       //clear the fields
       setFile({});
       setAssignemntLink("");
@@ -126,7 +125,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "http://localhost:5001/api/tasks/" + task._id + "/download",
+      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/download",
       config
     );
 

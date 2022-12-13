@@ -39,13 +39,13 @@ const ContactSection = () => {
                   Talk to our advisor to craft the ideal course plan
                 </span>
 
-                <div class='inner mt-3 ml-4'>
+                <div className='inner mt-3 ml-4'>
                   <a
-                    class='button fb'
+                    className='button fb'
                     onClick={() => setShowModal({ visible: true })}
                   >
                     <div className='d-flex align-items-center w-100 justify-content-center pb-1 pl-3 overflow-auto' style={{height:'40px'}}>
-                      <i class='far fa-user-circle fa-4x advisor-icon'></i>
+                      <i className='far fa-user-circle fa-4x advisor-icon'></i>
                       <span className='fs-2  '>Ask an advisor</span>
                     </div>
                   </a>
@@ -75,13 +75,13 @@ const ContactSection = () => {
                   Talk to our advisor to craft the ideal course plan
                 </span>
 
-                <div class='inner mt-3 ml-4'>
+                <div className='inner mt-3 ml-4'>
                   <a
-                    class='button fb'
+                    className='button fb'
                     onClick={() => setShowModal({ visible: true })}
                   >
                     <span className='d-flex'>
-                      <i class='far fa-user-circle fa-4x advisor-icon'></i>
+                      <i className='far fa-user-circle fa-4x advisor-icon'></i>
                       <span className='px-1 pt-2 pl-5'>Ask an advisor</span>
                     </span>
                   </a>
@@ -96,7 +96,7 @@ const ContactSection = () => {
         animation='rotate'
         visible={showModal.visible}
         onClose={() => setShowModal({ visible: false })}
-        width='900'
+        width={900}
       >
         <ContactForm />
       </Rodal>

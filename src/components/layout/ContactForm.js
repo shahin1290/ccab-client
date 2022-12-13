@@ -35,7 +35,7 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5001/contact", {
+      const res = await axios.post("https://ccab-api.onrender.com/contact", {
         name,
         email,
         phoneNumber,
@@ -117,10 +117,8 @@ const ContactForm = () => {
                         setCode(e.target.value);
                       }}
                     >
-                      <option value="" >
-                        select Country Code
-                      </option>
-                      <option data-countrycode="GB" value="44" >
+                      <option value="">select Country Code</option>
+                      <option data-countrycode="GB" value="44">
                         UK (+44)
                       </option>
                       <option data-countrycode="US" value="1">
@@ -790,9 +788,7 @@ const ContactForm = () => {
                         setCategory(e.target.value);
                       }}
                     >
-                      <option value="" >
-                        select a categogy
-                      </option>
+                      <option value="">select a categogy</option>
                       <option value="Course Fees/Finance Options">
                         Course Fees/Finance Options
                       </option>
@@ -820,9 +816,7 @@ const ContactForm = () => {
                         setIndustry(e.target.value);
                       }}
                     >
-                      <option value="" >
-                        select an industry
-                      </option>
+                      <option value="">select an industry</option>
                       <option value="Accounting">Accounting</option>
                       <option value="Airlines/Aviation">
                         Airlines/Aviation

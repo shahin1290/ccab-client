@@ -104,7 +104,7 @@ export default function DayContent({ bootcampId, setOpen }) {
   //get task list for mentor_route
   const { quizzes } = useSelector((state) => state.quizList);
 
-  const { dayVideoList } = useSelector((state) => state.dayVideoList);
+  const days = weekList.length > 0 && weekList.map((week) => week.days);
 
   /****************function***************** */
 
@@ -174,8 +174,6 @@ export default function DayContent({ bootcampId, setOpen }) {
   };
 
   const chunkArray = () => {
-    const days = weekList.length > 0 && weekList.map((week) => week.days);
-
     const merged = days.length && days.flat(1);
 
     const filteredDays = daysBasedOnUser(merged);
@@ -200,62 +198,6 @@ export default function DayContent({ bootcampId, setOpen }) {
     }
 
     return tempArray;
-  };
-
-  //check if the daily video is watched
-  const watched = (dayId) => {
-  
-  };
-
-  const isQuizCompleted = (dayId) => {
-    const quizzes =
-      myQuizList.length && myQuizList.filter((quiz) => quiz.day === dayId);
-
-    if (!quizzes.length) return true;
-
-    const found =
-      quizzes.length &&
-      myQuizAnswers.length &&
-      myQuizAnswers.find((ans) => ans.quiz._id === quizzes[0]._id);
-
-    if (found) {
-      return found.status !== "Not Sent";
-    }
-  };
-
-  const isTaskCompleted = (dayId) => {
-    const tasks =
-      myTasks.length && myTasks.filter((task) => task.day === dayId);
-
-    if (!tasks.length) return true;
-
-    const found =
-      tasks.length &&
-      myanswers.length &&
-      myanswers.find((ans) => ans.task._id === tasks[0]._id);
-
-    if (found) {
-      return found.status !== "Not Sent";
-    }
-  };
-
-  const showDay = (dayId) => {
-    const videoIds =
-      dayVideoList &&
-      dayVideoList.length > 0 &&
-      dayVideoList.map((dayVideo) => dayVideo._id);
-
-    const previousDayVideo =
-      videoIds.length && videoIds[videoIds.indexOf(dayId) - 1];
-
-    const firstVideo = videoIds.length && videoIds[0] === dayId;
-
-    return (
-      firstVideo ||
-      (watched(previousDayVideo) &&
-        isTaskCompleted(previousDayVideo) &&
-        isQuizCompleted(previousDayVideo))
-    );
   };
 
   /****************useEffect***************** */
@@ -286,7 +228,7 @@ export default function DayContent({ bootcampId, setOpen }) {
         <Loader />
       ) : (
         weekList.length &&
-        chunkArray().map((week, index) => (
+        days.map((week, index) => (
           <div key={week._id} className="accordion block">
             <div
               as={Card.Header}
@@ -298,67 +240,7 @@ export default function DayContent({ bootcampId, setOpen }) {
             <div eventKey={`${index}`}>
               {week.map((day, index) => (
                 <div key={day._id} className="course-content">
-                  {/* {!showDay(day._id) ? (
-                    <>
-                      {lockedMessage ? (
-                        <div
-                          className='lock-layer'
-                          style={{ backgroundColor: "#eeeeee" }}
-                        >
-                          <div className='at-container'>
-                            <p className=' fs-1 p-2 at-item'>
-                              complete the previous lecture and assignment to
-                              unlock
-                            </p>
-                          </div>
-
-                          <ProgressProvider valueStart={10} valueEnd={100}>
-                            {(value) => (
-                              <CircularProgressbar
-                                value={value}
-                                styles={
-                                  ({ width: "50px" },
-                                  buildStyles({
-                                    // How long animation takes to go from one percentage to another, in seconds
-                                    pathTransitionDuration: 4.5,
-                                  }))
-                                }
-                              />
-                            )}
-                          </ProgressProvider>
-                        </div>
-                      ) : (
-                        <div
-                          className='lock-layer'
-                          style={{ backgroundColor: "#eeeeee88" }}
-                        >
-                          <i
-                            className='fas fa-lock'
-                            style={{ marginTop: "20px" }}
-                            onClick={() => {
-                              setLockedMessage(true);
-                              setTimeout(() => {
-                                setLockedMessage(false);
-                              }, 3500);
-                            }}
-                          ></i>
-                        </div>
-                      )}
-                    </>
-                  ) : null} */}
-
                   <div className=" d-flex p-2 mt-2 mb-2">
-                    <div
-                      className="pr-4 text-warning "
-                      style={{ fontSize: "25px" }}
-                    >
-                      {watched(day._id) ? (
-                        <i class="fas fa-check-circle"></i>
-                      ) : (
-                        <i class="far fa-circle"></i>
-                      )}
-                    </div>
-
                     <div
                       onClick={() => {
                         setShow(day._id);
@@ -388,9 +270,9 @@ export default function DayContent({ bootcampId, setOpen }) {
                         >
                           {quizStatus(quiz._id) &&
                           quizStatus(quiz._id).status === "Not Sent" ? (
-                            <i class="far fa-circle"></i>
+                            <i className="far fa-circle"></i>
                           ) : (
-                            <i class="fas fa-check-circle"></i>
+                            <i className="fas fa-check-circle"></i>
                           )}
                         </div>
                         <div key={quiz._id}>
@@ -435,9 +317,9 @@ export default function DayContent({ bootcampId, setOpen }) {
                         >
                           {taskStatus(task._id) &&
                           taskStatus(task._id).status === "Not Sent" ? (
-                            <i class="far fa-circle"></i>
+                            <i className="far fa-circle"></i>
                           ) : (
-                            <i class="fas fa-check-circle"></i>
+                            <i className="fas fa-check-circle"></i>
                           )}
                         </div>
                         <div key={task._id}>

@@ -220,7 +220,7 @@ export default function CourseDetailScreen({ match }) {
                           className="intro-video"
                           style={{
                             backgroundImage:
-                              "url(http://localhost:5001/uploads/Bootcamp/" +
+                              "url(https://ccab-api.onrender.com/uploads/Bootcamp/" +
                               course.img_path +
                               ")",
                           }}

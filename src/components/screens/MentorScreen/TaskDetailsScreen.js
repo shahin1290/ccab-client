@@ -78,7 +78,7 @@ export default function TaskDetailsScreen({ match }) {
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "http://localhost:5001/api/tasks/" + task.task._id + "/download",
+      "https://ccab-api.onrender.com/api/tasks/" + task.task._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -88,7 +88,7 @@ export default function TaskDetailsScreen({ match }) {
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
     const res = await fetch(
-      "http://localhost:5001/api/answers/" + answer._id + "/download",
+      "https://ccab-api.onrender.com/api/answers/" + answer._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -160,8 +160,6 @@ Failed
       dispatch(
         updateAnswerStatus(bootcampId, id, answer._id, { status: value })
       );
-
-      
 
       toast.info(answer.user.name + " " + textMessage, {
         position: toast.POSITION.BOTTOM_RIGHT,
