@@ -76,7 +76,7 @@ const Form = () => {
     showThanksMessage();
     // const config={headers:{'Content-Type' : 'application/json'}}
     // try {
-    //   const res = await axios.post("https://server.ccab.tech/contact", {
+    //   const res = await axios.post("http://localhost:5001/contact", {
     //       ...FormData
     //   },config);
 
@@ -142,16 +142,16 @@ const Form = () => {
 
   return (
     <>
-      <div className='text-center'>
-        <p className='text-muted mb-2 f-13 text-uppercase'>
+      <div className="text-center">
+        <p className="text-muted mb-2 f-13 text-uppercase">
           Welcome To Codify College
         </p>
-        <h5 className='form-dark mb-4'>Get 30 Days Free Trial</h5>
+        <h5 className="form-dark mb-4">Get 30 Days Free Trial</h5>
       </div>
       {/* form */}
       {err ? (
         <p
-          className='text-danger pl-3 m-0 error-attention'
+          className="text-danger pl-3 m-0 error-attention"
           style={{ fontWeight: "bold" }}
         >
           {" "}
@@ -159,60 +159,60 @@ const Form = () => {
         </p>
       ) : null}
       {!Hide ? (
-        <div className=' px-4 py-2 landing-thnaks-box'>
+        <div className=" px-4 py-2 landing-thnaks-box">
           <h3>Thank You Our Manger will contact you soon!</h3>
         </div>
       ) : (
         <form
-          className='landing-form  w-100 needs-validation p-3'
+          className="landing-form  w-100 needs-validation p-3"
           onSubmit={_handelSubmit}
         >
           <>
-            <div className='form-row'>
+            <div className="form-row">
               <div
-                className='form-group  col-12'
+                className="form-group  col-12"
                 style={{ position: "relative" }}
               >
-                {err ? <p className='text-danger'>{err}</p> : null}
+                {err ? <p className="text-danger">{err}</p> : null}
               </div>
 
               <div
-                className='form-group mb-4 col-12'
+                className="form-group mb-4 col-12"
                 style={{ position: "relative" }}
               >
                 <input
-                  type='text'
-                  className='form-control'
-                  id='Name'
-                  placeholder='Your Name*'
+                  type="text"
+                  className="form-control"
+                  id="Name"
+                  placeholder="Your Name*"
                   required
                   value={FormData.Name}
                   onChange={_handelFieldChange}
                 />
 
                 {ValidationError.NameErr ? (
-                  <p className='text-danger'>Enter Your Name Please!</p>
+                  <p className="text-danger">Enter Your Name Please!</p>
                 ) : null}
               </div>
 
-              <div className='form-group mb-4 col-12 '>
+              <div className="form-group mb-4 col-12 ">
                 <input
-                  type='email'
-                  className='form-control'
-                  id='exampleFormControlInput2'
-                  placeholder='Your email*'
+                  type="email"
+                  className="form-control"
+                  id="exampleFormControlInput2"
+                  placeholder="Your email*"
                   required
                   value={FormData.Email}
                   onChange={_handelEmailChange}
                 />
 
                 {ValidationError.EmailErr ? (
-                  <p className='text-danger'>Enter A Valid Email Please!</p>
+                  <p className="text-danger">Enter A Valid Email Please!</p>
                 ) : null}
               </div>
             </div>
-            <div className='form-row'>
-              <div className='form-group mb-4 col-12 sm-12'>
+            <div className="form-row">
+              <div className="form-group mb-4 col-12 sm-12">
                 <PhoneInput
                   international
                   countryCallingCodeEditable={false}
@@ -221,25 +221,25 @@ const Form = () => {
                   onChange={_handelPhoneChange}
                 />
                 {ValidationError.PhoneErr ? (
-                  <p className='text-danger'>
+                  <p className="text-danger">
                     Enter A Valid Phone Number Please!
                   </p>
                 ) : null}
               </div>
             </div>
 
-            <div className='form-row'>
-              <div className='form-group mb-4 col-12 sm-12'>
+            <div className="form-row">
+              <div className="form-group mb-4 col-12 sm-12">
                 <button
-                  type='submit'
+                  type="submit"
                   disabled={!showButton}
-                  className='btn btn-warning btn-block btn-sm formButton py-1'
+                  className="btn btn-warning btn-block btn-sm formButton py-1"
                 >
                   {loading ? (
                     <Loader />
                   ) : (
                     <>
-                      Send <i className='mdi mdi-telegram ml-2' />
+                      Send <i className="mdi mdi-telegram ml-2" />
                     </>
                   )}
                 </button>

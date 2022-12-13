@@ -107,20 +107,20 @@ export default function CourseGridScreen({ match }) {
 
   return (
     <>
-      <section className='page-title'>
-        <div className='auto-container'>
-          <div className='search-boxed'>
-            <div className='search-box'>
-              <div className='form-group'>
+      <section className="page-title">
+        <div className="auto-container">
+          <div className="search-boxed">
+            <div className="search-box">
+              <div className="form-group">
                 <input
-                  type='search'
-                  name='search-field'
-                  placeholder='Search with course name'
+                  type="search"
+                  name="search-field"
+                  placeholder="Search with course name"
                   required
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <button type='submit'>
-                  <span className='icon fa fa-search'></span>
+                <button type="submit">
+                  <span className="icon fa fa-search"></span>
                 </button>
               </div>
             </div>
@@ -128,30 +128,30 @@ export default function CourseGridScreen({ match }) {
         </div>
       </section>
       {/*Sidebar Page Container */}
-      <div className='sidebar-page-container'>
+      <div className="sidebar-page-container">
         <div
-          className='patern-layer-one paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-one paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-1.png)" }}
         ></div>
         <div
-          className='patern-layer-two paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='-0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-two paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="-0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-2.png)" }}
         ></div>
-        <div className='circle-one'></div>
-        <div className='circle-two'></div>
-        <div className='auto-container'>
-          <div className='row clearfix'>
+        <div className="circle-one"></div>
+        <div className="circle-two"></div>
+        <div className="auto-container">
+          <div className="row clearfix">
             {/* Content Side  */}
-            <div className='content-side col-lg-12 col-md-12 col-sm-12'>
-              <div className='our-courses'>
+            <div className="content-side col-lg-12 col-md-12 col-sm-12">
+              <div className="our-courses">
                 {loading ? (
                   <Loader />
                 ) : error ? (
@@ -161,63 +161,63 @@ export default function CourseGridScreen({ match }) {
                     return (
                       <div>
                         {/* Options View  */}
-                        <div className='options-view'>
-                          <div className='clearfix'>
-                            <div className='pull-left'>
-                              <div className='title pt-5 text-capitalize'>
+                        <div className="options-view">
+                          <div className="clearfix">
+                            <div className="pull-left">
+                              <div className="title pt-5 text-capitalize">
                                 {category} Courses
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className='row clearfix'>
+                        <div className="row clearfix">
                           {categoryCourses(category).length > 0 ? (
                             categoryCourses(category).map((course) => {
                               return (
                                 <div
-                                  className='cource-block-two col-lg-3 col-md-6 col-sm-12'
+                                  className="cource-block-two col-lg-3 col-md-6 col-sm-12"
                                   key={course._id}
                                 >
-                                  <div className='inner-box'>
-                                    <div className='image'>
+                                  <div className="inner-box">
+                                    <div className="image">
                                       <Link to={`/courses/${course._id}`}>
                                         <img
                                           src={
-                                            "https://server.ccab.tech/uploads/Bootcamp/" +
+                                            "http://localhost:5001/uploads/Bootcamp/" +
                                             course.img_path
                                           }
-                                          alt=''
+                                          alt=""
                                           style={{
                                             "max-height": "150px",
                                           }}
                                         />
                                       </Link>
                                     </div>
-                                    <div className='lower-content'>
+                                    <div className="lower-content">
                                       <div>
                                         <Link
-                                          className='sub-title'
+                                          className="sub-title"
                                           to={`/courses/${course._id}`}
                                         >
                                           {course.name}
                                         </Link>
                                       </div>
-                                      <div className='text'>
+                                      <div className="text">
                                         <span
-                                          className='sub-text d-inline-block text-truncate'
+                                          className="sub-text d-inline-block text-truncate"
                                           style={{ maxWidth: "240px" }}
                                         >
                                           {course.description}
                                         </span>
                                       </div>
-                                      <div className='clearfix'>
-                                        <div className='pull-left'>
-                                          <div className='students'>
+                                      <div className="clearfix">
+                                        <div className="pull-left">
+                                          <div className="students">
                                             {course.weeks * 5} Lectures
                                           </div>
                                         </div>
-                                        <div className='pull-right'>
-                                          <div className='hours'>
+                                        <div className="pull-right">
+                                          <div className="hours">
                                             {course.weeks * 5 * 2} Hours
                                           </div>
                                         </div>
@@ -228,7 +228,7 @@ export default function CourseGridScreen({ match }) {
                               );
                             })
                           ) : (
-                            <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
+                            <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                               No Course found !
                             </p>
                           )}
@@ -286,7 +286,7 @@ export default function CourseGridScreen({ match }) {
                     );
                   })
                 ) : (
-                  <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
+                  <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                     No Course found !
                   </p>
                 )}
@@ -297,62 +297,62 @@ export default function CourseGridScreen({ match }) {
       </div>
 
       {/* Popular Courses  */}
-      <section className='popular-courses-section sidebar-page-container'>
+      <section className="popular-courses-section sidebar-page-container">
         <div
-          className='patern-layer-one paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-one paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-1.png)" }}
         ></div>
         <div
-          className='patern-layer-two paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='-0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-two paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="-0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-2.png)" }}
         ></div>
-        <div className='auto-container'>
-          <div className='title pb-3'>Most Popular Courses</div>
-          <div className='row clearfix'>
-            <div className='col-lg-9 col-md-12 col-sm-12'>
-              <div className='row clearfix'>
+        <div className="auto-container">
+          <div className="title pb-3">Most Popular Courses</div>
+          <div className="row clearfix">
+            <div className="col-lg-9 col-md-12 col-sm-12">
+              <div className="row clearfix">
                 {loading ? (
                   <Loader />
                 ) : error ? (
                   <Message>{error}</Message>
                 ) : filterSubscriptionCourse(courseList).length ? (
-                  <div className='cource-block-two col-lg-4 col-md-6 col-sm-12'>
+                  <div className="cource-block-two col-lg-4 col-md-6 col-sm-12">
                     <div
-                      className='inner-box wow fadeInLeft'
-                      data-wow-delay='0ms'
-                      data-wow-duration='1500ms'
+                      className="inner-box wow fadeInLeft"
+                      data-wow-delay="0ms"
+                      data-wow-duration="1500ms"
                     >
-                      <div className='image'>
-                        <Link to='/course/1/details'>
+                      <div className="image">
+                        <Link to="/course/1/details">
                           <img
                             src={
-                              "https://server.ccab.tech/uploads/Bootcamp/" +
+                              "http://localhost:5001/uploads/Bootcamp/" +
                               filterSubscriptionCourse(courseList)[0].img_path
                             }
-                            alt=''
+                            alt=""
                           />
                         </Link>
                       </div>
-                      <div className='lower-content'>
+                      <div className="lower-content">
                         <div>
                           <Link
-                            className='sub-title'
+                            className="sub-title"
                             to={`/courses/${courseList[0]._id}`}
                           >
                             {filterSubscriptionCourse(courseList)[0].name}
                           </Link>
                         </div>
-                        <div className='text'>
+                        <div className="text">
                           <span
-                            className='sub-text d-inline-block text-truncate'
+                            className="sub-text d-inline-block text-truncate"
                             style={{ maxWidth: "240px" }}
                           >
                             {
@@ -361,16 +361,16 @@ export default function CourseGridScreen({ match }) {
                             }
                           </span>
                         </div>
-                        <div className='clearfix'>
-                          <div className='pull-left'>
-                            <div className='students'>
+                        <div className="clearfix">
+                          <div className="pull-left">
+                            <div className="students">
                               {filterSubscriptionCourse(courseList)[0].weeks *
                                 5}{" "}
                               Lectures
                             </div>
                           </div>
-                          <div className='pull-right'>
-                            <div className='hours'>
+                          <div className="pull-right">
+                            <div className="hours">
                               {filterSubscriptionCourse(courseList)[0].weeks *
                                 5 *
                                 2}{" "}

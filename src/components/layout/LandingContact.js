@@ -116,7 +116,7 @@ export default function Contact() {
     const config = { headers: { "Content-Type": "application/json" } };
     try {
       const res = await axios.post(
-        "https://server.ccab.tech/contact",
+        "http://localhost:5001/contact",
         {
           ...FormData,
         },
@@ -151,58 +151,58 @@ export default function Contact() {
 
   return (
     <form
-      className='registration-form  needs-validation p-3'
+      className="registration-form  needs-validation p-3"
       onSubmit={_handelSubmit}
     >
       {Hide ? (
         <>
-          <div className='form-row'>
+          <div className="form-row">
             <div
-              className='form-group  col-10'
+              className="form-group  col-10"
               style={{ position: "relative" }}
             >
               {err ? (
-                <p className='text-danger error-attention'>{err}</p>
+                <p className="text-danger error-attention">{err}</p>
               ) : null}
             </div>
 
             <div
-              className='form-group mb-4 col-10'
+              className="form-group mb-4 col-10"
               style={{ position: "relative" }}
             >
               <input
-                type='text'
-                className='form-control'
-                id='Name'
-                placeholder='Your Name*'
+                type="text"
+                className="form-control"
+                id="Name"
+                placeholder="Your Name*"
                 required
                 value={FormData.Name}
                 onChange={_handelFieldChange}
               />
 
               {ValidationError.NameErr ? (
-                <p className='text-danger'>Enter Your Name Please!</p>
+                <p className="text-danger">Enter Your Name Please!</p>
               ) : null}
             </div>
 
-            <div className='form-group mb-4 col-10 '>
+            <div className="form-group mb-4 col-10 ">
               <input
-                type='email'
-                className='form-control'
-                id='exampleFormControlInput2'
-                placeholder='Your email*'
+                type="email"
+                className="form-control"
+                id="exampleFormControlInput2"
+                placeholder="Your email*"
                 required
                 value={FormData.Email}
                 onChange={_handelEmailChange}
               />
 
               {ValidationError.EmailErr ? (
-                <p className='text-danger'>Enter A Valid Email Please!</p>
+                <p className="text-danger">Enter A Valid Email Please!</p>
               ) : null}
             </div>
           </div>
-          <div className='form-row'>
-            <div className='form-group mb-4 col-10 sm-12'>
+          <div className="form-row">
+            <div className="form-group mb-4 col-10 sm-12">
               <PhoneInput
                 international
                 countryCallingCodeEditable={false}
@@ -211,62 +211,62 @@ export default function Contact() {
                 onChange={_handelPhoneChange}
               />
               {ValidationError.PhoneErr ? (
-                <p className='text-danger'>
+                <p className="text-danger">
                   Enter A Valid Phone Number Please!
                 </p>
               ) : null}
             </div>
           </div>
           <div
-            className='form-group mb-4 col-10'
+            className="form-group mb-4 col-10"
             style={{ position: "relative" }}
           >
             <input
-              type='text'
-              className='form-control'
-              id='Subject'
-              placeholder='Subject*'
+              type="text"
+              className="form-control"
+              id="Subject"
+              placeholder="Subject*"
               required
               value={FormData.Subject}
               onChange={_handelFieldChange}
             />
 
             {ValidationError.SubjectErr ? (
-              <p className='text-danger'>Enter Subject Please!</p>
+              <p className="text-danger">Enter Subject Please!</p>
             ) : null}
           </div>
 
           <div
-            className='form-group mb-4 col-10'
+            className="form-group mb-4 col-10"
             style={{ position: "relative" }}
           >
             <textarea
-              name='comments'
-              id='Message'
+              name="comments"
+              id="Message"
               rows={3}
-              className='form-control'
-              placeholder='Enter message..'
+              className="form-control"
+              placeholder="Enter message.."
               value={FormData.Message}
               onChange={_handelFieldChange}
             />
 
             {ValidationError.MessageErr ? (
-              <p className='text-danger'>Enter a message Please!</p>
+              <p className="text-danger">Enter a message Please!</p>
             ) : null}
           </div>
 
-          <div className='form-row'>
-            <div className='form-group mb-4 col-10 sm-12'>
+          <div className="form-row">
+            <div className="form-group mb-4 col-10 sm-12">
               <button
-                type='submit'
+                type="submit"
                 disabled={!showButton}
-                className='btn btn-warning btn-block btn-sm formButton py-1'
+                className="btn btn-warning btn-block btn-sm formButton py-1"
               >
                 {loading ? (
                   <Loader />
                 ) : (
                   <>
-                    Send <i className='mdi mdi-telegram ml-2' />
+                    Send <i className="mdi mdi-telegram ml-2" />
                   </>
                 )}
               </button>
@@ -275,11 +275,11 @@ export default function Contact() {
         </>
       ) : (
         <div
-          className='form-group mb-4 col-10 '
+          className="form-group mb-4 col-10 "
           style={{ position: "relative" }}
         >
           <h4>Thank you, Your email has been sent!</h4>
-          <div className='sentEmail'></div>
+          <div className="sentEmail"></div>
         </div>
       )}
     </form>

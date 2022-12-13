@@ -286,32 +286,32 @@ export default function UpdateCourese({ match }) {
   return (
     <>
       {/* <!-- Edit Cource Section --> */}
-      <div className='edit-cource-section'>
-        <div className='auto-container'>
+      <div className="edit-cource-section">
+        <div className="auto-container">
           {/* Sec Title */}
-          <div className='sec-title'>
-            <div className='clearfix'>
-              <div className='pull-left'>
-                <div className='title'>Edit Service</div>
+          <div className="sec-title">
+            <div className="clearfix">
+              <div className="pull-left">
+                <div className="title">Edit Service</div>
               </div>
             </div>
           </div>
 
-          <div className='buttons-box pull-right'>
+          <div className="buttons-box pull-right">
             <Button
-              variant='danger'
+              variant="danger"
               onClick={() => {
                 setShowModal({ visible: true });
               }}
             >
-              <span className='sub-title text-white'>
-                <i class='fas fa-plus-square'></i> Add Student
+              <span className="sub-title text-white">
+                <i class="fas fa-plus-square"></i> Add Student
               </span>
             </Button>
           </div>
-          <div className='py-2 sub-title mb-5'>
+          <div className="py-2 sub-title mb-5">
             <Rodal
-              animation='zoom'
+              animation="zoom"
               visible={showModal.visible}
               onClose={() => setShowModal({ visible: false })}
               width={900}
@@ -321,31 +321,31 @@ export default function UpdateCourese({ match }) {
           </div>
           <div>
             {error ? (
-              <p className='text-danger bg-light p-2 '>{error}</p>
+              <p className="text-danger bg-light p-2 ">{error}</p>
             ) : UpdateSuccess ? (
-              <p className='text-success bg-light p-2 '>
+              <p className="text-success bg-light p-2 ">
                 service Updated successfully
               </p>
             ) : null}
           </div>
-          <div className='inner-container'>
-            <div className='row clearfix'>
+          <div className="inner-container">
+            <div className="row clearfix">
               {/* Left Column */}
-              <div className='left-column col-lg-8 col-md-12 col-sm-12'>
-                <div className='inner-column'>
-                  <div className='sub-title pb-3'>Basic Information</div>
+              <div className="left-column col-lg-8 col-md-12 col-sm-12">
+                <div className="inner-column">
+                  <div className="sub-title pb-3">Basic Information</div>
 
                   {/* Edit service Form */}
-                  <div className='edit-course-form'>
-                    <form method='post' action='index.html'>
+                  <div className="edit-course-form">
+                    <form method="post" action="index.html">
                       {/* Form Group */}
-                      <div className='form-group'>
+                      <div className="form-group">
                         <label>service Title</label>
                         <input
-                          type='text'
-                          name='service-title'
+                          type="text"
+                          name="service-title"
                           defaultValue
-                          placeholder='service Title'
+                          placeholder="service Title"
                           value={name}
                           required
                           onChange={(e) => {
@@ -355,12 +355,12 @@ export default function UpdateCourese({ match }) {
                       </div>
 
                       {/* descriptopn  */}
-                      <div className='form-group'>
+                      <div className="form-group">
                         <label>Description</label>
-                        <span className='support'></span>
+                        <span className="support"></span>
                         <textarea
-                          name='message'
-                          placeholder='Shortly describe this service'
+                          name="message"
+                          placeholder="Shortly describe this service"
                           defaultValue={description}
                           onChange={(e) => {
                             setDescription(e.target.value);
@@ -369,14 +369,14 @@ export default function UpdateCourese({ match }) {
                       </div>
 
                       {/* Category */}
-                      <div className='form-group mb-2'>
+                      <div className="form-group mb-2">
                         <label> Categogy</label>
 
                         <select
-                          className='custom-select-box px-2 ml-2'
+                          className="custom-select-box px-2 ml-2"
                           onChange={(e) => setCategory(e.target.value)}
                         >
-                          <option value='' disabled selected>
+                          <option value="" disabled selected>
                             select an option
                           </option>
 
@@ -389,38 +389,38 @@ export default function UpdateCourese({ match }) {
                               <option key={req._id}>{req.name}</option>
                             ))
                           ) : (
-                            <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
+                            <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                               No serviceCatyegory Found!
                             </p>
                           )}
                         </select>
                       </div>
 
-                      <div className='my-3'>
-                        <span className='rounded-pill  px-2 py-1 m-2 bg-light'>
-                          <i className='fas fa-plus-circle text-success'></i>{" "}
+                      <div className="my-3">
+                        <span className="rounded-pill  px-2 py-1 m-2 bg-light">
+                          <i className="fas fa-plus-circle text-success"></i>{" "}
                           {category}
                         </span>
                       </div>
 
                       {/* Form Group */}
-                      <div className='inner-container'>
-                        <div className='row clearfix'>
+                      <div className="inner-container">
+                        <div className="row clearfix">
                           {/* Left Column */}
-                          <div className='left-column col-lg-12 col-md-12 col-sm-12'>
-                            <div className='inner-column'>
+                          <div className="left-column col-lg-12 col-md-12 col-sm-12">
+                            <div className="inner-column">
                               {/* Edit service Form */}
-                              <div className='edit-course-form'>
+                              <div className="edit-course-form">
                                 <form>
-                                  <div className='sub-title pb-3'>
+                                  <div className="sub-title pb-3">
                                     Add Describtion Info List
                                   </div>
-                                  <div className='form-group'>
+                                  <div className="form-group">
                                     <label>List Title</label>
                                     <input
-                                      type='text'
-                                      placeholder='Title'
-                                      name='title'
+                                      type="text"
+                                      placeholder="Title"
+                                      name="title"
                                       value={title}
                                       onChange={(e) => setTitle(e.target.value)}
                                     />
@@ -428,12 +428,12 @@ export default function UpdateCourese({ match }) {
                                   {inputFields.map((inputField, index) => (
                                     <Card key={inputField.id}>
                                       <div style={{ display: "flex" }}>
-                                        <div className='form-group form-group col-lg-7 col-md-12 col-sm-12'>
+                                        <div className="form-group form-group col-lg-7 col-md-12 col-sm-12">
                                           <label>{`Item ${1 + index}`} </label>
                                           <input
-                                            type='text'
-                                            placeholder='Write Item text'
-                                            name='content'
+                                            type="text"
+                                            placeholder="Write Item text"
+                                            name="content"
                                             value={inputField.content}
                                             onChange={(event) =>
                                               handleChangeInput(
@@ -454,32 +454,32 @@ export default function UpdateCourese({ match }) {
                                         }}
                                       >
                                         <button
-                                          type='button'
+                                          type="button"
                                           onClick={handleAddFields}
                                         >
-                                          <i className='fas fa-plus-square'></i>
+                                          <i className="fas fa-plus-square"></i>
                                         </button>
                                         <button
-                                          type='button'
+                                          type="button"
                                           disabled={inputFields.length === 1}
                                           onClick={() =>
                                             handleRemoveFields(inputField.id)
                                           }
                                         >
-                                          <i className='fas fa-minus-square'></i>
+                                          <i className="fas fa-minus-square"></i>
                                         </button>
                                       </div>
                                     </Card>
                                   ))}
 
-                                  <div className='form-group col-lg-12 col-md-12 col-sm-12 text-center'>
+                                  <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">
                                     <div
-                                      className='theme-btn btn-style-two'
+                                      className="theme-btn btn-style-two"
                                       onClick={addtitleWithAnswer}
                                     >
-                                      <span className='txt'>
+                                      <span className="txt">
                                         Add List{" "}
-                                        <i className='fa fa-angle-right' />
+                                        <i className="fa fa-angle-right" />
                                       </span>
                                     </div>
                                   </div>
@@ -488,25 +488,25 @@ export default function UpdateCourese({ match }) {
                             </div>
                           </div>
                           {/* Right Column */}
-                          <div className='right-column col-lg-12 col-md-12 col-sm-12'>
-                            <div className='inner-column'>
-                              <div className='edit-course-form'>
+                          <div className="right-column col-lg-12 col-md-12 col-sm-12">
+                            <div className="inner-column">
+                              <div className="edit-course-form">
                                 {/* Form Group */}
-                                <div className='form-group'>
-                                  <div className='sub-title pb-3'>
+                                <div className="form-group">
+                                  <div className="sub-title pb-3">
                                     INFO LIST
                                   </div>
 
                                   <Accordion
-                                    className='accordion-box style-two'
-                                    defaultActiveKey='0'
+                                    className="accordion-box style-two"
+                                    defaultActiveKey="0"
                                   >
                                     {titleWithAnswer &&
                                       titleWithAnswer.map((x, index) => (
-                                        <Card className='accordion block'>
+                                        <Card className="accordion block">
                                           <Card.Header>
                                             <Accordion.Toggle
-                                              variant='link'
+                                              variant="link"
                                               eventKey={`${index}`}
                                             >
                                               {x.title}
@@ -517,7 +517,7 @@ export default function UpdateCourese({ match }) {
                                           >
                                             <Card.Body>
                                               {x.items.map((answer) => (
-                                                <div className='mb-3'>
+                                                <div className="mb-3">
                                                   {"- " + answer.content}
                                                 </div>
                                               ))}
@@ -534,13 +534,13 @@ export default function UpdateCourese({ match }) {
                       </div>
                       {/*  bootcamp sections  */}
 
-                      <div className='form-group'>
+                      <div className="form-group">
                         <button
-                          type='button'
-                          className='theme-btn btn-style-two'
+                          type="button"
+                          className="theme-btn btn-style-two"
                           onClick={submitHandler}
                         >
-                          <span className='txt'>Add Section</span>
+                          <span className="txt">Add Section</span>
                         </button>
                       </div>
                     </form>
@@ -548,65 +548,64 @@ export default function UpdateCourese({ match }) {
                 </div>
               </div>
               {/* Right Column */}
-              <div className='right-column col-lg-4 col-md-12 col-sm-12'>
-                <div className='inner-column'>
+              <div className="right-column col-lg-4 col-md-12 col-sm-12">
+                <div className="inner-column">
                   {/* Url Box */}
-                  <div className='url-boxed'>
+                  <div className="url-boxed">
                     {/* Divider */}
-                    <div className='border my-3'></div>
-                    {/* ***https://server.ccab.tech** */}
+                    <div className="border my-3"></div>
+                    {/* ***http://localhost:5001** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          "https://server.ccab.tech/uploads/Bootcamp/" +
-                          ImageLable
+                          "http://localhost:5001/uploads/Bootcamp/" + ImageLable
                         }
                       />
                     ) : (
-                      <p className='text-warning bg-light p-1'>
+                      <p className="text-warning bg-light p-1">
                         * No Image Uploaded
                       </p>
                     )}
-                    <span className='valid mb-3'>
+                    <span className="valid mb-3">
                       Select (jpg / png )image{" "}
                     </span>
-                    <div className='input-group '>
+                    <div className="input-group ">
                       <input
-                        type='file'
+                        type="file"
                         onChange={(e) => {
                           setImageLable(e.target.files[0].name);
                           setImageUrl(e.target.files[0]);
                           setUpdateErr("");
                         }}
-                        className='form-control'
-                        id='inputGroupFile02'
+                        className="form-control"
+                        id="inputGroupFile02"
                       />
                     </div>
                   </div>
 
-                  <div className=''></div>
+                  <div className=""></div>
                   {/* End Url Box */}
 
-                  <div className='sub-title pb-3'>Options</div>
-                  <div className='option-cource-box'>
-                    <div className='box-inner'>
+                  <div className="sub-title pb-3">Options</div>
+                  <div className="option-cource-box">
+                    <div className="box-inner">
                       {/* ******************* */}
-                      <div className='form-group '>
-                        <label htmlFor='exampleDataList' className='form-label'>
+                      <div className="form-group ">
+                        <label htmlFor="exampleDataList" className="form-label">
                           Instructors
                         </label>
                         {/* error message */}
                         {selectInstructorErr && (
-                          <p className='text-danger bg-light p-1'>
+                          <p className="text-danger bg-light p-1">
                             {selectInstructorErr}
                           </p>
                         )}
                         <input
-                          className='form-control bg-light'
-                          list='datalistOptions1'
-                          id='exampleDataList1'
-                          placeholder='search instructor...'
+                          className="form-control bg-light"
+                          list="datalistOptions1"
+                          id="exampleDataList1"
+                          placeholder="search instructor..."
                           onChange={(e) => {
                             setSelectInstructorErr("");
                             setSelectedInstructor(e.target.value);
@@ -615,14 +614,14 @@ export default function UpdateCourese({ match }) {
                         />
 
                         <button
-                          type='button'
-                          className='btn btn-success py-2 px-4 mt-2'
+                          type="button"
+                          className="btn btn-success py-2 px-4 mt-2"
                           onClick={_handleSelectInstructor}
                         >
                           add
                         </button>
 
-                        <datalist id='datalistOptions1'>
+                        <datalist id="datalistOptions1">
                           {InstructorList.length > 0 &&
                             InstructorList.map((instructor) => {
                               return (
@@ -637,51 +636,51 @@ export default function UpdateCourese({ match }) {
                             })}
                         </datalist>
                       </div>
-                      <label className='mt-2'>
+                      <label className="mt-2">
                         Selected Instructors : {instructors.length}/
                         {InstructorList.length}
                       </label>
-                      <div className='my-3'>
+                      <div className="my-3">
                         {instructors.length > 0 ? (
                           instructors.map((instructor) => {
                             return (
-                              <span className='rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light'>
+                              <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
                                 <a
                                   onClick={() => {
                                     _handleUnselectInstructor(instructor._id);
                                   }}
                                 >
-                                  <i className='fas fa-minus-circle text-danger  cursor- pointer'></i>
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
                                 </a>{" "}
                                 {instructor.name}
                               </span>
                             );
                           })
                         ) : (
-                          <p className='text-warning bg-light p-1'>
+                          <p className="text-warning bg-light p-1">
                             * Nothing Selected
                           </p>
                         )}
                       </div>
 
                       {/* Divider */}
-                      <div className='border my-3'></div>
+                      <div className="border my-3"></div>
                       {/* ******************* */}
-                      <div className='form-group '>
-                        <label htmlFor='exampleDataList' className='form-label'>
+                      <div className="form-group ">
+                        <label htmlFor="exampleDataList" className="form-label">
                           Students
                         </label>
                         {/* error message */}
                         {selectStudentErr && (
-                          <p className='text-danger bg-light p-1'>
+                          <p className="text-danger bg-light p-1">
                             {selectStudentErr}
                           </p>
                         )}
                         <input
-                          className='form-control bg-light'
-                          list='datalistOptions2'
-                          id='exampleDataList2'
-                          placeholder='search student...'
+                          className="form-control bg-light"
+                          list="datalistOptions2"
+                          id="exampleDataList2"
+                          placeholder="search student..."
                           onChange={(e) => {
                             setSelectStudentErr("");
                             setSelectedStudent(e.target.value);
@@ -690,14 +689,14 @@ export default function UpdateCourese({ match }) {
                         />
 
                         <button
-                          type='button'
-                          className='btn btn-success py-2 px-4 mt-2'
+                          type="button"
+                          className="btn btn-success py-2 px-4 mt-2"
                           onClick={_handleSelectStudent}
                         >
                           add
                         </button>
 
-                        <datalist id='datalistOptions2'>
+                        <datalist id="datalistOptions2">
                           {StudentsList.length > 0 &&
                             StudentsList.map((student) => {
                               return (
@@ -712,45 +711,45 @@ export default function UpdateCourese({ match }) {
                             })}
                         </datalist>
                       </div>
-                      <label className='mt-2'>
+                      <label className="mt-2">
                         Selected Students : {students.length}/
                         {StudentsList.length}
                       </label>
-                      <div className='my-3'>
+                      <div className="my-3">
                         {students.length ? (
                           students.map((student) => {
                             return (
-                              <span className='rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light'>
+                              <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
                                 <a
                                   onClick={() => {
                                     _handleUnselectStudent(student._id);
                                   }}
                                 >
-                                  <i className='fas fa-minus-circle text-danger  cursor- pointer'></i>
+                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
                                 </a>{" "}
                                 {student.name}
                               </span>
                             );
                           })
                         ) : (
-                          <p className='text-warning bg-light p-1'>
+                          <p className="text-warning bg-light p-1">
                             * Nothing Selected
                           </p>
                         )}
                       </div>
 
                       {/* Divider */}
-                      <div className='border my-3'></div>
+                      <div className="border my-3"></div>
                       {/* ******************* */}
-                      <div className='form-group'>
-                        <span className='price'>price</span>
-                        <div className='total-price'>Set service Price :</div>
-                        <div className='item-quantity'>
+                      <div className="form-group">
+                        <span className="price">price</span>
+                        <div className="total-price">Set service Price :</div>
+                        <div className="item-quantity">
                           <input
-                            className='quantity-spinner'
-                            type='number'
+                            className="quantity-spinner"
+                            type="number"
                             defaultValue={price}
-                            name='quantity'
+                            name="quantity"
                             onChange={(e) => {
                               setPrice(e.target.value);
                             }}
@@ -760,13 +759,13 @@ export default function UpdateCourese({ match }) {
                     </div>
                   </div>
                   {/* Button Box */}
-                  <div className='button-box text-center'>
+                  <div className="button-box text-center">
                     <button
-                      type='button'
-                      className='theme-btn btn-style-one'
+                      type="button"
+                      className="theme-btn btn-style-one"
                       style={{ zIndex: "0" }}
                     >
-                      <span className='txt' onClick={_handleupdateService}>
+                      <span className="txt" onClick={_handleupdateService}>
                         Save Changes
                       </span>
                     </button>

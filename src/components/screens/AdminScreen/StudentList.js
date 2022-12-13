@@ -23,7 +23,6 @@ import { useHistory, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../../layout/Loader";
 import { getDate } from "../../../util/getDate";
-import PerformanceChart from "../../layout/PerformanceChart";
 
 export default function UserlistScreen() {
   const dispatch = useDispatch();

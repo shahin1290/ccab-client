@@ -97,7 +97,7 @@ export default function TaskListScreen({ match }) {
     // dispatch(DownloadAssignemnt(task.task._id)
     try {
       const res = await fetch(
-        "https://server.ccab.tech/api/tasks/" + task._id + "/download"
+        "http://localhost:5001/api/tasks/" + task._id + "/download"
       );
       const blob = await res.blob();
       download(blob, task.projectName + "-Assignment");
@@ -142,7 +142,7 @@ export default function TaskListScreen({ match }) {
       <h1>Tasks</h1>
       {loading && <Loader />}
       {error && <Message>{error}</Message>}
-      <Table striped bordered hover responsive='sm'>
+      <Table striped bordered hover responsive="sm">
         <thead>
           <tr>
             <th>Nr</th>
@@ -243,7 +243,7 @@ export default function TaskListScreen({ match }) {
                   {delError && <Message>{delError}</Message>}
                   <td>
                     <i
-                      className='fas fa-trash-restore'
+                      className="fas fa-trash-restore"
                       onClick={() => {
                         setClickTaskDelete(task);
                         handleShow();
@@ -258,11 +258,11 @@ export default function TaskListScreen({ match }) {
                         Are you sure to delete {clickTaskDelete.projectName} ?
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant='secondary' onClick={handleClose}>
+                        <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
                         <Button
-                          variant='danger'
+                          variant="danger"
                           onClick={() => {
                             dispatch(taskDelete(clickTaskDelete._id));
 

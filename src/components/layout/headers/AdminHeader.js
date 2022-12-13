@@ -37,13 +37,13 @@ export default function AdminHeader() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand='lg' bg='danger' variant='dark'>
-        <div className='container'>
+      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
+        <div className="container">
           <Navbar.Brand>Admin DashBoard</Navbar.Brand>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-          <Navbar.Collapse id='responsive-navbar-nav' className='text-danger'>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav" className="text-danger">
             <Nav>
-              <Nav.Link className='text-dark  mr-3' href='/'>
+              <Nav.Link className="text-dark  mr-3" href="/">
                 Home
               </Nav.Link>
 
@@ -51,40 +51,40 @@ export default function AdminHeader() {
 
               {!userDetail.token ? (
                 <>
-                  <Nav.Link href='/login'>Login</Nav.Link>
-                  <Nav.Link href='/get-start'>Register</Nav.Link>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link href="/get-start">Register</Nav.Link>
                 </>
               ) : (
                 user.name && (
                   <div
-                    className='collapse navbar-collapse'
+                    className="collapse navbar-collapse"
                     style={{ marginLeft: "350px" }}
                   >
-                    <ul className='navbar-nav '>
-                      <li className='nav-item dropdown dropdown-slide dropdown-hover '>
-                        <a href='/'>
-                          <div className='logo-image'>
+                    <ul className="navbar-nav ">
+                      <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                        <a href="/">
+                          <div className="logo-image">
                             <img
                               src={
                                 user.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                  ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                   : "/images/resource/avatar.svg"
                               }
-                              alt='avatar'
+                              alt="avatar"
                             />
                           </div>
                         </a>
                         <div
-                          className='dropdown-menu  mt-3'
-                          aria-labelledby='navbarDropdownMenuLink'
+                          className="dropdown-menu  mt-3"
+                          aria-labelledby="navbarDropdownMenuLink"
                           style={{ top: "37px" }}
                         >
-                          <a className='dropdown-item' href='/profile'>
+                          <a className="dropdown-item" href="/profile">
                             My Profile
                           </a>
-                          <div className='dropdown-divider'></div>
+                          <div className="dropdown-divider"></div>
 
-                          <a className='dropdown-item' onClick={logoutHandler}>
+                          <a className="dropdown-item" onClick={logoutHandler}>
                             Logout
                           </a>
                         </div>

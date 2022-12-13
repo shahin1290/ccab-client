@@ -106,7 +106,7 @@ export default function TaskListScreen({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     try {
       const res = await fetch(
-        "https://server.ccab.tech/api/tasks/" + task._id + "/download",
+        "http://localhost:5001/api/tasks/" + task._id + "/download",
         config
       );
       const blob = await res.blob();
@@ -150,9 +150,9 @@ export default function TaskListScreen({ match }) {
 
   return (
     <div style={{ margin: "50px 0" }}>
-      <div className='title mb-4'>Tasks</div>
+      <div className="title mb-4">Tasks</div>
 
-      <Table striped bordered hover responsive='sm'>
+      <Table striped bordered hover responsive="sm">
         <thead>
           <tr>
             <th>Nr</th>
@@ -177,7 +177,7 @@ export default function TaskListScreen({ match }) {
                   <td>
                     {course._id ? (
                       <Link
-                        className='text-info'
+                        className="text-info"
                         to={`/task-details/${task.bootcamp}/${task._id}`}
                       >
                         {task.projectName}
@@ -210,7 +210,7 @@ export default function TaskListScreen({ match }) {
                   {delError && <Message>{delError}</Message>}
                   <td>
                     <i
-                      className='fas fa-trash-restore'
+                      className="fas fa-trash-restore"
                       onClick={() => {
                         setClickTaskDelete(task);
                         handleShow();
@@ -225,11 +225,11 @@ export default function TaskListScreen({ match }) {
                         Are you sure to delete {clickTaskDelete.projectName} ?
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant='secondary' onClick={handleClose}>
+                        <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
                         <Button
-                          variant='danger'
+                          variant="danger"
                           onClick={() => {
                             deleteHandler(clickTaskDelete._id);
 

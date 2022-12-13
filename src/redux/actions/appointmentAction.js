@@ -37,7 +37,7 @@ export const createAppointment =
       };
 
       const response = await axios.post(
-        "https://server.ccab.tech/api/appointment",
+        "http://localhost:5001/api/appointment",
         appointment,
         config
       );
@@ -78,7 +78,7 @@ export const getAppointments = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "https://server.ccab.tech/api/appointment/",
+      "http://localhost:5001/api/appointment/",
       config
     );
     dispatch({
@@ -115,7 +115,7 @@ export const getInstructorAppointments =
         },
       };
       const response = await axios.get(
-        "https://server.ccab.tech/api/appointment/" + insructorId,
+        "http://localhost:5001/api/appointment/" + insructorId,
         config
       );
       dispatch({
@@ -151,7 +151,7 @@ export const getAppointmentDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://server.ccab.tech/api/appointment/${id}`,
+      `http://localhost:5001/api/appointment/${id}`,
       config
     );
 
@@ -188,10 +188,7 @@ export const deleteAppointment = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      `https://server.ccab.tech/api/appointment/${id}`,
-      config
-    );
+    await axios.delete(`http://localhost:5001/api/appointment/${id}`, config);
 
     dispatch({
       type: APPOINTMENT_DELETE_SUCCESS,
@@ -225,11 +222,7 @@ export const updateAppointment = (req, id) => async (dispatch, getState) => {
     };
 
     //console.log(REQUEST);
-    await axios.put(
-      `https://server.ccab.tech/api/appointment/${id}`,
-      req,
-      config
-    );
+    await axios.put(`http://localhost:5001/api/appointment/${id}`, req, config);
 
     dispatch({
       type: APPOINTMENT_UPDATE_SUCCESS,

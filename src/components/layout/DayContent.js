@@ -10,7 +10,7 @@ import { getMyQuizAnswerList } from "../../redux/actions/quizAnswerAction";
 import { getWeekList } from "../../redux/actions/weekAction";
 import { getOrderList } from "../../redux/actions/orderAction";
 import { getCourseDetails } from "../../redux/actions/courseAction";
-import { getWatchingLectures } from "../../redux/actions/performanceAction";
+
 import { TransitionGroup } from "react-transition-group";
 import { getMyAnswerList } from "../../redux/actions/answerAction";
 
@@ -104,7 +104,7 @@ export default function DayContent({ bootcampId, setOpen }) {
   //get task list for mentor_route
   const { quizzes } = useSelector((state) => state.quizList);
 
-  const { lectures } = useSelector((state) => state.performanceLectureList);
+ 
 
   const { dayVideoList } = useSelector((state) => state.dayVideoList);
 

@@ -208,41 +208,41 @@ export default function EditProfile() {
     <>
       {/* Edit Profile Section */}
       <section
-        className='edit-profile-section '
+        className="edit-profile-section "
         style={{ paddingTop: 100 + "px" }}
       >
         <div
-          className='patern-layer-one paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-one paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-1.png)" }}
         />
         <div
-          className='patern-layer-two paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='-0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-two paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="-0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-2.png)" }}
         />
-        <div className='auto-container'>
-          <div className='row clearfix'>
+        <div className="auto-container">
+          <div className="row clearfix">
             {/* Image Section */}
-            <div className='image-column col-lg-3 col-md-12 col-sm-12'>
-              <div className='inner-column'>
-                <div className='image'>
+            <div className="image-column col-lg-3 col-md-12 col-sm-12">
+              <div className="inner-column">
+                <div className="image">
                   <img
                     onLoad={() => URL.revokeObjectURL(preview)}
                     src={
                       preview
                         ? preview
                         : user.avatar
-                        ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                        ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                         : "https://via.placeholder.com/200x112"
                     }
-                    alt='avatar'
+                    alt="avatar"
                   />
                 </div>
                 <div rootRef={ref}>
@@ -260,7 +260,7 @@ export default function EditProfile() {
                     }}
                   >
                     <input {...getInputProps()} />
-                    <div className='sub-text'>
+                    <div className="sub-text">
                       Drag 'n' drop image file here, or click to select file
                     </div>
                   </div>
@@ -278,318 +278,322 @@ export default function EditProfile() {
               </div>
             </div>
             {/* Content Section */}
-            <div className='content-column col-lg-9 col-md-12 col-sm-12'>
-              <div className='inner-column'>
+            <div className="content-column col-lg-9 col-md-12 col-sm-12">
+              <div className="inner-column">
                 {/* Edit Profile Info Tabs*/}
-                <div className='edit-profile-info-tabs'>
+                <div className="edit-profile-info-tabs">
                   {/* Profile Tabs*/}
-                  <div className='edit-profile-tabs tabs-box'>
+                  <div className="edit-profile-tabs tabs-box">
                     {/*Tab Btns*/}
-                    <ul className='tab-btns tab-buttons clearfix'>
+                    <ul className="tab-btns tab-buttons clearfix">
                       <li
-                        data-tab='#prod-overview'
-                        className='tab-btn active-btn'
+                        data-tab="#prod-overview"
+                        className="tab-btn active-btn"
                       >
                         Overview
                       </li>
                     </ul>
                     {/*Tabs Container*/}
-                    <div className='tabs-content'>
+                    <div className="tabs-content">
                       {/*Tab / Active Tab*/}
-                      <div className='tab active-tab' id='prod-overview'>
-                        <div className='content'>
+                      <div className="tab active-tab" id="prod-overview">
+                        <div className="content">
                           {/* Title Box */}
-                          <div className='sub-title mb-2'>
+                          <div className="sub-title mb-2">
                             <div>Edit Profile</div>
                           </div>
 
                           {/* Profile Form */}
-                          <div className='profile-form'>
+                          <div className="profile-form">
                             {error ? (
-                              <p className='text-danger bg-light p-2 '>
+                              <p className="text-danger bg-light p-2 ">
                                 {error}
                               </p>
                             ) : updateSuccess ? (
-                              <p className='text-success bg-light p-2 '>
+                              <p className="text-success bg-light p-2 ">
                                 Profile Updated successfully
                               </p>
                             ) : null}
                             {/* Profile Form */}
                             <form onSubmit={submitHandler}>
-                              <div className='row clearfix'>
-                                <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
+                              <div className="row clearfix">
+                                <div className="col-lg-6 col-md-6 col-sm-12 form-group">
                                   <input
-                                    type='text'
-                                    name='firstName'
+                                    type="text"
+                                    name="firstName"
                                     value={firstName}
-                                    placeholder='First Name'
+                                    placeholder="First Name"
                                     onChange={(e) =>
                                       setFirstName(e.target.value)
                                     }
                                     required
                                   />
-                                  <span className='icon flaticon-edit-1' />
+                                  <span className="icon flaticon-edit-1" />
                                 </div>
-                                <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
+                                <div className="col-lg-6 col-md-6 col-sm-12 form-group">
                                   <input
-                                    type='text'
-                                    name='lastName'
+                                    type="text"
+                                    name="lastName"
                                     value={lastName}
-                                    placeholder='Last Name'
+                                    placeholder="Last Name"
                                     onChange={(e) =>
                                       setLastName(e.target.value)
                                     }
                                     required
                                   />
-                                  <span className='icon flaticon-edit-1' />
+                                  <span className="icon flaticon-edit-1" />
                                 </div>
-                                <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
+                                <div className="col-lg-6 col-md-6 col-sm-12 form-group">
                                   <input
-                                    type='email'
-                                    name='email'
+                                    type="email"
+                                    name="email"
                                     value={email}
-                                    placeholder='Email'
+                                    placeholder="Email"
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                   />
-                                  <span className='icon flaticon-edit-1' />
+                                  <span className="icon flaticon-edit-1" />
                                 </div>
-                                <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
+                                <div className="col-lg-6 col-md-6 col-sm-12 form-group">
                                   <input
-                                    type='text'
-                                    name='phoneNumber'
+                                    type="text"
+                                    name="phoneNumber"
                                     value={phoneNumber}
-                                    placeholder='Phone'
+                                    placeholder="Phone"
                                     onChange={(e) =>
                                       setPhoneNumber(e.target.value)
                                     }
                                     required
                                   />
-                                  <span className='icon flaticon-edit-1' />
+                                  <span className="icon flaticon-edit-1" />
                                 </div>
 
-                                {user && user.user_type === "InstructorUser" && (
-                                  <>
-                                    <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
-                                      <input
-                                        type='text'
-                                        name='facebook'
-                                        value={
-                                          facebookAddress &&
-                                          facebookAddress.address
-                                        }
-                                        placeholder='Facebook Address'
-                                        onChange={(e) =>
-                                          setFacebookAddress({
-                                            network: "facebook",
-                                            address: e.target.value,
-                                          })
-                                        }
-                                      />
-                                      <span className='icon flaticon-edit-1' />
-                                    </div>
+                                {user &&
+                                  user.user_type === "InstructorUser" && (
+                                    <>
+                                      <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input
+                                          type="text"
+                                          name="facebook"
+                                          value={
+                                            facebookAddress &&
+                                            facebookAddress.address
+                                          }
+                                          placeholder="Facebook Address"
+                                          onChange={(e) =>
+                                            setFacebookAddress({
+                                              network: "facebook",
+                                              address: e.target.value,
+                                            })
+                                          }
+                                        />
+                                        <span className="icon flaticon-edit-1" />
+                                      </div>
 
-                                    <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
-                                      <input
-                                        type='text'
-                                        name='twitter'
-                                        value={
-                                          twitterAddress &&
-                                          twitterAddress.address
-                                        }
-                                        placeholder='Twitter Address'
-                                        onChange={(e) =>
-                                          setTwitterAddress({
-                                            network: "twitter",
-                                            address: e.target.value,
-                                          })
-                                        }
-                                      />
-                                      <span className='icon flaticon-edit-1' />
-                                    </div>
+                                      <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input
+                                          type="text"
+                                          name="twitter"
+                                          value={
+                                            twitterAddress &&
+                                            twitterAddress.address
+                                          }
+                                          placeholder="Twitter Address"
+                                          onChange={(e) =>
+                                            setTwitterAddress({
+                                              network: "twitter",
+                                              address: e.target.value,
+                                            })
+                                          }
+                                        />
+                                        <span className="icon flaticon-edit-1" />
+                                      </div>
 
-                                    <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
-                                      <input
-                                        type='text'
-                                        name='github'
-                                        value={
-                                          githubAddress && githubAddress.address
-                                        }
-                                        placeholder='Github Address'
-                                        onChange={(e) =>
-                                          setGithubAddress({
-                                            network: "github",
-                                            address: e.target.value,
-                                          })
-                                        }
-                                      />
-                                      <span className='icon flaticon-edit-1' />
-                                    </div>
-                                    <div className='col-lg-6 col-md-6 col-sm-12 form-group'>
-                                      <input
-                                        type='text'
-                                        name='linkedin'
-                                        value={
-                                          linkedinAddress &&
-                                          linkedinAddress.address
-                                        }
-                                        placeholder='Linkedin Address'
-                                        onChange={(e) =>
-                                          setLinkedinAddress({
-                                            network: "linkedin",
-                                            address: e.target.value,
-                                          })
-                                        }
-                                      />
-                                      <span className='icon flaticon-edit-1' />
-                                    </div>
-                                    <div className='col-lg-12 col-md-12 col-sm-12 form-group'>
-                                      <textarea
-                                        type='text'
-                                        name='bio'
-                                        value={bio}
-                                        placeholder='Add Bio'
-                                        onChange={(e) => setBio(e.target.value)}
-                                      />
-                                      <span className='icon flaticon-edit-1' />
-                                    </div>
+                                      <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input
+                                          type="text"
+                                          name="github"
+                                          value={
+                                            githubAddress &&
+                                            githubAddress.address
+                                          }
+                                          placeholder="Github Address"
+                                          onChange={(e) =>
+                                            setGithubAddress({
+                                              network: "github",
+                                              address: e.target.value,
+                                            })
+                                          }
+                                        />
+                                        <span className="icon flaticon-edit-1" />
+                                      </div>
+                                      <div className="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input
+                                          type="text"
+                                          name="linkedin"
+                                          value={
+                                            linkedinAddress &&
+                                            linkedinAddress.address
+                                          }
+                                          placeholder="Linkedin Address"
+                                          onChange={(e) =>
+                                            setLinkedinAddress({
+                                              network: "linkedin",
+                                              address: e.target.value,
+                                            })
+                                          }
+                                        />
+                                        <span className="icon flaticon-edit-1" />
+                                      </div>
+                                      <div className="col-lg-12 col-md-12 col-sm-12 form-group">
+                                        <textarea
+                                          type="text"
+                                          name="bio"
+                                          value={bio}
+                                          placeholder="Add Bio"
+                                          onChange={(e) =>
+                                            setBio(e.target.value)
+                                          }
+                                        />
+                                        <span className="icon flaticon-edit-1" />
+                                      </div>
 
-                                    {/* *********skill********** */}
-                                    <div className='d-flex col-lg-8 col-md-6 col-sm-12 form-group '>
-                                      <input
-                                        type='text'
-                                        name='skill'
-                                        value={skill}
-                                        placeholder='Add Skill'
-                                        onChange={(e) => {
-                                          setSkill(e.target.value);
-                                        }}
-                                        value={skill}
-                                      />
+                                      {/* *********skill********** */}
+                                      <div className="d-flex col-lg-8 col-md-6 col-sm-12 form-group ">
+                                        <input
+                                          type="text"
+                                          name="skill"
+                                          value={skill}
+                                          placeholder="Add Skill"
+                                          onChange={(e) => {
+                                            setSkill(e.target.value);
+                                          }}
+                                          value={skill}
+                                        />
 
-                                      <button
-                                        type='button'
-                                        className='btn btn-success py-2 px-4 ml-3'
-                                        onClick={_handleSelectSKill}
-                                      >
-                                        add
-                                      </button>
-                                    </div>
+                                        <button
+                                          type="button"
+                                          className="btn btn-success py-2 px-4 ml-3"
+                                          onClick={_handleSelectSKill}
+                                        >
+                                          add
+                                        </button>
+                                      </div>
 
-                                    <div className='col-lg-6 col-md-6 col-sm-12 form-group my-3'>
-                                      {skills.length ? (
-                                        skills.map((skill) => {
-                                          return (
-                                            <span className='rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light'>
-                                              <a
-                                                onClick={() => {
-                                                  _handleUnselectSkill(skill);
-                                                }}
-                                              >
-                                                <i className='fas fa-minus-circle text-danger  cursor- pointer'></i>
-                                              </a>{" "}
-                                              {skill}
-                                            </span>
-                                          );
-                                        })
-                                      ) : (
-                                        <p className='text-warning bg-light p-1'>
-                                          * No Skill Added
-                                        </p>
-                                      )}
-                                    </div>
-
-                                    <div className='border my-3'></div>
-                                    {/* ******************* */}
-                                    <div className='form-group col-lg-8 col-md-6 col-sm-12  '>
-                                      <label
-                                        htmlFor='exampleDataList'
-                                        className='form-label'
-                                      >
-                                        Teaching Fields
-                                      </label>
-                                      {/* error message */}
-                                      {selectCategoryErr && (
-                                        <p className='text-danger bg-light p-1'>
-                                          {selectCategoryErr}
-                                        </p>
-                                      )}
-                                      <input
-                                        className='form-control bg-light'
-                                        list='datalistOptions'
-                                        placeholder='Search Teaching Fields...'
-                                        onChange={(e) => {
-                                          setSelectCategoryErr("");
-                                          setSelectedCategory(e.target.value);
-                                        }}
-                                        value={selectedCategory}
-                                      />
-
-                                      <button
-                                        type='button'
-                                        className='btn btn-success py-2 px-4 mt-2'
-                                        onClick={_handleSelectCategory}
-                                      >
-                                        add
-                                      </button>
-
-                                      <datalist id='datalistOptions'>
-                                        {categoryList &&
-                                          categoryList.length > 0 &&
-                                          categoryList.map((Category) => {
+                                      <div className="col-lg-6 col-md-6 col-sm-12 form-group my-3">
+                                        {skills.length ? (
+                                          skills.map((skill) => {
                                             return (
-                                              <option
-                                                data={Category._id}
-                                                value={Category.name}
-                                                key={Category._id}
-                                              >
-                                                {Category.email}
-                                              </option>
+                                              <span className="rounded-pill  px-2 py-1  my-1 d-inline-block text-truncate bg-light">
+                                                <a
+                                                  onClick={() => {
+                                                    _handleUnselectSkill(skill);
+                                                  }}
+                                                >
+                                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                                </a>{" "}
+                                                {skill}
+                                              </span>
                                             );
-                                          })}
-                                      </datalist>
-                                    </div>
-                                    <label className='col-lg-4 col-md-6 col-sm-12 form-group'>
-                                      Selected Teaching Fields:{" "}
-                                      {categories && categories.length}/
-                                      {categoryList && categoryList.length}
-                                    </label>
-                                    <div className='my-3'>
-                                      {categories && categories.length ? (
-                                        categories.map((category) => {
-                                          return (
-                                            <span className='rounded-pill  px-4 py-1  my-1 d-inline-block text-truncate bg-light'>
-                                              <a
-                                                onClick={() => {
-                                                  _handleUnselectCategory(
-                                                    category._id
-                                                  );
-                                                }}
-                                              >
-                                                <i className='fas fa-minus-circle text-danger  cursor- pointer'></i>
-                                              </a>{" "}
-                                              {category.name}
-                                            </span>
-                                          );
-                                        })
-                                      ) : (
-                                        <p className='text-warning bg-light p-1'>
-                                          * Nothing Selected
-                                        </p>
-                                      )}
-                                    </div>
-                                  </>
-                                )}
+                                          })
+                                        ) : (
+                                          <p className="text-warning bg-light p-1">
+                                            * No Skill Added
+                                          </p>
+                                        )}
+                                      </div>
 
-                                <div className='col-lg-12 col-md-12 col-sm-12 form-group'>
+                                      <div className="border my-3"></div>
+                                      {/* ******************* */}
+                                      <div className="form-group col-lg-8 col-md-6 col-sm-12  ">
+                                        <label
+                                          htmlFor="exampleDataList"
+                                          className="form-label"
+                                        >
+                                          Teaching Fields
+                                        </label>
+                                        {/* error message */}
+                                        {selectCategoryErr && (
+                                          <p className="text-danger bg-light p-1">
+                                            {selectCategoryErr}
+                                          </p>
+                                        )}
+                                        <input
+                                          className="form-control bg-light"
+                                          list="datalistOptions"
+                                          placeholder="Search Teaching Fields..."
+                                          onChange={(e) => {
+                                            setSelectCategoryErr("");
+                                            setSelectedCategory(e.target.value);
+                                          }}
+                                          value={selectedCategory}
+                                        />
+
+                                        <button
+                                          type="button"
+                                          className="btn btn-success py-2 px-4 mt-2"
+                                          onClick={_handleSelectCategory}
+                                        >
+                                          add
+                                        </button>
+
+                                        <datalist id="datalistOptions">
+                                          {categoryList &&
+                                            categoryList.length > 0 &&
+                                            categoryList.map((Category) => {
+                                              return (
+                                                <option
+                                                  data={Category._id}
+                                                  value={Category.name}
+                                                  key={Category._id}
+                                                >
+                                                  {Category.email}
+                                                </option>
+                                              );
+                                            })}
+                                        </datalist>
+                                      </div>
+                                      <label className="col-lg-4 col-md-6 col-sm-12 form-group">
+                                        Selected Teaching Fields:{" "}
+                                        {categories && categories.length}/
+                                        {categoryList && categoryList.length}
+                                      </label>
+                                      <div className="my-3">
+                                        {categories && categories.length ? (
+                                          categories.map((category) => {
+                                            return (
+                                              <span className="rounded-pill  px-4 py-1  my-1 d-inline-block text-truncate bg-light">
+                                                <a
+                                                  onClick={() => {
+                                                    _handleUnselectCategory(
+                                                      category._id
+                                                    );
+                                                  }}
+                                                >
+                                                  <i className="fas fa-minus-circle text-danger  cursor- pointer"></i>
+                                                </a>{" "}
+                                                {category.name}
+                                              </span>
+                                            );
+                                          })
+                                        ) : (
+                                          <p className="text-warning bg-light p-1">
+                                            * Nothing Selected
+                                          </p>
+                                        )}
+                                      </div>
+                                    </>
+                                  )}
+
+                                <div className="col-lg-12 col-md-12 col-sm-12 form-group">
                                   <button
-                                    className='theme-btn btn-style-three'
-                                    type='submit'
-                                    name='submit-form'
+                                    className="theme-btn btn-style-three"
+                                    type="submit"
+                                    name="submit-form"
                                   >
-                                    <span className='txt'>
+                                    <span className="txt">
                                       Save Change{" "}
-                                      <i className='fa fa-angle-right' />
+                                      <i className="fa fa-angle-right" />
                                     </span>
                                   </button>
                                 </div>

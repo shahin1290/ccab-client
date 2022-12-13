@@ -95,7 +95,7 @@ export default function Assignments() {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "https://server.ccab.tech/api/tasks/" + task._id + "/download",
+      "http://localhost:5001/api/tasks/" + task._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -122,31 +122,31 @@ export default function Assignments() {
 
   return (
     <>
-      <div className='pb-5 mt-5 mb-5'>
-        <div className='auto-container'>
+      <div className="pb-5 mt-5 mb-5">
+        <div className="auto-container">
           {/* Sec Title */}
-          <div className='title mb-4'>
-            <div className='clearfix'>
-              <div className='pull-left'>
+          <div className="title mb-4">
+            <div className="clearfix">
+              <div className="pull-left">
                 <div>My Assignments</div>
               </div>
             </div>
           </div>
 
-          <div className='row'>
+          <div className="row">
             <CourseSideBar
               selectedCourse={selectedCourse}
               setSelctedCourse={setSelctedCourse}
             />
           </div>
 
-          <div className='inner-container'>
-            <div className='table-responsive'>
+          <div className="inner-container">
+            <div className="table-responsive">
               {filterAssignemnts().length ? (
                 <table
-                  className='table text-center'
+                  className="table text-center"
                   style={{ overflow: "hidden" }}
-                  id='Tasks'
+                  id="Tasks"
                 >
                   <thead>
                     <tr>
@@ -168,11 +168,11 @@ export default function Assignments() {
                     {myTasksLoading ? (
                       <Loader />
                     ) : myTasksError ? (
-                      <Message variant='danger'>{myTasksError}</Message>
+                      <Message variant="danger">{myTasksError}</Message>
                     ) : (
                       filterAssignemnts()
                         .map((task, index) => (
-                          <tr data-aos='zoom-in-up' key={task._id}>
+                          <tr data-aos="zoom-in-up" key={task._id}>
                             <td>{index + 1}</td>
                             <td>{task.projectName}</td>
                             {/* status */}
@@ -183,7 +183,7 @@ export default function Assignments() {
                               <Link
                                 onClick={() => DownloadAssignmentHandler(task)}
                               >
-                                <i class='fas fa-file-download'></i> DOWNLOAD
+                                <i class="fas fa-file-download"></i> DOWNLOAD
                               </Link>
                             </td>
 
@@ -195,7 +195,7 @@ export default function Assignments() {
                                   {answerListLoading ? (
                                     <Loader />
                                   ) : answerListError ? (
-                                    <Message variant='danger'>
+                                    <Message variant="danger">
                                       {answerListError}
                                     </Message>
                                   ) : (
@@ -259,7 +259,7 @@ export default function Assignments() {
                                     ) : (
                                       <Link
                                         to={`/assignment-details/${task.bootcamp._id}/${task._id}`}
-                                        className=' text-info'
+                                        className=" text-info"
                                       >
                                         Submit Assignment
                                       </Link>
@@ -274,8 +274,8 @@ export default function Assignments() {
                   </tbody>
                 </table>
               ) : (
-                <div className='notFound'>
-                  <h4 className='text-center'>You Don't have any task </h4>
+                <div className="notFound">
+                  <h4 className="text-center">You Don't have any task </h4>
                   <div></div>
                 </div>
               )}

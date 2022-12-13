@@ -216,16 +216,16 @@ export default function UpdateMediaCenter({ match }) {
   return (
     <>
       {/* <!-- Edit Cource Section --> */}
-      <div className='edit-cource-section'>
-        <div className='auto-container'>
+      <div className="edit-cource-section">
+        <div className="auto-container">
           {/* Sec Title */}
-          <div className='sec-title'>
-            <div className='clearfix'>
-              <div className='pull-left'>
-                <div className='title'>Edit mediaCenters</div>
+          <div className="sec-title">
+            <div className="clearfix">
+              <div className="pull-left">
+                <div className="title">Edit mediaCenters</div>
               </div>
-              <div className='pull-right'>
-                <a href='/mentor-mediaCenters-list' className='see-all'>
+              <div className="pull-right">
+                <a href="/mentor-mediaCenters-list" className="see-all">
                   Add Content
                 </a>
               </div>
@@ -233,20 +233,20 @@ export default function UpdateMediaCenter({ match }) {
           </div>
           <div>
             {error ? (
-              <p className='text-danger bg-light p-2 '>{error}</p>
+              <p className="text-danger bg-light p-2 ">{error}</p>
             ) : UpdateSuccess ? (
-              <p className='text-success bg-light p-2 '>
+              <p className="text-success bg-light p-2 ">
                 mediaCenter Updated successfully
               </p>
             ) : null}
           </div>
-          <div className='inner-container'>
-            <div className='row clearfix'>
+          <div className="inner-container">
+            <div className="row clearfix">
               {/* Left Column */}
-              <div className='left-column col-lg-8 col-md-12 col-sm-12'>
-                <div className='inner-column'>
-                  <div className='sub-title pb-3'>Basic Information</div>
-                  <div className='sub-title pb-3 text-danger'>
+              <div className="left-column col-lg-8 col-md-12 col-sm-12">
+                <div className="inner-column">
+                  <div className="sub-title pb-3">Basic Information</div>
+                  <div className="sub-title pb-3 text-danger">
                     *Add Plan name(Silver or Golden or Diamond) as a first word
                     of the mediaCenter title (Ex. Golden MERN STACK){" "}
                     <u>
@@ -255,16 +255,16 @@ export default function UpdateMediaCenter({ match }) {
                     </u>
                   </div>
                   {/* Edit mediaCenter Form */}
-                  <div className='edit-course-form'>
-                    <form method='post' action='index.html'>
+                  <div className="edit-course-form">
+                    <form method="post" action="index.html">
                       {/* Form Group */}
-                      <div className='form-group'>
+                      <div className="form-group">
                         <label>mediaCenter Title</label>
                         <input
-                          type='text'
-                          name='mediaCenter-title'
+                          type="text"
+                          name="mediaCenter-title"
                           defaultValue
-                          placeholder='mediaCenter Title'
+                          placeholder="mediaCenter Title"
                           value={name}
                           required
                           onChange={(e) => {
@@ -274,12 +274,12 @@ export default function UpdateMediaCenter({ match }) {
                       </div>
 
                       {/* descriptopn  */}
-                      <div className='form-group'>
+                      <div className="form-group">
                         <label>Description</label>
-                        <span className='support'></span>
+                        <span className="support"></span>
                         <textarea
-                          name='message'
-                          placeholder='Shortly describe this mediaCenter'
+                          name="message"
+                          placeholder="Shortly describe this mediaCenter"
                           defaultValue={description}
                           onChange={(e) => {
                             setDescription(e.target.value);
@@ -288,14 +288,14 @@ export default function UpdateMediaCenter({ match }) {
                       </div>
 
                       {/* Category */}
-                      <div className='form-group mb-2'>
+                      <div className="form-group mb-2">
                         <label> Categogy</label>
 
                         <select
-                          className='custom-select-box px-2 ml-2'
+                          className="custom-select-box px-2 ml-2"
                           onChange={(e) => setCategory(e.target.value)}
                         >
-                          <option value='' disabled selected>
+                          <option value="" disabled selected>
                             select an option
                           </option>
 
@@ -309,31 +309,31 @@ export default function UpdateMediaCenter({ match }) {
                         </select>
                       </div>
 
-                      <div className='my-3'>
-                        <span className='rounded-pill  px-2 py-1 m-2 bg-light'>
-                          <i className='fas fa-plus-circle text-success'></i>{" "}
+                      <div className="my-3">
+                        <span className="rounded-pill  px-2 py-1 m-2 bg-light">
+                          <i className="fas fa-plus-circle text-success"></i>{" "}
                           {category}
                         </span>
                       </div>
 
                       {/* Form Group */}
-                      <div className='inner-container'>
-                        <div className='row clearfix'>
+                      <div className="inner-container">
+                        <div className="row clearfix">
                           {/* Left Column */}
-                          <div className='left-column col-lg-12 col-md-12 col-sm-12'>
-                            <div className='inner-column'>
+                          <div className="left-column col-lg-12 col-md-12 col-sm-12">
+                            <div className="inner-column">
                               {/* Edit mediaCenter Form */}
-                              <div className='edit-mediaCenter-form'>
+                              <div className="edit-mediaCenter-form">
                                 <form>
-                                  <div className='sub-title pb-3'>
+                                  <div className="sub-title pb-3">
                                     Add Describtion Info List
                                   </div>
-                                  <div className='form-group'>
+                                  <div className="form-group">
                                     <label>List Title</label>
                                     <input
-                                      type='text'
-                                      placeholder='Title'
-                                      name='title'
+                                      type="text"
+                                      placeholder="Title"
+                                      name="title"
                                       value={title}
                                       onChange={(e) => setTitle(e.target.value)}
                                     />
@@ -341,12 +341,12 @@ export default function UpdateMediaCenter({ match }) {
                                   {inputFields.map((inputField, index) => (
                                     <Card key={inputField.id}>
                                       <div style={{ display: "flex" }}>
-                                        <div className='form-group form-group col-lg-7 col-md-12 col-sm-12'>
+                                        <div className="form-group form-group col-lg-7 col-md-12 col-sm-12">
                                           <label>{`Item ${1 + index}`} </label>
                                           <input
-                                            type='text'
-                                            placeholder='Write Item text'
-                                            name='content'
+                                            type="text"
+                                            placeholder="Write Item text"
+                                            name="content"
                                             value={inputField.content}
                                             onChange={(event) =>
                                               handleChangeInput(
@@ -367,32 +367,32 @@ export default function UpdateMediaCenter({ match }) {
                                         }}
                                       >
                                         <button
-                                          type='button'
+                                          type="button"
                                           onClick={handleAddFields}
                                         >
-                                          <i className='fas fa-plus-square'></i>
+                                          <i className="fas fa-plus-square"></i>
                                         </button>
                                         <button
-                                          type='button'
+                                          type="button"
                                           disabled={inputFields.length === 1}
                                           onClick={() =>
                                             handleRemoveFields(inputField.id)
                                           }
                                         >
-                                          <i className='fas fa-minus-square'></i>
+                                          <i className="fas fa-minus-square"></i>
                                         </button>
                                       </div>
                                     </Card>
                                   ))}
 
-                                  <div className='form-group col-lg-12 col-md-12 col-sm-12 text-center'>
+                                  <div className="form-group col-lg-12 col-md-12 col-sm-12 text-center">
                                     <div
-                                      className='theme-btn btn-style-two'
+                                      className="theme-btn btn-style-two"
                                       onClick={addtitleWithAnswer}
                                     >
-                                      <span className='txt'>
+                                      <span className="txt">
                                         Add List{" "}
-                                        <i className='fa fa-angle-right' />
+                                        <i className="fa fa-angle-right" />
                                       </span>
                                     </div>
                                   </div>
@@ -401,25 +401,25 @@ export default function UpdateMediaCenter({ match }) {
                             </div>
                           </div>
                           {/* Right Column */}
-                          <div className='right-column col-lg-12 col-md-12 col-sm-12'>
-                            <div className='inner-column'>
-                              <div className='edit-mediaCenter-form'>
+                          <div className="right-column col-lg-12 col-md-12 col-sm-12">
+                            <div className="inner-column">
+                              <div className="edit-mediaCenter-form">
                                 {/* Form Group */}
-                                <div className='form-group'>
-                                  <div className='sub-title pb-3'>
+                                <div className="form-group">
+                                  <div className="sub-title pb-3">
                                     INFO LIST
                                   </div>
 
                                   <Accordion
-                                    className='accordion-box style-two'
-                                    defaultActiveKey='0'
+                                    className="accordion-box style-two"
+                                    defaultActiveKey="0"
                                   >
                                     {titleWithAnswer &&
                                       titleWithAnswer.map((x, index) => (
-                                        <Card className='accordion block'>
+                                        <Card className="accordion block">
                                           <Card.Header>
                                             <Accordion.Toggle
-                                              variant='link'
+                                              variant="link"
                                               eventKey={`${index}`}
                                             >
                                               {x.title}
@@ -430,7 +430,7 @@ export default function UpdateMediaCenter({ match }) {
                                           >
                                             <Card.Body>
                                               {x.items.map((answer) => (
-                                                <div className='mb-3'>
+                                                <div className="mb-3">
                                                   {"- " + answer.content}
                                                 </div>
                                               ))}
@@ -447,13 +447,13 @@ export default function UpdateMediaCenter({ match }) {
                       </div>
                       {/*  bootcamp sections  */}
 
-                      <div className='form-group'>
+                      <div className="form-group">
                         <button
-                          type='button'
-                          className='theme-btn btn-style-two'
+                          type="button"
+                          className="theme-btn btn-style-two"
                           onClick={submitHandler}
                         >
-                          <span className='txt'>Add Section</span>
+                          <span className="txt">Add Section</span>
                         </button>
                       </div>
                     </form>
@@ -461,12 +461,12 @@ export default function UpdateMediaCenter({ match }) {
                 </div>
               </div>
               {/* Right Column */}
-              <div className='right-column col-lg-4 col-md-12 col-sm-12'>
-                <div className='inner-column'>
-                  <div className='sub-title pb-3'>Video & Image</div>
+              <div className="right-column col-lg-4 col-md-12 col-sm-12">
+                <div className="inner-column">
+                  <div className="sub-title pb-3">Video & Image</div>
                   {/* Video Box */}
                   <div
-                    className='video-boxed'
+                    className="video-boxed"
                     style={{
                       backgroundImage: "url(images/resource/video-image-3.jpg)",
                     }}
@@ -475,10 +475,10 @@ export default function UpdateMediaCenter({ match }) {
                       onClick={() => {
                         handleOpenVideo();
                       }}
-                      className='lightbox-image intro-video-box'
+                      className="lightbox-image intro-video-box"
                     >
-                      <span className='fa fa-play'>
-                        <i className='ripple' />
+                      <span className="fa fa-play">
+                        <i className="ripple" />
                       </span>
                     </a>
                   </div>
@@ -486,13 +486,13 @@ export default function UpdateMediaCenter({ match }) {
                   <Modal
                     show={showVideo}
                     onHide={handleCloseVideo}
-                    size='lg'
+                    size="lg"
                     centered
                   >
                     <Modal.Header closeButton>
                       <Modal.Title>Watch Video</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body className=' m-auto'>
+                    <Modal.Body className=" m-auto">
                       {/* {(AddnewmediaCenterErr|| AddError)&&<Message variant="danger">{AddnewmediaCenterErr||AddError}</Message>} */}
                       <ReactPlayer url={VideoUrl} controls></ReactPlayer>
                     </Modal.Body>
@@ -501,74 +501,73 @@ export default function UpdateMediaCenter({ match }) {
                   {/* End Video Box */}
 
                   {/* Url Box */}
-                  <div className='url-boxed'>
+                  <div className="url-boxed">
                     <label>Video URL</label>
                     <input
-                      type='url'
-                      name='videoUrl'
+                      type="url"
+                      name="videoUrl"
                       value={VideoUrl}
-                      placeholder='https://www.youtube.com/dummy-video.com'
+                      placeholder="https://www.youtube.com/dummy-video.com"
                       required
                       onChange={(e) => {
                         setVideoUrl(e.target.value);
                       }}
                     />
-                    <span className='valid'>Enter valid url address</span>
+                    <span className="valid">Enter valid url address</span>
 
                     {/* Divider */}
-                    <div className='border my-3'></div>
-                    {/* ***https://server.ccab.tech** */}
+                    <div className="border my-3"></div>
+                    {/* ***http://localhost:5001** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         src={
-                          "https://server.ccab.tech/uploads/Bootcamp/" +
-                          ImageLable
+                          "http://localhost:5001/uploads/Bootcamp/" + ImageLable
                         }
                       />
                     ) : (
-                      <p className='text-warning bg-light p-1'>
+                      <p className="text-warning bg-light p-1">
                         * No Image Uploaded
                       </p>
                     )}
-                    <span className='valid mb-3'>
+                    <span className="valid mb-3">
                       Select (jpg / png )image{" "}
                     </span>
-                    <div className='input-group '>
+                    <div className="input-group ">
                       <input
-                        type='file'
+                        type="file"
                         onChange={(e) => {
                           setImageLable(e.target.files[0].name);
                           setImageUrl(e.target.files[0]);
                           setUpdateErr("");
                         }}
-                        className='form-control'
-                        id='inputGroupFile02'
+                        className="form-control"
+                        id="inputGroupFile02"
                       />
                     </div>
                   </div>
 
-                  <div className=''></div>
+                  <div className=""></div>
                   {/* End Url Box */}
 
-                  <div className='sub-title pb-3'>Options</div>
-                  <div className='option-cource-box'>
-                    <div className='box-inner'>
-                      <div className='form-group mb-2'>
+                  <div className="sub-title pb-3">Options</div>
+                  <div className="option-cource-box">
+                    <div className="box-inner">
+                      <div className="form-group mb-2">
                         <label> Mentor</label>
                         {!MentorsList.length > 0 && (
-                          <p className='text-warning bg-light p-1'>
+                          <p className="text-warning bg-light p-1">
                             * There is no Mentor Users
                           </p>
                         )}
                         {/* <span className="select-category">Select a category</span> */}
                         <select
-                          className='custom-select-box px-2'
+                          className="custom-select-box px-2"
                           onChange={(e) => {
                             _handleSelectMentor(e.target.value.split(","));
                           }}
                         >
-                          <option value='' disabled selected>
+                          <option value="" disabled selected>
                             Choose Mentor{" "}
                           </option>
                           {MentorsList.length > 0 &&
@@ -583,14 +582,14 @@ export default function UpdateMediaCenter({ match }) {
                             })}
                         </select>
 
-                        <div className='my-3'>
+                        <div className="my-3">
                           {Mentor.name ? (
-                            <span className='rounded-pill  px-2 py-1 m-2 bg-light'>
-                              <i className='fas fa-plus-circle text-success'></i>{" "}
+                            <span className="rounded-pill  px-2 py-1 m-2 bg-light">
+                              <i className="fas fa-plus-circle text-success"></i>{" "}
                               {Mentor.name}
                             </span>
                           ) : (
-                            <p className='text-warning bg-light p-1'>
+                            <p className="text-warning bg-light p-1">
                               * Nothing Selected
                             </p>
                           )}
@@ -598,19 +597,19 @@ export default function UpdateMediaCenter({ match }) {
                       </div>
 
                       {/* Divider */}
-                      <div className='border my-3'></div>
+                      <div className="border my-3"></div>
                       {/* ******************* */}
-                      <div className='form-group'>
-                        <span className='price'>price</span>
-                        <div className='total-price'>
+                      <div className="form-group">
+                        <span className="price">price</span>
+                        <div className="total-price">
                           Set mediaCenter Price :
                         </div>
-                        <div className='item-quantity'>
+                        <div className="item-quantity">
                           <input
-                            className='quantity-spinner'
-                            type='number'
+                            className="quantity-spinner"
+                            type="number"
                             defaultValue={price}
-                            name='quantity'
+                            name="quantity"
                             onChange={(e) => {
                               setPrice(e.target.value);
                             }}
@@ -619,21 +618,21 @@ export default function UpdateMediaCenter({ match }) {
                       </div>
 
                       {/* Divider */}
-                      <div className='border my-3'></div>
+                      <div className="border my-3"></div>
                       {/* ******************* */}
-                      <div className='form-group'>
-                        <span className='price'>seats</span>
-                        <div className='total-price'>
+                      <div className="form-group">
+                        <span className="price">seats</span>
+                        <div className="total-price">
                           Set mediaCenter seats :
                         </div>
                         <p>More than 99 seat, it will be unlimited</p>
-                        <div className='item-quantity'>
+                        <div className="item-quantity">
                           <input
-                            className='quantity-spinner'
-                            type='number'
-                            min='0'
+                            className="quantity-spinner"
+                            type="number"
+                            min="0"
                             defaultValue={seats}
-                            name='quantity'
+                            name="quantity"
                             onChange={(e) => {
                               setSeats(e.target.value);
                             }}
@@ -641,18 +640,18 @@ export default function UpdateMediaCenter({ match }) {
                         </div>
                       </div>
 
-                      <div className='form-group'>
-                        <span className='price'>weeks</span>
-                        <div className='total-price'>
+                      <div className="form-group">
+                        <span className="price">weeks</span>
+                        <div className="total-price">
                           Set mediaCenter weeks :
                         </div>
-                        <div className='item-quantity'>
+                        <div className="item-quantity">
                           <input
-                            className='quantity-spinner'
-                            type='number'
+                            className="quantity-spinner"
+                            type="number"
                             min={1}
                             defaultValue={weeks}
-                            name='quantity'
+                            name="quantity"
                             onChange={(e) => {
                               setWeeks(e.target.value);
                             }}
@@ -662,13 +661,13 @@ export default function UpdateMediaCenter({ match }) {
                     </div>
                   </div>
                   {/* Button Box */}
-                  <div className='button-box text-center'>
+                  <div className="button-box text-center">
                     <button
-                      type='button'
-                      className='theme-btn btn-style-one'
+                      type="button"
+                      className="theme-btn btn-style-one"
                       style={{ zIndex: "0" }}
                     >
-                      <span className='txt' onClick={_handleUpdateMediaCenter}>
+                      <span className="txt" onClick={_handleUpdateMediaCenter}>
                         Save Changes
                       </span>
                     </button>

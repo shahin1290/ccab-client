@@ -34,7 +34,7 @@ export default function JobList() {
   const DownloadCVHandler = async (job) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "https://server.ccab.tech/api/job/" + job._id + "/download",
+      "http://localhost:5001/api/job/" + job._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -44,7 +44,7 @@ export default function JobList() {
   const DownloadDocHandler = async (job) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "https://server.ccab.tech/api/job/" + job._id + "/download/others",
+      "http://localhost:5001/api/job/" + job._id + "/download/others",
       config
     );
     const blob = await res.blob();
@@ -53,10 +53,10 @@ export default function JobList() {
 
   return (
     <>
-      <div className='container ' style={{ padding: "60px 0" }}>
-        <div className='title pb-3'>Applicants</div>
-        <div className='py-2 sub-title'></div>
-        <Table striped bordered hover responsive='sm'>
+      <div className="container " style={{ padding: "60px 0" }}>
+        <div className="title pb-3">Applicants</div>
+        <div className="py-2 sub-title"></div>
+        <Table striped bordered hover responsive="sm">
           <thead>
             <tr>
               <th>#</th>
@@ -90,7 +90,7 @@ export default function JobList() {
                     {job.cv_path ? (
                       <Link
                         onClick={() => DownloadCVHandler(job)}
-                        className='text-info'
+                        className="text-info"
                       >
                         Download
                       </Link>
@@ -101,7 +101,7 @@ export default function JobList() {
                   <td>
                     {job.doc_path ? (
                       <Link
-                        className='text-info'
+                        className="text-info"
                         onClick={() => DownloadDocHandler(job)}
                       >
                         Download
@@ -113,7 +113,7 @@ export default function JobList() {
                 </tr>
               ))
             ) : (
-              <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
+              <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                 No Request Found!
               </p>
             )}

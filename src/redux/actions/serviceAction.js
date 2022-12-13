@@ -42,7 +42,7 @@ export const getServiceList =
         },
       };
       const response = await axios.get(
-        `https://server.ccab.tech/api/service?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/service?pageNumber=${pageNumber}`,
         config
       );
 
@@ -80,7 +80,7 @@ export const getServiceListForAdmin =
         },
       };
       const response = await axios.get(
-        `https://server.ccab.tech/api/service/manage?pageNumber=${pageNumber}`,
+        `http://localhost:5001/api/service/manage?pageNumber=${pageNumber}`,
         config
       );
 
@@ -116,7 +116,7 @@ export const getServiceDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "https://server.ccab.tech/api/service/" + id,
+      "http://localhost:5001/api/service/" + id,
       config
     );
 
@@ -149,7 +149,7 @@ export const createService = () => async (dispatch, getState) => {
     const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
     const response = await axios.get(
-      "https://server.ccab.tech/api/service/admin/new-service",
+      "http://localhost:5001/api/service/admin/new-service",
       config
     );
 
@@ -190,7 +190,7 @@ export const deleteService = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete("https://server.ccab.tech/api/service/" + id, config);
+    await axios.delete("http://localhost:5001/api/service/" + id, config);
 
     dispatch({
       type: SERVICE_DELETE_SUCCESS,
@@ -224,11 +224,7 @@ export const updateService = (service, id) => async (dispatch, getState) => {
     };
 
     //console.log(service);
-    await axios.put(
-      "https://server.ccab.tech/api/service/" + id,
-      service,
-      config
-    );
+    await axios.put("http://localhost:5001/api/service/" + id, service, config);
 
     dispatch({
       type: SERVICE_UPDATE_SUCCESS,
@@ -265,7 +261,7 @@ export const updateServiceInstructor =
 
       //console.log(service);
       await axios.put(
-        "https://server.ccab.tech/api/service/update-instructors",
+        "http://localhost:5001/api/service/update-instructors",
         categories,
         config
       );

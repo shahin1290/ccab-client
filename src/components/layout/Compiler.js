@@ -55,7 +55,7 @@ class Compiler extends Component {
     const data = { ...this.state };
 
     axios
-      .post("https://server.ccab.tech/update-editor", data)
+      .post("http://localhost:5001/update-editor", data)
       .catch(console.error);
   };
 
@@ -101,16 +101,16 @@ class Compiler extends Component {
 
     return (
       <Container>
-        <div className='text-center mt-2 mb-5'>
-          <div className='title'>Javascript Playground</div>
-          <div className='sub-title'>
+        <div className="text-center mt-2 mb-5">
+          <div className="title">Javascript Playground</div>
+          <div className="sub-title">
             Simplest javascript playground with real-time result view.
           </div>
         </div>
-        <Row className='shadow p-3 mb-5 bg-white rounded'>
-          <Col md={6} className='playground'>
-            <div className='code-editor html-code'>
-              <div className='editor-header'>HTML</div>
+        <Row className="shadow p-3 mb-5 bg-white rounded">
+          <Col md={6} className="playground">
+            <div className="code-editor html-code">
+              <div className="editor-header">HTML</div>
               <CodeMirror
                 value={html}
                 options={{
@@ -122,8 +122,8 @@ class Compiler extends Component {
                 }}
               />
             </div>
-            <div className='code-editor css-code'>
-              <div className='editor-header'>CSS</div>
+            <div className="code-editor css-code">
+              <div className="editor-header">CSS</div>
               <CodeMirror
                 value={css}
                 options={{
@@ -135,8 +135,8 @@ class Compiler extends Component {
                 }}
               />
             </div>
-            <div className='code-editor js-code'>
-              <div className='editor-header'>JavaScript</div>
+            <div className="code-editor js-code">
+              <div className="editor-header">JavaScript</div>
               <CodeMirror
                 value={js}
                 options={{
@@ -149,9 +149,9 @@ class Compiler extends Component {
               />
             </div>
           </Col>
-          <Col md={6} className='result'>
-            <div className='sub-title text-center'>Result View</div>
-            <iframe title='result' className='iframe' ref='iframe' />
+          <Col md={6} className="result">
+            <div className="sub-title text-center">Result View</div>
+            <iframe title="result" className="iframe" ref="iframe" />
           </Col>
         </Row>
       </Container>

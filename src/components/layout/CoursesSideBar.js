@@ -59,13 +59,13 @@ export default function CourseSideBar({ setSelctedCourse, selectedCourse }) {
 
   return (
     <>
-      <div className='courses-side-bar-container' data-aos='zoom-in-left'>
-        <div className='pb-5 mt-5 mb-5 courses-side-bar'>
+      <div className="courses-side-bar-container" data-aos="zoom-in-left">
+        <div className="pb-5 mt-5 mb-5 courses-side-bar">
           {filterCourseList().length ? (
             filterCourseList().map((course) => {
               return (
                 <Link
-                  to='Tasks'
+                  to="Tasks"
                   spy={true}
                   smooth={true}
                   offset={-150}
@@ -84,20 +84,20 @@ export default function CourseSideBar({ setSelctedCourse, selectedCourse }) {
                       setSelctedCourse(course.name);
                     }}
                   >
-                    <div className='inner-box'>
-                      <div className='image image-box  '>
+                    <div className="inner-box">
+                      <div className="image image-box  ">
                         <img
-                          className='w-100'
+                          className="w-100"
                           src={
-                            "https://server.ccab.tech/uploads/Bootcamp/" +
+                            "http://localhost:5001/uploads/Bootcamp/" +
                             course.img_path
                           }
-                          alt=''
+                          alt=""
                         />
                       </div>
                     </div>
 
-                    <a className='sub-title2 btn  w-100'>{course.name}</a>
+                    <a className="sub-title2 btn  w-100">{course.name}</a>
                   </div>
                 </Link>
               );

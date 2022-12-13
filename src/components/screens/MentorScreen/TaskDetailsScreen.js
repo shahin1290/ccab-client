@@ -14,7 +14,6 @@ import { getTaskDetails } from "../../../redux/actions/taskAction";
 
 import Loader from "../../layout/Loader";
 import { ANSWER_UPDATE_STATUS_REST } from "../../../redux/constences/answerConst";
-import { updatePerformance } from "../../../redux/actions/performanceAction";
 
 export default function TaskDetailsScreen({ match }) {
   const dispatch = useDispatch();
@@ -79,7 +78,7 @@ export default function TaskDetailsScreen({ match }) {
   const DownloadAssignmentHandler = async () => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "https://server.ccab.tech/api/tasks/" + task.task._id + "/download",
+      "http://localhost:5001/api/tasks/" + task.task._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -89,7 +88,7 @@ export default function TaskDetailsScreen({ match }) {
   //download user answers
   const DownloadAnswerHandler = async (answer) => {
     const res = await fetch(
-      "https://server.ccab.tech/api/answers/" + answer._id + "/download",
+      "http://localhost:5001/api/answers/" + answer._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -162,12 +161,7 @@ Failed
         updateAnswerStatus(bootcampId, id, answer._id, { status: value })
       );
 
-      dispatch(
-        updatePerformance(
-          { taskResult: value, student: answer.user._id },
-          bootcampId
-        )
-      );
+      
 
       toast.info(answer.user.name + " " + textMessage, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -183,43 +177,43 @@ Failed
   };
 
   return (
-    <div className='py-5'>
-      <div className='title'>Task Details</div>
+    <div className="py-5">
+      <div className="title">Task Details</div>
       {taskLoading ? (
         <Loader />
       ) : TaskError ? (
         <Message>{TaskError}</Message>
       ) : task.success ? (
-        <div className='p-3 container-fluid '>
-          <div className='row'>
-            <div className='col-sm '>
-              <div className='sub-title mb-2'>{task.task.projectName}</div>
-              <span className='mb-1 d-block'>
+        <div className="p-3 container-fluid ">
+          <div className="row">
+            <div className="col-sm ">
+              <div className="sub-title mb-2">{task.task.projectName}</div>
+              <span className="mb-1 d-block">
                 {getDates(task.task.createdAt)}
               </span>
               <p>{task.task.description}</p>
             </div>
           </div>
 
-          <div className='row d-flex justify-content-between'>
-            <div className='col-sm-3 '>
+          <div className="row d-flex justify-content-between">
+            <div className="col-sm-3 ">
               <cite>Assignment by {task.task.user.name}</cite>
             </div>
 
-            <div className='col-sm-4 mt-3 '>
+            <div className="col-sm-4 mt-3 ">
               <button
-                type='button'
-                className='float-right btn btn-outline-dark btn-sm'
+                type="button"
+                className="float-right btn btn-outline-dark btn-sm"
                 onClick={DownloadAssignmentHandler}
               >
-                <i className=''>Download</i>
+                <i className="">Download</i>
               </button>
             </div>
           </div>
         </div>
       ) : null}
 
-      <Table striped bordered hover size='sm' mt-2>
+      <Table striped bordered hover size="sm" mt-2>
         <thead>
           <tr>
             <th>Nr</th>
@@ -272,7 +266,7 @@ Failed
                         <Row>
                           <Col lg={10}>
                             <Form.Control
-                              as='select'
+                              as="select"
                               custom
                               onChange={(e) => {
                                 //dispatch(taskAsPassed(task));
@@ -280,10 +274,10 @@ Failed
                               }}
                             >
                               <option>Choose Option</option>
-                              <option value='1'>Excellent</option>
-                              <option value='2'>Good</option>
-                              <option value='3'>Not Bad</option>
-                              <option value='4'>Failed</option>
+                              <option value="1">Excellent</option>
+                              <option value="2">Good</option>
+                              <option value="3">Not Bad</option>
+                              <option value="4">Failed</option>
                             </Form.Control>
                           </Col>
                         </Row>
@@ -301,17 +295,17 @@ Failed
                       <Col>
                         {answer.isViewed ? (
                           <i
-                            className='fas fa-eye eyeIcon'
+                            className="fas fa-eye eyeIcon"
                             style={{ color: "green", pointer: "auto" }}
                           ></i>
                         ) : (
                           <i
-                            className='far fa-eye-slash eyeIcon'
+                            className="far fa-eye-slash eyeIcon"
                             style={{ color: "#adb5bd" }}
                           ></i>
                         )}
                       </Col>
-                      <Col className='statusCol-Admin'>
+                      <Col className="statusCol-Admin">
                         {/* answer status */}
                         {answer.status === "Not Sent" ? (
                           <td style={{ color: "red" }}>{answer.status}</td>

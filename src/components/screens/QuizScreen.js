@@ -9,7 +9,6 @@ import {
 import { useHistory } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import CountDown from '../layout/CountDown'
-import { updatePerformance } from '../../redux/actions/performanceAction'
 
 export default function QuizScreen({ match, location }) {
   const { bootcampId, dayId, id } = match.params
@@ -107,9 +106,7 @@ export default function QuizScreen({ match, location }) {
     dispatch(createQuizAnswer(inputFields, bootcampId, id, timeDiff))
     localStorage.removeItem('timestamp')
     localStorage.removeItem('quizStartTime')
-    if (userDetail.user_type === 'StudentUser') {
-      dispatch(updatePerformance({ quizId: id }, bootcampId))
-    }
+   
   }
 
   //handle delete quiz question (for mentor)

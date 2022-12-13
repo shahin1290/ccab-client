@@ -35,7 +35,7 @@ export default function StripeSubscriptionDetails({
 
     if (window.confirm("Do you really want to cancel?")) {
       const res = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/cancel-subscription`,
+        `http://localhost:5001/api/order/stripe/cancel-subscription`,
         {
           subscriptionId,
           orderBy,
@@ -63,7 +63,7 @@ export default function StripeSubscriptionDetails({
     <>
       <div>
         <Rodal
-          animation='zoom'
+          animation="zoom"
           visible={showSubscriptionModal.visible}
           onClose={() => setShowSubscriptionModal({ visible: false })}
           width={500}
@@ -74,25 +74,25 @@ export default function StripeSubscriptionDetails({
             ) : error ? (
               <Message>{error}</Message>
             ) : (
-              <Card.Body className='pb-2'>
-                <div className='title pb-2'>Subscription Details</div>
+              <Card.Body className="pb-2">
+                <div className="title pb-2">Subscription Details</div>
 
                 <div>
-                  <span className='sub-title'>Customer Id:</span>{" "}
+                  <span className="sub-title">Customer Id:</span>{" "}
                   {invoice && invoice.customer}
                 </div>
                 <div>
-                  <span className='sub-title'>Subscription Id:</span>{" "}
+                  <span className="sub-title">Subscription Id:</span>{" "}
                   {invoice && invoice.subscription}
                 </div>
-                <div className='pb-5'>
-                  <span className='sub-title'> Next Payment:</span>{" "}
+                <div className="pb-5">
+                  <span className="sub-title"> Next Payment:</span>{" "}
                   {invoice &&
                     invoice.next_payment_attempt &&
                     formatDate(nextPaymentAttempt())}
                 </div>
                 <Button
-                  variant='danger'
+                  variant="danger"
                   onClick={() =>
                     cancelSubscription(order.charge, order.orderBy)
                   }

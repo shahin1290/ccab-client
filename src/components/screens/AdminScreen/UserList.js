@@ -23,14 +23,12 @@ import { useHistory, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../../layout/Loader";
 import { getDate } from "../../../util/getDate";
-import PerformanceChart from "../../layout/PerformanceChart";
 import { getMyAnswerList } from "../../../redux/actions/answerAction";
 import { getMyQuizAnswerList } from "../../../redux/actions/quizAnswerAction";
 
 export default function UserlistScreen() {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [showPerformanceModal, setShowPerformanceModal] = useState("");
   const [studentId, setStudentId] = useState("");
 
   const history = useHistory();
@@ -284,7 +282,7 @@ export default function UserlistScreen() {
                             <a
                               onClick={() => {
                                 setStudentId(user._id);
-                                setShowPerformanceModal({ visible: true });
+                                
                                 dispatch(getMyAnswerList(user._id));
                                 dispatch(getMyQuizAnswerList(user._id));
                               }}
@@ -504,24 +502,6 @@ export default function UserlistScreen() {
         )}
         {<ToastContainer />}
 
-        {studentId && (
-          <div className='py-2 sub-title mb-5'>
-            <Rodal
-              animation='zoom'
-              visible={showPerformanceModal.visible}
-              onClose={() => setShowPerformanceModal({ visible: false })}
-              width={900}
-            >
-              <PerformanceChart
-                courses={
-                  filterCourseList(studentId).length > 0 &&
-                  filterCourseList(studentId)
-                }
-                student={studentId}
-              />
-            </Rodal>
-          </div>
-        )}
       </div>
     </>
   );

@@ -64,32 +64,32 @@ export default function Header() {
     <>
       <Navbar
         collapseOnSelect
-        expand='lg'
-        className='p-2 '
+        expand="lg"
+        className="p-2 "
         style={{
           zIndex: "1030",
           backgroundColor: "#fff",
         }}
       >
-        <div className='container'>
-          <Navbar.Brand href='/'>
+        <div className="container">
+          <Navbar.Brand href="/">
             <img
-              data-aos='fade-down'
-              data-aos-delay='400'
-              className='ml-5'
+              data-aos="fade-down"
+              data-aos-delay="400"
+              className="ml-5"
               src={Logo}
-              title='Bootcamp'
-              width='40px'
+              title="Bootcamp"
+              width="40px"
             />
-            <span data-aos='fade-left' className='ml-2 text-dark '>
+            <span data-aos="fade-left" className="ml-2 text-dark ">
               CF College{" "}
             </span>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-          <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav className='mr-auto'>
-              <Nav.Link className='text-dark hide-on-small-screen' href='/'>
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link className="text-dark hide-on-small-screen" href="/">
                 Home
               </Nav.Link>
 
@@ -131,8 +131,8 @@ export default function Header() {
                   ))}
               </Dropdown.Menu>
             </div> */}
-              <div className='collapse navbar-collapse mr-3'>
-                <ul className='navbar-nav '>
+              <div className="collapse navbar-collapse mr-3">
+                <ul className="navbar-nav ">
                   {/*  <li className='nav-item dropdown dropdown-slide dropdown-hover '>
                   <Link
                     to='pricing'
@@ -197,58 +197,58 @@ export default function Header() {
               </ul>
             </div> */}
 
-              <Nav.Link className='text-dark' href='/jobs'>
+              <Nav.Link className="text-dark" href="/jobs">
                 Jobs
               </Nav.Link>
             </Nav>
             {userDetail.user_type === "MentorUser" ? (
               <>
-                <div className='collapse navbar-collapse mr-3'>
-                  <ul className='navbar-nav '>
-                    <li className='nav-item dropdown dropdown-slide dropdown-hover '>
-                      <a href='#' className='text-dark pb-5 pt-5'>
+                <div className="collapse navbar-collapse mr-3">
+                  <ul className="navbar-nav ">
+                    <li className="nav-item dropdown dropdown-slide dropdown-hover ">
+                      <a href="#" className="text-dark pb-5 pt-5">
                         Manage
                       </a>
                       <div
-                        className='dropdown-menu  mt-4 ml-5'
-                        aria-labelledby='navbarDropdownMenuLink'
+                        className="dropdown-menu  mt-4 ml-5"
+                        aria-labelledby="navbarDropdownMenuLink"
                       >
                         <a
-                          className='dropdown-item'
-                          href='/mentor-courses-list'
+                          className="dropdown-item"
+                          href="/mentor-courses-list"
                         >
                           Mange Courses
                         </a>
-                        <div className='dropdown-divider'></div>
-                        <a className='dropdown-item' href='/mentor-users-list'>
+                        <div className="dropdown-divider"></div>
+                        <a className="dropdown-item" href="/mentor-users-list">
                           Users
                         </a>
-                        <div className='dropdown-divider'></div>
+                        <div className="dropdown-divider"></div>
                       </div>
                     </li>
                   </ul>
                 </div>
 
-                <Nav className='text-dark hide-on-big-screen pt-4 '>
+                <Nav className="text-dark hide-on-big-screen pt-4 ">
                   Manage
-                  <Dropdown.Menu show className='border-0'>
-                    <NavDropdown.Item href='/mentor-courses-list'>
+                  <Dropdown.Menu show className="border-0">
+                    <NavDropdown.Item href="/mentor-courses-list">
                       Mange Courses
                     </NavDropdown.Item>
-                    <NavDropdown.Item href='/mentor-users-list'>
+                    <NavDropdown.Item href="/mentor-users-list">
                       Users
                     </NavDropdown.Item>
                   </Dropdown.Menu>
                   <Nav.Link
-                    href='/profile'
-                    className='text-dark hide-on-big-screen'
+                    href="/profile"
+                    className="text-dark hide-on-big-screen"
                     style={{ top: "37px" }}
                   >
                     My Profile
                   </Nav.Link>
                   <Nav.Link
                     onClick={logoutHandler}
-                    className='text-dark hide-on-big-screen'
+                    className="text-dark hide-on-big-screen"
                   >
                     Logout
                   </Nav.Link>
@@ -269,42 +269,42 @@ export default function Header() {
             <Nav>
               {!userDetail.token ? (
                 <>
-                  <Nav.Link className='text-dark' href='/login'>
+                  <Nav.Link className="text-dark" href="/login">
                     Login
                   </Nav.Link>
-                  <Nav.Link className='text-dark' href='/get-start'>
+                  <Nav.Link className="text-dark" href="/get-start">
                     Register
                   </Nav.Link>
                 </>
               ) : (
                 user.name && (
-                  <div className='collapse navbar-collapse mr-3'>
-                    <ul className='navbar-nav'>
-                      <li className='nav-item dropdown dropdown-slide dropdown-hover'>
+                  <div className="collapse navbar-collapse mr-3">
+                    <ul className="navbar-nav">
+                      <li className="nav-item dropdown dropdown-slide dropdown-hover">
                         <a>
-                          <div className='logo-image pb-1'>
+                          <div className="logo-image pb-1">
                             <img
                               src={
                                 user.avatar
-                                  ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                  ? `http://localhost:5001/uploads/Avatar/${user.avatar}`
                                   : "/images/resource/avatar.svg"
                               }
-                              alt='avatar'
+                              alt="avatar"
                             />
                           </div>
                         </a>
                         <div
-                          className='dropdown-menu  mt-3 p-0'
-                          aria-labelledby='navbarDropdownMenuLink'
+                          className="dropdown-menu  mt-3 p-0"
+                          aria-labelledby="navbarDropdownMenuLink"
                           style={{ top: "37px" }}
                         >
-                          <a className='dropdown-item py-3' href='/profile'>
+                          <a className="dropdown-item py-3" href="/profile">
                             My Profile
                           </a>
-                          <div className='dropdown-divider m-0'></div>
+                          <div className="dropdown-divider m-0"></div>
 
                           <a
-                            className='dropdown-item py-3'
+                            className="dropdown-item py-3"
                             onClick={logoutHandler}
                           >
                             Logout

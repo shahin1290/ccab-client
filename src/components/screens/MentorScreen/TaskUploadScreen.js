@@ -108,7 +108,7 @@ export default function TaskUploadScreen({ match }) {
 
   const DownloadAssignmentHandler = async (task) => {
     const res = await fetch(
-      "https://server.ccab.tech/api/tasks/" + task._id + "/download",
+      "http://localhost:5001/api/tasks/" + task._id + "/download",
       config
     );
     const blob = await res.blob();
@@ -116,8 +116,8 @@ export default function TaskUploadScreen({ match }) {
   };
 
   return (
-    <div className='py-5'>
-      <div div className='title mb-4'>
+    <div className="py-5">
+      <div div className="title mb-4">
         Task uploading
       </div>
 
@@ -127,10 +127,10 @@ export default function TaskUploadScreen({ match }) {
             {err || CreateTaskError ? (
               <Message>{err || CreateTaskError}</Message>
             ) : null}
-            <Form.Group controlId='title'>
+            <Form.Group controlId="title">
               <Form.Label>Assignment Name</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 value={AssignmentName}
                 onChange={(e) => {
                   setAssignmentName(e.target.value);
@@ -138,10 +138,10 @@ export default function TaskUploadScreen({ match }) {
               />
             </Form.Group>
 
-            <Form.Group controlId='exampleForm.ControlTextarea1'>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Label>Assignment Description</Form.Label>
               <Form.Control
-                as='textarea'
+                as="textarea"
                 rows={3}
                 value={description}
                 onChange={(e) => {
@@ -152,23 +152,23 @@ export default function TaskUploadScreen({ match }) {
 
             <Form.Group>
               <Form.Label>Assignment Document</Form.Label>
-              <Form.File id='custom-file' custom>
-                <Form.File.Input onChange={_FileSubmitHandler} id='pdf-file' />
-                <Form.File.Label data-browse='Upload File'>
+              <Form.File id="custom-file" custom>
+                <Form.File.Input onChange={_FileSubmitHandler} id="pdf-file" />
+                <Form.File.Label data-browse="Upload File">
                   {DocumentLable}
                 </Form.File.Label>
               </Form.File>
             </Form.Group>
 
-            <Button variant='dark' type='submit' block>
+            <Button variant="dark" type="submit" block>
               Submit
             </Button>
           </Form>
         </Col>
         <Col lg={8} md={6} sm={12}>
-          <div className='sub-title mb-2'>Latest Task</div>
+          <div className="sub-title mb-2">Latest Task</div>
 
-          <Table striped bordered hover responsive='sm'>
+          <Table striped bordered hover responsive="sm">
             <thead>
               <tr>
                 <th>#</th>
@@ -194,7 +194,7 @@ export default function TaskUploadScreen({ match }) {
 
                       <td>
                         <a
-                          href='#'
+                          href="#"
                           onClick={() => {
                             DownloadAssignmentHandler(task);
                           }}
@@ -208,7 +208,7 @@ export default function TaskUploadScreen({ match }) {
             </tbody>
           </Table>
 
-          <div className='py-3'>
+          <div className="py-3">
             <Link
               to={`/mentor-task-list/${bootcampId}`}
               style={{ color: "green" }}

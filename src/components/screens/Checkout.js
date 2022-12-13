@@ -296,7 +296,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const res = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-subscription`,
+          `http://localhost:5001/api/order/stripe/stripe-subscription`,
           {
             payment_method: paymentMethod.id,
             planId: plan.stripeSubscriptionId,
@@ -385,7 +385,7 @@ const CheckoutForm = ({ match, history }) => {
         }
 
         const { data: clientSecret } = await axios.post(
-          `https://server.ccab.tech/api/order/stripe/stripe-payment-intent`,
+          `http://localhost:5001/api/order/stripe/stripe-payment-intent`,
           {
             paymentMethodType: "card",
             currency: currency.data.currency,
@@ -586,56 +586,56 @@ const CheckoutForm = ({ match, history }) => {
   const [klarnaMethod, setKlarnaMethod] = useState();
 
   return (
-    <div className='sidebar-page-container'>
-      <div className='auto-container'>
+    <div className="sidebar-page-container">
+      <div className="auto-container">
         {currencyLoading ? (
           <Loader />
         ) : currencyError ? (
           <Message>{currencyError}</Message>
         ) : (
           currencySuccess && (
-            <div className=''>
+            <div className="">
               {/* Content Side */}
 
               <div
-                className='content-side col-lg-10 col-md-12 col-sm-12'
+                className="content-side col-lg-10 col-md-12 col-sm-12"
                 style={{ margin: "0 auto" }}
               >
                 {/* Sec Title */}
-                <div className='sec-title'>
-                  <div className='title'>Checkout</div>
+                <div className="sec-title">
+                  <div className="title">Checkout</div>
                 </div>
 
-                <div className='checkout-section'>
+                <div className="checkout-section">
                   {/* Checkout Form */}
 
                   {/* Sidebar Side */}
 
-                  <div className='sidebar-side col-lg-9 col-md-12 col-sm-12 mt-5'>
-                    <aside className='sidebar sticky-top  mt-5'>
+                  <div className="sidebar-side col-lg-9 col-md-12 col-sm-12 mt-5">
+                    <aside className="sidebar sticky-top  mt-5">
                       {/* Order Widget */}
-                      <div className='border border-secondary rounded'>
-                        <div className='widget-content '>
-                          <div className='sidebar-title'>
-                            <div className='sub-title text-info pl-2 pt-2'>
+                      <div className="border border-secondary rounded">
+                        <div className="widget-content ">
+                          <div className="sidebar-title">
+                            <div className="sub-title text-info pl-2 pt-2">
                               Order Summary
                             </div>
                           </div>
 
-                          <div className='order-box bg-white p-2'>
+                          <div className="order-box bg-white p-2">
                             {subscription && (
                               <>
-                                <div className=''>
-                                  <div className='sub-title mr-2 mb-2'>
+                                <div className="">
+                                  <div className="sub-title mr-2 mb-2">
                                     Billing Type{" "}
                                   </div>
-                                  <div className='form-check m-3'>
+                                  <div className="form-check m-3">
                                     <input
-                                      className='form-check-input'
-                                      type='radio'
-                                      name='price'
-                                      id='inlineRadio1'
-                                      value='subscription'
+                                      className="form-check-input"
+                                      type="radio"
+                                      name="price"
+                                      id="inlineRadio1"
+                                      value="subscription"
                                       onChange={(e) => {
                                         setBillingType(e.target.value);
                                       }}
@@ -643,20 +643,20 @@ const CheckoutForm = ({ match, history }) => {
                                       required
                                     />
                                     <label
-                                      className='form-check-label font-weight-bold'
-                                      for='inlineRadio1'
+                                      className="form-check-label font-weight-bold"
+                                      for="inlineRadio1"
                                     >
                                       Subscription (pay every month)
                                     </label>
 
-                                    <div className='clearfix mb-3'>
+                                    <div className="clearfix mb-3">
                                       Total Of
                                       {plan.period === "weekly"
                                         ? " Weeks"
                                         : " Months"}
                                       :
                                       <select
-                                        className='custom-select-box px-2 mt-3'
+                                        className="custom-select-box px-2 mt-3"
                                         onChange={(e) => {
                                           setAmountOfWeeks(
                                             Number(e.target.value)
@@ -665,57 +665,57 @@ const CheckoutForm = ({ match, history }) => {
                                       >
                                         {plan.period == "weekly" ? (
                                           <>
-                                            <option value='4' selected>
+                                            <option value="4" selected>
                                               4 weeks
                                             </option>
-                                            <option value='5'>5 weeks</option>
-                                            <option value='6'>6 weeks</option>
-                                            <option value='7'>7 weeks</option>
-                                            <option value='8'>8 weeks</option>
+                                            <option value="5">5 weeks</option>
+                                            <option value="6">6 weeks</option>
+                                            <option value="7">7 weeks</option>
+                                            <option value="8">8 weeks</option>
                                           </>
                                         ) : (
                                           <>
-                                            <option value='2' selected>
+                                            <option value="2" selected>
                                               2 Months
                                             </option>
-                                            <option value='3'>3 Months</option>
-                                            <option value='4'>4 Months</option>
-                                            <option value='5'>5 Months</option>
-                                            <option value='6'>6 Months</option>
+                                            <option value="3">3 Months</option>
+                                            <option value="4">4 Months</option>
+                                            <option value="5">5 Months</option>
+                                            <option value="6">6 Months</option>
                                           </>
                                         )}
                                       </select>
                                     </div>
                                   </div>
 
-                                  <div className='form-check m-3'>
+                                  <div className="form-check m-3">
                                     <input
-                                      className='form-check-input'
-                                      type='radio'
-                                      name='price'
-                                      id='inlineRadio2'
-                                      value='oneTime'
+                                      className="form-check-input"
+                                      type="radio"
+                                      name="price"
+                                      id="inlineRadio2"
+                                      value="oneTime"
                                       onChange={(e) => {
                                         setBillingType(e.target.value);
                                       }}
                                       checked={billingType === "oneTime"}
                                     />
                                     <label
-                                      className='form-check-label font-weight-bold'
-                                      for='inlineRadio2'
+                                      className="form-check-label font-weight-bold"
+                                      for="inlineRadio2"
                                     >
                                       Full payment (pay once)
                                     </label>
                                   </div>
                                 </div>
 
-                                <div className='sub-title mt-5 mr-2 mb-2'>
+                                <div className="sub-title mt-5 mr-2 mb-2">
                                   Order Details{" "}
                                 </div>
-                                <ul className='pt-2'>
-                                  <li className='clearfix mb-3'>
+                                <ul className="pt-2">
+                                  <li className="clearfix mb-3">
                                     Plan Type:
-                                    <span className='pull-right'>
+                                    <span className="pull-right">
                                       {plan.name}
                                     </span>
                                   </li>
@@ -723,9 +723,9 @@ const CheckoutForm = ({ match, history }) => {
                                   {billingType === "oneTime" ? (
                                     <>
                                       {" "}
-                                      <li className='clearfix mb-3'>
+                                      <li className="clearfix mb-3">
                                         Original Price:
-                                        <span className='pull-right'>
+                                        <span className="pull-right">
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -744,9 +744,9 @@ const CheckoutForm = ({ match, history }) => {
                                   ) : (
                                     <>
                                       {" "}
-                                      <li className='clearfix mb-3'>
+                                      <li className="clearfix mb-3">
                                         Original Price:
-                                        <span className='pull-right'>
+                                        <span className="pull-right">
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -768,10 +768,10 @@ const CheckoutForm = ({ match, history }) => {
                                     </>
                                   )}
 
-                                  <li className='clearfix mb-3'>
+                                  <li className="clearfix mb-3">
                                     Disscount:
                                     {billingType === "oneTime" ? (
-                                      <span className='pull-right'>
+                                      <span className="pull-right">
                                         {currencySuccess &&
                                           `${Math.round(
                                             (promos &&
@@ -785,7 +785,7 @@ const CheckoutForm = ({ match, history }) => {
                                           )}  ${currency.data.currency}`}
                                       </span>
                                     ) : (
-                                      <span className='pull-right'>
+                                      <span className="pull-right">
                                         {currencySuccess &&
                                           `${Math.round(
                                             (promos &&
@@ -803,13 +803,13 @@ const CheckoutForm = ({ match, history }) => {
 
                                   <hr />
 
-                                  <li className='clearfix'>
-                                    <span className='text-info font-weight-bold'>
+                                  <li className="clearfix">
+                                    <span className="text-info font-weight-bold">
                                       Total
                                     </span>{" "}
-                                    <span className='pull-right'>
+                                    <span className="pull-right">
                                       {billingType === "oneTime" ? (
-                                        <span className='text-info font-weight-bold'>
+                                        <span className="text-info font-weight-bold">
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -824,7 +824,7 @@ const CheckoutForm = ({ match, history }) => {
                                             )}  ${currency.data.currency}`}
                                         </span>
                                       ) : (
-                                        <span className='text-info font-weight-bold'>
+                                        <span className="text-info font-weight-bold">
                                           {currencySuccess &&
                                             `${Math.round(
                                               (Number(plan.price) +
@@ -846,9 +846,9 @@ const CheckoutForm = ({ match, history }) => {
                             )}
                             {ID && (
                               <ul>
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Original Price:
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
@@ -860,9 +860,9 @@ const CheckoutForm = ({ match, history }) => {
                                   </span>
                                 </li>
 
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Coupon discounts:
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `-${getPriceFormat(
                                         Math.round(
@@ -875,12 +875,12 @@ const CheckoutForm = ({ match, history }) => {
                                 </li>
                                 <hr />
 
-                                <li className='clearfix'>
-                                  <span className='text-info text-bold'>
+                                <li className="clearfix">
+                                  <span className="text-info text-bold">
                                     Total
                                   </span>{" "}
-                                  <span className='pull-right'>
-                                    <span className='text-info font-weight-bold'>
+                                  <span className="pull-right">
+                                    <span className="text-info font-weight-bold">
                                       {currencySuccess &&
                                         `${getPriceFormat(
                                           Math.round(
@@ -895,15 +895,15 @@ const CheckoutForm = ({ match, history }) => {
 
                             {requestId && (
                               <ul>
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Service:
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {request.name}
                                   </span>
                                 </li>
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Bill:
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
@@ -915,12 +915,12 @@ const CheckoutForm = ({ match, history }) => {
 
                                 <hr />
 
-                                <li className='clearfix'>
-                                  <span className='text-info text-bold'>
+                                <li className="clearfix">
+                                  <span className="text-info text-bold">
                                     Total
                                   </span>{" "}
-                                  <span className='pull-right'>
-                                    <span className='text-info font-weight-bold'>
+                                  <span className="pull-right">
+                                    <span className="text-info font-weight-bold">
                                       {currencySuccess &&
                                         `${getPriceFormat(
                                           Math.round(
@@ -936,15 +936,15 @@ const CheckoutForm = ({ match, history }) => {
 
                             {serviceId && (
                               <ul>
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Service:
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {service && service.name}
                                   </span>
                                 </li>
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Price(per session):
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {currencySuccess &&
                                       `${getPriceFormat(
                                         Math.round(
@@ -954,9 +954,9 @@ const CheckoutForm = ({ match, history }) => {
                                   </span>
                                 </li>
 
-                                <li className='clearfix mb-3'>
+                                <li className="clearfix mb-3">
                                   Sessions:
-                                  <span className='pull-right'>
+                                  <span className="pull-right">
                                     {
                                       JSON.parse(
                                         localStorage.getItem("appointment")
@@ -967,12 +967,12 @@ const CheckoutForm = ({ match, history }) => {
 
                                 <hr />
 
-                                <li className='clearfix'>
-                                  <span className='text-info text-bold'>
+                                <li className="clearfix">
+                                  <span className="text-info text-bold">
                                     Total
                                   </span>{" "}
-                                  <span className='pull-right'>
-                                    <span className='text-info font-weight-bold'>
+                                  <span className="pull-right">
+                                    <span className="text-info font-weight-bold">
                                       {currencySuccess &&
                                         `${getPriceFormat(
                                           Math.round(
@@ -997,45 +997,45 @@ const CheckoutForm = ({ match, history }) => {
                   </div>
 
                   {/* Signup Info Tabs*/}
-                  <div className=' col-lg-9 col-md-12 col-sm-12 mb-5'>
-                    <div className='wrapper'>
-                      <div className='title'>Select Payment Method</div>
-                      <div className='box'>
+                  <div className=" col-lg-9 col-md-12 col-sm-12 mb-5">
+                    <div className="wrapper">
+                      <div className="title">Select Payment Method</div>
+                      <div className="box">
                         <input
-                          type='radio'
-                          name='select'
-                          id='option-1'
+                          type="radio"
+                          name="select"
+                          id="option-1"
                           onClick={() => setMethod("card")}
                         />
                         <input
-                          type='radio'
-                          name='select'
-                          id='option-2'
+                          type="radio"
+                          name="select"
+                          id="option-2"
                           onClick={() => {
                             setMethod("klarna");
                             _handelcreateKlarnaOrder();
                           }}
                         />
 
-                        <label for='option-1' className='option-1'>
-                          <div className='dot'></div>
+                        <label for="option-1" className="option-1">
+                          <div className="dot"></div>
 
-                          <div className='text'>Credit card</div>
-                          <div className='pl-5 ml-2'>
+                          <div className="text">Credit card</div>
+                          <div className="pl-5 ml-2">
                             <img
-                              width='160'
-                              src='https://cdn.jotfor.ms/images/credit-card-logo.png'
+                              width="160"
+                              src="https://cdn.jotfor.ms/images/credit-card-logo.png"
                             />
                           </div>
                         </label>
-                        <label for='option-2' className='option-2'>
-                          <div className='dot'></div>
-                          <div className='text'>Klarna</div>
-                          <div className='pl-5 ml-5'>
+                        <label for="option-2" className="option-2">
+                          <div className="dot"></div>
+                          <div className="text">Klarna</div>
+                          <div className="pl-5 ml-5">
                             <img
-                              width='50'
-                              className='pr-2'
-                              src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
+                              width="50"
+                              className="pr-2"
+                              src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
                             />
                           </div>
                         </label>
@@ -1064,19 +1064,19 @@ const CheckoutForm = ({ match, history }) => {
                     </ButtonGroup> */}
                     {method === "card" && (
                       <form onSubmit={submitHandler}>
-                        <div className='sub-title p-3'>Payment Information</div>
+                        <div className="sub-title p-3">Payment Information</div>
                         {checkoutError && (
                           <Message>{checkoutError}</Message>
                         )}{" "}
                         {isProcessing && <Loader />}
                         <div
-                          className='row clearfix p-3'
+                          className="row clearfix p-3"
                           style={{
                             boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
                             backgroundColor: "white",
                           }}
                         >
-                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-12 col-sm-12">
                             <label>Name on card</label>
 
                             <div
@@ -1087,17 +1087,17 @@ const CheckoutForm = ({ match, history }) => {
                               }}
                             >
                               <input
-                                type='text'
+                                type="text"
                                 value={name}
-                                placeholder='Emily J Smith'
+                                placeholder="Emily J Smith"
                                 required
                                 onChange={(e) => setName(e.target.value)}
                               />
                             </div>
                           </div>
 
-                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
-                            <label htmlFor='cardNumber'>Card Number</label>
+                          <div className="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label htmlFor="cardNumber">Card Number</label>
                             <div
                               style={{
                                 boxShadow: "0px 0px 10px rgba(0,0,0,0.10)",
@@ -1106,13 +1106,13 @@ const CheckoutForm = ({ match, history }) => {
                               }}
                             >
                               <CardNumberElement
-                                id='cardNumber'
+                                id="cardNumber"
                                 options={ELEMENT_OPTIONS}
                               />
                             </div>
                           </div>
 
-                          <div className='form-group col-lg-6 col-md-6 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-6 col-sm-12">
                             <label>Expiration Date</label>
                             <div
                               style={{
@@ -1125,7 +1125,7 @@ const CheckoutForm = ({ match, history }) => {
                             </div>
                           </div>
 
-                          <div className='form-group col-lg-6 col-md-6 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-6 col-sm-12">
                             <label>CVC Code</label>
                             <div
                               style={{
@@ -1138,15 +1138,15 @@ const CheckoutForm = ({ match, history }) => {
                             </div>
                           </div>
                         </div>
-                        <div className='sub-title p-3'>Billing Address</div>
+                        <div className="sub-title p-3">Billing Address</div>
                         <div
-                          className='row clearfix'
+                          className="row clearfix"
                           style={{
                             boxShadow: " 0 2px 2px 0 rgba(0,0,0,0.2)",
                             backgroundColor: "white",
                           }}
                         >
-                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-12 col-sm-12">
                             <label>Street</label>
 
                             <div
@@ -1157,16 +1157,16 @@ const CheckoutForm = ({ match, history }) => {
                               }}
                             >
                               <input
-                                type='text'
+                                type="text"
                                 value={street}
-                                placeholder='542 W. 15th Street'
+                                placeholder="542 W. 15th Street"
                                 required
                                 onChange={(e) => setStreet(e.target.value)}
                               />
                             </div>
                           </div>
 
-                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-12 col-sm-12">
                             <label>City</label>
 
                             <div
@@ -1177,16 +1177,16 @@ const CheckoutForm = ({ match, history }) => {
                               }}
                             >
                               <input
-                                type='text'
+                                type="text"
                                 value={city}
-                                placeholder='New York'
+                                placeholder="New York"
                                 required
                                 onChange={(e) => setCity(e.target.value)}
                               />
                             </div>
                           </div>
 
-                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-12 col-sm-12">
                             <label>Country</label>
 
                             <div
@@ -1197,15 +1197,15 @@ const CheckoutForm = ({ match, history }) => {
                               }}
                             >
                               <input
-                                type='text'
+                                type="text"
                                 value={country}
-                                placeholder='USA'
+                                placeholder="USA"
                                 required
                                 onChange={(e) => setCountry(e.target.value)}
                               />
                             </div>
                           </div>
-                          <div className='form-group col-lg-6 col-md-12 col-sm-12'>
+                          <div className="form-group col-lg-6 col-md-12 col-sm-12">
                             <label>Zip</label>
 
                             <div
@@ -1216,9 +1216,9 @@ const CheckoutForm = ({ match, history }) => {
                               }}
                             >
                               <input
-                                type='text'
+                                type="text"
                                 value={zip}
-                                placeholder='58648'
+                                placeholder="58648"
                                 required
                                 onChange={(e) => setZip(e.target.value)}
                               />
@@ -1230,13 +1230,13 @@ const CheckoutForm = ({ match, history }) => {
                             className={`theme-btn btn-style-one ${
                               isProcessing && "isDisabled"
                             }`}
-                            type='submit'
-                            name='submit-form'
+                            type="submit"
+                            name="submit-form"
                           >
                             {isProcessing ? (
                               <Loader />
                             ) : (
-                              <span className='txt'>Confirm Checkout</span>
+                              <span className="txt">Confirm Checkout</span>
                             )}
                           </button>
                         </div>
@@ -1247,7 +1247,7 @@ const CheckoutForm = ({ match, history }) => {
                         {widgetLoaded && <Loader />}
                         <div
                           onChange={(e) => setKlarnaMethod(e.target.value)}
-                          className='p-4'
+                          className="p-4"
                         >
                           {sessionLoading ? (
                             <Loader />
@@ -1256,23 +1256,23 @@ const CheckoutForm = ({ match, history }) => {
                             session.payment_method_categories.map((method) => (
                               <div
                                 key={method.identifier}
-                                className='m-2 p-2 border border-secondary bg-white text-dark '
+                                className="m-2 p-2 border border-secondary bg-white text-dark "
                               >
                                 <input
                                   value={method.identifier}
-                                  className='form-check-input ml-3'
-                                  type='radio'
-                                  name='flexRadioDefault'
+                                  className="form-check-input ml-3"
+                                  type="radio"
+                                  name="flexRadioDefault"
                                   id={method.identifier}
                                 />
-                                <div className='d-flex justify-content-between'>
+                                <div className="d-flex justify-content-between">
                                   <label
-                                    className='form-check-label ml-5'
+                                    className="form-check-label ml-5"
                                     for={method.identifier}
                                   >
                                     {method.name}
                                   </label>
-                                  <img src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg' />
+                                  <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" />
                                 </div>
                               </div>
                             ))

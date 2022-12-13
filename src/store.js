@@ -129,15 +129,7 @@ import {
   serviceCategoryUpdateReducer,
 } from "./redux/reducers/serviceCategoryReducer";
 
-import {
-  performanceCreateReducer,
-  performanceListReducer,
-  performanceLectureListReducer,
-  performanceDetailsReducer,
-  topPerformanceListReducer,
-  performanceDeleteReducer,
-  performanceUpdateReducer,
-} from "./redux/reducers/performanceReducer";
+
 
 import {
   mediaCenterListReducer,
@@ -256,14 +248,9 @@ const reducer = combineReducers({
   serviceCategoryDetails: serviceCategoryDetailsReducer,
   serviceCategoryUpdate: serviceCategoryUpdateReducer,
   serviceCategoryDelete: serviceCategoryDeleteReducer,
-  performanceCreate: performanceCreateReducer,
-  performanceList: performanceListReducer,
-  topPerformanceList: topPerformanceListReducer,
-  performanceDetails: performanceDetailsReducer,
-  performanceUpdate: performanceUpdateReducer,
-  performanceDelete: performanceDeleteReducer,
+
   mediaCenterList: mediaCenterListReducer,
-  performanceLectureList: performanceLectureListReducer,
+
   adminmediaCenterList: adminMediaCenterListReducer,
   mediaCenterDetails: mediaCenterDetailsReducer,
   mediaCenterCreate: mediaCenterCreateReducer,

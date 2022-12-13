@@ -15,7 +15,6 @@ import { createAnswer, getUserAnswer } from "../../redux/actions/answerAction";
 // importing component
 import Loader from "../layout/Loader";
 import Message from "../layout/Message";
-import { updatePerformance } from "../../redux/actions/performanceAction";
 
 export default function AssignmentDetail({ match }) {
   const history = useHistory();
@@ -105,12 +104,7 @@ export default function AssignmentDetail({ match }) {
 
       dispatch(createAnswer(form_data, bootcampId, taskDetail.task._id));
 
-      if (userDetail.user_type === "StudentUser") {
-        dispatch(
-          updatePerformance({ taskId: taskDetail.task._id }, bootcampId)
-        );
-      }
-
+     
       //clear the fields
       setFile({});
       setAssignemntLink("");
@@ -132,7 +126,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "https://server.ccab.tech/api/tasks/" + task._id + "/download",
+      "http://localhost:5001/api/tasks/" + task._id + "/download",
       config
     );
 
@@ -149,40 +143,40 @@ export default function AssignmentDetail({ match }) {
 
   return (
     <>
-      <section className='login-nav-section'>
-        <div className='auto-container'></div>
+      <section className="login-nav-section">
+        <div className="auto-container"></div>
       </section>
       <Container style={{ marginBottom: "120px" }}>
-        <h1 className=''>Assignment Details</h1>
+        <h1 className="">Assignment Details</h1>
         {loading ? (
           <Loader />
         ) : taskDetail && taskDetail.task ? (
           <Row>
             <Col>
-              <div className='p-3 container-fluid '>
-                <div className='row'>
-                  <div className='col-sm '>
-                    <h3 className='mb-2'>{taskDetail.task.projectName}</h3>
-                    <span className='mb-1 d-block'>
+              <div className="p-3 container-fluid ">
+                <div className="row">
+                  <div className="col-sm ">
+                    <h3 className="mb-2">{taskDetail.task.projectName}</h3>
+                    <span className="mb-1 d-block">
                       {getDates(taskDetail.task.createdAt)}
                     </span>
                     <p>{taskDetail.task.description}</p>
                   </div>
                 </div>
 
-                <div className='row justify-content-between mt-4'>
-                  <div className='col-sm '>
+                <div className="row justify-content-between mt-4">
+                  <div className="col-sm ">
                     <cite>Assignment by : {taskDetail.task.user.name}</cite>
                   </div>
 
-                  <div className='col-sm '>
+                  <div className="col-sm ">
                     <a
-                      href='#'
+                      href="#"
                       onClick={() => {
                         DownloadAssignmentHandler(taskDetail.task);
                       }}
                     >
-                      <i className=''>Download Assignemnt</i>
+                      <i className="">Download Assignemnt</i>
                     </a>
                   </div>
                 </div>
@@ -200,12 +194,12 @@ export default function AssignmentDetail({ match }) {
                     <Message>{err || AnswerError}</Message>
                   ) : null}
 
-                  <Form.Group controlId='link'>
+                  <Form.Group controlId="link">
                     <Form.Label>Github Link</Form.Label>
                     <Form.Control
-                      type='text'
+                      type="text"
                       value={AssignemntLink}
-                      placeholder='github.com'
+                      placeholder="github.com"
                       onChange={(e) => {
                         setAssignemntLink(e.target.value);
                       }}
@@ -213,20 +207,20 @@ export default function AssignmentDetail({ match }) {
                   </Form.Group>
                   <Form.Label>Project Document</Form.Label>
 
-                  <Form.File id='custom-file' custom>
+                  <Form.File id="custom-file" custom>
                     <Form.File.Input
                       onChange={_FileSubmitHandler}
-                      id='zip-file'
+                      id="zip-file"
                     />
-                    <Form.File.Label data-browse='Upload file'>
+                    <Form.File.Label data-browse="Upload file">
                       {DocumentLable}
                     </Form.File.Label>
                   </Form.File>
 
-                  <div className='py-3'>
+                  <div className="py-3">
                     <Button
-                      variant='dark'
-                      type='submit'
+                      variant="dark"
+                      type="submit"
                       block
                       onClick={submitHanlder}
                     >
@@ -234,10 +228,10 @@ export default function AssignmentDetail({ match }) {
                     </Button>
                   </div>
                 </Form>
-                <div className='py-3'>
-                  <Link to='/profile'>
-                    <i className='fas fa-user'></i>
-                    <span className='px-1'>Go back to profile</span>
+                <div className="py-3">
+                  <Link to="/profile">
+                    <i className="fas fa-user"></i>
+                    <span className="px-1">Go back to profile</span>
                   </Link>
                 </div>
               </Col>
@@ -246,15 +240,15 @@ export default function AssignmentDetail({ match }) {
                 lg={4}
                 md={6}
                 sm={12}
-                className='d-flex align-items-center  justify-content-center flex-column'
+                className="d-flex align-items-center  justify-content-center flex-column"
               >
-                <div className='card text-center p-3 '>
-                  <h5 className='text-info'>Assignemnt Is Already Sent</h5>
+                <div className="card text-center p-3 ">
+                  <h5 className="text-info">Assignemnt Is Already Sent</h5>
                 </div>
-                <div className='py-3 align-self-center '>
-                  <Link to='/profile'>
-                    <i className='fas fa-user'></i>
-                    <span className='px-1'>Go back to profile</span>
+                <div className="py-3 align-self-center ">
+                  <Link to="/profile">
+                    <i className="fas fa-user"></i>
+                    <span className="px-1">Go back to profile</span>
                   </Link>
                 </div>
               </Col>

@@ -236,51 +236,51 @@ export default function ServiceDetailScreen({ match }) {
   return (
     <>
       {/* Intro services */}
-      <section className='intro-section'>
+      <section className="intro-section">
         <div
-          className='patern-layer-one paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-one paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-1.png)" }}
         ></div>
         <div
-          className='patern-layer-two paroller'
-          data-paroller-factor='0.40'
-          data-paroller-factor-lg='-0.20'
-          data-paroller-type='foreground'
-          data-paroller-direction='vertical'
+          className="patern-layer-two paroller"
+          data-paroller-factor="0.40"
+          data-paroller-factor-lg="-0.20"
+          data-paroller-type="foreground"
+          data-paroller-direction="vertical"
           style={{ backgroundImage: "url(images/icons/icon-2.png)" }}
         ></div>
-        <div className='circle-one'></div>
+        <div className="circle-one"></div>
 
-        <div className='auto-container'>
+        <div className="auto-container">
           {loading ? (
             <Loader />
           ) : error ? (
             <Message>{error}</Message>
           ) : service.name ? (
             <div>
-              <div className='sec-title'>
+              <div className="sec-title">
                 <h2>{service.name}</h2>
               </div>
 
-              <div className='inner-container'>
-                <div className='row clearfix'>
+              <div className="inner-container">
+                <div className="row clearfix">
                   {/* Content Column */}
-                  <div className='content-column col-lg-8 col-md-12 col-sm-12'>
+                  <div className="content-column col-lg-8 col-md-12 col-sm-12">
                     {/* Intro Tabs*/}
-                    <div className='sub-title '>Instructors</div>
-                    <div className='intro-tabs tabs-box mt-3'>
+                    <div className="sub-title ">Instructors</div>
+                    <div className="intro-tabs tabs-box mt-3">
                       {/*Tab Btns*/}
-                      <ul className='tab-btns tab-buttons clearfix'>
+                      <ul className="tab-btns tab-buttons clearfix">
                         {service.name &&
                           service.instructors.length &&
                           service.instructors.map((instructor) => (
                             <li
-                              data-tab='#prod-overview'
-                              className='tab-btn'
+                              data-tab="#prod-overview"
+                              className="tab-btn"
                               onClick={() =>
                                 setSelectedInstructor(instructor._id)
                               }
@@ -292,14 +292,14 @@ export default function ServiceDetailScreen({ match }) {
                               }}
                             >
                               <a>
-                                <div className='logo-image'>
+                                <div className="logo-image">
                                   <img
                                     src={
                                       instructor.avatar
-                                        ? `https://server.ccab.tech/uploads/Avatar/${instructor.avatar}`
+                                        ? `http://localhost:5001/uploads/Avatar/${instructor.avatar}`
                                         : "/images/resource/avatar.svg"
                                     }
-                                    alt='avatar'
+                                    alt="avatar"
                                   />
                                 </div>
                               </a>
@@ -308,20 +308,20 @@ export default function ServiceDetailScreen({ match }) {
                       </ul>
 
                       {/*Tabs Container*/}
-                      <div className='tabs-content'>
+                      <div className="tabs-content">
                         {/*Tab / Active Tab*/}
-                        <div className='tab active-tab' id='prod-overview'>
-                          <div className='content'>
+                        <div className="tab active-tab" id="prod-overview">
+                          <div className="content">
                             {/* Cource Overview */}
-                            <div className='course-overview'>
-                              <div className='inner-box'>
-                                <div className='title'>
+                            <div className="course-overview">
+                              <div className="inner-box">
+                                <div className="title">
                                   {selectedInstructorBio() &&
                                     selectedInstructorBio().name}
                                 </div>
-                                <div className=' col-lg-9 col-md-6 col-sm-12'>
-                                  <div className=' logo-widget'>
-                                    <div className='social-box'>
+                                <div className=" col-lg-9 col-md-6 col-sm-12">
+                                  <div className=" logo-widget">
+                                    <div className="social-box">
                                       {selectedInstructorBio() &&
                                         selectedInstructorBio()
                                           .networkAddresses &&
@@ -334,7 +334,7 @@ export default function ServiceDetailScreen({ match }) {
                                                 "facebook" && (
                                                 <a
                                                   href={networkAddress.address}
-                                                  className='fa fa-facebook p-2'
+                                                  className="fa fa-facebook p-2"
                                                   style={{
                                                     color: "#3b5998",
                                                   }}
@@ -345,7 +345,7 @@ export default function ServiceDetailScreen({ match }) {
                                                 "twitter" && (
                                                 <a
                                                   href={networkAddress.address}
-                                                  className='fa fa-twitter p-2'
+                                                  className="fa fa-twitter p-2"
                                                   style={{
                                                     color: "#1DA1F2",
                                                   }}
@@ -356,7 +356,7 @@ export default function ServiceDetailScreen({ match }) {
                                                 "linkedin" && (
                                                 <a
                                                   href={networkAddress.address}
-                                                  className='fa fa-linkedin p-2'
+                                                  className="fa fa-linkedin p-2"
                                                   style={{
                                                     color: "#0A66C2",
                                                   }}
@@ -367,7 +367,7 @@ export default function ServiceDetailScreen({ match }) {
                                                 "github" && (
                                                 <a
                                                   href={networkAddress.address}
-                                                  className='fa fa-github p-2'
+                                                  className="fa fa-github p-2"
                                                 />
                                               )}
                                             </>
@@ -377,8 +377,8 @@ export default function ServiceDetailScreen({ match }) {
                                   </div>
                                 </div>
 
-                                <div className='mt-5 mb-5'>
-                                  <div className='sub-title'>
+                                <div className="mt-5 mb-5">
+                                  <div className="sub-title">
                                     About{" "}
                                     <span>
                                       {selectedInstructorBio() &&
@@ -387,13 +387,13 @@ export default function ServiceDetailScreen({ match }) {
                                   </div>
                                   <hr />
 
-                                  <div className='sub-text'>
+                                  <div className="sub-text">
                                     {selectedInstructorBio() &&
                                       selectedInstructorBio().bio}
                                   </div>
                                 </div>
 
-                                <div className='sub-title'>Skills</div>
+                                <div className="sub-title">Skills</div>
                                 <hr />
 
                                 {selectedInstructorBio() &&
@@ -401,7 +401,7 @@ export default function ServiceDetailScreen({ match }) {
                                   selectedInstructorBio().skills.length > 0 &&
                                   selectedInstructorBio().skills.map(
                                     (skill) => (
-                                      <div className='sub-text'>{skill}</div>
+                                      <div className="sub-text">{skill}</div>
                                     )
                                   )}
                               </div>
@@ -410,36 +410,36 @@ export default function ServiceDetailScreen({ match }) {
                         </div>
                       </div>
                     </div>
-                    <div className='inner-column'>
+                    <div className="inner-column">
                       {/* Intro Info Tabs*/}
-                      <div className='intro-info-tabs'>
+                      <div className="intro-info-tabs">
                         {/* Intro Tabs*/}
-                        <div className='intro-tabs tabs-box'>
+                        <div className="intro-tabs tabs-box">
                           {/*Tab Btns*/}
-                          <ul className='tab-btns tab-buttons clearfix mt-5'>
+                          <ul className="tab-btns tab-buttons clearfix mt-5">
                             <li
-                              data-tab='#prod-overview'
-                              className='tab-btn active-btn'
+                              data-tab="#prod-overview"
+                              className="tab-btn active-btn"
                             >
                               Overview
                             </li>
                           </ul>
 
                           {/*Tabs Container*/}
-                          <div className='tabs-content'>
+                          <div className="tabs-content">
                             {/*Tab / Active Tab*/}
-                            <div className='tab active-tab' id='prod-overview'>
-                              <div className='content'>
+                            <div className="tab active-tab" id="prod-overview">
+                              <div className="content">
                                 {/* Cource Overview */}
-                                <div className='course-overview'>
-                                  <div className='inner-box'>
+                                <div className="course-overview">
+                                  <div className="inner-box">
                                     <h4>About the service</h4>
-                                    <p className='sub-text'>
+                                    <p className="sub-text">
                                       {service.description}
                                     </p>
 
-                                    <ul className='student-list'>
-                                      <li className='text-dark bg-warning p-2 rounded '>
+                                    <ul className="student-list">
+                                      <li className="text-dark bg-warning p-2 rounded ">
                                         {service.instructors.length} Instructors
                                       </li>
                                     </ul>
@@ -448,11 +448,11 @@ export default function ServiceDetailScreen({ match }) {
                                         return (
                                           <div key={item.title}>
                                             <h3>{item.title}</h3>
-                                            <ul className='review-list'>
+                                            <ul className="review-list">
                                               {item.items.map((itemList) => {
                                                 return (
                                                   <li
-                                                    className='sub-text'
+                                                    className="sub-text"
                                                     key={itemList.content}
                                                   >
                                                     {itemList.content}
@@ -464,7 +464,7 @@ export default function ServiceDetailScreen({ match }) {
                                         );
                                       })
                                     ) : (
-                                      <p className='p-2 text-warning'>
+                                      <p className="p-2 text-warning">
                                         There is no Requirements
                                       </p>
                                     )}
@@ -480,17 +480,17 @@ export default function ServiceDetailScreen({ match }) {
 
                   {/* Video Column */}
 
-                  <div className='video-column col-lg-4 col-md-12 col-sm-12'>
+                  <div className="video-column col-lg-4 col-md-12 col-sm-12">
                     {currencyLoading ? (
                       <Loader />
                     ) : (
-                      <div className='inner-column sticky-top'>
+                      <div className="inner-column sticky-top">
                         {/* Video Box */}
                         <div
-                          className='intro-video'
+                          className="intro-video"
                           style={{
                             backgroundImage:
-                              "url(https://server.ccab.tech/uploads/Service/" +
+                              "url(http://localhost:5001/uploads/Service/" +
                               service.img_path +
                               ")",
                           }}
@@ -499,10 +499,10 @@ export default function ServiceDetailScreen({ match }) {
                         {order && order.service ? (
                           <a
                             href={"/service-content/" + service._id}
-                            className='mt-4 theme-btn btn-style-three'
+                            className="mt-4 theme-btn btn-style-three"
                           >
-                            <span className='txt'>
-                              GO TO service<i className='fa fa-angle-right'></i>
+                            <span className="txt">
+                              GO TO service<i className="fa fa-angle-right"></i>
                             </span>
                           </a>
                         ) : (
@@ -510,7 +510,7 @@ export default function ServiceDetailScreen({ match }) {
                             <div>
                               {currencySuccess &&
                                 (service.price > 0 ? (
-                                  <div className='price mb-3'>
+                                  <div className="price mb-3">
                                     {` ${
                                       currency.data.currency
                                     } ${getPriceFormat(
@@ -518,7 +518,7 @@ export default function ServiceDetailScreen({ match }) {
                                         currency.data.amount * service.price
                                       )
                                     )} `}
-                                    <div className='sub-title'>
+                                    <div className="sub-title">
                                       (per session)
                                     </div>
                                   </div>
@@ -526,29 +526,29 @@ export default function ServiceDetailScreen({ match }) {
                                   "Free service "
                                 ))}
                               {/* Service Form */}
-                              <div className='option-cource-box'>
-                                <div className=''>
-                                  <div className='form-group mb-2'>
-                                    <div className='sub-title mb-2'>
+                              <div className="option-cource-box">
+                                <div className="">
+                                  <div className="form-group mb-2">
+                                    <div className="sub-title mb-2">
                                       {" "}
                                       Instructor
                                     </div>
                                     {service.name &&
                                       !service.instructors.length && (
-                                        <p className='text-warning bg-light p-1'>
+                                        <p className="text-warning bg-light p-1">
                                           * There is no Instructor User
                                         </p>
                                       )}
                                     {/* <span className="select-category">Select a category</span> */}
                                     <select
-                                      className='custom-select-box px-2'
+                                      className="custom-select-box px-2"
                                       onChange={(e) => {
                                         _handleSelectInstructor(
                                           e.target.value.split(",")
                                         );
                                       }}
                                     >
-                                      <option value='' disabled selected>
+                                      <option value="" disabled selected>
                                         Choose Instructor{" "}
                                       </option>
                                       {service.name &&
@@ -572,14 +572,14 @@ export default function ServiceDetailScreen({ match }) {
                                         )}
                                     </select>
 
-                                    <div className='my-3'>
+                                    <div className="my-3">
                                       {instructor.name ? (
-                                        <span className='rounded-pill  px-2 py-1 m-2 bg-light'>
-                                          <i className='fas fa-plus-circle text-success'></i>{" "}
+                                        <span className="rounded-pill  px-2 py-1 m-2 bg-light">
+                                          <i className="fas fa-plus-circle text-success"></i>{" "}
                                           {instructor.name}
                                         </span>
                                       ) : (
-                                        <p className='text-warning bg-light p-1'>
+                                        <p className="text-warning bg-light p-1">
                                           * Nothing Selected
                                         </p>
                                       )}
@@ -591,7 +591,7 @@ export default function ServiceDetailScreen({ match }) {
                                       inputFields.map((inputField, index) => (
                                         <Card key={inputField.id}>
                                           <div style={{ display: "flex" }}>
-                                            <div className='form-group col-lg-7 col-md-12 col-sm-12'>
+                                            <div className="form-group col-lg-7 col-md-12 col-sm-12">
                                               <label>
                                                 {`Session ${1 + index}`}{" "}
                                               </label>
@@ -608,9 +608,9 @@ export default function ServiceDetailScreen({ match }) {
                                                   )
                                                 }
                                                 timeIntervals={60}
-                                                name='content'
+                                                name="content"
                                                 showTimeSelect
-                                                dateFormat='MMMM d, yyyy h:mm aa'
+                                                dateFormat="MMMM d, yyyy h:mm aa"
                                                 filterTime={filterPassedTime}
                                                 filterDate={isWeekday}
                                                 minTime={setHours(
@@ -634,13 +634,13 @@ export default function ServiceDetailScreen({ match }) {
                                             }}
                                           >
                                             <button
-                                              type='button'
+                                              type="button"
                                               onClick={handleAddFields}
                                             >
-                                              <i className='fas fa-plus-square'></i>
+                                              <i className="fas fa-plus-square"></i>
                                             </button>
                                             <button
-                                              type='button'
+                                              type="button"
                                               disabled={
                                                 inputFields.length === 1
                                               }
@@ -650,7 +650,7 @@ export default function ServiceDetailScreen({ match }) {
                                                 )
                                               }
                                             >
-                                              <i className='fas fa-minus-square'></i>
+                                              <i className="fas fa-minus-square"></i>
                                             </button>
                                           </div>
                                         </Card>
@@ -685,8 +685,8 @@ export default function ServiceDetailScreen({ match }) {
                                   : ""
                               }`}
                             >
-                              <span className='txt'>
-                                Book now <i className='fa fa-angle-right'></i>
+                              <span className="txt">
+                                Book now <i className="fa fa-angle-right"></i>
                               </span>
                             </a>
                             <div
@@ -696,13 +696,13 @@ export default function ServiceDetailScreen({ match }) {
                               }}
                             >
                               <img
-                                width='23%'
-                                className='pr-2'
-                                src='https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png'
+                                width="23%"
+                                className="pr-2"
+                                src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.png"
                               />
                               <img
-                                width='75%'
-                                src='https://cdn.jotfor.ms/images/credit-card-logo.png'
+                                width="75%"
+                                src="https://cdn.jotfor.ms/images/credit-card-logo.png"
                               />
                             </div>
                           </>
@@ -721,26 +721,26 @@ export default function ServiceDetailScreen({ match }) {
       {/* Call To Action Section Two */}
       {!userDetail.token ? (
         <section
-          className='call-to-action-section-two'
+          className="call-to-action-section-two"
           style={{ backgroundImage: "url(images/background/3.png)" }}
         >
-          <div className='auto-container'>
-            <div className='content'>
-              <h2 className=' text-dark'>Ready to get started?</h2>
-              <div className='text text-dark'>
+          <div className="auto-container">
+            <div className="content">
+              <h2 className=" text-dark">Ready to get started?</h2>
+              <div className="text text-dark">
                 Replenish him third creature and meat blessed void a fruit
                 gathered you’re, they’re two <br /> waters own morning gathered
                 greater shall had behold had seed.
               </div>
-              <div className='buttons-box'>
-                <a href='/get-start' className='theme-btn btn-style-one'>
-                  <span className='txt'>
-                    Get Stared <i className='fa fa-angle-right'></i>
+              <div className="buttons-box">
+                <a href="/get-start" className="theme-btn btn-style-one">
+                  <span className="txt">
+                    Get Stared <i className="fa fa-angle-right"></i>
                   </span>
                 </a>
-                <a href='/services-grid' className='theme-btn btn-style-two'>
-                  <span className='txt'>
-                    All services <i className='fa fa-angle-right'></i>
+                <a href="/services-grid" className="theme-btn btn-style-two">
+                  <span className="txt">
+                    All services <i className="fa fa-angle-right"></i>
                   </span>
                 </a>
               </div>

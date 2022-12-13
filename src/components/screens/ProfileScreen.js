@@ -20,7 +20,6 @@ import CountUp from "react-countup";
 import Purchases from "../layout/Purchases";
 import PaymentRequest from "../layout/StudentPaymentRequests";
 import { getServiceList } from "../../redux/actions/serviceAction";
-import PerformanceChart from "../layout/PerformanceChart";
 import ServiceSessions from "../layout/ServiceSessions";
 import MainLoader from "./../layout/LandingMainLoader";
 
@@ -439,15 +438,7 @@ export default function ProfileScreen() {
                       </Tab>
                     )}
 
-                    {userDetail && userDetail.user_type === "StudentUser" ? (
-                      <Tab eventKey='Performance' title='Performance'>
-                        <div className='m-5'>
-                          {filterCourseList() && filterCourseList().length && (
-                            <PerformanceChart courses={filterCourseList()} />
-                          )}
-                        </div>
-                      </Tab>
-                    ) : null}
+                 
 
                     {userDetail && userDetail.user_type === "StudentUser" ? (
                       <Tab eventKey='Assignments' title='Assignments'>
@@ -496,11 +487,7 @@ export default function ProfileScreen() {
                       </Tab>
                     ) : null}
 
-                    {userDetail && userDetail.user_type === "StudentUser" ? (
-                      <Tab eventKey='Bill' title='Bill'>
-                        <PaymentRequest />
-                      </Tab>
-                    ) : null}
+                    
                   </Tabs>
                 </div>
               </div>

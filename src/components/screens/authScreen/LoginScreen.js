@@ -9,7 +9,6 @@ import { createBrowserHistory } from 'history'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { createPerformance } from '../../../redux/actions/performanceAction'
 import { Link } from 'react-router-dom';
 
 const schema = yup.object().shape({

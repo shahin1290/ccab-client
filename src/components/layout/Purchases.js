@@ -47,7 +47,7 @@ export default function Purchases() {
 
     if (window.confirm("Do you really want to cancel?")) {
       const res = await axios.post(
-        `https://server.ccab.tech/api/order/stripe/cancel-subscription`,
+        `http://localhost:5001/api/order/stripe/cancel-subscription`,
         {
           subscriptionId,
         },
@@ -73,24 +73,24 @@ export default function Purchases() {
 
   return (
     <>
-      <div className='pb-5 pt-5 mb-5'>
-        <div className='auto-container'>
+      <div className="pb-5 pt-5 mb-5">
+        <div className="auto-container">
           {/* Sec Title */}
-          <div className='title mb-4'>
-            <div className='clearfix'>
-              <div className='pull-left'>
+          <div className="title mb-4">
+            <div className="clearfix">
+              <div className="pull-left">
                 <div>My Purchases</div>
               </div>
             </div>
           </div>
-          <div className='inner-container'>
-            <div className='table-responsive'>
+          <div className="inner-container">
+            <div className="table-responsive">
               {orderLoading ? (
                 <Loader />
               ) : orderError ? (
-                <Message variant='danger'>{orderError}</Message>
+                <Message variant="danger">{orderError}</Message>
               ) : (
-                <table className='table'>
+                <table className="table">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -105,7 +105,7 @@ export default function Purchases() {
                       orderList.map((order, index) => (
                         <tr key={order._id}>
                           <td>{index + 1}</td>
-                          <td className='text-capitalize'>
+                          <td className="text-capitalize">
                             {order.course.includes("subscription")
                               ? subscriptionDetails(order.course)
                               : order.course}
@@ -116,14 +116,14 @@ export default function Purchases() {
                             {order.amount} ({order.currency})
                           </td>
 
-                          <td className='d-flex'>
+                          <td className="d-flex">
                             {order.orderStatus === "Active" ? (
                               <>
-                                <div className='text-info font-weight-bold'>
+                                <div className="text-info font-weight-bold">
                                   {order.orderStatus}
                                 </div>
                                 <button
-                                  className='bg-info ml-4 text-white p-1'
+                                  className="bg-info ml-4 text-white p-1"
                                   onClick={() => {
                                     dispatch(
                                       getStripeSubscriptionInvoice(
@@ -139,7 +139,7 @@ export default function Purchases() {
                                 </button>
                               </>
                             ) : order.orderStatus === "Canceled" ? (
-                              <div className='text-danger font-weight-bold'>
+                              <div className="text-danger font-weight-bold">
                                 {order.orderStatus}
                               </div>
                             ) : (
@@ -158,7 +158,7 @@ export default function Purchases() {
                         </tr>
                       ))
                     ) : (
-                      <p className='pl-4 py-2 mt-4 text-dark bg-warning '>
+                      <p className="pl-4 py-2 mt-4 text-dark bg-warning ">
                         You Don't have Any Orders yet !
                       </p>
                     )}
