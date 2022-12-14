@@ -39,7 +39,7 @@ export const getMediaCenterList =
         },
       };
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/mediaCenter?pageNumber=${pageNumber}`,
+        `https://ccab-server.up.railway.app/api/mediaCenter?pageNumber=${pageNumber}`,
         config
       );
 
@@ -77,7 +77,7 @@ export const getMediaCenterListForAdmin =
         },
       };
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/mediaCenter/mange?pageNumber=${pageNumber}`,
+        `https://ccab-server.up.railway.app/api/mediaCenter/mange?pageNumber=${pageNumber}`,
         config
       );
 
@@ -113,7 +113,7 @@ export const getMediaCenterDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/mediaCenter/" + id,
+      "https://ccab-server.up.railway.app/api/mediaCenter/" + id,
       config
     );
 
@@ -149,7 +149,7 @@ export const createMediaCenter =
       };
 
       const response = await axios.post(
-        "https://ccab-api.onrender.com/api/mediaCenter",
+        "https://ccab-server.up.railway.app/api/mediaCenter",
         mediaCenter,
         config
       );
@@ -191,7 +191,7 @@ export const deleteMediaCenter = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      "https://ccab-api.onrender.com/api/mediaCenter/" + id,
+      "https://ccab-server.up.railway.app/api/mediaCenter/" + id,
       config
     );
 
@@ -229,7 +229,7 @@ export const updateMediaCenter =
 
       //console.log(mediaCenter);
       await axios.put(
-        "https://ccab-api.onrender.com/api/mediaCenter/" + id,
+        "https://ccab-server.up.railway.app/api/mediaCenter/" + id,
         mediaCenter,
         config
       );

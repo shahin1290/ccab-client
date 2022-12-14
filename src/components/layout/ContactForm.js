@@ -35,14 +35,17 @@ const ContactForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://ccab-api.onrender.com/contact", {
-        name,
-        email,
-        phoneNumber,
-        industry,
-        category,
-        message,
-      });
+      const res = await axios.post(
+        "https://ccab-server.up.railway.app/contact",
+        {
+          name,
+          email,
+          phoneNumber,
+          industry,
+          category,
+          message,
+        }
+      );
       setResponse(res.data);
     } catch (error) {
       setResponse(error);

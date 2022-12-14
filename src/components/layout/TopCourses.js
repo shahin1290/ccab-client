@@ -101,7 +101,7 @@ export default function TopCourses({ match }) {
                       <Link to={`/courses/${course._id}`}>
                         <img
                           src={
-                            "https://ccab-api.onrender.com/uploads/Bootcamp/" +
+                            "https://ccab-server.up.railway.app/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt="ccab"

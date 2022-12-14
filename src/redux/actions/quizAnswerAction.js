@@ -31,7 +31,7 @@ export const getQuizAnswerList =
       };
 
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/quizAnswer/${bootcampId}/${quizId}`,
+        `https://ccab-server.up.railway.app/api/quizAnswer/${bootcampId}/${quizId}`,
         config
       );
 
@@ -68,7 +68,7 @@ export const createQuizAnswer =
         },
       };
       const response = await axios.put(
-        `https://ccab-api.onrender.com/api/quizAnswer/${bootcampId}/${quizId}`,
+        `https://ccab-server.up.railway.app/api/quizAnswer/${bootcampId}/${quizId}`,
         { answer, quizTime },
         config
       );
@@ -115,7 +115,8 @@ export const getMyQuizAnswerList = (userId) => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/quizAnswer/myQuizAnswers/" + userId,
+      "https://ccab-server.up.railway.app/api/quizAnswer/myQuizAnswers/" +
+        userId,
       config
     );
 

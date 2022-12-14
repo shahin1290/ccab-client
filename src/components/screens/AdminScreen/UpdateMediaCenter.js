@@ -517,13 +517,13 @@ export default function UpdateMediaCenter({ match }) {
 
                     {/* Divider */}
                     <div className="border my-3"></div>
-                    {/* ***https://ccab-api.onrender.com** */}
+                    {/* ***https://ccab-server.up.railway.app** */}
                     <label>Image URL</label>
                     {ImageLable ? (
                       <img
                         alt="ccab"
                         src={
-                          "https://ccab-api.onrender.com/uploads/Bootcamp/" +
+                          "https://ccab-server.up.railway.app/uploads/Bootcamp/" +
                           ImageLable
                         }
                       />

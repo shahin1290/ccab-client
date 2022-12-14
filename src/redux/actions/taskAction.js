@@ -45,7 +45,7 @@ export const getTaskList = (bootcampId) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/tasks/" + bootcampId,
+      "https://ccab-server.up.railway.app/api/tasks/" + bootcampId,
       config
     );
 
@@ -82,7 +82,7 @@ export const getTaskDetails =
       };
 
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/tasks/${bootcampId}/${id}`,
+        `https://ccab-server.up.railway.app/api/tasks/${bootcampId}/${id}`,
         config
       );
 
@@ -118,7 +118,7 @@ export const createTask =
       };
 
       const response = await axios.post(
-        `https://ccab-api.onrender.com/api/tasks/${bootcampId}/${weekId}`,
+        `https://ccab-server.up.railway.app/api/tasks/${bootcampId}/${weekId}`,
         task,
         config
       );
@@ -162,7 +162,7 @@ export const taskDelete = (bootcampId, id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `https://ccab-api.onrender.com/api/tasks/${bootcampId}/${id}`,
+      `https://ccab-server.up.railway.app/api/tasks/${bootcampId}/${id}`,
       config
     );
 
@@ -198,7 +198,7 @@ export const taskChecked = (task) => async (dispatch, getState) => {
     };
 
     const response = await axios.put(
-      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/checked",
+      "https://ccab-server.up.railway.app/api/tasks/" + task._id + "/checked",
       {},
       config
     );
@@ -237,7 +237,7 @@ export const taskAsPassed = (task) => async (dispatch, getState) => {
     };
 
     const response = await axios.put(
-      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/passed",
+      "https://ccab-server.up.railway.app/api/tasks/" + task._id + "/passed",
       {},
       config
     );
@@ -276,7 +276,7 @@ export const taskAsNotPassed = (task) => async (dispatch, getState) => {
     };
 
     const response = await axios.put(
-      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/nopassed",
+      "https://ccab-server.up.railway.app/api/tasks/" + task._id + "/nopassed",
       {},
       config
     );
@@ -315,7 +315,7 @@ export const getMyTaskList = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/tasks/mytasklist",
+      "https://ccab-server.up.railway.app/api/tasks/mytasklist",
       config
     );
 

@@ -34,7 +34,7 @@ export const createDailyActivity =
       };
 
       const response = await axios.post(
-        "https://ccab-api.onrender.com/api/dailyActivity/" + bootcampId,
+        "https://ccab-server.up.railway.app/api/dailyActivity/" + bootcampId,
         dailyActivity,
         config
       );
@@ -76,7 +76,7 @@ export const getDailyActivities =
         },
       };
       const response = await axios.get(
-        "https://ccab-api.onrender.com/api/dailyActivity/" + bootcampId,
+        "https://ccab-server.up.railway.app/api/dailyActivity/" + bootcampId,
         config
       );
       dispatch({
@@ -112,7 +112,7 @@ export const getDailyActivityDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/dailyActivity/${id}`,
+      `https://ccab-server.up.railway.app/api/dailyActivity/${id}`,
       config
     );
 
@@ -150,7 +150,7 @@ export const deleteDailyActivity = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `https://ccab-api.onrender.com/api/dailyActivity/${id}`,
+      `https://ccab-server.up.railway.app/api/dailyActivity/${id}`,
       config
     );
 
@@ -188,7 +188,7 @@ export const updateDailyActivity =
 
       //console.log(REQUEST);
       await axios.put(
-        `https://ccab-api.onrender.com/api/dailyActivity/${bootcampId}`,
+        `https://ccab-server.up.railway.app/api/dailyActivity/${bootcampId}`,
         req,
         config
       );

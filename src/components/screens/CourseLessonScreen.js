@@ -287,7 +287,7 @@ export default function CourseContentScreen({ match }) {
 
                                     {findElementText("image", section.name) && (
                                       <img
-                                        src={`https://ccab-api.onrender.com/uploads/Source_Code/${findElementText(
+                                        src={`https://ccab-server.up.railway.app/uploads/Source_Code/${findElementText(
                                           "image",
                                           section.name
                                         )}`}

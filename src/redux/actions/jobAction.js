@@ -25,7 +25,7 @@ export const createJob = (job) => async (dispatch, getState) => {
     });
 
     const response = await axios.post(
-      "https://ccab-api.onrender.com/api/job",
+      "https://ccab-server.up.railway.app/api/job",
       job
     );
 
@@ -65,7 +65,7 @@ export const getJobs = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/job/",
+      "https://ccab-server.up.railway.app/api/job/",
       config
     );
     dispatch({
@@ -101,7 +101,7 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/request/${id}`,
+      `https://ccab-server.up.railway.app/api/request/${id}`,
       config
     );
 
@@ -139,7 +139,7 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `https://ccab-api.onrender.com/api/request/${id}`,
+      `https://ccab-server.up.railway.app/api/request/${id}`,
       config
     );
 
@@ -176,7 +176,7 @@ export const updateRequest = (req, id) => async (dispatch, getState) => {
 
     //console.log(REQUEST);
     await axios.put(
-      `https://ccab-api.onrender.com/api/request/${id}`,
+      `https://ccab-server.up.railway.app/api/request/${id}`,
       req,
       config
     );

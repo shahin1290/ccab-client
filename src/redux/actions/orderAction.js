@@ -47,7 +47,7 @@ export const createOrder = (id, order) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-      `https://ccab-api.onrender.com/api/order/${id}`,
+      `https://ccab-server.up.railway.app/api/order/${id}`,
       order,
       config
     );
@@ -90,7 +90,7 @@ export const getOrderList = () => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/order/myorders`,
+      `https://ccab-server.up.railway.app/api/order/myorders`,
       config
     );
 
@@ -128,7 +128,7 @@ export const getAllOrders = () => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/order/`,
+      `https://ccab-server.up.railway.app/api/order/`,
       config
     );
 
@@ -165,7 +165,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/order/` + id,
+      `https://ccab-server.up.railway.app/api/order/` + id,
       config
     );
 
@@ -203,7 +203,7 @@ export const getStripeSubscriptionInvoice =
       };
 
       const response = await axios.post(
-        "https://ccab-api.onrender.com/api/order/stripe/view-subscription",
+        "https://ccab-server.up.railway.app/api/order/stripe/view-subscription",
         { orderBy },
         config
       );
@@ -239,7 +239,7 @@ export const createKlarnaSession =
       };
 
       const response = await axios.post(
-        `https://ccab-api.onrender.com/api/order/${id}/klarna/session`,
+        `https://ccab-server.up.railway.app/api/order/${id}/klarna/session`,
         order,
         config
       );
@@ -279,7 +279,7 @@ export const createKlarnaOrder = (id, data) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-      `https://ccab-api.onrender.com/api/order/${id}/klarna/order`,
+      `https://ccab-server.up.railway.app/api/order/${id}/klarna/order`,
       data,
       config
     );
@@ -321,7 +321,7 @@ export const readKlarnaOrder = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/order/${id}/klarna/order`,
+      `https://ccab-server.up.railway.app/api/order/${id}/klarna/order`,
       config
     );
 
@@ -363,7 +363,7 @@ export const readKlarnaSession =
       };
 
       const response = await axios.post(
-        `https://ccab-api.onrender.com/api/order/${id}/klarna/authorize`,
+        `https://ccab-server.up.railway.app/api/order/${id}/klarna/authorize`,
         session,
         config
       );
@@ -403,7 +403,7 @@ export const captureOrder = (id, orderBy) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-      `https://ccab-api.onrender.com/api/order/capture/${id}`,
+      `https://ccab-server.up.railway.app/api/order/capture/${id}`,
       orderBy,
       config
     );

@@ -106,7 +106,9 @@ export default function TaskListScreen({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     try {
       const res = await fetch(
-        "https://ccab-api.onrender.com/api/tasks/" + task._id + "/download",
+        "https://ccab-server.up.railway.app/api/tasks/" +
+          task._id +
+          "/download",
         config
       );
       const blob = await res.blob();

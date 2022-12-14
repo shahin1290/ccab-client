@@ -55,7 +55,7 @@ class Compiler extends Component {
     const data = { ...this.state };
 
     axios
-      .post("https://ccab-api.onrender.com/update-editor", data)
+      .post("https://ccab-server.up.railway.app/update-editor", data)
       .catch(console.error);
   };
 

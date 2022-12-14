@@ -67,7 +67,7 @@ export default function AdminHeader() {
                             <img
                               src={
                                 user.avatar
-                                  ? `https://ccab-api.onrender.com/uploads/Avatar/${user.avatar}`
+                                  ? `https://ccab-server.up.railway.app/uploads/Avatar/${user.avatar}`
                                   : "/images/resource/avatar.svg"
                               }
                               alt="avatar"

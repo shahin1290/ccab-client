@@ -116,7 +116,7 @@ export default function Contact() {
     const config = { headers: { "Content-Type": "application/json" } };
     try {
       const res = await axios.post(
-        "https://ccab-api.onrender.com/contact",
+        "https://ccab-server.up.railway.app/contact",
         {
           ...FormData,
         },

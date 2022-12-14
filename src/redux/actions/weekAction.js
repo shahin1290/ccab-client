@@ -25,7 +25,7 @@ export const getWeekList = (id) => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/weeks/` + id,
+      `https://ccab-server.up.railway.app/api/weeks/` + id,
       config
     );
 
@@ -62,7 +62,7 @@ export const updateWeek = (bootcampId) => async (dispatch, getState) => {
     });
 
     await axios.put(
-      "https://ccab-api.onrender.com/api/weeks/" + bootcampId,
+      "https://ccab-server.up.railway.app/api/weeks/" + bootcampId,
       config
     );
 

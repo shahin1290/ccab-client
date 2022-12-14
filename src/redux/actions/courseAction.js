@@ -39,7 +39,7 @@ export const getCourseList =
         },
       };
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/bootcamp?pageNumber=${pageNumber}`,
+        `https://ccab-server.up.railway.app/api/bootcamp?pageNumber=${pageNumber}`,
         config
       );
 
@@ -77,7 +77,7 @@ export const getCourseListForAdmin =
         },
       };
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/bootcamp/mange?pageNumber=${pageNumber}`,
+        `https://ccab-server.up.railway.app/api/bootcamp/mange?pageNumber=${pageNumber}`,
         config
       );
 
@@ -113,7 +113,7 @@ export const getCourseDetails = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/bootcamp/" + id,
+      "https://ccab-server.up.railway.app/api/bootcamp/" + id,
       config
     );
 
@@ -146,7 +146,7 @@ export const createCourse = (course) => async (dispatch, getState) => {
     const config = { headers: { Authorization: "Bearer " + userDetail.token } };
 
     const response = await axios.post(
-      "https://ccab-api.onrender.com/api/bootcamp",
+      "https://ccab-server.up.railway.app/api/bootcamp",
       course,
       config
     );
@@ -188,7 +188,7 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      "https://ccab-api.onrender.com/api/bootcamp/" + id,
+      "https://ccab-server.up.railway.app/api/bootcamp/" + id,
       config
     );
 
@@ -225,7 +225,7 @@ export const updateCourse = (course, id) => async (dispatch, getState) => {
 
     //console.log(course);
     await axios.put(
-      "https://ccab-api.onrender.com/api/bootcamp/" + id,
+      "https://ccab-server.up.railway.app/api/bootcamp/" + id,
       course,
       config
     );

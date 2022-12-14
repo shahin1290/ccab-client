@@ -97,7 +97,7 @@ export default function TaskListScreen({ match }) {
     // dispatch(DownloadAssignemnt(task.task._id)
     try {
       const res = await fetch(
-        "https://ccab-api.onrender.com/api/tasks/" + task._id + "/download"
+        "https://ccab-server.up.railway.app/api/tasks/" + task._id + "/download"
       );
       const blob = await res.blob();
       download(blob, task.projectName + "-Assignment");

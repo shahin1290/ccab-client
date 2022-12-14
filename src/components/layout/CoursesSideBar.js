@@ -89,7 +89,7 @@ export default function CourseSideBar({ setSelctedCourse, selectedCourse }) {
                         <img
                           className="w-100"
                           src={
-                            "https://ccab-api.onrender.com/uploads/Bootcamp/" +
+                            "https://ccab-server.up.railway.app/uploads/Bootcamp/" +
                             course.img_path
                           }
                           alt="ccab"

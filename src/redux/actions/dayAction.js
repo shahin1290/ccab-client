@@ -31,7 +31,7 @@ export const getDayList = (id) => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/content/` + id,
+      `https://ccab-server.up.railway.app/api/content/` + id,
       config
     );
 
@@ -68,7 +68,7 @@ export const getDayVideoList = (id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/content/videos/${id}`,
+      `https://ccab-server.up.railway.app/api/content/videos/${id}`,
       config
     );
     dispatch({
@@ -103,7 +103,7 @@ export const getDayDetails = (weekId, id) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/content/${weekId}/${id}`,
+      `https://ccab-server.up.railway.app/api/content/${weekId}/${id}`,
       config
     );
 
@@ -142,7 +142,7 @@ export const updateDay = (weekId, id, day) => async (dispatch, getState) => {
     };
 
     await axios.put(
-      `https://ccab-api.onrender.com/api/content/${weekId}/${id}`,
+      `https://ccab-server.up.railway.app/api/content/${weekId}/${id}`,
       day,
       config
     );

@@ -134,7 +134,7 @@ export default function ProfileScreen() {
                           <img
                             src={
                               user.avatar
-                                ? `https://server.ccab.tech/uploads/Avatar/${user.avatar}`
+                                ? `https://ccab-server.up.railway.app/uploads/Avatar/${user.avatar}`
                                 : "/images/resource/avatar.svg"
                             }
                             alt="avatar"
@@ -288,7 +288,7 @@ export default function ProfileScreen() {
                                           <div className="image">
                                             <img
                                               src={
-                                                "https://server.ccab.tech/uploads/Bootcamp/" +
+                                                "https://ccab-server.up.railway.app/uploads/Bootcamp/" +
                                                 course.img_path
                                               }
                                               alt="bootcamp"

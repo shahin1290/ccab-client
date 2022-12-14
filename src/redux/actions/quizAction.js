@@ -40,7 +40,7 @@ export const getQuizList = (bootcampId) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/quizzes/" + bootcampId,
+      "https://ccab-server.up.railway.app/api/quizzes/" + bootcampId,
       config
     );
 
@@ -76,7 +76,7 @@ export const getMyQuizList = () => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      `https://ccab-api.onrender.com/api/quizzes/myquizlist`,
+      `https://ccab-server.up.railway.app/api/quizzes/myquizlist`,
       config
     );
 
@@ -113,7 +113,7 @@ export const getQuizDetails =
       };
 
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `https://ccab-server.up.railway.app/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       );
 
@@ -151,7 +151,7 @@ export const createQuiz =
         },
       };
       const response = await axios.post(
-        `https://ccab-api.onrender.com/api/quizzes/${bootcampId}/${dayId}`,
+        `https://ccab-server.up.railway.app/api/quizzes/${bootcampId}/${dayId}`,
         quizData,
         config
       );
@@ -198,7 +198,7 @@ export const quizDelete =
       };
 
       const response = await axios.delete(
-        `https://ccab-api.onrender.com/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `https://ccab-server.up.railway.app/api/quizzes/${bootcampId}/${dayId}/${id}`,
         config
       );
 
@@ -234,7 +234,7 @@ export const updateQuiz =
       };
 
       const response = await axios.put(
-        `https://ccab-api.onrender.com/api/quizzes/${bootcampId}/${dayId}/${id}`,
+        `https://ccab-server.up.railway.app/api/quizzes/${bootcampId}/${dayId}/${id}`,
         quiz,
         config
       );

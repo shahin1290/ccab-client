@@ -21,7 +21,7 @@ export const createCurrrency = (fromCurrency) => async (dispatch, getState) => {
     let res = await axios.get("https://ipapi.co/json/");
 
     const response = await axios.post(
-      "https://ccab-api.onrender.com/currency-convert",
+      "https://ccab-server.up.railway.app/currency-convert",
       { currency: res.data.currency, country: res.data.country, fromCurrency },
       config
     );

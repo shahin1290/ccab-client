@@ -35,7 +35,7 @@ export default function StripeSubscriptionDetails({
 
     if (window.confirm("Do you really want to cancel?")) {
       const res = await axios.post(
-        `https://ccab-api.onrender.com/api/order/stripe/cancel-subscription`,
+        `https://ccab-server.up.railway.app/api/order/stripe/cancel-subscription`,
         {
           subscriptionId,
           orderBy,

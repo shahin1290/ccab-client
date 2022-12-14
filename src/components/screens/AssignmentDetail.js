@@ -125,7 +125,7 @@ export default function AssignmentDetail({ match }) {
   const DownloadAssignmentHandler = async (task) => {
     // dispatch(DownloadAssignemnt(task.task._id))
     const res = await fetch(
-      "https://ccab-api.onrender.com/api/tasks/" + task._id + "/download",
+      "https://ccab-server.up.railway.app/api/tasks/" + task._id + "/download",
       config
     );
 

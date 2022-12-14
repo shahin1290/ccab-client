@@ -38,7 +38,7 @@ export const createAnswer =
         },
       };
       const response = await axios.put(
-        `https://ccab-api.onrender.com/api/answers/${bootcampId}/${quizId}`,
+        `https://ccab-server.up.railway.app/api/answers/${bootcampId}/${quizId}`,
         answer,
         config
       );
@@ -85,7 +85,7 @@ export const getMyAnswerList = (userId) => async (dispatch, getState) => {
       },
     };
     const response = await axios.get(
-      "https://ccab-api.onrender.com/api/answers/myanswers/" + userId,
+      "https://ccab-server.up.railway.app/api/answers/myanswers/" + userId,
       config
     );
     dispatch({
@@ -124,7 +124,7 @@ export const getTaskAnswerList =
       };
 
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/answers/${bootcampId}/${taskId}`,
+        `https://ccab-server.up.railway.app/api/answers/${bootcampId}/${taskId}`,
         config
       );
 
@@ -163,7 +163,7 @@ export const getUserAnswer =
       };
 
       const response = await axios.get(
-        `https://ccab-api.onrender.com/api/answers/${bootcampId}/${taskId}/myAnswer`,
+        `https://ccab-server.up.railway.app/api/answers/${bootcampId}/${taskId}/myAnswer`,
         config
       );
 
@@ -202,7 +202,7 @@ export const updateAnswerStatus =
       };
 
       const response = await axios.put(
-        `https://ccab-api.onrender.com/api/answers/${bootcampId}/${taskId}/${answerId}`,
+        `https://ccab-server.up.railway.app/api/answers/${bootcampId}/${taskId}/${answerId}`,
         status,
         config
       );

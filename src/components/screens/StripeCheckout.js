@@ -45,7 +45,7 @@ const StripeCheckoutForm = ({ match, history }) => {
   useEffect(() => {
     const customCheckout = async () => {
       const { data: clientSecret } = await axios.post(
-        `https://ccab-api.onrender.com/api/order/stripe/stripe-payment-intent`,
+        `https://ccab-server.up.railway.app/api/order/stripe/stripe-payment-intent`,
         {
           amount: 100,
           receipt_email: userDetail.email,
